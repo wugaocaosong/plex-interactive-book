@@ -48,3 +48,23 @@ npm run build
 - 类型检查、内容审计和生产构建通过。
 - `tests/browser/drag.spec.ts` 的 5 项浏览器测试全部通过：390 / 820 / 1440 px 下实时卷页、拖回取消、前后翻页、Escape 取消与正文选择；封面拖开和跨章节；减少动态效果与拖动后立即打开代码面板。
 - 本次保存的卷页截图：[桌面](preview-drag-desktop.png)、[平板](preview-drag-tablet.png)、[手机](preview-drag-mobile.png)。后续测试输出保存在 `output/playwright/drag-fold-{390,820,1440}.png`。
+
+## GitHub 干净克隆与完整压缩包验收（2026-10-22）
+
+从 GitHub 私有仓库重新克隆到独立目录，使用独立 Python venv，从 `requirements.lock.txt` 安装 11 个固定 Python 包，以 `npm ci` 安装 Node 依赖；没有复制原工作区的依赖、临时附件或生成资源。Node 24.14.1、npm 11.11.0、Python 3.14.3。
+
+发现并修复了可选系统 Pygments 导致的代码块 HTML 差异；导入配置显式禁用该可选处理，生成文件统一 LF。有 Pygments 的全局环境与没有 Pygments 的 venv 比较 263 个生成文件，输出一致；独立克隆重复导入与已提交内容一致。原始快照 2,051 个文件及 H5P 内容 / 运行库 277 个文件均来自 GitHub 克隆。
+
+类型检查、内容审计、5 个 Node 测试、4 个 Python 测试及生产构建全部通过。在独立端口 5192 上验收该克隆的生产构建，16 个浏览器测试全部通过：0 失败、0 跳过、0 重试通过，耗时约 2 分 14 秒。
+
+| 视口宽度 | 检查小节 | 排版页数 | 有内容 / 资源 / 排版错误的小节 |
+| --- | ---: | ---: | ---: |
+| 390 px | 127 | 882 | 0 |
+| 820 px | 127 | 606 | 0 |
+| 1440 px | 127 | 657 | 0 |
+
+同时完成 73 个完整 Python 示例执行、运行错误与超时恢复、H5P 评分及本机恢复、导航与拖拽验收。机器可读摘要和应用提交号见 [clean-clone-validation.json](clean-clone-validation.json)。
+
+完整 ZIP 通过 CRC 及 `PACKAGE-MANIFEST.json` 逐文件 SHA-256 校验。解压到另一独立目录后，不安装 `node_modules` 或 Python 环境，仅用 Node 内置静态服务器验证封面、干净小节路由、二分查找 Python 输出、H5P 作答与本机得分；页面异常、失败资源请求和外站资源请求均为 0。
+
+这次复现实测仍以 Windows + Chromium 为准；其他平台启动步骤已记录，未声称逐一实测。浏览器缓存、个人阅读进度及机器环境不纳入压缩包。
