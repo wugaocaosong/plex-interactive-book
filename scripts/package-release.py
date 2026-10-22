@@ -3,7 +3,8 @@ import datetime, hashlib, json, pathlib, subprocess, zipfile
 
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 DIST=ROOT/'web/.vitepress/dist'
-if subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip():
+if (subprocess.run(['git','diff','--quiet','HEAD'],cwd=ROOT).returncode or
+        subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).strip()):
     raise SystemExit('Commit source/document changes before packaging so the manifest identifies the exact inputs.')
 if not (DIST/'index.html').is_file():raise SystemExit('Run npm run build before packaging.')
 commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
