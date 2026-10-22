@@ -7,6 +7,7 @@ import type { PageFlip } from 'page-flip'
 import type { BookManifest, BookPage, ReadingLocator, SavedBookmark, SearchEntry } from './types'
 import { paginate, locateLeaf, type Leaf } from './pagination'
 import { readStore, saveStore } from './storage'
+import { bindPageDrag } from './page-drag'
 import StarMap from './StarMap.vue'
 import CodePanel from './CodePanel.vue'
 import H5PPanel from './H5PPanel.vue'
@@ -22,6 +23,7 @@ const bookmarks=ref<SavedBookmark[]>([]);const resume=ref<ReadingLocator>();cons
 const host=ref<HTMLElement>();const stage=ref<HTMLElement>();const measure=ref<HTMLElement>();const pageIndex=ref(0);const leaves=ref<Leaf[]>([])
 const panel=ref<'code'|'activity'|'image'|'expanded'|null>(null);const codeIndex=ref(0);const imageUrl=ref('');const imageAlt=ref('');const expandedHtml=ref('')
 const pageWidth=ref(510);const pageHeight=ref(670);const desktop=ref(true)
+const coverElement=ref<HTMLElement>();let disposeDrag:(()=>void)|undefined
 const searchResults=computed(()=>{const term=query.value.trim().toLocaleLowerCase();return term?index.value.filter(e=>(e.title+' '+e.text).toLocaleLowerCase().includes(term)).slice(0,60):[]})
 const groups=computed(()=>{const map=new Map<string,typeof sections.value>();for(const item of sections.value){if(item.kind==='cover'||item.kind==='back-cover')continue;const label=item.group||'卷首';map.set(label,[...(map.get(label)||[]),item])}return [...map]})
 const progress=computed(()=>sections.value.length?Math.round(Math.max(0,sectionIndex.value)/(sections.value.length-1)*100):0)
@@ -79,6 +81,7 @@ async function layout(place?:ReadingLocator) {
   if(own!==serial)return
   stage.value.querySelectorAll<HTMLImageElement>('.step-player img').forEach(img=>img.style.height=img.getBoundingClientRect().height+'px')
   // PageFlip owns these nodes; no Vue stateful component is mounted inside its cloneable pages.
+  disposeDrag?.();disposeDrag=undefined
   if(flip){flip.destroy();flip=undefined}
   const node=document.createElement('div');host.value.replaceChildren(node)
   leaves.value=paginate(stage.value,measure.value,pageHeight.value-(desktop.value?112:92))
@@ -98,16 +101,25 @@ async function layout(place?:ReadingLocator) {
     drawShadow:true,maxShadowOpacity:0.22,flippingTime:matchMedia('(prefers-reduced-motion: reduce)').matches?1:480,useMouseEvents:false,mobileScrollSupport:false,disableFlipByClick:true})
   flip.on('flip',(event)=>{pageIndex.value=Math.min(Number(event.data),leaves.value.length-1);remember()})
   flip.loadFromHTML(elements);pageIndex.value=Math.min(flip.getCurrentPageIndex(),leaves.value.length-1)
+  disposeDrag=bindPageDrag(host.value,{
+    flip,
+    canTurn:direction=>!loading.value&&!menu.value&&!panel.value&&(direction==='previous'?pageIndex.value>0||sectionIndex.value>0:pageIndex.value+(desktop.value?2:1)<leaves.value.length||sectionIndex.value<sections.value.length-1),
+    atBoundary:direction=>direction==='previous'?pageIndex.value===0:pageIndex.value+(desktop.value?2:1)>=leaves.value.length,
+    turn:direction=>direction==='previous'?previous():next(),onStart:stopAnimation
+  })
   rendering=false;loading.value=false;remember()
 }
 async function loadCurrent(){
   if(!mounted)return
   const id=sectionId.value;error.value='';loading.value=true;panel.value=null
+  disposeDrag?.();disposeDrag=undefined
   try{
     const data=await getPage(id);if(id!==sectionId.value)return
     current.value=data;await nextTick()
     const place=pendingLocator||parseHash();pendingLocator=undefined
-    if(cover.value){++serial;flip?.destroy();flip=undefined;leaves.value=[];pageIndex.value=0;loading.value=false;rendering=false}
+    if(cover.value){++serial;flip?.destroy();flip=undefined;leaves.value=[];pageIndex.value=0;loading.value=false;rendering=false
+      if(coverElement.value)disposeDrag=bindPageDrag(coverElement.value,{cover:true,canTurn:()=>!menu.value,atBoundary:()=>true,turn:next,onStart:stopAnimation})
+    }
     else await layout(place)
     for(const adjacent of [sections.value[sectionIndex.value-1],sections.value[sectionIndex.value+1]])if(adjacent)getPage(adjacent.id).catch(()=>{})
   }catch(e){error.value=String(e);loading.value=false}
@@ -123,7 +135,7 @@ function keydown(event:KeyboardEvent){
 function hashchange(){const place=parseHash();if(place)flip?.turnToPage(locateLeaf(leaves.value,place.blockId,place.offset))}
 watch(sectionId,loadCurrent)
 onMounted(async()=>{mounted=true;desktop.value=window.innerWidth>=1024;ready.value=true;bookmarks.value=readStore('bookmarks',[]);resume.value=readStore<ReadingLocator|undefined>('reading',undefined);try{manifest.value=await fetch('/book/manifest.json').then(r=>r.json());await loadCurrent()}catch(e){error.value=String(e);loading.value=false}window.addEventListener('resize',resize);window.addEventListener('keydown',keydown);window.addEventListener('hashchange',hashchange)})
-onBeforeUnmount(()=>{++serial;flip?.destroy();stopAnimation();clearTimeout(resizeTimer);window.removeEventListener('resize',resize);window.removeEventListener('keydown',keydown);window.removeEventListener('hashchange',hashchange)})
+onBeforeUnmount(()=>{++serial;disposeDrag?.();flip?.destroy();stopAnimation();clearTimeout(resizeTimer);window.removeEventListener('resize',resize);window.removeEventListener('keydown',keydown);window.removeEventListener('hashchange',hashchange)})
 </script>
 
 <template>
@@ -139,18 +151,19 @@ onBeforeUnmount(()=>{++serial;flip?.destroy();stopAnimation();clearTimeout(resiz
     <main class="reading-main">
       <div v-if="error" class="reader-error" role="alert"><h1>暂时无法打开这一页</h1><p>{{error}}</p><button @click="loadCurrent">重新加载</button><button @click="navigate('cover')">返回封面</button></div>
       <div v-else-if="cover" class="cover-scene">
-        <button class="cover-book" aria-label="打开星轨编程，进入扉页" @click="next"><img src="/images/cover.png" alt="PLEX 星轨编程：Python 与算法的探索之旅。宇航员坐在月牙上读书。" fetchpriority="high"/></button>
+        <button ref="coverElement" class="cover-book" aria-label="打开星轨编程，进入扉页" title="点击打开，或按住封面向左拖动" @click="next"><img src="/images/cover.png" alt="PLEX 星轨编程：Python 与算法的探索之旅。宇航员坐在月牙上读书。" fetchpriority="high" draggable="false"/></button>
         <div class="cover-controls"><button class="open-book" @click="next">翻开这本书 <ArrowRight :size="18"/></button><button v-if="resume&&resume.sectionId!=='cover'" class="resume-button" @click="navigate(resume.sectionId,resume)"><BookOpen :size="15"/>继续上次阅读</button></div>
       </div>
       <section v-else class="open-book-scene" aria-label="电子书阅读区" :aria-busy="loading">
         <div class="section-heading"><span>{{current?.group}}</span><h1>{{current?.title||'星轨编程'}}</h1><button class="bookmark-page" :aria-label="saved?'已加入书签':'收藏当前页'" @click="addBookmark"><Check v-if="saved" :size="17"/><Bookmark v-else :size="17"/></button></div>
         <div class="book-holder" :class="{loading}" @click="($event.target as HTMLElement).closest('[data-action=star-map]')?openMenu('contents'):clickBook($event)">
           <button class="edge-nav edge-prev" aria-label="上一页" :disabled="sectionIndex<=0&&pageIndex===0" @click.stop="previous"><ChevronLeft :size="24"/></button>
-          <div ref="host" class="book-host vp-raw"/>
+          <div ref="host" class="book-host vp-raw" title="按住书页左右边缘，拖动翻页"/>
           <button class="edge-nav edge-next" aria-label="下一页" :disabled="sectionIndex===sections.length-1&&pageIndex+(desktop?2:1)>=leaves.length" @click.stop="next"><ChevronRight :size="24"/></button>
         </div>
         <div v-if="loading" class="loading-label" role="status">正在排版这一节…</div>
         <div class="page-navigation"><button aria-label="上一节" :disabled="sectionIndex<=0" @click="navigate(sections[sectionIndex-1].id)"><ArrowLeft :size="14"/>上一节</button><span>第 {{pageIndex+1}}{{desktop&&pageIndex+1<leaves.length?'–'+(pageIndex+2):''}} 页 / {{leaves.length}} 页</span><button aria-label="下一节" :disabled="sectionIndex>=sections.length-1" @click="navigate(sections[sectionIndex+1].id)">下一节<ArrowRight :size="14"/></button></div>
+        <p class="drag-hint">按住页边向内拖动翻书 · 拖回可取消</p>
       </section>
       <div v-if="!ready" class="loading-label">正在打开星轨编程…</div>
     </main>

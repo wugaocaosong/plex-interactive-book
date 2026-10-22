@@ -11,6 +11,14 @@ declare module 'page-flip' {
     flipNext():void;
     flipPrev():void;
     getCurrentPageIndex():number;
+    getUI():{getDistElement():HTMLElement};
+    getState():'read'|'user_fold'|'fold_corner'|'flipping';
+    getOrientation():'portrait'|'landscape';
+    getBoundsRect():{left:number;top:number;width:number;height:number;pageWidth:number};
+    getFlipController():{start(point:{x:number;y:number}):boolean;fold(point:{x:number;y:number}):void};
+    startUserTouch(point:{x:number;y:number}):void;
+    userMove(point:{x:number;y:number},isTouch:boolean):void;
+    userStop(point:{x:number;y:number},isSwipe?:boolean):void;
     destroy():void;
   }
 }

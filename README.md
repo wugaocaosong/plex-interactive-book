@@ -6,11 +6,13 @@
 
 ## 本地启动
 
-要求 **Node.js 24+、Python 3.10+**。首次安装需要网络；日常阅读、字体、图片、Python 与练习均由本地站点提供。
+推荐复现环境 **Node.js 24.14.1、Python 3.14.3**（仓库内提供版本文件）。首次安装需要网络；日常阅读、字体、图片、Python 与练习均由本地站点提供。完整 Windows / macOS / Linux 命令见 [克隆与复现](docs/REPRODUCIBILITY.md)。默认 `main` 为可验收版本。
 
 ```sh
+git clone https://github.com/yeniwu46-max/plex-interactive-book.git
+cd plex-interactive-book
 npm ci
-python -m pip install -r requirements.txt
+python -m pip install -r requirements.lock.txt
 npm run dev
 ```
 
@@ -50,7 +52,8 @@ npm run test:e2e
 
 ## 阅读与运行说明
 
-- 点击封面进入扉页；页边箭头或键盘左右键连续翻阅，可跨小节到封底。
+- 点击封面或按住封面向左拖动进入扉页。按住书页左右外侧约 24 px 的页边向内拖动，纸页随鼠标卷起；双页拖过书脊后松开翻页，拖回可取消。单页模式同样支持拖拽，章节交界自动进入相邻小节。
+- 页边箭头或键盘左右键仍可连续翻阅；正文区域可选中文字，图解和代码按钮保持独立操作。拖动时按 Escape 可取消，系统减少动态效果设置下省略连续卷页动画。
 - 目录支持原作行星导航和全章节文字目录。搜索跳到匹配块；书签和继续阅读使用内容锚点，不使用物理页码。
 - 图解支持全部帧、播放、暂停、放大。超长块有「展开阅读」入口。
 - 代码面板保留全部可用语言，默认 Python，可编辑完整源文件、运行、停止、重置。10 秒超时终止 Worker；其他语言可查看、复制和访问原始源码。
@@ -66,3 +69,5 @@ VitePress 1.6.4、Vue 3.5.22、StPageFlip 2.0.7、h5p-standalone 3.8.2、Pyodide
 教材改编内容遵循 **CC BY-NC-SA 4.0**，保留 krahets 与 Hello Algo 贡献者署名；封面沿用用户原附件。各软件组件保留各自许可。详见 [第三方说明](THIRD_PARTY_NOTICES.md)。
 
 验收范围与首版截图见 [验证记录](docs/VALIDATION.md)。
+
+首版实现、拖拽翻页、Python / H5P 接入经验与维护取舍见 [技术总结](docs/TECHNICAL_SUMMARY.md)。

@@ -42,3 +42,9 @@ npm run build
 - [手机单页](preview-mobile.png)
 
 测试覆盖现代 Chromium。本记录不表示已经验证所有浏览器或已经公开上线。编者、出版机构等未提供信息仍保留「待填写」。
+
+## 鼠标拖拽翻页增量验收（2026-10-22）
+
+- 类型检查、内容审计和生产构建通过。
+- `tests/browser/drag.spec.ts` 的 5 项浏览器测试全部通过：390 / 820 / 1440 px 下实时卷页、拖回取消、前后翻页、Escape 取消与正文选择；封面拖开和跨章节；减少动态效果与拖动后立即打开代码面板。
+- 本次保存的卷页截图：[桌面](preview-drag-desktop.png)、[平板](preview-drag-tablet.png)、[手机](preview-drag-mobile.png)。后续测试输出保存在 `output/playwright/drag-fold-{390,820,1440}.png`。
