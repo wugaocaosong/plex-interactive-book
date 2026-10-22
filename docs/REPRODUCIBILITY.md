@@ -99,7 +99,11 @@ Playwright 自动启动、结束该测试服务。默认是 5190 开发服务，
 
 ## 独立分发静态成品
 
-构建后可以复制整个 `web/.vitepress/dist/`，使用支持 `.html` 干净路由的 HTTP 静态服务器从网站根目录提供。无需 Python、Node 构建工具或源教材运行浏览器端功能。不要通过 `file://` 直接打开；当前资源路径按站点根 `/` 设计，尚未配置子目录前缀。
+构建后可以复制整个 `web/.vitepress/dist/`，使用支持 `.html` 干净路由的 HTTP 静态服务器从网站根目录提供。无需 Python、Node 构建工具或源教材运行浏览器端功能。项目也自带仅依赖 Node 内置模块的服务器：`node scripts/serve-dist.mjs`，或 `node scripts/serve-dist.mjs --port 5192`。不要通过 `file://` 直接打开；当前资源路径按站点根 `/` 设计，尚未配置子目录前缀。
+
+完整 ZIP 已包含静态成品和源码。解压完整目录后，Windows 可双击 `START_PREVIEW.cmd`；macOS / Linux 运行上面的 Node 命令。此方式需要 Node.js 24+，不需要 `npm ci`、Python、数据库或外网运行时。需要编辑源码时再按前文安装开发依赖。
+
+ZIP 内的 `PACKAGE-MANIFEST.json` 提供每个文件的 SHA-256 和应用提交号，ZIP 旁的 `.zip.sha256` 校验整个压缩包。开发者先提交改动，再运行 `npm run package`，产物位于 `output/releases/`；该命令先构建，打包脚本拒绝有未提交改动的工作区。
 
 首次打开新浏览器应显示封面。阅读进度、书签、语言偏好与练习成绩保存在 localStorage，不属于教材内容，不随 clone 复制；它们按浏览器和来源（主机、协议、端口）隔离。页面实际分页依赖窗口大小和字体渲染，但内容和所有交互应保持一致。
 
@@ -109,5 +113,5 @@ Playwright 自动启动、结束该测试服务。默认是 5190 开发服务，
 - **缺 `bs4` / `yaml` 等 Python 包**：确认 `python` 指向 `.venv`，并从 `requirements.lock.txt` 安装，而非另一套系统 Python。
 - **封面或 H5P / Python 资源 404**：先执行 `npm run build`（包含 assets）或 `npm run dev`（predev 自动执行 assets）；不要只启动尚未构建的 preview。
 - **来源 / H5P 哈希报错**：检查是否下载不完整或编辑了原始文件，保留 `.gitattributes` 的字节策略，使用 Git 恢复对应来源；不要关闭完整性检查。
-- **端口已经被使用**：停止旧进程或执行 `npm run preview -- --port 5192`；测试端口使用上述环境变量。
+- **端口已经被使用**：停止旧进程或执行 `npx vitepress preview web --host 127.0.0.1 --port 5192`；不要在已有固定端口的 npm preview 命令上重复追加 `--port`。测试端口使用上述环境变量。
 - **没有旧书签或成绩**：这是正常的新浏览器 / 新端口状态；验证同一来源下的刷新恢复即可。

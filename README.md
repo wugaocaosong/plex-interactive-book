@@ -70,3 +70,9 @@ VitePress 1.6.4、Vue 3.5.22、StPageFlip 2.0.7、h5p-standalone 3.8.2、Pyodide
 验收范围与首版截图见 [验证记录](docs/VALIDATION.md)。
 
 首版实现、拖拽翻页、Python / H5P 接入经验与维护取舍见 [技术总结](docs/TECHNICAL_SUMMARY.md)。
+
+## 完整压缩包
+
+完整 ZIP 包含受版本控制的源码、教材、练习库、文档和已构建静态成品。解压后安装 Node.js 24+，Windows 双击 `START_PREVIEW.cmd`，或跨平台执行 `node scripts/serve-dist.mjs`，打开终端提示的本机地址；无需先安装 npm 或 Python 依赖。GitHub 克隆不含静态成品，需先按上方说明构建。
+
+开发者在已提交的干净 Git 工作区运行 `npm run package`，会先构建再生成 `output/releases/` 下的 ZIP、SHA-256 校验文件。包内 `PACKAGE-MANIFEST.json` 记录提交版本及逐文件哈希，不包含 `.git`、虚拟环境、`node_modules`、本机日志或浏览器进度。

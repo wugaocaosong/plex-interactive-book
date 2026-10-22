@@ -100,6 +100,8 @@ MultiChoice 恢复已选答案与分数，但不保证恢复反馈面板展开�
 
 字体布局与分页会受窗口尺寸、浏览器和系统字体渲染差异影响；复现的是完整内容、视觉方案与交互功能，不保证跨平台像素与物理页码完全一致。未部署 Service Worker，因此“资源本地化”不等于离开 HTTP 服务仍可打开。
 
+完整分发包由 `scripts/package-release.py` 组装 Git 跟踪文件与生产构建，记录提交和逐文件 SHA-256，排除环境、缓存和浏览器数据。`scripts/serve-dist.mjs` 使用 Node 内置 HTTP / 文件系统模块，提供干净小节路由和 WASM / 模块脚本 MIME；解压 ZIP 即可启动，无需先安装项目依赖。
+
 ## 8. 测试与维护经验
 
 - `npm run check`：Vue / TypeScript、内容审计、导入与定位单元测试。

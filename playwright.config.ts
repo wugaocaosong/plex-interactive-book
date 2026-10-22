@@ -6,5 +6,5 @@ const mode=process.env.PLEX_TEST_PREVIEW==='1'?'preview':'dev'
 export default defineConfig({
  testDir: './tests/browser', timeout: 120000, expect: {timeout:15000}, workers:1,
  use: {baseURL,headless:true,launchOptions:{executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE},viewport:{width:1440,height:1000},screenshot:'only-on-failure',trace:'retain-on-failure'},
- webServer:{command:`npm run ${mode} -- --port ${port}`,url:baseURL,reuseExistingServer:!process.env.CI&&process.env.PLEX_TEST_REUSE!=='0',timeout:120000}
+ webServer:{command:`node scripts/test-server.mjs ${mode} ${port}`,url:baseURL,reuseExistingServer:!process.env.CI&&process.env.PLEX_TEST_REUSE!=='0',timeout:120000}
 })
