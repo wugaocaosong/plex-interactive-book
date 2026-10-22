@@ -149,9 +149,10 @@ def convert(source, path, page_id):
         preview=variants[0]
         return '\n\n'+f'<div class="code-example" data-code="{index}"><div class="code-caption"><span>{html.escape(name)} · {preview["language"]}</span><button data-action="code" data-code="{index}">查看 / 运行</button></div><pre><code>{html.escape(preview["snippet"])}</code></pre></div>'+'\n\n'
     source=re.sub(r'```src\s*\n(.*?)\n\s*```',replace_code,source,flags=re.S)
-    output=markdown.markdown(source,extensions=['extra','admonition','toc','pymdownx.details','pymdownx.superfences',
+    output=markdown.markdown(source,extensions=['extra','admonition','toc','pymdownx.details','pymdownx.highlight','pymdownx.superfences',
         'pymdownx.tabbed','pymdownx.arithmatex','pymdownx.mark','pymdownx.tilde','pymdownx.caret','pymdownx.keys'],
-        extension_configs={'pymdownx.tabbed':{'alternate_style':True},'pymdownx.arithmatex':{'generic':True}})
+        # Optional system Pygments must not change generated HTML or fence parsing.
+        extension_configs={'pymdownx.highlight':{'use_pygments':False},'pymdownx.tabbed':{'alternate_style':True},'pymdownx.arithmatex':{'generic':True}})
     soup=BeautifulSoup(output,'html.parser')
     for tag in soup.find_all(['script','iframe']): tag.decompose()
     for tag in soup.find_all(True):

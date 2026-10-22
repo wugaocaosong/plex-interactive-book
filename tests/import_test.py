@@ -1,8 +1,17 @@
 import pathlib,sys,unittest
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'scripts'))
-from import_book import extract_variant,SOURCE
+from import_book import extract_variant,convert,SOURCE
+from bs4 import BeautifulSoup
 
 class ImportTests(unittest.TestCase):
+    def test_fenced_code_is_environment_independent_and_preserves_text(self):
+        for language,code in [('shell','docker-compose up -d'),('python','if a < 3:\n    print("<tag>")')]:
+            with self.subTest(language=language):
+                rendered,_,_=convert(f'```{language}\n{code}\n```',pathlib.Path('chapter_appendix/contribution.md'),'test')
+                soup=BeautifulSoup(rendered,'html.parser')
+                self.assertEqual(soup.pre.code.get_text().rstrip('\n'),code)
+                self.assertIsNone(soup.pre.find('span'))
+
     def test_same_named_methods_keep_class_scope(self):
         for language,suffix in [('python','py'),('java','java'),('ruby','rb'),('go','go'),('rust','rs'),('c','c'),('swift','swift'),('kotlin','kt')]:
             with self.subTest(language=language):

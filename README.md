@@ -12,11 +12,10 @@
 git clone https://github.com/yeniwu46-max/plex-interactive-book.git
 cd plex-interactive-book
 npm ci
-python -m pip install -r requirements.lock.txt
 npm run dev
 ```
 
-打开 **http://127.0.0.1:5190/**。首次点击「运行 Python」时才加载本地运行环境。
+打开 **http://127.0.0.1:5190/**。直接开发预览只需要 Node；内容导入、检查和构建需按 [复现说明](docs/REPRODUCIBILITY.md) 创建 Python 虚拟环境并安装 `requirements.lock.txt`。首次点击「运行 Python」时才加载浏览器内的本地运行环境。
 
 ```sh
 npm run check       # TypeScript、全文审计、导入与定位回归测试
