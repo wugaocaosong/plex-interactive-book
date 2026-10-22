@@ -13,7 +13,7 @@ SUFFIXES = {'.py','.java','.cpp','.c','.h','.cs','.go','.js','.ts','.swift','.rs
 
 def write_json(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf8', newline='\n')
 
 def normalize(name):
     return re.sub(r'[^a-z0-9]', '', name.lower())
@@ -222,7 +222,7 @@ def publish(record,body,examples=None,animations=None):
     write_json(PUBLIC/'book/pages'/f'{record["id"]}.json',data)
     routefile=ROOT/'web/read'/f'{record["id"]}.md'
     routefile.parent.mkdir(parents=True,exist_ok=True)
-    routefile.write_text('---\n'+yaml.safe_dump({'title':record['title'],'bookId':record['id']},allow_unicode=True)+'---\n',encoding='utf8')
+    routefile.write_text('---\n'+yaml.safe_dump({'title':record['title'],'bookId':record['id']},allow_unicode=True)+'---\n',encoding='utf8',newline='\n')
     parsed=BeautifulSoup(body,'html.parser');plain=parsed.get_text(' ',strip=True)
     search.append({'id':record['id'],'title':record['title'],'group':record['group'],'text':plain,'blocks':[{'blockId':tag['data-block'],'text':tag.get_text(' ',strip=True)} for tag in parsed.select('[data-block]')]})
     records.append(record)
@@ -276,5 +276,5 @@ if __name__=='__main__':
             target=PUBLIC/'upstream'/path.relative_to(SOURCE/'docs');target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(path,target)
     python_files={p.relative_to(SOURCE/'codes/python').as_posix():p.read_text(encoding='utf8') for p in (SOURCE/'codes/python').rglob('*.py')}
     write_json(PUBLIC/'book/python-files.json',python_files)
-    (ROOT/'web/index.md').write_text('---\ntitle: 星轨编程\nbookId: cover\n---\n',encoding='utf8')
+    (ROOT/'web/index.md').write_text('---\ntitle: 星轨编程\nbookId: cover\n---\n',encoding='utf8',newline='\n')
     print(json.dumps(stats,ensure_ascii=False))
