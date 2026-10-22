@@ -1,0 +1,13 @@
+{
+  "id": "dedication",
+  "title": "献给每一位探索者",
+  "kind": "editorial",
+  "group": "卷首",
+  "route": "/read/dedication",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"b0\">献给每一位探索者</h1>\n<p data-block=\"b1\">献给第一次写下代码的你。</p>\n<p data-block=\"b2\">也献给在报错之后，仍愿意再试一次的你。</p>\n<blockquote data-block=\"b3\">\n<p>不必一次看清整片星空。\n从眼前的一束光开始。</p>\n</blockquote>\n<p data-block=\"b4\">—— PLEX 数字教材原创题记</p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null
+}

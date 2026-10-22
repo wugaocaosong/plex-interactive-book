@@ -1,0 +1,203 @@
+{
+  "id": "chapter_sorting/merge_sort",
+  "title": "11.6   归并排序",
+  "kind": "chapter",
+  "group": "第 11 章   排序",
+  "route": "/read/chapter_sorting/merge_sort",
+  "sourcePath": "chapter_sorting/merge_sort.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">归并排序</h1>\n<p data-block=\"b1\"><u>归并排序（merge sort）</u>是一种基于分治策略的排序算法，包含下图所示的“划分”和“合并”阶段。</p>\n<ol data-block=\"b2\">\n<li><strong>划分阶段</strong>：通过递归不断地将数组从中点处分开，将长数组的排序问题转换为短数组的排序问题。</li>\n<li><strong>合并阶段</strong>：当子数组长度为 1 时终止划分，开始合并，持续地将左右两个较短的有序数组合并为一个较长的有序数组，直至结束。</li>\n</ol>\n<figure data-block=\"b3\"><img alt=\"归并排序的划分与合并阶段\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_sorting/merge_sort.assets/merge_sort_overview.png\"/><figcaption>归并排序的划分与合并阶段</figcaption></figure>\n<h2 data-block=\"b4\" id=\"_2\">算法流程</h2>\n<p data-block=\"b5\">如下图所示，“划分阶段”从顶至底递归地将数组从中点切分为两个子数组。</p>\n<ol data-block=\"b6\">\n<li>计算数组中点 <code>mid</code> ，递归划分左子数组（区间 <code>[left, mid]</code> ）和右子数组（区间 <code>[mid + 1, right]</code> ）。</li>\n<li>递归执行步骤 <code>1.</code> ，直至子数组区间长度为 1 时终止。</li>\n</ol>\n<p data-block=\"b7\">“合并阶段”从底至顶地将左子数组和右子数组合并为一个有序数组。需要注意的是，从长度为 1 的子数组开始合并，合并阶段中的每个子数组都是有序的。</p>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"b8\"><img alt=\"归并排序步骤\" data-action=\"image\" src=\"/upstream/chapter_sorting/merge_sort.assets/merge_sort_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 10</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<p data-block=\"b9\">观察发现，归并排序与二叉树后序遍历的递归顺序是一致的。</p>\n<ul data-block=\"b10\">\n<li><strong>后序遍历</strong>：先递归左子树，再递归右子树，最后处理根节点。</li>\n<li><strong>归并排序</strong>：先递归左子数组，再递归右子数组，最后处理合并。</li>\n</ul>\n<p data-block=\"b11\">归并排序的实现如以下代码所示。请注意，<code>nums</code> 的待合并区间为 <code>[left, right]</code> ，而 <code>tmp</code> 的对应区间为 <code>[0, right - left]</code> 。</p>\n<div class=\"code-example\" data-block=\"b12\" data-code=\"0\"><div class=\"code-caption\"><span>merge_sort · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def merge_sort(nums: list[int], left: int, right: int):\n    \"\"\"归并排序\"\"\"\n    # 终止条件\n    if left &gt;= right:\n        return  # 当子数组长度为 1 时终止递归\n    # 划分阶段\n    mid = (left + right) // 2 # 计算中点\n    merge_sort(nums, left, mid)  # 递归左子数组\n    merge_sort(nums, mid + 1, right)  # 递归右子数组\n    # 合并阶段\n    merge(nums, left, mid, right)</code></pre></div>\n<h2 data-block=\"b13\" id=\"_3\">算法特性</h2>\n<ul data-block=\"b14\">\n<li><strong>时间复杂度为 <span class=\"arithmatex\">\\(O(n \\log n)\\)</span>、非自适应排序</strong>：划分产生高度为 <span class=\"arithmatex\">\\(\\log n\\)</span> 的递归树，每层合并的总操作数量为 <span class=\"arithmatex\">\\(n\\)</span> ，因此总体时间复杂度为 <span class=\"arithmatex\">\\(O(n \\log n)\\)</span> 。</li>\n<li><strong>空间复杂度为 <span class=\"arithmatex\">\\(O(n)\\)</span>、非原地排序</strong>：递归深度为 <span class=\"arithmatex\">\\(\\log n\\)</span> ，使用 <span class=\"arithmatex\">\\(O(\\log n)\\)</span> 大小的栈帧空间。合并操作需要借助辅助数组实现，使用 <span class=\"arithmatex\">\\(O(n)\\)</span> 大小的额外空间。</li>\n<li><strong>稳定排序</strong>：在合并过程中，相等元素的次序保持不变。</li>\n</ul>\n<h2 data-block=\"b15\" id=\"_4\">链表排序</h2>\n<p data-block=\"b16\">对于链表，归并排序相较于其他排序算法具有显著优势，<strong>可以将链表排序任务的空间复杂度优化至 <span class=\"arithmatex\">\\(O(1)\\)</span></strong> 。</p>\n<ul data-block=\"b17\">\n<li><strong>划分阶段</strong>：可以使用“迭代”替代“递归”来实现链表划分工作，从而省去递归使用的栈帧空间。</li>\n<li><strong>合并阶段</strong>：在链表中，节点增删操作仅需改变引用（指针）即可实现，因此合并阶段（将两个短有序链表合并为一个长有序链表）无须创建额外链表。</li>\n</ul>\n<p data-block=\"b18\">具体实现细节比较复杂，有兴趣的读者可以查阅相关资料进行学习。</p>",
+  "codeExamples": [
+    {
+      "id": "chapter_sorting/merge_sort-code-0",
+      "file": "merge_sort",
+      "className": "",
+      "functionName": "merge_sort",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def merge_sort(nums: list[int], left: int, right: int):\n    \"\"\"归并排序\"\"\"\n    # 终止条件\n    if left >= right:\n        return  # 当子数组长度为 1 时终止递归\n    # 划分阶段\n    mid = (left + right) // 2 # 计算中点\n    merge_sort(nums, left, mid)  # 递归左子数组\n    merge_sort(nums, mid + 1, right)  # 递归右子数组\n    # 合并阶段\n    merge(nums, left, mid, right)",
+          "fullSource": "\"\"\"\nFile: merge_sort.py\nCreated Time: 2022-11-25\nAuthor: timi (xisunyy@163.com), krahets (krahets@163.com)\n\"\"\"\n\n\ndef merge(nums: list[int], left: int, mid: int, right: int):\n    \"\"\"合并左子数组和右子数组\"\"\"\n    # 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n    # 创建一个临时数组 tmp ，用于存放合并后的结果\n    tmp = [0] * (right - left + 1)\n    # 初始化左子数组和右子数组的起始索引\n    i, j, k = left, mid + 1, 0\n    # 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n    while i <= mid and j <= right:\n        if nums[i] <= nums[j]:\n            tmp[k] = nums[i]\n            i += 1\n        else:\n            tmp[k] = nums[j]\n            j += 1\n        k += 1\n    # 将左子数组和右子数组的剩余元素复制到临时数组中\n    while i <= mid:\n        tmp[k] = nums[i]\n        i += 1\n        k += 1\n    while j <= right:\n        tmp[k] = nums[j]\n        j += 1\n        k += 1\n    # 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n    for k in range(0, len(tmp)):\n        nums[left + k] = tmp[k]\n\n\ndef merge_sort(nums: list[int], left: int, right: int):\n    \"\"\"归并排序\"\"\"\n    # 终止条件\n    if left >= right:\n        return  # 当子数组长度为 1 时终止递归\n    # 划分阶段\n    mid = (left + right) // 2 # 计算中点\n    merge_sort(nums, left, mid)  # 递归左子数组\n    merge_sort(nums, mid + 1, right)  # 递归右子数组\n    # 合并阶段\n    merge(nums, left, mid, right)\n\n\n\"\"\"Driver Code\"\"\"\nif __name__ == \"__main__\":\n    nums = [7, 3, 2, 6, 0, 1, 5, 4]\n    merge_sort(nums, 0, len(nums) - 1)\n    print(\"归并排序完成后 nums =\", nums)\n",
+          "sourcePath": "codes/python/chapter_sorting/merge_sort.py",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/python/chapter_sorting/merge_sort.py",
+          "extraction": "symbol",
+          "runnable": true
+        },
+        {
+          "language": "java",
+          "snippet": "public class merge_sort {\n    /* 合并左子数组和右子数组 */\n    static void merge(int[] nums, int left, int mid, int right) {\n        // 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n        // 创建一个临时数组 tmp ，用于存放合并后的结果\n        int[] tmp = new int[right - left + 1];\n        // 初始化左子数组和右子数组的起始索引\n        int i = left, j = mid + 1, k = 0;\n        // 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n        while (i <= mid && j <= right) {\n            if (nums[i] <= nums[j])\n                tmp[k++] = nums[i++];\n            else\n                tmp[k++] = nums[j++];\n        }\n        // 将左子数组和右子数组的剩余元素复制到临时数组中\n        while (i <= mid) {\n            tmp[k++] = nums[i++];\n        }\n        while (j <= right) {\n            tmp[k++] = nums[j++];\n        }\n        // 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n        for (k = 0; k < tmp.length; k++) {\n            nums[left + k] = tmp[k];\n        }\n    }\n\n    /* 归并排序 */\n    static void mergeSort(int[] nums, int left, int right) {\n        // 终止条件\n        if (left >= right)\n            return; // 当子数组长度为 1 时终止递归\n        // 划分阶段\n        int mid = left + (right - left) / 2; // 计算中点\n        mergeSort(nums, left, mid); // 递归左子数组\n        mergeSort(nums, mid + 1, right); // 递归右子数组\n        // 合并阶段\n        merge(nums, left, mid, right);\n    }\n\n    public static void main(String[] args) {\n        /* 归并排序 */\n        int[] nums = { 7, 3, 2, 6, 0, 1, 5, 4 };\n        mergeSort(nums, 0, nums.length - 1);\n        System.out.println(\"归并排序完成后 nums = \" + Arrays.toString(nums));\n    }\n}",
+          "fullSource": "/**\n * File: merge_sort.java\n * Created Time: 2022-11-25\n * Author: krahets (krahets@163.com)\n */\n\npackage chapter_sorting;\n\nimport java.util.*;\n\npublic class merge_sort {\n    /* 合并左子数组和右子数组 */\n    static void merge(int[] nums, int left, int mid, int right) {\n        // 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n        // 创建一个临时数组 tmp ，用于存放合并后的结果\n        int[] tmp = new int[right - left + 1];\n        // 初始化左子数组和右子数组的起始索引\n        int i = left, j = mid + 1, k = 0;\n        // 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n        while (i <= mid && j <= right) {\n            if (nums[i] <= nums[j])\n                tmp[k++] = nums[i++];\n            else\n                tmp[k++] = nums[j++];\n        }\n        // 将左子数组和右子数组的剩余元素复制到临时数组中\n        while (i <= mid) {\n            tmp[k++] = nums[i++];\n        }\n        while (j <= right) {\n            tmp[k++] = nums[j++];\n        }\n        // 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n        for (k = 0; k < tmp.length; k++) {\n            nums[left + k] = tmp[k];\n        }\n    }\n\n    /* 归并排序 */\n    static void mergeSort(int[] nums, int left, int right) {\n        // 终止条件\n        if (left >= right)\n            return; // 当子数组长度为 1 时终止递归\n        // 划分阶段\n        int mid = left + (right - left) / 2; // 计算中点\n        mergeSort(nums, left, mid); // 递归左子数组\n        mergeSort(nums, mid + 1, right); // 递归右子数组\n        // 合并阶段\n        merge(nums, left, mid, right);\n    }\n\n    public static void main(String[] args) {\n        /* 归并排序 */\n        int[] nums = { 7, 3, 2, 6, 0, 1, 5, 4 };\n        mergeSort(nums, 0, nums.length - 1);\n        System.out.println(\"归并排序完成后 nums = \" + Arrays.toString(nums));\n    }\n}\n",
+          "sourcePath": "codes/java/chapter_sorting/merge_sort.java",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/java/chapter_sorting/merge_sort.java",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "cpp",
+          "snippet": "void mergeSort(vector<int> &nums, int left, int right) {\n    // 终止条件\n    if (left >= right)\n        return; // 当子数组长度为 1 时终止递归\n    // 划分阶段\n    int mid = left + (right - left) / 2;    // 计算中点\n    mergeSort(nums, left, mid);      // 递归左子数组\n    mergeSort(nums, mid + 1, right); // 递归右子数组\n    // 合并阶段\n    merge(nums, left, mid, right);\n}",
+          "fullSource": "/**\n * File: merge_sort.cpp\n * Created Time: 2022-11-25\n * Author: krahets (krahets@163.com)\n */\n\n#include \"../utils/common.hpp\"\n\n/* 合并左子数组和右子数组 */\nvoid merge(vector<int> &nums, int left, int mid, int right) {\n    // 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n    // 创建一个临时数组 tmp ，用于存放合并后的结果\n    vector<int> tmp(right - left + 1);\n    // 初始化左子数组和右子数组的起始索引\n    int i = left, j = mid + 1, k = 0;\n    // 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n    while (i <= mid && j <= right) {\n        if (nums[i] <= nums[j])\n            tmp[k++] = nums[i++];\n        else\n            tmp[k++] = nums[j++];\n    }\n    // 将左子数组和右子数组的剩余元素复制到临时数组中\n    while (i <= mid) {\n        tmp[k++] = nums[i++];\n    }\n    while (j <= right) {\n        tmp[k++] = nums[j++];\n    }\n    // 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n    for (k = 0; k < tmp.size(); k++) {\n        nums[left + k] = tmp[k];\n    }\n}\n\n/* 归并排序 */\nvoid mergeSort(vector<int> &nums, int left, int right) {\n    // 终止条件\n    if (left >= right)\n        return; // 当子数组长度为 1 时终止递归\n    // 划分阶段\n    int mid = left + (right - left) / 2;    // 计算中点\n    mergeSort(nums, left, mid);      // 递归左子数组\n    mergeSort(nums, mid + 1, right); // 递归右子数组\n    // 合并阶段\n    merge(nums, left, mid, right);\n}\n\n/* Driver Code */\nint main() {\n    /* 归并排序 */\n    vector<int> nums = {7, 3, 2, 6, 0, 1, 5, 4};\n    mergeSort(nums, 0, nums.size() - 1);\n    cout << \"归并排序完成后 nums = \";\n    printVector(nums);\n\n    return 0;\n}\n",
+          "sourcePath": "codes/cpp/chapter_sorting/merge_sort.cpp",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/cpp/chapter_sorting/merge_sort.cpp",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "c",
+          "snippet": "void mergeSort(int *nums, int left, int right) {\n    // 终止条件\n    if (left >= right)\n        return; // 当子数组长度为 1 时终止递归\n    // 划分阶段\n    int mid = left + (right - left) / 2;    // 计算中点\n    mergeSort(nums, left, mid);      // 递归左子数组\n    mergeSort(nums, mid + 1, right); // 递归右子数组\n    // 合并阶段\n    merge(nums, left, mid, right);\n}",
+          "fullSource": "/**\n * File: merge_sort.c\n * Created Time: 2022-03-21\n * Author: Guanngxu (446678850@qq.com)\n */\n\n#include \"../utils/common.h\"\n\n/* 合并左子数组和右子数组 */\nvoid merge(int *nums, int left, int mid, int right) {\n    // 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n    // 创建一个临时数组 tmp ，用于存放合并后的结果\n    int tmpSize = right - left + 1;\n    int *tmp = (int *)malloc(tmpSize * sizeof(int));\n    // 初始化左子数组和右子数组的起始索引\n    int i = left, j = mid + 1, k = 0;\n    // 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n    while (i <= mid && j <= right) {\n        if (nums[i] <= nums[j]) {\n            tmp[k++] = nums[i++];\n        } else {\n            tmp[k++] = nums[j++];\n        }\n    }\n    // 将左子数组和右子数组的剩余元素复制到临时数组中\n    while (i <= mid) {\n        tmp[k++] = nums[i++];\n    }\n    while (j <= right) {\n        tmp[k++] = nums[j++];\n    }\n    // 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n    for (k = 0; k < tmpSize; ++k) {\n        nums[left + k] = tmp[k];\n    }\n    // 释放内存\n    free(tmp);\n}\n\n/* 归并排序 */\nvoid mergeSort(int *nums, int left, int right) {\n    // 终止条件\n    if (left >= right)\n        return; // 当子数组长度为 1 时终止递归\n    // 划分阶段\n    int mid = left + (right - left) / 2;    // 计算中点\n    mergeSort(nums, left, mid);      // 递归左子数组\n    mergeSort(nums, mid + 1, right); // 递归右子数组\n    // 合并阶段\n    merge(nums, left, mid, right);\n}\n\n/* Driver Code */\nint main() {\n    /* 归并排序 */\n    int nums[] = {7, 3, 2, 6, 0, 1, 5, 4};\n    int size = sizeof(nums) / sizeof(int);\n    mergeSort(nums, 0, size - 1);\n    printf(\"归并排序完成后 nums = \");\n    printArray(nums, size);\n\n    return 0;\n}\n",
+          "sourcePath": "codes/c/chapter_sorting/merge_sort.c",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/c/chapter_sorting/merge_sort.c",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "csharp",
+          "snippet": "public class merge_sort {\n    /* 合并左子数组和右子数组 */\n    void Merge(int[] nums, int left, int mid, int right) {\n        // 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n        // 创建一个临时数组 tmp ，用于存放合并后的结果\n        int[] tmp = new int[right - left + 1];\n        // 初始化左子数组和右子数组的起始索引\n        int i = left, j = mid + 1, k = 0;\n        // 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n        while (i <= mid && j <= right) {\n            if (nums[i] <= nums[j])\n                tmp[k++] = nums[i++];\n            else\n                tmp[k++] = nums[j++];\n        }\n        // 将左子数组和右子数组的剩余元素复制到临时数组中\n        while (i <= mid) {\n            tmp[k++] = nums[i++];\n        }\n        while (j <= right) {\n            tmp[k++] = nums[j++];\n        }\n        // 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n        for (k = 0; k < tmp.Length; ++k) {\n            nums[left + k] = tmp[k];\n        }\n    }\n\n    /* 归并排序 */\n    void MergeSort(int[] nums, int left, int right) {\n        // 终止条件\n        if (left >= right) return;       // 当子数组长度为 1 时终止递归\n        // 划分阶段\n        int mid = left + (right - left) / 2;    // 计算中点\n        MergeSort(nums, left, mid);      // 递归左子数组\n        MergeSort(nums, mid + 1, right); // 递归右子数组\n        // 合并阶段\n        Merge(nums, left, mid, right);\n    }\n\n    [Test]\n    public void Test() {\n        /* 归并排序 */\n        int[] nums = [7, 3, 2, 6, 0, 1, 5, 4];\n        MergeSort(nums, 0, nums.Length - 1);\n        Console.WriteLine(\"归并排序完成后 nums = \" + string.Join(\",\", nums));\n    }\n}",
+          "fullSource": "﻿/**\n * File: merge_sort.cs\n * Created Time: 2022-12-23\n * Author: haptear (haptear@hotmail.com)\n */\n\nnamespace hello_algo.chapter_sorting;\n\npublic class merge_sort {\n    /* 合并左子数组和右子数组 */\n    void Merge(int[] nums, int left, int mid, int right) {\n        // 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n        // 创建一个临时数组 tmp ，用于存放合并后的结果\n        int[] tmp = new int[right - left + 1];\n        // 初始化左子数组和右子数组的起始索引\n        int i = left, j = mid + 1, k = 0;\n        // 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n        while (i <= mid && j <= right) {\n            if (nums[i] <= nums[j])\n                tmp[k++] = nums[i++];\n            else\n                tmp[k++] = nums[j++];\n        }\n        // 将左子数组和右子数组的剩余元素复制到临时数组中\n        while (i <= mid) {\n            tmp[k++] = nums[i++];\n        }\n        while (j <= right) {\n            tmp[k++] = nums[j++];\n        }\n        // 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n        for (k = 0; k < tmp.Length; ++k) {\n            nums[left + k] = tmp[k];\n        }\n    }\n\n    /* 归并排序 */\n    void MergeSort(int[] nums, int left, int right) {\n        // 终止条件\n        if (left >= right) return;       // 当子数组长度为 1 时终止递归\n        // 划分阶段\n        int mid = left + (right - left) / 2;    // 计算中点\n        MergeSort(nums, left, mid);      // 递归左子数组\n        MergeSort(nums, mid + 1, right); // 递归右子数组\n        // 合并阶段\n        Merge(nums, left, mid, right);\n    }\n\n    [Test]\n    public void Test() {\n        /* 归并排序 */\n        int[] nums = [7, 3, 2, 6, 0, 1, 5, 4];\n        MergeSort(nums, 0, nums.Length - 1);\n        Console.WriteLine(\"归并排序完成后 nums = \" + string.Join(\",\", nums));\n    }\n}\n",
+          "sourcePath": "codes/csharp/chapter_sorting/merge_sort.cs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/csharp/chapter_sorting/merge_sort.cs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "go",
+          "snippet": "func mergeSort(nums []int, left, right int) {\n\t// 终止条件\n\tif left >= right {\n\t\treturn\n\t}\n\t// 划分阶段\n\tmid := left + (right - left) / 2\n\tmergeSort(nums, left, mid)\n\tmergeSort(nums, mid+1, right)\n\t// 合并阶段\n\tmerge(nums, left, mid, right)\n}",
+          "fullSource": "// File: merge_sort.go\n// Created Time: 2022-12-13\n// Author: msk397 (machangxinq@gmail.com)\n\npackage chapter_sorting\n\n/* 合并左子数组和右子数组 */\nfunc merge(nums []int, left, mid, right int) {\n\t// 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n\t// 创建一个临时数组 tmp ，用于存放合并后的结果\n\ttmp := make([]int, right-left+1)\n\t// 初始化左子数组和右子数组的起始索引\n\ti, j, k := left, mid+1, 0\n\t// 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n\tfor i <= mid && j <= right {\n\t\tif nums[i] <= nums[j] {\n\t\t\ttmp[k] = nums[i]\n\t\t\ti++\n\t\t} else {\n\t\t\ttmp[k] = nums[j]\n\t\t\tj++\n\t\t}\n\t\tk++\n\t}\n\t// 将左子数组和右子数组的剩余元素复制到临时数组中\n\tfor i <= mid {\n\t\ttmp[k] = nums[i]\n\t\ti++\n\t\tk++\n\t}\n\tfor j <= right {\n\t\ttmp[k] = nums[j]\n\t\tj++\n\t\tk++\n\t}\n\t// 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n\tfor k := 0; k < len(tmp); k++ {\n\t\tnums[left+k] = tmp[k]\n\t}\n}\n\n/* 归并排序 */\nfunc mergeSort(nums []int, left, right int) {\n\t// 终止条件\n\tif left >= right {\n\t\treturn\n\t}\n\t// 划分阶段\n\tmid := left + (right - left) / 2\n\tmergeSort(nums, left, mid)\n\tmergeSort(nums, mid+1, right)\n\t// 合并阶段\n\tmerge(nums, left, mid, right)\n}\n",
+          "sourcePath": "codes/go/chapter_sorting/merge_sort.go",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/go/chapter_sorting/merge_sort.go",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "javascript",
+          "snippet": "function mergeSort(nums, left, right) {\n    // 终止条件\n    if (left >= right) return; // 当子数组长度为 1 时终止递归\n    // 划分阶段\n    let mid = Math.floor(left + (right - left) / 2); // 计算中点\n    mergeSort(nums, left, mid); // 递归左子数组\n    mergeSort(nums, mid + 1, right); // 递归右子数组\n    // 合并阶段\n    merge(nums, left, mid, right);\n}",
+          "fullSource": "/**\n * File: merge_sort.js\n * Created Time: 2022-12-01\n * Author: IsChristina (christinaxia77@foxmail.com)\n */\n\n/* 合并左子数组和右子数组 */\nfunction merge(nums, left, mid, right) {\n    // 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n    // 创建一个临时数组 tmp ，用于存放合并后的结果\n    const tmp = new Array(right - left + 1);\n    // 初始化左子数组和右子数组的起始索引\n    let i = left,\n        j = mid + 1,\n        k = 0;\n    // 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n    while (i <= mid && j <= right) {\n        if (nums[i] <= nums[j]) {\n            tmp[k++] = nums[i++];\n        } else {\n            tmp[k++] = nums[j++];\n        }\n    }\n    // 将左子数组和右子数组的剩余元素复制到临时数组中\n    while (i <= mid) {\n        tmp[k++] = nums[i++];\n    }\n    while (j <= right) {\n        tmp[k++] = nums[j++];\n    }\n    // 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n    for (k = 0; k < tmp.length; k++) {\n        nums[left + k] = tmp[k];\n    }\n}\n\n/* 归并排序 */\nfunction mergeSort(nums, left, right) {\n    // 终止条件\n    if (left >= right) return; // 当子数组长度为 1 时终止递归\n    // 划分阶段\n    let mid = Math.floor(left + (right - left) / 2); // 计算中点\n    mergeSort(nums, left, mid); // 递归左子数组\n    mergeSort(nums, mid + 1, right); // 递归右子数组\n    // 合并阶段\n    merge(nums, left, mid, right);\n}\n\n/* Driver Code */\nconst nums = [7, 3, 2, 6, 0, 1, 5, 4];\nmergeSort(nums, 0, nums.length - 1);\nconsole.log('归并排序完成后 nums =', nums);\n",
+          "sourcePath": "codes/javascript/chapter_sorting/merge_sort.js",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/javascript/chapter_sorting/merge_sort.js",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "typescript",
+          "snippet": "function mergeSort(nums: number[], left: number, right: number): void {\n    // 终止条件\n    if (left >= right) return; // 当子数组长度为 1 时终止递归\n    // 划分阶段\n    let mid = Math.floor(left + (right - left) / 2); // 计算中点\n    mergeSort(nums, left, mid); // 递归左子数组\n    mergeSort(nums, mid + 1, right); // 递归右子数组\n    // 合并阶段\n    merge(nums, left, mid, right);\n}",
+          "fullSource": "/**\n * File: merge_sort.ts\n * Created Time: 2022-12-12\n * Author: Justin (xiefahit@gmail.com)\n */\n\n/* 合并左子数组和右子数组 */\nfunction merge(nums: number[], left: number, mid: number, right: number): void {\n    // 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n    // 创建一个临时数组 tmp ，用于存放合并后的结果\n    const tmp = new Array(right - left + 1);\n    // 初始化左子数组和右子数组的起始索引\n    let i = left,\n        j = mid + 1,\n        k = 0;\n    // 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n    while (i <= mid && j <= right) {\n        if (nums[i] <= nums[j]) {\n            tmp[k++] = nums[i++];\n        } else {\n            tmp[k++] = nums[j++];\n        }\n    }\n    // 将左子数组和右子数组的剩余元素复制到临时数组中\n    while (i <= mid) {\n        tmp[k++] = nums[i++];\n    }\n    while (j <= right) {\n        tmp[k++] = nums[j++];\n    }\n    // 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n    for (k = 0; k < tmp.length; k++) {\n        nums[left + k] = tmp[k];\n    }\n}\n\n/* 归并排序 */\nfunction mergeSort(nums: number[], left: number, right: number): void {\n    // 终止条件\n    if (left >= right) return; // 当子数组长度为 1 时终止递归\n    // 划分阶段\n    let mid = Math.floor(left + (right - left) / 2); // 计算中点\n    mergeSort(nums, left, mid); // 递归左子数组\n    mergeSort(nums, mid + 1, right); // 递归右子数组\n    // 合并阶段\n    merge(nums, left, mid, right);\n}\n\n/* Driver Code */\nconst nums = [7, 3, 2, 6, 0, 1, 5, 4];\nmergeSort(nums, 0, nums.length - 1);\nconsole.log('归并排序完成后 nums =', nums);\n\nexport {};\n",
+          "sourcePath": "codes/typescript/chapter_sorting/merge_sort.ts",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/typescript/chapter_sorting/merge_sort.ts",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "swift",
+          "snippet": "func mergeSort(nums: inout [Int], left: Int, right: Int) {\n    // 终止条件\n    if left >= right { // 当子数组长度为 1 时终止递归\n        return\n    }\n    // 划分阶段\n    let mid = left + (right - left) / 2 // 计算中点\n    mergeSort(nums: &nums, left: left, right: mid) // 递归左子数组\n    mergeSort(nums: &nums, left: mid + 1, right: right) // 递归右子数组\n    // 合并阶段\n    merge(nums: &nums, left: left, mid: mid, right: right)\n}",
+          "fullSource": "/**\n * File: merge_sort.swift\n * Created Time: 2023-01-29\n * Author: nuomi1 (nuomi1@qq.com)\n */\n\n/* 合并左子数组和右子数组 */\nfunc merge(nums: inout [Int], left: Int, mid: Int, right: Int) {\n    // 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n    // 创建一个临时数组 tmp ，用于存放合并后的结果\n    var tmp = Array(repeating: 0, count: right - left + 1)\n    // 初始化左子数组和右子数组的起始索引\n    var i = left, j = mid + 1, k = 0\n    // 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n    while i <= mid, j <= right {\n        if nums[i] <= nums[j] {\n            tmp[k] = nums[i]\n            i += 1\n        } else {\n            tmp[k] = nums[j]\n            j += 1\n        }\n        k += 1\n    }\n    // 将左子数组和右子数组的剩余元素复制到临时数组中\n    while i <= mid {\n        tmp[k] = nums[i]\n        i += 1\n        k += 1\n    }\n    while j <= right {\n        tmp[k] = nums[j]\n        j += 1\n        k += 1\n    }\n    // 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n    for k in tmp.indices {\n        nums[left + k] = tmp[k]\n    }\n}\n\n/* 归并排序 */\nfunc mergeSort(nums: inout [Int], left: Int, right: Int) {\n    // 终止条件\n    if left >= right { // 当子数组长度为 1 时终止递归\n        return\n    }\n    // 划分阶段\n    let mid = left + (right - left) / 2 // 计算中点\n    mergeSort(nums: &nums, left: left, right: mid) // 递归左子数组\n    mergeSort(nums: &nums, left: mid + 1, right: right) // 递归右子数组\n    // 合并阶段\n    merge(nums: &nums, left: left, mid: mid, right: right)\n}\n\n@main\nenum MergeSort {\n    /* Driver Code */\n    static func main() {\n        /* 归并排序 */\n        var nums = [7, 3, 2, 6, 0, 1, 5, 4]\n        mergeSort(nums: &nums, left: nums.startIndex, right: nums.endIndex - 1)\n        print(\"归并排序完成后 nums = \\(nums)\")\n    }\n}\n",
+          "sourcePath": "codes/swift/chapter_sorting/merge_sort.swift",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/swift/chapter_sorting/merge_sort.swift",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "rust",
+          "snippet": "fn merge_sort(nums: &mut [i32], left: usize, right: usize) {\n    // 终止条件\n    if left >= right {\n        return; // 当子数组长度为 1 时终止递归\n    }\n\n    // 划分阶段\n    let mid = left + (right - left) / 2; // 计算中点\n    merge_sort(nums, left, mid); // 递归左子数组\n    merge_sort(nums, mid + 1, right); // 递归右子数组\n\n    // 合并阶段\n    merge(nums, left, mid, right);\n}",
+          "fullSource": "/**\n * File: merge_sort.rs\n * Created Time: 2023-02-14\n * Author: xBLACKICEx (xBLACKICEx@outlook.com)\n */\n\n/* 合并左子数组和右子数组 */\nfn merge(nums: &mut [i32], left: usize, mid: usize, right: usize) {\n    // 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n    // 创建一个临时数组 tmp ，用于存放合并后的结果\n    let tmp_size = right - left + 1;\n    let mut tmp = vec![0; tmp_size];\n    // 初始化左子数组和右子数组的起始索引\n    let (mut i, mut j, mut k) = (left, mid + 1, 0);\n    // 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n    while i <= mid && j <= right {\n        if nums[i] <= nums[j] {\n            tmp[k] = nums[i];\n            i += 1;\n        } else {\n            tmp[k] = nums[j];\n            j += 1;\n        }\n        k += 1;\n    }\n    // 将左子数组和右子数组的剩余元素复制到临时数组中\n    while i <= mid {\n        tmp[k] = nums[i];\n        k += 1;\n        i += 1;\n    }\n    while j <= right {\n        tmp[k] = nums[j];\n        k += 1;\n        j += 1;\n    }\n    // 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n    for k in 0..tmp_size {\n        nums[left + k] = tmp[k];\n    }\n}\n\n/* 归并排序 */\nfn merge_sort(nums: &mut [i32], left: usize, right: usize) {\n    // 终止条件\n    if left >= right {\n        return; // 当子数组长度为 1 时终止递归\n    }\n\n    // 划分阶段\n    let mid = left + (right - left) / 2; // 计算中点\n    merge_sort(nums, left, mid); // 递归左子数组\n    merge_sort(nums, mid + 1, right); // 递归右子数组\n\n    // 合并阶段\n    merge(nums, left, mid, right);\n}\n\n/* Driver Code */\nfn main() {\n    /* 归并排序 */\n    let mut nums = [7, 3, 2, 6, 0, 1, 5, 4];\n    let right = nums.len() - 1;\n    merge_sort(&mut nums, 0, right);\n    println!(\"归并排序完成后 nums = {:?}\", nums);\n}\n",
+          "sourcePath": "codes/rust/chapter_sorting/merge_sort.rs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/rust/chapter_sorting/merge_sort.rs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "kotlin",
+          "snippet": "fun mergeSort(nums: IntArray, left: Int, right: Int) {\n    // 终止条件\n    if (left >= right) return  // 当子数组长度为 1 时终止递归\n    // 划分阶段\n    val mid = left + (right - left) / 2 // 计算中点\n    mergeSort(nums, left, mid) // 递归左子数组\n    mergeSort(nums, mid + 1, right) // 递归右子数组\n    // 合并阶段\n    merge(nums, left, mid, right)\n}",
+          "fullSource": "/**\n * File: merge_sort.kt\n * Created Time: 2024-01-25\n * Author: curtishd (1023632660@qq.com)\n */\n\npackage chapter_sorting\n\n/* 合并左子数组和右子数组 */\nfun merge(nums: IntArray, left: Int, mid: Int, right: Int) {\n    // 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n    // 创建一个临时数组 tmp ，用于存放合并后的结果\n    val tmp = IntArray(right - left + 1)\n    // 初始化左子数组和右子数组的起始索引\n    var i = left\n    var j = mid + 1\n    var k = 0\n    // 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n    while (i <= mid && j <= right) {\n        if (nums[i] <= nums[j])\n            tmp[k++] = nums[i++]\n        else\n            tmp[k++] = nums[j++]\n    }\n    // 将左子数组和右子数组的剩余元素复制到临时数组中\n    while (i <= mid) {\n        tmp[k++] = nums[i++]\n    }\n    while (j <= right) {\n        tmp[k++] = nums[j++]\n    }\n    // 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n    for (l in tmp.indices) {\n        nums[left + l] = tmp[l]\n    }\n}\n\n/* 归并排序 */\nfun mergeSort(nums: IntArray, left: Int, right: Int) {\n    // 终止条件\n    if (left >= right) return  // 当子数组长度为 1 时终止递归\n    // 划分阶段\n    val mid = left + (right - left) / 2 // 计算中点\n    mergeSort(nums, left, mid) // 递归左子数组\n    mergeSort(nums, mid + 1, right) // 递归右子数组\n    // 合并阶段\n    merge(nums, left, mid, right)\n}\n\n/* Driver Code */\nfun main() {\n    /* 归并排序 */\n    val nums = intArrayOf(7, 3, 2, 6, 0, 1, 5, 4)\n    mergeSort(nums, 0, nums.size - 1)\n    println(\"归并排序完成后 nums = ${nums.contentToString()}\")\n}\n",
+          "sourcePath": "codes/kotlin/chapter_sorting/merge_sort.kt",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/kotlin/chapter_sorting/merge_sort.kt",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "dart",
+          "snippet": "void mergeSort(List<int> nums, int left, int right) {\n  // 终止条件\n  if (left >= right) return; // 当子数组长度为 1 时终止递归\n  // 划分阶段\n  int mid = left + (right - left) ~/ 2; // 计算中点\n  mergeSort(nums, left, mid); // 递归左子数组\n  mergeSort(nums, mid + 1, right); // 递归右子数组\n  // 合并阶段\n  merge(nums, left, mid, right);\n}",
+          "fullSource": "/**\n * File: merge_sort.dart\n * Created Time: 2023-02-14\n * Author: what-is-me (whatisme@outlook.jp)\n */\n\n/* 合并左子数组和右子数组 */\nvoid merge(List<int> nums, int left, int mid, int right) {\n  // 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n  // 创建一个临时数组 tmp ，用于存放合并后的结果\n  List<int> tmp = List.filled(right - left + 1, 0);\n  // 初始化左子数组和右子数组的起始索引\n  int i = left, j = mid + 1, k = 0;\n  // 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n  while (i <= mid && j <= right) {\n    if (nums[i] <= nums[j])\n      tmp[k++] = nums[i++];\n    else\n      tmp[k++] = nums[j++];\n  }\n  // 将左子数组和右子数组的剩余元素复制到临时数组中\n  while (i <= mid) {\n    tmp[k++] = nums[i++];\n  }\n  while (j <= right) {\n    tmp[k++] = nums[j++];\n  }\n  // 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n  for (k = 0; k < tmp.length; k++) {\n    nums[left + k] = tmp[k];\n  }\n}\n\n/* 归并排序 */\nvoid mergeSort(List<int> nums, int left, int right) {\n  // 终止条件\n  if (left >= right) return; // 当子数组长度为 1 时终止递归\n  // 划分阶段\n  int mid = left + (right - left) ~/ 2; // 计算中点\n  mergeSort(nums, left, mid); // 递归左子数组\n  mergeSort(nums, mid + 1, right); // 递归右子数组\n  // 合并阶段\n  merge(nums, left, mid, right);\n}\n\n/* Driver Code */\nvoid main() {\n  /* 归并排序 */\n  List<int> nums = [7, 3, 2, 6, 0, 1, 5, 4];\n  mergeSort(nums, 0, nums.length - 1);\n  print(\"归并排序完成后 nums = $nums\");\n}\n",
+          "sourcePath": "codes/dart/chapter_sorting/merge_sort.dart",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/dart/chapter_sorting/merge_sort.dart",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "ruby",
+          "snippet": "def merge_sort(nums, left, right)\n  # 终止条件\n  # 当子数组长度为 1 时终止递归\n  return if left >= right\n  # 划分阶段\n  mid = left + (right - left) / 2 # 计算中点\n  merge_sort(nums, left, mid) # 递归左子数组\n  merge_sort(nums, mid + 1, right) # 递归右子数组\n  # 合并阶段\n  merge(nums, left, mid, right)\nend",
+          "fullSource": "=begin\nFile: merge_sort.rb\nCreated Time: 2024-04-10\nAuthor: junminhong (junminhong1110@gmail.com)\n=end\n\n### 合并左子数组和右子数组 ###\ndef merge(nums, left, mid, right)\n  # 左子数组区间为 [left, mid], 右子数组区间为 [mid+1, right]\n  # 创建一个临时数组 tmp，用于存放合并后的结果\n  tmp = Array.new(right - left + 1, 0)\n  # 初始化左子数组和右子数组的起始索引\n  i, j, k = left, mid + 1, 0\n  # 当左右子数组都还有元素时，进行比较并将较小的元素复制到临时数组中\n  while i <= mid && j <= right\n    if nums[i] <= nums[j]\n      tmp[k] = nums[i]\n      i += 1\n    else\n      tmp[k] = nums[j]\n      j += 1\n    end\n    k += 1\n  end\n  # 将左子数组和右子数组的剩余元素复制到临时数组中\n  while i <= mid\n    tmp[k] = nums[i]\n    i += 1\n    k += 1\n  end\n  while j <= right\n    tmp[k] = nums[j]\n    j += 1\n    k += 1\n  end\n  # 将临时数组 tmp 中的元素复制回原数组 nums 的对应区间\n  (0...tmp.length).each do |k|\n    nums[left + k] = tmp[k]\n  end\nend\n\n### 归并排序 ###\ndef merge_sort(nums, left, right)\n  # 终止条件\n  # 当子数组长度为 1 时终止递归\n  return if left >= right\n  # 划分阶段\n  mid = left + (right - left) / 2 # 计算中点\n  merge_sort(nums, left, mid) # 递归左子数组\n  merge_sort(nums, mid + 1, right) # 递归右子数组\n  # 合并阶段\n  merge(nums, left, mid, right)\nend\n\n### Driver Code ###\nif __FILE__ == $0\n  nums = [7, 3, 2, 6, 0, 1, 5, 4]\n  merge_sort(nums, 0, nums.length - 1)\n  puts \"归并排序完成后 nums = #{nums.inspect}\"\nend\n",
+          "sourcePath": "codes/ruby/chapter_sorting/merge_sort.rb",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/ruby/chapter_sorting/merge_sort.rb",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "zig",
+          "snippet": "fn mergeSort(nums: []i32, left: usize, right: usize) !void {\n    // 终止条件\n    if (left >= right) return;              // 当子数组长度为 1 时终止递归\n    // 划分阶段\n    var mid = left + (right - left) / 2;    // 计算中点\n    try mergeSort(nums, left, mid);         // 递归左子数组\n    try mergeSort(nums, mid + 1, right);    // 递归右子数组\n    // 合并阶段\n    try merge(nums, left, mid, right);\n}",
+          "fullSource": "// File: merge_sort.zig\n// Created Time: 2023-01-15\n// Author: codingonion (coderonion@gmail.com)\n\nconst std = @import(\"std\");\nconst inc = @import(\"include\");\n\n// 合并左子数组和右子数组\n// 左子数组区间 [left, mid]\n// 右子数组区间 [mid + 1, right]\nfn merge(nums: []i32, left: usize, mid: usize, right: usize) !void {\n    // 初始化辅助数组\n    var mem_arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\n    defer mem_arena.deinit();\n    const mem_allocator = mem_arena.allocator();\n    var tmp = try mem_allocator.alloc(i32, right + 1 - left);\n    std.mem.copy(i32, tmp, nums[left..right+1]);\n    // 左子数组的起始索引和结束索引\n    var leftStart = left - left;\n    var leftEnd = mid - left;\n    // 右子数组的起始索引和结束索引\n    var rightStart = mid + 1 - left;\n    var rightEnd = right - left;\n    // i, j 分别指向左子数组、右子数组的首元素\n    var i = leftStart;\n    var j = rightStart;\n    // 通过覆盖原数组 nums 来合并左子数组和右子数组\n    var k = left;\n    while (k <= right) : (k += 1) {\n        // 若“左子数组已全部合并完”，则选取右子数组元素，并且 j++\n        if (i > leftEnd) {\n            nums[k] = tmp[j];\n            j += 1;\n        // 否则，若“右子数组已全部合并完”或“左子数组元素 <= 右子数组元素”，则选取左子数组元素，并且 i++\n        } else if  (j > rightEnd or tmp[i] <= tmp[j]) {\n            nums[k] = tmp[i];\n            i += 1;\n        // 否则，若“左右子数组都未全部合并完”且“左子数组元素 > 右子数组元素”，则选取右子数组元素，并且 j++\n        } else {\n            nums[k] = tmp[j];\n            j += 1;\n        }\n    }\n}\n\n// 归并排序\nfn mergeSort(nums: []i32, left: usize, right: usize) !void {\n    // 终止条件\n    if (left >= right) return;              // 当子数组长度为 1 时终止递归\n    // 划分阶段\n    var mid = left + (right - left) / 2;    // 计算中点\n    try mergeSort(nums, left, mid);         // 递归左子数组\n    try mergeSort(nums, mid + 1, right);    // 递归右子数组\n    // 合并阶段\n    try merge(nums, left, mid, right);\n}\n\n// Driver Code\npub fn main() !void {\n    // 归并排序\n    var nums = [_]i32{ 7, 3, 2, 6, 0, 1, 5, 4 };\n    try mergeSort(&nums, 0, nums.len - 1);\n    std.debug.print(\"归并排序完成后 nums = \", .{});\n    inc.PrintUtil.printArray(i32, &nums);\n\n    _ = try std.io.getStdIn().reader().readByte();\n}\n",
+          "sourcePath": "codes/zig/chapter_sorting/merge_sort.zig",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/zig/chapter_sorting/merge_sort.zig",
+          "extraction": "symbol",
+          "runnable": false
+        }
+      ]
+    }
+  ],
+  "animations": [
+    [
+      {
+        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step1.png",
+        "alt": "归并排序步骤"
+      },
+      {
+        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step2.png",
+        "alt": "merge_sort_step2"
+      },
+      {
+        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step3.png",
+        "alt": "merge_sort_step3"
+      },
+      {
+        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step4.png",
+        "alt": "merge_sort_step4"
+      },
+      {
+        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step5.png",
+        "alt": "merge_sort_step5"
+      },
+      {
+        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step6.png",
+        "alt": "merge_sort_step6"
+      },
+      {
+        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step7.png",
+        "alt": "merge_sort_step7"
+      },
+      {
+        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step8.png",
+        "alt": "merge_sort_step8"
+      },
+      {
+        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step9.png",
+        "alt": "merge_sort_step9"
+      },
+      {
+        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step10.png",
+        "alt": "merge_sort_step10"
+      }
+    ]
+  ],
+  "conversion": {
+    "sourceSha256": "ca90f6712e11876e7454eac5bd7f69c0b177dcf2d48bda82430ce6bda54270f8",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 1,
+    "animationGroups": 1
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "chapter_hashing/exercises",
+  "title": "6.5   练习",
+  "kind": "chapter",
+  "group": "第 6 章   哈希表",
+  "route": "/read/chapter_hashing/exercises",
+  "sourcePath": "chapter_hashing/exercises.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">练习</h1>\n<h2 data-block=\"b1\" id=\"_2\">知识巩固</h2>\n<h3 data-block=\"b2\" id=\"_3\">发生哈希冲突后怎样查找</h3>\n<p data-block=\"b3\">一个哈希表有 5 个桶，哈希函数为 <span class=\"arithmatex\">\\(h(x)=x \\bmod 5\\)</span>，冲突时把元素依次放进该桶的列表中。\n依次插入 <code>[1, 6, 11, 7]</code>：</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"b4\">\n<li>写出 0～4 号桶中的内容；</li>\n<li>查找 6 时会先进入哪个桶，并依次检查哪些元素？</li>\n<li>根据第 1 问写出的桶内容，后插入的元素是否覆盖了先插入的元素？结合这种冲突处理方式说明理由。</li>\n</ol>\n<details class=\"success\" data-block=\"b5\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>因为 <span class=\"arithmatex\">\\(1\\bmod5=6\\bmod5=11\\bmod5=1\\)</span>，而 <span class=\"arithmatex\">\\(7\\bmod5=2\\)</span>，各桶为：</p>\n<p><code>text\n0: []\n1: [1, 6, 11]\n2: [7]\n3: []\n4: []</code></p>\n</li>\n<li>\n<p>查找 6 时先进入 1 号桶，再依次比较 1、6，第二次比较时找到目标。</p>\n</li>\n<li>\n<p>哈希值相同只表示它们落入同一个桶，并不表示这些元素相等。链式地址把冲突元素都保存在桶内，\n    查询时再逐个比较，因此 1、6、11 不会互相覆盖。</p>\n</li>\n</ol>\n</details>\n<h3 data-block=\"b6\" id=\"_4\">哈希表扩容后元素去哪儿</h3>\n<p data-block=\"b7\">一个使用链式地址的哈希表原有 5 个桶，哈希函数为 <span class=\"arithmatex\">\\(h(x)=x\\bmod5\\)</span>。\n键 <code>[1, 6, 11]</code> 都在 1 号桶中。</p>\n<p data-block=\"b8\">现在把哈希表扩容为 7 个桶，哈希函数相应变为 <span class=\"arithmatex\">\\(h(x)=x\\bmod7\\)</span>：</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"b9\">\n<li>分别计算 1、6、11 的新桶号。</li>\n<li>扩容后哪些桶中有元素？</li>\n<li>扩容时能否把原来 1 号桶中的列表原样复制到新的 1 号桶？结合第 1、2 问的结果说明理由。</li>\n</ol>\n<details class=\"success\" data-block=\"b10\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>新桶号分别为：</p>\n<ul>\n<li><span class=\"arithmatex\">\\(1\\bmod7=1\\)</span>；</li>\n<li><span class=\"arithmatex\">\\(6\\bmod7=6\\)</span>；</li>\n<li><span class=\"arithmatex\">\\(11\\bmod7=4\\)</span>。</li>\n</ul>\n</li>\n<li>\n<p>1 号桶保存 1，4 号桶保存 11，6 号桶保存 6。三个键不再挤在同一个桶中。</p>\n</li>\n<li>\n<p>不能原样复制。桶号由“键对桶数取余”得到。桶数从 5 变成 7 后，同一个键的新桶号可能改变，\n    因此必须重新计算每个键的位置。若把旧的 1 号桶原样复制过去，之后按新公式查找 6 和 11 时，\n    会分别前往 6 号桶和 4 号桶，从而找不到它们。</p>\n</li>\n</ol>\n</details>\n<h3 data-block=\"b11\" id=\"6-11\">删除 6 后还能找到 11 吗</h3>\n<p data-block=\"b12\">一个哈希表有 5 个位置，索引为 <code>0～4</code>，哈希函数为 <span class=\"arithmatex\">\\(h(x)=x\\bmod5\\)</span>。\n发生冲突时，从哈希函数算出的索引开始，向右寻找第一个空位。</p>\n<p data-block=\"b13\">依次插入 <code>[1, 6, 11]</code>：</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"b14\">\n<li>三个数最终分别放在哪个索引？</li>\n<li>查找 11 时，会依次检查哪些索引？</li>\n<li>如果删除 6 时直接把它的位置改成“从未使用的空位”，而查找遇到空位就停止，\n    再查找 11 时会发生什么？这个查找结果是否正确？如果有问题，应怎样避免？</li>\n</ol>\n<details class=\"success\" data-block=\"b15\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>1 放在索引 1。6 也映射到索引 1，发生冲突后放在索引 2。\n    11 同样从索引 1 开始，依次跳过已占用的索引 1、2，最终放在索引 3。</p>\n</li>\n<li>\n<p>查找 11 时依次检查索引 <code>1、2、3</code>，在索引 3 找到它。</p>\n</li>\n<li>\n<p>如果把索引 2 改成表示“从未使用”的空位，查找 11 时检查索引 1 后就会在索引 2 停止，\n    从而错误地认为 11 不存在。删除时应留下“已删除”标记：\n    查找遇到该标记时继续检查下一个索引（越过索引 4 后回到索引 0），而以后的插入仍可重新使用这个位置。</p>\n</li>\n</ol>\n</details>\n<h2 data-block=\"b16\" id=\"_5\">编程练习</h2>\n<h3 data-block=\"b17\" id=\"_6\">比较两个字符串的字符组成</h3>\n<p data-block=\"b18\">给定两个只含小写英文字母的字符串 <code>s</code> 和 <code>t</code>。\n可以任意调整 <code>s</code> 中字符的位置，但不能添加、删除或替换字符。</p>\n<p data-block=\"b19\">请判断调整后能否得到 <code>t</code>；可以则返回 <code>true</code>，否则返回 <code>false</code>。\n请使用哈希表记录各字母的出现次数，不对字符串中的字符排序。</p>\n<details class=\"tip\" data-block=\"b20\">\n<summary>解题提示</summary>\n<ol>\n<li>两个字符串长度不同，它们的字符组成一定不同</li>\n<li>用哈希表记录每种字母的数量；扫描 s 时把对应计数加 1</li>\n<li>扫描 t 时把对应计数减 1；所有计数最终都为 0，字符组成才相同</li>\n</ol>\n</details>\n<p data-block=\"b21\"><a class=\"rounded-button exercise-button\" href=\"https://leetcode.cn/problems/valid-anagram/\" rel=\"noopener noreferrer\" target=\"_blank\">LeetCode</a> <a class=\"rounded-button exercise-button\" href=\"https://leetcode.cn/problems/valid-anagram/solutions/2362065/242-you-xiao-de-zi-mu-yi-wei-ci-ha-xi-bi-cch7/\" rel=\"noopener noreferrer\" target=\"_blank\">题目解析</a></p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "f4f8a03dd2fed764b917de8b65aadf307d4bceab72302fdb648b7a46b4fa6793",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  }
+}

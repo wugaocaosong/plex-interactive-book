@@ -1,0 +1,202 @@
+{
+  "id": "chapter_sorting/heap_sort",
+  "title": "11.7   堆排序",
+  "kind": "chapter",
+  "group": "第 11 章   排序",
+  "route": "/read/chapter_sorting/heap_sort",
+  "sourcePath": "chapter_sorting/heap_sort.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">堆排序</h1>\n<div class=\"admonition tip\" data-block=\"b1\">\n<p class=\"admonition-title\">Tip</p>\n<p>阅读本节前，请确保已学完“堆”章节。</p>\n</div>\n<p data-block=\"b2\"><u>堆排序（heap sort）</u>是一种基于堆数据结构实现的高效排序算法。我们可以利用已经学过的“建堆操作”和“元素出堆操作”实现堆排序。</p>\n<ol data-block=\"b3\">\n<li>输入数组并建立小顶堆，此时最小元素位于堆顶。</li>\n<li>不断执行出堆操作，依次记录出堆元素，即可得到从小到大排序的序列。</li>\n</ol>\n<p data-block=\"b4\">以上方法虽然可行，但需要借助一个额外数组来保存弹出的元素，比较浪费空间。在实际中，我们通常使用一种更加优雅的实现方式。</p>\n<h2 data-block=\"b5\" id=\"_2\">算法流程</h2>\n<p data-block=\"b6\">设数组的长度为 <span class=\"arithmatex\">\\(n\\)</span> ，堆排序的流程如下图所示。</p>\n<ol data-block=\"b7\">\n<li>输入数组并建立大顶堆。完成后，最大元素位于堆顶。</li>\n<li>将堆顶元素（第一个元素）与堆底元素（最后一个元素）交换。完成交换后，堆的长度减 <span class=\"arithmatex\">\\(1\\)</span> ，已排序元素数量加 <span class=\"arithmatex\">\\(1\\)</span> 。</li>\n<li>从堆顶元素开始，从顶到底执行堆化操作（sift down）。完成堆化后，堆的性质得到修复。</li>\n<li>循环执行第 <code>2.</code> 步和第 <code>3.</code> 步。循环 <span class=\"arithmatex\">\\(n - 1\\)</span> 轮后，即可完成数组排序。</li>\n</ol>\n<div class=\"admonition tip\" data-block=\"b8\">\n<p class=\"admonition-title\">Tip</p>\n<p>实际上，元素出堆操作中也包含第 <code>2.</code> 步和第 <code>3.</code> 步，只是多了一个弹出元素的步骤。</p>\n</div>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"b9\"><img alt=\"堆排序步骤\" data-action=\"image\" src=\"/upstream/chapter_sorting/heap_sort.assets/heap_sort_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 12</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<p data-block=\"b10\">在代码实现中，我们使用了与“堆”章节相同的从顶至底堆化 <code>sift_down()</code> 函数。值得注意的是，由于堆的长度会随着提取最大元素而减小，因此我们需要给 <code>sift_down()</code> 函数添加一个长度参数 <span class=\"arithmatex\">\\(n\\)</span> ，用于指定堆的当前有效长度。代码如下所示：</p>\n<div class=\"code-example\" data-block=\"b11\" data-code=\"0\"><div class=\"code-caption\"><span>heap_sort · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def heap_sort(nums: list[int]):\n    \"\"\"堆排序\"\"\"\n    # 建堆操作：堆化除叶节点以外的其他所有节点\n    for i in range(len(nums) // 2 - 1, -1, -1):\n        sift_down(nums, len(nums), i)\n    # 从堆中提取最大元素，循环 n-1 轮\n    for i in range(len(nums) - 1, 0, -1):\n        # 交换根节点与最右叶节点（交换首元素与尾元素）\n        nums[0], nums[i] = nums[i], nums[0]\n        # 以根节点为起点，从顶至底进行堆化\n        sift_down(nums, i, 0)</code></pre></div>\n<h2 data-block=\"b12\" id=\"_3\">算法特性</h2>\n<ul data-block=\"b13\">\n<li><strong>时间复杂度为 <span class=\"arithmatex\">\\(O(n \\log n)\\)</span>、非自适应排序</strong>：建堆操作使用 <span class=\"arithmatex\">\\(O(n)\\)</span> 时间。从堆中提取最大元素的时间复杂度为 <span class=\"arithmatex\">\\(O(\\log n)\\)</span> ，共循环 <span class=\"arithmatex\">\\(n - 1\\)</span> 轮。</li>\n<li><strong>空间复杂度为 <span class=\"arithmatex\">\\(O(1)\\)</span>、原地排序</strong>：几个指针变量使用 <span class=\"arithmatex\">\\(O(1)\\)</span> 空间。元素交换和堆化操作都是在原数组上进行的。</li>\n<li><strong>非稳定排序</strong>：在交换堆顶元素和堆底元素时，相等元素的相对位置可能发生变化。</li>\n</ul>",
+  "codeExamples": [
+    {
+      "id": "chapter_sorting/heap_sort-code-0",
+      "file": "heap_sort",
+      "className": "",
+      "functionName": "heap_sort",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def heap_sort(nums: list[int]):\n    \"\"\"堆排序\"\"\"\n    # 建堆操作：堆化除叶节点以外的其他所有节点\n    for i in range(len(nums) // 2 - 1, -1, -1):\n        sift_down(nums, len(nums), i)\n    # 从堆中提取最大元素，循环 n-1 轮\n    for i in range(len(nums) - 1, 0, -1):\n        # 交换根节点与最右叶节点（交换首元素与尾元素）\n        nums[0], nums[i] = nums[i], nums[0]\n        # 以根节点为起点，从顶至底进行堆化\n        sift_down(nums, i, 0)",
+          "fullSource": "\"\"\"\nFile: heap_sort.py\nCreated Time: 2023-05-24\nAuthor: krahets (krahets@163.com)\n\"\"\"\n\n\ndef sift_down(nums: list[int], n: int, i: int):\n    \"\"\"堆的长度为 n ，从节点 i 开始，从顶至底堆化\"\"\"\n    while True:\n        # 判断节点 i, l, r 中值最大的节点，记为 ma\n        l = 2 * i + 1\n        r = 2 * i + 2\n        ma = i\n        if l < n and nums[l] > nums[ma]:\n            ma = l\n        if r < n and nums[r] > nums[ma]:\n            ma = r\n        # 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n        if ma == i:\n            break\n        # 交换两节点\n        nums[i], nums[ma] = nums[ma], nums[i]\n        # 循环向下堆化\n        i = ma\n\n\ndef heap_sort(nums: list[int]):\n    \"\"\"堆排序\"\"\"\n    # 建堆操作：堆化除叶节点以外的其他所有节点\n    for i in range(len(nums) // 2 - 1, -1, -1):\n        sift_down(nums, len(nums), i)\n    # 从堆中提取最大元素，循环 n-1 轮\n    for i in range(len(nums) - 1, 0, -1):\n        # 交换根节点与最右叶节点（交换首元素与尾元素）\n        nums[0], nums[i] = nums[i], nums[0]\n        # 以根节点为起点，从顶至底进行堆化\n        sift_down(nums, i, 0)\n\n\n\"\"\"Driver Code\"\"\"\nif __name__ == \"__main__\":\n    nums = [4, 1, 3, 1, 5, 2]\n    heap_sort(nums)\n    print(\"堆排序完成后 nums =\", nums)\n",
+          "sourcePath": "codes/python/chapter_sorting/heap_sort.py",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/python/chapter_sorting/heap_sort.py",
+          "extraction": "symbol",
+          "runnable": true
+        },
+        {
+          "language": "java",
+          "snippet": "public class heap_sort {\n    /* 堆的长度为 n ，从节点 i 开始，从顶至底堆化 */\n    public static void siftDown(int[] nums, int n, int i) {\n        while (true) {\n            // 判断节点 i, l, r 中值最大的节点，记为 ma\n            int l = 2 * i + 1;\n            int r = 2 * i + 2;\n            int ma = i;\n            if (l < n && nums[l] > nums[ma])\n                ma = l;\n            if (r < n && nums[r] > nums[ma])\n                ma = r;\n            // 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n            if (ma == i)\n                break;\n            // 交换两节点\n            int temp = nums[i];\n            nums[i] = nums[ma];\n            nums[ma] = temp;\n            // 循环向下堆化\n            i = ma;\n        }\n    }\n\n    /* 堆排序 */\n    public static void heapSort(int[] nums) {\n        // 建堆操作：堆化除叶节点以外的其他所有节点\n        for (int i = nums.length / 2 - 1; i >= 0; i--) {\n            siftDown(nums, nums.length, i);\n        }\n        // 从堆中提取最大元素，循环 n-1 轮\n        for (int i = nums.length - 1; i > 0; i--) {\n            // 交换根节点与最右叶节点（交换首元素与尾元素）\n            int tmp = nums[0];\n            nums[0] = nums[i];\n            nums[i] = tmp;\n            // 以根节点为起点，从顶至底进行堆化\n            siftDown(nums, i, 0);\n        }\n    }\n\n    public static void main(String[] args) {\n        int[] nums = { 4, 1, 3, 1, 5, 2 };\n        heapSort(nums);\n        System.out.println(\"堆排序完成后 nums = \" + Arrays.toString(nums));\n    }\n}",
+          "fullSource": "/**\n * File: heap_sort.java\n * Created Time: 2023-05-26\n * Author: krahets (krahets@163.com)\n */\n\npackage chapter_sorting;\n\nimport java.util.Arrays;\n\npublic class heap_sort {\n    /* 堆的长度为 n ，从节点 i 开始，从顶至底堆化 */\n    public static void siftDown(int[] nums, int n, int i) {\n        while (true) {\n            // 判断节点 i, l, r 中值最大的节点，记为 ma\n            int l = 2 * i + 1;\n            int r = 2 * i + 2;\n            int ma = i;\n            if (l < n && nums[l] > nums[ma])\n                ma = l;\n            if (r < n && nums[r] > nums[ma])\n                ma = r;\n            // 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n            if (ma == i)\n                break;\n            // 交换两节点\n            int temp = nums[i];\n            nums[i] = nums[ma];\n            nums[ma] = temp;\n            // 循环向下堆化\n            i = ma;\n        }\n    }\n\n    /* 堆排序 */\n    public static void heapSort(int[] nums) {\n        // 建堆操作：堆化除叶节点以外的其他所有节点\n        for (int i = nums.length / 2 - 1; i >= 0; i--) {\n            siftDown(nums, nums.length, i);\n        }\n        // 从堆中提取最大元素，循环 n-1 轮\n        for (int i = nums.length - 1; i > 0; i--) {\n            // 交换根节点与最右叶节点（交换首元素与尾元素）\n            int tmp = nums[0];\n            nums[0] = nums[i];\n            nums[i] = tmp;\n            // 以根节点为起点，从顶至底进行堆化\n            siftDown(nums, i, 0);\n        }\n    }\n\n    public static void main(String[] args) {\n        int[] nums = { 4, 1, 3, 1, 5, 2 };\n        heapSort(nums);\n        System.out.println(\"堆排序完成后 nums = \" + Arrays.toString(nums));\n    }\n}\n",
+          "sourcePath": "codes/java/chapter_sorting/heap_sort.java",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/java/chapter_sorting/heap_sort.java",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "cpp",
+          "snippet": "void heapSort(vector<int> &nums) {\n    // 建堆操作：堆化除叶节点以外的其他所有节点\n    for (int i = nums.size() / 2 - 1; i >= 0; --i) {\n        siftDown(nums, nums.size(), i);\n    }\n    // 从堆中提取最大元素，循环 n-1 轮\n    for (int i = nums.size() - 1; i > 0; --i) {\n        // 交换根节点与最右叶节点（交换首元素与尾元素）\n        swap(nums[0], nums[i]);\n        // 以根节点为起点，从顶至底进行堆化\n        siftDown(nums, i, 0);\n    }\n}",
+          "fullSource": "/**\n * File: heap_sort.cpp\n * Created Time: 2023-05-26\n * Author: krahets (krahets@163.com)\n */\n\n#include \"../utils/common.hpp\"\n\n/* 堆的长度为 n ，从节点 i 开始，从顶至底堆化 */\nvoid siftDown(vector<int> &nums, int n, int i) {\n    while (true) {\n        // 判断节点 i, l, r 中值最大的节点，记为 ma\n        int l = 2 * i + 1;\n        int r = 2 * i + 2;\n        int ma = i;\n        if (l < n && nums[l] > nums[ma])\n            ma = l;\n        if (r < n && nums[r] > nums[ma])\n            ma = r;\n        // 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n        if (ma == i) {\n            break;\n        }\n        // 交换两节点\n        swap(nums[i], nums[ma]);\n        // 循环向下堆化\n        i = ma;\n    }\n}\n\n/* 堆排序 */\nvoid heapSort(vector<int> &nums) {\n    // 建堆操作：堆化除叶节点以外的其他所有节点\n    for (int i = nums.size() / 2 - 1; i >= 0; --i) {\n        siftDown(nums, nums.size(), i);\n    }\n    // 从堆中提取最大元素，循环 n-1 轮\n    for (int i = nums.size() - 1; i > 0; --i) {\n        // 交换根节点与最右叶节点（交换首元素与尾元素）\n        swap(nums[0], nums[i]);\n        // 以根节点为起点，从顶至底进行堆化\n        siftDown(nums, i, 0);\n    }\n}\n\n/* Driver Code */\nint main() {\n    vector<int> nums = {4, 1, 3, 1, 5, 2};\n    heapSort(nums);\n    cout << \"堆排序完成后 nums = \";\n    printVector(nums);\n\n    return 0;\n}\n",
+          "sourcePath": "codes/cpp/chapter_sorting/heap_sort.cpp",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/cpp/chapter_sorting/heap_sort.cpp",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "c",
+          "snippet": "void heapSort(int nums[], int n) {\n    // 建堆操作：堆化除叶节点以外的其他所有节点\n    for (int i = n / 2 - 1; i >= 0; --i) {\n        siftDown(nums, n, i);\n    }\n    // 从堆中提取最大元素，循环 n-1 轮\n    for (int i = n - 1; i > 0; --i) {\n        // 交换根节点与最右叶节点（交换首元素与尾元素）\n        int tmp = nums[0];\n        nums[0] = nums[i];\n        nums[i] = tmp;\n        // 以根节点为起点，从顶至底进行堆化\n        siftDown(nums, i, 0);\n    }\n}",
+          "fullSource": "/**\n * File: heap_sort.c\n * Created Time: 2023-05-30\n * Author: Gonglja (glj0@outlook.com)\n */\n\n#include \"../utils/common.h\"\n\n/* 堆的长度为 n ，从节点 i 开始，从顶至底堆化 */\nvoid siftDown(int nums[], int n, int i) {\n    while (1) {\n        // 判断节点 i, l, r 中值最大的节点，记为 ma\n        int l = 2 * i + 1;\n        int r = 2 * i + 2;\n        int ma = i;\n        if (l < n && nums[l] > nums[ma])\n            ma = l;\n        if (r < n && nums[r] > nums[ma])\n            ma = r;\n        // 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n        if (ma == i) {\n            break;\n        }\n        // 交换两节点\n        int temp = nums[i];\n        nums[i] = nums[ma];\n        nums[ma] = temp;\n        // 循环向下堆化\n        i = ma;\n    }\n}\n\n/* 堆排序 */\nvoid heapSort(int nums[], int n) {\n    // 建堆操作：堆化除叶节点以外的其他所有节点\n    for (int i = n / 2 - 1; i >= 0; --i) {\n        siftDown(nums, n, i);\n    }\n    // 从堆中提取最大元素，循环 n-1 轮\n    for (int i = n - 1; i > 0; --i) {\n        // 交换根节点与最右叶节点（交换首元素与尾元素）\n        int tmp = nums[0];\n        nums[0] = nums[i];\n        nums[i] = tmp;\n        // 以根节点为起点，从顶至底进行堆化\n        siftDown(nums, i, 0);\n    }\n}\n\n/* Driver Code */\nint main() {\n    int nums[] = {4, 1, 3, 1, 5, 2};\n    int n = sizeof(nums) / sizeof(nums[0]);\n\n    heapSort(nums, n);\n    printf(\"堆排序完成后 nums = \");\n    printArray(nums, n);\n\n    return 0;\n}",
+          "sourcePath": "codes/c/chapter_sorting/heap_sort.c",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/c/chapter_sorting/heap_sort.c",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "csharp",
+          "snippet": "public class heap_sort {\n    /* 堆的长度为 n ，从节点 i 开始，从顶至底堆化 */\n    void SiftDown(int[] nums, int n, int i) {\n        while (true) {\n            // 判断节点 i, l, r 中值最大的节点，记为 ma\n            int l = 2 * i + 1;\n            int r = 2 * i + 2;\n            int ma = i;\n            if (l < n && nums[l] > nums[ma])\n                ma = l;\n            if (r < n && nums[r] > nums[ma])\n                ma = r;\n            // 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n            if (ma == i)\n                break;\n            // 交换两节点\n            (nums[ma], nums[i]) = (nums[i], nums[ma]);\n            // 循环向下堆化\n            i = ma;\n        }\n    }\n\n    /* 堆排序 */\n    void HeapSort(int[] nums) {\n        // 建堆操作：堆化除叶节点以外的其他所有节点\n        for (int i = nums.Length / 2 - 1; i >= 0; i--) {\n            SiftDown(nums, nums.Length, i);\n        }\n        // 从堆中提取最大元素，循环 n-1 轮\n        for (int i = nums.Length - 1; i > 0; i--) {\n            // 交换根节点与最右叶节点（交换首元素与尾元素）\n            (nums[i], nums[0]) = (nums[0], nums[i]);\n            // 以根节点为起点，从顶至底进行堆化\n            SiftDown(nums, i, 0);\n        }\n    }\n\n    [Test]\n    public void Test() {\n        int[] nums = [4, 1, 3, 1, 5, 2];\n        HeapSort(nums);\n        Console.WriteLine(\"堆排序完成后 nums = \" + string.Join(\" \", nums));\n    }\n}",
+          "fullSource": "﻿/**\n* File: heap_sort.cs\n* Created Time: 2023-06-01\n* Author: hpstory (hpstory1024@163.com)\n*/\n\nnamespace hello_algo.chapter_sorting;\n\npublic class heap_sort {\n    /* 堆的长度为 n ，从节点 i 开始，从顶至底堆化 */\n    void SiftDown(int[] nums, int n, int i) {\n        while (true) {\n            // 判断节点 i, l, r 中值最大的节点，记为 ma\n            int l = 2 * i + 1;\n            int r = 2 * i + 2;\n            int ma = i;\n            if (l < n && nums[l] > nums[ma])\n                ma = l;\n            if (r < n && nums[r] > nums[ma])\n                ma = r;\n            // 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n            if (ma == i)\n                break;\n            // 交换两节点\n            (nums[ma], nums[i]) = (nums[i], nums[ma]);\n            // 循环向下堆化\n            i = ma;\n        }\n    }\n\n    /* 堆排序 */\n    void HeapSort(int[] nums) {\n        // 建堆操作：堆化除叶节点以外的其他所有节点\n        for (int i = nums.Length / 2 - 1; i >= 0; i--) {\n            SiftDown(nums, nums.Length, i);\n        }\n        // 从堆中提取最大元素，循环 n-1 轮\n        for (int i = nums.Length - 1; i > 0; i--) {\n            // 交换根节点与最右叶节点（交换首元素与尾元素）\n            (nums[i], nums[0]) = (nums[0], nums[i]);\n            // 以根节点为起点，从顶至底进行堆化\n            SiftDown(nums, i, 0);\n        }\n    }\n\n    [Test]\n    public void Test() {\n        int[] nums = [4, 1, 3, 1, 5, 2];\n        HeapSort(nums);\n        Console.WriteLine(\"堆排序完成后 nums = \" + string.Join(\" \", nums));\n    }\n}\n",
+          "sourcePath": "codes/csharp/chapter_sorting/heap_sort.cs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/csharp/chapter_sorting/heap_sort.cs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "go",
+          "snippet": "func heapSort(nums *[]int) {\n\t// 建堆操作：堆化除叶节点以外的其他所有节点\n\tfor i := len(*nums)/2 - 1; i >= 0; i-- {\n\t\tsiftDown(nums, len(*nums), i)\n\t}\n\t// 从堆中提取最大元素，循环 n-1 轮\n\tfor i := len(*nums) - 1; i > 0; i-- {\n\t\t// 交换根节点与最右叶节点（交换首元素与尾元素）\n\t\t(*nums)[0], (*nums)[i] = (*nums)[i], (*nums)[0]\n\t\t// 以根节点为起点，从顶至底进行堆化\n\t\tsiftDown(nums, i, 0)\n\t}\n}",
+          "fullSource": "// File: heap_sort.go\n// Created Time: 2023-05-29\n// Author: Reanon (793584285@qq.com)\n\npackage chapter_sorting\n\n/* 堆的长度为 n ，从节点 i 开始，从顶至底堆化 */\nfunc siftDown(nums *[]int, n, i int) {\n\tfor true {\n\t\t// 判断节点 i, l, r 中值最大的节点，记为 ma\n\t\tl := 2*i + 1\n\t\tr := 2*i + 2\n\t\tma := i\n\t\tif l < n && (*nums)[l] > (*nums)[ma] {\n\t\t\tma = l\n\t\t}\n\t\tif r < n && (*nums)[r] > (*nums)[ma] {\n\t\t\tma = r\n\t\t}\n\t\t// 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n\t\tif ma == i {\n\t\t\tbreak\n\t\t}\n\t\t// 交换两节点\n\t\t(*nums)[i], (*nums)[ma] = (*nums)[ma], (*nums)[i]\n\t\t// 循环向下堆化\n\t\ti = ma\n\t}\n}\n\n/* 堆排序 */\nfunc heapSort(nums *[]int) {\n\t// 建堆操作：堆化除叶节点以外的其他所有节点\n\tfor i := len(*nums)/2 - 1; i >= 0; i-- {\n\t\tsiftDown(nums, len(*nums), i)\n\t}\n\t// 从堆中提取最大元素，循环 n-1 轮\n\tfor i := len(*nums) - 1; i > 0; i-- {\n\t\t// 交换根节点与最右叶节点（交换首元素与尾元素）\n\t\t(*nums)[0], (*nums)[i] = (*nums)[i], (*nums)[0]\n\t\t// 以根节点为起点，从顶至底进行堆化\n\t\tsiftDown(nums, i, 0)\n\t}\n}\n",
+          "sourcePath": "codes/go/chapter_sorting/heap_sort.go",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/go/chapter_sorting/heap_sort.go",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "javascript",
+          "snippet": "function heapSort(nums) {\n    // 建堆操作：堆化除叶节点以外的其他所有节点\n    for (let i = Math.floor(nums.length / 2) - 1; i >= 0; i--) {\n        siftDown(nums, nums.length, i);\n    }\n    // 从堆中提取最大元素，循环 n-1 轮\n    for (let i = nums.length - 1; i > 0; i--) {\n        // 交换根节点与最右叶节点（交换首元素与尾元素）\n        [nums[0], nums[i]] = [nums[i], nums[0]];\n        // 以根节点为起点，从顶至底进行堆化\n        siftDown(nums, i, 0);\n    }\n}",
+          "fullSource": "/**\n * File: heap_sort.js\n * Created Time: 2023-06-04\n * Author: Justin (xiefahit@gmail.com)\n */\n\n/* 堆的长度为 n ，从节点 i 开始，从顶至底堆化 */\nfunction siftDown(nums, n, i) {\n    while (true) {\n        // 判断节点 i, l, r 中值最大的节点，记为 ma\n        let l = 2 * i + 1;\n        let r = 2 * i + 2;\n        let ma = i;\n        if (l < n && nums[l] > nums[ma]) {\n            ma = l;\n        }\n        if (r < n && nums[r] > nums[ma]) {\n            ma = r;\n        }\n        // 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n        if (ma === i) {\n            break;\n        }\n        // 交换两节点\n        [nums[i], nums[ma]] = [nums[ma], nums[i]];\n        // 循环向下堆化\n        i = ma;\n    }\n}\n\n/* 堆排序 */\nfunction heapSort(nums) {\n    // 建堆操作：堆化除叶节点以外的其他所有节点\n    for (let i = Math.floor(nums.length / 2) - 1; i >= 0; i--) {\n        siftDown(nums, nums.length, i);\n    }\n    // 从堆中提取最大元素，循环 n-1 轮\n    for (let i = nums.length - 1; i > 0; i--) {\n        // 交换根节点与最右叶节点（交换首元素与尾元素）\n        [nums[0], nums[i]] = [nums[i], nums[0]];\n        // 以根节点为起点，从顶至底进行堆化\n        siftDown(nums, i, 0);\n    }\n}\n\n/* Driver Code */\nconst nums = [4, 1, 3, 1, 5, 2];\nheapSort(nums);\nconsole.log('堆排序完成后 nums =', nums);\n",
+          "sourcePath": "codes/javascript/chapter_sorting/heap_sort.js",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/javascript/chapter_sorting/heap_sort.js",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "typescript",
+          "snippet": "function heapSort(nums: number[]): void {\n    // 建堆操作：堆化除叶节点以外的其他所有节点\n    for (let i = Math.floor(nums.length / 2) - 1; i >= 0; i--) {\n        siftDown(nums, nums.length, i);\n    }\n    // 从堆中提取最大元素，循环 n-1 轮\n    for (let i = nums.length - 1; i > 0; i--) {\n        // 交换根节点与最右叶节点（交换首元素与尾元素）\n        [nums[0], nums[i]] = [nums[i], nums[0]];\n        // 以根节点为起点，从顶至底进行堆化\n        siftDown(nums, i, 0);\n    }\n}",
+          "fullSource": "/**\n * File: heap_sort.ts\n * Created Time: 2023-06-04\n * Author: Justin (xiefahit@gmail.com)\n */\n\n/* 堆的长度为 n ，从节点 i 开始，从顶至底堆化 */\nfunction siftDown(nums: number[], n: number, i: number): void {\n    while (true) {\n        // 判断节点 i, l, r 中值最大的节点，记为 ma\n        let l = 2 * i + 1;\n        let r = 2 * i + 2;\n        let ma = i;\n        if (l < n && nums[l] > nums[ma]) {\n            ma = l;\n        }\n        if (r < n && nums[r] > nums[ma]) {\n            ma = r;\n        }\n        // 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n        if (ma === i) {\n            break;\n        }\n        // 交换两节点\n        [nums[i], nums[ma]] = [nums[ma], nums[i]];\n        // 循环向下堆化\n        i = ma;\n    }\n}\n\n/* 堆排序 */\nfunction heapSort(nums: number[]): void {\n    // 建堆操作：堆化除叶节点以外的其他所有节点\n    for (let i = Math.floor(nums.length / 2) - 1; i >= 0; i--) {\n        siftDown(nums, nums.length, i);\n    }\n    // 从堆中提取最大元素，循环 n-1 轮\n    for (let i = nums.length - 1; i > 0; i--) {\n        // 交换根节点与最右叶节点（交换首元素与尾元素）\n        [nums[0], nums[i]] = [nums[i], nums[0]];\n        // 以根节点为起点，从顶至底进行堆化\n        siftDown(nums, i, 0);\n    }\n}\n\n/* Driver Code */\nconst nums: number[] = [4, 1, 3, 1, 5, 2];\nheapSort(nums);\nconsole.log('堆排序完成后 nums =', nums);\n\nexport {};\n",
+          "sourcePath": "codes/typescript/chapter_sorting/heap_sort.ts",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/typescript/chapter_sorting/heap_sort.ts",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "swift",
+          "snippet": "func heapSort(nums: inout [Int]) {\n    // 建堆操作：堆化除叶节点以外的其他所有节点\n    for i in stride(from: nums.count / 2 - 1, through: 0, by: -1) {\n        siftDown(nums: &nums, n: nums.count, i: i)\n    }\n    // 从堆中提取最大元素，循环 n-1 轮\n    for i in nums.indices.dropFirst().reversed() {\n        // 交换根节点与最右叶节点（交换首元素与尾元素）\n        nums.swapAt(0, i)\n        // 以根节点为起点，从顶至底进行堆化\n        siftDown(nums: &nums, n: i, i: 0)\n    }\n}",
+          "fullSource": "/**\n * File: heap_sort.swift\n * Created Time: 2023-05-28\n * Author: nuomi1 (nuomi1@qq.com)\n */\n\n/* 堆的长度为 n ，从节点 i 开始，从顶至底堆化 */\nfunc siftDown(nums: inout [Int], n: Int, i: Int) {\n    var i = i\n    while true {\n        // 判断节点 i, l, r 中值最大的节点，记为 ma\n        let l = 2 * i + 1\n        let r = 2 * i + 2\n        var ma = i\n        if l < n, nums[l] > nums[ma] {\n            ma = l\n        }\n        if r < n, nums[r] > nums[ma] {\n            ma = r\n        }\n        // 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n        if ma == i {\n            break\n        }\n        // 交换两节点\n        nums.swapAt(i, ma)\n        // 循环向下堆化\n        i = ma\n    }\n}\n\n/* 堆排序 */\nfunc heapSort(nums: inout [Int]) {\n    // 建堆操作：堆化除叶节点以外的其他所有节点\n    for i in stride(from: nums.count / 2 - 1, through: 0, by: -1) {\n        siftDown(nums: &nums, n: nums.count, i: i)\n    }\n    // 从堆中提取最大元素，循环 n-1 轮\n    for i in nums.indices.dropFirst().reversed() {\n        // 交换根节点与最右叶节点（交换首元素与尾元素）\n        nums.swapAt(0, i)\n        // 以根节点为起点，从顶至底进行堆化\n        siftDown(nums: &nums, n: i, i: 0)\n    }\n}\n\n@main\nenum HeapSort {\n    /* Driver Code */\n    static func main() {\n        var nums = [4, 1, 3, 1, 5, 2]\n        heapSort(nums: &nums)\n        print(\"堆排序完成后 nums = \\(nums)\")\n    }\n}\n",
+          "sourcePath": "codes/swift/chapter_sorting/heap_sort.swift",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/swift/chapter_sorting/heap_sort.swift",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "rust",
+          "snippet": "fn heap_sort(nums: &mut [i32]) {\n    // 建堆操作：堆化除叶节点以外的其他所有节点\n    for i in (0..nums.len() / 2).rev() {\n        sift_down(nums, nums.len(), i);\n    }\n    // 从堆中提取最大元素，循环 n-1 轮\n    for i in (1..nums.len()).rev() {\n        // 交换根节点与最右叶节点（交换首元素与尾元素）\n        nums.swap(0, i);\n        // 以根节点为起点，从顶至底进行堆化\n        sift_down(nums, i, 0);\n    }\n}",
+          "fullSource": "/*\n * File: heap_sort.rs\n * Created Time: 2023-07-04\n * Author: night-cruise (2586447362@qq.com)\n */\n\nuse hello_algo_rust::include::print_util;\n\n/* 堆的长度为 n ，从节点 i 开始，从顶至底堆化 */\nfn sift_down(nums: &mut [i32], n: usize, mut i: usize) {\n    loop {\n        // 判断节点 i, l, r 中值最大的节点，记为 ma\n        let l = 2 * i + 1;\n        let r = 2 * i + 2;\n        let mut ma = i;\n        if l < n && nums[l] > nums[ma] {\n            ma = l;\n        }\n        if r < n && nums[r] > nums[ma] {\n            ma = r;\n        }\n        // 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n        if ma == i {\n            break;\n        }\n        // 交换两节点\n        nums.swap(i, ma);\n        // 循环向下堆化\n        i = ma;\n    }\n}\n\n/* 堆排序 */\nfn heap_sort(nums: &mut [i32]) {\n    // 建堆操作：堆化除叶节点以外的其他所有节点\n    for i in (0..nums.len() / 2).rev() {\n        sift_down(nums, nums.len(), i);\n    }\n    // 从堆中提取最大元素，循环 n-1 轮\n    for i in (1..nums.len()).rev() {\n        // 交换根节点与最右叶节点（交换首元素与尾元素）\n        nums.swap(0, i);\n        // 以根节点为起点，从顶至底进行堆化\n        sift_down(nums, i, 0);\n    }\n}\n\n/* Driver Code */\nfn main() {\n    let mut nums = [4, 1, 3, 1, 5, 2];\n    heap_sort(&mut nums);\n    print!(\"堆排序完成后 nums = \");\n    print_util::print_array(&nums);\n}\n",
+          "sourcePath": "codes/rust/chapter_sorting/heap_sort.rs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/rust/chapter_sorting/heap_sort.rs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "kotlin",
+          "snippet": "fun heapSort(nums: IntArray) {\n    // 建堆操作：堆化除叶节点以外的其他所有节点\n    for (i in nums.size / 2 - 1 downTo 0) {\n        siftDown(nums, nums.size, i)\n    }\n    // 从堆中提取最大元素，循环 n-1 轮\n    for (i in nums.size - 1 downTo 1) {\n        // 交换根节点与最右叶节点（交换首元素与尾元素）\n        val temp = nums[0]\n        nums[0] = nums[i]\n        nums[i] = temp\n        // 以根节点为起点，从顶至底进行堆化\n        siftDown(nums, i, 0)\n    }\n}",
+          "fullSource": "/**\n * File: heap_sort.kt\n * Created Time: 2024-01-25\n * Author: curtishd (1023632660@qq.com)\n */\n\npackage chapter_sorting\n\n/* 堆的长度为 n ，从节点 i 开始，从顶至底堆化 */\nfun siftDown(nums: IntArray, n: Int, li: Int) {\n    var i = li\n    while (true) {\n        // 判断节点 i, l, r 中值最大的节点，记为 ma\n        val l = 2 * i + 1\n        val r = 2 * i + 2\n        var ma = i\n        if (l < n && nums[l] > nums[ma]) \n            ma = l\n        if (r < n && nums[r] > nums[ma]) \n            ma = r\n        // 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n        if (ma == i) \n            break\n        // 交换两节点\n        val temp = nums[i]\n        nums[i] = nums[ma]\n        nums[ma] = temp\n        // 循环向下堆化\n        i = ma\n    }\n}\n\n/* 堆排序 */\nfun heapSort(nums: IntArray) {\n    // 建堆操作：堆化除叶节点以外的其他所有节点\n    for (i in nums.size / 2 - 1 downTo 0) {\n        siftDown(nums, nums.size, i)\n    }\n    // 从堆中提取最大元素，循环 n-1 轮\n    for (i in nums.size - 1 downTo 1) {\n        // 交换根节点与最右叶节点（交换首元素与尾元素）\n        val temp = nums[0]\n        nums[0] = nums[i]\n        nums[i] = temp\n        // 以根节点为起点，从顶至底进行堆化\n        siftDown(nums, i, 0)\n    }\n}\n\n/* Driver Code */\nfun main() {\n    val nums = intArrayOf(4, 1, 3, 1, 5, 2)\n    heapSort(nums)\n    println(\"堆排序完成后 nums = ${nums.contentToString()}\")\n}",
+          "sourcePath": "codes/kotlin/chapter_sorting/heap_sort.kt",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/kotlin/chapter_sorting/heap_sort.kt",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "dart",
+          "snippet": "void heapSort(List<int> nums) {\n  // 建堆操作：堆化除叶节点以外的其他所有节点\n  for (int i = nums.length ~/ 2 - 1; i >= 0; i--) {\n    siftDown(nums, nums.length, i);\n  }\n  // 从堆中提取最大元素，循环 n-1 轮\n  for (int i = nums.length - 1; i > 0; i--) {\n    // 交换根节点与最右叶节点（交换首元素与尾元素）\n    int tmp = nums[0];\n    nums[0] = nums[i];\n    nums[i] = tmp;\n    // 以根节点为起点，从顶至底进行堆化\n    siftDown(nums, i, 0);\n  }\n}",
+          "fullSource": "/**\n * File: heap_sort.dart\n * Created Time: 2023-06-01\n * Author: liuyuxin (gvenusleo@gmail.com)\n */\n\n/* 堆的长度为 n ，从节点 i 开始，从顶至底堆化 */\nvoid siftDown(List<int> nums, int n, int i) {\n  while (true) {\n    // 判断节点 i, l, r 中值最大的节点，记为 ma\n    int l = 2 * i + 1;\n    int r = 2 * i + 2;\n    int ma = i;\n    if (l < n && nums[l] > nums[ma]) ma = l;\n    if (r < n && nums[r] > nums[ma]) ma = r;\n    // 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n    if (ma == i) break;\n    // 交换两节点\n    int temp = nums[i];\n    nums[i] = nums[ma];\n    nums[ma] = temp;\n    // 循环向下堆化\n    i = ma;\n  }\n}\n\n/* 堆排序 */\nvoid heapSort(List<int> nums) {\n  // 建堆操作：堆化除叶节点以外的其他所有节点\n  for (int i = nums.length ~/ 2 - 1; i >= 0; i--) {\n    siftDown(nums, nums.length, i);\n  }\n  // 从堆中提取最大元素，循环 n-1 轮\n  for (int i = nums.length - 1; i > 0; i--) {\n    // 交换根节点与最右叶节点（交换首元素与尾元素）\n    int tmp = nums[0];\n    nums[0] = nums[i];\n    nums[i] = tmp;\n    // 以根节点为起点，从顶至底进行堆化\n    siftDown(nums, i, 0);\n  }\n}\n\n/* Driver Code */\nvoid main() {\n  List<int> nums = [4, 1, 3, 1, 5, 2];\n  heapSort(nums);\n  print(\"堆排序完成后 nums = $nums\");\n}\n",
+          "sourcePath": "codes/dart/chapter_sorting/heap_sort.dart",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/dart/chapter_sorting/heap_sort.dart",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "ruby",
+          "snippet": "def heap_sort(nums)\n  # 建堆操作：堆化除叶节点以外的其他所有节点\n  (nums.length / 2 - 1).downto(0) do |i|\n    sift_down(nums, nums.length, i)\n  end\n  # 从堆中提取最大元素，循环 n-1 轮\n  (nums.length - 1).downto(1) do |i|\n    # 交换根节点与最右叶节点（交换首元素与尾元素）\n    nums[0], nums[i] = nums[i], nums[0]\n    # 以根节点为起点，从顶至底进行堆化\n    sift_down(nums, i, 0)\n  end\nend",
+          "fullSource": "=begin\nFile: heap_sort.rb\nCreated Time: 2024-04-10\nAuthor: junminhong (junminhong1110@gmail.com)\n=end\n\n### 堆的长度为 n ，从节点 i 开始，从顶至底堆化 ###\ndef sift_down(nums, n, i)\n  while true\n    # 判断节点 i, l, r 中值最大的节点，记为 ma\n    l = 2 * i + 1\n    r = 2 * i + 2\n    ma = i\n    ma = l if l < n && nums[l] > nums[ma]\n    ma = r if r < n && nums[r] > nums[ma]\n    # 若节点 i 最大或索引 l, r 越界，则无须继续堆化，跳出\n    break if ma == i\n    # 交换两节点\n    nums[i], nums[ma] = nums[ma], nums[i]\n    # 循环向下堆化\n    i = ma\n  end\nend\n\n### 堆排序 ###\ndef heap_sort(nums)\n  # 建堆操作：堆化除叶节点以外的其他所有节点\n  (nums.length / 2 - 1).downto(0) do |i|\n    sift_down(nums, nums.length, i)\n  end\n  # 从堆中提取最大元素，循环 n-1 轮\n  (nums.length - 1).downto(1) do |i|\n    # 交换根节点与最右叶节点（交换首元素与尾元素）\n    nums[0], nums[i] = nums[i], nums[0]\n    # 以根节点为起点，从顶至底进行堆化\n    sift_down(nums, i, 0)\n  end\nend\n\n### Driver Code ###\nif __FILE__ == $0\n  nums = [4, 1, 3, 1, 5, 2]\n  heap_sort(nums)\n  puts \"堆排序完成后 nums = #{nums.inspect}\"\nend\n",
+          "sourcePath": "codes/ruby/chapter_sorting/heap_sort.rb",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/ruby/chapter_sorting/heap_sort.rb",
+          "extraction": "symbol",
+          "runnable": false
+        }
+      ]
+    }
+  ],
+  "animations": [
+    [
+      {
+        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step1.png",
+        "alt": "堆排序步骤"
+      },
+      {
+        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step2.png",
+        "alt": "heap_sort_step2"
+      },
+      {
+        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step3.png",
+        "alt": "heap_sort_step3"
+      },
+      {
+        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step4.png",
+        "alt": "heap_sort_step4"
+      },
+      {
+        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step5.png",
+        "alt": "heap_sort_step5"
+      },
+      {
+        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step6.png",
+        "alt": "heap_sort_step6"
+      },
+      {
+        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step7.png",
+        "alt": "heap_sort_step7"
+      },
+      {
+        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step8.png",
+        "alt": "heap_sort_step8"
+      },
+      {
+        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step9.png",
+        "alt": "heap_sort_step9"
+      },
+      {
+        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step10.png",
+        "alt": "heap_sort_step10"
+      },
+      {
+        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step11.png",
+        "alt": "heap_sort_step11"
+      },
+      {
+        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step12.png",
+        "alt": "heap_sort_step12"
+      }
+    ]
+  ],
+  "conversion": {
+    "sourceSha256": "2200370efd5cc84b0759f81d0a91094149bcc7a0440fdcce7d25a9b9234e5fe8",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 1,
+    "animationGroups": 1
+  }
+}

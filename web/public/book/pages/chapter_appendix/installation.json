@@ -1,0 +1,25 @@
+{
+  "id": "chapter_appendix/installation",
+  "title": "16.1   编程环境安装",
+  "kind": "chapter",
+  "group": "第 16 章   附录",
+  "route": "/read/chapter_appendix/installation",
+  "sourcePath": "chapter_appendix/installation.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">编程环境安装</h1>\n<h2 data-block=\"b1\" id=\"ide\">安装 IDE</h2>\n<p data-block=\"b2\">推荐使用开源、轻量的 VS Code 作为本地集成开发环境（IDE）。访问 <a href=\"https://code.visualstudio.com/\">VS Code 官网</a>，根据操作系统选择相应版本的 VS Code 进行下载和安装。</p>\n<figure data-block=\"b3\"><img alt=\"从官网下载 VS Code\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_appendix/installation.assets/vscode_installation.png\"/><figcaption>从官网下载 VS Code</figcaption></figure>\n<p data-block=\"b4\">VS Code 拥有强大的扩展包生态系统，支持大多数编程语言的运行和调试。以 Python 为例，安装“Python Extension Pack”扩展包之后，即可进行 Python 代码调试。安装步骤如下图所示。</p>\n<figure data-block=\"b5\"><img alt=\"安装 VS Code 扩展包\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_appendix/installation.assets/vscode_extension_installation.png\"/><figcaption>安装 VS Code 扩展包</figcaption></figure>\n<h2 data-block=\"b6\" id=\"_2\">安装语言环境</h2>\n<h3 data-block=\"b7\" id=\"python\">Python 环境</h3>\n<ol data-block=\"b8\">\n<li>下载并安装 <a href=\"https://docs.conda.io/en/latest/miniconda.html\">Miniconda3</a> ，需要 Python 3.10 或更新版本。</li>\n<li>在 VS Code 的插件市场中搜索 <code>python</code> ，安装 Python Extension Pack 。</li>\n<li>（可选）在命令行输入 <code>pip install black</code> ，安装代码格式化工具。</li>\n</ol>\n<h3 data-block=\"b9\" id=\"cc\">C/C++ 环境</h3>\n<ol data-block=\"b10\">\n<li>Windows 系统需要安装 <a href=\"https://sourceforge.net/projects/mingw-w64/files/\">MinGW</a>（<a href=\"https://blog.csdn.net/qq_33698226/article/details/129031241\">配置教程</a>）；macOS 自带 Clang ，无须安装。</li>\n<li>在 VS Code 的插件市场中搜索 <code>c++</code> ，安装 C/C++ Extension Pack 。</li>\n<li>（可选）打开 Settings 页面，搜索 <code>Clang_format_fallback Style</code> 代码格式化选项，设置为 <code>{ BasedOnStyle: Microsoft, BreakBeforeBraces: Attach }</code> 。</li>\n</ol>\n<h3 data-block=\"b11\" id=\"java\">Java 环境</h3>\n<ol data-block=\"b12\">\n<li>下载并安装 <a href=\"https://jdk.java.net/18/\">OpenJDK</a>（版本需满足 &gt; JDK 9）。</li>\n<li>在 VS Code 的插件市场中搜索 <code>java</code> ，安装 Extension Pack for Java 。</li>\n</ol>\n<h3 data-block=\"b13\" id=\"c\">C# 环境</h3>\n<ol data-block=\"b14\">\n<li>下载并安装 <a href=\"https://dotnet.microsoft.com/en-us/download\">.NET 8.0</a> 。</li>\n<li>在 VS Code 的插件市场中搜索 <code>C# Dev Kit</code> ，安装 C# Dev Kit （<a href=\"https://code.visualstudio.com/docs/csharp/get-started\">配置教程</a>）。</li>\n<li>也可使用 Visual Studio（<a href=\"https://learn.microsoft.com/zh-cn/visualstudio/install/install-visual-studio?view=vs-2022\">安装教程</a>）。</li>\n</ol>\n<h3 data-block=\"b15\" id=\"go\">Go 环境</h3>\n<ol data-block=\"b16\">\n<li>下载并安装 <a href=\"https://go.dev/dl/\">go</a> 。</li>\n<li>在 VS Code 的插件市场中搜索 <code>go</code> ，安装 Go 。</li>\n<li>按快捷键 <code>Ctrl + Shift + P</code> 呼出命令栏，输入 go ，选择 <code>Go: Install/Update Tools</code> ，全部勾选并安装即可。</li>\n</ol>\n<h3 data-block=\"b17\" id=\"swift\">Swift 环境</h3>\n<ol data-block=\"b18\">\n<li>下载并安装 <a href=\"https://www.swift.org/download/\">Swift</a> 。</li>\n<li>在 VS Code 的插件市场中搜索 <code>swift</code> ，安装 <a href=\"https://marketplace.visualstudio.com/items?itemName=sswg.swift-lang\">Swift for Visual Studio Code</a> 。</li>\n</ol>\n<h3 data-block=\"b19\" id=\"javascript\">JavaScript 环境</h3>\n<ol data-block=\"b20\">\n<li>下载并安装 <a href=\"https://nodejs.org/en/\">Node.js</a> 。</li>\n<li>（可选）在 VS Code 的插件市场中搜索 <code>Prettier</code> ，安装代码格式化工具。</li>\n</ol>\n<h3 data-block=\"b21\" id=\"typescript\">TypeScript 环境</h3>\n<ol data-block=\"b22\">\n<li>同 JavaScript 环境安装步骤。</li>\n<li>安装 <a href=\"https://github.com/privatenumber/tsx?tab=readme-ov-file#global-installation\">TypeScript Execute (tsx)</a> 。</li>\n<li>在 VS Code 的插件市场中搜索 <code>typescript</code> ，安装 <a href=\"https://marketplace.visualstudio.com/items?itemName=yoavbls.pretty-ts-errors\">Pretty TypeScript Errors</a> 。</li>\n</ol>\n<h3 data-block=\"b23\" id=\"dart\">Dart 环境</h3>\n<ol data-block=\"b24\">\n<li>下载并安装 <a href=\"https://dart.dev/get-dart\">Dart</a> 。</li>\n<li>在 VS Code 的插件市场中搜索 <code>dart</code> ，安装 <a href=\"https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code\">Dart</a> 。</li>\n</ol>\n<h3 data-block=\"b25\" id=\"rust\">Rust 环境</h3>\n<ol data-block=\"b26\">\n<li>下载并安装 <a href=\"https://www.rust-lang.org/tools/install\">Rust</a> 。</li>\n<li>在 VS Code 的插件市场中搜索 <code>rust</code> ，安装 <a href=\"https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer\">rust-analyzer</a> 。</li>\n</ol>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "7ae9c99406625a0855830d6032a7fcaed881f8d1815fec1bb10ad2fd5f28a350",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  }
+}

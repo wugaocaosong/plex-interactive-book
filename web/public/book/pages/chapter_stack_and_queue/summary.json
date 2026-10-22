@@ -1,0 +1,25 @@
+{
+  "id": "chapter_stack_and_queue/summary",
+  "title": "5.4   小结",
+  "kind": "chapter",
+  "group": "第 5 章   栈与队列",
+  "route": "/read/chapter_stack_and_queue/summary",
+  "sourcePath": "chapter_stack_and_queue/summary.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">小结</h1>\n<h3 data-block=\"b1\" id=\"_2\">重点回顾</h3>\n<ul data-block=\"b2\">\n<li>栈是一种遵循先入后出原则的数据结构，可通过数组或链表来实现。</li>\n<li>在时间效率方面，栈的数组实现具有较高的平均效率，但在扩容过程中，单次入栈操作的时间复杂度会劣化至 <span class=\"arithmatex\">\\(O(n)\\)</span> 。相比之下，栈的链表实现具有更为稳定的效率表现。</li>\n<li>在空间效率方面，栈的数组实现可能导致一定程度的空间浪费。但需要注意的是，链表节点所占用的内存空间比数组元素更大。</li>\n<li>队列是一种遵循先入先出原则的数据结构，同样可以通过数组或链表来实现。在时间效率和空间效率的对比上，队列的结论与前述栈的结论相似。</li>\n<li>双向队列是一种具有更高自由度的队列，它允许在两端进行元素的添加和删除操作。</li>\n</ul>\n<h3 data-block=\"b3\" id=\"q-a\">Q &amp; A</h3>\n<p data-block=\"b4\"><strong>Q</strong>：浏览器的前进后退是否是双向链表实现？</p>\n<p data-block=\"b5\">浏览器的前进后退功能本质上是“栈”的体现。当用户访问一个新页面时，该页面会被添加到栈顶；当用户点击后退按钮时，该页面会从栈顶弹出。使用双向队列可以方便地实现一些额外操作，这个在“双向队列”章节有提到。</p>\n<p data-block=\"b6\"><strong>Q</strong>：在出栈后，是否需要释放出栈节点的内存？</p>\n<p data-block=\"b7\">如果后续仍需要使用弹出节点，则不需要释放内存。若之后不需要用到，<code>Java</code> 和 <code>Python</code> 等语言拥有自动垃圾回收机制，因此不需要手动释放内存；在 <code>C</code> 和 <code>C++</code> 中需要手动释放内存。</p>\n<p data-block=\"b8\"><strong>Q</strong>：双向队列像是两个栈拼接在了一起，它的用途是什么？</p>\n<p data-block=\"b9\">双向队列就像是栈和队列的组合或两个栈拼在了一起。它表现的是栈 + 队列的逻辑，因此可以实现栈与队列的所有应用，并且更加灵活。</p>\n<p data-block=\"b10\"><strong>Q</strong>：撤销（undo）和反撤销（redo）具体是如何实现的？</p>\n<p data-block=\"b11\">使用两个栈，栈 <code>A</code> 用于撤销，栈 <code>B</code> 用于反撤销。</p>\n<ol data-block=\"b12\">\n<li>每当用户执行一个操作，将这个操作压入栈 <code>A</code> ，并清空栈 <code>B</code> 。</li>\n<li>当用户执行“撤销”时，从栈 <code>A</code> 中弹出最近的操作，并将其压入栈 <code>B</code> 。</li>\n<li>当用户执行“反撤销”时，从栈 <code>B</code> 中弹出最近的操作，并将其压入栈 <code>A</code> 。</li>\n</ol>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "96a3b0439a5fb032add8325c08e1672a1cd52960f82fa4067a552bf73a755c10",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "chapter_data_structure/index",
+  "title": "数据结构",
+  "kind": "chapter",
+  "group": "第 3 章   数据结构",
+  "route": "/read/chapter_data_structure/index",
+  "sourcePath": "chapter_data_structure/index.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">数据结构</h1>\n<figure data-block=\"b1\"><img alt=\"数据结构\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_data_structure.jpg\"/><figcaption>数据结构</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"b2\">\n<p class=\"admonition-title\">Abstract</p>\n<p>数据结构如同一副稳固而多样的框架。</p>\n<p>它为数据的有序组织提供了蓝图，算法得以在此基础上生动起来。</p>\n</div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "0a57bf20ec0358716a0b50ee70978f9198f9aa20dd7adf7eb5bfd0f5fe345a9a",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  }
+}

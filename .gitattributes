@@ -1,4 +1,12 @@
-* text=auto
-*.md text eol=lf
-*.json text eol=lf
+* text=auto eol=lf
+# Preserve vendored originals byte-for-byte: import and H5P locks verify their hashes.
+content/upstream/hello-algo/** -text
+content/h5p/binary-search/** -text
 *.png binary
+*.jpg binary
+*.gif binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.otf binary

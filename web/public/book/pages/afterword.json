@@ -1,0 +1,13 @@
+{
+  "id": "afterword",
+  "title": "后记：下一段轨道",
+  "kind": "editorial",
+  "group": "卷末",
+  "route": "/read/afterword",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"b0\">下一段轨道</h1>\n<p data-block=\"b1\">读到这里，并不意味着旅程已经结束。比记住一个结论更有价值的，是学会观察问题、提出猜想，再用代码验证。</p>\n<p data-block=\"b2\">选一个熟悉的算法，把输入换一换。试着解释它为什么正确、什么时候会变慢，或者把它讲给另一个刚开始学习的人。</p>\n<p data-block=\"b3\">愿你在下一次遇到难题时，仍保有探索的耐心。</p>\n<p data-block=\"b4\"><em>本页为 PLEX 数字教材原创后记草稿。</em></p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null
+}

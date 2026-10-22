@@ -1,0 +1,151 @@
+{
+  "id": "chapter_divide_and_conquer/binary_search_recur",
+  "title": "12.2   分治搜索策略",
+  "kind": "chapter",
+  "group": "第 12 章   分治",
+  "route": "/read/chapter_divide_and_conquer/binary_search_recur",
+  "sourcePath": "chapter_divide_and_conquer/binary_search_recur.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">分治搜索策略</h1>\n<p data-block=\"b1\">我们已经学过，搜索算法分为两大类。</p>\n<ul data-block=\"b2\">\n<li><strong>暴力搜索</strong>：它通过遍历数据结构实现，时间复杂度为 <span class=\"arithmatex\">\\(O(n)\\)</span> 。</li>\n<li><strong>自适应搜索</strong>：它利用特有的数据组织形式或先验信息，时间复杂度可达到 <span class=\"arithmatex\">\\(O(\\log n)\\)</span> 甚至 <span class=\"arithmatex\">\\(O(1)\\)</span> 。</li>\n</ul>\n<p data-block=\"b3\">实际上，<strong>时间复杂度为 <span class=\"arithmatex\">\\(O(\\log n)\\)</span> 的搜索算法通常是基于分治策略实现的</strong>，例如二分查找和树。</p>\n<ul data-block=\"b4\">\n<li>二分查找的每一步都将问题（在数组中搜索目标元素）分解为一个小问题（在数组的一半中搜索目标元素），这个过程一直持续到数组为空或找到目标元素为止。</li>\n<li>树是分治思想的代表，在二叉搜索树、AVL 树、堆等数据结构中，各种操作的时间复杂度皆为 <span class=\"arithmatex\">\\(O(\\log n)\\)</span> 。</li>\n</ul>\n<p data-block=\"b5\">二分查找的分治策略如下所示。</p>\n<ul data-block=\"b6\">\n<li><strong>问题可以分解</strong>：二分查找递归地将原问题（在数组中进行查找）分解为子问题（在数组的一半中进行查找），这是通过比较中间元素和目标元素来实现的。</li>\n<li><strong>子问题是独立的</strong>：在二分查找中，每轮只处理一个子问题，它不受其他子问题的影响。</li>\n<li><strong>子问题的解无须合并</strong>：二分查找旨在查找一个特定元素，因此不需要将子问题的解进行合并。当子问题得到解决时，原问题也会同时得到解决。</li>\n</ul>\n<p data-block=\"b7\">分治能够提升搜索效率，本质上是因为暴力搜索每轮只能排除一个选项，<strong>而分治搜索每轮可以排除一半选项</strong>。</p>\n<h3 data-block=\"b8\" id=\"_2\">基于分治实现二分查找</h3>\n<p data-block=\"b9\">在之前的章节中，二分查找是基于递推（迭代）实现的。现在我们基于分治（递归）来实现它。</p>\n<div class=\"admonition question\" data-block=\"b10\">\n<p class=\"admonition-title\">Question</p>\n<p>给定一个长度为 <span class=\"arithmatex\">\\(n\\)</span> 的有序数组 <code>nums</code> ，其中所有元素都是唯一的，请查找元素 <code>target</code> 。</p>\n</div>\n<p data-block=\"b11\">从分治角度，我们将搜索区间 <span class=\"arithmatex\">\\([i, j]\\)</span> 对应的子问题记为 <span class=\"arithmatex\">\\(f(i, j)\\)</span> 。</p>\n<p data-block=\"b12\">以原问题 <span class=\"arithmatex\">\\(f(0, n-1)\\)</span> 为起始点，通过以下步骤进行二分查找。</p>\n<ol data-block=\"b13\">\n<li>计算搜索区间 <span class=\"arithmatex\">\\([i, j]\\)</span> 的中点 <span class=\"arithmatex\">\\(m\\)</span> ，根据它排除一半搜索区间。</li>\n<li>递归求解规模减小一半的子问题，可能为 <span class=\"arithmatex\">\\(f(i, m-1)\\)</span> 或 <span class=\"arithmatex\">\\(f(m+1, j)\\)</span> 。</li>\n<li>循环第 <code>1.</code> 步和第 <code>2.</code> 步，直至找到 <code>target</code> 或区间为空时返回。</li>\n</ol>\n<p data-block=\"b14\">下图展示了在数组中二分查找元素 <span class=\"arithmatex\">\\(6\\)</span> 的分治过程。</p>\n<figure data-block=\"b15\"><img alt=\"二分查找的分治过程\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_divide_and_conquer/binary_search_recur.assets/binary_search_recur.png\"/><figcaption>二分查找的分治过程</figcaption></figure>\n<p data-block=\"b16\">在实现代码中，我们声明一个递归函数 <code>dfs()</code> 来求解问题 <span class=\"arithmatex\">\\(f(i, j)\\)</span> ：</p>\n<div class=\"code-example\" data-block=\"b17\" data-code=\"0\"><div class=\"code-caption\"><span>binary_search_recur · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def binary_search(nums: list[int], target: int) -&gt; int:\n    \"\"\"二分查找\"\"\"\n    n = len(nums)\n    # 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1)</code></pre></div>",
+  "codeExamples": [
+    {
+      "id": "chapter_divide_and_conquer/binary_search_recur-code-0",
+      "file": "binary_search_recur",
+      "className": "",
+      "functionName": "binary_search",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def binary_search(nums: list[int], target: int) -> int:\n    \"\"\"二分查找\"\"\"\n    n = len(nums)\n    # 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1)",
+          "fullSource": "\"\"\"\nFile: binary_search_recur.py\nCreated Time: 2023-07-17\nAuthor: krahets (krahets@163.com)\n\"\"\"\n\n\ndef dfs(nums: list[int], target: int, i: int, j: int) -> int:\n    \"\"\"二分查找：问题 f(i, j)\"\"\"\n    # 若区间为空，代表无目标元素，则返回 -1\n    if i > j:\n        return -1\n    # 计算中点索引 m\n    m = (i + j) // 2\n    if nums[m] < target:\n        # 递归子问题 f(m+1, j)\n        return dfs(nums, target, m + 1, j)\n    elif nums[m] > target:\n        # 递归子问题 f(i, m-1)\n        return dfs(nums, target, i, m - 1)\n    else:\n        # 找到目标元素，返回其索引\n        return m\n\n\ndef binary_search(nums: list[int], target: int) -> int:\n    \"\"\"二分查找\"\"\"\n    n = len(nums)\n    # 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1)\n\n\n\"\"\"Driver Code\"\"\"\nif __name__ == \"__main__\":\n    target = 6\n    nums = [1, 3, 6, 8, 12, 15, 23, 26, 31, 35]\n\n    # 二分查找（双闭区间）\n    index = binary_search(nums, target)\n    print(\"目标元素 6 的索引 = \", index)\n",
+          "sourcePath": "codes/python/chapter_divide_and_conquer/binary_search_recur.py",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/python/chapter_divide_and_conquer/binary_search_recur.py",
+          "extraction": "symbol",
+          "runnable": true
+        },
+        {
+          "language": "java",
+          "snippet": "    static int binarySearch(int[] nums, int target) {\n        int n = nums.length;\n        // 求解问题 f(0, n-1)\n        return dfs(nums, target, 0, n - 1);\n    }",
+          "fullSource": "/**\n * File: binary_search_recur.java\n * Created Time: 2023-07-17\n * Author: krahets (krahets@163.com)\n */\n\npackage chapter_divide_and_conquer;\n\npublic class binary_search_recur {\n    /* 二分查找：问题 f(i, j) */\n    static int dfs(int[] nums, int target, int i, int j) {\n        // 若区间为空，代表无目标元素，则返回 -1\n        if (i > j) {\n            return -1;\n        }\n        // 计算中点索引 m\n        int m = (i + j) / 2;\n        if (nums[m] < target) {\n            // 递归子问题 f(m+1, j)\n            return dfs(nums, target, m + 1, j);\n        } else if (nums[m] > target) {\n            // 递归子问题 f(i, m-1)\n            return dfs(nums, target, i, m - 1);\n        } else {\n            // 找到目标元素，返回其索引\n            return m;\n        }\n    }\n\n    /* 二分查找 */\n    static int binarySearch(int[] nums, int target) {\n        int n = nums.length;\n        // 求解问题 f(0, n-1)\n        return dfs(nums, target, 0, n - 1);\n    }\n\n    public static void main(String[] args) {\n        int target = 6;\n        int[] nums = { 1, 3, 6, 8, 12, 15, 23, 26, 31, 35 };\n\n        // 二分查找（双闭区间）\n        int index = binarySearch(nums, target);\n        System.out.println(\"目标元素 6 的索引 = \" + index);\n    }\n}\n",
+          "sourcePath": "codes/java/chapter_divide_and_conquer/binary_search_recur.java",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/java/chapter_divide_and_conquer/binary_search_recur.java",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "cpp",
+          "snippet": "int binarySearch(vector<int> &nums, int target) {\n    int n = nums.size();\n    // 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1);\n}",
+          "fullSource": "/**\n * File: binary_search_recur.cpp\n * Created Time: 2023-07-17\n * Author: krahets (krahets@163.com)\n */\n\n#include \"../utils/common.hpp\"\n\n/* 二分查找：问题 f(i, j) */\nint dfs(vector<int> &nums, int target, int i, int j) {\n    // 若区间为空，代表无目标元素，则返回 -1\n    if (i > j) {\n        return -1;\n    }\n    // 计算中点索引 m\n    int m = (i + j) / 2;\n    if (nums[m] < target) {\n        // 递归子问题 f(m+1, j)\n        return dfs(nums, target, m + 1, j);\n    } else if (nums[m] > target) {\n        // 递归子问题 f(i, m-1)\n        return dfs(nums, target, i, m - 1);\n    } else {\n        // 找到目标元素，返回其索引\n        return m;\n    }\n}\n\n/* 二分查找 */\nint binarySearch(vector<int> &nums, int target) {\n    int n = nums.size();\n    // 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1);\n}\n\n/* Driver Code */\nint main() {\n    int target = 6;\n    vector<int> nums = {1, 3, 6, 8, 12, 15, 23, 26, 31, 35};\n\n    // 二分查找（双闭区间）\n    int index = binarySearch(nums, target);\n    cout << \"目标元素 6 的索引 = \" << index << endl;\n\n    return 0;\n}",
+          "sourcePath": "codes/cpp/chapter_divide_and_conquer/binary_search_recur.cpp",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/cpp/chapter_divide_and_conquer/binary_search_recur.cpp",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "c",
+          "snippet": "int binarySearch(int nums[], int target, int numsSize) {\n    int n = numsSize;\n    // 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1);\n}",
+          "fullSource": "/**\n * File: binary_search_recur.c\n * Created Time: 2023-10-01\n * Author: Zuoxun (845242523@qq.com)\n */\n\n#include \"../utils/common.h\"\n\n/* 二分查找：问题 f(i, j) */\nint dfs(int nums[], int target, int i, int j) {\n    // 若区间为空，代表无目标元素，则返回 -1\n    if (i > j) {\n        return -1;\n    }\n    // 计算中点索引 m\n    int m = (i + j) / 2;\n    if (nums[m] < target) {\n        // 递归子问题 f(m+1, j)\n        return dfs(nums, target, m + 1, j);\n    } else if (nums[m] > target) {\n        // 递归子问题 f(i, m-1)\n        return dfs(nums, target, i, m - 1);\n    } else {\n        // 找到目标元素，返回其索引\n        return m;\n    }\n}\n\n/* 二分查找 */\nint binarySearch(int nums[], int target, int numsSize) {\n    int n = numsSize;\n    // 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1);\n}\n\n/* Driver Code */\nint main() {\n    int target = 6;\n    int nums[] = {1, 3, 6, 8, 12, 15, 23, 26, 31, 35};\n    int numsSize = sizeof(nums) / sizeof(nums[0]);\n\n    // 二分查找（双闭区间）\n    int index = binarySearch(nums, target, numsSize);\n    printf(\"目标元素 6 的索引 = %d\\n\", index);\n\n    return 0;\n}\n",
+          "sourcePath": "codes/c/chapter_divide_and_conquer/binary_search_recur.c",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/c/chapter_divide_and_conquer/binary_search_recur.c",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "csharp",
+          "snippet": "    int BinarySearch(int[] nums, int target) {\n        int n = nums.Length;\n        // 求解问题 f(0, n-1)\n        return DFS(nums, target, 0, n - 1);\n    }",
+          "fullSource": "﻿/**\n* File: binary_search_recur.cs\n* Created Time: 2023-07-18\n* Author: hpstory (hpstory1024@163.com)\n*/\n\nnamespace hello_algo.chapter_divide_and_conquer;\n\npublic class binary_search_recur {\n    /* 二分查找：问题 f(i, j) */\n    int DFS(int[] nums, int target, int i, int j) {\n        // 若区间为空，代表无目标元素，则返回 -1\n        if (i > j) {\n            return -1;\n        }\n        // 计算中点索引 m\n        int m = (i + j) / 2;\n        if (nums[m] < target) {\n            // 递归子问题 f(m+1, j)\n            return DFS(nums, target, m + 1, j);\n        } else if (nums[m] > target) {\n            // 递归子问题 f(i, m-1)\n            return DFS(nums, target, i, m - 1);\n        } else {\n            // 找到目标元素，返回其索引\n            return m;\n        }\n    }\n\n    /* 二分查找 */\n    int BinarySearch(int[] nums, int target) {\n        int n = nums.Length;\n        // 求解问题 f(0, n-1)\n        return DFS(nums, target, 0, n - 1);\n    }\n\n    [Test]\n    public void Test() {\n        int target = 6;\n        int[] nums = [1, 3, 6, 8, 12, 15, 23, 26, 31, 35];\n\n        // 二分查找（双闭区间）\n        int index = BinarySearch(nums, target);\n        Console.WriteLine(\"目标元素 6 的索引 = \" + index);\n    }\n}\n",
+          "sourcePath": "codes/csharp/chapter_divide_and_conquer/binary_search_recur.cs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/csharp/chapter_divide_and_conquer/binary_search_recur.cs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "go",
+          "snippet": "func binarySearch(nums []int, target int) int {\n\tn := len(nums)\n\treturn dfs(nums, target, 0, n-1)\n}",
+          "fullSource": "// File: binary_search_recur.go\n// Created Time: 2023-07-19\n// Author: hongyun-robot (1836017030@qq.com)\n\npackage chapter_divide_and_conquer\n\n/* 二分查找：问题 f(i, j) */\nfunc dfs(nums []int, target, i, j int) int {\n\t// 如果区间为空，代表没有目标元素，则返回 -1\n\tif i > j {\n\t\treturn -1\n\t}\n\t//\t计算索引中点\n\tm := i + ((j - i) >> 1)\n\t//判断中点与目标元素大小\n\tif nums[m] < target {\n\t\t// 小于则递归右半数组\n\t\t// 递归子问题 f(m+1, j)\n\t\treturn dfs(nums, target, m+1, j)\n\t} else if nums[m] > target {\n\t\t// 大于则递归左半数组\n\t\t// 递归子问题 f(i, m-1)\n\t\treturn dfs(nums, target, i, m-1)\n\t} else {\n\t\t// 找到目标元素，返回其索引\n\t\treturn m\n\t}\n}\n\n/* 二分查找 */\nfunc binarySearch(nums []int, target int) int {\n\tn := len(nums)\n\treturn dfs(nums, target, 0, n-1)\n}\n",
+          "sourcePath": "codes/go/chapter_divide_and_conquer/binary_search_recur.go",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/go/chapter_divide_and_conquer/binary_search_recur.go",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "javascript",
+          "snippet": "function binarySearch(nums, target) {\n    const n = nums.length;\n    // 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1);\n}",
+          "fullSource": "/**\n * File: binary_search_recur.js\n * Created Time: 2023-07-30\n * Author: yuan0221 (yl1452491917@gmail.com)\n */\n\n/* 二分查找：问题 f(i, j) */\nfunction dfs(nums, target, i, j) {\n    // 若区间为空，代表无目标元素，则返回 -1\n    if (i > j) {\n        return -1;\n    }\n    // 计算中点索引 m\n    const m = i + ((j - i) >> 1);\n    if (nums[m] < target) {\n        // 递归子问题 f(m+1, j)\n        return dfs(nums, target, m + 1, j);\n    } else if (nums[m] > target) {\n        // 递归子问题 f(i, m-1)\n        return dfs(nums, target, i, m - 1);\n    } else {\n        // 找到目标元素，返回其索引\n        return m;\n    }\n}\n\n/* 二分查找 */\nfunction binarySearch(nums, target) {\n    const n = nums.length;\n    // 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1);\n}\n\n/* Driver Code */\nconst target = 6;\nconst nums = [1, 3, 6, 8, 12, 15, 23, 26, 31, 35];\n// 二分查找（双闭区间）\nconst index = binarySearch(nums, target);\nconsole.log(`目标元素 6 的索引 = ${index}`);\n",
+          "sourcePath": "codes/javascript/chapter_divide_and_conquer/binary_search_recur.js",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/javascript/chapter_divide_and_conquer/binary_search_recur.js",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "typescript",
+          "snippet": "function binarySearch(nums: number[], target: number): number {\n    const n = nums.length;\n    // 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1);\n}",
+          "fullSource": "/**\n * File: binary_search_recur.ts\n * Created Time: 2023-07-30\n * Author: yuan0221 (yl1452491917@gmail.com)\n */\n\n/* 二分查找：问题 f(i, j) */\nfunction dfs(nums: number[], target: number, i: number, j: number): number {\n    // 若区间为空，代表无目标元素，则返回 -1\n    if (i > j) {\n        return -1;\n    }\n    // 计算中点索引 m\n    const m = i + ((j - i) >> 1);\n    if (nums[m] < target) {\n        // 递归子问题 f(m+1, j)\n        return dfs(nums, target, m + 1, j);\n    } else if (nums[m] > target) {\n        // 递归子问题 f(i, m-1)\n        return dfs(nums, target, i, m - 1);\n    } else {\n        // 找到目标元素，返回其索引\n        return m;\n    }\n}\n\n/* 二分查找 */\nfunction binarySearch(nums: number[], target: number): number {\n    const n = nums.length;\n    // 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1);\n}\n\n/* Driver Code */\nconst target = 6;\nconst nums = [1, 3, 6, 8, 12, 15, 23, 26, 31, 35];\n// 二分查找（双闭区间）\nconst index = binarySearch(nums, target);\nconsole.log(`目标元素 6 的索引 = ${index}`);\n\nexport {};\n",
+          "sourcePath": "codes/typescript/chapter_divide_and_conquer/binary_search_recur.ts",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/typescript/chapter_divide_and_conquer/binary_search_recur.ts",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "swift",
+          "snippet": "func binarySearch(nums: [Int], target: Int) -> Int {\n    // 求解问题 f(0, n-1)\n    dfs(nums: nums, target: target, i: nums.startIndex, j: nums.endIndex - 1)\n}",
+          "fullSource": "/**\n * File: binary_search_recur.swift\n * Created Time: 2023-09-02\n * Author: nuomi1 (nuomi1@qq.com)\n */\n\n/* 二分查找：问题 f(i, j) */\nfunc dfs(nums: [Int], target: Int, i: Int, j: Int) -> Int {\n    // 若区间为空，代表无目标元素，则返回 -1\n    if i > j {\n        return -1\n    }\n    // 计算中点索引 m\n    let m = (i + j) / 2\n    if nums[m] < target {\n        // 递归子问题 f(m+1, j)\n        return dfs(nums: nums, target: target, i: m + 1, j: j)\n    } else if nums[m] > target {\n        // 递归子问题 f(i, m-1)\n        return dfs(nums: nums, target: target, i: i, j: m - 1)\n    } else {\n        // 找到目标元素，返回其索引\n        return m\n    }\n}\n\n/* 二分查找 */\nfunc binarySearch(nums: [Int], target: Int) -> Int {\n    // 求解问题 f(0, n-1)\n    dfs(nums: nums, target: target, i: nums.startIndex, j: nums.endIndex - 1)\n}\n\n@main\nenum BinarySearchRecur {\n    /* Driver Code */\n    static func main() {\n        let target = 6\n        let nums = [1, 3, 6, 8, 12, 15, 23, 26, 31, 35]\n\n        // 二分查找（双闭区间）\n        let index = binarySearch(nums: nums, target: target)\n        print(\"目标元素 6 的索引 = \\(index)\")\n    }\n}\n",
+          "sourcePath": "codes/swift/chapter_divide_and_conquer/binary_search_recur.swift",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/swift/chapter_divide_and_conquer/binary_search_recur.swift",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "rust",
+          "snippet": "fn binary_search(nums: &[i32], target: i32) -> i32 {\n    let n = nums.len() as i32;\n    // 求解问题 f(0, n-1)\n    dfs(nums, target, 0, n - 1)\n}",
+          "fullSource": "/*\n * File: binary_search_recur.rs\n * Created Time: 2023-07-15\n * Author: codingonion (coderonion@gmail.com)\n */\n\n/* 二分查找：问题 f(i, j) */\nfn dfs(nums: &[i32], target: i32, i: i32, j: i32) -> i32 {\n    // 若区间为空，代表无目标元素，则返回 -1\n    if i > j {\n        return -1;\n    }\n    let m: i32 = i + (j - i) / 2;\n    if nums[m as usize] < target {\n        // 递归子问题 f(m+1, j)\n        return dfs(nums, target, m + 1, j);\n    } else if nums[m as usize] > target {\n        // 递归子问题 f(i, m-1)\n        return dfs(nums, target, i, m - 1);\n    } else {\n        // 找到目标元素，返回其索引\n        return m;\n    }\n}\n\n/* 二分查找 */\nfn binary_search(nums: &[i32], target: i32) -> i32 {\n    let n = nums.len() as i32;\n    // 求解问题 f(0, n-1)\n    dfs(nums, target, 0, n - 1)\n}\n\n/* Driver Code */\npub fn main() {\n    let target = 6;\n    let nums = [1, 3, 6, 8, 12, 15, 23, 26, 31, 35];\n\n    // 二分查找（双闭区间）\n    let index = binary_search(&nums, target);\n    println!(\"目标元素 6 的索引 = {index}\");\n}\n",
+          "sourcePath": "codes/rust/chapter_divide_and_conquer/binary_search_recur.rs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/rust/chapter_divide_and_conquer/binary_search_recur.rs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "kotlin",
+          "snippet": "fun binarySearch(nums: IntArray, target: Int): Int {\n    val n = nums.size\n    // 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1)\n}",
+          "fullSource": "/**\n * File: binary_search_recur.kt\n * Created Time: 2024-01-25\n * Author: curtishd (1023632660@qq.com)\n */\n\npackage chapter_divide_and_conquer.binary_search_recur\n\n/* 二分查找：问题 f(i, j) */\nfun dfs(\n    nums: IntArray,\n    target: Int,\n    i: Int,\n    j: Int\n): Int {\n    // 若区间为空，代表无目标元素，则返回 -1\n    if (i > j) {\n        return -1\n    }\n    // 计算中点索引 m\n    val m = (i + j) / 2\n    return if (nums[m] < target) {\n        // 递归子问题 f(m+1, j)\n        dfs(nums, target, m + 1, j)\n    } else if (nums[m] > target) {\n        // 递归子问题 f(i, m-1)\n        dfs(nums, target, i, m - 1)\n    } else {\n        // 找到目标元素，返回其索引\n        m\n    }\n}\n\n/* 二分查找 */\nfun binarySearch(nums: IntArray, target: Int): Int {\n    val n = nums.size\n    // 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1)\n}\n\n/* Driver Code */\nfun main() {\n    val target = 6\n    val nums = intArrayOf(1, 3, 6, 8, 12, 15, 23, 26, 31, 35)\n\n    // 二分查找（双闭区间）\n    val index = binarySearch(nums, target)\n    println(\"目标元素 6 的索引 = $index\")\n}",
+          "sourcePath": "codes/kotlin/chapter_divide_and_conquer/binary_search_recur.kt",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/kotlin/chapter_divide_and_conquer/binary_search_recur.kt",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "dart",
+          "snippet": "int binarySearch(List<int> nums, int target) {\n  int n = nums.length;\n  // 求解问题 f(0, n-1)\n  return dfs(nums, target, 0, n - 1);\n}",
+          "fullSource": "/**\n * File: binary_search_recur.dart\n * Created Time: 2023-08-10\n * Author: liuyuxin (gvenusleo@gmail.com)\n */\n\n/* 二分查找：问题 f(i, j) */\nint dfs(List<int> nums, int target, int i, int j) {\n  // 若区间为空，代表无目标元素，则返回 -1\n  if (i > j) {\n    return -1;\n  }\n  // 计算中点索引 m\n  int m = (i + j) ~/ 2;\n  if (nums[m] < target) {\n    // 递归子问题 f(m+1, j)\n    return dfs(nums, target, m + 1, j);\n  } else if (nums[m] > target) {\n    // 递归子问题 f(i, m-1)\n    return dfs(nums, target, i, m - 1);\n  } else {\n    // 找到目标元素，返回其索引\n    return m;\n  }\n}\n\n/* 二分查找 */\nint binarySearch(List<int> nums, int target) {\n  int n = nums.length;\n  // 求解问题 f(0, n-1)\n  return dfs(nums, target, 0, n - 1);\n}\n\n/* Driver Code */\nvoid main() {\n  int target = 6;\n  List<int> nums = [1, 3, 6, 8, 12, 15, 23, 26, 31, 35];\n\n  // 二分查找（双闭区间）\n  int index = binarySearch(nums, target);\n  print(\"目标元素 6 的索引 = $index\");\n}\n",
+          "sourcePath": "codes/dart/chapter_divide_and_conquer/binary_search_recur.dart",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/dart/chapter_divide_and_conquer/binary_search_recur.dart",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "ruby",
+          "snippet": "def binary_search(nums, target)\n  n = nums.length\n  # 求解问题 f(0, n-1)\n  dfs(nums, target, 0, n - 1)\nend",
+          "fullSource": "=begin\nFile: binary_search_recur.rb\nCreated Time: 2024-05-13\nAuthor: Xuan Khoa Tu Nguyen (ngxktuzkai2000@gmail.com)\n=end\n\n### 二分查找：问题 f(i, j) ###\ndef dfs(nums, target, i, j)\n  # 若区间为空，代表无目标元素，则返回 -1\n  return -1 if i > j\n  \n  # 计算中点索引 m\n  m = (i + j) / 2\n\n  if nums[m] < target\n    # 递归子问题 f(m+1, j)\n    return dfs(nums, target, m + 1, j)\n  elsif nums[m] > target\n    # 递归子问题 f(i, m-1)\n    return dfs(nums, target, i, m - 1)\n  else\n    # 找到目标元素，返回其索引\n    return m\n  end\nend\n\n### 二分查找 ###\ndef binary_search(nums, target)\n  n = nums.length\n  # 求解问题 f(0, n-1)\n  dfs(nums, target, 0, n - 1)\nend\n\n### Driver Code ###\nif __FILE__ == $0\n  target = 6\n  nums = [1, 3, 6, 8, 12, 15, 23, 26, 31, 35]\n\n  # 二分查找（双闭区间）\n  index = binary_search(nums, target)\n  puts \"目标元素 6 的索引 = #{index}\"\nend\n",
+          "sourcePath": "codes/ruby/chapter_divide_and_conquer/binary_search_recur.rb",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/ruby/chapter_divide_and_conquer/binary_search_recur.rb",
+          "extraction": "symbol",
+          "runnable": false
+        }
+      ]
+    }
+  ],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "39de29ebfeeff1afdbf1f77190567df2c50025d8c59a73931fcedb99ea68bfd9",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 1,
+    "animationGroups": 0
+  }
+}

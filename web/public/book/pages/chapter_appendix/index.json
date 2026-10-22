@@ -1,0 +1,25 @@
+{
+  "id": "chapter_appendix/index",
+  "title": "附录",
+  "kind": "chapter",
+  "group": "第 16 章   附录",
+  "route": "/read/chapter_appendix/index",
+  "sourcePath": "chapter_appendix/index.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">附录</h1>\n<figure data-block=\"b1\"><img alt=\"附录\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_appendix.jpg\"/><figcaption>附录</figcaption></figure>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "0cb1a357f8268a6e46115d0539cf2f23b4fd57120874f43e6ce4911e33033d82",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  }
+}

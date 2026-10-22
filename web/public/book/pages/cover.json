@@ -1,0 +1,13 @@
+{
+  "id": "cover",
+  "title": "星轨编程",
+  "kind": "cover",
+  "group": "卷首",
+  "route": "/read/cover",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"b0\">星轨编程</h1>\n<p data-block=\"b1\">Python 与算法的探索之旅</p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null
+}

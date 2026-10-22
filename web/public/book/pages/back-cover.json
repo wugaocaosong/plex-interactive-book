@@ -1,0 +1,13 @@
+{
+  "id": "back-cover",
+  "title": "封底",
+  "kind": "back-cover",
+  "group": "卷末",
+  "route": "/read/back-cover",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"b0\">探索，仍在继续。</h1>\n<p data-block=\"b1\">把抽象的算法，变成可看见的每一步。</p>\n<p data-block=\"b2\">把第一次尝试，变成下一次出发。</p>\n<p data-block=\"b3\"><strong>PLEX · 星轨编程</strong></p>\n<p data-block=\"b4\">Python 与算法的探索之旅</p>\n<p data-block=\"b5\">基于《Hello 算法》制作 · CC BY-NC-SA 4.0</p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null
+}

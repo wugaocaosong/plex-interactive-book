@@ -1,0 +1,25 @@
+{
+  "id": "chapter_introduction/summary",
+  "title": "1.3   小结",
+  "kind": "chapter",
+  "group": "第 1 章   初识算法",
+  "route": "/read/chapter_introduction/summary",
+  "sourcePath": "chapter_introduction/summary.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">小结</h1>\n<h3 data-block=\"b1\" id=\"_2\">重点回顾</h3>\n<ul data-block=\"b2\">\n<li>算法在日常生活中无处不在，并不是遥不可及的高深知识。实际上，我们已经在不知不觉中学会了许多算法，用以解决生活中的大小问题。</li>\n<li>查字典的原理与二分查找算法相一致。二分查找算法体现了分而治之的重要算法思想。</li>\n<li>整理扑克的过程与插入排序算法非常类似。插入排序算法适合排序小型数据集。</li>\n<li>货币找零的步骤本质上是贪心算法，每一步都采取当前看来最好的选择。</li>\n<li>算法是在有限时间内解决特定问题的一组指令或操作步骤，而数据结构是计算机中组织和存储数据的方式。</li>\n<li>数据结构与算法紧密相连。数据结构是算法的基石，而算法为数据结构注入生命力。</li>\n<li>我们可以将数据结构与算法类比为拼装积木，积木代表数据，积木的形状和连接方式等代表数据结构，拼装积木的步骤则对应算法。</li>\n</ul>\n<h3 data-block=\"b3\" id=\"q-a\">Q &amp; A</h3>\n<p data-block=\"b4\"><strong>Q</strong>：作为一名程序员，我在日常工作中从未用算法解决过问题，常用算法都被编程语言封装好了，直接用就可以了；这是否意味着我们工作中的问题还没有到达需要算法的程度？</p>\n<p data-block=\"b5\">如果把具体的工作技能比作是武功的“招式”的话，那么基础科目应该更像是“内功”。</p>\n<p data-block=\"b6\">我认为学算法（以及其他基础科目）的意义不是在于在工作中从零实现它，而是基于学到的知识，在解决问题时能够作出专业的反应和判断，从而提升工作的整体质量。举一个简单例子，每种编程语言都内置了排序函数：</p>\n<ul data-block=\"b7\">\n<li>如果我们没有学过数据结构与算法，那么给定任何数据，我们可能都塞给这个排序函数去做了。运行顺畅、性能不错，看上去并没有什么问题。</li>\n<li>但如果学过算法，我们就会知道内置排序函数的时间复杂度是 <span class=\"arithmatex\">\\(O(n \\log n)\\)</span> ；而如果给定的数据是固定位数的整数（例如学号），那么我们就可以用效率更高的“基数排序”来做，将时间复杂度降为 <span class=\"arithmatex\">\\(O(nk)\\)</span> ，其中 <span class=\"arithmatex\">\\(k\\)</span> 为位数。当数据体量很大时，节省出来的运行时间就能创造较大价值（成本降低、体验变好等）。</li>\n</ul>\n<p data-block=\"b8\">在工程领域中，大量问题是难以达到最优解的，许多问题只是被“差不多”地解决了。问题的难易程度一方面取决于问题本身的性质，另一方面也取决于观测问题的人的知识储备。人的知识越完备、经验越多，分析问题就会越深入，问题就能被解决得更优雅。</p>\n<p data-block=\"b9\"><strong>Q</strong>：现在几乎所有代码都让 AI Agent 写了，我们还有必要学习算法吗？</p>\n<p data-block=\"b10\">引用一下李沐老师的话：“agent 是能力放大器，就是能力 x10，而不是加法器，不是能力 +10。”</p>\n<p data-block=\"b11\">既然 AI 是能力放大器，那么作为基数的“能力”也很重要。我觉得两方面能力尤其值得积累：一是表达能力，尤其是和 AI 协作的能力。讲清目标、补足背景、及时纠偏。向 AI 解释问题，也是在帮自己想清楚问题。二是基础知识。细节可以让 AI 补，但基本概念得自己懂，才能问到点上、判断对错，把它的输出变成有用的成果。</p>\n<p data-block=\"b12\">AI 很特别的一点是，它不像过去的工具那样有清晰的功能边界。它有点像水，到了不同的人手里，会呈现出不同的形状。人的能力越强、taste 越好，AI 的放大效应就越明显。</p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "b4275dac250459340701c2a5533f1c9a70969fff910a4aac8f44bccf364b6f76",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  }
+}

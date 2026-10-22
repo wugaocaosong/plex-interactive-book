@@ -1,0 +1,25 @@
+{
+  "id": "chapter_hashing/index",
+  "title": "哈希表",
+  "kind": "chapter",
+  "group": "第 6 章   哈希表",
+  "route": "/read/chapter_hashing/index",
+  "sourcePath": "chapter_hashing/index.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">哈希表</h1>\n<figure data-block=\"b1\"><img alt=\"哈希表\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_hashing.jpg\"/><figcaption>哈希表</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"b2\">\n<p class=\"admonition-title\">Abstract</p>\n<p>在计算机世界中，哈希表如同一位聪慧的图书管理员。</p>\n<p>他知道如何计算索书号，从而可以快速找到目标图书。</p>\n</div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "69d7759dc5b1fa61dd98fc04c8360ba8927e3a35b932a3deaefac45376599e17",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  }
+}

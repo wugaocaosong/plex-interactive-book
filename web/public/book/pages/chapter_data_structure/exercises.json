@@ -1,0 +1,25 @@
+{
+  "id": "chapter_data_structure/exercises",
+  "title": "3.6   练习",
+  "kind": "chapter",
+  "group": "第 3 章   数据结构",
+  "route": "/read/chapter_data_structure/exercises",
+  "sourcePath": "chapter_data_structure/exercises.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">练习</h1>\n<h2 data-block=\"b1\" id=\"_2\">知识巩固</h2>\n<h3 data-block=\"b2\" id=\"_3\">生活场景中的数据关系</h3>\n<p data-block=\"b3\">请根据数据之间的关系，为下面三个场景选择“线性结构、树形结构、网状结构”中的一种，并说明理由：</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"b4\">\n<li>同学们排成一列，每人只关心自己前面和后面的人；</li>\n<li>学校按“学校 → 年级 → 班级”分层管理；</li>\n<li>城市道路连接多个路口，一个路口可以通向多个其他路口，也可能形成环路。</li>\n</ol>\n<details class=\"success\" data-block=\"b5\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>是线性结构。除排在最前和最后的人外，每个人都只与前面和后面各一人相邻，关系沿一条线展开。</p>\n</li>\n<li>\n<p>是树形结构。每个班级属于一个年级，每个年级又属于学校，关系从上到下分层展开。</p>\n</li>\n<li>\n<p>是网状结构。一个路口可以连接多个路口，路线之间还能形成环，不能排成单一顺序或严格层级。</p>\n<p>判断结构时应先观察元素之间的关系，而不是先考虑它在内存中占多少空间。</p>\n</li>\n</ol>\n</details>\n<h3 data-block=\"b6\" id=\"_4\">逻辑顺序怎样存进内存</h3>\n<p data-block=\"b7\">为了保存逻辑顺序 <code>A → B → C</code>，现有两种简化的内存安排：</p>\n<ul data-block=\"b8\">\n<li>方案甲：<code>A、B、C</code> 分别放在编号为 <code>20、21、22</code> 的内存格中；</li>\n<li>方案乙：<code>A、B、C</code> 分别放在编号为 <code>20、7、31</code> 的内存格中，并由 <code>A</code> 记录 <code>B</code> 的位置、<code>B</code> 记录 <code>C</code> 的位置。</li>\n</ul>\n<!-- numbered-subquestions -->\n<ol data-block=\"b9\">\n<li>哪个方案属于连续空间存储？哪个属于分散空间存储？</li>\n<li>两个方案分别更接近数组还是链表？</li>\n<li>方案乙的内存格编号没有按大小排列，为什么仍能表示 <code>A → B → C</code> 的逻辑顺序？</li>\n</ol>\n<details class=\"success\" data-block=\"b10\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>方案甲使用连续的内存格，属于连续空间存储；方案乙的节点分散在不同位置，属于分散空间存储。</p>\n</li>\n<li>\n<p>方案甲更接近数组，方案乙更接近链表。</p>\n</li>\n<li>\n<p>逻辑顺序由节点之间记录的连接关系决定，而不是由内存格编号的大小决定。\n    从 <code>A</code> 记录的位置可以找到 <code>B</code>，再从 <code>B</code> 记录的位置找到 <code>C</code>，所以仍能依次访问 <code>A、B、C</code>。</p>\n<p>这也说明逻辑结构和物理结构是观察同一组数据的两个不同角度。</p>\n</li>\n</ol>\n</details>\n<h3 data-block=\"b11\" id=\"_5\">作业记录中的数据类型与结构</h3>\n<p data-block=\"b12\">某学习小组按座位顺序记录 4 名同学是否交了作业，得到：</p>\n<p data-block=\"b13\"><code>[true, false, true, true]</code></p>\n<!-- numbered-subquestions -->\n<ol data-block=\"b14\">\n<li>每个元素适合使用哪种基本数据类型？</li>\n<li>这 4 个元素按座位顺序排成一列，使用了什么逻辑结构？</li>\n<li>如果以后改为记录每人的作业分数 <code>[90, 0, 85, 100]</code>，改变的是数据的“内容类型”还是“组织方式”？说明理由。</li>\n</ol>\n<details class=\"success\" data-block=\"b15\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>每个元素只表示“是”或“否”，适合使用布尔类型 <code>bool</code>。</p>\n</li>\n<li>\n<p>这些元素按座位顺序排列，形成线性结构，可以用数组保存。</p>\n</li>\n<li>\n<p>改变的是内容类型：元素由布尔值变成了整数。组织方式没有改变，\n    这些数据仍然按座位顺序排成一列，仍可使用数组这一线性结构。</p>\n<p>基本数据类型描述“存的是什么”，数据结构描述“数据怎样组织”。</p>\n</li>\n</ol>\n</details>\n<h2 data-block=\"b16\" id=\"_6\">编程练习</h2>\n<h3 data-block=\"b17\" id=\"1\">统计二进制表示中的 1</h3>\n<p data-block=\"b18\">给定非负整数 <code>n</code>，请统计它的二进制表示中共有多少个 1。</p>\n<p data-block=\"b19\">要求使用位运算完成，不把二进制表示转换成字符串，也不使用直接统计 1 的内置函数。</p>\n<details class=\"tip\" data-block=\"b20\">\n<summary>解题提示</summary>\n<ol>\n<li>n &amp; 1 可以取出 n 的最右边一位，用它判断这一位是否为 1</li>\n<li>右移一位表示丢掉当前最右边的二进制位；多数语言使用运算符 &gt;&gt;</li>\n<li>完成逐位检查并右移的方法后，再观察：n &amp; (n - 1) 会把 n 中最右边的一个 1 变成 0</li>\n</ol>\n</details>\n<p data-block=\"b21\"><a class=\"rounded-button exercise-button\" href=\"https://leetcode.cn/problems/number-of-1-bits/\" rel=\"noopener noreferrer\" target=\"_blank\">LeetCode</a> <a class=\"rounded-button exercise-button\" href=\"https://leetcode.cn/problems/number-of-1-bits/solutions/2361978/191-wei-1-de-ge-shu-wei-yun-suan-qing-xi-40rw/\" rel=\"noopener noreferrer\" target=\"_blank\">题目解析</a></p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "afcf96ad60c295e11b057ae1f824e7b943aeaa8263150da1a039a92045fe150f",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "pages": 118,
+  "codeReferences": 136,
+  "codeVariants": 1865,
+  "animationGroups": 39,
+  "animationFrames": 292,
+  "fullFileDisplays": 39,
+  "totalBookSections": 129,
+  "transformations": [
+    "MkDocs admonitions/details",
+    "tabbed diagrams",
+    "source code references",
+    "math markup",
+    "local images and links",
+    "stable block anchors"
+  ]
+}

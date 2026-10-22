@@ -1,0 +1,10 @@
+import type { Theme } from 'vitepress'
+import Layout from './Layout.vue'
+import './style.css'
+import 'katex/dist/katex.min.css'
+import '@fontsource/noto-serif-sc/400.css'
+import '@fontsource/noto-serif-sc/600.css'
+import '@fontsource/noto-sans-sc/400.css'
+import '@fontsource/noto-sans-sc/500.css'
+import '@fontsource/jetbrains-mono/400.css'
+export default { Layout } satisfies Theme

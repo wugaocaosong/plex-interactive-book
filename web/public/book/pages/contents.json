@@ -1,0 +1,13 @@
+{
+  "id": "contents",
+  "title": "星域目录",
+  "kind": "contents",
+  "group": "卷首",
+  "route": "/read/contents",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"b0\">星域目录</h1>\n<p data-block=\"b1\">选择一颗行星，开始今天的探索。</p>\n<p data-block=\"b2\">你也可以打开文字目录，按章节顺序阅读全书。</p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null
+}

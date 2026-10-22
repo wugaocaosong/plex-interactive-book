@@ -1,0 +1,25 @@
+{
+  "id": "chapter_graph/index",
+  "title": "图",
+  "kind": "chapter",
+  "group": "第 9 章   图",
+  "route": "/read/chapter_graph/index",
+  "sourcePath": "chapter_graph/index.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">图</h1>\n<figure data-block=\"b1\"><img alt=\"图\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_graph.jpg\"/><figcaption>图</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"b2\">\n<p class=\"admonition-title\">Abstract</p>\n<p>在生命旅途中，我们就像是一个个节点，被无数看不见的边相连。</p>\n<p>每一次的相识与相离，都在这张巨大的网络图中留下独特的印记。</p>\n</div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "b2d93327e6610df3629a6d185f43bb44d1f14fe1981884a8bbacce4dbf8af8db",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  }
+}

@@ -1,5 +1,7 @@
 node_modules/
 dist/
+!content/h5p/binary-search/**/dist/
+!content/h5p/binary-search/**/dist/**
 .vite/
 coverage/
 .env
@@ -12,3 +14,12 @@ Thumbs.db
 .vscode/
 __pycache__/
 .venv/
+web/.vitepress/cache/
+web/public/vendor/
+web/public/h5p/
+web/public/images/
+web/public/licenses/
+content/h5p/libraries/
+test-results/
+playwright-report/
+output/

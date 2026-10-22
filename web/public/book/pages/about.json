@@ -1,0 +1,13 @@
+{
+  "id": "about",
+  "title": "作者与编者",
+  "kind": "editorial",
+  "group": "卷末",
+  "route": "/read/about",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"b0\">作者与编者</h1>\n<h2 data-block=\"b1\">原作作者</h2>\n<p data-block=\"b2\"><strong>krahets 及 Hello Algo 贡献者</strong></p>\n<p data-block=\"b3\">本书算法正文来自开源项目《Hello 算法》。原作及代码贡献者的署名保留在来源记录和源文件中。</p>\n<p data-block=\"b4\"><a href=\"https://github.com/krahets\">访问原作者主页</a></p>\n<h2 data-block=\"b5\">数字教材编者</h2>\n<p data-block=\"b6\">PLEX 数字教材制作团队。</p>\n<p data-block=\"b7\">姓名、机构与个人简介：待填写。</p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null
+}

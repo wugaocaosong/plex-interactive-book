@@ -1,0 +1,190 @@
+{
+  "id": "chapter_greedy/max_capacity_problem",
+  "title": "15.3   最大容量问题",
+  "kind": "chapter",
+  "group": "第 15 章   贪心",
+  "route": "/read/chapter_greedy/max_capacity_problem",
+  "sourcePath": "chapter_greedy/max_capacity_problem.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">最大容量问题</h1>\n<div class=\"admonition question\" data-block=\"b1\">\n<p class=\"admonition-title\">Question</p>\n<p>输入一个数组 <span class=\"arithmatex\">\\(ht\\)</span> ，其中的每个元素代表一个垂直隔板的高度。数组中的任意两个隔板，以及它们之间的空间可以组成一个容器。</p>\n<p>容器的容量等于高度和宽度的乘积（面积），其中高度由较短的隔板决定，宽度是两个隔板的数组索引之差。</p>\n<p>请在数组中选择两个隔板，使得组成的容器的容量最大，返回最大容量。示例如下图所示。</p>\n</div>\n<figure data-block=\"b2\"><img alt=\"最大容量问题的示例数据\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_example.png\"/><figcaption>最大容量问题的示例数据</figcaption></figure>\n<p data-block=\"b3\">容器由任意两个隔板围成，<strong>因此本题的状态为两个隔板的索引，记为 <span class=\"arithmatex\">\\([i, j]\\)</span></strong> 。</p>\n<p data-block=\"b4\">根据题意，容量等于高度乘以宽度，其中高度由短板决定，宽度是两隔板的数组索引之差。设容量为 <span class=\"arithmatex\">\\(cap[i, j]\\)</span> ，则可得计算公式：</p>\n<div class=\"arithmatex\" data-block=\"b5\">\\[\ncap[i, j] = \\min(ht[i], ht[j]) \\times (j - i)\n\\]</div>\n<p data-block=\"b6\">设数组长度为 <span class=\"arithmatex\">\\(n\\)</span> ，两个隔板的组合数量（状态总数）为 <span class=\"arithmatex\">\\(C_n^2 = \\frac{n(n - 1)}{2}\\)</span> 个。最直接地，<strong>我们可以穷举所有状态</strong>，从而求得最大容量，时间复杂度为 <span class=\"arithmatex\">\\(O(n^2)\\)</span> 。</p>\n<h3 data-block=\"b7\" id=\"_2\">贪心策略确定</h3>\n<p data-block=\"b8\">这道题还有更高效率的解法。如下图所示，现选取一个状态 <span class=\"arithmatex\">\\([i, j]\\)</span> ，其满足索引 <span class=\"arithmatex\">\\(i &lt; j\\)</span> 且高度 <span class=\"arithmatex\">\\(ht[i] &lt; ht[j]\\)</span> ，即 <span class=\"arithmatex\">\\(i\\)</span> 为短板、<span class=\"arithmatex\">\\(j\\)</span> 为长板。</p>\n<figure data-block=\"b9\"><img alt=\"初始状态\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_initial_state.png\"/><figcaption>初始状态</figcaption></figure>\n<p data-block=\"b10\">如下图所示，<strong>若此时将长板 <span class=\"arithmatex\">\\(j\\)</span> 向短板 <span class=\"arithmatex\">\\(i\\)</span> 靠近，则容量一定变小</strong>。</p>\n<p data-block=\"b11\">这是因为在移动长板 <span class=\"arithmatex\">\\(j\\)</span> 后，宽度 <span class=\"arithmatex\">\\(j-i\\)</span> 肯定变小；而高度由短板决定，因此高度只可能不变（ <span class=\"arithmatex\">\\(i\\)</span> 仍为短板）或变小（移动后的 <span class=\"arithmatex\">\\(j\\)</span> 成为短板）。</p>\n<figure data-block=\"b12\"><img alt=\"向内移动长板后的状态\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_moving_long_board.png\"/><figcaption>向内移动长板后的状态</figcaption></figure>\n<p data-block=\"b13\">反向思考，<strong>我们只有向内收缩短板 <span class=\"arithmatex\">\\(i\\)</span> ，才有可能使容量变大</strong>。因为虽然宽度一定变小，<strong>但高度可能会变大</strong>（移动后的短板 <span class=\"arithmatex\">\\(i\\)</span> 可能会变长）。例如在下图中，移动短板后面积变大。</p>\n<figure data-block=\"b14\"><img alt=\"向内移动短板后的状态\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_moving_short_board.png\"/><figcaption>向内移动短板后的状态</figcaption></figure>\n<p data-block=\"b15\">由此便可推出本题的贪心策略：初始化两指针，使其分列容器两端，每轮向内收缩短板对应的指针，直至两指针相遇。</p>\n<p data-block=\"b16\">下图展示了贪心策略的执行过程。</p>\n<ol data-block=\"b17\">\n<li>初始状态下，指针 <span class=\"arithmatex\">\\(i\\)</span> 和 <span class=\"arithmatex\">\\(j\\)</span> 分列数组两端。</li>\n<li>计算当前状态的容量 <span class=\"arithmatex\">\\(cap[i, j]\\)</span> ，并更新最大容量。</li>\n<li>比较板 <span class=\"arithmatex\">\\(i\\)</span> 和板 <span class=\"arithmatex\">\\(j\\)</span> 的高度，并将短板向内移动一格。</li>\n<li>循环执行第 <code>2.</code> 步和第 <code>3.</code> 步，直至 <span class=\"arithmatex\">\\(i\\)</span> 和 <span class=\"arithmatex\">\\(j\\)</span> 相遇时结束。</li>\n</ol>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"b18\"><img alt=\"最大容量问题的贪心过程\" data-action=\"image\" src=\"/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_greedy_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 9</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<h3 data-block=\"b19\" id=\"_3\">代码实现</h3>\n<p data-block=\"b20\">代码循环最多 <span class=\"arithmatex\">\\(n\\)</span> 轮，<strong>因此时间复杂度为 <span class=\"arithmatex\">\\(O(n)\\)</span></strong> 。</p>\n<p data-block=\"b21\">变量 <span class=\"arithmatex\">\\(i\\)</span>、<span class=\"arithmatex\">\\(j\\)</span>、<span class=\"arithmatex\">\\(res\\)</span> 使用常数大小的额外空间，<strong>因此空间复杂度为 <span class=\"arithmatex\">\\(O(1)\\)</span></strong> 。</p>\n<div class=\"code-example\" data-block=\"b22\" data-code=\"0\"><div class=\"code-caption\"><span>max_capacity · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def max_capacity(ht: list[int]) -&gt; int:\n    \"\"\"最大容量：贪心\"\"\"\n    # 初始化 i, j，使其分列数组两端\n    i, j = 0, len(ht) - 1\n    # 初始最大容量为 0\n    res = 0\n    # 循环贪心选择，直至两板相遇\n    while i &lt; j:\n        # 更新最大容量\n        cap = min(ht[i], ht[j]) * (j - i)\n        res = max(res, cap)\n        # 向内移动短板\n        if ht[i] &lt; ht[j]:\n            i += 1\n        else:\n            j -= 1\n    return res</code></pre></div>\n<h3 data-block=\"b23\" id=\"_4\">正确性证明</h3>\n<p data-block=\"b24\">之所以贪心比穷举更快，是因为每轮的贪心选择都会“跳过”一些状态。</p>\n<p data-block=\"b25\">比如在状态 <span class=\"arithmatex\">\\(cap[i, j]\\)</span> 下，<span class=\"arithmatex\">\\(i\\)</span> 为短板、<span class=\"arithmatex\">\\(j\\)</span> 为长板。若贪心地将短板 <span class=\"arithmatex\">\\(i\\)</span> 向内移动一格，会导致下图所示的状态被“跳过”。<strong>这意味着之后无法验证这些状态的容量大小</strong>。</p>\n<div class=\"arithmatex\" data-block=\"b26\">\\[\ncap[i, i+1], cap[i, i+2], \\dots, cap[i, j-2], cap[i, j-1]\n\\]</div>\n<figure data-block=\"b27\"><img alt=\"移动短板导致被跳过的状态\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_skipped_states.png\"/><figcaption>移动短板导致被跳过的状态</figcaption></figure>\n<p data-block=\"b28\">观察发现，<strong>这些被跳过的状态实际上就是将长板 <span class=\"arithmatex\">\\(j\\)</span> 向内移动的所有状态</strong>。前面我们已经证明内移长板一定会导致容量变小。也就是说，被跳过的状态都不可能是最优解，<strong>跳过它们不会导致错过最优解</strong>。</p>\n<p data-block=\"b29\">以上分析说明，移动短板的操作是“安全”的，贪心策略是有效的。</p>",
+  "codeExamples": [
+    {
+      "id": "chapter_greedy/max_capacity_problem-code-0",
+      "file": "max_capacity",
+      "className": "",
+      "functionName": "max_capacity",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def max_capacity(ht: list[int]) -> int:\n    \"\"\"最大容量：贪心\"\"\"\n    # 初始化 i, j，使其分列数组两端\n    i, j = 0, len(ht) - 1\n    # 初始最大容量为 0\n    res = 0\n    # 循环贪心选择，直至两板相遇\n    while i < j:\n        # 更新最大容量\n        cap = min(ht[i], ht[j]) * (j - i)\n        res = max(res, cap)\n        # 向内移动短板\n        if ht[i] < ht[j]:\n            i += 1\n        else:\n            j -= 1\n    return res",
+          "fullSource": "\"\"\"\nFile: max_capacity.py\nCreated Time: 2023-07-21\nAuthor: krahets (krahets@163.com)\n\"\"\"\n\n\ndef max_capacity(ht: list[int]) -> int:\n    \"\"\"最大容量：贪心\"\"\"\n    # 初始化 i, j，使其分列数组两端\n    i, j = 0, len(ht) - 1\n    # 初始最大容量为 0\n    res = 0\n    # 循环贪心选择，直至两板相遇\n    while i < j:\n        # 更新最大容量\n        cap = min(ht[i], ht[j]) * (j - i)\n        res = max(res, cap)\n        # 向内移动短板\n        if ht[i] < ht[j]:\n            i += 1\n        else:\n            j -= 1\n    return res\n\n\n\"\"\"Driver Code\"\"\"\nif __name__ == \"__main__\":\n    ht = [3, 8, 5, 2, 7, 7, 3, 4]\n\n    # 贪心算法\n    res = max_capacity(ht)\n    print(f\"最大容量为 {res}\")\n",
+          "sourcePath": "codes/python/chapter_greedy/max_capacity.py",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/python/chapter_greedy/max_capacity.py",
+          "extraction": "symbol",
+          "runnable": true
+        },
+        {
+          "language": "java",
+          "snippet": "public class max_capacity {\n    /* 最大容量：贪心 */\n    static int maxCapacity(int[] ht) {\n        // 初始化 i, j，使其分列数组两端\n        int i = 0, j = ht.length - 1;\n        // 初始最大容量为 0\n        int res = 0;\n        // 循环贪心选择，直至两板相遇\n        while (i < j) {\n            // 更新最大容量\n            int cap = Math.min(ht[i], ht[j]) * (j - i);\n            res = Math.max(res, cap);\n            // 向内移动短板\n            if (ht[i] < ht[j]) {\n                i++;\n            } else {\n                j--;\n            }\n        }\n        return res;\n    }\n\n    public static void main(String[] args) {\n        int[] ht = { 3, 8, 5, 2, 7, 7, 3, 4 };\n\n        // 贪心算法\n        int res = maxCapacity(ht);\n        System.out.println(\"最大容量为 \" + res);\n    }\n}",
+          "fullSource": "/**\n * File: max_capacity.java\n * Created Time: 2023-07-21\n * Author: krahets (krahets@163.com)\n */\n\npackage chapter_greedy;\n\npublic class max_capacity {\n    /* 最大容量：贪心 */\n    static int maxCapacity(int[] ht) {\n        // 初始化 i, j，使其分列数组两端\n        int i = 0, j = ht.length - 1;\n        // 初始最大容量为 0\n        int res = 0;\n        // 循环贪心选择，直至两板相遇\n        while (i < j) {\n            // 更新最大容量\n            int cap = Math.min(ht[i], ht[j]) * (j - i);\n            res = Math.max(res, cap);\n            // 向内移动短板\n            if (ht[i] < ht[j]) {\n                i++;\n            } else {\n                j--;\n            }\n        }\n        return res;\n    }\n\n    public static void main(String[] args) {\n        int[] ht = { 3, 8, 5, 2, 7, 7, 3, 4 };\n\n        // 贪心算法\n        int res = maxCapacity(ht);\n        System.out.println(\"最大容量为 \" + res);\n    }\n}\n",
+          "sourcePath": "codes/java/chapter_greedy/max_capacity.java",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/java/chapter_greedy/max_capacity.java",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "cpp",
+          "snippet": "int maxCapacity(vector<int> &ht) {\n    // 初始化 i, j，使其分列数组两端\n    int i = 0, j = ht.size() - 1;\n    // 初始最大容量为 0\n    int res = 0;\n    // 循环贪心选择，直至两板相遇\n    while (i < j) {\n        // 更新最大容量\n        int cap = min(ht[i], ht[j]) * (j - i);\n        res = max(res, cap);\n        // 向内移动短板\n        if (ht[i] < ht[j]) {\n            i++;\n        } else {\n            j--;\n        }\n    }\n    return res;\n}",
+          "fullSource": "/**\n * File: max_capacity.cpp\n * Created Time: 2023-07-21\n * Author: krahets (krahets@163.com)\n */\n\n#include \"../utils/common.hpp\"\n\n/* 最大容量：贪心 */\nint maxCapacity(vector<int> &ht) {\n    // 初始化 i, j，使其分列数组两端\n    int i = 0, j = ht.size() - 1;\n    // 初始最大容量为 0\n    int res = 0;\n    // 循环贪心选择，直至两板相遇\n    while (i < j) {\n        // 更新最大容量\n        int cap = min(ht[i], ht[j]) * (j - i);\n        res = max(res, cap);\n        // 向内移动短板\n        if (ht[i] < ht[j]) {\n            i++;\n        } else {\n            j--;\n        }\n    }\n    return res;\n}\n\n/* Driver Code */\nint main() {\n    vector<int> ht = {3, 8, 5, 2, 7, 7, 3, 4};\n\n    // 贪心算法\n    int res = maxCapacity(ht);\n    cout << \"最大容量为 \" << res << endl;\n\n    return 0;\n}\n",
+          "sourcePath": "codes/cpp/chapter_greedy/max_capacity.cpp",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/cpp/chapter_greedy/max_capacity.cpp",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "c",
+          "snippet": "int maxCapacity(int ht[], int htLength) {\n    // 初始化 i, j，使其分列数组两端\n    int i = 0;\n    int j = htLength - 1;\n    // 初始最大容量为 0\n    int res = 0;\n    // 循环贪心选择，直至两板相遇\n    while (i < j) {\n        // 更新最大容量\n        int capacity = myMin(ht[i], ht[j]) * (j - i);\n        res = myMax(res, capacity);\n        // 向内移动短板\n        if (ht[i] < ht[j]) {\n            i++;\n        } else {\n            j--;\n        }\n    }\n    return res;\n}",
+          "fullSource": "/**\n * File: max_capacity.c\n * Created Time: 2023-09-15\n * Author: xianii (xianyi.xia@outlook.com)\n */\n\n#include \"../utils/common.h\"\n\n/* 求最小值 */\nint myMin(int a, int b) {\n    return a < b ? a : b;\n}\n/* 求最大值 */\nint myMax(int a, int b) {\n    return a > b ? a : b;\n}\n\n/* 最大容量：贪心 */\nint maxCapacity(int ht[], int htLength) {\n    // 初始化 i, j，使其分列数组两端\n    int i = 0;\n    int j = htLength - 1;\n    // 初始最大容量为 0\n    int res = 0;\n    // 循环贪心选择，直至两板相遇\n    while (i < j) {\n        // 更新最大容量\n        int capacity = myMin(ht[i], ht[j]) * (j - i);\n        res = myMax(res, capacity);\n        // 向内移动短板\n        if (ht[i] < ht[j]) {\n            i++;\n        } else {\n            j--;\n        }\n    }\n    return res;\n}\n\n/* Driver Code */\nint main(void) {\n    int ht[] = {3, 8, 5, 2, 7, 7, 3, 4};\n\n    // 贪心算法\n    int res = maxCapacity(ht, sizeof(ht) / sizeof(int));\n    printf(\"最大容量为 %d\\n\", res);\n\n    return 0;\n}\n",
+          "sourcePath": "codes/c/chapter_greedy/max_capacity.c",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/c/chapter_greedy/max_capacity.c",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "csharp",
+          "snippet": "public class max_capacity {\n    /* 最大容量：贪心 */\n    int MaxCapacity(int[] ht) {\n        // 初始化 i, j，使其分列数组两端\n        int i = 0, j = ht.Length - 1;\n        // 初始最大容量为 0\n        int res = 0;\n        // 循环贪心选择，直至两板相遇\n        while (i < j) {\n            // 更新最大容量\n            int cap = Math.Min(ht[i], ht[j]) * (j - i);\n            res = Math.Max(res, cap);\n            // 向内移动短板\n            if (ht[i] < ht[j]) {\n                i++;\n            } else {\n                j--;\n            }\n        }\n        return res;\n    }\n\n    [Test]\n    public void Test() {\n        int[] ht = [3, 8, 5, 2, 7, 7, 3, 4];\n\n        // 贪心算法\n        int res = MaxCapacity(ht);\n        Console.WriteLine(\"最大容量为 \" + res);\n    }\n}",
+          "fullSource": "﻿/**\n* File: max_capacity.cs\n* Created Time: 2023-07-21\n* Author: hpstory (hpstory1024@163.com)\n*/\n\nnamespace hello_algo.chapter_greedy;\n\npublic class max_capacity {\n    /* 最大容量：贪心 */\n    int MaxCapacity(int[] ht) {\n        // 初始化 i, j，使其分列数组两端\n        int i = 0, j = ht.Length - 1;\n        // 初始最大容量为 0\n        int res = 0;\n        // 循环贪心选择，直至两板相遇\n        while (i < j) {\n            // 更新最大容量\n            int cap = Math.Min(ht[i], ht[j]) * (j - i);\n            res = Math.Max(res, cap);\n            // 向内移动短板\n            if (ht[i] < ht[j]) {\n                i++;\n            } else {\n                j--;\n            }\n        }\n        return res;\n    }\n\n    [Test]\n    public void Test() {\n        int[] ht = [3, 8, 5, 2, 7, 7, 3, 4];\n\n        // 贪心算法\n        int res = MaxCapacity(ht);\n        Console.WriteLine(\"最大容量为 \" + res);\n    }\n}",
+          "sourcePath": "codes/csharp/chapter_greedy/max_capacity.cs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/csharp/chapter_greedy/max_capacity.cs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "go",
+          "snippet": "func maxCapacity(ht []int) int {\n\t// 初始化 i, j，使其分列数组两端\n\ti, j := 0, len(ht)-1\n\t// 初始最大容量为 0\n\tres := 0\n\t// 循环贪心选择，直至两板相遇\n\tfor i < j {\n\t\t// 更新最大容量\n\t\tcapacity := int(math.Min(float64(ht[i]), float64(ht[j]))) * (j - i)\n\t\tres = int(math.Max(float64(res), float64(capacity)))\n\t\t// 向内移动短板\n\t\tif ht[i] < ht[j] {\n\t\t\ti++\n\t\t} else {\n\t\t\tj--\n\t\t}\n\t}\n\treturn res\n}",
+          "fullSource": "// File: max_capacity.go\n// Created Time: 2023-07-23\n// Author: Reanon (793584285@qq.com)\n\npackage chapter_greedy\n\nimport \"math\"\n\n/* 最大容量：贪心 */\nfunc maxCapacity(ht []int) int {\n\t// 初始化 i, j，使其分列数组两端\n\ti, j := 0, len(ht)-1\n\t// 初始最大容量为 0\n\tres := 0\n\t// 循环贪心选择，直至两板相遇\n\tfor i < j {\n\t\t// 更新最大容量\n\t\tcapacity := int(math.Min(float64(ht[i]), float64(ht[j]))) * (j - i)\n\t\tres = int(math.Max(float64(res), float64(capacity)))\n\t\t// 向内移动短板\n\t\tif ht[i] < ht[j] {\n\t\t\ti++\n\t\t} else {\n\t\t\tj--\n\t\t}\n\t}\n\treturn res\n}\n",
+          "sourcePath": "codes/go/chapter_greedy/max_capacity.go",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/go/chapter_greedy/max_capacity.go",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "javascript",
+          "snippet": "function maxCapacity(ht) {\n    // 初始化 i, j，使其分列数组两端\n    let i = 0,\n        j = ht.length - 1;\n    // 初始最大容量为 0\n    let res = 0;\n    // 循环贪心选择，直至两板相遇\n    while (i < j) {\n        // 更新最大容量\n        const cap = Math.min(ht[i], ht[j]) * (j - i);\n        res = Math.max(res, cap);\n        // 向内移动短板\n        if (ht[i] < ht[j]) {\n            i += 1;\n        } else {\n            j -= 1;\n        }\n    }\n    return res;\n}",
+          "fullSource": "/**\n * File: max_capacity.js\n * Created Time: 2023-09-02\n * Author: Justin (xiefahit@gmail.com)\n */\n\n/* 最大容量：贪心 */\nfunction maxCapacity(ht) {\n    // 初始化 i, j，使其分列数组两端\n    let i = 0,\n        j = ht.length - 1;\n    // 初始最大容量为 0\n    let res = 0;\n    // 循环贪心选择，直至两板相遇\n    while (i < j) {\n        // 更新最大容量\n        const cap = Math.min(ht[i], ht[j]) * (j - i);\n        res = Math.max(res, cap);\n        // 向内移动短板\n        if (ht[i] < ht[j]) {\n            i += 1;\n        } else {\n            j -= 1;\n        }\n    }\n    return res;\n}\n\n/* Driver Code */\nconst ht = [3, 8, 5, 2, 7, 7, 3, 4];\n\n// 贪心算法\nconst res = maxCapacity(ht);\nconsole.log(`最大容量为 ${res}`);\n",
+          "sourcePath": "codes/javascript/chapter_greedy/max_capacity.js",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/javascript/chapter_greedy/max_capacity.js",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "typescript",
+          "snippet": "function maxCapacity(ht: number[]): number {\n    // 初始化 i, j，使其分列数组两端\n    let i = 0,\n        j = ht.length - 1;\n    // 初始最大容量为 0\n    let res = 0;\n    // 循环贪心选择，直至两板相遇\n    while (i < j) {\n        // 更新最大容量\n        const cap: number = Math.min(ht[i], ht[j]) * (j - i);\n        res = Math.max(res, cap);\n        // 向内移动短板\n        if (ht[i] < ht[j]) {\n            i += 1;\n        } else {\n            j -= 1;\n        }\n    }\n    return res;\n}",
+          "fullSource": "/**\n * File: max_capacity.ts\n * Created Time: 2023-09-02\n * Author: Justin (xiefahit@gmail.com)\n */\n\n/* 最大容量：贪心 */\nfunction maxCapacity(ht: number[]): number {\n    // 初始化 i, j，使其分列数组两端\n    let i = 0,\n        j = ht.length - 1;\n    // 初始最大容量为 0\n    let res = 0;\n    // 循环贪心选择，直至两板相遇\n    while (i < j) {\n        // 更新最大容量\n        const cap: number = Math.min(ht[i], ht[j]) * (j - i);\n        res = Math.max(res, cap);\n        // 向内移动短板\n        if (ht[i] < ht[j]) {\n            i += 1;\n        } else {\n            j -= 1;\n        }\n    }\n    return res;\n}\n\n/* Driver Code */\nconst ht: number[] = [3, 8, 5, 2, 7, 7, 3, 4];\n\n// 贪心算法\nconst res: number = maxCapacity(ht);\nconsole.log(`最大容量为 ${res}`);\n\nexport {};\n",
+          "sourcePath": "codes/typescript/chapter_greedy/max_capacity.ts",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/typescript/chapter_greedy/max_capacity.ts",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "swift",
+          "snippet": "func maxCapacity(ht: [Int]) -> Int {\n    // 初始化 i, j，使其分列数组两端\n    var i = ht.startIndex, j = ht.endIndex - 1\n    // 初始最大容量为 0\n    var res = 0\n    // 循环贪心选择，直至两板相遇\n    while i < j {\n        // 更新最大容量\n        let cap = min(ht[i], ht[j]) * (j - i)\n        res = max(res, cap)\n        // 向内移动短板\n        if ht[i] < ht[j] {\n            i += 1\n        } else {\n            j -= 1\n        }\n    }\n    return res\n}",
+          "fullSource": "/**\n * File: max_capacity.swift\n * Created Time: 2023-09-03\n * Author: nuomi1 (nuomi1@qq.com)\n */\n\n/* 最大容量：贪心 */\nfunc maxCapacity(ht: [Int]) -> Int {\n    // 初始化 i, j，使其分列数组两端\n    var i = ht.startIndex, j = ht.endIndex - 1\n    // 初始最大容量为 0\n    var res = 0\n    // 循环贪心选择，直至两板相遇\n    while i < j {\n        // 更新最大容量\n        let cap = min(ht[i], ht[j]) * (j - i)\n        res = max(res, cap)\n        // 向内移动短板\n        if ht[i] < ht[j] {\n            i += 1\n        } else {\n            j -= 1\n        }\n    }\n    return res\n}\n\n@main\nenum MaxCapacity {\n    /* Driver Code */\n    static func main() {\n        let ht = [3, 8, 5, 2, 7, 7, 3, 4]\n\n        // 贪心算法\n        let res = maxCapacity(ht: ht)\n        print(\"最大容量为 \\(res)\")\n    }\n}\n",
+          "sourcePath": "codes/swift/chapter_greedy/max_capacity.swift",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/swift/chapter_greedy/max_capacity.swift",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "rust",
+          "snippet": "fn max_capacity(ht: &[i32]) -> i32 {\n    // 初始化 i, j，使其分列数组两端\n    let mut i = 0;\n    let mut j = ht.len() - 1;\n    // 初始最大容量为 0\n    let mut res = 0;\n    // 循环贪心选择，直至两板相遇\n    while i < j {\n        // 更新最大容量\n        let cap = std::cmp::min(ht[i], ht[j]) * (j - i) as i32;\n        res = std::cmp::max(res, cap);\n        // 向内移动短板\n        if ht[i] < ht[j] {\n            i += 1;\n        } else {\n            j -= 1;\n        }\n    }\n    res\n}",
+          "fullSource": "/*\n * File: coin_change_greedy.rs\n * Created Time: 2023-07-22\n * Author: night-cruise (2586447362@qq.com)\n */\n\n/* 最大容量：贪心 */\nfn max_capacity(ht: &[i32]) -> i32 {\n    // 初始化 i, j，使其分列数组两端\n    let mut i = 0;\n    let mut j = ht.len() - 1;\n    // 初始最大容量为 0\n    let mut res = 0;\n    // 循环贪心选择，直至两板相遇\n    while i < j {\n        // 更新最大容量\n        let cap = std::cmp::min(ht[i], ht[j]) * (j - i) as i32;\n        res = std::cmp::max(res, cap);\n        // 向内移动短板\n        if ht[i] < ht[j] {\n            i += 1;\n        } else {\n            j -= 1;\n        }\n    }\n    res\n}\n\n/* Driver Code */\nfn main() {\n    let ht = [3, 8, 5, 2, 7, 7, 3, 4];\n\n    // 贪心算法\n    let res = max_capacity(&ht);\n    println!(\"最大容量为 {}\", res);\n}\n",
+          "sourcePath": "codes/rust/chapter_greedy/max_capacity.rs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/rust/chapter_greedy/max_capacity.rs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "kotlin",
+          "snippet": "fun maxCapacity(ht: IntArray): Int {\n    // 初始化 i, j，使其分列数组两端\n    var i = 0\n    var j = ht.size - 1\n    // 初始最大容量为 0\n    var res = 0\n    // 循环贪心选择，直至两板相遇\n    while (i < j) {\n        // 更新最大容量\n        val cap = min(ht[i], ht[j]) * (j - i)\n        res = max(res, cap)\n        // 向内移动短板\n        if (ht[i] < ht[j]) {\n            i++\n        } else {\n            j--\n        }\n    }\n    return res\n}",
+          "fullSource": "/**\n * File: max_capacity.kt\n * Created Time: 2024-01-25\n * Author: curtishd (1023632660@qq.com)\n */\n\npackage chapter_greedy\n\nimport kotlin.math.max\nimport kotlin.math.min\n\n/* 最大容量：贪心 */\nfun maxCapacity(ht: IntArray): Int {\n    // 初始化 i, j，使其分列数组两端\n    var i = 0\n    var j = ht.size - 1\n    // 初始最大容量为 0\n    var res = 0\n    // 循环贪心选择，直至两板相遇\n    while (i < j) {\n        // 更新最大容量\n        val cap = min(ht[i], ht[j]) * (j - i)\n        res = max(res, cap)\n        // 向内移动短板\n        if (ht[i] < ht[j]) {\n            i++\n        } else {\n            j--\n        }\n    }\n    return res\n}\n\n/* Driver Code */\nfun main() {\n    val ht = intArrayOf(3, 8, 5, 2, 7, 7, 3, 4)\n\n    // 贪心算法\n    val res = maxCapacity(ht)\n    println(\"最大容量为 $res\")\n}",
+          "sourcePath": "codes/kotlin/chapter_greedy/max_capacity.kt",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/kotlin/chapter_greedy/max_capacity.kt",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "dart",
+          "snippet": "int maxCapacity(List<int> ht) {\n  // 初始化 i, j，使其分列数组两端\n  int i = 0, j = ht.length - 1;\n  // 初始最大容量为 0\n  int res = 0;\n  // 循环贪心选择，直至两板相遇\n  while (i < j) {\n    // 更新最大容量\n    int cap = min(ht[i], ht[j]) * (j - i);\n    res = max(res, cap);\n    // 向内移动短板\n    if (ht[i] < ht[j]) {\n      i++;\n    } else {\n      j--;\n    }\n  }\n  return res;\n}",
+          "fullSource": "/**\n * File: max_capacity.dart\n * Created Time: 2023-08-11\n * Author: liuyuxin (gvenusleo@gmail.com)\n */\n\nimport 'dart:math';\n\n/* 最大容量：贪心 */\nint maxCapacity(List<int> ht) {\n  // 初始化 i, j，使其分列数组两端\n  int i = 0, j = ht.length - 1;\n  // 初始最大容量为 0\n  int res = 0;\n  // 循环贪心选择，直至两板相遇\n  while (i < j) {\n    // 更新最大容量\n    int cap = min(ht[i], ht[j]) * (j - i);\n    res = max(res, cap);\n    // 向内移动短板\n    if (ht[i] < ht[j]) {\n      i++;\n    } else {\n      j--;\n    }\n  }\n  return res;\n}\n\n/* Driver Code */\nvoid main() {\n  List<int> ht = [3, 8, 5, 2, 7, 7, 3, 4];\n\n  // 贪心算法\n  int res = maxCapacity(ht);\n  print(\"最大容量为 $res\");\n}\n",
+          "sourcePath": "codes/dart/chapter_greedy/max_capacity.dart",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/dart/chapter_greedy/max_capacity.dart",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "ruby",
+          "snippet": "def max_capacity(ht)\n  # 初始化 i, j，使其分列数组两端\n  i, j = 0, ht.length - 1\n  # 初始最大容量为 0\n  res = 0\n\n  # 循环贪心选择，直至两板相遇\n  while i < j\n    # 更新最大容量\n    cap = [ht[i], ht[j]].min * (j - i)\n    res = [res, cap].max\n    # 向内移动短板\n    if ht[i] < ht[j]\n      i += 1\n    else\n      j -= 1\n    end\n  end\n\n  res\nend",
+          "fullSource": "=begin\nFile: max_capacity.rb\nCreated Time: 2024-05-07\nAuthor: Xuan Khoa Tu Nguyen (ngxktuzkai2000@gmail.com)\n=end\n\n### 最大容量：贪心 ###\ndef max_capacity(ht)\n  # 初始化 i, j，使其分列数组两端\n  i, j = 0, ht.length - 1\n  # 初始最大容量为 0\n  res = 0\n\n  # 循环贪心选择，直至两板相遇\n  while i < j\n    # 更新最大容量\n    cap = [ht[i], ht[j]].min * (j - i)\n    res = [res, cap].max\n    # 向内移动短板\n    if ht[i] < ht[j]\n      i += 1\n    else\n      j -= 1\n    end\n  end\n\n  res\nend\n\n### Driver Code ###\nif __FILE__ == $0\n  ht = [3, 8, 5, 2, 7, 7, 3, 4]\n\n  # 贪心算法\n  res = max_capacity(ht)\n  puts \"最大容量为 #{res}\"\nend\n",
+          "sourcePath": "codes/ruby/chapter_greedy/max_capacity.rb",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/ruby/chapter_greedy/max_capacity.rb",
+          "extraction": "symbol",
+          "runnable": false
+        }
+      ]
+    }
+  ],
+  "animations": [
+    [
+      {
+        "src": "/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_greedy_step1.png",
+        "alt": "最大容量问题的贪心过程"
+      },
+      {
+        "src": "/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_greedy_step2.png",
+        "alt": "max_capacity_greedy_step2"
+      },
+      {
+        "src": "/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_greedy_step3.png",
+        "alt": "max_capacity_greedy_step3"
+      },
+      {
+        "src": "/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_greedy_step4.png",
+        "alt": "max_capacity_greedy_step4"
+      },
+      {
+        "src": "/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_greedy_step5.png",
+        "alt": "max_capacity_greedy_step5"
+      },
+      {
+        "src": "/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_greedy_step6.png",
+        "alt": "max_capacity_greedy_step6"
+      },
+      {
+        "src": "/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_greedy_step7.png",
+        "alt": "max_capacity_greedy_step7"
+      },
+      {
+        "src": "/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_greedy_step8.png",
+        "alt": "max_capacity_greedy_step8"
+      },
+      {
+        "src": "/upstream/chapter_greedy/max_capacity_problem.assets/max_capacity_greedy_step9.png",
+        "alt": "max_capacity_greedy_step9"
+      }
+    ]
+  ],
+  "conversion": {
+    "sourceSha256": "54825f9c6b3a532640f2627030bace7facb9bad9a3d024b7737c853cc7b1db83",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 1,
+    "animationGroups": 1
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "id": "chapter_divide_and_conquer/exercises",
+  "title": "12.6   练习",
+  "kind": "chapter",
+  "group": "第 12 章   分治",
+  "route": "/read/chapter_divide_and_conquer/exercises",
+  "sourcePath": "chapter_divide_and_conquer/exercises.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">练习</h1>\n<h2 data-block=\"b1\" id=\"_2\">知识巩固</h2>\n<h3 data-block=\"b2\" id=\"_3\">哪些任务适合分治</h3>\n<p data-block=\"b3\">一位同学想用“先分成两半，分别解决，再合并结果”的方法完成以下任务。\n请分别判断它们是“适合分治”“可以分治，但不会减少总工作量”还是“两半不能独立解决”，并说明理由。</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"b4\">\n<li>将一个无序数组排序；</li>\n<li>求一个数组中的最大值；</li>\n<li>按顺序执行一串 <code>push(x)</code>、<code>pop()</code> 栈操作，并输出每次 <code>pop()</code> 得到的元素。</li>\n</ol>\n<details class=\"success\" data-block=\"b5\">\n<summary>参考答案</summary>\n<ol>\n<li>适合：对半分解、两半独立排序、<span class=\"arithmatex\">\\(O(n)\\)</span> 合并——这正是归并排序。</li>\n<li>可以分治，但不会减少总工作量：左右两半仍需合计检查全部 <span class=\"arithmatex\">\\(n\\)</span> 个元素，\n    和直接扫描一样都是 <span class=\"arithmatex\">\\(O(n)\\)</span> 时间。</li>\n<li>两半不能独立解决：后半段开始时的栈内容取决于前半段执行结果，\n    两半不能在互不知道结果时独立完成。</li>\n</ol>\n</details>\n<h3 data-block=\"b6\" id=\"_4\">快速幂是怎样减少计算的</h3>\n<p data-block=\"b7\">下面的递归函数用分治计算 <span class=\"arithmatex\">\\(x^n\\)</span>：</p>\n<div class=\"code-example\" data-block=\"b8\" data-code=\"0\"><div class=\"code-caption\"><span>fast_power · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def fast_pow(x: int, n: int) -&gt; int:\n    \"\"\"快速幂\"\"\"\n    if n == 0:\n        return 1\n    half = fast_pow(x, n // 2)\n    if n % 2 == 0:\n        return half * half\n    return half * half * x</code></pre></div>\n<p data-block=\"b9\">令 <code>x = 3</code>、<code>n = 5</code>，用这个函数计算：</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"b10\">\n<li>递归调用时，参数 <code>n</code> 依次变成哪些值？</li>\n<li>从最深层开始返回时，各层依次返回什么值？</li>\n<li>为什么要先把递归结果保存为 <code>half</code>，而不是在乘法两边各调用一次相同的子问题？</li>\n</ol>\n<details class=\"success\" data-block=\"b11\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>参数依次为 <code>5 → 2 → 1 → 0</code>，每次都把指数减半，直到到达终止条件。</p>\n</li>\n<li>\n<p><code>n = 0</code> 时返回 1；<code>n = 1</code> 时返回 <span class=\"arithmatex\">\\(1×1×3=3\\)</span>；\n    <code>n = 2</code> 时返回 <span class=\"arithmatex\">\\(3×3=9\\)</span>；<code>n = 5</code> 时返回 <span class=\"arithmatex\">\\(9×9×3=243\\)</span>。</p>\n</li>\n<li>\n<p>如果在乘法两边各调用一次相同的子问题，两次递归会进行完全相同的计算。\n    先把结果保存为 <code>half</code>，每层就只递归一次，递归深度约为 <span class=\"arithmatex\">\\(\\log n\\)</span>；\n    调用两次会造成大量重复计算。</p>\n</li>\n</ol>\n</details>\n<h3 data-block=\"b12\" id=\"_5\">从遍历序列拆分左右子树</h3>\n<p data-block=\"b13\">一棵没有重复节点的二叉树，其前序遍历和中序遍历分别为：</p>\n<ul data-block=\"b14\">\n<li>前序遍历：<code>[A, B, D, E, C]</code></li>\n<li>中序遍历：<code>[D, B, E, A, C]</code></li>\n</ul>\n<p data-block=\"b15\">只完成根节点这一层的拆分，不必继续递归，也不必画出整棵树：</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"b16\">\n<li>根节点是什么？</li>\n<li>左、右子树在中序遍历中分别对应哪一段？</li>\n<li>左、右子树在前序遍历中分别对应哪一段？根节点有哪些直接孩子？</li>\n</ol>\n<details class=\"success\" data-block=\"b17\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>前序遍历的第一个节点是根节点，因此根节点为 <code>A</code>。</p>\n</li>\n<li>\n<p><code>A</code> 把中序遍历分成两部分：左子树为 <code>[D, B, E]</code>，右子树为 <code>[C]</code>。</p>\n</li>\n<li>\n<p>左子树有 3 个节点，因此根节点 <code>A</code> 后面的 3 个前序元素属于左子树，\n    即 <code>[B, D, E]</code>；剩余的 <code>[C]</code> 属于右子树。\n    所以根节点的左孩子是 <code>B</code>，右孩子是 <code>C</code>。</p>\n</li>\n</ol>\n</details>\n<h2 data-block=\"b18\" id=\"_6\">编程练习</h2>\n<h3 data-block=\"b19\" id=\"_7\">快速幂</h3>\n<p data-block=\"b20\">给定实数 <code>x</code> 和整数 <code>n</code>，请计算 <span class=\"arithmatex\">\\(x^n\\)</span>，且不能调用语言内置的幂函数。\n要求使用递归分治：每次把指数缩小一半，并复用已经算出的子问题结果。\n本题规定 <span class=\"arithmatex\">\\(x^0=1\\)</span>，包括 <code>x = 0</code> 时；当 <code>n &lt; 0</code> 时保证 <code>x != 0</code>，答案可转化为 <span class=\"arithmatex\">\\((1/x)^{-n}\\)</span>。</p>\n<details class=\"tip\" data-block=\"b21\">\n<summary>解题提示</summary>\n<ol>\n<li>n 等于 0 时答案是 1</li>\n<li>算出 x 的 n // 2 次方后保存为 half，不要递归调用第二次</li>\n<li>当 n &lt; 0 时，先把 x 改为 1 / x，再把 n 改为 -n；使用 C++ 或 Java 时，可先把 n 转为 64 位整数，避免最小的 32 位整数取相反数时溢出</li>\n</ol>\n</details>\n<p data-block=\"b22\"><a class=\"rounded-button exercise-button\" href=\"https://leetcode.cn/problems/powx-n/\" rel=\"noopener noreferrer\" target=\"_blank\">LeetCode</a> <a class=\"rounded-button exercise-button\" href=\"https://leetcode.cn/problems/powx-n/solutions/241471/50-powx-n-kuai-su-mi-qing-xi-tu-jie-by-jyd/\" rel=\"noopener noreferrer\" target=\"_blank\">题目解析</a></p>\n<blockquote data-block=\"b23\">\n<p><strong>说明：</strong> 链接中的题解使用迭代位运算，与本练习指定的递归分治方法不同；请根据本题的解题提示完成递归版本</p>\n</blockquote>",
+  "codeExamples": [
+    {
+      "id": "chapter_divide_and_conquer/exercises-code-0",
+      "file": "fast_power",
+      "className": "",
+      "functionName": "fast_pow",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def fast_pow(x: int, n: int) -> int:\n    \"\"\"快速幂\"\"\"\n    if n == 0:\n        return 1\n    half = fast_pow(x, n // 2)\n    if n % 2 == 0:\n        return half * half\n    return half * half * x",
+          "fullSource": "\"\"\"\nFile: fast_power.py\nCreated Time: 2026-08-18\nAuthor: Hello Algo Team\n\"\"\"\n\n\ndef fast_pow(x: int, n: int) -> int:\n    \"\"\"快速幂\"\"\"\n    if n == 0:\n        return 1\n    half = fast_pow(x, n // 2)\n    if n % 2 == 0:\n        return half * half\n    return half * half * x\n\n\nif __name__ == \"__main__\":\n    assert fast_pow(7, 0) == 1\n    assert fast_pow(3, 5) == 243\n    assert fast_pow(2, 6) == 64\n",
+          "sourcePath": "codes/python/chapter_divide_and_conquer/fast_power.py",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/python/chapter_divide_and_conquer/fast_power.py",
+          "extraction": "symbol",
+          "runnable": true
+        },
+        {
+          "language": "java",
+          "snippet": "    static int fastPow(int x, int n) {\n        if (n == 0) {\n            return 1;\n        }\n        int half = fastPow(x, n / 2);\n        if (n % 2 == 0) {\n            return half * half;\n        }\n        return half * half * x;\n    }",
+          "fullSource": "/**\n * File: fast_power.java\n * Created Time: 2026-08-18\n * Author: Hello Algo Team\n */\n\npackage chapter_divide_and_conquer;\n\npublic class fast_power {\n    /* 快速幂 */\n    static int fastPow(int x, int n) {\n        if (n == 0) {\n            return 1;\n        }\n        int half = fastPow(x, n / 2);\n        if (n % 2 == 0) {\n            return half * half;\n        }\n        return half * half * x;\n    }\n\n    public static void main(String[] args) {\n        assert fastPow(7, 0) == 1;\n        assert fastPow(3, 5) == 243;\n        assert fastPow(2, 6) == 64;\n    }\n}\n",
+          "sourcePath": "codes/java/chapter_divide_and_conquer/fast_power.java",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/java/chapter_divide_and_conquer/fast_power.java",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "cpp",
+          "snippet": "int fastPow(int x, int n) {\n    if (n == 0) {\n        return 1;\n    }\n    int half = fastPow(x, n / 2);\n    if (n % 2 == 0) {\n        return half * half;\n    }\n    return half * half * x;\n}",
+          "fullSource": "/**\n * File: fast_power.cpp\n * Created Time: 2026-08-18\n * Author: Hello Algo Team\n */\n\n#include <cassert>\n\n/* 快速幂 */\nint fastPow(int x, int n) {\n    if (n == 0) {\n        return 1;\n    }\n    int half = fastPow(x, n / 2);\n    if (n % 2 == 0) {\n        return half * half;\n    }\n    return half * half * x;\n}\n\nint main() {\n    assert(fastPow(7, 0) == 1);\n    assert(fastPow(3, 5) == 243);\n    assert(fastPow(2, 6) == 64);\n    return 0;\n}\n",
+          "sourcePath": "codes/cpp/chapter_divide_and_conquer/fast_power.cpp",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/cpp/chapter_divide_and_conquer/fast_power.cpp",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "c",
+          "snippet": "int fastPow(int x, int n) {\n    if (n == 0) {\n        return 1;\n    }\n    int half = fastPow(x, n / 2);\n    if (n % 2 == 0) {\n        return half * half;\n    }\n    return half * half * x;\n}",
+          "fullSource": "/**\n * File: fast_power.c\n * Created Time: 2026-08-18\n * Author: Hello Algo Team\n */\n\n#include <assert.h>\n\n/* 快速幂 */\nint fastPow(int x, int n) {\n    if (n == 0) {\n        return 1;\n    }\n    int half = fastPow(x, n / 2);\n    if (n % 2 == 0) {\n        return half * half;\n    }\n    return half * half * x;\n}\n\nint main(void) {\n    assert(fastPow(7, 0) == 1);\n    assert(fastPow(3, 5) == 243);\n    assert(fastPow(2, 6) == 64);\n    return 0;\n}\n",
+          "sourcePath": "codes/c/chapter_divide_and_conquer/fast_power.c",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/c/chapter_divide_and_conquer/fast_power.c",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "csharp",
+          "snippet": "    int FastPow(int x, int n) {\n        if (n == 0) {\n            return 1;\n        }\n        int half = FastPow(x, n / 2);\n        if (n % 2 == 0) {\n            return half * half;\n        }\n        return half * half * x;\n    }",
+          "fullSource": "/**\n * File: fast_power.cs\n * Created Time: 2026-08-18\n * Author: Hello Algo Team\n */\n\nnamespace hello_algo.chapter_divide_and_conquer;\n\npublic class fast_power {\n    /* 快速幂 */\n    int FastPow(int x, int n) {\n        if (n == 0) {\n            return 1;\n        }\n        int half = FastPow(x, n / 2);\n        if (n % 2 == 0) {\n            return half * half;\n        }\n        return half * half * x;\n    }\n\n    [Test]\n    public void Test() {\n        Assert.That(FastPow(7, 0), Is.EqualTo(1));\n        Assert.That(FastPow(3, 5), Is.EqualTo(243));\n        Assert.That(FastPow(2, 6), Is.EqualTo(64));\n    }\n}\n",
+          "sourcePath": "codes/csharp/chapter_divide_and_conquer/fast_power.cs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/csharp/chapter_divide_and_conquer/fast_power.cs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "go",
+          "snippet": "func fastPow(x, n int) int {\n\tif n == 0 {\n\t\treturn 1\n\t}\n\thalf := fastPow(x, n/2)\n\tif n%2 == 0 {\n\t\treturn half * half\n\t}\n\treturn half * half * x\n}",
+          "fullSource": "// File: fast_power.go\n// Created Time: 2026-08-18\n// Author: Hello Algo Team\n\npackage chapter_divide_and_conquer\n\n/* 快速幂 */\nfunc fastPow(x, n int) int {\n\tif n == 0 {\n\t\treturn 1\n\t}\n\thalf := fastPow(x, n/2)\n\tif n%2 == 0 {\n\t\treturn half * half\n\t}\n\treturn half * half * x\n}\n",
+          "sourcePath": "codes/go/chapter_divide_and_conquer/fast_power.go",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/go/chapter_divide_and_conquer/fast_power.go",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "javascript",
+          "snippet": "function fastPow(x, n) {\n    if (n === 0) {\n        return 1;\n    }\n    const half = fastPow(x, Math.floor(n / 2));\n    if (n % 2 === 0) {\n        return half * half;\n    }\n    return half * half * x;\n}",
+          "fullSource": "/**\n * File: fast_power.js\n * Created Time: 2026-08-18\n * Author: Hello Algo Team\n */\n\n/* 快速幂 */\nfunction fastPow(x, n) {\n    if (n === 0) {\n        return 1;\n    }\n    const half = fastPow(x, Math.floor(n / 2));\n    if (n % 2 === 0) {\n        return half * half;\n    }\n    return half * half * x;\n}\n\nif (fastPow(7, 0) !== 1 || fastPow(3, 5) !== 243 || fastPow(2, 6) !== 64) {\n    throw new Error('fast power check failed');\n}\n",
+          "sourcePath": "codes/javascript/chapter_divide_and_conquer/fast_power.js",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/javascript/chapter_divide_and_conquer/fast_power.js",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "typescript",
+          "snippet": "function fastPow(x: number, n: number): number {\n    if (n === 0) {\n        return 1;\n    }\n    const half = fastPow(x, Math.floor(n / 2));\n    if (n % 2 === 0) {\n        return half * half;\n    }\n    return half * half * x;\n}",
+          "fullSource": "/**\n * File: fast_power.ts\n * Created Time: 2026-08-18\n * Author: Hello Algo Team\n */\n\n/* 快速幂 */\nfunction fastPow(x: number, n: number): number {\n    if (n === 0) {\n        return 1;\n    }\n    const half = fastPow(x, Math.floor(n / 2));\n    if (n % 2 === 0) {\n        return half * half;\n    }\n    return half * half * x;\n}\n\nif (fastPow(7, 0) !== 1 || fastPow(3, 5) !== 243 || fastPow(2, 6) !== 64) {\n    throw new Error('fast power check failed');\n}\n\nexport {};\n",
+          "sourcePath": "codes/typescript/chapter_divide_and_conquer/fast_power.ts",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/typescript/chapter_divide_and_conquer/fast_power.ts",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "swift",
+          "snippet": "func fastPow(x: Int, n: Int) -> Int {\n    if n == 0 {\n        return 1\n    }\n    let half = fastPow(x: x, n: n / 2)\n    if n % 2 == 0 {\n        return half * half\n    }\n    return half * half * x\n}",
+          "fullSource": "/**\n File: fast_power.swift\n Created Time: 2026-08-18\n Author: Hello Algo Team\n */\n\n/* 快速幂 */\nfunc fastPow(x: Int, n: Int) -> Int {\n    if n == 0 {\n        return 1\n    }\n    let half = fastPow(x: x, n: n / 2)\n    if n % 2 == 0 {\n        return half * half\n    }\n    return half * half * x\n}\n\n@main\nenum FastPower {\n    static func main() {\n        assert(fastPow(x: 7, n: 0) == 1)\n        assert(fastPow(x: 3, n: 5) == 243)\n        assert(fastPow(x: 2, n: 6) == 64)\n    }\n}\n",
+          "sourcePath": "codes/swift/chapter_divide_and_conquer/fast_power.swift",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/swift/chapter_divide_and_conquer/fast_power.swift",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "rust",
+          "snippet": "fn fast_pow(x: i32, n: i32) -> i32 {\n    if n == 0 {\n        return 1;\n    }\n    let half = fast_pow(x, n / 2);\n    if n % 2 == 0 {\n        return half * half;\n    }\n    half * half * x\n}",
+          "fullSource": "/*\n * File: fast_power.rs\n * Created Time: 2026-08-18\n * Author: Hello Algo Team\n */\n\n/* 快速幂 */\nfn fast_pow(x: i32, n: i32) -> i32 {\n    if n == 0 {\n        return 1;\n    }\n    let half = fast_pow(x, n / 2);\n    if n % 2 == 0 {\n        return half * half;\n    }\n    half * half * x\n}\n\nfn main() {\n    assert_eq!(fast_pow(7, 0), 1);\n    assert_eq!(fast_pow(3, 5), 243);\n    assert_eq!(fast_pow(2, 6), 64);\n}\n",
+          "sourcePath": "codes/rust/chapter_divide_and_conquer/fast_power.rs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/rust/chapter_divide_and_conquer/fast_power.rs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "kotlin",
+          "snippet": "fun fastPow(x: Int, n: Int): Int {\n    if (n == 0) {\n        return 1\n    }\n    val half = fastPow(x, n / 2)\n    if (n % 2 == 0) {\n        return half * half\n    }\n    return half * half * x\n}",
+          "fullSource": "/**\n * File: fast_power.kt\n * Created Time: 2026-08-18\n * Author: Hello Algo Team\n */\n\npackage chapter_divide_and_conquer.fast_power\n\n/* 快速幂 */\nfun fastPow(x: Int, n: Int): Int {\n    if (n == 0) {\n        return 1\n    }\n    val half = fastPow(x, n / 2)\n    if (n % 2 == 0) {\n        return half * half\n    }\n    return half * half * x\n}\n\nfun main() {\n    check(fastPow(7, 0) == 1)\n    check(fastPow(3, 5) == 243)\n    check(fastPow(2, 6) == 64)\n}\n",
+          "sourcePath": "codes/kotlin/chapter_divide_and_conquer/fast_power.kt",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/kotlin/chapter_divide_and_conquer/fast_power.kt",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "dart",
+          "snippet": "int fastPow(int x, int n) {\n  if (n == 0) {\n    return 1;\n  }\n  int half = fastPow(x, n ~/ 2);\n  if (n % 2 == 0) {\n    return half * half;\n  }\n  return half * half * x;\n}",
+          "fullSource": "/**\n * File: fast_power.dart\n * Created Time: 2026-08-18\n * Author: Hello Algo Team\n */\n\n/* 快速幂 */\nint fastPow(int x, int n) {\n  if (n == 0) {\n    return 1;\n  }\n  int half = fastPow(x, n ~/ 2);\n  if (n % 2 == 0) {\n    return half * half;\n  }\n  return half * half * x;\n}\n\nvoid main() {\n  if (fastPow(7, 0) != 1 || fastPow(3, 5) != 243 || fastPow(2, 6) != 64) {\n    throw StateError('fast power check failed');\n  }\n}\n",
+          "sourcePath": "codes/dart/chapter_divide_and_conquer/fast_power.dart",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/dart/chapter_divide_and_conquer/fast_power.dart",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "ruby",
+          "snippet": "def fast_pow(x, n)\n  return 1 if n == 0\n\n  half = fast_pow(x, n / 2)\n  return half * half if n.even?\n\n  half * half * x\nend",
+          "fullSource": "=begin\nFile: fast_power.rb\nCreated Time: 2026-08-18\nAuthor: Hello Algo Team\n=end\n\n### 快速幂 ###\ndef fast_pow(x, n)\n  return 1 if n == 0\n\n  half = fast_pow(x, n / 2)\n  return half * half if n.even?\n\n  half * half * x\nend\n\nif __FILE__ == $0\n  raise 'fast power check failed' unless fast_pow(7, 0) == 1\n  raise 'fast power check failed' unless fast_pow(3, 5) == 243\n  raise 'fast power check failed' unless fast_pow(2, 6) == 64\nend\n",
+          "sourcePath": "codes/ruby/chapter_divide_and_conquer/fast_power.rb",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/ruby/chapter_divide_and_conquer/fast_power.rb",
+          "extraction": "symbol",
+          "runnable": false
+        }
+      ]
+    }
+  ],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "a9184d84140885d04697209db696252e848531660a85963ea7614fc2599d66ea",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 1,
+    "animationGroups": 0
+  }
+}

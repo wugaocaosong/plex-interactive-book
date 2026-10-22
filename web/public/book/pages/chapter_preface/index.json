@@ -1,0 +1,25 @@
+{
+  "id": "chapter_preface/index",
+  "title": "前言",
+  "kind": "chapter",
+  "group": "第 0 章   前言",
+  "route": "/read/chapter_preface/index",
+  "sourcePath": "chapter_preface/index.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">前言</h1>\n<figure data-block=\"b1\"><img alt=\"前言\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_preface.jpg\"/><figcaption>前言</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"b2\">\n<p class=\"admonition-title\">Abstract</p>\n<p>算法犹如美妙的交响乐，每一行代码都像韵律般流淌。</p>\n<p>愿这本书在你的脑海中轻轻响起，留下独特而深刻的旋律。</p>\n</div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "7fda044d196ece0f8b01d3cedbfa71cc1cff34c1c8bcfaddf7b3b6120020c415",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  }
+}

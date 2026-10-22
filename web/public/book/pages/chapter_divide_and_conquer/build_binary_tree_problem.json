@@ -1,0 +1,190 @@
+{
+  "id": "chapter_divide_and_conquer/build_binary_tree_problem",
+  "title": "12.3   构建树问题",
+  "kind": "chapter",
+  "group": "第 12 章   分治",
+  "route": "/read/chapter_divide_and_conquer/build_binary_tree_problem",
+  "sourcePath": "chapter_divide_and_conquer/build_binary_tree_problem.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">构建二叉树问题</h1>\n<div class=\"admonition question\" data-block=\"b1\">\n<p class=\"admonition-title\">Question</p>\n<p>给定一棵二叉树的前序遍历 <code>preorder</code> 和中序遍历 <code>inorder</code> ，请从中构建二叉树，返回二叉树的根节点。假设二叉树中没有值重复的节点（如下图所示）。</p>\n</div>\n<figure data-block=\"b2\"><img alt=\"构建二叉树的示例数据\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_divide_and_conquer/build_binary_tree_problem.assets/build_tree_example.png\"/><figcaption>构建二叉树的示例数据</figcaption></figure>\n<h3 data-block=\"b3\" id=\"_2\">判断是否为分治问题</h3>\n<p data-block=\"b4\">原问题定义为从 <code>preorder</code> 和 <code>inorder</code> 构建二叉树，是一个典型的分治问题。</p>\n<ul data-block=\"b5\">\n<li><strong>问题可以分解</strong>：从分治的角度切入，我们可以将原问题划分为两个子问题：构建左子树、构建右子树，加上一步操作：初始化根节点。而对于每棵子树（子问题），我们仍然可以复用以上划分方法，将其划分为更小的子树（子问题），直至达到最小子问题（空子树）时终止。</li>\n<li><strong>子问题是独立的</strong>：左子树和右子树是相互独立的，它们之间没有交集。在构建左子树时，我们只需关注中序遍历和前序遍历中与左子树对应的部分。右子树同理。</li>\n<li><strong>子问题的解可以合并</strong>：一旦得到了左子树和右子树（子问题的解），我们就可以将它们链接到根节点上，得到原问题的解。</li>\n</ul>\n<h3 data-block=\"b6\" id=\"_3\">如何划分子树</h3>\n<p data-block=\"b7\">根据以上分析，这道题可以使用分治来求解，<strong>但如何通过前序遍历 <code>preorder</code> 和中序遍历 <code>inorder</code> 来划分左子树和右子树呢</strong>？</p>\n<p data-block=\"b8\">根据定义，<code>preorder</code> 和 <code>inorder</code> 都可以划分为三个部分。</p>\n<ul data-block=\"b9\">\n<li>前序遍历：<code>[ 根节点 | 左子树 | 右子树 ]</code> ，例如上图的树对应 <code>[ 3 | 9 | 2 1 7 ]</code> 。</li>\n<li>中序遍历：<code>[ 左子树 | 根节点 | 右子树 ]</code> ，例如上图的树对应 <code>[ 9 | 3 | 1 2 7 ]</code> 。</li>\n</ul>\n<p data-block=\"b10\">以上图数据为例，我们可以通过下图所示的步骤得到划分结果。</p>\n<ol data-block=\"b11\">\n<li>前序遍历的首元素 3 是根节点的值。</li>\n<li>查找根节点 3 在 <code>inorder</code> 中的索引，利用该索引可将 <code>inorder</code> 划分为 <code>[ 9 | 3 | 1 2 7 ]</code> 。</li>\n<li>根据 <code>inorder</code> 的划分结果，易得左子树和右子树的节点数量分别为 1 和 3 ，从而可将 <code>preorder</code> 划分为 <code>[ 3 | 9 | 2 1 7 ]</code> 。</li>\n</ol>\n<figure data-block=\"b12\"><img alt=\"在前序遍历和中序遍历中划分子树\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_divide_and_conquer/build_binary_tree_problem.assets/build_tree_preorder_inorder_division.png\"/><figcaption>在前序遍历和中序遍历中划分子树</figcaption></figure>\n<h3 data-block=\"b13\" id=\"_4\">基于变量描述子树区间</h3>\n<p data-block=\"b14\">根据以上划分方法，<strong>我们已经得到根节点、左子树、右子树在 <code>preorder</code> 和 <code>inorder</code> 中的索引区间</strong>。而为了描述这些索引区间，我们需要借助几个指针变量。</p>\n<ul data-block=\"b15\">\n<li>将当前树的根节点在 <code>preorder</code> 中的索引记为 <span class=\"arithmatex\">\\(i\\)</span> 。</li>\n<li>将当前树的根节点在 <code>inorder</code> 中的索引记为 <span class=\"arithmatex\">\\(m\\)</span> 。</li>\n<li>将当前树在 <code>inorder</code> 中的索引区间记为 <span class=\"arithmatex\">\\([l, r]\\)</span> 。</li>\n</ul>\n<p data-block=\"b16\">如下表所示，通过以上变量即可表示根节点在 <code>preorder</code> 中的索引，以及子树在 <code>inorder</code> 中的索引区间。</p>\n<p align=\"center\" data-block=\"b17\"> 表 <id>   根节点和子树在前序遍历和中序遍历中的索引 </id></p>\n<table data-block=\"b18\">\n<thead>\n<tr>\n<th></th>\n<th>根节点在 <code>preorder</code> 中的索引</th>\n<th>子树在 <code>inorder</code> 中的索引区间</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>当前树</td>\n<td><span class=\"arithmatex\">\\(i\\)</span></td>\n<td><span class=\"arithmatex\">\\([l, r]\\)</span></td>\n</tr>\n<tr>\n<td>左子树</td>\n<td><span class=\"arithmatex\">\\(i + 1\\)</span></td>\n<td><span class=\"arithmatex\">\\([l, m-1]\\)</span></td>\n</tr>\n<tr>\n<td>右子树</td>\n<td><span class=\"arithmatex\">\\(i + 1 + (m - l)\\)</span></td>\n<td><span class=\"arithmatex\">\\([m+1, r]\\)</span></td>\n</tr>\n</tbody>\n</table>\n<p data-block=\"b19\">请注意，右子树根节点索引中的 <span class=\"arithmatex\">\\((m-l)\\)</span> 的含义是“左子树的节点数量”，建议结合下图理解。</p>\n<figure data-block=\"b20\"><img alt=\"根节点和左右子树的索引区间表示\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_divide_and_conquer/build_binary_tree_problem.assets/build_tree_division_pointers.png\"/><figcaption>根节点和左右子树的索引区间表示</figcaption></figure>\n<h3 data-block=\"b21\" id=\"_5\">代码实现</h3>\n<p data-block=\"b22\">为了提升查询 <span class=\"arithmatex\">\\(m\\)</span> 的效率，我们借助一个哈希表 <code>hmap</code> 来存储数组 <code>inorder</code> 中元素到索引的映射：</p>\n<div class=\"code-example\" data-block=\"b23\" data-code=\"0\"><div class=\"code-caption\"><span>build_tree · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def build_tree(preorder: list[int], inorder: list[int]) -&gt; TreeNode | None:\n    \"\"\"构建二叉树\"\"\"\n    # 初始化哈希表，存储 inorder 元素到索引的映射\n    inorder_map = {val: i for i, val in enumerate(inorder)}\n    root = dfs(preorder, inorder_map, 0, 0, len(inorder) - 1)\n    return root</code></pre></div>\n<p data-block=\"b24\">下图展示了构建二叉树的递归过程，各个节点是在向下“递”的过程中建立的，而各条边（引用）是在向上“归”的过程中建立的。</p>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"b25\"><img alt=\"构建二叉树的递归过程\" data-action=\"image\" src=\"/upstream/chapter_divide_and_conquer/build_binary_tree_problem.assets/built_tree_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 9</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<p data-block=\"b26\">每个递归函数内的前序遍历 <code>preorder</code> 和中序遍历 <code>inorder</code> 的划分结果如下图所示。</p>\n<figure data-block=\"b27\"><img alt=\"每个递归函数中的划分结果\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_divide_and_conquer/build_binary_tree_problem.assets/built_tree_overall.png\"/><figcaption>每个递归函数中的划分结果</figcaption></figure>\n<p data-block=\"b28\">设树的节点数量为 <span class=\"arithmatex\">\\(n\\)</span> ，初始化每一个节点（执行一个递归函数 <code>dfs()</code> ）使用 <span class=\"arithmatex\">\\(O(1)\\)</span> 时间。<strong>因此总体时间复杂度为 <span class=\"arithmatex\">\\(O(n)\\)</span></strong> 。</p>\n<p data-block=\"b29\">哈希表存储 <code>inorder</code> 元素到索引的映射，空间复杂度为 <span class=\"arithmatex\">\\(O(n)\\)</span> 。在最差情况下，即二叉树退化为链表时，递归深度达到 <span class=\"arithmatex\">\\(n\\)</span> ，使用 <span class=\"arithmatex\">\\(O(n)\\)</span> 的栈帧空间。<strong>因此总体空间复杂度为 <span class=\"arithmatex\">\\(O(n)\\)</span></strong> 。</p>",
+  "codeExamples": [
+    {
+      "id": "chapter_divide_and_conquer/build_binary_tree_problem-code-0",
+      "file": "build_tree",
+      "className": "",
+      "functionName": "build_tree",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def build_tree(preorder: list[int], inorder: list[int]) -> TreeNode | None:\n    \"\"\"构建二叉树\"\"\"\n    # 初始化哈希表，存储 inorder 元素到索引的映射\n    inorder_map = {val: i for i, val in enumerate(inorder)}\n    root = dfs(preorder, inorder_map, 0, 0, len(inorder) - 1)\n    return root",
+          "fullSource": "\"\"\"\nFile: build_tree.py\nCreated Time: 2023-07-15\nAuthor: krahets (krahets@163.com)\n\"\"\"\n\nimport sys\nfrom pathlib import Path\n\nsys.path.append(str(Path(__file__).parent.parent))\nfrom modules import TreeNode, print_tree\n\n\ndef dfs(\n    preorder: list[int],\n    inorder_map: dict[int, int],\n    i: int,\n    l: int,\n    r: int,\n) -> TreeNode | None:\n    \"\"\"构建二叉树：分治\"\"\"\n    # 子树区间为空时终止\n    if r - l < 0:\n        return None\n    # 初始化根节点\n    root = TreeNode(preorder[i])\n    # 查询 m ，从而划分左右子树\n    m = inorder_map[preorder[i]]\n    # 子问题：构建左子树\n    root.left = dfs(preorder, inorder_map, i + 1, l, m - 1)\n    # 子问题：构建右子树\n    root.right = dfs(preorder, inorder_map, i + 1 + m - l, m + 1, r)\n    # 返回根节点\n    return root\n\n\ndef build_tree(preorder: list[int], inorder: list[int]) -> TreeNode | None:\n    \"\"\"构建二叉树\"\"\"\n    # 初始化哈希表，存储 inorder 元素到索引的映射\n    inorder_map = {val: i for i, val in enumerate(inorder)}\n    root = dfs(preorder, inorder_map, 0, 0, len(inorder) - 1)\n    return root\n\n\n\"\"\"Driver Code\"\"\"\nif __name__ == \"__main__\":\n    preorder = [3, 9, 2, 1, 7]\n    inorder = [9, 3, 1, 2, 7]\n    print(f\"前序遍历 = {preorder}\")\n    print(f\"中序遍历 = {inorder}\")\n\n    root = build_tree(preorder, inorder)\n    print(\"构建的二叉树为：\")\n    print_tree(root)\n",
+          "sourcePath": "codes/python/chapter_divide_and_conquer/build_tree.py",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/python/chapter_divide_and_conquer/build_tree.py",
+          "extraction": "symbol",
+          "runnable": true
+        },
+        {
+          "language": "java",
+          "snippet": "public class build_tree {\n    /* 构建二叉树：分治 */\n    static TreeNode dfs(int[] preorder, Map<Integer, Integer> inorderMap, int i, int l, int r) {\n        // 子树区间为空时终止\n        if (r - l < 0)\n            return null;\n        // 初始化根节点\n        TreeNode root = new TreeNode(preorder[i]);\n        // 查询 m ，从而划分左右子树\n        int m = inorderMap.get(preorder[i]);\n        // 子问题：构建左子树\n        root.left = dfs(preorder, inorderMap, i + 1, l, m - 1);\n        // 子问题：构建右子树\n        root.right = dfs(preorder, inorderMap, i + 1 + m - l, m + 1, r);\n        // 返回根节点\n        return root;\n    }\n\n    /* 构建二叉树 */\n    static TreeNode buildTree(int[] preorder, int[] inorder) {\n        // 初始化哈希表，存储 inorder 元素到索引的映射\n        Map<Integer, Integer> inorderMap = new HashMap<>();\n        for (int i = 0; i < inorder.length; i++) {\n            inorderMap.put(inorder[i], i);\n        }\n        TreeNode root = dfs(preorder, inorderMap, 0, 0, inorder.length - 1);\n        return root;\n    }\n\n    public static void main(String[] args) {\n        int[] preorder = { 3, 9, 2, 1, 7 };\n        int[] inorder = { 9, 3, 1, 2, 7 };\n        System.out.println(\"前序遍历 = \" + Arrays.toString(preorder));\n        System.out.println(\"中序遍历 = \" + Arrays.toString(inorder));\n\n        TreeNode root = buildTree(preorder, inorder);\n        System.out.println(\"构建的二叉树为：\");\n        PrintUtil.printTree(root);\n    }\n}",
+          "fullSource": "/**\n * File: build_tree.java\n * Created Time: 2023-07-17\n * Author: krahets (krahets@163.com)\n */\n\npackage chapter_divide_and_conquer;\n\nimport utils.*;\nimport java.util.*;\n\npublic class build_tree {\n    /* 构建二叉树：分治 */\n    static TreeNode dfs(int[] preorder, Map<Integer, Integer> inorderMap, int i, int l, int r) {\n        // 子树区间为空时终止\n        if (r - l < 0)\n            return null;\n        // 初始化根节点\n        TreeNode root = new TreeNode(preorder[i]);\n        // 查询 m ，从而划分左右子树\n        int m = inorderMap.get(preorder[i]);\n        // 子问题：构建左子树\n        root.left = dfs(preorder, inorderMap, i + 1, l, m - 1);\n        // 子问题：构建右子树\n        root.right = dfs(preorder, inorderMap, i + 1 + m - l, m + 1, r);\n        // 返回根节点\n        return root;\n    }\n\n    /* 构建二叉树 */\n    static TreeNode buildTree(int[] preorder, int[] inorder) {\n        // 初始化哈希表，存储 inorder 元素到索引的映射\n        Map<Integer, Integer> inorderMap = new HashMap<>();\n        for (int i = 0; i < inorder.length; i++) {\n            inorderMap.put(inorder[i], i);\n        }\n        TreeNode root = dfs(preorder, inorderMap, 0, 0, inorder.length - 1);\n        return root;\n    }\n\n    public static void main(String[] args) {\n        int[] preorder = { 3, 9, 2, 1, 7 };\n        int[] inorder = { 9, 3, 1, 2, 7 };\n        System.out.println(\"前序遍历 = \" + Arrays.toString(preorder));\n        System.out.println(\"中序遍历 = \" + Arrays.toString(inorder));\n\n        TreeNode root = buildTree(preorder, inorder);\n        System.out.println(\"构建的二叉树为：\");\n        PrintUtil.printTree(root);\n    }\n}\n",
+          "sourcePath": "codes/java/chapter_divide_and_conquer/build_tree.java",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/java/chapter_divide_and_conquer/build_tree.java",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "cpp",
+          "snippet": "TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder) {\n    // 初始化哈希表，存储 inorder 元素到索引的映射\n    unordered_map<int, int> inorderMap;\n    for (int i = 0; i < inorder.size(); i++) {\n        inorderMap[inorder[i]] = i;\n    }\n    TreeNode *root = dfs(preorder, inorderMap, 0, 0, inorder.size() - 1);\n    return root;\n}",
+          "fullSource": "/**\n * File: build_tree.cpp\n * Created Time: 2023-07-17\n * Author: krahets (krahets@163.com)\n */\n\n#include \"../utils/common.hpp\"\n\n/* 构建二叉树：分治 */\nTreeNode *dfs(vector<int> &preorder, unordered_map<int, int> &inorderMap, int i, int l, int r) {\n    // 子树区间为空时终止\n    if (r - l < 0)\n        return NULL;\n    // 初始化根节点\n    TreeNode *root = new TreeNode(preorder[i]);\n    // 查询 m ，从而划分左右子树\n    int m = inorderMap[preorder[i]];\n    // 子问题：构建左子树\n    root->left = dfs(preorder, inorderMap, i + 1, l, m - 1);\n    // 子问题：构建右子树\n    root->right = dfs(preorder, inorderMap, i + 1 + m - l, m + 1, r);\n    // 返回根节点\n    return root;\n}\n\n/* 构建二叉树 */\nTreeNode *buildTree(vector<int> &preorder, vector<int> &inorder) {\n    // 初始化哈希表，存储 inorder 元素到索引的映射\n    unordered_map<int, int> inorderMap;\n    for (int i = 0; i < inorder.size(); i++) {\n        inorderMap[inorder[i]] = i;\n    }\n    TreeNode *root = dfs(preorder, inorderMap, 0, 0, inorder.size() - 1);\n    return root;\n}\n\n/* Driver Code */\nint main() {\n    vector<int> preorder = {3, 9, 2, 1, 7};\n    vector<int> inorder = {9, 3, 1, 2, 7};\n    cout << \"前序遍历 = \";\n    printVector(preorder);\n    cout << \"中序遍历 = \";\n    printVector(inorder);\n\n    TreeNode *root = buildTree(preorder, inorder);\n    cout << \"构建的二叉树为：\\n\";\n    printTree(root);\n\n    return 0;\n}\n",
+          "sourcePath": "codes/cpp/chapter_divide_and_conquer/build_tree.cpp",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/cpp/chapter_divide_and_conquer/build_tree.cpp",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "c",
+          "snippet": "TreeNode *buildTree(int *preorder, int preorderSize, int *inorder, int inorderSize) {\n    // 初始化哈希表，存储 inorder 元素到索引的映射\n    int *inorderMap = (int *)malloc(sizeof(int) * MAX_SIZE);\n    for (int i = 0; i < inorderSize; i++) {\n        inorderMap[inorder[i]] = i;\n    }\n    TreeNode *root = dfs(preorder, inorderMap, 0, 0, inorderSize - 1, inorderSize);\n    free(inorderMap);\n    return root;\n}",
+          "fullSource": "/**\n * File : build_tree.c\n * Created Time: 2023-10-16\n * Author : lucas (superrat6@gmail.com)\n */\n\n#include \"../utils/common.h\"\n\n// 假设所有元素都小于 1000\n#define MAX_SIZE 1000\n\n/* 构建二叉树：分治 */\nTreeNode *dfs(int *preorder, int *inorderMap, int i, int l, int r, int size) {\n    // 子树区间为空时终止\n    if (r - l < 0)\n        return NULL;\n    // 初始化根节点\n    TreeNode *root = (TreeNode *)malloc(sizeof(TreeNode));\n    root->val = preorder[i];\n    root->left = NULL;\n    root->right = NULL;\n    // 查询 m ，从而划分左右子树\n    int m = inorderMap[preorder[i]];\n    // 子问题：构建左子树\n    root->left = dfs(preorder, inorderMap, i + 1, l, m - 1, size);\n    // 子问题：构建右子树\n    root->right = dfs(preorder, inorderMap, i + 1 + m - l, m + 1, r, size);\n    // 返回根节点\n    return root;\n}\n\n/* 构建二叉树 */\nTreeNode *buildTree(int *preorder, int preorderSize, int *inorder, int inorderSize) {\n    // 初始化哈希表，存储 inorder 元素到索引的映射\n    int *inorderMap = (int *)malloc(sizeof(int) * MAX_SIZE);\n    for (int i = 0; i < inorderSize; i++) {\n        inorderMap[inorder[i]] = i;\n    }\n    TreeNode *root = dfs(preorder, inorderMap, 0, 0, inorderSize - 1, inorderSize);\n    free(inorderMap);\n    return root;\n}\n\n/* Driver Code */\nint main() {\n    int preorder[] = {3, 9, 2, 1, 7};\n    int inorder[] = {9, 3, 1, 2, 7};\n    int preorderSize = sizeof(preorder) / sizeof(preorder[0]);\n    int inorderSize = sizeof(inorder) / sizeof(inorder[0]);\n    printf(\"前序遍历 = \");\n    printArray(preorder, preorderSize);\n    printf(\"中序遍历 = \");\n    printArray(inorder, inorderSize);\n\n    TreeNode *root = buildTree(preorder, preorderSize, inorder, inorderSize);\n    printf(\"构建的二叉树为：\\n\");\n    printTree(root);\n\n    freeMemoryTree(root);\n    return 0;\n}\n",
+          "sourcePath": "codes/c/chapter_divide_and_conquer/build_tree.c",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/c/chapter_divide_and_conquer/build_tree.c",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "csharp",
+          "snippet": "public class build_tree {\n    /* 构建二叉树：分治 */\n    TreeNode? DFS(int[] preorder, Dictionary<int, int> inorderMap, int i, int l, int r) {\n        // 子树区间为空时终止\n        if (r - l < 0)\n            return null;\n        // 初始化根节点\n        TreeNode root = new(preorder[i]);\n        // 查询 m ，从而划分左右子树\n        int m = inorderMap[preorder[i]];\n        // 子问题：构建左子树\n        root.left = DFS(preorder, inorderMap, i + 1, l, m - 1);\n        // 子问题：构建右子树\n        root.right = DFS(preorder, inorderMap, i + 1 + m - l, m + 1, r);\n        // 返回根节点\n        return root;\n    }\n\n    /* 构建二叉树 */\n    TreeNode? BuildTree(int[] preorder, int[] inorder) {\n        // 初始化哈希表，存储 inorder 元素到索引的映射\n        Dictionary<int, int> inorderMap = [];\n        for (int i = 0; i < inorder.Length; i++) {\n            inorderMap.TryAdd(inorder[i], i);\n        }\n        TreeNode? root = DFS(preorder, inorderMap, 0, 0, inorder.Length - 1);\n        return root;\n    }\n\n    [Test]\n    public void Test() {\n        int[] preorder = [3, 9, 2, 1, 7];\n        int[] inorder = [9, 3, 1, 2, 7];\n        Console.WriteLine(\"前序遍历 = \" + string.Join(\", \", preorder));\n        Console.WriteLine(\"中序遍历 = \" + string.Join(\", \", inorder));\n\n        TreeNode? root = BuildTree(preorder, inorder);\n        Console.WriteLine(\"构建的二叉树为：\");\n        PrintUtil.PrintTree(root);\n    }\n}",
+          "fullSource": "﻿/**\n* File: build_tree.cs\n* Created Time: 2023-07-18\n* Author: hpstory (hpstory1024@163.com)\n*/\n\nnamespace hello_algo.chapter_divide_and_conquer;\n\npublic class build_tree {\n    /* 构建二叉树：分治 */\n    TreeNode? DFS(int[] preorder, Dictionary<int, int> inorderMap, int i, int l, int r) {\n        // 子树区间为空时终止\n        if (r - l < 0)\n            return null;\n        // 初始化根节点\n        TreeNode root = new(preorder[i]);\n        // 查询 m ，从而划分左右子树\n        int m = inorderMap[preorder[i]];\n        // 子问题：构建左子树\n        root.left = DFS(preorder, inorderMap, i + 1, l, m - 1);\n        // 子问题：构建右子树\n        root.right = DFS(preorder, inorderMap, i + 1 + m - l, m + 1, r);\n        // 返回根节点\n        return root;\n    }\n\n    /* 构建二叉树 */\n    TreeNode? BuildTree(int[] preorder, int[] inorder) {\n        // 初始化哈希表，存储 inorder 元素到索引的映射\n        Dictionary<int, int> inorderMap = [];\n        for (int i = 0; i < inorder.Length; i++) {\n            inorderMap.TryAdd(inorder[i], i);\n        }\n        TreeNode? root = DFS(preorder, inorderMap, 0, 0, inorder.Length - 1);\n        return root;\n    }\n\n    [Test]\n    public void Test() {\n        int[] preorder = [3, 9, 2, 1, 7];\n        int[] inorder = [9, 3, 1, 2, 7];\n        Console.WriteLine(\"前序遍历 = \" + string.Join(\", \", preorder));\n        Console.WriteLine(\"中序遍历 = \" + string.Join(\", \", inorder));\n\n        TreeNode? root = BuildTree(preorder, inorder);\n        Console.WriteLine(\"构建的二叉树为：\");\n        PrintUtil.PrintTree(root);\n    }\n}\n",
+          "sourcePath": "codes/csharp/chapter_divide_and_conquer/build_tree.cs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/csharp/chapter_divide_and_conquer/build_tree.cs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "go",
+          "snippet": "func buildTree(preorder, inorder []int) *TreeNode {\n\t// 初始化哈希表，存储 inorder 元素到索引的映射\n\tinorderMap := make(map[int]int, len(inorder))\n\tfor i := 0; i < len(inorder); i++ {\n\t\tinorderMap[inorder[i]] = i\n\t}\n\n\troot := dfsBuildTree(preorder, inorderMap, 0, 0, len(inorder)-1)\n\treturn root\n}",
+          "fullSource": "// File: build_tree.go\n// Created Time: 2023-07-20\n// Author: hongyun-robot (1836017030@qq.com)\n\npackage chapter_divide_and_conquer\n\nimport . \"github.com/krahets/hello-algo/pkg\"\n\n/* 构建二叉树：分治 */\nfunc dfsBuildTree(preorder []int, inorderMap map[int]int, i, l, r int) *TreeNode {\n\t// 子树区间为空时终止\n\tif r-l < 0 {\n\t\treturn nil\n\t}\n\t// 初始化根节点\n\troot := NewTreeNode(preorder[i])\n\t// 查询 m ，从而划分左右子树\n\tm := inorderMap[preorder[i]]\n\t// 子问题：构建左子树\n\troot.Left = dfsBuildTree(preorder, inorderMap, i+1, l, m-1)\n\t// 子问题：构建右子树\n\troot.Right = dfsBuildTree(preorder, inorderMap, i+1+m-l, m+1, r)\n\t// 返回根节点\n\treturn root\n}\n\n/* 构建二叉树 */\nfunc buildTree(preorder, inorder []int) *TreeNode {\n\t// 初始化哈希表，存储 inorder 元素到索引的映射\n\tinorderMap := make(map[int]int, len(inorder))\n\tfor i := 0; i < len(inorder); i++ {\n\t\tinorderMap[inorder[i]] = i\n\t}\n\n\troot := dfsBuildTree(preorder, inorderMap, 0, 0, len(inorder)-1)\n\treturn root\n}\n",
+          "sourcePath": "codes/go/chapter_divide_and_conquer/build_tree.go",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/go/chapter_divide_and_conquer/build_tree.go",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "javascript",
+          "snippet": "function buildTree(preorder, inorder) {\n    // 初始化哈希表，存储 inorder 元素到索引的映射\n    let inorderMap = new Map();\n    for (let i = 0; i < inorder.length; i++) {\n        inorderMap.set(inorder[i], i);\n    }\n    const root = dfs(preorder, inorderMap, 0, 0, inorder.length - 1);\n    return root;\n}",
+          "fullSource": "/**\n * File: build_tree.js\n * Created Time: 2023-07-30\n * Author: yuan0221 (yl1452491917@gmail.com)\n */\n\nconst { printTree } = require('../modules/PrintUtil');\nconst { TreeNode } = require('../modules/TreeNode');\n\n/* 构建二叉树：分治 */\nfunction dfs(preorder, inorderMap, i, l, r) {\n    // 子树区间为空时终止\n    if (r - l < 0) return null;\n    // 初始化根节点\n    const root = new TreeNode(preorder[i]);\n    // 查询 m ，从而划分左右子树\n    const m = inorderMap.get(preorder[i]);\n    // 子问题：构建左子树\n    root.left = dfs(preorder, inorderMap, i + 1, l, m - 1);\n    // 子问题：构建右子树\n    root.right = dfs(preorder, inorderMap, i + 1 + m - l, m + 1, r);\n    // 返回根节点\n    return root;\n}\n\n/* 构建二叉树 */\nfunction buildTree(preorder, inorder) {\n    // 初始化哈希表，存储 inorder 元素到索引的映射\n    let inorderMap = new Map();\n    for (let i = 0; i < inorder.length; i++) {\n        inorderMap.set(inorder[i], i);\n    }\n    const root = dfs(preorder, inorderMap, 0, 0, inorder.length - 1);\n    return root;\n}\n\n/* Driver Code */\nconst preorder = [3, 9, 2, 1, 7];\nconst inorder = [9, 3, 1, 2, 7];\nconsole.log('前序遍历 = ' + JSON.stringify(preorder));\nconsole.log('中序遍历 = ' + JSON.stringify(inorder));\nconst root = buildTree(preorder, inorder);\nconsole.log('构建的二叉树为：');\nprintTree(root);\n",
+          "sourcePath": "codes/javascript/chapter_divide_and_conquer/build_tree.js",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/javascript/chapter_divide_and_conquer/build_tree.js",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "typescript",
+          "snippet": "function buildTree(preorder: number[], inorder: number[]): TreeNode | null {\n    // 初始化哈希表，存储 inorder 元素到索引的映射\n    let inorderMap = new Map<number, number>();\n    for (let i = 0; i < inorder.length; i++) {\n        inorderMap.set(inorder[i], i);\n    }\n    const root = dfs(preorder, inorderMap, 0, 0, inorder.length - 1);\n    return root;\n}",
+          "fullSource": "/**\n * File: build_tree.ts\n * Created Time: 2023-07-30\n * Author: yuan0221 (yl1452491917@gmail.com)\n */\n\nimport { printTree } from '../modules/PrintUtil';\nimport { TreeNode } from '../modules/TreeNode';\n\n/* 构建二叉树：分治 */\nfunction dfs(\n    preorder: number[],\n    inorderMap: Map<number, number>,\n    i: number,\n    l: number,\n    r: number\n): TreeNode | null {\n    // 子树区间为空时终止\n    if (r - l < 0) return null;\n    // 初始化根节点\n    const root: TreeNode = new TreeNode(preorder[i]);\n    // 查询 m ，从而划分左右子树\n    const m = inorderMap.get(preorder[i]);\n    // 子问题：构建左子树\n    root.left = dfs(preorder, inorderMap, i + 1, l, m - 1);\n    // 子问题：构建右子树\n    root.right = dfs(preorder, inorderMap, i + 1 + m - l, m + 1, r);\n    // 返回根节点\n    return root;\n}\n\n/* 构建二叉树 */\nfunction buildTree(preorder: number[], inorder: number[]): TreeNode | null {\n    // 初始化哈希表，存储 inorder 元素到索引的映射\n    let inorderMap = new Map<number, number>();\n    for (let i = 0; i < inorder.length; i++) {\n        inorderMap.set(inorder[i], i);\n    }\n    const root = dfs(preorder, inorderMap, 0, 0, inorder.length - 1);\n    return root;\n}\n\n/* Driver Code */\nconst preorder = [3, 9, 2, 1, 7];\nconst inorder = [9, 3, 1, 2, 7];\nconsole.log('前序遍历 = ' + JSON.stringify(preorder));\nconsole.log('中序遍历 = ' + JSON.stringify(inorder));\nconst root = buildTree(preorder, inorder);\nconsole.log('构建的二叉树为：');\nprintTree(root);\n",
+          "sourcePath": "codes/typescript/chapter_divide_and_conquer/build_tree.ts",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/typescript/chapter_divide_and_conquer/build_tree.ts",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "swift",
+          "snippet": "func buildTree(preorder: [Int], inorder: [Int]) -> TreeNode? {\n    // 初始化哈希表，存储 inorder 元素到索引的映射\n    let inorderMap = inorder.enumerated().reduce(into: [:]) { $0[$1.element] = $1.offset }\n    return dfs(preorder: preorder, inorderMap: inorderMap, i: inorder.startIndex, l: inorder.startIndex, r: inorder.endIndex - 1)\n}",
+          "fullSource": "/**\n * File: build_tree.swift\n * Created Time: 2023-09-02\n * Author: nuomi1 (nuomi1@qq.com)\n */\n\nimport utils\n\n/* 构建二叉树：分治 */\nfunc dfs(preorder: [Int], inorderMap: [Int: Int], i: Int, l: Int, r: Int) -> TreeNode? {\n    // 子树区间为空时终止\n    if r - l < 0 {\n        return nil\n    }\n    // 初始化根节点\n    let root = TreeNode(x: preorder[i])\n    // 查询 m ，从而划分左右子树\n    let m = inorderMap[preorder[i]]!\n    // 子问题：构建左子树\n    root.left = dfs(preorder: preorder, inorderMap: inorderMap, i: i + 1, l: l, r: m - 1)\n    // 子问题：构建右子树\n    root.right = dfs(preorder: preorder, inorderMap: inorderMap, i: i + 1 + m - l, l: m + 1, r: r)\n    // 返回根节点\n    return root\n}\n\n/* 构建二叉树 */\nfunc buildTree(preorder: [Int], inorder: [Int]) -> TreeNode? {\n    // 初始化哈希表，存储 inorder 元素到索引的映射\n    let inorderMap = inorder.enumerated().reduce(into: [:]) { $0[$1.element] = $1.offset }\n    return dfs(preorder: preorder, inorderMap: inorderMap, i: inorder.startIndex, l: inorder.startIndex, r: inorder.endIndex - 1)\n}\n\n@main\nenum BuildTree {\n    /* Driver Code */\n    static func main() {\n        let preorder = [3, 9, 2, 1, 7]\n        let inorder = [9, 3, 1, 2, 7]\n        print(\"前序遍历 = \\(preorder)\")\n        print(\"中序遍历 = \\(inorder)\")\n\n        let root = buildTree(preorder: preorder, inorder: inorder)\n        print(\"构建的二叉树为：\")\n        PrintUtil.printTree(root: root)\n    }\n}\n",
+          "sourcePath": "codes/swift/chapter_divide_and_conquer/build_tree.swift",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/swift/chapter_divide_and_conquer/build_tree.swift",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "rust",
+          "snippet": "fn build_tree(preorder: &[i32], inorder: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {\n    // 初始化哈希表，存储 inorder 元素到索引的映射\n    let mut inorder_map: HashMap<i32, i32> = HashMap::new();\n    for i in 0..inorder.len() {\n        inorder_map.insert(inorder[i], i as i32);\n    }\n    let root = dfs(preorder, &inorder_map, 0, 0, inorder.len() as i32 - 1);\n    root\n}",
+          "fullSource": "/*\n * File: build_tree.rs\n * Created Time: 2023-07-15\n * Author: codingonion (coderonion@gmail.com)\n */\n\nuse hello_algo_rust::include::{print_util, TreeNode};\nuse std::collections::HashMap;\nuse std::{cell::RefCell, rc::Rc};\n\n/* 构建二叉树：分治 */\nfn dfs(\n    preorder: &[i32],\n    inorder_map: &HashMap<i32, i32>,\n    i: i32,\n    l: i32,\n    r: i32,\n) -> Option<Rc<RefCell<TreeNode>>> {\n    // 子树区间为空时终止\n    if r - l < 0 {\n        return None;\n    }\n    // 初始化根节点\n    let root = TreeNode::new(preorder[i as usize]);\n    // 查询 m ，从而划分左右子树\n    let m = inorder_map.get(&preorder[i as usize]).unwrap();\n    // 子问题：构建左子树\n    root.borrow_mut().left = dfs(preorder, inorder_map, i + 1, l, m - 1);\n    // 子问题：构建右子树\n    root.borrow_mut().right = dfs(preorder, inorder_map, i + 1 + m - l, m + 1, r);\n    // 返回根节点\n    Some(root)\n}\n\n/* 构建二叉树 */\nfn build_tree(preorder: &[i32], inorder: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {\n    // 初始化哈希表，存储 inorder 元素到索引的映射\n    let mut inorder_map: HashMap<i32, i32> = HashMap::new();\n    for i in 0..inorder.len() {\n        inorder_map.insert(inorder[i], i as i32);\n    }\n    let root = dfs(preorder, &inorder_map, 0, 0, inorder.len() as i32 - 1);\n    root\n}\n\n/* Driver Code */\nfn main() {\n    let preorder = [3, 9, 2, 1, 7];\n    let inorder = [9, 3, 1, 2, 7];\n    println!(\"中序遍历 = {:?}\", preorder);\n    println!(\"前序遍历 = {:?}\", inorder);\n\n    let root = build_tree(&preorder, &inorder);\n    println!(\"构建的二叉树为：\");\n    print_util::print_tree(root.as_ref().unwrap());\n}\n",
+          "sourcePath": "codes/rust/chapter_divide_and_conquer/build_tree.rs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/rust/chapter_divide_and_conquer/build_tree.rs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "kotlin",
+          "snippet": "fun buildTree(preorder: IntArray, inorder: IntArray): TreeNode? {\n    // 初始化哈希表，存储 inorder 元素到索引的映射\n    val inorderMap = HashMap<Int?, Int?>()\n    for (i in inorder.indices) {\n        inorderMap[inorder[i]] = i\n    }\n    val root = dfs(preorder, inorderMap, 0, 0, inorder.size - 1)\n    return root\n}",
+          "fullSource": "/**\n * File: build_tree.kt\n * Created Time: 2024-01-25\n * Author: curtishd (1023632660@qq.com)\n */\n\npackage chapter_divide_and_conquer.build_tree\n\nimport utils.TreeNode\nimport utils.printTree\n\n/* 构建二叉树：分治 */\nfun dfs(\n    preorder: IntArray,\n    inorderMap: Map<Int?, Int?>,\n    i: Int,\n    l: Int,\n    r: Int\n): TreeNode? {\n    // 子树区间为空时终止\n    if (r - l < 0) return null\n    // 初始化根节点\n    val root = TreeNode(preorder[i])\n    // 查询 m ，从而划分左右子树\n    val m = inorderMap[preorder[i]]!!\n    // 子问题：构建左子树\n    root.left = dfs(preorder, inorderMap, i + 1, l, m - 1)\n    // 子问题：构建右子树\n    root.right = dfs(preorder, inorderMap, i + 1 + m - l, m + 1, r)\n    // 返回根节点\n    return root\n}\n\n/* 构建二叉树 */\nfun buildTree(preorder: IntArray, inorder: IntArray): TreeNode? {\n    // 初始化哈希表，存储 inorder 元素到索引的映射\n    val inorderMap = HashMap<Int?, Int?>()\n    for (i in inorder.indices) {\n        inorderMap[inorder[i]] = i\n    }\n    val root = dfs(preorder, inorderMap, 0, 0, inorder.size - 1)\n    return root\n}\n\n/* Driver Code */\nfun main() {\n    val preorder = intArrayOf(3, 9, 2, 1, 7)\n    val inorder = intArrayOf(9, 3, 1, 2, 7)\n    println(\"前序遍历 = ${preorder.contentToString()}\")\n    println(\"中序遍历 = ${inorder.contentToString()}\")\n\n    val root = buildTree(preorder, inorder)\n    println(\"构建的二叉树为：\")\n    printTree(root)\n}",
+          "sourcePath": "codes/kotlin/chapter_divide_and_conquer/build_tree.kt",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/kotlin/chapter_divide_and_conquer/build_tree.kt",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "dart",
+          "snippet": "TreeNode? buildTree(List<int> preorder, List<int> inorder) {\n  // 初始化哈希表，存储 inorder 元素到索引的映射\n  Map<int, int> inorderMap = {};\n  for (int i = 0; i < inorder.length; i++) {\n    inorderMap[inorder[i]] = i;\n  }\n  TreeNode? root = dfs(preorder, inorderMap, 0, 0, inorder.length - 1);\n  return root;\n}",
+          "fullSource": "/**\n * File: build_tree.dart\n * Created Time: 2023-08-10\n * Author: liuyuxin (gvenusleo@gmail.com)\n */\n\nimport '../utils/print_util.dart';\nimport '../utils/tree_node.dart';\n\n/* 构建二叉树：分治 */\nTreeNode? dfs(\n  List<int> preorder,\n  Map<int, int> inorderMap,\n  int i,\n  int l,\n  int r,\n) {\n  // 子树区间为空时终止\n  if (r - l < 0) {\n    return null;\n  }\n  // 初始化根节点\n  TreeNode? root = TreeNode(preorder[i]);\n  // 查询 m ，从而划分左右子树\n  int m = inorderMap[preorder[i]]!;\n  // 子问题：构建左子树\n  root.left = dfs(preorder, inorderMap, i + 1, l, m - 1);\n  // 子问题：构建右子树\n  root.right = dfs(preorder, inorderMap, i + 1 + m - l, m + 1, r);\n  // 返回根节点\n  return root;\n}\n\n/* 构建二叉树 */\nTreeNode? buildTree(List<int> preorder, List<int> inorder) {\n  // 初始化哈希表，存储 inorder 元素到索引的映射\n  Map<int, int> inorderMap = {};\n  for (int i = 0; i < inorder.length; i++) {\n    inorderMap[inorder[i]] = i;\n  }\n  TreeNode? root = dfs(preorder, inorderMap, 0, 0, inorder.length - 1);\n  return root;\n}\n\n/* Driver Code */\nvoid main() {\n  List<int> preorder = [3, 9, 2, 1, 7];\n  List<int> inorder = [9, 3, 1, 2, 7];\n  print(\"前序遍历 = $preorder\");\n  print(\"中序遍历 = $inorder\");\n\n  TreeNode? root = buildTree(preorder, inorder);\n  print(\"构建的二叉树为：\");\n  printTree(root!);\n}\n",
+          "sourcePath": "codes/dart/chapter_divide_and_conquer/build_tree.dart",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/dart/chapter_divide_and_conquer/build_tree.dart",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "ruby",
+          "snippet": "def build_tree(preorder, inorder)\n  # 初始化哈希表，存储 inorder 元素到索引的映射\n  inorder_map = {}\n  inorder.each_with_index { |val, i| inorder_map[val] = i }\n  dfs(preorder, inorder_map, 0, 0, inorder.length - 1)\nend",
+          "fullSource": "=begin\nFile: build_tree.rb\nCreated Time: 2024-05-13\nAuthor: Xuan Khoa Tu Nguyen (ngxktuzkai2000@gmail.com)\n=end\n\nrequire_relative '../utils/tree_node'\nrequire_relative '../utils/print_util'\n\n### 构建二叉树：分治 ###\ndef dfs(preorder, inorder_map, i, l, r)\n  # 子树区间为空时终止\n  return if r - l < 0\n\n  # 初始化根节点\n  root = TreeNode.new(preorder[i])\n  # 查询 m ，从而划分左右子树\n  m = inorder_map[preorder[i]]\n  # 子问题：构建左子树\n  root.left = dfs(preorder, inorder_map, i + 1, l, m - 1)\n  # 子问题：构建右子树\n  root.right = dfs(preorder, inorder_map, i + 1 + m - l, m + 1, r)\n\n  # 返回根节点\n  root\nend\n\n### 构建二叉树 ###\ndef build_tree(preorder, inorder)\n  # 初始化哈希表，存储 inorder 元素到索引的映射\n  inorder_map = {}\n  inorder.each_with_index { |val, i| inorder_map[val] = i }\n  dfs(preorder, inorder_map, 0, 0, inorder.length - 1)\nend\n\n### Driver Code ###\nif __FILE__ == $0\n  preorder = [3, 9, 2, 1, 7]\n  inorder = [9, 3, 1, 2, 7]\n  puts \"前序遍历 = #{preorder}\"\n  puts \"中序遍历 = #{inorder}\"\n\n  root = build_tree(preorder, inorder)\n  puts \"构建的二叉树为：\"\n  print_tree(root)\nend\n",
+          "sourcePath": "codes/ruby/chapter_divide_and_conquer/build_tree.rb",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/ruby/chapter_divide_and_conquer/build_tree.rb",
+          "extraction": "symbol",
+          "runnable": false
+        }
+      ]
+    }
+  ],
+  "animations": [
+    [
+      {
+        "src": "/upstream/chapter_divide_and_conquer/build_binary_tree_problem.assets/built_tree_step1.png",
+        "alt": "构建二叉树的递归过程"
+      },
+      {
+        "src": "/upstream/chapter_divide_and_conquer/build_binary_tree_problem.assets/built_tree_step2.png",
+        "alt": "built_tree_step2"
+      },
+      {
+        "src": "/upstream/chapter_divide_and_conquer/build_binary_tree_problem.assets/built_tree_step3.png",
+        "alt": "built_tree_step3"
+      },
+      {
+        "src": "/upstream/chapter_divide_and_conquer/build_binary_tree_problem.assets/built_tree_step4.png",
+        "alt": "built_tree_step4"
+      },
+      {
+        "src": "/upstream/chapter_divide_and_conquer/build_binary_tree_problem.assets/built_tree_step5.png",
+        "alt": "built_tree_step5"
+      },
+      {
+        "src": "/upstream/chapter_divide_and_conquer/build_binary_tree_problem.assets/built_tree_step6.png",
+        "alt": "built_tree_step6"
+      },
+      {
+        "src": "/upstream/chapter_divide_and_conquer/build_binary_tree_problem.assets/built_tree_step7.png",
+        "alt": "built_tree_step7"
+      },
+      {
+        "src": "/upstream/chapter_divide_and_conquer/build_binary_tree_problem.assets/built_tree_step8.png",
+        "alt": "built_tree_step8"
+      },
+      {
+        "src": "/upstream/chapter_divide_and_conquer/build_binary_tree_problem.assets/built_tree_step9.png",
+        "alt": "built_tree_step9"
+      }
+    ]
+  ],
+  "conversion": {
+    "sourceSha256": "5932676c617639e9bf0802467592bb32ce1d14a000b53fbb33ced819cb43e3e0",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 1,
+    "animationGroups": 1
+  }
+}

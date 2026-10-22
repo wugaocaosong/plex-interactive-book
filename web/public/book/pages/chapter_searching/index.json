@@ -1,0 +1,25 @@
+{
+  "id": "chapter_searching/index",
+  "title": "搜索",
+  "kind": "chapter",
+  "group": "第 10 章   搜索",
+  "route": "/read/chapter_searching/index",
+  "sourcePath": "chapter_searching/index.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">搜索</h1>\n<figure data-block=\"b1\"><img alt=\"搜索\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_searching.jpg\"/><figcaption>搜索</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"b2\">\n<p class=\"admonition-title\">Abstract</p>\n<p>搜索是一场未知的冒险，我们或许需要走遍神秘空间的每个角落，又或许可以快速锁定目标。</p>\n<p>在这场寻觅之旅中，每一次探索都可能得到一个未曾料想的答案。</p>\n</div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "abd71dfc94dafd15cf0a2551ce26bda01566b38a74000a5d12d7fb7378ca2a8f",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "id": "chapter_sorting/selection_sort",
+  "title": "11.2   选择排序",
+  "kind": "chapter",
+  "group": "第 11 章   排序",
+  "route": "/read/chapter_sorting/selection_sort",
+  "sourcePath": "chapter_sorting/selection_sort.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">选择排序</h1>\n<p data-block=\"b1\"><u>选择排序（selection sort）</u>的工作原理非常简单：开启一个循环，每轮从未排序区间选择最小的元素，将其放到已排序区间的末尾。</p>\n<p data-block=\"b2\">设数组的长度为 <span class=\"arithmatex\">\\(n\\)</span> ，选择排序的算法流程如下图所示。</p>\n<ol data-block=\"b3\">\n<li>初始状态下，所有元素未排序，即未排序（索引）区间为 <span class=\"arithmatex\">\\([0, n-1]\\)</span> 。</li>\n<li>选取区间 <span class=\"arithmatex\">\\([0, n-1]\\)</span> 中的最小元素，将其与索引 <span class=\"arithmatex\">\\(0\\)</span> 处的元素交换。完成后，数组前 1 个元素已排序。</li>\n<li>选取区间 <span class=\"arithmatex\">\\([1, n-1]\\)</span> 中的最小元素，将其与索引 <span class=\"arithmatex\">\\(1\\)</span> 处的元素交换。完成后，数组前 2 个元素已排序。</li>\n<li>以此类推。经过 <span class=\"arithmatex\">\\(n - 1\\)</span> 轮选择与交换后，数组前 <span class=\"arithmatex\">\\(n - 1\\)</span> 个元素已排序。</li>\n<li>仅剩的一个元素必定是最大元素，无须排序，因此数组排序完成。</li>\n</ol>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"b4\"><img alt=\"选择排序步骤\" data-action=\"image\" src=\"/upstream/chapter_sorting/selection_sort.assets/selection_sort_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 11</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<p data-block=\"b5\">在代码中，我们用 <span class=\"arithmatex\">\\(k\\)</span> 来记录未排序区间内的最小元素：</p>\n<div class=\"code-example\" data-block=\"b6\" data-code=\"0\"><div class=\"code-caption\"><span>selection_sort · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def selection_sort(nums: list[int]):\n    \"\"\"选择排序\"\"\"\n    n = len(nums)\n    # 外循环：未排序区间为 [i, n-1]\n    for i in range(n - 1):\n        # 内循环：找到未排序区间内的最小元素\n        k = i\n        for j in range(i + 1, n):\n            if nums[j] &lt; nums[k]:\n                k = j  # 记录最小元素的索引\n        # 将该最小元素与未排序区间的首个元素交换\n        nums[i], nums[k] = nums[k], nums[i]</code></pre></div>\n<h2 data-block=\"b7\" id=\"_2\">算法特性</h2>\n<ul data-block=\"b8\">\n<li><strong>时间复杂度为 <span class=\"arithmatex\">\\(O(n^2)\\)</span>、非自适应排序</strong>：外循环共 <span class=\"arithmatex\">\\(n - 1\\)</span> 轮，第一轮内循环执行 <span class=\"arithmatex\">\\(n - 1\\)</span> 次，最后一轮执行 <span class=\"arithmatex\">\\(1\\)</span> 次，即各轮内循环分别执行 <span class=\"arithmatex\">\\(n - 1\\)</span>、<span class=\"arithmatex\">\\(n - 2\\)</span>、<span class=\"arithmatex\">\\(\\dots\\)</span>、<span class=\"arithmatex\">\\(2\\)</span>、<span class=\"arithmatex\">\\(1\\)</span> 次，求和为 <span class=\"arithmatex\">\\(\\frac{n(n - 1)}{2}\\)</span> 。</li>\n<li><strong>空间复杂度为 <span class=\"arithmatex\">\\(O(1)\\)</span>、原地排序</strong>：指针 <span class=\"arithmatex\">\\(i\\)</span> 和 <span class=\"arithmatex\">\\(j\\)</span> 使用常数大小的额外空间。</li>\n<li><strong>非稳定排序</strong>：如下图所示，元素 <code>nums[i]</code> 有可能被交换至与其相等的元素的右边，导致两者的相对顺序发生改变。</li>\n</ul>\n<figure data-block=\"b9\"><img alt=\"选择排序非稳定示例\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_sorting/selection_sort.assets/selection_sort_instability.png\"/><figcaption>选择排序非稳定示例</figcaption></figure>",
+  "codeExamples": [
+    {
+      "id": "chapter_sorting/selection_sort-code-0",
+      "file": "selection_sort",
+      "className": "",
+      "functionName": "selection_sort",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def selection_sort(nums: list[int]):\n    \"\"\"选择排序\"\"\"\n    n = len(nums)\n    # 外循环：未排序区间为 [i, n-1]\n    for i in range(n - 1):\n        # 内循环：找到未排序区间内的最小元素\n        k = i\n        for j in range(i + 1, n):\n            if nums[j] < nums[k]:\n                k = j  # 记录最小元素的索引\n        # 将该最小元素与未排序区间的首个元素交换\n        nums[i], nums[k] = nums[k], nums[i]",
+          "fullSource": "\"\"\"\nFile: selection_sort.py\nCreated Time: 2023-05-22\nAuthor: krahets (krahets@163.com)\n\"\"\"\n\n\ndef selection_sort(nums: list[int]):\n    \"\"\"选择排序\"\"\"\n    n = len(nums)\n    # 外循环：未排序区间为 [i, n-1]\n    for i in range(n - 1):\n        # 内循环：找到未排序区间内的最小元素\n        k = i\n        for j in range(i + 1, n):\n            if nums[j] < nums[k]:\n                k = j  # 记录最小元素的索引\n        # 将该最小元素与未排序区间的首个元素交换\n        nums[i], nums[k] = nums[k], nums[i]\n\n\n\"\"\"Driver Code\"\"\"\nif __name__ == \"__main__\":\n    nums = [4, 1, 3, 1, 5, 2]\n    selection_sort(nums)\n    print(\"选择排序完成后 nums =\", nums)\n",
+          "sourcePath": "codes/python/chapter_sorting/selection_sort.py",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/python/chapter_sorting/selection_sort.py",
+          "extraction": "symbol",
+          "runnable": true
+        },
+        {
+          "language": "java",
+          "snippet": "public class selection_sort {\n    /* 选择排序 */\n    public static void selectionSort(int[] nums) {\n        int n = nums.length;\n        // 外循环：未排序区间为 [i, n-1]\n        for (int i = 0; i < n - 1; i++) {\n            // 内循环：找到未排序区间内的最小元素\n            int k = i;\n            for (int j = i + 1; j < n; j++) {\n                if (nums[j] < nums[k])\n                    k = j; // 记录最小元素的索引\n            }\n            // 将该最小元素与未排序区间的首个元素交换\n            int temp = nums[i];\n            nums[i] = nums[k];\n            nums[k] = temp;\n        }\n    }\n\n    public static void main(String[] args) {\n        int[] nums = { 4, 1, 3, 1, 5, 2 };\n        selectionSort(nums);\n        System.out.println(\"选择排序完成后 nums = \" + Arrays.toString(nums));\n    }\n}",
+          "fullSource": "/**\n * File: selection_sort.java\n * Created Time: 2023-05-23\n * Author: krahets (krahets@163.com)\n */\n\npackage chapter_sorting;\n\nimport java.util.Arrays;\n\npublic class selection_sort {\n    /* 选择排序 */\n    public static void selectionSort(int[] nums) {\n        int n = nums.length;\n        // 外循环：未排序区间为 [i, n-1]\n        for (int i = 0; i < n - 1; i++) {\n            // 内循环：找到未排序区间内的最小元素\n            int k = i;\n            for (int j = i + 1; j < n; j++) {\n                if (nums[j] < nums[k])\n                    k = j; // 记录最小元素的索引\n            }\n            // 将该最小元素与未排序区间的首个元素交换\n            int temp = nums[i];\n            nums[i] = nums[k];\n            nums[k] = temp;\n        }\n    }\n\n    public static void main(String[] args) {\n        int[] nums = { 4, 1, 3, 1, 5, 2 };\n        selectionSort(nums);\n        System.out.println(\"选择排序完成后 nums = \" + Arrays.toString(nums));\n    }\n}\n",
+          "sourcePath": "codes/java/chapter_sorting/selection_sort.java",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/java/chapter_sorting/selection_sort.java",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "cpp",
+          "snippet": "void selectionSort(vector<int> &nums) {\n    int n = nums.size();\n    // 外循环：未排序区间为 [i, n-1]\n    for (int i = 0; i < n - 1; i++) {\n        // 内循环：找到未排序区间内的最小元素\n        int k = i;\n        for (int j = i + 1; j < n; j++) {\n            if (nums[j] < nums[k])\n                k = j; // 记录最小元素的索引\n        }\n        // 将该最小元素与未排序区间的首个元素交换\n        swap(nums[i], nums[k]);\n    }\n}",
+          "fullSource": "/**\n * File: selection_sort.cpp\n * Created Time: 2023-05-23\n * Author: krahets (krahets@163.com)\n */\n\n#include \"../utils/common.hpp\"\n\n/* 选择排序 */\nvoid selectionSort(vector<int> &nums) {\n    int n = nums.size();\n    // 外循环：未排序区间为 [i, n-1]\n    for (int i = 0; i < n - 1; i++) {\n        // 内循环：找到未排序区间内的最小元素\n        int k = i;\n        for (int j = i + 1; j < n; j++) {\n            if (nums[j] < nums[k])\n                k = j; // 记录最小元素的索引\n        }\n        // 将该最小元素与未排序区间的首个元素交换\n        swap(nums[i], nums[k]);\n    }\n}\n\n/* Driver Code */\nint main() {\n    vector<int> nums = {4, 1, 3, 1, 5, 2};\n    selectionSort(nums);\n\n    cout << \"选择排序完成后 nums = \";\n    printVector(nums);\n\n    return 0;\n}\n",
+          "sourcePath": "codes/cpp/chapter_sorting/selection_sort.cpp",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/cpp/chapter_sorting/selection_sort.cpp",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "c",
+          "snippet": "void selectionSort(int nums[], int n) {\n    // 外循环：未排序区间为 [i, n-1]\n    for (int i = 0; i < n - 1; i++) {\n        // 内循环：找到未排序区间内的最小元素\n        int k = i;\n        for (int j = i + 1; j < n; j++) {\n            if (nums[j] < nums[k])\n                k = j; // 记录最小元素的索引\n        }\n        // 将该最小元素与未排序区间的首个元素交换\n        int temp = nums[i];\n        nums[i] = nums[k];\n        nums[k] = temp;\n    }\n}",
+          "fullSource": "/**\n * File: selection_sort.c\n * Created Time: 2023-05-31\n * Author: Gonglja (glj0@outlook.com)\n */\n\n#include \"../utils/common.h\"\n\n/* 选择排序 */\nvoid selectionSort(int nums[], int n) {\n    // 外循环：未排序区间为 [i, n-1]\n    for (int i = 0; i < n - 1; i++) {\n        // 内循环：找到未排序区间内的最小元素\n        int k = i;\n        for (int j = i + 1; j < n; j++) {\n            if (nums[j] < nums[k])\n                k = j; // 记录最小元素的索引\n        }\n        // 将该最小元素与未排序区间的首个元素交换\n        int temp = nums[i];\n        nums[i] = nums[k];\n        nums[k] = temp;\n    }\n}\n\n/* Driver Code */\nint main() {\n    int nums[] = {4, 1, 3, 1, 5, 2};\n    int n = sizeof(nums) / sizeof(nums[0]);\n\n    selectionSort(nums, n);\n\n    printf(\"选择排序完成后 nums = \");\n    printArray(nums, n);\n\n    return 0;\n}\n",
+          "sourcePath": "codes/c/chapter_sorting/selection_sort.c",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/c/chapter_sorting/selection_sort.c",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "csharp",
+          "snippet": "public class selection_sort {\n    /* 选择排序 */\n    void SelectionSort(int[] nums) {\n        int n = nums.Length;\n        // 外循环：未排序区间为 [i, n-1]\n        for (int i = 0; i < n - 1; i++) {\n            // 内循环：找到未排序区间内的最小元素\n            int k = i;\n            for (int j = i + 1; j < n; j++) {\n                if (nums[j] < nums[k])\n                    k = j; // 记录最小元素的索引\n            }\n            // 将该最小元素与未排序区间的首个元素交换\n            (nums[k], nums[i]) = (nums[i], nums[k]);\n        }\n    }\n\n    [Test]\n    public void Test() {\n        int[] nums = [4, 1, 3, 1, 5, 2];\n        SelectionSort(nums);\n        Console.WriteLine(\"选择排序完成后 nums = \" + string.Join(\" \", nums));\n    }\n}",
+          "fullSource": "﻿/**\n* File: selection_sort.cs\n* Created Time: 2023-06-01\n* Author: hpstory (hpstory1024@163.com)\n*/\n\nnamespace hello_algo.chapter_sorting;\n\npublic class selection_sort {\n    /* 选择排序 */\n    void SelectionSort(int[] nums) {\n        int n = nums.Length;\n        // 外循环：未排序区间为 [i, n-1]\n        for (int i = 0; i < n - 1; i++) {\n            // 内循环：找到未排序区间内的最小元素\n            int k = i;\n            for (int j = i + 1; j < n; j++) {\n                if (nums[j] < nums[k])\n                    k = j; // 记录最小元素的索引\n            }\n            // 将该最小元素与未排序区间的首个元素交换\n            (nums[k], nums[i]) = (nums[i], nums[k]);\n        }\n    }\n\n    [Test]\n    public void Test() {\n        int[] nums = [4, 1, 3, 1, 5, 2];\n        SelectionSort(nums);\n        Console.WriteLine(\"选择排序完成后 nums = \" + string.Join(\" \", nums));\n    }\n}\n",
+          "sourcePath": "codes/csharp/chapter_sorting/selection_sort.cs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/csharp/chapter_sorting/selection_sort.cs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "go",
+          "snippet": "func selectionSort(nums []int) {\n\tn := len(nums)\n\t// 外循环：未排序区间为 [i, n-1]\n\tfor i := 0; i < n-1; i++ {\n\t\t// 内循环：找到未排序区间内的最小元素\n\t\tk := i\n\t\tfor j := i + 1; j < n; j++ {\n\t\t\tif nums[j] < nums[k] {\n\t\t\t\t// 记录最小元素的索引\n\t\t\t\tk = j\n\t\t\t}\n\t\t}\n\t\t// 将该最小元素与未排序区间的首个元素交换\n\t\tnums[i], nums[k] = nums[k], nums[i]\n\n\t}\n}",
+          "fullSource": "// File: selection_sort.go\n// Created Time: 2023-05-29\n// Author: Reanon (793584285@qq.com)\n\npackage chapter_sorting\n\n/* 选择排序 */\nfunc selectionSort(nums []int) {\n\tn := len(nums)\n\t// 外循环：未排序区间为 [i, n-1]\n\tfor i := 0; i < n-1; i++ {\n\t\t// 内循环：找到未排序区间内的最小元素\n\t\tk := i\n\t\tfor j := i + 1; j < n; j++ {\n\t\t\tif nums[j] < nums[k] {\n\t\t\t\t// 记录最小元素的索引\n\t\t\t\tk = j\n\t\t\t}\n\t\t}\n\t\t// 将该最小元素与未排序区间的首个元素交换\n\t\tnums[i], nums[k] = nums[k], nums[i]\n\n\t}\n}\n",
+          "sourcePath": "codes/go/chapter_sorting/selection_sort.go",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/go/chapter_sorting/selection_sort.go",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "javascript",
+          "snippet": "function selectionSort(nums) {\n    let n = nums.length;\n    // 外循环：未排序区间为 [i, n-1]\n    for (let i = 0; i < n - 1; i++) {\n        // 内循环：找到未排序区间内的最小元素\n        let k = i;\n        for (let j = i + 1; j < n; j++) {\n            if (nums[j] < nums[k]) {\n                k = j; // 记录最小元素的索引\n            }\n        }\n        // 将该最小元素与未排序区间的首个元素交换\n        [nums[i], nums[k]] = [nums[k], nums[i]];\n    }\n}",
+          "fullSource": "/**\n * File: selection_sort.js\n * Created Time: 2023-06-04\n * Author: Justin (xiefahit@gmail.com)\n */\n\n/* 选择排序 */\nfunction selectionSort(nums) {\n    let n = nums.length;\n    // 外循环：未排序区间为 [i, n-1]\n    for (let i = 0; i < n - 1; i++) {\n        // 内循环：找到未排序区间内的最小元素\n        let k = i;\n        for (let j = i + 1; j < n; j++) {\n            if (nums[j] < nums[k]) {\n                k = j; // 记录最小元素的索引\n            }\n        }\n        // 将该最小元素与未排序区间的首个元素交换\n        [nums[i], nums[k]] = [nums[k], nums[i]];\n    }\n}\n\n/* Driver Code */\nconst nums = [4, 1, 3, 1, 5, 2];\nselectionSort(nums);\nconsole.log('选择排序完成后 nums =', nums);\n",
+          "sourcePath": "codes/javascript/chapter_sorting/selection_sort.js",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/javascript/chapter_sorting/selection_sort.js",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "typescript",
+          "snippet": "function selectionSort(nums: number[]): void {\n    let n = nums.length;\n    // 外循环：未排序区间为 [i, n-1]\n    for (let i = 0; i < n - 1; i++) {\n        // 内循环：找到未排序区间内的最小元素\n        let k = i;\n        for (let j = i + 1; j < n; j++) {\n            if (nums[j] < nums[k]) {\n                k = j; // 记录最小元素的索引\n            }\n        }\n        // 将该最小元素与未排序区间的首个元素交换\n        [nums[i], nums[k]] = [nums[k], nums[i]];\n    }\n}",
+          "fullSource": "/**\n * File: selection_sort.ts\n * Created Time: 2023-06-04\n * Author: Justin (xiefahit@gmail.com)\n */\n\n/* 选择排序 */\nfunction selectionSort(nums: number[]): void {\n    let n = nums.length;\n    // 外循环：未排序区间为 [i, n-1]\n    for (let i = 0; i < n - 1; i++) {\n        // 内循环：找到未排序区间内的最小元素\n        let k = i;\n        for (let j = i + 1; j < n; j++) {\n            if (nums[j] < nums[k]) {\n                k = j; // 记录最小元素的索引\n            }\n        }\n        // 将该最小元素与未排序区间的首个元素交换\n        [nums[i], nums[k]] = [nums[k], nums[i]];\n    }\n}\n\n/* Driver Code */\nconst nums: number[] = [4, 1, 3, 1, 5, 2];\nselectionSort(nums);\nconsole.log('选择排序完成后 nums =', nums);\n\nexport {};\n",
+          "sourcePath": "codes/typescript/chapter_sorting/selection_sort.ts",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/typescript/chapter_sorting/selection_sort.ts",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "swift",
+          "snippet": "func selectionSort(nums: inout [Int]) {\n    // 外循环：未排序区间为 [i, n-1]\n    for i in nums.indices.dropLast() {\n        // 内循环：找到未排序区间内的最小元素\n        var k = i\n        for j in nums.indices.dropFirst(i + 1) {\n            if nums[j] < nums[k] {\n                k = j // 记录最小元素的索引\n            }\n        }\n        // 将该最小元素与未排序区间的首个元素交换\n        nums.swapAt(i, k)\n    }\n}",
+          "fullSource": "/**\n * File: selection_sort.swift\n * Created Time: 2023-05-28\n * Author: nuomi1 (nuomi1@qq.com)\n */\n\n/* 选择排序 */\nfunc selectionSort(nums: inout [Int]) {\n    // 外循环：未排序区间为 [i, n-1]\n    for i in nums.indices.dropLast() {\n        // 内循环：找到未排序区间内的最小元素\n        var k = i\n        for j in nums.indices.dropFirst(i + 1) {\n            if nums[j] < nums[k] {\n                k = j // 记录最小元素的索引\n            }\n        }\n        // 将该最小元素与未排序区间的首个元素交换\n        nums.swapAt(i, k)\n    }\n}\n\n@main\nenum SelectionSort {\n    /* Driver Code */\n    static func main() {\n        var nums = [4, 1, 3, 1, 5, 2]\n        selectionSort(nums: &nums)\n        print(\"选择排序完成后 nums = \\(nums)\")\n    }\n}\n",
+          "sourcePath": "codes/swift/chapter_sorting/selection_sort.swift",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/swift/chapter_sorting/selection_sort.swift",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "rust",
+          "snippet": "fn selection_sort(nums: &mut [i32]) {\n    if nums.is_empty() {\n        return;\n    }\n    let n = nums.len();\n    // 外循环：未排序区间为 [i, n-1]\n    for i in 0..n - 1 {\n        // 内循环：找到未排序区间内的最小元素\n        let mut k = i;\n        for j in i + 1..n {\n            if nums[j] < nums[k] {\n                k = j; // 记录最小元素的索引\n            }\n        }\n        // 将该最小元素与未排序区间的首个元素交换\n        nums.swap(i, k);\n    }\n}",
+          "fullSource": "/*\n * File: selection_sort.rs\n * Created Time: 2023-05-30\n * Author: WSL0809 (wslzzy@outlook.com)\n */\n\nuse hello_algo_rust::include::print_util;\n\n/* 选择排序 */\nfn selection_sort(nums: &mut [i32]) {\n    if nums.is_empty() {\n        return;\n    }\n    let n = nums.len();\n    // 外循环：未排序区间为 [i, n-1]\n    for i in 0..n - 1 {\n        // 内循环：找到未排序区间内的最小元素\n        let mut k = i;\n        for j in i + 1..n {\n            if nums[j] < nums[k] {\n                k = j; // 记录最小元素的索引\n            }\n        }\n        // 将该最小元素与未排序区间的首个元素交换\n        nums.swap(i, k);\n    }\n}\n\n/* Driver Code */\npub fn main() {\n    let mut nums = [4, 1, 3, 1, 5, 2];\n    selection_sort(&mut nums);\n    print!(\"\\n选择排序完成后 nums = \");\n    print_util::print_array(&nums);\n}\n",
+          "sourcePath": "codes/rust/chapter_sorting/selection_sort.rs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/rust/chapter_sorting/selection_sort.rs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "kotlin",
+          "snippet": "fun selectionSort(nums: IntArray) {\n    val n = nums.size\n    // 外循环：未排序区间为 [i, n-1]\n    for (i in 0..<n - 1) {\n        var k = i\n        // 内循环：找到未排序区间内的最小元素\n        for (j in i + 1..<n) {\n            if (nums[j] < nums[k])\n                k = j // 记录最小元素的索引\n        }\n        // 将该最小元素与未排序区间的首个元素交换\n        val temp = nums[i]\n        nums[i] = nums[k]\n        nums[k] = temp\n    }\n}",
+          "fullSource": "/**\n * File: selection_sort.kt\n * Created Time: 2024-01-25\n * Author: curtishd (1023632660@qq.com)\n */\n\npackage chapter_sorting\n\n/* 选择排序 */\nfun selectionSort(nums: IntArray) {\n    val n = nums.size\n    // 外循环：未排序区间为 [i, n-1]\n    for (i in 0..<n - 1) {\n        var k = i\n        // 内循环：找到未排序区间内的最小元素\n        for (j in i + 1..<n) {\n            if (nums[j] < nums[k])\n                k = j // 记录最小元素的索引\n        }\n        // 将该最小元素与未排序区间的首个元素交换\n        val temp = nums[i]\n        nums[i] = nums[k]\n        nums[k] = temp\n    }\n}\n\n/* Driver Code */\nfun main() {\n    val nums = intArrayOf(4, 1, 3, 1, 5, 2)\n    selectionSort(nums)\n    println(\"选择排序完成后 nums = ${nums.contentToString()}\")\n}",
+          "sourcePath": "codes/kotlin/chapter_sorting/selection_sort.kt",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/kotlin/chapter_sorting/selection_sort.kt",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "dart",
+          "snippet": "void selectionSort(List<int> nums) {\n  int n = nums.length;\n  // 外循环：未排序区间为 [i, n-1]\n  for (int i = 0; i < n - 1; i++) {\n    // 内循环：找到未排序区间内的最小元素\n    int k = i;\n    for (int j = i + 1; j < n; j++) {\n      if (nums[j] < nums[k]) k = j; // 记录最小元素的索引\n    }\n    // 将该最小元素与未排序区间的首个元素交换\n    int temp = nums[i];\n    nums[i] = nums[k];\n    nums[k] = temp;\n  }\n}",
+          "fullSource": "/**\n * File: selection_sort.dart\n * Created Time: 2023-06-01\n * Author: liuyuxin (gvenusleo@gmail.com)\n */\n\n/* 选择排序 */\nvoid selectionSort(List<int> nums) {\n  int n = nums.length;\n  // 外循环：未排序区间为 [i, n-1]\n  for (int i = 0; i < n - 1; i++) {\n    // 内循环：找到未排序区间内的最小元素\n    int k = i;\n    for (int j = i + 1; j < n; j++) {\n      if (nums[j] < nums[k]) k = j; // 记录最小元素的索引\n    }\n    // 将该最小元素与未排序区间的首个元素交换\n    int temp = nums[i];\n    nums[i] = nums[k];\n    nums[k] = temp;\n  }\n}\n\n/* Driver Code */\nvoid main() {\n  List<int> nums = [4, 1, 3, 1, 5, 2];\n  selectionSort(nums);\n  print(\"选择排序完成后 nums = $nums\");\n}\n",
+          "sourcePath": "codes/dart/chapter_sorting/selection_sort.dart",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/dart/chapter_sorting/selection_sort.dart",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "ruby",
+          "snippet": "def selection_sort(nums)\n  n = nums.length\n  # 外循环：未排序区间为 [i, n-1]\n  for i in 0...(n - 1)\n    # 内循环：找到未排序区间内的最小元素\n    k = i\n    for j in (i + 1)...n\n      if nums[j] < nums[k]\n        k = j # 记录最小元素的索引\n      end\n    end\n    # 将该最小元素与未排序区间的首个元素交换\n    nums[i], nums[k] = nums[k], nums[i]\n  end\nend",
+          "fullSource": "=begin\nFile: selection_sort.rb\nCreated Time: 2024-05-03\nAuthor: Xuan Khoa Tu Nguyen (ngxktuzkai2000@gmail.com)\n=end\n\n### 选择排序 ###\ndef selection_sort(nums)\n  n = nums.length\n  # 外循环：未排序区间为 [i, n-1]\n  for i in 0...(n - 1)\n    # 内循环：找到未排序区间内的最小元素\n    k = i\n    for j in (i + 1)...n\n      if nums[j] < nums[k]\n        k = j # 记录最小元素的索引\n      end\n    end\n    # 将该最小元素与未排序区间的首个元素交换\n    nums[i], nums[k] = nums[k], nums[i]\n  end\nend\n\n### Driver Code ###\nif __FILE__ == $0\n  nums = [4, 1, 3, 1, 5, 2]\n  selection_sort(nums)\n  puts \"选择排序完成后 nums = #{nums}\"\nend\n",
+          "sourcePath": "codes/ruby/chapter_sorting/selection_sort.rb",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/ruby/chapter_sorting/selection_sort.rb",
+          "extraction": "symbol",
+          "runnable": false
+        }
+      ]
+    }
+  ],
+  "animations": [
+    [
+      {
+        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step1.png",
+        "alt": "选择排序步骤"
+      },
+      {
+        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step2.png",
+        "alt": "selection_sort_step2"
+      },
+      {
+        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step3.png",
+        "alt": "selection_sort_step3"
+      },
+      {
+        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step4.png",
+        "alt": "selection_sort_step4"
+      },
+      {
+        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step5.png",
+        "alt": "selection_sort_step5"
+      },
+      {
+        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step6.png",
+        "alt": "selection_sort_step6"
+      },
+      {
+        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step7.png",
+        "alt": "selection_sort_step7"
+      },
+      {
+        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step8.png",
+        "alt": "selection_sort_step8"
+      },
+      {
+        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step9.png",
+        "alt": "selection_sort_step9"
+      },
+      {
+        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step10.png",
+        "alt": "selection_sort_step10"
+      },
+      {
+        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step11.png",
+        "alt": "selection_sort_step11"
+      }
+    ]
+  ],
+  "conversion": {
+    "sourceSha256": "3973ca287402a2f1c7cd9ec2a0f7199f3a066b2b3192b6f2c0196ecd0e78da23",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 1,
+    "animationGroups": 1
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "chapter_searching/exercises",
+  "title": "10.7   练习",
+  "kind": "chapter",
+  "group": "第 10 章   搜索",
+  "route": "/read/chapter_searching/exercises",
+  "sourcePath": "chapter_searching/exercises.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">练习</h1>\n<h2 data-block=\"b1\" id=\"_2\">知识巩固</h2>\n<h3 data-block=\"b2\" id=\"_3\">二分查找怎样缩小搜索区间</h3>\n<p data-block=\"b3\">在有序数组 <code>[2, 5, 8, 12, 16, 23, 38]</code> 中查找 16。\n使用双闭区间 <code>[i, j]</code>，中点为\n<span class=\"arithmatex\">\\(m=i+(j-i)/2\\)</span>（向下取整）。</p>\n<p data-block=\"b4\">请写出每轮的 <code>(i, j, m)</code>、中点元素，以及下一步如何缩小区间，\n直到找到目标。</p>\n<details class=\"success\" data-block=\"b5\">\n<summary>参考答案</summary>\n<p>每轮查找过程如下：</p>\n<table>\n<thead>\n<tr>\n<th>轮次</th>\n<th><code>(i, j, m)</code></th>\n<th>中点元素</th>\n<th>下一步</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td><code>(0, 6, 3)</code></td>\n<td>12</td>\n<td><code>12 &lt; 16</code>，令 <code>i = 4</code></td>\n</tr>\n<tr>\n<td>2</td>\n<td><code>(4, 6, 5)</code></td>\n<td>23</td>\n<td><code>23 &gt; 16</code>，令 <code>j = 4</code></td>\n</tr>\n<tr>\n<td>3</td>\n<td><code>(4, 4, 4)</code></td>\n<td>16</td>\n<td>找到目标，返回索引 4</td>\n</tr>\n</tbody>\n</table>\n<p>数组有序，所以中点值小于目标时可以排除中点及其左侧；\n中点值大于目标时可以排除中点及其右侧。</p>\n</details>\n<h3 data-block=\"b6\" id=\"_4\">重复元素的左右边界</h3>\n<p data-block=\"b7\">在数组 <code>[1, 2, 2, 2, 4, 6]</code> 中查找数字 2。\n一名同学用二分查找在索引 2 找到目标后立即返回，并说：\n“索引 2 就是数字 2 的左边界。”</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"b8\">\n<li>这名同学的说法是否正确？数字 2 的左、右边界分别是多少？请说明理由。</li>\n<li>查找左边界时，若中点元素等于目标，接下来应继续搜索哪一侧？</li>\n<li>查找右边界时又应继续搜索哪一侧？只需说明方向，无须写出完整的查找过程。</li>\n</ol>\n<details class=\"success\" data-block=\"b9\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>这名同学的说法不正确。找到一个 2 后立即返回，只能保证找到某一个 2，不能保证找到最左或最右的 2。\n    本题的左边界为索引 1，右边界为索引 3。</p>\n</li>\n<li>\n<p>查找左边界时，即使中点元素等于 2，也要继续搜索左侧，\n    例如在双闭区间写法中令 <code>j = m - 1</code>。</p>\n</li>\n<li>\n<p>查找右边界时，中点元素等于 2 后应继续搜索右侧，\n    例如令 <code>i = m + 1</code>。</p>\n</li>\n</ol>\n</details>\n<h3 data-block=\"b10\" id=\"_5\">不同数据该选哪种搜索方法</h3>\n<p data-block=\"b11\">请在“顺序查找、二分查找、哈希表”中，为下面三个场景选择合适的方法，并说明理由：</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"b12\">\n<li>在 <span class=\"arithmatex\">\\(10^7\\)</span> 个已经有序且不再变动的整数中反复查找，不额外建立其他数据结构；</li>\n<li>在频繁插入、删除的数据集中反复判断某个键是否存在，不要求保持有序，也不进行范围查找；</li>\n<li>在无序数组中只查找一次某个值。</li>\n</ol>\n<details class=\"success\" data-block=\"b13\">\n<summary>参考答案</summary>\n<ol>\n<li>二分查找：数据有序且静态，<span class=\"arithmatex\">\\(O(\\log n)\\)</span> 且无须额外空间。</li>\n<li>哈希表：当哈希函数能把键较均匀地分散到各桶时，插入、删除和按键查找的平均时间复杂度都是 <span class=\"arithmatex\">\\(O(1)\\)</span>。</li>\n<li>\n<p>直接从头到尾遍历：只查找一次时，排序或建立哈希表都要先处理整个数组，\n    并不会减少这一次任务的总工作量。</p>\n<p>选择取决于数据是否有序、是否允许建立额外结构、查询次数以及需要执行哪些操作。</p>\n</li>\n</ol>\n</details>\n<h2 data-block=\"b14\" id=\"_6\">编程练习</h2>\n<h3 data-block=\"b15\" id=\"_7\">有序数组的二分查找</h3>\n<p data-block=\"b16\">给定一个按严格递增顺序排列的整数数组 <code>nums</code> 和目标值 <code>target</code>。请使用二分查找找到 <code>target</code>：若存在，返回它的数组索引；若不存在，返回 -1。</p>\n<details class=\"tip\" data-block=\"b17\">\n<summary>解题提示</summary>\n<ol>\n<li>初始区间是 left = 0、right = n - 1，非空条件是 left &lt;= right</li>\n<li>用 mid = left + (right - left) // 2 计算中点</li>\n<li>若 <code>nums[mid]</code> 小于 <code>target</code>，就把左边界移到 <code>mid + 1</code>；若 <code>nums[mid]</code> 大于 <code>target</code>，就把右边界移到 <code>mid - 1</code>；相等时立即返回</li>\n</ol>\n</details>\n<p data-block=\"b18\"><a class=\"rounded-button exercise-button\" href=\"https://leetcode.cn/problems/binary-search/\" rel=\"noopener noreferrer\" target=\"_blank\">LeetCode</a> <a class=\"rounded-button exercise-button\" href=\"https://leetcode.cn/problems/binary-search/solutions/1692151/by-jyd-i7xr/\" rel=\"noopener noreferrer\" target=\"_blank\">题目解析</a></p>\n<h3 data-block=\"b19\" id=\"_8\">有序数组的插入位置</h3>\n<p data-block=\"b20\">给定一个按严格递增顺序排列的整数数组 <code>nums</code> 和目标值 <code>target</code>。</p>\n<p data-block=\"b21\">若 <code>target</code> 已在数组中，返回它的索引；否则，返回把 <code>target</code> 插入数组后仍能保持严格递增顺序的位置。答案可能是 0，也可能等于数组长度。请使用二分查找。</p>\n<details class=\"tip\" data-block=\"b22\">\n<summary>解题提示</summary>\n<ol>\n<li>答案可能是 0，也可能是数组长度 n</li>\n<li>使用双闭区间时，若 <code>nums[mid]</code> 大于等于 <code>target</code>，就令 <code>right = mid - 1</code>，继续检查更靠左的位置；否则令 <code>left = mid + 1</code></li>\n<li>循环结束时 left 就是插入位置</li>\n</ol>\n</details>\n<p data-block=\"b23\"><a class=\"rounded-button exercise-button\" href=\"https://leetcode.cn/problems/search-insert-position/\" rel=\"noopener noreferrer\" target=\"_blank\">LeetCode</a></p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "9d8ed7f975385156fe7a826ad7cedf0bd415c8b2cf51e6a5ca1f256727ab0c81",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  }
+}

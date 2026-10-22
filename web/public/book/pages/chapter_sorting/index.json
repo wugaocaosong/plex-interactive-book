@@ -1,0 +1,25 @@
+{
+  "id": "chapter_sorting/index",
+  "title": "排序",
+  "kind": "chapter",
+  "group": "第 11 章   排序",
+  "route": "/read/chapter_sorting/index",
+  "sourcePath": "chapter_sorting/index.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"b0\" id=\"_1\">排序</h1>\n<figure data-block=\"b1\"><img alt=\"排序\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_sorting.jpg\"/><figcaption>排序</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"b2\">\n<p class=\"admonition-title\">Abstract</p>\n<p>排序犹如一把将混乱变为秩序的魔法钥匙，使我们能以更高效的方式理解与处理数据。</p>\n<p>无论是简单的升序，还是复杂的分类排列，排序都向我们展示了数据的和谐美感。</p>\n</div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "7e8e6c8503ecea7747a0b85b8b193757897211404f18263fc64638a46343baa1",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  }
+}
