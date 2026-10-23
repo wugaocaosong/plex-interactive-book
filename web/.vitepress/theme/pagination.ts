@@ -32,11 +32,10 @@ export function paginate(source: HTMLElement, measure: HTMLElement, maxHeight: n
     const element = queue[index]
     // Lists may continue on the next leaf, with numbering preserved.
     if (/^(UL|OL)$/.test(element.tagName) && element.children.length > 1) {
-      let textOffset = 0
       const pieces = [...element.children].map((li, i) => {
         const list = element.cloneNode(false) as HTMLElement
-        list.dataset.start = String(textOffset)
-        textOffset += li.textContent?.length || 0
+        const prefix=document.createRange();prefix.selectNodeContents(element);prefix.setEndBefore(li)
+        list.dataset.start = String(Number(element.dataset.start||0)+prefix.toString().length)
         if (element.tagName === 'OL') list.setAttribute('start', String(Number(element.getAttribute('start') || 1) + i))
         list.append(li.cloneNode(true)); return list
       })
