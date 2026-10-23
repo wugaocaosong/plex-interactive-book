@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=24" },
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "predev": "npm run assets",
     "dev": "vitepress dev web --host 127.0.0.1 --port 5190",
@@ -22,22 +24,27 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "vitepress": "1.6.4",
-    "vue": "3.5.22",
-    "page-flip": "2.0.7",
+    "@codemirror/lang-python": "6.2.1",
+    "@codemirror/lint": "6.9.7",
+    "@codemirror/merge": "6.12.3",
+    "@fontsource/jetbrains-mono": "5.2.6",
+    "@fontsource/noto-sans-sc": "5.2.7",
+    "@fontsource/noto-serif-sc": "5.2.6",
+    "codemirror": "6.0.2",
     "h5p-standalone": "3.8.2",
-    "pyodide": "314.0.7",
     "katex": "0.16.22",
     "lucide-vue-next": "0.468.0",
-    "@fontsource/noto-serif-sc": "5.2.6",
-    "@fontsource/noto-sans-sc": "5.2.7",
-    "@fontsource/jetbrains-mono": "5.2.6"
+    "page-flip": "2.0.7",
+    "pyodide": "314.0.7",
+    "shiki": "2.5.0",
+    "vitepress": "1.6.4",
+    "vue": "3.5.22"
   },
   "devDependencies": {
     "@playwright/test": "1.56.1",
-    "typescript": "5.9.3",
-    "vue-tsc": "3.1.1",
+    "@types/katex": "0.16.7",
     "@types/node": "24.7.2",
-    "@types/katex": "0.16.7"
+    "typescript": "5.9.3",
+    "vue-tsc": "3.1.1"
   }
 }

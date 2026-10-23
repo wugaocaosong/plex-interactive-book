@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast, hashlib, html, json, pathlib, re, shutil
 import markdown, yaml
 from bs4 import BeautifulSoup
+from block_ids import assign_blocks
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'content/upstream/hello-algo'
@@ -145,7 +146,8 @@ def convert(source, path, page_id):
         name,cls,func=found.groups()
         variants=code_variants(name,cls,func,path.parts[0])
         index=len(examples)
-        examples.append({'id':f'{page_id}-code-{index}','file':name,'className':cls,'functionName':func,'variants':variants})
+        identity=hashlib.sha256(f'{path.parts[0]}/{name}:{cls}:{func}'.encode()).hexdigest()[:16]
+        examples.append({'id':f'example-{identity}','file':name,'className':cls,'functionName':func,'variants':variants})
         preview=variants[0]
         return '\n\n'+f'<div class="code-example" data-code="{index}"><div class="code-caption"><span>{html.escape(name)} · {preview["language"]}</span><button data-action="code" data-code="{index}">查看 / 运行</button></div><pre><code>{html.escape(preview["snippet"])}</code></pre></div>'+'\n\n'
     source=re.sub(r'```src\s*\n(.*?)\n\s*```',replace_code,source,flags=re.S)
@@ -214,17 +216,19 @@ def page_record(id,title,kind,group,source_path=None):
             'sourcePath':source_path,'sourceCommit':SHA if source_path else None}
 
 def publish(record,body,examples=None,animations=None):
+    body,aliases,changes=assign_blocks(body,record['id'],block_registry)
+    block_changes.extend(changes)
     conversion=None
     if record['sourcePath']:
         original=(SOURCE/'docs'/record['sourcePath']).read_bytes()
         conversion={'sourceSha256':hashlib.sha256(original).hexdigest(),'adapterVersion':1,'operations':['MkDocs Markdown to HTML','local asset and link rewriting','stable block anchors','math and footnotes','image caption grouping'], 'codeReferences':len(examples or []),'animationGroups':len(animations or [])}
-    data={**record,'html':body,'codeExamples':examples or [],'animations':animations or [],'conversion':conversion}
+    data={**record,'html':body,'codeExamples':examples or [],'animations':animations or [],'conversion':conversion,'blockAliases':aliases,'contentVersion':hashlib.sha256(body.encode()).hexdigest()[:16]}
     write_json(PUBLIC/'book/pages'/f'{record["id"]}.json',data)
     routefile=ROOT/'web/read'/f'{record["id"]}.md'
     routefile.parent.mkdir(parents=True,exist_ok=True)
     routefile.write_text('---\n'+yaml.safe_dump({'title':record['title'],'bookId':record['id']},allow_unicode=True)+'---\n',encoding='utf8',newline='\n')
     parsed=BeautifulSoup(body,'html.parser');plain=parsed.get_text(' ',strip=True)
-    search.append({'id':record['id'],'title':record['title'],'group':record['group'],'text':plain,'blocks':[{'blockId':tag['data-block'],'text':tag.get_text(' ',strip=True)} for tag in parsed.select('[data-block]')]})
+    search.append({'id':record['id'],'title':record['title'],'group':record['group'],'text':plain,'blocks':[{'blockId':tag['data-block'],'text':tag.get_text()} for tag in parsed.select('[data-block]')]})
     records.append(record)
 
 if __name__=='__main__':
@@ -236,6 +240,9 @@ if __name__=='__main__':
     route_map={p:f'/read/{p[:-3]}' for p,_,_ in nav}
     route_map['index.md']='/read/contents'
     records=[];search=[];stats={'pages':0,'codeReferences':0,'codeVariants':0,'animationGroups':0,'animationFrames':0,'fullFileDisplays':0}
+    registry_path=ROOT/'content/block-registry.json'
+    block_registry=json.loads(registry_path.read_text(encoding='utf8')) if registry_path.exists() else {}
+    block_changes=[]
     editorial=json.loads((ROOT/'content/editorial.json').read_text(encoding='utf8'))
     def add_editorial(id):
         info=editorial[id]
@@ -267,7 +274,9 @@ if __name__=='__main__':
     for item in nav:
         if item[0].startswith(('chapter_appendix/','chapter_reference/')): add_source(item)
     for id in ['index','about','back-cover']: add_editorial(id)
-    write_json(PUBLIC/'book/manifest.json',{'title':'星轨编程','subtitle':'Python 与算法的探索之旅','version':'0.1.0','sourceCommit':SHA,'pages':records})
+    write_json(PUBLIC/'book/manifest.json',{'title':'星轨编程','subtitle':'Python 与算法的探索之旅','version':'0.2.0','sourceCommit':SHA,'pages':records})
+    write_json(registry_path,block_registry)
+    write_json(ROOT/'docs/block-migration-report.json',block_changes)
     write_json(PUBLIC/'book/search.json',search)
     write_json(ROOT/'docs/import-report.json',{'sourceCommit':SHA,**stats,'totalBookSections':len(records),'transformations':['MkDocs admonitions/details','tabbed diagrams','source code references','math markup','local images and links','stable block anchors']})
     # Images keep their original directory layout. Only referenced web assets are shipped.

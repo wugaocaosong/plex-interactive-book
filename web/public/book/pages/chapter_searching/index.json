@@ -6,7 +6,7 @@
   "route": "/read/chapter_searching/index",
   "sourcePath": "chapter_searching/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"b0\" id=\"_1\">搜索</h1>\n<figure data-block=\"b1\"><img alt=\"搜索\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_searching.jpg\"/><figcaption>搜索</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"b2\">\n<p class=\"admonition-title\">Abstract</p>\n<p>搜索是一场未知的冒险，我们或许需要走遍神秘空间的每个角落，又或许可以快速锁定目标。</p>\n<p>在这场寻觅之旅中，每一次探索都可能得到一个未曾料想的答案。</p>\n</div>",
+  "html": "<h1 data-block=\"blk-faeb0a7cce61e275\" id=\"_1\">搜索</h1>\n<figure data-block=\"blk-0a47f4a69dc87d87\"><img alt=\"搜索\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_searching.jpg\"/><figcaption>搜索</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-07113feca0df2466\">\n<p class=\"admonition-title\">Abstract</p>\n<p>搜索是一场未知的冒险，我们或许需要走遍神秘空间的每个角落，又或许可以快速锁定目标。</p>\n<p>在这场寻觅之旅中，每一次探索都可能得到一个未曾料想的答案。</p>\n</div>",
   "codeExamples": [],
   "animations": [],
   "conversion": {
@@ -21,5 +21,11 @@
     ],
     "codeReferences": 0,
     "animationGroups": 0
-  }
+  },
+  "blockAliases": {
+    "b0": "blk-faeb0a7cce61e275",
+    "b1": "blk-0a47f4a69dc87d87",
+    "b2": "blk-07113feca0df2466"
+  },
+  "contentVersion": "f35198e91d10697a"
 }

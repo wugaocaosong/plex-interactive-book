@@ -6,7 +6,7 @@
   "route": "/read/chapter_stack_and_queue/index",
   "sourcePath": "chapter_stack_and_queue/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"b0\" id=\"_1\">栈与队列</h1>\n<figure data-block=\"b1\"><img alt=\"栈与队列\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_stack_and_queue.jpg\"/><figcaption>栈与队列</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"b2\">\n<p class=\"admonition-title\">Abstract</p>\n<p>栈如同叠猫猫，而队列就像猫猫排队。</p>\n<p>两者分别代表先入后出和先入先出的逻辑关系。</p>\n</div>",
+  "html": "<h1 data-block=\"blk-18c63c64a5db84f1\" id=\"_1\">栈与队列</h1>\n<figure data-block=\"blk-06b017e41ba7d94a\"><img alt=\"栈与队列\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_stack_and_queue.jpg\"/><figcaption>栈与队列</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-9459a37e197a949f\">\n<p class=\"admonition-title\">Abstract</p>\n<p>栈如同叠猫猫，而队列就像猫猫排队。</p>\n<p>两者分别代表先入后出和先入先出的逻辑关系。</p>\n</div>",
   "codeExamples": [],
   "animations": [],
   "conversion": {
@@ -21,5 +21,11 @@
     ],
     "codeReferences": 0,
     "animationGroups": 0
-  }
+  },
+  "blockAliases": {
+    "b0": "blk-18c63c64a5db84f1",
+    "b1": "blk-06b017e41ba7d94a",
+    "b2": "blk-9459a37e197a949f"
+  },
+  "contentVersion": "04534a6bc59e137e"
 }

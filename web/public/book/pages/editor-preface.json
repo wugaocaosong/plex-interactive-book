@@ -6,8 +6,17 @@
   "route": "/read/editor-preface",
   "sourcePath": null,
   "sourceCommit": null,
-  "html": "<h1 data-block=\"b0\">把知识变成探索</h1>\n<p data-block=\"b1\">这本书邀请你边读边做：翻过一页，观察算法的一步；修改一行代码，看看结果如何改变。</p>\n<p data-block=\"b2\">我们保留《Hello 算法》的完整中文教材内容，在它周围加入星轨目录、翻页阅读、Python 运行与练习。星图上的每一颗行星通向一个知识主题，文字目录则帮助你按顺序稳步前进。</p>\n<p data-block=\"b3\">初次阅读时，从“初识算法”开始。看到图解，可以逐帧观察；遇到代码，可以打开完整示例运行。如果暂时没理解，留下书签，稍后再回来。</p>\n<p data-block=\"b4\">接下来的原序与前言来自《Hello 算法》，保留原作者的叙述。</p>\n<p data-block=\"b5\"><em>本页为 PLEX 数字教材编者草稿。</em></p>",
+  "html": "<h1 data-block=\"blk-9662e53fa3e914de\">把知识变成探索</h1>\n<p data-block=\"blk-712e2ed1383ece91\">这本书邀请你边读边做：翻过一页，观察算法的一步；修改一行代码，看看结果如何改变。</p>\n<p data-block=\"blk-c87ed5c57408c13c\">我们保留《Hello 算法》的完整中文教材内容，在它周围加入星轨目录、翻页阅读、Python 运行与练习。星图上的每一颗行星通向一个知识主题，文字目录则帮助你按顺序稳步前进。</p>\n<p data-block=\"blk-8b1519421e87d8ef\">初次阅读时，从“初识算法”开始。看到图解，可以逐帧观察；遇到代码，可以打开完整示例运行。如果暂时没理解，留下书签，稍后再回来。</p>\n<p data-block=\"blk-ee45b20f05ffbe0d\">接下来的原序与前言来自《Hello 算法》，保留原作者的叙述。</p>\n<p data-block=\"blk-360f1bd3871e753e\"><em>本页为 PLEX 数字教材编者草稿。</em></p>",
   "codeExamples": [],
   "animations": [],
-  "conversion": null
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-9662e53fa3e914de",
+    "b1": "blk-712e2ed1383ece91",
+    "b2": "blk-c87ed5c57408c13c",
+    "b3": "blk-8b1519421e87d8ef",
+    "b4": "blk-ee45b20f05ffbe0d",
+    "b5": "blk-360f1bd3871e753e"
+  },
+  "contentVersion": "a23bd3df56a242be"
 }

@@ -6,7 +6,7 @@
   "route": "/read/chapter_introduction/what_is_dsa",
   "sourcePath": "chapter_introduction/what_is_dsa.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"b0\" id=\"_1\">算法是什么</h1>\n<h2 data-block=\"b1\" id=\"_2\">算法定义</h2>\n<p data-block=\"b2\"><u>算法（algorithm）</u>是在有限时间内解决特定问题的一组指令或操作步骤，它具有以下特性。</p>\n<ul data-block=\"b3\">\n<li>问题是明确的，包含清晰的输入和输出定义。</li>\n<li>具有可行性，能够在有限步骤、时间和内存空间下完成。</li>\n<li>各步骤都有确定的含义，在相同的输入和运行条件下，输出始终相同。</li>\n</ul>\n<h2 data-block=\"b4\" id=\"_3\">数据结构定义</h2>\n<p data-block=\"b5\"><u>数据结构（data structure）</u>是组织和存储数据的方式，涵盖数据内容、数据之间关系和数据操作方法，它具有以下设计目标。</p>\n<ul data-block=\"b6\">\n<li>空间占用尽量少，以节省计算机内存。</li>\n<li>数据操作尽可能快速，涵盖数据访问、添加、删除、更新等。</li>\n<li>提供简洁的数据表示和逻辑信息，以便算法高效运行。</li>\n</ul>\n<p data-block=\"b7\"><strong>数据结构设计是一个充满权衡的过程</strong>。如果想在某方面取得提升，往往需要在另一方面作出妥协。下面举两个例子。</p>\n<ul data-block=\"b8\">\n<li>链表相较于数组，在数据添加和删除操作上更加便捷，但牺牲了数据访问速度。</li>\n<li>图相较于链表，提供了更丰富的逻辑信息，但需要占用更大的内存空间。</li>\n</ul>\n<h2 data-block=\"b9\" id=\"_4\">数据结构与算法的关系</h2>\n<p data-block=\"b10\">如下图所示，数据结构与算法高度相关、紧密结合，具体表现在以下三个方面。</p>\n<ul data-block=\"b11\">\n<li>数据结构是算法的基石。数据结构为算法提供了结构化存储的数据，以及操作数据的方法。</li>\n<li>算法为数据结构注入生命力。数据结构本身仅存储数据信息，结合算法才能解决特定问题。</li>\n<li>算法通常可以基于不同的数据结构实现，但执行效率可能相差很大，选择合适的数据结构是关键。</li>\n</ul>\n<figure data-block=\"b12\"><img alt=\"数据结构与算法的关系\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_introduction/what_is_dsa.assets/relationship_between_data_structure_and_algorithm.png\"/><figcaption>数据结构与算法的关系</figcaption></figure>\n<p data-block=\"b13\">数据结构与算法犹如下图所示的拼装积木。一套积木，除了包含许多零件之外，还附有详细的组装说明书。我们按照说明书一步步操作，就能组装出精美的积木模型。</p>\n<figure data-block=\"b14\"><img alt=\"拼装积木\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_introduction/what_is_dsa.assets/assembling_blocks.png\"/><figcaption>拼装积木</figcaption></figure>\n<p data-block=\"b15\">两者的详细对应关系如下表所示。</p>\n<p align=\"center\" data-block=\"b16\"> 表 <id>   将数据结构与算法类比为拼装积木 </id></p>\n<table data-block=\"b17\">\n<thead>\n<tr>\n<th>数据结构与算法</th>\n<th>拼装积木</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>输入数据</td>\n<td>未拼装的积木</td>\n</tr>\n<tr>\n<td>数据结构</td>\n<td>积木组织形式，包括形状、大小、连接方式等</td>\n</tr>\n<tr>\n<td>算法</td>\n<td>把积木拼成目标形态的一系列操作步骤</td>\n</tr>\n<tr>\n<td>输出数据</td>\n<td>积木模型</td>\n</tr>\n</tbody>\n</table>\n<p data-block=\"b18\">值得说明的是，数据结构与算法是独立于编程语言的。正因如此，本书得以提供基于多种编程语言的实现。</p>\n<div class=\"admonition tip\" data-block=\"b19\">\n<p class=\"admonition-title\">约定俗成的简称</p>\n<p>在实际讨论时，我们通常会将“数据结构与算法”简称为“算法”。比如众所周知的 LeetCode 算法题目，实际上同时考查数据结构和算法两方面的知识。</p>\n</div>",
+  "html": "<h1 data-block=\"blk-cf4ecf79dea5387b\" id=\"_1\">算法是什么</h1>\n<h2 data-block=\"blk-d34923293b31faff\" id=\"_2\">算法定义</h2>\n<p data-block=\"blk-4045263ed07f722e\"><u>算法（algorithm）</u>是在有限时间内解决特定问题的一组指令或操作步骤，它具有以下特性。</p>\n<ul data-block=\"blk-49ea325f6271d708\">\n<li>问题是明确的，包含清晰的输入和输出定义。</li>\n<li>具有可行性，能够在有限步骤、时间和内存空间下完成。</li>\n<li>各步骤都有确定的含义，在相同的输入和运行条件下，输出始终相同。</li>\n</ul>\n<h2 data-block=\"blk-7dace2f931f12699\" id=\"_3\">数据结构定义</h2>\n<p data-block=\"blk-36d998d2a9b4785c\"><u>数据结构（data structure）</u>是组织和存储数据的方式，涵盖数据内容、数据之间关系和数据操作方法，它具有以下设计目标。</p>\n<ul data-block=\"blk-08e6e01bd1552c92\">\n<li>空间占用尽量少，以节省计算机内存。</li>\n<li>数据操作尽可能快速，涵盖数据访问、添加、删除、更新等。</li>\n<li>提供简洁的数据表示和逻辑信息，以便算法高效运行。</li>\n</ul>\n<p data-block=\"blk-7006d5fa5b943f81\"><strong>数据结构设计是一个充满权衡的过程</strong>。如果想在某方面取得提升，往往需要在另一方面作出妥协。下面举两个例子。</p>\n<ul data-block=\"blk-933985c54dbe4a90\">\n<li>链表相较于数组，在数据添加和删除操作上更加便捷，但牺牲了数据访问速度。</li>\n<li>图相较于链表，提供了更丰富的逻辑信息，但需要占用更大的内存空间。</li>\n</ul>\n<h2 data-block=\"blk-332cdefff824b4d9\" id=\"_4\">数据结构与算法的关系</h2>\n<p data-block=\"blk-6a5a3e02b3145ff2\">如下图所示，数据结构与算法高度相关、紧密结合，具体表现在以下三个方面。</p>\n<ul data-block=\"blk-5a7423e6efb28879\">\n<li>数据结构是算法的基石。数据结构为算法提供了结构化存储的数据，以及操作数据的方法。</li>\n<li>算法为数据结构注入生命力。数据结构本身仅存储数据信息，结合算法才能解决特定问题。</li>\n<li>算法通常可以基于不同的数据结构实现，但执行效率可能相差很大，选择合适的数据结构是关键。</li>\n</ul>\n<figure data-block=\"blk-87b71f6bfc0ef01a\"><img alt=\"数据结构与算法的关系\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_introduction/what_is_dsa.assets/relationship_between_data_structure_and_algorithm.png\"/><figcaption>数据结构与算法的关系</figcaption></figure>\n<p data-block=\"blk-92a23ac0ecd26c89\">数据结构与算法犹如下图所示的拼装积木。一套积木，除了包含许多零件之外，还附有详细的组装说明书。我们按照说明书一步步操作，就能组装出精美的积木模型。</p>\n<figure data-block=\"blk-d75e8b037d9f08be\"><img alt=\"拼装积木\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_introduction/what_is_dsa.assets/assembling_blocks.png\"/><figcaption>拼装积木</figcaption></figure>\n<p data-block=\"blk-56e9dbd456d6d7c9\">两者的详细对应关系如下表所示。</p>\n<p align=\"center\" data-block=\"blk-0ca227731ef7e28f\"> 表 <id>   将数据结构与算法类比为拼装积木 </id></p>\n<table data-block=\"blk-2ad47921e4f07ade\">\n<thead>\n<tr>\n<th>数据结构与算法</th>\n<th>拼装积木</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>输入数据</td>\n<td>未拼装的积木</td>\n</tr>\n<tr>\n<td>数据结构</td>\n<td>积木组织形式，包括形状、大小、连接方式等</td>\n</tr>\n<tr>\n<td>算法</td>\n<td>把积木拼成目标形态的一系列操作步骤</td>\n</tr>\n<tr>\n<td>输出数据</td>\n<td>积木模型</td>\n</tr>\n</tbody>\n</table>\n<p data-block=\"blk-4071ea5febd5d352\">值得说明的是，数据结构与算法是独立于编程语言的。正因如此，本书得以提供基于多种编程语言的实现。</p>\n<div class=\"admonition tip\" data-block=\"blk-beeb933acfb8ae70\">\n<p class=\"admonition-title\">约定俗成的简称</p>\n<p>在实际讨论时，我们通常会将“数据结构与算法”简称为“算法”。比如众所周知的 LeetCode 算法题目，实际上同时考查数据结构和算法两方面的知识。</p>\n</div>",
   "codeExamples": [],
   "animations": [],
   "conversion": {
@@ -21,5 +21,28 @@
     ],
     "codeReferences": 0,
     "animationGroups": 0
-  }
+  },
+  "blockAliases": {
+    "b0": "blk-cf4ecf79dea5387b",
+    "b1": "blk-d34923293b31faff",
+    "b2": "blk-4045263ed07f722e",
+    "b3": "blk-49ea325f6271d708",
+    "b4": "blk-7dace2f931f12699",
+    "b5": "blk-36d998d2a9b4785c",
+    "b6": "blk-08e6e01bd1552c92",
+    "b7": "blk-7006d5fa5b943f81",
+    "b8": "blk-933985c54dbe4a90",
+    "b9": "blk-332cdefff824b4d9",
+    "b10": "blk-6a5a3e02b3145ff2",
+    "b11": "blk-5a7423e6efb28879",
+    "b12": "blk-87b71f6bfc0ef01a",
+    "b13": "blk-92a23ac0ecd26c89",
+    "b14": "blk-d75e8b037d9f08be",
+    "b15": "blk-56e9dbd456d6d7c9",
+    "b16": "blk-0ca227731ef7e28f",
+    "b17": "blk-2ad47921e4f07ade",
+    "b18": "blk-4071ea5febd5d352",
+    "b19": "blk-beeb933acfb8ae70"
+  },
+  "contentVersion": "159f77b8d1c02553"
 }

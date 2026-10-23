@@ -6,7 +6,7 @@
   "route": "/read/chapter_sorting/index",
   "sourcePath": "chapter_sorting/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"b0\" id=\"_1\">排序</h1>\n<figure data-block=\"b1\"><img alt=\"排序\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_sorting.jpg\"/><figcaption>排序</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"b2\">\n<p class=\"admonition-title\">Abstract</p>\n<p>排序犹如一把将混乱变为秩序的魔法钥匙，使我们能以更高效的方式理解与处理数据。</p>\n<p>无论是简单的升序，还是复杂的分类排列，排序都向我们展示了数据的和谐美感。</p>\n</div>",
+  "html": "<h1 data-block=\"blk-f997708317f28503\" id=\"_1\">排序</h1>\n<figure data-block=\"blk-e0772273c1a20c27\"><img alt=\"排序\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_sorting.jpg\"/><figcaption>排序</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-7841e6b1fb4d732a\">\n<p class=\"admonition-title\">Abstract</p>\n<p>排序犹如一把将混乱变为秩序的魔法钥匙，使我们能以更高效的方式理解与处理数据。</p>\n<p>无论是简单的升序，还是复杂的分类排列，排序都向我们展示了数据的和谐美感。</p>\n</div>",
   "codeExamples": [],
   "animations": [],
   "conversion": {
@@ -21,5 +21,11 @@
     ],
     "codeReferences": 0,
     "animationGroups": 0
-  }
+  },
+  "blockAliases": {
+    "b0": "blk-f997708317f28503",
+    "b1": "blk-e0772273c1a20c27",
+    "b2": "blk-7841e6b1fb4d732a"
+  },
+  "contentVersion": "ba176efa938785be"
 }

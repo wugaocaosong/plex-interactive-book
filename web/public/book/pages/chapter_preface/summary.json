@@ -6,7 +6,7 @@
   "route": "/read/chapter_preface/summary",
   "sourcePath": "chapter_preface/summary.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"b0\" id=\"_1\">小结</h1>\n<h3 data-block=\"b1\" id=\"_2\">重点回顾</h3>\n<ul data-block=\"b2\">\n<li>本书的主要受众是算法初学者。如果你已有一定基础，本书能帮助你系统回顾算法知识，书中源代码也可作为“刷题工具库”使用。</li>\n<li>书中内容主要包括复杂度分析、数据结构和算法三部分，涵盖了该领域的大部分主题。</li>\n<li>对于算法新手，在初学阶段阅读一本入门书至关重要，可以少走许多弯路。</li>\n<li>书中的动画图解通常用于介绍重点和难点知识。阅读本书时，应给予这些内容更多关注。</li>\n<li>实践乃学习编程之最佳途径。强烈建议运行源代码并亲自敲代码。</li>\n<li>本书网页版的每个章节都设有评论区，欢迎随时分享你的疑惑与见解。</li>\n</ul>",
+  "html": "<h1 data-block=\"blk-504666dbd3ee64f7\" id=\"_1\">小结</h1>\n<h3 data-block=\"blk-d894b5fd51077eb2\" id=\"_2\">重点回顾</h3>\n<ul data-block=\"blk-40faa7140cec9a44\">\n<li>本书的主要受众是算法初学者。如果你已有一定基础，本书能帮助你系统回顾算法知识，书中源代码也可作为“刷题工具库”使用。</li>\n<li>书中内容主要包括复杂度分析、数据结构和算法三部分，涵盖了该领域的大部分主题。</li>\n<li>对于算法新手，在初学阶段阅读一本入门书至关重要，可以少走许多弯路。</li>\n<li>书中的动画图解通常用于介绍重点和难点知识。阅读本书时，应给予这些内容更多关注。</li>\n<li>实践乃学习编程之最佳途径。强烈建议运行源代码并亲自敲代码。</li>\n<li>本书网页版的每个章节都设有评论区，欢迎随时分享你的疑惑与见解。</li>\n</ul>",
   "codeExamples": [],
   "animations": [],
   "conversion": {
@@ -21,5 +21,11 @@
     ],
     "codeReferences": 0,
     "animationGroups": 0
-  }
+  },
+  "blockAliases": {
+    "b0": "blk-504666dbd3ee64f7",
+    "b1": "blk-d894b5fd51077eb2",
+    "b2": "blk-40faa7140cec9a44"
+  },
+  "contentVersion": "546d9fe6651ed4b7"
 }

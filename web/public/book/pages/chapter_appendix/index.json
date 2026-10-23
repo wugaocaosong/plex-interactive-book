@@ -6,7 +6,7 @@
   "route": "/read/chapter_appendix/index",
   "sourcePath": "chapter_appendix/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"b0\" id=\"_1\">附录</h1>\n<figure data-block=\"b1\"><img alt=\"附录\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_appendix.jpg\"/><figcaption>附录</figcaption></figure>",
+  "html": "<h1 data-block=\"blk-16d55e5bae764d10\" id=\"_1\">附录</h1>\n<figure data-block=\"blk-ac5ec6c3aab37da1\"><img alt=\"附录\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_appendix.jpg\"/><figcaption>附录</figcaption></figure>",
   "codeExamples": [],
   "animations": [],
   "conversion": {
@@ -21,5 +21,10 @@
     ],
     "codeReferences": 0,
     "animationGroups": 0
-  }
+  },
+  "blockAliases": {
+    "b0": "blk-16d55e5bae764d10",
+    "b1": "blk-ac5ec6c3aab37da1"
+  },
+  "contentVersion": "7ad99e52d626429b"
 }

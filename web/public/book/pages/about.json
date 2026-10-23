@@ -6,8 +6,19 @@
   "route": "/read/about",
   "sourcePath": null,
   "sourceCommit": null,
-  "html": "<h1 data-block=\"b0\">作者与编者</h1>\n<h2 data-block=\"b1\">原作作者</h2>\n<p data-block=\"b2\"><strong>krahets 及 Hello Algo 贡献者</strong></p>\n<p data-block=\"b3\">本书算法正文来自开源项目《Hello 算法》。原作及代码贡献者的署名保留在来源记录和源文件中。</p>\n<p data-block=\"b4\"><a href=\"https://github.com/krahets\">访问原作者主页</a></p>\n<h2 data-block=\"b5\">数字教材编者</h2>\n<p data-block=\"b6\">PLEX 数字教材制作团队。</p>\n<p data-block=\"b7\">姓名、机构与个人简介：待填写。</p>",
+  "html": "<h1 data-block=\"blk-7cdaf43cf59314a5\">作者与编者</h1>\n<h2 data-block=\"blk-116238c49b39211d\">原作作者</h2>\n<p data-block=\"blk-9fc460420221ec12\"><strong>krahets 及 Hello Algo 贡献者</strong></p>\n<p data-block=\"blk-b530465cd2d9d23b\">本书算法正文来自开源项目《Hello 算法》。原作及代码贡献者的署名保留在来源记录和源文件中。</p>\n<p data-block=\"blk-bf9845d1f50726cb\"><a href=\"https://github.com/krahets\">访问原作者主页</a></p>\n<h2 data-block=\"blk-874ed5f81f734f1f\">数字教材编者</h2>\n<p data-block=\"blk-accfe13abb6669d6\">PLEX 数字教材制作团队。</p>\n<p data-block=\"blk-6ebb98dad4713c95\">姓名、机构与个人简介：待填写。</p>",
   "codeExamples": [],
   "animations": [],
-  "conversion": null
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-7cdaf43cf59314a5",
+    "b1": "blk-116238c49b39211d",
+    "b2": "blk-9fc460420221ec12",
+    "b3": "blk-b530465cd2d9d23b",
+    "b4": "blk-bf9845d1f50726cb",
+    "b5": "blk-874ed5f81f734f1f",
+    "b6": "blk-accfe13abb6669d6",
+    "b7": "blk-6ebb98dad4713c95"
+  },
+  "contentVersion": "269593f0d591c9a3"
 }

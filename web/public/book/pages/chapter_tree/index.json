@@ -6,7 +6,7 @@
   "route": "/read/chapter_tree/index",
   "sourcePath": "chapter_tree/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"b0\" id=\"_1\">树</h1>\n<figure data-block=\"b1\"><img alt=\"树\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_tree.jpg\"/><figcaption>树</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"b2\">\n<p class=\"admonition-title\">Abstract</p>\n<p>参天大树充满生命力，根深叶茂，分枝扶疏。</p>\n<p>它为我们展现了数据分治的生动形态。</p>\n</div>",
+  "html": "<h1 data-block=\"blk-b281093db98c8d9c\" id=\"_1\">树</h1>\n<figure data-block=\"blk-7a64fb122c7d3fb9\"><img alt=\"树\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_tree.jpg\"/><figcaption>树</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-321af004869c575f\">\n<p class=\"admonition-title\">Abstract</p>\n<p>参天大树充满生命力，根深叶茂，分枝扶疏。</p>\n<p>它为我们展现了数据分治的生动形态。</p>\n</div>",
   "codeExamples": [],
   "animations": [],
   "conversion": {
@@ -21,5 +21,11 @@
     ],
     "codeReferences": 0,
     "animationGroups": 0
-  }
+  },
+  "blockAliases": {
+    "b0": "blk-b281093db98c8d9c",
+    "b1": "blk-7a64fb122c7d3fb9",
+    "b2": "blk-321af004869c575f"
+  },
+  "contentVersion": "308c42735eb37bd3"
 }

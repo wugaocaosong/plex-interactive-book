@@ -6,7 +6,7 @@
   "route": "/read/chapter_greedy/exercises",
   "sourcePath": "chapter_greedy/exercises.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"b0\" id=\"_1\">练习</h1>\n<h2 data-block=\"b1\" id=\"_2\">知识巩固</h2>\n<h3 data-block=\"b2\" id=\"_3\">每次选最大硬币一定最好吗</h3>\n<p data-block=\"b3\">硬币面值为 <code>[1, 7, 10]</code>，目标金额为 14。</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"b4\">\n<li>按“每次取不超过剩余金额的最大面值”执行，写出所取硬币；</li>\n<li>是否存在使用更少硬币的方案？如果存在，请写出一种；如果不存在，请说明理由；</li>\n<li>这能否说明该贪心策略对任意硬币面值都正确？</li>\n</ol>\n<details class=\"success\" data-block=\"b5\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>贪心依次选择 <code>10 + 1 + 1 + 1 + 1</code>，共 5 枚硬币。</p>\n</li>\n<li>\n<p>存在使用更少硬币的方案：<code>7 + 7</code>，只需 2 枚硬币。</p>\n</li>\n<li>\n<p>不能。这个反例说明，对任意硬币面值，每次选择当前能取的最大面值并不一定得到最少硬币数；\n    眼前最大的选择可能破坏后续更好的组合。</p>\n</li>\n</ol>\n</details>\n<h3 data-block=\"b6\" id=\"_4\">背包应该先装哪件物品</h3>\n<p data-block=\"b7\">一个容量为 4 千克的背包中可以装入以下物品，物品允许只取一部分，\n所取价值与重量成正比：</p>\n<ul data-block=\"b8\">\n<li>物品 A：重量 4 千克，价值 20；</li>\n<li>物品 B：重量 3 千克，价值 18。</li>\n</ul>\n<!-- numbered-subquestions -->\n<ol data-block=\"b9\">\n<li>两件物品每千克的价值分别是多少？应先装哪一件？</li>\n<li>按分数背包的贪心策略装满背包，最终价值是多少？</li>\n<li>在物品可以切分、背包限制总重量的情况下，选择物品时应该比较总价值还是每千克价值？为什么？</li>\n</ol>\n<details class=\"success\" data-block=\"b10\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>A 每千克价值为 <code>20 ÷ 4 = 5</code>，B 每千克价值为 <code>18 ÷ 3 = 6</code>，\n    因此应先装单位价值更高的 B。</p>\n</li>\n<li>\n<p>先装入全部 B，占用 3 千克、获得价值 18；剩余 1 千克容量，\n    再装入 1 千克 A，获得价值 5。最终价值为 <code>18 + 5 = 23</code>。</p>\n</li>\n<li>\n<p>背包限制的是总重量，而且物品可以切分，所以应比较单位重量的价值。\n    A 的总价值虽然更高，但每千克价值低于 B；若先装满 A，只能得到价值 20。</p>\n</li>\n</ol>\n</details>\n<h3 data-block=\"b11\" id=\"_5\">两个指针下一步怎样移动</h3>\n<p data-block=\"b12\">隔板高度为 <code>[1, 8, 6, 2, 5]</code>，用首尾双指针寻找最大容量。\n容量等于“两块隔板中较短者的高度 × 两块隔板的下标距离”。</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"b13\">\n<li>初始时左指针在下标 0、右指针在下标 4，当前容量是多少？下一步应移动哪个指针？</li>\n<li>按照第 1 问的选择移动一次后，两个指针分别位于哪个下标？此时容量是多少？下一步又应移动哪个指针？</li>\n<li>在当前一对隔板中，可以移动较短隔板对应的指针，也可以移动较长隔板对应的指针。哪一种移动仍有可能得到更大的容量？为什么？</li>\n</ol>\n<details class=\"success\" data-block=\"b14\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>当前容量为 <code>min(1, 5) × (4 - 0) = 4</code>。左侧隔板较短，因此移动左指针。</p>\n</li>\n<li>\n<p>移动左指针后，两个指针分别位于下标 1 和 4。当前容量为\n    <code>min(8, 5) × (4 - 1) = 15</code>。右侧隔板较短，因此下一步移动右指针。</p>\n</li>\n<li>\n<p>移动较短隔板对应的指针，才仍有可能得到更大的容量。移动较长隔板后，两块隔板的距离一定缩短，而容器高度仍受未移动的短板限制，\n    只可能不变或变小。因此容量不可能超过移动前；只有移动短板，才有机会遇到更高的隔板。</p>\n</li>\n</ol>\n</details>\n<h2 data-block=\"b15\" id=\"_6\">编程练习</h2>\n<h3 data-block=\"b16\" id=\"_7\">分数背包</h3>\n<p data-block=\"b17\">给定等长数组 <code>wgt</code> 和 <code>val</code>，其中 <code>wgt[i] &gt; 0</code>、<code>val[i] &gt;= 0</code>，背包容量 <code>cap &gt;= 0</code>。\n每种物品只有一件，但允许只装入其中一部分，\n获得的价值按所装重量占该物品总重量的比例计算。请使用贪心算法，\n并以实数返回背包能够获得的最大总价值。</p>\n<details class=\"tip\" data-block=\"b18\">\n<summary>解题提示</summary>\n<ol>\n<li>先计算每件物品的单位重量价值 val[i] / wgt[i]，除法结果要保留小数</li>\n<li>单位价值越高的物品越先装入背包</li>\n<li>若剩余容量小于当前物品重量，就装入恰好填满背包的部分并结束</li>\n</ol>\n</details>",
+  "html": "<h1 data-block=\"blk-fc9a4df8a2d3e8cc\" id=\"_1\">练习</h1>\n<h2 data-block=\"blk-b8e05056c396c8c5\" id=\"_2\">知识巩固</h2>\n<h3 data-block=\"blk-a4b053309c598ab8\" id=\"_3\">每次选最大硬币一定最好吗</h3>\n<p data-block=\"blk-5c56ac67b520ba17\">硬币面值为 <code>[1, 7, 10]</code>，目标金额为 14。</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"blk-914a5bfb8a618d05\">\n<li>按“每次取不超过剩余金额的最大面值”执行，写出所取硬币；</li>\n<li>是否存在使用更少硬币的方案？如果存在，请写出一种；如果不存在，请说明理由；</li>\n<li>这能否说明该贪心策略对任意硬币面值都正确？</li>\n</ol>\n<details class=\"success\" data-block=\"blk-aa0672ffc339887b\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>贪心依次选择 <code>10 + 1 + 1 + 1 + 1</code>，共 5 枚硬币。</p>\n</li>\n<li>\n<p>存在使用更少硬币的方案：<code>7 + 7</code>，只需 2 枚硬币。</p>\n</li>\n<li>\n<p>不能。这个反例说明，对任意硬币面值，每次选择当前能取的最大面值并不一定得到最少硬币数；\n    眼前最大的选择可能破坏后续更好的组合。</p>\n</li>\n</ol>\n</details>\n<h3 data-block=\"blk-da3b7209b735150e\" id=\"_4\">背包应该先装哪件物品</h3>\n<p data-block=\"blk-e21f560de0361d6b\">一个容量为 4 千克的背包中可以装入以下物品，物品允许只取一部分，\n所取价值与重量成正比：</p>\n<ul data-block=\"blk-7a372346c88196e4\">\n<li>物品 A：重量 4 千克，价值 20；</li>\n<li>物品 B：重量 3 千克，价值 18。</li>\n</ul>\n<!-- numbered-subquestions -->\n<ol data-block=\"blk-d21ea08003db03e3\">\n<li>两件物品每千克的价值分别是多少？应先装哪一件？</li>\n<li>按分数背包的贪心策略装满背包，最终价值是多少？</li>\n<li>在物品可以切分、背包限制总重量的情况下，选择物品时应该比较总价值还是每千克价值？为什么？</li>\n</ol>\n<details class=\"success\" data-block=\"blk-63c6b9eb80d7a82c\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>A 每千克价值为 <code>20 ÷ 4 = 5</code>，B 每千克价值为 <code>18 ÷ 3 = 6</code>，\n    因此应先装单位价值更高的 B。</p>\n</li>\n<li>\n<p>先装入全部 B，占用 3 千克、获得价值 18；剩余 1 千克容量，\n    再装入 1 千克 A，获得价值 5。最终价值为 <code>18 + 5 = 23</code>。</p>\n</li>\n<li>\n<p>背包限制的是总重量，而且物品可以切分，所以应比较单位重量的价值。\n    A 的总价值虽然更高，但每千克价值低于 B；若先装满 A，只能得到价值 20。</p>\n</li>\n</ol>\n</details>\n<h3 data-block=\"blk-ff1d11800fd80bec\" id=\"_5\">两个指针下一步怎样移动</h3>\n<p data-block=\"blk-3d117ab2c437324e\">隔板高度为 <code>[1, 8, 6, 2, 5]</code>，用首尾双指针寻找最大容量。\n容量等于“两块隔板中较短者的高度 × 两块隔板的下标距离”。</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"blk-1bc67456c3e79462\">\n<li>初始时左指针在下标 0、右指针在下标 4，当前容量是多少？下一步应移动哪个指针？</li>\n<li>按照第 1 问的选择移动一次后，两个指针分别位于哪个下标？此时容量是多少？下一步又应移动哪个指针？</li>\n<li>在当前一对隔板中，可以移动较短隔板对应的指针，也可以移动较长隔板对应的指针。哪一种移动仍有可能得到更大的容量？为什么？</li>\n</ol>\n<details class=\"success\" data-block=\"blk-da4799d98ad36a0c\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>当前容量为 <code>min(1, 5) × (4 - 0) = 4</code>。左侧隔板较短，因此移动左指针。</p>\n</li>\n<li>\n<p>移动左指针后，两个指针分别位于下标 1 和 4。当前容量为\n    <code>min(8, 5) × (4 - 1) = 15</code>。右侧隔板较短，因此下一步移动右指针。</p>\n</li>\n<li>\n<p>移动较短隔板对应的指针，才仍有可能得到更大的容量。移动较长隔板后，两块隔板的距离一定缩短，而容器高度仍受未移动的短板限制，\n    只可能不变或变小。因此容量不可能超过移动前；只有移动短板，才有机会遇到更高的隔板。</p>\n</li>\n</ol>\n</details>\n<h2 data-block=\"blk-cbc6934f6060cf0b\" id=\"_6\">编程练习</h2>\n<h3 data-block=\"blk-1d2fd5f7e1efdb6e\" id=\"_7\">分数背包</h3>\n<p data-block=\"blk-da553ea6c7424504\">给定等长数组 <code>wgt</code> 和 <code>val</code>，其中 <code>wgt[i] &gt; 0</code>、<code>val[i] &gt;= 0</code>，背包容量 <code>cap &gt;= 0</code>。\n每种物品只有一件，但允许只装入其中一部分，\n获得的价值按所装重量占该物品总重量的比例计算。请使用贪心算法，\n并以实数返回背包能够获得的最大总价值。</p>\n<details class=\"tip\" data-block=\"blk-cae1716d2247b876\">\n<summary>解题提示</summary>\n<ol>\n<li>先计算每件物品的单位重量价值 val[i] / wgt[i]，除法结果要保留小数</li>\n<li>单位价值越高的物品越先装入背包</li>\n<li>若剩余容量小于当前物品重量，就装入恰好填满背包的部分并结束</li>\n</ol>\n</details>",
   "codeExamples": [],
   "animations": [],
   "conversion": {
@@ -21,5 +21,27 @@
     ],
     "codeReferences": 0,
     "animationGroups": 0
-  }
+  },
+  "blockAliases": {
+    "b0": "blk-fc9a4df8a2d3e8cc",
+    "b1": "blk-b8e05056c396c8c5",
+    "b2": "blk-a4b053309c598ab8",
+    "b3": "blk-5c56ac67b520ba17",
+    "b4": "blk-914a5bfb8a618d05",
+    "b5": "blk-aa0672ffc339887b",
+    "b6": "blk-da3b7209b735150e",
+    "b7": "blk-e21f560de0361d6b",
+    "b8": "blk-7a372346c88196e4",
+    "b9": "blk-d21ea08003db03e3",
+    "b10": "blk-63c6b9eb80d7a82c",
+    "b11": "blk-ff1d11800fd80bec",
+    "b12": "blk-3d117ab2c437324e",
+    "b13": "blk-1bc67456c3e79462",
+    "b14": "blk-da4799d98ad36a0c",
+    "b15": "blk-cbc6934f6060cf0b",
+    "b16": "blk-1d2fd5f7e1efdb6e",
+    "b17": "blk-da553ea6c7424504",
+    "b18": "blk-cae1716d2247b876"
+  },
+  "contentVersion": "17486d07a581f746"
 }

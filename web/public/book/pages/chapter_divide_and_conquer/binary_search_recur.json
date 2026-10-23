@@ -6,10 +6,10 @@
   "route": "/read/chapter_divide_and_conquer/binary_search_recur",
   "sourcePath": "chapter_divide_and_conquer/binary_search_recur.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"b0\" id=\"_1\">分治搜索策略</h1>\n<p data-block=\"b1\">我们已经学过，搜索算法分为两大类。</p>\n<ul data-block=\"b2\">\n<li><strong>暴力搜索</strong>：它通过遍历数据结构实现，时间复杂度为 <span class=\"arithmatex\">\\(O(n)\\)</span> 。</li>\n<li><strong>自适应搜索</strong>：它利用特有的数据组织形式或先验信息，时间复杂度可达到 <span class=\"arithmatex\">\\(O(\\log n)\\)</span> 甚至 <span class=\"arithmatex\">\\(O(1)\\)</span> 。</li>\n</ul>\n<p data-block=\"b3\">实际上，<strong>时间复杂度为 <span class=\"arithmatex\">\\(O(\\log n)\\)</span> 的搜索算法通常是基于分治策略实现的</strong>，例如二分查找和树。</p>\n<ul data-block=\"b4\">\n<li>二分查找的每一步都将问题（在数组中搜索目标元素）分解为一个小问题（在数组的一半中搜索目标元素），这个过程一直持续到数组为空或找到目标元素为止。</li>\n<li>树是分治思想的代表，在二叉搜索树、AVL 树、堆等数据结构中，各种操作的时间复杂度皆为 <span class=\"arithmatex\">\\(O(\\log n)\\)</span> 。</li>\n</ul>\n<p data-block=\"b5\">二分查找的分治策略如下所示。</p>\n<ul data-block=\"b6\">\n<li><strong>问题可以分解</strong>：二分查找递归地将原问题（在数组中进行查找）分解为子问题（在数组的一半中进行查找），这是通过比较中间元素和目标元素来实现的。</li>\n<li><strong>子问题是独立的</strong>：在二分查找中，每轮只处理一个子问题，它不受其他子问题的影响。</li>\n<li><strong>子问题的解无须合并</strong>：二分查找旨在查找一个特定元素，因此不需要将子问题的解进行合并。当子问题得到解决时，原问题也会同时得到解决。</li>\n</ul>\n<p data-block=\"b7\">分治能够提升搜索效率，本质上是因为暴力搜索每轮只能排除一个选项，<strong>而分治搜索每轮可以排除一半选项</strong>。</p>\n<h3 data-block=\"b8\" id=\"_2\">基于分治实现二分查找</h3>\n<p data-block=\"b9\">在之前的章节中，二分查找是基于递推（迭代）实现的。现在我们基于分治（递归）来实现它。</p>\n<div class=\"admonition question\" data-block=\"b10\">\n<p class=\"admonition-title\">Question</p>\n<p>给定一个长度为 <span class=\"arithmatex\">\\(n\\)</span> 的有序数组 <code>nums</code> ，其中所有元素都是唯一的，请查找元素 <code>target</code> 。</p>\n</div>\n<p data-block=\"b11\">从分治角度，我们将搜索区间 <span class=\"arithmatex\">\\([i, j]\\)</span> 对应的子问题记为 <span class=\"arithmatex\">\\(f(i, j)\\)</span> 。</p>\n<p data-block=\"b12\">以原问题 <span class=\"arithmatex\">\\(f(0, n-1)\\)</span> 为起始点，通过以下步骤进行二分查找。</p>\n<ol data-block=\"b13\">\n<li>计算搜索区间 <span class=\"arithmatex\">\\([i, j]\\)</span> 的中点 <span class=\"arithmatex\">\\(m\\)</span> ，根据它排除一半搜索区间。</li>\n<li>递归求解规模减小一半的子问题，可能为 <span class=\"arithmatex\">\\(f(i, m-1)\\)</span> 或 <span class=\"arithmatex\">\\(f(m+1, j)\\)</span> 。</li>\n<li>循环第 <code>1.</code> 步和第 <code>2.</code> 步，直至找到 <code>target</code> 或区间为空时返回。</li>\n</ol>\n<p data-block=\"b14\">下图展示了在数组中二分查找元素 <span class=\"arithmatex\">\\(6\\)</span> 的分治过程。</p>\n<figure data-block=\"b15\"><img alt=\"二分查找的分治过程\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_divide_and_conquer/binary_search_recur.assets/binary_search_recur.png\"/><figcaption>二分查找的分治过程</figcaption></figure>\n<p data-block=\"b16\">在实现代码中，我们声明一个递归函数 <code>dfs()</code> 来求解问题 <span class=\"arithmatex\">\\(f(i, j)\\)</span> ：</p>\n<div class=\"code-example\" data-block=\"b17\" data-code=\"0\"><div class=\"code-caption\"><span>binary_search_recur · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def binary_search(nums: list[int], target: int) -&gt; int:\n    \"\"\"二分查找\"\"\"\n    n = len(nums)\n    # 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1)</code></pre></div>",
+  "html": "<h1 data-block=\"blk-9a2d75998eea32f9\" id=\"_1\">分治搜索策略</h1>\n<p data-block=\"blk-4c7e87373534dd8a\">我们已经学过，搜索算法分为两大类。</p>\n<ul data-block=\"blk-bc13d959060b6f15\">\n<li><strong>暴力搜索</strong>：它通过遍历数据结构实现，时间复杂度为 <span class=\"arithmatex\">\\(O(n)\\)</span> 。</li>\n<li><strong>自适应搜索</strong>：它利用特有的数据组织形式或先验信息，时间复杂度可达到 <span class=\"arithmatex\">\\(O(\\log n)\\)</span> 甚至 <span class=\"arithmatex\">\\(O(1)\\)</span> 。</li>\n</ul>\n<p data-block=\"blk-b1c1cd03df26269b\">实际上，<strong>时间复杂度为 <span class=\"arithmatex\">\\(O(\\log n)\\)</span> 的搜索算法通常是基于分治策略实现的</strong>，例如二分查找和树。</p>\n<ul data-block=\"blk-7d6d6a694306b8b3\">\n<li>二分查找的每一步都将问题（在数组中搜索目标元素）分解为一个小问题（在数组的一半中搜索目标元素），这个过程一直持续到数组为空或找到目标元素为止。</li>\n<li>树是分治思想的代表，在二叉搜索树、AVL 树、堆等数据结构中，各种操作的时间复杂度皆为 <span class=\"arithmatex\">\\(O(\\log n)\\)</span> 。</li>\n</ul>\n<p data-block=\"blk-e77cec00f0e51b27\">二分查找的分治策略如下所示。</p>\n<ul data-block=\"blk-7d1922d3f97fd2f5\">\n<li><strong>问题可以分解</strong>：二分查找递归地将原问题（在数组中进行查找）分解为子问题（在数组的一半中进行查找），这是通过比较中间元素和目标元素来实现的。</li>\n<li><strong>子问题是独立的</strong>：在二分查找中，每轮只处理一个子问题，它不受其他子问题的影响。</li>\n<li><strong>子问题的解无须合并</strong>：二分查找旨在查找一个特定元素，因此不需要将子问题的解进行合并。当子问题得到解决时，原问题也会同时得到解决。</li>\n</ul>\n<p data-block=\"blk-19290f903fbc7b18\">分治能够提升搜索效率，本质上是因为暴力搜索每轮只能排除一个选项，<strong>而分治搜索每轮可以排除一半选项</strong>。</p>\n<h3 data-block=\"blk-15a895a40e7070a3\" id=\"_2\">基于分治实现二分查找</h3>\n<p data-block=\"blk-7880e941b8492150\">在之前的章节中，二分查找是基于递推（迭代）实现的。现在我们基于分治（递归）来实现它。</p>\n<div class=\"admonition question\" data-block=\"blk-1b422e4f99ee5956\">\n<p class=\"admonition-title\">Question</p>\n<p>给定一个长度为 <span class=\"arithmatex\">\\(n\\)</span> 的有序数组 <code>nums</code> ，其中所有元素都是唯一的，请查找元素 <code>target</code> 。</p>\n</div>\n<p data-block=\"blk-55dfe784895ea65f\">从分治角度，我们将搜索区间 <span class=\"arithmatex\">\\([i, j]\\)</span> 对应的子问题记为 <span class=\"arithmatex\">\\(f(i, j)\\)</span> 。</p>\n<p data-block=\"blk-920c2584524c6cc6\">以原问题 <span class=\"arithmatex\">\\(f(0, n-1)\\)</span> 为起始点，通过以下步骤进行二分查找。</p>\n<ol data-block=\"blk-d003eecbd46dc911\">\n<li>计算搜索区间 <span class=\"arithmatex\">\\([i, j]\\)</span> 的中点 <span class=\"arithmatex\">\\(m\\)</span> ，根据它排除一半搜索区间。</li>\n<li>递归求解规模减小一半的子问题，可能为 <span class=\"arithmatex\">\\(f(i, m-1)\\)</span> 或 <span class=\"arithmatex\">\\(f(m+1, j)\\)</span> 。</li>\n<li>循环第 <code>1.</code> 步和第 <code>2.</code> 步，直至找到 <code>target</code> 或区间为空时返回。</li>\n</ol>\n<p data-block=\"blk-c4c3faacf654b44f\">下图展示了在数组中二分查找元素 <span class=\"arithmatex\">\\(6\\)</span> 的分治过程。</p>\n<figure data-block=\"blk-b1c4ec075a03fa4e\"><img alt=\"二分查找的分治过程\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_divide_and_conquer/binary_search_recur.assets/binary_search_recur.png\"/><figcaption>二分查找的分治过程</figcaption></figure>\n<p data-block=\"blk-895d3e48c9d5dafd\">在实现代码中，我们声明一个递归函数 <code>dfs()</code> 来求解问题 <span class=\"arithmatex\">\\(f(i, j)\\)</span> ：</p>\n<div class=\"code-example\" data-block=\"blk-e0c95d9bc1a77a74\" data-code=\"0\"><div class=\"code-caption\"><span>binary_search_recur · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def binary_search(nums: list[int], target: int) -&gt; int:\n    \"\"\"二分查找\"\"\"\n    n = len(nums)\n    # 求解问题 f(0, n-1)\n    return dfs(nums, target, 0, n - 1)</code></pre></div>",
   "codeExamples": [
     {
-      "id": "chapter_divide_and_conquer/binary_search_recur-code-0",
+      "id": "example-f5da45dc8019a6eb",
       "file": "binary_search_recur",
       "className": "",
       "functionName": "binary_search",
@@ -147,5 +147,26 @@
     ],
     "codeReferences": 1,
     "animationGroups": 0
-  }
+  },
+  "blockAliases": {
+    "b0": "blk-9a2d75998eea32f9",
+    "b1": "blk-4c7e87373534dd8a",
+    "b2": "blk-bc13d959060b6f15",
+    "b3": "blk-b1c1cd03df26269b",
+    "b4": "blk-7d6d6a694306b8b3",
+    "b5": "blk-e77cec00f0e51b27",
+    "b6": "blk-7d1922d3f97fd2f5",
+    "b7": "blk-19290f903fbc7b18",
+    "b8": "blk-15a895a40e7070a3",
+    "b9": "blk-7880e941b8492150",
+    "b10": "blk-1b422e4f99ee5956",
+    "b11": "blk-55dfe784895ea65f",
+    "b12": "blk-920c2584524c6cc6",
+    "b13": "blk-d003eecbd46dc911",
+    "b14": "blk-c4c3faacf654b44f",
+    "b15": "blk-b1c4ec075a03fa4e",
+    "b16": "blk-895d3e48c9d5dafd",
+    "b17": "blk-e0c95d9bc1a77a74"
+  },
+  "contentVersion": "b967682ff8e57745"
 }

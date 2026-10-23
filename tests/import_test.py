@@ -2,8 +2,19 @@ import pathlib,sys,unittest
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'scripts'))
 from import_book import extract_variant,convert,SOURCE
 from bs4 import BeautifulSoup
+from block_ids import assign_blocks
 
 class ImportTests(unittest.TestCase):
+    def test_stable_blocks_survive_insertions_and_repeat_import(self):
+        registry={}
+        first,aliases,_=assign_blocks('<h1 data-block="b0">标题</h1><p data-block="b1">原文</p>','section',registry)
+        old_id=aliases['b1']
+        second,_,_=assign_blocks('<h1>标题</h1><p>新增段落</p><p>原文</p>','section',registry)
+        self.assertEqual(BeautifulSoup(second,'html.parser').find_all('p')[-1]['data-block'],old_id)
+        third,_,changes=assign_blocks('<h1>标题</h1><p>新增段落</p><p>原文</p>','section',registry)
+        self.assertEqual(second,third)
+        self.assertEqual(changes,[])
+        self.assertEqual(registry['section']['aliases']['b1'],old_id)
     def test_fenced_code_is_environment_independent_and_preserves_text(self):
         for language,code in [('shell','docker-compose up -d'),('python','if a < 3:\n    print("<tag>")')]:
             with self.subTest(language=language):

@@ -6,7 +6,7 @@
   "route": "/read/chapter_divide_and_conquer/index",
   "sourcePath": "chapter_divide_and_conquer/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"b0\" id=\"_1\">分治</h1>\n<figure data-block=\"b1\"><img alt=\"分治\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_divide_and_conquer.jpg\"/><figcaption>分治</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"b2\">\n<p class=\"admonition-title\">Abstract</p>\n<p>难题被逐层拆解，每一次的拆解都使它变得更为简单。</p>\n<p>分而治之揭示了一个重要的事实：从简单做起，一切都不再复杂。</p>\n</div>",
+  "html": "<h1 data-block=\"blk-83a6e4596031061d\" id=\"_1\">分治</h1>\n<figure data-block=\"blk-32fe26e7a0cd7fcf\"><img alt=\"分治\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_divide_and_conquer.jpg\"/><figcaption>分治</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-b82fff37eb1cc29f\">\n<p class=\"admonition-title\">Abstract</p>\n<p>难题被逐层拆解，每一次的拆解都使它变得更为简单。</p>\n<p>分而治之揭示了一个重要的事实：从简单做起，一切都不再复杂。</p>\n</div>",
   "codeExamples": [],
   "animations": [],
   "conversion": {
@@ -21,5 +21,11 @@
     ],
     "codeReferences": 0,
     "animationGroups": 0
-  }
+  },
+  "blockAliases": {
+    "b0": "blk-83a6e4596031061d",
+    "b1": "blk-32fe26e7a0cd7fcf",
+    "b2": "blk-b82fff37eb1cc29f"
+  },
+  "contentVersion": "91b261c46bf35444"
 }
