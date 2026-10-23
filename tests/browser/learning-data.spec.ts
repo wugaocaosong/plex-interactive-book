@@ -1,0 +1,233 @@
+import { test, expect } from "@playwright/test";
+import { readFileSync } from "node:fs";
+import ts from "typescript";
+const source = (file: string) =>
+  readFileSync("web/.vitepress/theme/" + file, "utf8").replace(
+    /^import .*$/gm,
+    "",
+  );
+const annotations = ts.transpileModule(
+  source("text-coordinates.ts") + "\n" + source("annotations.ts"),
+  {
+    compilerOptions: {
+      target: ts.ScriptTarget.ES2022,
+      module: ts.ModuleKind.ESNext,
+    },
+  },
+).outputText;
+const store = ts.transpileModule(source("learning-store.ts"), {
+  compilerOptions: {
+    target: ts.ScriptTarget.ES2022,
+    module: ts.ModuleKind.ESNext,
+  },
+}).outputText;
+
+test("legacy bookmarks migrate and notebook backups round-trip through the UI", async ({
+  page,
+  browser,
+}) => {
+  await page.addInitScript(() =>
+    localStorage.setItem(
+      "plex:bookmarks",
+      JSON.stringify([
+        { sectionId: "title", blockId: "b1", offset: 0, title: "旧版书签" },
+      ]),
+    ),
+  );
+  await page.goto("/read/title");
+  await expect(page.locator(".book-holder")).not.toHaveClass(/loading/);
+  await page.getByRole("button", { name: "查看书签" }).click();
+  await expect(page.locator(".bookmark-list")).toContainText("旧版书签");
+  await page.getByRole("button", { name: "关闭", exact: true }).click();
+  await page.getByRole("button", { name: "本段笔记" }).click();
+  await page.getByLabel("批注内容").fill("备份往返测试");
+  await page.getByRole("button", { name: "保存批注", exact: true }).click();
+  await page.getByRole("button", { name: "学习笔记", exact: true }).click();
+  await expect(page.getByLabel("编辑笔记")).toHaveValue("备份往返测试");
+  const downloadEvent = page.waitForEvent("download");
+  await page.getByRole("button", { name: "导出全部学习备份" }).click();
+  const backup = readFileSync((await (await downloadEvent).path())!);
+  const context = await browser.newContext();
+  const restored = await context.newPage();
+  await restored.goto(new URL("/read/title", page.url()).href);
+  await expect(restored.locator(".book-holder")).not.toHaveClass(/loading/);
+  await restored.getByRole("button", { name: "学习笔记", exact: true }).click();
+  await restored
+    .locator("input[type=file]")
+    .setInputFiles({
+      name: "backup.json",
+      mimeType: "application/json",
+      buffer: backup,
+    });
+  await expect(restored.locator(".backup-preview")).toContainText("即将导入");
+  await restored.getByRole("button", { name: "确认导入" }).click();
+  await expect(restored.getByLabel("编辑笔记")).toHaveValue("备份往返测试");
+  await context.close();
+});
+
+test("quote anchors recover uniquely, refuse ambiguous or removed text and preserve formula offsets", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const result = await page.evaluate(async (code) => {
+    const url = URL.createObjectURL(
+      new Blob([code], { type: "text/javascript" }),
+    );
+    const api = await import(url);
+    URL.revokeObjectURL(url);
+    const root = document.createElement("div");
+    root.innerHTML =
+      '<p data-block="new">插入段落</p><p data-block="original">前文引用文本后文</p>';
+    const now = new Date().toISOString();
+    const note = {
+      id: "one",
+      sectionId: "chapter",
+      kind: "highlight",
+      start: { sectionId: "chapter", blockId: "old", offset: 2 },
+      end: { sectionId: "chapter", blockId: "old", offset: 6 },
+      exact: "引用文本",
+      prefix: "前文",
+      suffix: "后文",
+      note: "笔记",
+      createdAt: now,
+      updatedAt: now,
+      status: "located",
+    };
+    const unique = api.reanchor(note, root);
+    root.innerHTML += '<p data-block="copy">前文引用文本后文</p>';
+    const ambiguous = api.reanchor(note, root);
+    root.innerHTML = '<p data-block="other">原文已经删除</p>';
+    const removed = api.reanchor(note, root);
+    root.innerHTML =
+      '<p data-block="math">左<span class="arithmatex" data-tex="\\(x\\)"><span class="katex">xx</span></span>右侧文字</p>';
+    const block = root.firstElementChild;
+    api.markRange(block, 6, 10, "highlight", "math-note");
+    return {
+      unique,
+      ambiguous,
+      removed,
+      canonical: api.canonicalText(block),
+      marked: block.querySelector("mark")?.textContent,
+      search: api.searchText("之前\n  目标\n\t词语  后文", "目标 词语"),
+    };
+  }, annotations);
+  expect(result.unique.status).toBe("located");
+  expect(result.unique.start.blockId).toBe("original");
+  expect(result.ambiguous.status).toBe("orphan");
+  expect(result.removed.status).toBe("orphan");
+  expect(result.marked).toBe("右侧文字");
+  expect(result.canonical).toBe("左\\(x\\)右侧文字");
+  expect(result.search.offset).toBe(5);
+});
+
+test("legacy migration, complete backups, conflict preservation and storage failure reporting", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const result = await page.evaluate(async (code) => {
+    const url = URL.createObjectURL(
+      new Blob([code], { type: "text/javascript" }),
+    );
+    const api = await import(url);
+    URL.revokeObjectURL(url);
+    localStorage.setItem("plex:h5p:test:v1", JSON.stringify({ score: 2 }));
+    await api.putLearning("draft:fixture", { code: "print(1)" });
+    await api.putLearning("annotation:fixture", {
+      id: "fixture",
+      sectionId: "title",
+      kind: "note",
+      start: { sectionId: "title", blockId: "fixture", offset: 0 },
+      end: { sectionId: "title", blockId: "fixture", offset: 2 },
+      status: "located",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      prefix: "",
+      suffix: "",
+      exact: "引用",
+      note: "笔记",
+    });
+    const backup = await api.exportBackup();
+    await api.putLearning("draft:fixture", { code: "print(2)" });
+    await api.importBackup(backup);
+    const records = await api.allLearning();
+    let invalid = false;
+    try {
+      api.validateBackup({ format: "other" });
+    } catch {
+      invalid = true;
+    }
+    let notice = "";
+    window.addEventListener(
+      "plex-storage-error",
+      (e: any) => (notice = e.detail),
+      { once: true },
+    );
+    api.storageError(Error("quota"));
+    return {
+      current: await api.getLearning("draft:fixture", null),
+      conflict: records.some(
+        (r: any) =>
+          r.id.startsWith("conflict:draft:fixture:") &&
+          (r.value as any).code === "print(1)",
+      ),
+      h5p: backup.records.some((r: any) => r.id === "h5p:test:v1"),
+      invalid,
+      notice,
+    };
+  }, store);
+  expect(result.current.code).toBe("print(2)");
+  expect(result.conflict).toBe(true);
+  expect(result.h5p).toBe(true);
+  expect(result.invalid).toBe(true);
+  expect(result.notice).toContain("未能保存");
+});
+
+for (const width of [390, 820, 1440])
+  test(`settings, exact search and keyboard navigation at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/read/chapter_searching/binary_search#b1");
+    await expect(page.locator(".book-holder")).not.toHaveClass(/loading/);
+    await expect(page).toHaveURL(/#blk-/);
+    await page.getByRole("button", { name: "阅读设置", exact: true }).click();
+    await page.getByLabel("字号").fill("26");
+    await page.getByLabel("字号").dispatchEvent("change");
+    await page.getByLabel("行距").selectOption("2.1");
+    await page.getByLabel("主题").selectOption("dark");
+    await page.keyboard.press("Escape");
+    await expect(page.locator(".reader")).toHaveClass(/theme-dark/);
+    await expect(page.locator(".book-holder")).not.toHaveClass(/loading/);
+    const overflow = await page
+      .locator(".book-host .leaf-content")
+      .evaluateAll(
+        (nodes) =>
+          nodes.filter(
+            (n) =>
+              n.scrollHeight > n.clientHeight + 2 ||
+              n.scrollWidth > n.clientWidth + 2,
+          ).length,
+      );
+    expect(overflow).toBe(0);
+    await page.getByRole("button", { name: "搜索全书" }).click();
+    await page.getByLabel("搜索关键词").fill("缩小一半搜索范围");
+    await page.locator(".search-results>button").first().click();
+    await expect(
+      page.locator(".book-host .annotation-search:visible").first(),
+    ).toBeVisible();
+    await page.getByRole("button", { name: "切换阅读模式" }).click();
+    await expect(page.getByLabel("连续正文")).toBeVisible();
+    await page.screenshot({
+      path: `output/playwright/v02-study-${width}.png`,
+      fullPage: true,
+    });
+    await page.getByRole("button", { name: "打开学习实验室" }).click();
+    if (width >= 1024) {
+      const splitter = page.getByRole("separator");
+      await splitter.focus();
+      await page.keyboard.press("ArrowLeft");
+      await expect(splitter).toHaveAttribute("aria-valuenow", "42");
+    }
+    await page.keyboard.press("Escape");
+    await expect(page.getByLabel("连续正文")).toBeVisible();
+  });

@@ -1,6 +1,6 @@
 {
   "name": "plex-interactive-book",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -9,13 +9,15 @@
   "scripts": {
     "predev": "npm run assets",
     "dev": "vitepress dev web --host 127.0.0.1 --port 5190",
-    "import:book": "python scripts/import_book.py",
+    "import:book": "python scripts/import_book.py && python scripts/prepare-learning.py",
+    "build:learning": "python scripts/prepare-learning.py",
+    "check:learning": "python scripts/prepare-learning.py --check",
     "build:activity": "python scripts/prepare-h5p.py && npm run assets",
     "assets": "node scripts/prepare-assets.mjs",
     "check:content": "python scripts/audit_content.py",
     "typecheck": "vue-tsc --noEmit",
-    "check": "npm run typecheck && npm run check:content && npm test",
-    "build": "npm run assets && npm run check:content && vitepress build web",
+    "check": "npm run typecheck && npm run check:content && npm run check:learning && npm test",
+    "build": "npm run assets && npm run check:content && npm run check:learning && vitepress build web",
     "preview": "vitepress preview web --host 127.0.0.1 --port 5190",
     "serve:dist": "node scripts/serve-dist.mjs",
     "prepackage": "npm run build",

@@ -5,6 +5,13 @@ h5p-standalone 3.8.2: MIT
 pyodide 314.0.7: MPL-2.0
 katex 0.16.22: MIT
 lucide-vue-next 0.468.0: ISC
+codemirror 6.0.2: MIT
+@codemirror/state 6.7.6: MIT
+@codemirror/view 6.43.15: MIT
+@codemirror/lang-python 6.2.1: MIT
+@codemirror/merge 6.12.3: MIT
+@codemirror/lint 6.9.7: MIT
+shiki 2.5.0: MIT
 @fontsource/noto-serif-sc 5.2.6: OFL-1.1
 @fontsource/noto-sans-sc 5.2.7: OFL-1.1
 @fontsource/jetbrains-mono 5.2.6: OFL-1.1

@@ -1,6 +1,13 @@
 """Publish authored learning assets and verify reference solutions."""
-import copy,json,pathlib,runpy
+import copy,json,pathlib,runpy,sys
 ROOT=pathlib.Path(__file__).resolve().parents[1]
+def publish(path,value):
+    text=json.dumps(value,ensure_ascii=False,indent=2)+'\n'
+    if '--check' in sys.argv:
+        assert path.read_text(encoding='utf8')==text,f'Stale learning asset: {path}. Run npm run build:learning.'
+    else:
+        path.parent.mkdir(parents=True,exist_ok=True)
+        path.write_text(text,encoding='utf8',newline='\n')
 data=runpy.run_path(str(ROOT/'content/learning/exercises.py'))['EXERCISES']
 manifest=json.loads((ROOT/'web/public/book/manifest.json').read_text(encoding='utf8'))
 sections={p['id'] for p in manifest['pages']}
@@ -11,7 +18,7 @@ for exercise in data:
         scope={};exec(exercise['solution'],scope)
         assert scope['solve'](*copy.deepcopy(test['args']))==test['expected'],exercise['id']
 target=ROOT/'web/public/learning/exercises.json';target.parent.mkdir(parents=True,exist_ok=True)
-target.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf8',newline='\n')
+publish(target,data)
 print(f'Published {len(data)} exercises; {sum(len(e["tests"]) for e in data)} reference cases passed.')
 definitions=dict(line.split('\t',1) for line in (ROOT/'content/learning/glossary.tsv').read_text(encoding='utf8').splitlines() if line)
 terms=[]
@@ -27,5 +34,5 @@ for english,chinese in terms:
     candidates.sort(key=lambda entry:(chinese not in entry['title'],len(entry['text'])))
     section=candidates[0]['id'] if candidates else 'chapter_appendix/terminology'
     glossary.append(dict(term=chinese.replace('$',''),english=english.replace('$',''),definition=definitions[chinese],sectionId=section))
-(target.parent/'glossary.json').write_text(json.dumps(glossary,ensure_ascii=False,indent=2)+'\n',encoding='utf8',newline='\n')
+publish(target.parent/'glossary.json',glossary)
 print(f'Published {len(glossary)} authored glossary explanations.')

@@ -24,6 +24,10 @@
 | Pyodide | 314.0.7 | MPL-2.0，保留运行时及 Python 自带许可 |
 | KaTeX | 0.16.22 | MIT |
 | Lucide | 0.468.0 | ISC |
+| CodeMirror | 6.0.2 | MIT |
+| CodeMirror state / view | 6.7.6 / 6.43.15 | MIT |
+| CodeMirror Python / merge / lint | 6.2.1 / 6.12.3 / 6.9.7 | MIT |
+| Shiki | 2.5.0 | MIT，保留包内声明 |
 | Noto Serif SC / Noto Sans SC | Fontsource 5.2.6 / 5.2.7 | SIL OFL 1.1 |
 | JetBrains Mono | Fontsource 5.2.6 | SIL OFL 1.1 |
 

@@ -115,3 +115,9 @@ ZIP 内的 `PACKAGE-MANIFEST.json` 提供每个文件的 SHA-256 和应用提交
 - **来源 / H5P 哈希报错**：检查是否下载不完整或编辑了原始文件，保留 `.gitattributes` 的字节策略，使用 Git 恢复对应来源；不要关闭完整性检查。
 - **端口已经被使用**：停止旧进程或执行 `npx vitepress preview web --host 127.0.0.1 --port 5192`；不要在已有固定端口的 npm preview 命令上重复追加 `--port`。测试端口使用上述环境变量。
 - **没有旧书签或成绩**：这是正常的新浏览器 / 新端口状态；验证同一来源下的刷新恢复即可。
+## v0.2 新增资源
+
+运行步骤沿用下文。`npm ci` 会安装锁定的 CodeMirror 与 Shiki；`web/public/learning/` 已随仓库保存，开发预览不需要先运行 Python。修改 `content/learning/` 后执行 `npm run build:learning`；`npm run check` 和 `npm run build` 都会检查这些资源与原始练习、术语定义一致。
+
+备份恢复位于应用「笔记」面板。学习记录属于浏览器站点数据，克隆仓库或解压 ZIP 不会自动携带；需要手动导出 JSON，在新来源中导入。发布包继续包含已构建静态站点及 `START_PREVIEW.cmd`。
+

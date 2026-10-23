@@ -20,7 +20,7 @@ await cp(resolve(root, 'content/h5p/binary-search'),resolve(publicDir,'h5p/binar
 await mkdir(resolve(publicDir, 'images'), {recursive:true});
 await cp(resolve(root,'assets/references/cover.png'),resolve(publicDir,'images/cover.png'));
 const notices = [];
-for(const name of ['vitepress','vue','page-flip','h5p-standalone','pyodide','katex','lucide-vue-next','@fontsource/noto-serif-sc','@fontsource/noto-sans-sc','@fontsource/jetbrains-mono']) {
+for(const name of ['vitepress','vue','page-flip','h5p-standalone','pyodide','katex','lucide-vue-next','codemirror','@codemirror/state','@codemirror/view','@codemirror/lang-python','@codemirror/merge','@codemirror/lint','shiki','@fontsource/noto-serif-sc','@fontsource/noto-sans-sc','@fontsource/jetbrains-mono']) {
   const dir=resolve(root,'node_modules',name);const pkg=JSON.parse(await readFile(resolve(dir,'package.json'),'utf8'));
   notices.push(`${name} ${pkg.version}: ${pkg.license}`);
   for(const file of await readdir(dir)) if(/^(license|licence|ofl|copyright)/i.test(file)) {
