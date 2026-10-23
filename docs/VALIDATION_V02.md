@@ -1,6 +1,6 @@
 # v0.2 验证记录
 
-环境：Windows，Node.js 24.14.1、Python 3.14.3，Playwright 1.56.1 驱动本机 Chrome。检查源码、开发服务和静态构建三个层面；最终干净克隆记录在发布前补充。
+环境：Windows，Node.js 24.14.1、Python 3.14.3，Playwright 1.56.1 驱动本机 Chrome。检查源码、开发服务和静态构建三个层面；2026-10-23 完成从私有 GitHub 的独立克隆复验。
 
 ## 已通过的检查
 
@@ -16,7 +16,27 @@
 - 浏览器前进后退、继续阅读、语言偏好、图解播放／暂停／放大、Python 停止／超时／初始化失败重试、H5P 答题评分／重试／恢复。
 - 390 / 820 / 1440px 下大字号、深色主题、精确搜索、键盘关闭面板和分栏键盘调整。
 
-完整静态构建回归共 24 项浏览器测试，0 失败、0 跳过。产物与后续修订的最终克隆复验结果以本文末尾的发布记录为准。
+最终独立克隆的完整静态构建回归共 **25 项浏览器测试，0 失败、0 跳过**，耗时约 4.4 分钟。此前完整回归为 24 项；最终增加了通过真实界面迁移旧书签、下载备份和在新浏览器上下文导入的检查。
+
+## 干净克隆复验
+
+应用源码提交：`aca8c548c2eb6db20f5084c34c9f38f7fd52cdce`。之后发布提交仅整理文档与验收截图，不改变应用源代码。机器可读记录见 [clean-clone-validation-v02.json](clean-clone-validation-v02.json)。
+
+1. 从私有 GitHub 克隆到新目录 `D:\Codex\verification\plex-interactive-book-v02-20261023`，独立执行 `npm ci`，创建新的 `.venv` 并按 `requirements.lock.txt` 安装 Python 依赖，没有复制开发目录的依赖。
+2. 执行 `npm run import:book`，随后 `git diff --exit-code` 通过：全文、稳定 ID、练习和术语再生未改变任何已提交文件。
+3. 执行 `npm run check` 和 `npm run build`，类型、内容、学习资源、单元测试及生产构建全部通过。
+4. 使用发布包同款 `node scripts/serve-dist.mjs --port 5194` 启动静态服务，以 `PLEX_TEST_PORT=5194`、`PLEX_TEST_PREVIEW=1`、`PLEX_TEST_REUSE=1` 运行完整 `npm run test:e2e`：25 项全部通过。
+5. 对开发目录与独立克隆目录的构建结果逐文件计算 SHA-256：两边均为 **2,188 个文件，0 个差异**。
+
+| 屏宽 | 审计普通小节 | 包含相邻小节的窗口叶片总数 |
+| --- | --- | --- |
+| 390px | 127 | 3,188 |
+| 820px | 127 | 2,056 |
+| 1440px | 127 | 2,486 |
+
+另有封面和封底两种专用页面，合计 129 小节。上述叶片数包括重复进入相邻窗口的页面，不能用作出版页码。
+
+验收截图：[手机深色大字号阅读](preview-v02-study-390.png)、[桌面学习模式](preview-v02-study-1440.png)、[编程练习](preview-v02-practice.png)。完整 ZIP 的逐文件清单位于包内 `PACKAGE-MANIFEST.json`；外部 `.sha256` 校验整个压缩包。
 
 ## 人工查看与边界
 

@@ -13,4 +13,6 @@
 
 从 GitHub 克隆开发时运行 `npm ci`、`npm run dev`。重新检查和构建需安装 requirements.lock.txt 中的 Python 依赖，详见 docs/REPRODUCIBILITY.md。
 
+独立 GitHub 克隆完成依赖安装、重复导入、检查、构建与 25 项浏览器测试，全部通过；两个目录的 2,188 个静态文件逐一校验完全一致。参考解法、错误起始代码、73 个上游完整示例及 H5P 恢复均经过实际浏览器运行。
+
 本版本为私有仓库发布，无公开部署。学习数据保存在本机。验证报告为 docs/VALIDATION_V02.md；NVDA / VoiceOver 实机验收及非 Chromium 浏览器仍为明确的待验收项。

@@ -1,5 +1,11 @@
 # 从 GitHub 克隆并复现本地效果
 
+## v0.2 新增资源
+
+运行步骤沿用下文。`npm ci` 会安装锁定的 CodeMirror 与 Shiki；`web/public/learning/` 已随仓库保存，开发预览不需要先运行 Python。修改 `content/learning/` 后执行 `npm run build:learning`；`npm run check` 和 `npm run build` 都会检查这些资源与原始练习、术语定义一致。
+
+备份恢复位于应用「笔记」面板。学习记录属于浏览器站点数据，克隆仓库或解压 ZIP 不会自动携带；需要手动导出 JSON，在新来源中导入。发布包继续包含已构建静态站点及 `START_PREVIEW.cmd`。
+
 仓库：<https://github.com/yeniwu46-max/plex-interactive-book>，保持私有。默认 `main` 是可验收版本；需要拥有仓库访问权限并已配置 GitHub Git 凭据。无需从原作者仓库再次复制教材，也无需找到旧聊天附件。
 
 ## 环境
@@ -47,7 +53,7 @@ npm run build
 npm run preview
 ```
 
-这组命令与 Windows 使用相同来源和依赖锁；实际干净克隆验收平台见 [验证记录](VALIDATION.md)，未将文档中的启动说明当作跨平台实测结论。
+这组命令与 Windows 使用相同来源和依赖锁；实际干净克隆验收平台见 [v0.2 验证记录](VALIDATION_V02.md)，未将文档中的启动说明当作跨平台实测结论。
 
 打开 **http://127.0.0.1:5190/**，应先显示完整封面。拖开封面后进入扉页，目录、搜索、拖拽翻页、代码实验室和二分查找练习可使用。停止服务使用运行终端的 Ctrl+C。
 
@@ -81,7 +87,7 @@ PLEX_TEST_PORT=5192 PLEX_TEST_PREVIEW=1 PLEX_TEST_REUSE=0 npm run test:e2e
 
 Playwright 自动启动、结束该测试服务。默认是 5190 开发服务，`PLEX_TEST_PREVIEW=1` 切换到生产预览，`PLEX_TEST_REUSE=0` 拒绝误用已有服务。占用端口时请换一个未占用端口。
 
-完整套件包含 16 项测试，其中三项逐节遍历全部普通小节，另有 73 个 Python 源文件运行，可能需要数分钟。仅验证鼠标拖拽可运行 `npx playwright test tests/browser/drag.spec.ts`。
+完整套件包含 25 项测试，其中三项逐节遍历全部普通小节，另有 73 个 Python 源文件、24 题参考解法和错误起始代码的实际运行，可能需要数分钟。仅验证鼠标拖拽可运行 `npx playwright test tests/browser/drag.spec.ts`。
 
 ## 哪些文件必须能从克隆中恢复
 
@@ -115,9 +121,3 @@ ZIP 内的 `PACKAGE-MANIFEST.json` 提供每个文件的 SHA-256 和应用提交
 - **来源 / H5P 哈希报错**：检查是否下载不完整或编辑了原始文件，保留 `.gitattributes` 的字节策略，使用 Git 恢复对应来源；不要关闭完整性检查。
 - **端口已经被使用**：停止旧进程或执行 `npx vitepress preview web --host 127.0.0.1 --port 5192`；不要在已有固定端口的 npm preview 命令上重复追加 `--port`。测试端口使用上述环境变量。
 - **没有旧书签或成绩**：这是正常的新浏览器 / 新端口状态；验证同一来源下的刷新恢复即可。
-## v0.2 新增资源
-
-运行步骤沿用下文。`npm ci` 会安装锁定的 CodeMirror 与 Shiki；`web/public/learning/` 已随仓库保存，开发预览不需要先运行 Python。修改 `content/learning/` 后执行 `npm run build:learning`；`npm run check` 和 `npm run build` 都会检查这些资源与原始练习、术语定义一致。
-
-备份恢复位于应用「笔记」面板。学习记录属于浏览器站点数据，克隆仓库或解压 ZIP 不会自动携带；需要手动导出 JSON，在新来源中导入。发布包继续包含已构建静态站点及 `START_PREVIEW.cmd`。
-

@@ -81,7 +81,7 @@ VitePress 1.6.4、Vue 3.5.22、StPageFlip 2.0.7、h5p-standalone 3.8.2、Pyodide
 
 教材改编内容遵循 **CC BY-NC-SA 4.0**，保留 krahets 与 Hello Algo 贡献者署名；封面沿用用户原附件。各软件组件保留各自许可。详见 [第三方说明](THIRD_PARTY_NOTICES.md)。
 
-验收范围与首版截图见 [验证记录](docs/VALIDATION.md)。
+当前验收范围、干净克隆复验及截图见 [v0.2 验证记录](docs/VALIDATION_V02.md)；[首版记录](docs/VALIDATION.md) 保留作为历史参考。
 
 首版实现、拖拽翻页、Python / H5P 接入经验与维护取舍见 [技术总结](docs/TECHNICAL_SUMMARY.md)。
 
