@@ -9,9 +9,11 @@ def publish(path,value):
         path.parent.mkdir(parents=True,exist_ok=True)
         path.write_text(text,encoding='utf8',newline='\n')
 data=runpy.run_path(str(ROOT/'content/learning/exercises.py'))['EXERCISES']
+unit=runpy.run_path(str(ROOT/'content/learning/monty.py'))
+data+=unit['EXERCISES']
 manifest=json.loads((ROOT/'web/public/book/manifest.json').read_text(encoding='utf8'))
 sections={p['id'] for p in manifest['pages']}
-assert len(data)==24 and len({e['id'] for e in data})==24
+assert len(data)==27 and len({e['id'] for e in data})==27
 for exercise in data:
     assert exercise['sectionId'] in sections,exercise['sectionId']
     for test in exercise['tests']:
@@ -19,6 +21,11 @@ for exercise in data:
         assert scope['solve'](*copy.deepcopy(test['args']))==test['expected'],exercise['id']
 target=ROOT/'web/public/learning/exercises.json';target.parent.mkdir(parents=True,exist_ok=True)
 publish(target,data)
+publish(target.parent/'monty-unit.json',{'id':'monty-hall','version':'1','minutes':45,
+    'title':'三扇舱门：直觉可靠吗？','goals':['解释主持人规则','区分概率与频率','读懂并修改模拟代码'],
+    'pages':[{'id':'unit/monty/'+slug,'title':title,'mode':mode} for slug,title,mode,_ in unit['PAGES']],
+    'exercises':[{'id':e['id'],'serverRef':e['serverRef']} for e in unit['EXERCISES']],
+    'activityId':'monty-hall','requiredQuizQuestion':0,'minimumScore':3})
 print(f'Published {len(data)} exercises; {sum(len(e["tests"]) for e in data)} reference cases passed.')
 definitions=dict(line.split('\t',1) for line in (ROOT/'content/learning/glossary.tsv').read_text(encoding='utf8').splitlines() if line)
 terms=[]

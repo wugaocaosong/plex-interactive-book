@@ -1,0 +1,21 @@
+{
+  "id": "unit/monty/conditions",
+  "title": "Python 补学：条件决定选择",
+  "kind": "unit",
+  "group": "三扇舱门 · 45 分钟",
+  "route": "/read/unit/monty/conditions",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-5677e73f39f1862c\">主持人能打开哪扇门？</h1>\n<pre data-block=\"blk-f4e15d739953d572\"><code class=\"language-python\">allowed = []\nfor door in [0, 1, 2]:\n    if door != first and door != prize:\n        allowed.append(door)\n</code></pre>\n<p data-block=\"blk-0322949d6150a9a9\"><code>!=</code> 表示不相等；<code>and</code> 要求两个条件同时成立。门既不能是初选门，也不能是奖品门。</p>\n<p data-block=\"blk-d8244e27d8fe12c6\"><code>allowed</code> 是列表，<code>append</code> 将一扇符合条件的门加入列表。初选正确时有两扇合法空门；初选错误时只有一扇。</p><div class=\"activity-invitation\" data-block=\"blk-00149362ae2614cc\"><span>PLEX · 三门探索</span><button data-action=\"unit\" data-unit-mode=\"exercises\">打开本页学习活动</button><button data-action=\"blackboard\">打开小黑板</button></div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-5677e73f39f1862c",
+    "b1": "blk-f4e15d739953d572",
+    "b2": "blk-0322949d6150a9a9",
+    "b3": "blk-d8244e27d8fe12c6",
+    "b4": "blk-00149362ae2614cc"
+  },
+  "contentVersion": "a5415fbefda8860b"
+}

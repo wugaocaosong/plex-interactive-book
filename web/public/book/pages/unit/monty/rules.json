@@ -1,0 +1,20 @@
+{
+  "id": "unit/monty/rules",
+  "title": "任务规则：小E知道什么？",
+  "kind": "unit",
+  "group": "三扇舱门 · 45 分钟",
+  "route": "/read/unit/monty/rules",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-a78d4f751877feac\">小E的开门约定</h1>\n<ol data-block=\"blk-950e9b03998607ab\">\n<li>核心等概率放在 1、2、3 号舱门中的一扇后面。</li>\n<li>你先选一扇，暂时不开。</li>\n<li>小E知道核心的位置，<strong>始终打开一扇你没选的空门</strong>。</li>\n<li>如果有两扇可开的空门，小E等概率选择其中一扇。</li>\n<li>小E每次都会让你决定：保留初选，还是换到另一扇未开的门。</li>\n</ol>\n<p data-block=\"blk-ba3e6fb379c341a5\">小E不是随便开一扇门。后面的概率结论依赖这些约定。</p><div class=\"activity-invitation\" data-block=\"blk-12441dd78b97c3db\"><span>PLEX · 三门探索</span><button data-action=\"unit\" data-unit-mode=\"story\">打开本页学习活动</button><button data-action=\"blackboard\">打开小黑板</button></div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-a78d4f751877feac",
+    "b1": "blk-950e9b03998607ab",
+    "b2": "blk-ba3e6fb379c341a5",
+    "b3": "blk-12441dd78b97c3db"
+  },
+  "contentVersion": "cf387f3299ab0abf"
+}

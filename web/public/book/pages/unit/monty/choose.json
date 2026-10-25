@@ -1,0 +1,21 @@
+{
+  "id": "unit/monty/choose",
+  "title": "第一轮：做出你的选择",
+  "kind": "unit",
+  "group": "三扇舱门 · 45 分钟",
+  "route": "/read/unit/monty/choose",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-8a233f22b0280f5f\">先选一扇舱门</h1>\n<p data-block=\"blk-c5a3589eeb22d312\">没有线索时，你选中核心的机会是三分之一。先选择，不急着看答案。</p>\n<p data-block=\"blk-23d241e11b39106e\">小E打开空门以后，还剩两扇关着的门。你觉得换门更好、不换更好，还是一样？把预测留在实验中。</p>\n<p data-block=\"blk-7d6df517b0ec705c\"><strong>这道预测不计分。</strong> 我们要观察直觉如何随着证据改变，而不是惩罚第一次猜错。</p><div class=\"activity-invitation\" data-block=\"blk-6c296d878b4127be\"><span>PLEX · 三门探索</span><button data-action=\"unit\" data-unit-mode=\"story\">打开本页学习活动</button><button data-action=\"blackboard\">打开小黑板</button></div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-8a233f22b0280f5f",
+    "b1": "blk-c5a3589eeb22d312",
+    "b2": "blk-23d241e11b39106e",
+    "b3": "blk-7d6df517b0ec705c",
+    "b4": "blk-6c296d878b4127be"
+  },
+  "contentVersion": "ed50e7ea348f9a80"
+}

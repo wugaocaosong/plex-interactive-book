@@ -1,0 +1,21 @@
+{
+  "id": "unit/monty/predict",
+  "title": "揭晓前：把理由说出来",
+  "kind": "unit",
+  "group": "三扇舱门 · 45 分钟",
+  "route": "/read/unit/monty/predict",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-b95057d9477b16b6\">不只猜结果，也说理由</h1>\n<p data-block=\"blk-8a8034c6fda01e5a\">想一想：小E为什么能保证打开空门？他掌握的信息与你一样吗？</p>\n<p data-block=\"blk-5ca627bb7f4bd6f9\">在小黑板上画三扇门，圈出初选，再叉掉小E打开的门。不要提前画出奖品。</p>\n<p data-block=\"blk-0024cb7683a4f2da\">选择换门或保留，观察一次结果。<strong>换门后失败，不代表换门策略更差；获奖也不代表已经理解了概率。</strong></p><div class=\"activity-invitation\" data-block=\"blk-d6af85fb8248c354\"><span>PLEX · 三门探索</span><button data-action=\"unit\" data-unit-mode=\"story\">打开本页学习活动</button><button data-action=\"blackboard\">打开小黑板</button></div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-b95057d9477b16b6",
+    "b1": "blk-8a8034c6fda01e5a",
+    "b2": "blk-5ca627bb7f4bd6f9",
+    "b3": "blk-0024cb7683a4f2da",
+    "b4": "blk-d6af85fb8248c354"
+  },
+  "contentVersion": "161e06682ecff5b4"
+}

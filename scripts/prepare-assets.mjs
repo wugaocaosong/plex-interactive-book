@@ -17,6 +17,8 @@ for (const file of ['pyodide.mjs','pyodide.asm.mjs','pyodide.asm.wasm','pyodide-
   await cp(resolve(root, 'node_modules/pyodide',file),resolve(publicDir, 'vendor/pyodide',file));
 }
 await cp(resolve(root, 'content/h5p/binary-search'),resolve(publicDir,'h5p/binary-search'),{recursive:true});
+await cp(resolve(root, 'content/h5p/binary-search'),resolve(publicDir,'h5p/monty-hall'),{recursive:true});
+await cp(resolve(root, 'content/h5p/monty-hall'),resolve(publicDir,'h5p/monty-hall'),{recursive:true});
 await mkdir(resolve(publicDir, 'images'), {recursive:true});
 await cp(resolve(root,'assets/references/cover.png'),resolve(publicDir,'images/cover.png'));
 const notices = [];

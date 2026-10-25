@@ -1,11 +1,12 @@
 """Build the original PLEX exercise and vendor its exact H5P runtime dependencies."""
-import hashlib, io, json, pathlib, shutil, uuid, zipfile
+import hashlib, io, json, pathlib, shutil, uuid, zipfile, sys, runpy
 import requests
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 LIBS=ROOT/'content/h5p/libraries'
-DEST=ROOT/'content/h5p/binary-search'
-if not (LIBS/'H5P.InteractiveBook-1.11').exists() and (DEST/'H5P.InteractiveBook-1.11').exists():
-    LIBS=DEST
+UNIT='monty-hall' if '--monty' in sys.argv else 'binary-search'
+DEST=ROOT/'content/h5p'/UNIT
+if not (LIBS/'H5P.InteractiveBook-1.11').exists() and (ROOT/'content/h5p/binary-search/H5P.InteractiveBook-1.11').exists():
+    LIBS=ROOT/'content/h5p/binary-search'
 def write(path,value):
     path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
@@ -25,7 +26,7 @@ def defaults(fields):
     return result
 def parameters(lib): return defaults(read(LIBS/lib/'semantics.json'))
 def sub(lib, title, params, identity):
-    return {'library':lib,'metadata':{'title':title,'contentType':lib.split()[0].replace('H5P.',''),'license':'CC BY-NC-SA','licenseVersion':'4.0','authors':[{'name':'PLEX 数字教材编者','role':'Author'}]},'params':params,'subContentId':str(uuid.uuid5(uuid.NAMESPACE_URL,'plex/'+identity))}
+    return {'library':lib,'metadata':{'title':title,'contentType':lib.split()[0].replace('H5P.',''),'license':'CC BY-NC-SA','licenseVersion':'4.0','authors':[{'name':'PLEX 数字教材编者','role':'Author'}]},'params':params,'subContentId':str(uuid.uuid5(uuid.NAMESPACE_URL,'plex/'+('monty-hall/' if UNIT=='monty-hall' else '')+identity))}
 
 questions=[
  ('二分查找的前提','二分查找要求待查找的数组具备什么条件？',['元素已经有序排列','元素必须全部为正数','数组长度必须是偶数'],0,'二分查找通过有序关系排除一半范围；正负数与奇偶长度不影响这一前提。'),
@@ -33,7 +34,9 @@ questions=[
  ('时间复杂度','每轮把搜索范围缩小一半，二分查找的时间复杂度是？',['O(n²)','O(n)','O(log n)'],2,'最多经过对数数量的折半，搜索区间就会缩小至一个元素。')
 ]
 chapters=[]
+if UNIT=='monty-hall': questions=runpy.run_path(str(ROOT/'content/learning/monty.py'))['QUESTIONS']
 intro=sub('H5P.AdvancedText 1.1','概念回顾',{'text':'<h2>二分查找 · 星轨试炼</h2><p>在有序数组中比较中间元素，每次排除一半搜索范围。完成三个小任务，看看你是否掌握了这一思路。</p>'},'intro')
+if UNIT=='monty-hall': intro['params']['text']='<h2>三扇舱门 · 理解自测</h2><p>四题至少答对三题，且主持人规则题正确。每题可重试，抽中奖品次数不参与评分。</p>'
 for i,(title,question,answers,correct,explanation) in enumerate(questions):
     params=parameters('H5P.MultiChoice-1.16')
     params['question']='<p>'+question+'</p>'
@@ -57,9 +60,10 @@ def include(name):
         include(f"{dependency['machineName']}-{dependency['majorVersion']}.{dependency['minorVersion']}")
 for name in ['H5P.InteractiveBook-1.11','H5P.Column-1.18','H5P.AdvancedText-1.1','H5P.MultiChoice-1.16']: include(name)
 for name in required:
-    if LIBS!=DEST:shutil.copytree(LIBS/name,DEST/name,dirs_exist_ok=True)
+    if LIBS!=DEST and UNIT=='binary-search':shutil.copytree(LIBS/name,DEST/name,dirs_exist_ok=True)
 deps=[{k:lib[k] for k in ['machineName','majorVersion','minorVersion']} for lib in required.values()]
 write(DEST/'content/content.json',book)
-write(DEST/'h5p.json',{'title':'二分查找 · 星轨试炼','language':'zh-hans','mainLibrary':'H5P.InteractiveBook','embedTypes':['iframe'],'license':'CC BY-NC-SA','licenseVersion':'4.0','preloadedDependencies':deps})
-write(ROOT/'content/h5p/runtime-lock.json',{'source':'https://api.h5p.org/v1/content-types/H5P.InteractiveBook','libraries':{name:{'version':f"{v['majorVersion']}.{v['minorVersion']}.{v['patchVersion']}",'sha256':hashlib.sha256((DEST/name/'library.json').read_bytes()).hexdigest(),'files':{p.relative_to(DEST/name).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((DEST/name).rglob('*')) if p.is_file()}} for name,v in required.items()}})
-print(f'Built three questions with {len(required)} pinned H5P libraries')
+write(DEST/'h5p.json',{'title':'三扇舱门 · 理解自测' if UNIT=='monty-hall' else '二分查找 · 星轨试炼','language':'zh-hans','mainLibrary':'H5P.InteractiveBook','embedTypes':['iframe'],'license':'CC BY-NC-SA','licenseVersion':'4.0','preloadedDependencies':deps})
+if UNIT=='binary-search':
+    write(ROOT/'content/h5p/runtime-lock.json',{'source':'https://api.h5p.org/v1/content-types/H5P.InteractiveBook','libraries':{name:{'version':f"{v['majorVersion']}.{v['minorVersion']}.{v['patchVersion']}",'sha256':hashlib.sha256((DEST/name/'library.json').read_bytes()).hexdigest(),'files':{p.relative_to(DEST/name).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((DEST/name).rglob('*')) if p.is_file()}} for name,v in required.items()}})
+print(f'Built {len(questions)} questions with {len(required)} pinned H5P libraries')

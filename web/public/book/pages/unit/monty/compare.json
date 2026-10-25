@@ -1,0 +1,21 @@
+{
+  "id": "unit/monty/compare",
+  "title": "批量实验：频率会波动",
+  "kind": "unit",
+  "group": "三扇舱门 · 45 分钟",
+  "route": "/read/unit/monty/compare",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-2e322d0935b315d1\">10 次、100 次、1000 次，会有什么不同？</h1>\n<p data-block=\"blk-ca118cd4d1c0f7ae\">先写下预测，再逐档增加试验次数。观察换门与不换门的累计获奖频率。</p>\n<p data-block=\"blk-d05e18c98868fe36\">曲线的水平参考线是理论概率，不是强制目标。小样本可能偏离很多，更多试验也不保证每一步都更接近理论值。</p>\n<p data-block=\"blk-a5a518d2b581dc91\">结果表和回放来自本次 Python 实际运行。运行失败或记录不符合规则时，应先修复程序，不能继续展示旧结果作为新结果。</p><div class=\"activity-invitation\" data-block=\"blk-5eba76b59b5df244\"><span>PLEX · 三门探索</span><button data-action=\"unit\" data-unit-mode=\"simulation\">打开本页学习活动</button><button data-action=\"blackboard\">打开小黑板</button></div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-2e322d0935b315d1",
+    "b1": "blk-ca118cd4d1c0f7ae",
+    "b2": "blk-d05e18c98868fe36",
+    "b3": "blk-a5a518d2b581dc91",
+    "b4": "blk-5eba76b59b5df244"
+  },
+  "contentVersion": "6ace4376fc57dca2"
+}

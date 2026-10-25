@@ -1,7 +1,7 @@
 {
   "title": "星轨编程",
   "subtitle": "Python 与算法的探索之旅",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
   "pages": [
     {
@@ -100,6 +100,132 @@
       "kind": "contents",
       "group": "卷首",
       "route": "/read/contents",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/start",
+      "title": "学习起点：三扇舱门",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/start",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/rules",
+      "title": "任务规则：小E知道什么？",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/rules",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/choose",
+      "title": "第一轮：做出你的选择",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/choose",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/predict",
+      "title": "揭晓前：把理由说出来",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/predict",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/cases",
+      "title": "枚举：把核心放在三个位置",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/cases",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/explain",
+      "title": "解释：空门不是白白消失",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/explain",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/variables",
+      "title": "Python 补学：变量与比较",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/variables",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/conditions",
+      "title": "Python 补学：条件决定选择",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/conditions",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/repeat",
+      "title": "Python 补学：循环与随机选择",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/repeat",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/single-run",
+      "title": "运行一次：把选择写成程序",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/single-run",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/compare",
+      "title": "批量实验：频率会波动",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/compare",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/practice",
+      "title": "编程任务：填空、修错、修改",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/practice",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/quiz",
+      "title": "自测：解释比猜中更重要",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/quiz",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/reflection",
+      "title": "回顾：你的直觉发生了什么变化？",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/reflection",
       "sourcePath": null,
       "sourceCommit": null
     },

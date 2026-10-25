@@ -1,0 +1,21 @@
+{
+  "id": "unit/monty/practice",
+  "title": "编程任务：填空、修错、修改",
+  "kind": "unit",
+  "group": "三扇舱门 · 45 分钟",
+  "route": "/read/unit/monty/practice",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-973d2913e7baff48\">三个小任务</h1>\n<ol data-block=\"blk-445bc9da41d10219\">\n<li><strong>填空</strong>：判断是否获奖，并计算获奖频率。</li>\n<li><strong>修错</strong>：修复主持人的开门条件。</li>\n<li><strong>修改</strong>：实现换门策略，累计同一批试验的获奖次数。</li>\n</ol>\n<p data-block=\"blk-71769994a78cb21d\">每题都有题意、样例、测试及三层提示。先尝试，再逐层查看；测试通过表示满足本题用例，不等于证明所有输入都正确。</p>\n<p data-block=\"blk-7613710f97513a32\">本机测试不需要登录。登录后可主动在线提交，并让小E依据服务器记录检查思路。</p><div class=\"activity-invitation\" data-block=\"blk-1bf4b92fe1fcad99\"><span>PLEX · 三门探索</span><button data-action=\"unit\" data-unit-mode=\"exercises\">打开本页学习活动</button><button data-action=\"blackboard\">打开小黑板</button></div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-973d2913e7baff48",
+    "b1": "blk-445bc9da41d10219",
+    "b2": "blk-71769994a78cb21d",
+    "b3": "blk-7613710f97513a32",
+    "b4": "blk-1bf4b92fe1fcad99"
+  },
+  "contentVersion": "aece607be3ad7561"
+}

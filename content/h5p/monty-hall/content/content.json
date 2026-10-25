@@ -1,0 +1,600 @@
+{
+  "showCoverPage": false,
+  "bookCover": {
+    "coverDescription": "<p style=\"text-align: center;\"></p>"
+  },
+  "behaviour": {
+    "baseColor": "#4f8d86",
+    "defaultTableOfContents": false,
+    "progressIndicators": true,
+    "progressAuto": true,
+    "displaySummary": true,
+    "enableRetry": true
+  },
+  "read": "开始",
+  "displayTOC": "显示目录",
+  "hideTOC": "隐藏目录",
+  "nextPage": "下一页",
+  "previousPage": "上一页",
+  "chapterCompleted": "本页已完成",
+  "partCompleted": "已完成 @pages / @total",
+  "incompleteChapter": "本页未完成",
+  "navigateToTop": "返回顶部",
+  "markAsFinished": "本页已完成",
+  "fullscreen": "全屏",
+  "exitFullscreen": "退出全屏",
+  "bookProgressSubtext": "@count / @total 页",
+  "interactionsProgressSubtext": "@count / @total 题",
+  "submitReport": "完成练习",
+  "restartLabel": "重新开始",
+  "summaryHeader": "练习总结",
+  "allInteractions": "全部题目",
+  "unansweredInteractions": "未答题目",
+  "scoreText": "@score / @maxscore",
+  "leftOutOfTotalCompleted": "已完成 @left / @max 题",
+  "noInteractions": "没有互动题目",
+  "score": "得分",
+  "summaryAndSubmit": "总结",
+  "noChapterInteractionBoldText": "你还没有开始答题。",
+  "noChapterInteractionText": "完成至少一道题目后即可查看总结。",
+  "yourAnswersAreSubmittedForReview": "练习已完成，结果已保存到本机。",
+  "bookProgress": "阅读进度",
+  "interactionsProgress": "答题进度",
+  "totalScoreLabel": "总分",
+  "a11y": {
+    "progress": "第 @page 页，共 @total 页。",
+    "menu": "切换章节目录"
+  },
+  "chapters": [
+    {
+      "library": "H5P.Column 1.18",
+      "metadata": {
+        "title": "主持人规则",
+        "contentType": "Column",
+        "license": "CC BY-NC-SA",
+        "licenseVersion": "4.0",
+        "authors": [
+          {
+            "name": "PLEX 数字教材编者",
+            "role": "Author"
+          }
+        ]
+      },
+      "params": {
+        "content": [
+          {
+            "content": {
+              "library": "H5P.AdvancedText 1.1",
+              "metadata": {
+                "title": "概念回顾",
+                "contentType": "AdvancedText",
+                "license": "CC BY-NC-SA",
+                "licenseVersion": "4.0",
+                "authors": [
+                  {
+                    "name": "PLEX 数字教材编者",
+                    "role": "Author"
+                  }
+                ]
+              },
+              "params": {
+                "text": "<h2>三扇舱门 · 理解自测</h2><p>四题至少答对三题，且主持人规则题正确。每题可重试，抽中奖品次数不参与评分。</p>"
+              },
+              "subContentId": "c09a2450-f1d4-5898-a776-5dcf459fbadb"
+            },
+            "useSeparator": "auto"
+          },
+          {
+            "content": {
+              "library": "H5P.MultiChoice 1.16",
+              "metadata": {
+                "title": "主持人规则",
+                "contentType": "MultiChoice",
+                "license": "CC BY-NC-SA",
+                "licenseVersion": "4.0",
+                "authors": [
+                  {
+                    "name": "PLEX 数字教材编者",
+                    "role": "Author"
+                  }
+                ]
+              },
+              "params": {
+                "media": {
+                  "disableImageZooming": false
+                },
+                "overallFeedback": [
+                  {
+                    "from": 0,
+                    "to": 99,
+                    "feedback": "再想一想。主持人知道核心位置，排除空门并始终提供换门机会是结论的前提。"
+                  },
+                  {
+                    "from": 100,
+                    "to": 100,
+                    "feedback": "回答正确！主持人知道核心位置，排除空门并始终提供换门机会是结论的前提。"
+                  }
+                ],
+                "UI": {
+                  "checkAnswerButton": "检查答案",
+                  "submitAnswerButton": "提交",
+                  "showSolutionButton": "查看答案",
+                  "tryAgainButton": "重试",
+                  "tipsLabel": "Show tip",
+                  "scoreBarLabel": "得分 :num / :total",
+                  "tipAvailable": "Tip available",
+                  "feedbackAvailable": "Feedback available",
+                  "readFeedback": "Read feedback",
+                  "wrongAnswer": "Wrong answer",
+                  "correctAnswer": "Correct answer",
+                  "shouldCheck": "Should have been checked",
+                  "shouldNotCheck": "Should not have been checked",
+                  "noInput": "Please answer before viewing the solution",
+                  "a11yCheck": "检查答案",
+                  "a11yShowSolution": "查看正确答案",
+                  "a11yRetry": "重新作答"
+                },
+                "behaviour": {
+                  "enableRetry": true,
+                  "enableSolutionsButton": true,
+                  "enableCheckButton": true,
+                  "type": "single",
+                  "singlePoint": false,
+                  "randomAnswers": false,
+                  "showSolutionsRequiresInput": true,
+                  "confirmCheckDialog": false,
+                  "confirmRetryDialog": false,
+                  "autoCheck": false,
+                  "passPercentage": 100,
+                  "showScorePoints": true,
+                  "singleAnswer": true
+                },
+                "confirmCheck": {
+                  "header": "Finish ?",
+                  "body": "Are you sure you wish to finish ?",
+                  "cancelLabel": "Cancel",
+                  "confirmLabel": "Finish"
+                },
+                "confirmRetry": {
+                  "header": "Retry ?",
+                  "body": "Are you sure you wish to retry ?",
+                  "cancelLabel": "Cancel",
+                  "confirmLabel": "Confirm"
+                },
+                "question": "<p>在本课的经典规则中，小E必须怎么开门？</p>",
+                "answers": [
+                  {
+                    "text": "<p>始终打开一扇未被初选的空门，并提供换门机会</p>",
+                    "correct": true,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "主持人知道核心位置，排除空门并始终提供换门机会是结论的前提。",
+                      "notChosenFeedback": ""
+                    }
+                  },
+                  {
+                    "text": "<p>随机打开任意一扇门</p>",
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "主持人知道核心位置，排除空门并始终提供换门机会是结论的前提。",
+                      "notChosenFeedback": ""
+                    }
+                  },
+                  {
+                    "text": "<p>只在玩家初选正确时提供换门机会</p>",
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "主持人知道核心位置，排除空门并始终提供换门机会是结论的前提。",
+                      "notChosenFeedback": ""
+                    }
+                  }
+                ]
+              },
+              "subContentId": "bdb0fc79-c5cd-545d-807c-d483a74f4cbd"
+            },
+            "useSeparator": "auto"
+          }
+        ]
+      },
+      "subContentId": "f37ce9f0-1e43-5969-8d6f-e4e9f0b47874"
+    },
+    {
+      "library": "H5P.Column 1.18",
+      "metadata": {
+        "title": "初选情况",
+        "contentType": "Column",
+        "license": "CC BY-NC-SA",
+        "licenseVersion": "4.0",
+        "authors": [
+          {
+            "name": "PLEX 数字教材编者",
+            "role": "Author"
+          }
+        ]
+      },
+      "params": {
+        "content": [
+          {
+            "content": {
+              "library": "H5P.MultiChoice 1.16",
+              "metadata": {
+                "title": "初选情况",
+                "contentType": "MultiChoice",
+                "license": "CC BY-NC-SA",
+                "licenseVersion": "4.0",
+                "authors": [
+                  {
+                    "name": "PLEX 数字教材编者",
+                    "role": "Author"
+                  }
+                ]
+              },
+              "params": {
+                "media": {
+                  "disableImageZooming": false
+                },
+                "overallFeedback": [
+                  {
+                    "from": 0,
+                    "to": 99,
+                    "feedback": "再想一想。小E必须打开另一扇空门，剩下的未选门就是核心所在。"
+                  },
+                  {
+                    "from": 100,
+                    "to": 100,
+                    "feedback": "回答正确！小E必须打开另一扇空门，剩下的未选门就是核心所在。"
+                  }
+                ],
+                "UI": {
+                  "checkAnswerButton": "检查答案",
+                  "submitAnswerButton": "提交",
+                  "showSolutionButton": "查看答案",
+                  "tryAgainButton": "重试",
+                  "tipsLabel": "Show tip",
+                  "scoreBarLabel": "得分 :num / :total",
+                  "tipAvailable": "Tip available",
+                  "feedbackAvailable": "Feedback available",
+                  "readFeedback": "Read feedback",
+                  "wrongAnswer": "Wrong answer",
+                  "correctAnswer": "Correct answer",
+                  "shouldCheck": "Should have been checked",
+                  "shouldNotCheck": "Should not have been checked",
+                  "noInput": "Please answer before viewing the solution",
+                  "a11yCheck": "检查答案",
+                  "a11yShowSolution": "查看正确答案",
+                  "a11yRetry": "重新作答"
+                },
+                "behaviour": {
+                  "enableRetry": true,
+                  "enableSolutionsButton": true,
+                  "enableCheckButton": true,
+                  "type": "single",
+                  "singlePoint": false,
+                  "randomAnswers": false,
+                  "showSolutionsRequiresInput": true,
+                  "confirmCheckDialog": false,
+                  "confirmRetryDialog": false,
+                  "autoCheck": false,
+                  "passPercentage": 100,
+                  "showScorePoints": true,
+                  "singleAnswer": true
+                },
+                "confirmCheck": {
+                  "header": "Finish ?",
+                  "body": "Are you sure you wish to finish ?",
+                  "cancelLabel": "Cancel",
+                  "confirmLabel": "Finish"
+                },
+                "confirmRetry": {
+                  "header": "Retry ?",
+                  "body": "Are you sure you wish to retry ?",
+                  "cancelLabel": "Cancel",
+                  "confirmLabel": "Confirm"
+                },
+                "question": "<p>如果最初选中了空门，按本课规则换门会怎样？</p>",
+                "answers": [
+                  {
+                    "text": "<p>必定得到核心</p>",
+                    "correct": true,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "小E必须打开另一扇空门，剩下的未选门就是核心所在。",
+                      "notChosenFeedback": ""
+                    }
+                  },
+                  {
+                    "text": "<p>仍然只能随机猜测</p>",
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "小E必须打开另一扇空门，剩下的未选门就是核心所在。",
+                      "notChosenFeedback": ""
+                    }
+                  },
+                  {
+                    "text": "<p>必定进入另一间空舱</p>",
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "小E必须打开另一扇空门，剩下的未选门就是核心所在。",
+                      "notChosenFeedback": ""
+                    }
+                  }
+                ]
+              },
+              "subContentId": "5890731b-2aee-55fa-ac50-d44779bf2673"
+            },
+            "useSeparator": "auto"
+          }
+        ]
+      },
+      "subContentId": "99142e55-94bb-51f6-8ce0-b7d820c3b3e7"
+    },
+    {
+      "library": "H5P.Column 1.18",
+      "metadata": {
+        "title": "频率波动",
+        "contentType": "Column",
+        "license": "CC BY-NC-SA",
+        "licenseVersion": "4.0",
+        "authors": [
+          {
+            "name": "PLEX 数字教材编者",
+            "role": "Author"
+          }
+        ]
+      },
+      "params": {
+        "content": [
+          {
+            "content": {
+              "library": "H5P.MultiChoice 1.16",
+              "metadata": {
+                "title": "频率波动",
+                "contentType": "MultiChoice",
+                "license": "CC BY-NC-SA",
+                "licenseVersion": "4.0",
+                "authors": [
+                  {
+                    "name": "PLEX 数字教材编者",
+                    "role": "Author"
+                  }
+                ]
+              },
+              "params": {
+                "media": {
+                  "disableImageZooming": false
+                },
+                "overallFeedback": [
+                  {
+                    "from": 0,
+                    "to": 99,
+                    "feedback": "再想一想。单次试验不负责补足比例；频率会波动，不能据十次结果推翻理论。"
+                  },
+                  {
+                    "from": 100,
+                    "to": 100,
+                    "feedback": "回答正确！单次试验不负责补足比例；频率会波动，不能据十次结果推翻理论。"
+                  }
+                ],
+                "UI": {
+                  "checkAnswerButton": "检查答案",
+                  "submitAnswerButton": "提交",
+                  "showSolutionButton": "查看答案",
+                  "tryAgainButton": "重试",
+                  "tipsLabel": "Show tip",
+                  "scoreBarLabel": "得分 :num / :total",
+                  "tipAvailable": "Tip available",
+                  "feedbackAvailable": "Feedback available",
+                  "readFeedback": "Read feedback",
+                  "wrongAnswer": "Wrong answer",
+                  "correctAnswer": "Correct answer",
+                  "shouldCheck": "Should have been checked",
+                  "shouldNotCheck": "Should not have been checked",
+                  "noInput": "Please answer before viewing the solution",
+                  "a11yCheck": "检查答案",
+                  "a11yShowSolution": "查看正确答案",
+                  "a11yRetry": "重新作答"
+                },
+                "behaviour": {
+                  "enableRetry": true,
+                  "enableSolutionsButton": true,
+                  "enableCheckButton": true,
+                  "type": "single",
+                  "singlePoint": false,
+                  "randomAnswers": false,
+                  "showSolutionsRequiresInput": true,
+                  "confirmCheckDialog": false,
+                  "confirmRetryDialog": false,
+                  "autoCheck": false,
+                  "passPercentage": 100,
+                  "showScorePoints": true,
+                  "singleAnswer": true
+                },
+                "confirmCheck": {
+                  "header": "Finish ?",
+                  "body": "Are you sure you wish to finish ?",
+                  "cancelLabel": "Cancel",
+                  "confirmLabel": "Finish"
+                },
+                "confirmRetry": {
+                  "header": "Retry ?",
+                  "body": "Are you sure you wish to retry ?",
+                  "cancelLabel": "Cancel",
+                  "confirmLabel": "Confirm"
+                },
+                "question": "<p>换门试验做了 10 次，只赢了 5 次。合理的解释是？</p>",
+                "answers": [
+                  {
+                    "text": "<p>本课理论一定错误</p>",
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "单次试验不负责补足比例；频率会波动，不能据十次结果推翻理论。",
+                      "notChosenFeedback": ""
+                    }
+                  },
+                  {
+                    "text": "<p>有限次试验的频率可能偏离理论概率</p>",
+                    "correct": true,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "单次试验不负责补足比例；频率会波动，不能据十次结果推翻理论。",
+                      "notChosenFeedback": ""
+                    }
+                  },
+                  {
+                    "text": "<p>下一次一定获奖来补足比例</p>",
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "单次试验不负责补足比例；频率会波动，不能据十次结果推翻理论。",
+                      "notChosenFeedback": ""
+                    }
+                  }
+                ]
+              },
+              "subContentId": "d235d8e8-d8f1-5cef-9afe-f9aaa0bfaff2"
+            },
+            "useSeparator": "auto"
+          }
+        ]
+      },
+      "subContentId": "fbe320d6-735f-5b20-ba20-adc5181df4dd"
+    },
+    {
+      "library": "H5P.Column 1.18",
+      "metadata": {
+        "title": "策略解释",
+        "contentType": "Column",
+        "license": "CC BY-NC-SA",
+        "licenseVersion": "4.0",
+        "authors": [
+          {
+            "name": "PLEX 数字教材编者",
+            "role": "Author"
+          }
+        ]
+      },
+      "params": {
+        "content": [
+          {
+            "content": {
+              "library": "H5P.MultiChoice 1.16",
+              "metadata": {
+                "title": "策略解释",
+                "contentType": "MultiChoice",
+                "license": "CC BY-NC-SA",
+                "licenseVersion": "4.0",
+                "authors": [
+                  {
+                    "name": "PLEX 数字教材编者",
+                    "role": "Author"
+                  }
+                ]
+              },
+              "params": {
+                "media": {
+                  "disableImageZooming": false
+                },
+                "overallFeedback": [
+                  {
+                    "from": 0,
+                    "to": 99,
+                    "feedback": "再想一想。换门获奖恰好对应最初选错；两扇门的数量本身不能推出各一半。"
+                  },
+                  {
+                    "from": 100,
+                    "to": 100,
+                    "feedback": "回答正确！换门获奖恰好对应最初选错；两扇门的数量本身不能推出各一半。"
+                  }
+                ],
+                "UI": {
+                  "checkAnswerButton": "检查答案",
+                  "submitAnswerButton": "提交",
+                  "showSolutionButton": "查看答案",
+                  "tryAgainButton": "重试",
+                  "tipsLabel": "Show tip",
+                  "scoreBarLabel": "得分 :num / :total",
+                  "tipAvailable": "Tip available",
+                  "feedbackAvailable": "Feedback available",
+                  "readFeedback": "Read feedback",
+                  "wrongAnswer": "Wrong answer",
+                  "correctAnswer": "Correct answer",
+                  "shouldCheck": "Should have been checked",
+                  "shouldNotCheck": "Should not have been checked",
+                  "noInput": "Please answer before viewing the solution",
+                  "a11yCheck": "检查答案",
+                  "a11yShowSolution": "查看正确答案",
+                  "a11yRetry": "重新作答"
+                },
+                "behaviour": {
+                  "enableRetry": true,
+                  "enableSolutionsButton": true,
+                  "enableCheckButton": true,
+                  "type": "single",
+                  "singlePoint": false,
+                  "randomAnswers": false,
+                  "showSolutionsRequiresInput": true,
+                  "confirmCheckDialog": false,
+                  "confirmRetryDialog": false,
+                  "autoCheck": false,
+                  "passPercentage": 100,
+                  "showScorePoints": true,
+                  "singleAnswer": true
+                },
+                "confirmCheck": {
+                  "header": "Finish ?",
+                  "body": "Are you sure you wish to finish ?",
+                  "cancelLabel": "Cancel",
+                  "confirmLabel": "Finish"
+                },
+                "confirmRetry": {
+                  "header": "Retry ?",
+                  "body": "Are you sure you wish to retry ?",
+                  "cancelLabel": "Cancel",
+                  "confirmLabel": "Confirm"
+                },
+                "question": "<p>经典规则下，一直换门的理论胜率为什么是 2/3？</p>",
+                "answers": [
+                  {
+                    "text": "<p>因为任何两扇关着的门都等可能</p>",
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "换门获奖恰好对应最初选错；两扇门的数量本身不能推出各一半。",
+                      "notChosenFeedback": ""
+                    }
+                  },
+                  {
+                    "text": "<p>因为初选错误的概率是 2/3，而初选错误时换门会获奖</p>",
+                    "correct": true,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "换门获奖恰好对应最初选错；两扇门的数量本身不能推出各一半。",
+                      "notChosenFeedback": ""
+                    }
+                  },
+                  {
+                    "text": "<p>因为小E总是直接指明奖品门</p>",
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "换门获奖恰好对应最初选错；两扇门的数量本身不能推出各一半。",
+                      "notChosenFeedback": ""
+                    }
+                  }
+                ]
+              },
+              "subContentId": "2d43dfbb-acda-5929-a5ed-a79cd5f383f0"
+            },
+            "useSeparator": "auto"
+          }
+        ]
+      },
+      "subContentId": "20aa30f7-b6d7-5ee3-b4bf-3fba64f0a9b7"
+    }
+  ]
+}

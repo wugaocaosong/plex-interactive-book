@@ -1,0 +1,23 @@
+{
+  "id": "unit/monty/start",
+  "title": "学习起点：三扇舱门",
+  "kind": "unit",
+  "group": "三扇舱门 · 45 分钟",
+  "route": "/read/unit/monty/start",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-13ac39ed7fa9437d\">三扇舱门：直觉可靠吗？</h1>\n<p data-block=\"blk-1a5963a442ed318f\">星舰需要一枚能源核心。三扇舱门背后，只有一间存放核心。小E知道它在哪里，但你只能先选一扇门。</p>\n<p data-block=\"blk-e6bc0d15f2e0d88a\">这节课约 <strong>45 分钟</strong>。你将先作预测，再用图解和 Python 核对自己的想法。</p>\n<h2 data-block=\"blk-bbebaf4a59ca195c\">你将能做到</h2>\n<ul data-block=\"blk-96449c722dd9f24d\">\n<li>说清小E开门必须遵守的规则。</li>\n<li>用“初选正确／初选错误”解释换门策略。</li>\n<li>读懂变量、条件和重复试验的基本代码。</li>\n<li>区分一次获奖、试验频率与理论概率。</li>\n</ul>\n<p data-block=\"blk-9d5ae2c733468e86\">可以查看 PLEX 学习画像，也可以跳过登录和自评直接开始。阅读进度、练习结果和画像分别记录。</p><div class=\"activity-invitation\" data-block=\"blk-f09b34e6e6b498f9\"><span>PLEX · 三门探索</span><button data-action=\"unit\" data-unit-mode=\"profile\">打开本页学习活动</button><button data-action=\"blackboard\">打开小黑板</button></div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-13ac39ed7fa9437d",
+    "b1": "blk-1a5963a442ed318f",
+    "b2": "blk-e6bc0d15f2e0d88a",
+    "b3": "blk-bbebaf4a59ca195c",
+    "b4": "blk-96449c722dd9f24d",
+    "b5": "blk-9d5ae2c733468e86",
+    "b6": "blk-f09b34e6e6b498f9"
+  },
+  "contentVersion": "bfa6c2c96fbf899d"
+}

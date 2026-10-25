@@ -1,0 +1,100 @@
+{
+  "id": "monty-hall",
+  "version": "1",
+  "minutes": 45,
+  "title": "三扇舱门：直觉可靠吗？",
+  "goals": [
+    "解释主持人规则",
+    "区分概率与频率",
+    "读懂并修改模拟代码"
+  ],
+  "pages": [
+    {
+      "id": "unit/monty/start",
+      "title": "学习起点：三扇舱门",
+      "mode": "profile"
+    },
+    {
+      "id": "unit/monty/rules",
+      "title": "任务规则：小E知道什么？",
+      "mode": "story"
+    },
+    {
+      "id": "unit/monty/choose",
+      "title": "第一轮：做出你的选择",
+      "mode": "story"
+    },
+    {
+      "id": "unit/monty/predict",
+      "title": "揭晓前：把理由说出来",
+      "mode": "story"
+    },
+    {
+      "id": "unit/monty/cases",
+      "title": "枚举：把核心放在三个位置",
+      "mode": "story"
+    },
+    {
+      "id": "unit/monty/explain",
+      "title": "解释：空门不是白白消失",
+      "mode": "story"
+    },
+    {
+      "id": "unit/monty/variables",
+      "title": "Python 补学：变量与比较",
+      "mode": "exercises"
+    },
+    {
+      "id": "unit/monty/conditions",
+      "title": "Python 补学：条件决定选择",
+      "mode": "exercises"
+    },
+    {
+      "id": "unit/monty/repeat",
+      "title": "Python 补学：循环与随机选择",
+      "mode": "simulation"
+    },
+    {
+      "id": "unit/monty/single-run",
+      "title": "运行一次：把选择写成程序",
+      "mode": "simulation"
+    },
+    {
+      "id": "unit/monty/compare",
+      "title": "批量实验：频率会波动",
+      "mode": "simulation"
+    },
+    {
+      "id": "unit/monty/practice",
+      "title": "编程任务：填空、修错、修改",
+      "mode": "exercises"
+    },
+    {
+      "id": "unit/monty/quiz",
+      "title": "自测：解释比猜中更重要",
+      "mode": "quiz"
+    },
+    {
+      "id": "unit/monty/reflection",
+      "title": "回顾：你的直觉发生了什么变化？",
+      "mode": "progress"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "monty-frequency",
+      "serverRef": "PLEX-MH-001"
+    },
+    {
+      "id": "monty-host",
+      "serverRef": "PLEX-MH-002"
+    },
+    {
+      "id": "monty-strategy",
+      "serverRef": "PLEX-MH-003"
+    }
+  ],
+  "activityId": "monty-hall",
+  "requiredQuizQuestion": 0,
+  "minimumScore": 3
+}

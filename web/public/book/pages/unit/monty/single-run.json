@@ -1,0 +1,21 @@
+{
+  "id": "unit/monty/single-run",
+  "title": "运行一次：把选择写成程序",
+  "kind": "unit",
+  "group": "三扇舱门 · 45 分钟",
+  "route": "/read/unit/monty/single-run",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-5e80c22e51bf68be\">先核对一次，再运行一千次</h1>\n<p data-block=\"blk-39a1979fbb08844a\">程序的 <code>choose_door(first, opened, switch)</code> 函数接收初选门、已打开门和是否换门，返回最后选择的门。</p>\n<p data-block=\"blk-722e068b25bab735\">不换门时返回 <code>first</code>。换门时遍历三扇门，找出既不是初选、也不是已打开的那一扇。</p>\n<p data-block=\"blk-3375ebfe8e4581a9\">实验提供完整的 Python 程序与运行记录。修改后重新运行才会产生新结果；教学动画不会假装自动跟随任意代码变化。</p><div class=\"activity-invitation\" data-block=\"blk-b3719e68bb75b7d3\"><span>PLEX · 三门探索</span><button data-action=\"unit\" data-unit-mode=\"simulation\">打开本页学习活动</button><button data-action=\"blackboard\">打开小黑板</button></div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-5e80c22e51bf68be",
+    "b1": "blk-39a1979fbb08844a",
+    "b2": "blk-722e068b25bab735",
+    "b3": "blk-3375ebfe8e4581a9",
+    "b4": "blk-b3719e68bb75b7d3"
+  },
+  "contentVersion": "f6cf38158e484ee6"
+}

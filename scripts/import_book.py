@@ -1,6 +1,6 @@
 """Deterministic Hello Algo -> PLEX import. Original snapshots are never modified."""
 from __future__ import annotations
-import ast, hashlib, html, json, pathlib, re, shutil
+import ast, hashlib, html, json, pathlib, re, shutil, runpy
 import markdown, yaml
 from bs4 import BeautifulSoup
 from block_ids import assign_blocks
@@ -268,13 +268,17 @@ if __name__=='__main__':
     for item in nav:
         if item[0].startswith(('chapter_hello_algo/','chapter_preface/')): add_source(item)
     add_editorial('contents')
+    for slug,title,mode,body in runpy.run_path(str(ROOT/'content/learning/monty.py'))['PAGES']:
+        markup=markdown.markdown(body,extensions=['extra'])
+        markup+=f'<div class="activity-invitation"><span>PLEX · 三门探索</span><button data-action="unit" data-unit-mode="{mode}">打开本页学习活动</button><button data-action="blackboard">打开小黑板</button></div>'
+        publish(page_record('unit/monty/'+slug,title,'unit','三扇舱门 · 45 分钟'),markup)
     for item in nav:
         if not item[0].startswith(('chapter_hello_algo/','chapter_preface/','chapter_appendix/','chapter_reference/')): add_source(item)
     for id in ['afterword','acknowledgements']: add_editorial(id)
     for item in nav:
         if item[0].startswith(('chapter_appendix/','chapter_reference/')): add_source(item)
     for id in ['index','about','back-cover']: add_editorial(id)
-    write_json(PUBLIC/'book/manifest.json',{'title':'星轨编程','subtitle':'Python 与算法的探索之旅','version':'0.2.0','sourceCommit':SHA,'pages':records})
+    write_json(PUBLIC/'book/manifest.json',{'title':'星轨编程','subtitle':'Python 与算法的探索之旅','version':'0.3.0','sourceCommit':SHA,'pages':records})
     write_json(registry_path,block_registry)
     write_json(ROOT/'docs/block-migration-report.json',block_changes)
     write_json(PUBLIC/'book/search.json',search)

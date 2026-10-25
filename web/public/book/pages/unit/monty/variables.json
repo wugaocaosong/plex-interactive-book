@@ -1,0 +1,21 @@
+{
+  "id": "unit/monty/variables",
+  "title": "Python 补学：变量与比较",
+  "kind": "unit",
+  "group": "三扇舱门 · 45 分钟",
+  "route": "/read/unit/monty/variables",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-4148d26f1b28dfcd\">用名字保存一次选择</h1>\n<pre data-block=\"blk-bf062bcbcc204c79\"><code class=\"language-python\">prize = 2        # 程序内部用 0、1、2 表示三扇门\nfirst = 0\nwon = first == prize\nprint(won)      # False\n</code></pre>\n<p data-block=\"blk-53bafe4096886b98\"><code>=</code> 给变量赋值；<code>==</code> 比较两个值是否相等，结果为 <code>True</code> 或 <code>False</code>。界面里的 1、2、3 号门对应程序的 0、1、2。</p>\n<p data-block=\"blk-bcf7a667c1b8c9bd\">累计赢了 <code>wins</code> 次，做了 <code>total</code> 次试验，频率是 <code>wins / total</code>。零次试验时不能除以零，本课约定显示 0 并注明尚无试验。</p><div class=\"activity-invitation\" data-block=\"blk-60b90773fa37fbbb\"><span>PLEX · 三门探索</span><button data-action=\"unit\" data-unit-mode=\"exercises\">打开本页学习活动</button><button data-action=\"blackboard\">打开小黑板</button></div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-4148d26f1b28dfcd",
+    "b1": "blk-bf062bcbcc204c79",
+    "b2": "blk-53bafe4096886b98",
+    "b3": "blk-bcf7a667c1b8c9bd",
+    "b4": "blk-60b90773fa37fbbb"
+  },
+  "contentVersion": "28245da83c4efbc1"
+}

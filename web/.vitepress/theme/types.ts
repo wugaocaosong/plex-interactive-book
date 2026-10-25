@@ -87,6 +87,7 @@ export interface AnnotationRecord {
   blockNote?: boolean;
 }
 export interface ExerciseDefinition {
+  serverRef?: string;
   id: string;
   group: string;
   title: string;
