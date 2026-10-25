@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-25",
+  "sourceCommit": "eb0864300b4b6a5dde82608fb8b2d318fa18a779",
+  "applicationCommit": "4e89c61",
+  "source": "private GitHub clone; separate npm ci and Python virtualenv",
+  "platform": "Windows / Node 24.14.1 / Python 3.14.3 / Chrome",
+  "commands": [
+    "npm ci",
+    "python -m venv .venv",
+    "pip install -r requirements.lock.txt",
+    "npm run check",
+    "npm run build",
+    "npm run import:book",
+    "git diff --exit-code"
+  ],
+  "staticFiles": 2535,
+  "sha256Differences": [],
+  "staticTreeSha256": "a2da4daf541d473d70c8c303aa10d99a118e198ddcc5216e389e18d736e6942a",
+  "browserSmoke": {
+    "status": "passed",
+    "origin": "http://127.0.0.1:5195",
+    "checks": [
+      "cover and clean route",
+      "story and persisted blackboard",
+      "actual 1000-trial Pyodide simulation",
+      "complete upstream Python example",
+      "both real H5P players and saved scores"
+    ],
+    "failedResources": [],
+    "externalRequests": []
+  }
+}

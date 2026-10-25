@@ -1,0 +1,250 @@
+{
+  "date": "2026-10-25",
+  "uniqueTests": 37,
+  "passed": 37,
+  "skipped": 0,
+  "note": "Full production run: 34 passed, 3 failed because the test-only transpilation helper did not remove formatted multiline imports. Helper fixed; all three passed targeted rerun. H5P retry path additionally exercised in the same rerun. Application bundle was unchanged by that test helper correction.",
+  "tests": [
+    {
+      "name": "mouse folds, completes, reverses and cancels pages at 1440px",
+      "file": "drag.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "mouse folds, completes, reverses and cancels pages at 820px",
+      "file": "drag.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "mouse folds, completes, reverses and cancels pages at 390px",
+      "file": "drag.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "cover drag opens only one section and edge drag crosses section boundaries",
+      "file": "drag.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "reduced motion supports drag and paper interactions still open their panels",
+      "file": "drag.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "legacy bookmarks migrate and notebook backups round-trip through the UI",
+      "file": "learning-data.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "quote anchors recover uniquely, refuse ambiguous or removed text and preserve formula offsets",
+      "file": "learning-data.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "legacy migration, complete backups, conflict preservation and storage failure reporting",
+      "file": "learning-data.spec.ts",
+      "status": "passed",
+      "verifiedIn": "targeted rerun after test helper fix"
+    },
+    {
+      "name": "settings, exact search and keyboard navigation at 390px",
+      "file": "learning-data.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "settings, exact search and keyboard navigation at 820px",
+      "file": "learning-data.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "settings, exact search and keyboard navigation at 1440px",
+      "file": "learning-data.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "concurrent unit visits merge atomically without losing reflection",
+      "file": "learning-data.spec.ts",
+      "status": "passed",
+      "verifiedIn": "targeted rerun after test helper fix"
+    },
+    {
+      "name": "study mode, annotations, settings and persisted drafts share the reader",
+      "file": "learning.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "algorithm prediction, persisted state, exercise grading and tiered hints",
+      "file": "learning.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "all 27 reference solutions pass in Pyodide and all starters expose a failing case",
+      "file": "learning.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "Monty story, board, restore and both reader modes 390px",
+      "file": "monty.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "Monty story, board, restore and both reader modes 820px",
+      "file": "monty.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "Monty story, board, restore and both reader modes 1440px",
+      "file": "monty.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "actual seeded Python simulations validate all records and repeat exactly",
+      "file": "monty.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "four-question H5P records rule answer, grades, retries and restores",
+      "file": "monty.spec.ts",
+      "status": "passed",
+      "verifiedIn": "targeted rerun after test helper fix"
+    },
+    {
+      "name": "opening a learning activity survives delayed initial book loading",
+      "file": "monty.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "all book sections preserve content and fit at 390px",
+      "file": "pagination.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "all book sections preserve content and fit at 820px",
+      "file": "pagination.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "all book sections preserve content and fit at 1440px",
+      "file": "pagination.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "guest migration, accounts, backups and returning to guest never mix records or tokens",
+      "file": "plex.spec.ts",
+      "status": "passed",
+      "verifiedIn": "targeted rerun after test helper fix"
+    },
+    {
+      "name": "offline login keeps local story available",
+      "file": "plex.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "expired refresh clears profile, keeps account scope and reports re-login",
+      "file": "plex.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "version conflict and quota are visible without substituting a model reply",
+      "file": "plex.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "online context, duplicate submit identity, cancellation and model failure are explicit",
+      "file": "plex.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "cover, complete table of contents, opening pages and bookmarks",
+      "file": "reader.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "search, diagram stepping, Python execution and error recovery",
+      "file": "reader.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "H5P real player grades and persists a correct answer across refresh",
+      "file": "reader.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "H5P reader panel saves immediately when closed and reopens a single player",
+      "file": "reader.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "cross-section navigation, history, continue reading and language preference",
+      "file": "reader.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "mobile pagination preserves every paragraph and survives resize and reload",
+      "file": "reader.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "every bundled Python example referenced by the book runs with its own driver",
+      "file": "reader.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    },
+    {
+      "name": "failed Python initialization offers a working retry without blocking reading",
+      "file": "recovery.spec.ts",
+      "status": "passed",
+      "verifiedIn": "full run"
+    }
+  ],
+  "pagination": [
+    {
+      "width": 390,
+      "sections": 141,
+      "windowLeaves": 3662
+    },
+    {
+      "width": 820,
+      "sections": 141,
+      "windowLeaves": 2098
+    },
+    {
+      "width": 1440,
+      "sections": 141,
+      "windowLeaves": 2828
+    }
+  ],
+  "pythonExamples": 73,
+  "exercises": 27
+}
