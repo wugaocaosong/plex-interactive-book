@@ -58,6 +58,7 @@ import {
   updateLearning,
   allLearning,
   migrateLegacy,
+  migrateLessonData,
 } from "./learning-store";
 import {
   captureSelection,
@@ -1178,6 +1179,7 @@ onMounted(async () => {
   darkMedia.addEventListener("change", updateSystemTheme);
   try {
     await migrateLegacy();
+    await migrateLessonData();
     await recordUnitVisit(sectionId.value);
     await loadNotes();
     preferences.value = sanitizePreferences(

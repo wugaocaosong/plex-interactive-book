@@ -52,7 +52,7 @@ _result = {}
 try:
     _compiled = compile(_request['code'], _filename, 'exec')
     if _request['type'] == 'simulate':
-        if _request.get('count') not in [10, 100, 1000, 10000]:
+        if _request.get('count') not in [1, 10, 100, 1000, 10000]:
             raise ValueError('试验次数不受支持')
         if type(_request.get('seed')) is not int or not 0 <= _request['seed'] <= 2147483647:
             raise ValueError('随机种子应为 0–2147483647 的整数')

@@ -1,7 +1,10 @@
+import {upgradeProgress} from './lesson-state';
+import {upgradeBoard} from './blackboard-model';
 import type { ReaderPreferences } from "./types";
 import { learningKey, learningScope, localLearningKey } from "./learning-scope";
 import {
   validateSimulation,
+  upgradeSession,
   eligibleDoors,
   remainingDoor,
   doors,
@@ -37,7 +40,7 @@ export interface LearningRecord {
 }
 export interface Backup {
   format: "plex-learning";
-  version: 1 | 2;
+  version: 1 | 2 | 3;
   scope?: string;
   book: "plex-interactive-book";
   exportedAt: string;
@@ -180,7 +183,7 @@ export async function copyGuestLearning() {
   );
   await importBackup({
     format: "plex-learning",
-    version: 2,
+    version: 3,
     book: "plex-interactive-book",
     exportedAt: new Date().toISOString(),
     records: records.filter((r) => !r.id.startsWith("user:")),
@@ -203,12 +206,20 @@ export async function migrateLegacy() {
   }
   await putLearning("migration:v01", true);
 }
+export async function migrateLessonData() {
+  for (const record of await allLearning()) {
+    const value=record.value as any;
+    if(value?.version!==1) continue;
+    const next=record.id==='unit:monty-hall'?upgradeProgress(value):record.id==='lab:monty-hall'?upgradeSession(value):record.id.startsWith('blackboard:')?upgradeBoard(value):value;
+    if(next!==value)await putLearning(record.id,next);
+  }
+}
 export function validateBackup(value: unknown): Backup {
   const data = value as Backup;
   if (
     !data ||
     data.format !== "plex-learning" ||
-    ![1, 2].includes(data.version) ||
+    ![1, 2, 3].includes(data.version) ||
     data.book !== "plex-interactive-book" ||
     !Array.isArray(data.records) ||
     data.records.length > 100000
@@ -226,12 +237,12 @@ export function validateBackup(value: unknown): Backup {
     )
       throw Error("备份记录格式错误");
     const value = record.value as Record<string, unknown> | null;
-    if (record.id === "simulation:monty-hall") {
+    if (["simulation:monty-hall", "simulation:monty-single"].includes(record.id)) {
       const simulation = value as any;
       if (
         !simulation ||
         typeof simulation.code !== "string" ||
-        ![10, 100, 1000, 10000].includes(simulation.count) ||
+        ![1, 10, 100, 1000, 10000].includes(simulation.count) ||
         !Number.isInteger(simulation.seed) ||
         simulation.seed < 0 ||
         simulation.seed > 2147483647
@@ -243,7 +254,7 @@ export function validateBackup(value: unknown): Backup {
       const story = value as any;
       if (
         !story ||
-        story.version !== 1 ||
+        ![1, 2].includes(story.version) ||
         !Number.isInteger(story.seed) ||
         story.seed < 0 ||
         story.seed > 2147483647 ||
@@ -267,7 +278,7 @@ export function validateBackup(value: unknown): Backup {
       const board = value as any;
       if (
         !board ||
-        board.version !== 1 ||
+        ![1, 2].includes(board.version) ||
         typeof board.sectionId !== "string" ||
         !Array.isArray(board.marks) ||
         board.marks.length > 300 ||
@@ -275,7 +286,7 @@ export function validateBackup(value: unknown): Backup {
           (m: any) =>
             !m ||
             typeof m.id !== "string" ||
-            !["stroke", "text", "scene"].includes(m.kind) ||
+            !["stroke", "text", "scene", "shape"].includes(m.kind) ||
             !/^#[a-f0-9]{6}$/i.test(m.color) ||
             (m.kind === "text" &&
               (typeof m.text !== "string" ||
@@ -291,7 +302,8 @@ export function validateBackup(value: unknown): Backup {
                     p.length !== 2 ||
                     !p.every(Number.isFinite),
                 ))) ||
-            (m.kind === "scene" && (!m.scene || m.scene.version !== 1)),
+            (m.kind === "shape" && (!['rectangle','ellipse','arrow'].includes(m.shape) || !Number.isInteger(m.seed) || m.seed<1 || ![m.x,m.y,m.width,m.height].every((n:unknown)=>typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<=1000))) ||
+            (m.kind === "scene" && (!m.scene || ![1,2].includes(m.scene.version))),
         )
       )
         throw Error("小黑板记录格式错误");
@@ -300,7 +312,7 @@ export function validateBackup(value: unknown): Backup {
       const unit = value as any;
       if (
         !unit ||
-        unit.version !== 1 ||
+        ![1, 2].includes(unit.version) ||
         !Array.isArray(unit.visited) ||
         unit.visited.some((id: any) => typeof id !== "string") ||
         !Array.isArray(unit.assessment) ||
@@ -338,7 +350,7 @@ export async function exportBackup(): Promise<Backup> {
   }
   return {
     format: "plex-learning",
-    version: 2,
+    version: 3,
     scope: learningScope || "guest",
     book: "plex-interactive-book",
     exportedAt: new Date().toISOString(),
@@ -366,6 +378,7 @@ export async function importBackup(value: unknown) {
         JSON.stringify(record.value),
       );
   }
+  await migrateLessonData();
 }
 export function download(
   name: string,

@@ -18,7 +18,7 @@ const annotations = ts.transpileModule(
 const store = ts.transpileModule(
   source("learning-scope.ts") +
     "\n" +
-    source("monty-hall.ts") +
+    source("monty-hall.ts") + "\n" + source("lesson-state.ts") + "\n" + source("blackboard-model.ts") +
     "\n" +
     source("learning-store.ts"),
   {

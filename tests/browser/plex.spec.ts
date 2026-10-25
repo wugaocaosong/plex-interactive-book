@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import ts from "typescript";
 import { readFileSync } from "node:fs";
 const source = ts.transpileModule(
-  ["learning-scope.ts", "monty-hall.ts", "learning-store.ts"]
+  ["learning-scope.ts", "monty-hall.ts", "lesson-state.ts", "blackboard-model.ts", "learning-store.ts"]
     .map((f) =>
       readFileSync("web/.vitepress/theme/" + f, "utf8").replace(
         /^import[\s\S]*?from\s*["'][^"']+["'];?\s*/gm,

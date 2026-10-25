@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {doors,eligibleDoors,remainingDoor,newSession,chooseFirst,revealHost,finishRound,nextRound,validateSimulation} from '../web/.vitepress/theme/monty-hall.ts';
+import {doors,eligibleDoors,remainingDoor,newSession,chooseFirst,revealHost,finishRound,nextRound,validateSimulation,revisePrediction,upgradeSession} from '../web/.vitepress/theme/monty-hall.ts';
 test('all weighted Monty outcomes yield exact 1/3 stay and 2/3 switch',()=>{
  let stay=0,change=0;
  for(const prize of doors)for(const first of doors){
@@ -22,4 +22,16 @@ test('simulation validation rejects fabricated statistics and illegal host moves
  assert.equal(validateSimulation(value),value);
  assert.throws(()=>validateSimulation({...value,stayWins:9}));
  assert.throws(()=>validateSimulation({...value,trials:trials.map(t=>({...t,opened:0}))}));
+});
+
+test('prediction stays empty initially, first reason survives revision and duplicate actions',()=>{
+ const start=newSession(42);assert.equal(start.prediction,undefined);
+ const first=chooseFirst(start,0);assert.equal(chooseFirst(first,1),first);
+ const revealed=revealHost(first,'两者一样','剩下两扇门','2026-10-25');
+ assert.equal(revealHost(revealed,'换门更好'),revealed);
+ const revised=revisePrediction(revealed,'换门更好','初选错误更常见');
+ assert.equal(revised.firstPrediction.reason,'剩下两扇门');assert.equal(revised.revisions.length,1);
+ const done=finishRound(revised,true);assert.equal(finishRound(done,false),done);
+ const next=nextRound(done);assert.equal(nextRound(next),next);assert.deepEqual(next.firstPrediction,revealed.firstPrediction);
+ assert.equal(upgradeSession({...start,version:1}).firstPrediction,undefined);
 });
