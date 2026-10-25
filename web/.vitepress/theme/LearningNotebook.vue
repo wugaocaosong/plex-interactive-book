@@ -13,6 +13,8 @@ import {
   type Backup,
 } from "./learning-store";
 import { notesMarkdown } from "./annotations";
+import {localLearningKey} from './learning-scope';
+import {flushLearning} from './learning-flush';
 const emit = defineEmits<{
   navigate: [place: ReadingLocator];
   changed: [];
@@ -53,6 +55,7 @@ async function remove(note: AnnotationRecord) {
 }
 async function backup() {
   try {
+    await flushLearning();
     download(
       "plex-learning-backup.json",
       JSON.stringify(await exportBackup(), null, 2),
@@ -88,7 +91,7 @@ async function useConflict(record: { id: string; value: unknown }) {
     await putLearning("conflict:" + id + ":" + crypto.randomUUID(), old);
   await putLearning(id, record.value);
   if (id.startsWith("h5p:"))
-    localStorage.setItem("plex:" + id, JSON.stringify(record.value));
+    localStorage.setItem(localLearningKey(id), JSON.stringify(record.value));
   await removeLearning(record.id);
   await load();
   emit("changed");

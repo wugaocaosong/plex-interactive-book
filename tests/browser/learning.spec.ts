@@ -8,6 +8,7 @@ test("study mode, annotations, settings and persisted drafts share the reader", 
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/read/chapter_searching/binary_search");
   await expect(page.locator(".book-holder")).not.toHaveClass(/loading/);
+  await page.getByRole("button", {name:"更多阅读工具"}).click();
   await page.getByRole("button", { name: "切换阅读模式" }).click();
   await expect(page.getByLabel("连续正文")).toBeVisible();
   await page
@@ -24,6 +25,7 @@ test("study mode, annotations, settings and persisted drafts share the reader", 
     });
   await page.getByLabel("批注内容").fill("这里记录二分查找的有序前提");
   await page.getByRole("button", { name: "保存批注", exact: true }).click();
+  await page.getByRole("button", {name:"更多阅读工具"}).click();
   await page.getByRole("button", { name: "学习笔记", exact: true }).click();
   await expect(page.getByLabel("编辑笔记")).toHaveValue(
     "这里记录二分查找的有序前提",
@@ -53,6 +55,7 @@ test("study mode, annotations, settings and persisted drafts share the reader", 
     .click();
   await expect(page.getByLabel("完整示例代码")).toContainText("持久草稿");
   await page.getByRole("button", { name: "关闭", exact: true }).click();
+  await page.getByRole("button", {name:"更多阅读工具"}).click();
   await page.getByRole("button", { name: "切换阅读模式" }).click();
   await expect(page.locator(".book-holder")).toBeVisible();
   expect(errors).toEqual([]);
@@ -63,6 +66,7 @@ test("algorithm prediction, persisted state, exercise grading and tiered hints",
 }) => {
   await page.goto("/read/chapter_searching/binary_search");
   await expect(page.locator(".book-holder")).not.toHaveClass(/loading/);
+  await page.getByRole("button", {name:"更多阅读工具"}).click();
   await page.getByRole("button", { name: "打开学习实验室" }).click();
   await expect(page.getByLabel("选择算法实验")).toHaveValue("binary");
   await page.getByRole("button", { name: "下一步", exact: true }).click();
@@ -96,7 +100,7 @@ test("algorithm prediction, persisted state, exercise grading and tiered hints",
   });
 });
 
-test("all 24 reference solutions pass in Pyodide and all starters expose a failing case", async ({
+test("all 27 reference solutions pass in Pyodide and all starters expose a failing case", async ({
   page,
 }) => {
   test.setTimeout(240000);
@@ -148,6 +152,6 @@ test("all 24 reference solutions pass in Pyodide and all starters expose a faili
     }
     return report;
   });
-  expect(report).toHaveLength(24);
+  expect(report).toHaveLength(27);
   expect(report.filter((r) => !r.passed || !r.starterRejected)).toEqual([]);
 });

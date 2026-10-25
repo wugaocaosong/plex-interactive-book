@@ -46,6 +46,7 @@ export function nextRound(s: MontyHallSession): MontyHallSession {
   return newSession(s.seed, s.round + 1, history.slice(-200));
 }
 export function validateSimulation(value: SimulationResult): SimulationResult {
+  if (!value || !Number.isInteger(value.seed) || value.seed < 0 || value.seed > 2147483647) throw Error('Python 返回的种子无效');
   if (!value || ![10, 100, 1000, 10000].includes(value.count) || value.trials?.length !== value.count) throw Error('Python 返回的试验次数不完整');
   let stay = 0, change = 0;
   for (const t of value.trials) {

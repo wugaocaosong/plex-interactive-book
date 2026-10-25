@@ -8,6 +8,7 @@ test('cover, complete table of contents, opening pages and bookmarks',async({pag
   await expect(page.locator('.book-holder')).not.toHaveClass(/loading/)
   await expect(page.locator('.book-host')).toContainText('数字教材编者')
   await page.getByRole('button',{name:'收藏当前页'}).click()
+  await page.getByRole("button", {name:"更多阅读工具"}).click();
   await page.getByRole('button',{name:'查看书签'}).click()
   await expect(page.locator('.bookmark-list')).toContainText('扉页')
   await page.getByRole('button',{name:'关闭',exact:true}).click()
@@ -53,6 +54,7 @@ test('search, diagram stepping, Python execution and error recovery',async({page
   await expect(page.getByLabel('完整示例代码')).toContainText(/binary_search/)
   await page.screenshot({path:'output/playwright/code-lab.png',fullPage:true})
   await page.getByRole('button',{name:'关闭',exact:true}).click()
+  await page.getByRole("button", {name:"更多阅读工具"}).click();
   await page.getByRole('button',{name:'搜索全书'}).click();await page.getByLabel('搜索关键词').fill('链表')
   await expect(page.locator('.search-results')).toContainText('链表')
 })
@@ -131,7 +133,7 @@ test('mobile pagination preserves every paragraph and survives resize and reload
   await expect(page.locator('.book-holder')).not.toHaveClass(/loading/)
   const overflow=await page.locator('.book-host .leaf-content').evaluateAll(els=>els.filter(el=>el.scrollHeight>el.clientHeight+2).map(el=>({scroll:el.scrollHeight,height:el.clientHeight,text:el.textContent?.slice(0,30)})))
   expect(overflow).toEqual([])
-  await page.getByRole('button',{name:'下一页',exact:true}).click();await page.waitForTimeout(600)
+  await page.getByRole('navigation',{name:'阅读主导航'}).getByRole('button',{name:'下一页',exact:true}).click();await page.waitForTimeout(600)
   const hash=new URL(page.url()).hash;expect(hash).not.toEqual('')
   await page.reload();await expect(page.locator('.book-holder')).not.toHaveClass(/loading/)
   expect(new URL(page.url()).hash).toEqual(hash)

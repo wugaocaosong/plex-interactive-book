@@ -83,15 +83,15 @@
   "exercises": [
     {
       "id": "monty-frequency",
-      "serverRef": "PLEX-MH-001"
+      "serverRef": "MH030001"
     },
     {
       "id": "monty-host",
-      "serverRef": "PLEX-MH-002"
+      "serverRef": "MH030002"
     },
     {
       "id": "monty-strategy",
-      "serverRef": "PLEX-MH-003"
+      "serverRef": "MH030003"
     }
   ],
   "activityId": "monty-hall",

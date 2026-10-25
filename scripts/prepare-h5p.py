@@ -9,7 +9,7 @@ if not (LIBS/'H5P.InteractiveBook-1.11').exists() and (ROOT/'content/h5p/binary-
     LIBS=ROOT/'content/h5p/binary-search'
 def write(path,value):
     path.parent.mkdir(parents=True,exist_ok=True)
-    path.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+    path.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf8',newline='\n' if UNIT=='monty-hall' else None)
 def read(path): return json.loads(path.read_text(encoding='utf8'))
 if not (LIBS/'H5P.InteractiveBook-1.11').exists():
     response=requests.get('https://api.h5p.org/v1/content-types/H5P.InteractiveBook',timeout=90);response.raise_for_status()

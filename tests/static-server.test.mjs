@@ -4,6 +4,15 @@ import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createStaticServer } from '../scripts/serve-dist.mjs';
+import {createServer} from 'node:http';
+
+test('fixed API proxy carries auth and JSON, prevents target injection and fails offline',async()=>{
+ const upstream=createServer(async(req,res)=>{let body='';for await(const part of req)body+=part;res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify({path:req.url,auth:req.headers.authorization,body:JSON.parse(body||'{}')}));});
+ await new Promise(resolve=>upstream.listen(0,'127.0.0.1',resolve));
+ const proxy=createStaticServer('.',`http://127.0.0.1:${upstream.address().port}`);await new Promise(resolve=>proxy.listen(0,'127.0.0.1',resolve));
+ const base=`http://127.0.0.1:${proxy.address().port}`;
+ try{const response=await fetch(base+'/api/v1/auth/login',{method:'POST',headers:{Authorization:'Bearer test-only','Content-Type':'application/json'},body:JSON.stringify({username:'fixture'})});assert.deepEqual(await response.json(),{path:'/api/v1/auth/login',auth:'Bearer test-only',body:{username:'fixture'}});assert.equal(response.headers.get('cache-control'),'no-store');assert.equal((await fetch(base+'/api/https://example.invalid')).status,404);await new Promise(resolve=>upstream.close(resolve));assert.equal((await fetch(base+'/api/v1/student/profile')).status,503);}finally{await new Promise(resolve=>proxy.close(resolve));upstream.close();}
+});
 
 test('standalone preview serves clean routes and runtime MIME types without exposing other files',async()=>{
   const temporary=await mkdtemp(join(tmpdir(),'plex-static-test-'));

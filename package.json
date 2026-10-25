@@ -1,6 +1,6 @@
 {
   "name": "plex-interactive-book",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -12,7 +12,7 @@
     "import:book": "python scripts/import_book.py && python scripts/prepare-learning.py",
     "build:learning": "python scripts/prepare-learning.py",
     "check:learning": "python scripts/prepare-learning.py --check",
-    "build:activity": "python scripts/prepare-h5p.py && npm run assets",
+    "build:activity": "python scripts/prepare-h5p.py && python scripts/prepare-h5p.py --monty && npm run assets",
     "assets": "node scripts/prepare-assets.mjs",
     "check:content": "python scripts/audit_content.py",
     "typecheck": "vue-tsc --noEmit",

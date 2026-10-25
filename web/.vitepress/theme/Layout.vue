@@ -38,9 +38,13 @@ import type {
 import { paginate, locateLeaf, type Leaf } from "./pagination";
 import { readStore, saveStore } from "./storage";
 import { bindPageDrag } from "./page-drag";
+import { flushLearning } from "./learning-flush";
 import StarMap from "./StarMap.vue";
 import StudyReader from "./StudyReader.vue";
 import LearningNotebook from "./LearningNotebook.vue";
+const UnitPanel = defineAsyncComponent(() => import("./UnitPanel.vue"));
+const unitMode = ref("profile");
+const unitSection = ref("unit/monty/start");
 const CodePanel = defineAsyncComponent(() => import("./CodePanel.vue"));
 const H5PPanel = defineAsyncComponent(() => import("./H5PPanel.vue"));
 const LearningHub = defineAsyncComponent(() => import("./LearningHub.vue"));
@@ -51,6 +55,7 @@ import {
   sanitizePreferences,
   getLearning,
   putLearning,
+  updateLearning,
   allLearning,
   migrateLegacy,
 } from "./learning-store";
@@ -78,7 +83,7 @@ const sectionIndex = computed(() =>
 const cover = computed(() => current.value?.kind === "cover");
 const backCover = computed(() => current.value?.kind === "back-cover");
 const menu = ref<
-  "contents" | "search" | "bookmarks" | "settings" | "notes" | null
+  "contents" | "search" | "bookmarks" | "settings" | "notes" | "more" | null
 >(null);
 const mapView = ref(true);
 const query = ref("");
@@ -114,13 +119,30 @@ function decorateTerms(root: HTMLElement) {
   decorateGlossary(root, glossary.value);
 }
 const splitPanel = computed(
-  () => preferences.value.mode === "study" && desktop.value && !!panel.value,
+  () =>
+    (preferences.value.mode === "study" || panel.value === "unit") &&
+    desktop.value &&
+    !!panel.value,
 );
 let studyRouting = false;
 let darkMedia: MediaQueryList | undefined;
 function updateSystemTheme() {
   systemDark.value = !!darkMedia?.matches;
 }
+async function recordUnitVisit(id: string) {
+  if (!id.startsWith("unit/monty/")) return;
+  await updateLearning<any>(
+    "unit:monty-hall",
+    { version: 1, visited: [], assessment: [], reflection: "" },
+    (p) => ({
+      ...p,
+      visited: [...new Set([...p.visited, id])],
+      updatedAt: new Date().toISOString(),
+    }),
+  ).catch(() => {});
+}
+watch(sectionId, recordUnitVisit);
+
 async function loadNotes() {
   notes.value = (await allLearning())
     .filter((r) => r.id.startsWith("annotation:"))
@@ -289,7 +311,14 @@ const measure = ref<HTMLElement>();
 const pageIndex = ref(0);
 const leaves = ref<Leaf[]>([]);
 const panel = ref<
-  "code" | "activity" | "image" | "expanded" | "learning" | "term" | null
+  | "code"
+  | "activity"
+  | "image"
+  | "expanded"
+  | "learning"
+  | "term"
+  | "unit"
+  | null
 >(null);
 const codeIndex = ref(0);
 const imageUrl = ref("");
@@ -314,6 +343,7 @@ const panelLabel = computed(
       expanded: "展开阅读",
       learning: "学习实验室",
       term: "术语解释",
+      unit: "小E · 三门学习单元",
     })[panel.value || "expanded"],
 );
 const menuLabel = computed(
@@ -324,8 +354,14 @@ const menuLabel = computed(
       bookmarks: "我的书签",
       settings: "阅读设置",
       notes: "学习笔记",
+      more: "阅读工具",
     })[menu.value || "contents"],
 );
+watch(splitPanel, async () => {
+  const place = locator();
+  await nextTick();
+  if (!cover.value) await layout(place);
+});
 const coverElement = ref<HTMLElement>();
 let disposeDrag: (() => void) | undefined;
 const searchResults = computed(() => {
@@ -615,6 +651,12 @@ function addBookmark() {
   setTimeout(() => (saved.value = false), 1500);
 }
 async function openMenu(type: typeof menu.value) {
+  try {
+    await flushLearning();
+  } catch (e) {
+    storageMessage.value = String(e);
+  }
+  panel.value = null;
   lastFocus = document.activeElement as HTMLElement;
   menu.value = type;
   if (type === "search" && !index.value.length)
@@ -637,6 +679,13 @@ async function goSearch(entry: (typeof searchResults.value)[number]) {
       if (block.dataset.block === entry.blockId)
         markRange(block, entry.offset, entry.end, "search", "search");
     });
+}
+function openUnit(mode = "profile", id = sectionId.value) {
+  menu.value = null;
+  unitMode.value = mode;
+  unitSection.value = id;
+  panelSource.value = current.value;
+  openPanel("unit");
 }
 function closeOverlay() {
   menu.value = null;
@@ -721,6 +770,13 @@ async function clickBook(event: MouseEvent) {
       openPanel("code");
     }
     if (value === "activity") openPanel("activity");
+    if (value === "unit" || value === "blackboard")
+      openUnit(
+        value === "blackboard"
+          ? "blackboard"
+          : action.dataset.unitMode || "profile",
+        panelBlock.value?.sectionId || sectionId.value,
+      );
     if (value === "image") {
       imageUrl.value = (action as HTMLImageElement).src;
       imageAlt.value = (action as HTMLImageElement).alt;
@@ -796,11 +852,17 @@ async function layout(place?: ReadingLocator) {
   loading.value = true;
   stopAnimation();
   desktop.value = window.innerWidth >= 1024;
-  pageHeight.value = Math.max(300, Math.min(window.innerHeight - 166, 850));
+  pageHeight.value = Math.max(300, Math.min(window.innerHeight - 240, 850));
   pageWidth.value = desktop.value
     ? Math.min(
         { narrow: 430, standard: 510, wide: 570 }[preferences.value.width],
-        Math.floor((window.innerWidth - 160) / 2),
+        Math.floor(
+          ((splitPanel.value
+            ? window.innerWidth * (1 - preferences.value.split / 100)
+            : window.innerWidth) -
+            100) /
+            2,
+        ),
       )
     : Math.min(600, window.innerWidth - 24);
   await nextTick();
@@ -995,7 +1057,6 @@ async function loadCurrent() {
   const id = sectionId.value;
   error.value = "";
   loading.value = true;
-  panel.value = null;
   disposeDrag?.();
   disposeDrag = undefined;
   try {
@@ -1102,7 +1163,10 @@ function hashchange() {
   }
 }
 watch(sectionId, () => {
-  if (!studyRouting) void loadCurrent();
+  if (!studyRouting) {
+    panel.value = null;
+    void loadCurrent();
+  }
 });
 onMounted(async () => {
   mounted = true;
@@ -1114,6 +1178,7 @@ onMounted(async () => {
   darkMedia.addEventListener("change", updateSystemTheme);
   try {
     await migrateLegacy();
+    await recordUnitVisit(sectionId.value);
     await loadNotes();
     preferences.value = sanitizePreferences(
       await getLearning(
@@ -1191,30 +1256,11 @@ onBeforeUnmount(() => {
     <a class="skip-link" href="#reading-content">跳到正文</a>
     <header class="reader-toolbar">
       <button class="brand" aria-label="返回封面" @click="navigate('cover')">
-        PLEX<span>星轨编程</span>
+        <span class="plex-symbol"
+          ><img src="/brand/plex-mark.png" alt="" /></span
+        >PLEX<span>星轨编程</span>
       </button>
-      <div class="toolbar-actions">
-        <button aria-label="切换阅读模式" @click="toggleMode">
-          {{ preferences.mode === "flip" ? "学习模式" : "翻书模式" }}
-        </button>
-        <button aria-label="阅读设置" @click="openMenu('settings')">
-          设置
-        </button>
-        <button aria-label="学习笔记" @click="openMenu('notes')">笔记</button>
-        <button aria-label="打开学习实验室" @click="openPanel('learning')">
-          实验
-        </button>
-        <button aria-label="打开目录" @click="openMenu('contents')">
-          <Compass :size="19" /><span>目录</span>
-        </button>
-        <button aria-label="搜索全书" @click="openMenu('search')">
-          <Search :size="18" /><span>搜索</span>
-        </button>
-        <button aria-label="查看书签" @click="openMenu('bookmarks')">
-          <Bookmark :size="18" /><span>书签</span
-          ><small v-if="bookmarks.length">{{ bookmarks.length }}</small>
-        </button>
-      </div>
+      <span class="reader-edition">INTERACTIVE EDITION · 03</span>
     </header>
     <p v-if="storageMessage" class="storage-notice" role="alert">
       {{ storageMessage
@@ -1271,7 +1317,12 @@ onBeforeUnmount(() => {
         <div class="section-heading">
           <span>{{ current?.group }}</span>
           <h1>{{ current?.title || "星轨编程" }}</h1>
-          <button @click="blockNote()">本段笔记</button
+          <button
+            v-if="sectionId.startsWith('unit/monty/')"
+            @click="openUnit('profile')"
+          >
+            学习活动</button
+          ><button @click="blockNote()">本段笔记</button
           ><button
             class="bookmark-page"
             :aria-label="saved ? '已加入书签' : '收藏当前页'"
@@ -1307,7 +1358,7 @@ onBeforeUnmount(() => {
         >
           <button
             class="edge-nav edge-prev"
-            aria-label="上一页"
+            aria-label="页边上一页"
             :disabled="sectionIndex <= 0 && pageIndex === 0"
             @click.stop="previous"
           >
@@ -1320,7 +1371,7 @@ onBeforeUnmount(() => {
           />
           <button
             class="edge-nav edge-next"
-            aria-label="下一页"
+            aria-label="页边下一页"
             :disabled="
               sectionIndex === sections.length - 1 &&
               pageIndex + (desktop ? 2 : 1) >= leaves.length
@@ -1363,11 +1414,39 @@ onBeforeUnmount(() => {
       </section>
       <div v-if="!ready" class="loading-label">正在打开星轨编程…</div>
     </main>
-    <footer class="reader-footer">
-      <span>Python 与算法的探索之旅</span
-      ><span v-if="!cover">全书进度 {{ progress }}%</span
-      ><span v-else>一本可以动手探索的书</span>
-    </footer>
+    <nav class="bottom-navigation" aria-label="阅读主导航">
+      <button aria-label="打开目录" @click="openMenu('contents')">
+        <Compass :size="20" /><span>目录</span>
+      </button>
+      <button
+        aria-label="上一页"
+        :disabled="sectionIndex <= 0 && pageIndex === 0"
+        @click="previous"
+      >
+        <ChevronLeft :size="22" /><span>上一页</span>
+      </button>
+      <button
+        class="bottom-progress"
+        aria-label="查看学习进度"
+        @click="openUnit('progress')"
+      >
+        <span>{{ progress }}% 全书</span
+        ><meter :value="progress" min="0" max="100" aria-label="全书阅读进度" />
+      </button>
+      <button
+        aria-label="下一页"
+        :disabled="backCover && pageIndex + (desktop ? 2 : 1) >= leaves.length"
+        @click="next"
+      >
+        <ChevronRight :size="22" /><span>下一页</span>
+      </button>
+      <button aria-label="打开小E" @click="openUnit('coach')">
+        <img src="/brand/little-e.png" alt="" /><span>小E</span>
+      </button>
+      <button aria-label="更多阅读工具" @click="openMenu('more')">
+        <List :size="20" /><span>更多</span>
+      </button>
+    </nav>
     <div class="measurement-area" aria-hidden="true">
       <div ref="stage" class="leaf-content source-stage" />
       <div ref="measure" class="leaf-content page-measure" />
@@ -1408,6 +1487,50 @@ onBeforeUnmount(() => {
             <X :size="22" />
           </button>
         </div>
+        <div v-if="menu === 'more'" class="more-tools">
+          <button
+            aria-label="切换阅读模式"
+            @click="
+              toggleMode();
+              closeOverlay();
+            "
+          >
+            {{ preferences.mode === "flip" ? "学习模式" : "翻书模式" }}
+          </button>
+          <button aria-label="搜索全书" @click="openMenu('search')">
+            搜索全书
+          </button>
+          <button aria-label="学习笔记" @click="openMenu('notes')">
+            笔记与备份
+          </button>
+          <button aria-label="阅读设置" @click="openMenu('settings')">
+            阅读设置
+          </button>
+          <button aria-label="查看书签" @click="openMenu('bookmarks')">
+            我的书签
+          </button>
+          <button
+            @click="
+              fullscreen();
+              closeOverlay();
+            "
+          >
+            全屏阅读
+          </button>
+          <button
+            aria-label="打开学习实验室"
+            @click="
+              menu = null;
+              openPanel('learning');
+            "
+          >
+            六类算法实验与 24 题
+          </button>
+          <button @click="navigate('unit/monty/start')">
+            学习起点 · 三门单元
+          </button>
+          <button @click="openUnit('blackboard')">本页小黑板</button>
+        </div>
         <template v-if="menu === 'contents'">
           <div class="view-tabs">
             <button :class="{ active: mapView }" @click="mapView = true">
@@ -1417,6 +1540,12 @@ onBeforeUnmount(() => {
             </button>
           </div>
           <div class="contents-scroll">
+            <button
+              class="unit-directory-entry"
+              @click="navigate('unit/monty/start')"
+            >
+              学习起点 · 三扇舱门：直觉可靠吗？ →
+            </button>
             <StarMap v-if="mapView" :sections="sections" @navigate="navigate" />
             <div v-if="!mapView || !desktop" class="chapter-directory">
               <section v-for="[group, items] in groups" :key="group">
@@ -1582,6 +1711,13 @@ onBeforeUnmount(() => {
         <CodePanel
           v-if="panel === 'code' && panelSource?.codeExamples[codeIndex]"
           :example="panelSource.codeExamples[codeIndex]"
+        />
+        <UnitPanel
+          v-if="panel === 'unit'"
+          :key="unitSection + unitMode"
+          :section-id="unitSection"
+          :initial-mode="unitMode"
+          @navigate="navigate"
         />
         <LearningHub v-if="panel === 'learning'" :section-id="sectionId" />
         <div v-if="panel === 'term' && term" class="reader-settings">

@@ -40,3 +40,9 @@ H5P 库来自 [官方 InteractiveBook 分发包](https://api.h5p.org/v1/content-
 `assets/references/cover.png`、`star-map.png` 来自用户附件。封面直接使用、不拉伸；星域截图仅作参考，实际导航使用上游独立素材。未为附件另行声明开放许可。
 
 本项目原创应用代码未单独授予开放源代码许可；教材改编与第三方软件分别遵循上述许可。编者及出版机构信息待项目方填写。
+
+## v0.3 原创教学与品牌
+
+三门问题故事、中文讲解、CSS 舱门、板书图形、模拟程序与题目由本项目编写，未整本导入或翻译第二本教材。基础知识组织参考 [Allen B. Downey 的 Think Python 第三版](https://greenteapress.com/wp/think-python-3rd-edition/)（原书 CC BY-NC-SA 4.0）；经典问题的规则核对参考 [University of Illinois Data Science Discovery](https://discovery.cs.illinois.edu/guides/Classic-Problems/Monty-Hall-Problem-Interactive-Game-and-Solution/)，未复制该站交互代码或图片。
+
+小E与 PLEX 标志复用本项目方 PLEX 主工程已有素材，路径、提交与原样文件哈希见 `web/public/brand/SOURCES.json`，不额外声明开放许可。原封面和全部 Hello Algo 署名、许可证与快照仍保留。

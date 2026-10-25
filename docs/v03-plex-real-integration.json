@@ -1,0 +1,72 @@
+{
+  "plexCommit": "536ac132f35dfff88f97bc85f1515a77d405b153",
+  "database": "isolated temporary SQLite",
+  "import": [
+    {
+      "ref": "MH030001",
+      "canonical_ref": "bank-1",
+      "changed": true,
+      "source_ref": "plex-interactive-book:monty:v1:monty-frequency",
+      "tests": 4
+    },
+    {
+      "ref": "MH030002",
+      "canonical_ref": "bank-2",
+      "changed": true,
+      "source_ref": "plex-interactive-book:monty:v1:monty-host",
+      "tests": 9
+    },
+    {
+      "ref": "MH030003",
+      "canonical_ref": "bank-3",
+      "changed": true,
+      "source_ref": "plex-interactive-book:monty:v1:monty-strategy",
+      "tests": 5
+    }
+  ],
+  "authProfileRefresh": true,
+  "execution": "docker",
+  "submissions": [
+    {
+      "ref": "MH030001",
+      "referencePassed": true,
+      "wrongStarterRejected": true,
+      "duplicateIdempotent": true,
+      "staleVersionRejected": true
+    },
+    {
+      "ref": "MH030002",
+      "referencePassed": true,
+      "wrongStarterRejected": true,
+      "duplicateIdempotent": true,
+      "staleVersionRejected": true
+    },
+    {
+      "ref": "MH030003",
+      "referencePassed": true,
+      "wrongStarterRejected": true,
+      "duplicateIdempotent": true,
+      "staleVersionRejected": true
+    }
+  ],
+  "model": {
+    "requested": true,
+    "status": "ok",
+    "generation_mode": "llm_reviewed",
+    "policy": {
+      "checks": [
+        "schema",
+        "line_bounds",
+        "citation_allowlist",
+        "semantic_review"
+      ],
+      "reason": null,
+      "status": "ok",
+      "version": "tutor-modes-5"
+    },
+    "summary": "你用的是“d 不等于 first 或 d 不等于 prize”，但“排除两扇门”要求两个条件同时成立；用 or 时，只要有一个条件成立就会保留该门，所以奖品门仍可能被留下。",
+    "next_step": "选一个小输入（例如 prize=0、first=1），把 d=0 代入你的条件，逐项判断“d != first”和“d != prize”的真假，再看 or 的结果是否保留它。"
+  },
+  "failedModelNotImpersonated": true,
+  "logoutRevokesRefresh": true
+}

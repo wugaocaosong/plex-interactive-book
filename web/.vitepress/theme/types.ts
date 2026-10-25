@@ -45,6 +45,7 @@ export interface BookPage extends BookSection {
   contentVersion?: string;
 }
 export interface ActivityRecord {
+  questionScores?: number[];
   contentId: string;
   contentPath: string;
   version: string;

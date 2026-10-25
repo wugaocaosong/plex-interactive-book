@@ -43,3 +43,7 @@ for english,chinese in terms:
     glossary.append(dict(term=chinese.replace('$',''),english=english.replace('$',''),definition=definitions[chinese],sectionId=section))
 publish(target.parent/'glossary.json',glossary)
 print(f'Published {len(glossary)} authored glossary explanations.')
+simulation=(ROOT/'content/learning/monty-simulation.py').read_text(encoding='utf8')
+simulation_target=target.parent/'monty-simulation.py'
+if '--check' in sys.argv: assert simulation_target.read_text(encoding='utf8')==simulation,'Stale Monty simulation'
+else: simulation_target.write_text(simulation,encoding='utf8',newline='\n')

@@ -31,7 +31,7 @@ self.onmessage = async ({ data }) => {
         'import sys\nsys.path.insert(0, "/book")\n_plex_base_path = sys.path.copy()',
       );
       send("ready");
-    } else if (data.type === "run" || data.type === "check") {
+    } else if (data.type === "run" || data.type === "check" || data.type === 'simulate') {
       if (!runtime) throw Error("Python 环境尚未就绪");
       const inputs = String(data.stdin || "").split("\n");
       let inputIndex = 0;
@@ -51,7 +51,15 @@ def _diagnostic(exc):
 _result = {}
 try:
     _compiled = compile(_request['code'], _filename, 'exec')
-    if _request['type'] == 'check':
+    if _request['type'] == 'simulate':
+        if _request.get('count') not in [10, 100, 1000, 10000]:
+            raise ValueError('试验次数不受支持')
+        if type(_request.get('seed')) is not int or not 0 <= _request['seed'] <= 2147483647:
+            raise ValueError('随机种子应为 0–2147483647 的整数')
+        _scope = {'__name__': 'plex_simulation', '__file__': _filename}
+        exec(_compiled, _scope)
+        _result = {'simulation': _scope['simulate'](_request['count'], _request['seed'])}
+    elif _request['type'] == 'check':
         _results = []
         for _case in _request['tests']:
             _scope = {'__name__': 'plex_exercise', '__file__': _filename}

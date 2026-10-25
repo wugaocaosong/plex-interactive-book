@@ -9,6 +9,8 @@ import type {
 } from "./types";
 import { readStore, saveStore } from "./storage";
 import { getLearning, putLearning } from "./learning-store";
+import { registerLearningFlush } from "./learning-flush";
+import PlexCoach from "./PlexCoach.vue";
 import CodeEditor from "./CodeEditor.vue";
 const props = defineProps<{
   example?: CodeExample;
@@ -244,7 +246,9 @@ async function copy() {
     status.value = "请在编辑区选择并复制";
   }
 }
+const unregisterFlush = registerLearningFlush(persist);
 onBeforeUnmount(() => {
+  unregisterFlush();
   void persist();
   disposed = true;
   stop();
@@ -371,6 +375,7 @@ onBeforeUnmount(() => {
       aria-live="polite"
       >{{ output || "输出会显示在这里。" }}</pre
     >
+    <details v-if="exercise?.serverRef" class="online-coach-details"><summary>小E在线辅导与 PLEX 正式提交</summary><PlexCoach :exercise="exercise" :code="code"/></details>
     <template v-if="exercise"
       ><div class="execution-actions">
         <button

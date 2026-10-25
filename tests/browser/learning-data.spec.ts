@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import ts from "typescript";
 const source = (file: string) =>
   readFileSync("web/.vitepress/theme/" + file, "utf8").replace(
-    /^import .*$/gm,
+    /^import[\s\S]*?from\s*["'][^"']+["'];?\s*/gm,
     "",
   );
 const annotations = ts.transpileModule(
@@ -15,12 +15,19 @@ const annotations = ts.transpileModule(
     },
   },
 ).outputText;
-const store = ts.transpileModule(source("learning-store.ts"), {
-  compilerOptions: {
-    target: ts.ScriptTarget.ES2022,
-    module: ts.ModuleKind.ESNext,
+const store = ts.transpileModule(
+  source("learning-scope.ts") +
+    "\n" +
+    source("monty-hall.ts") +
+    "\n" +
+    source("learning-store.ts"),
+  {
+    compilerOptions: {
+      target: ts.ScriptTarget.ES2022,
+      module: ts.ModuleKind.ESNext,
+    },
   },
-}).outputText;
+).outputText;
 
 test("legacy bookmarks migrate and notebook backups round-trip through the UI", async ({
   page,
@@ -36,12 +43,14 @@ test("legacy bookmarks migrate and notebook backups round-trip through the UI", 
   );
   await page.goto("/read/title");
   await expect(page.locator(".book-holder")).not.toHaveClass(/loading/);
+  await page.getByRole("button", { name: "更多阅读工具" }).click();
   await page.getByRole("button", { name: "查看书签" }).click();
   await expect(page.locator(".bookmark-list")).toContainText("旧版书签");
   await page.getByRole("button", { name: "关闭", exact: true }).click();
   await page.getByRole("button", { name: "本段笔记" }).click();
   await page.getByLabel("批注内容").fill("备份往返测试");
   await page.getByRole("button", { name: "保存批注", exact: true }).click();
+  await page.getByRole("button", { name: "更多阅读工具" }).click();
   await page.getByRole("button", { name: "学习笔记", exact: true }).click();
   await expect(page.getByLabel("编辑笔记")).toHaveValue("备份往返测试");
   const downloadEvent = page.waitForEvent("download");
@@ -51,14 +60,13 @@ test("legacy bookmarks migrate and notebook backups round-trip through the UI", 
   const restored = await context.newPage();
   await restored.goto(new URL("/read/title", page.url()).href);
   await expect(restored.locator(".book-holder")).not.toHaveClass(/loading/);
+  await restored.getByRole("button", { name: "更多阅读工具" }).click();
   await restored.getByRole("button", { name: "学习笔记", exact: true }).click();
-  await restored
-    .locator("input[type=file]")
-    .setInputFiles({
-      name: "backup.json",
-      mimeType: "application/json",
-      buffer: backup,
-    });
+  await restored.locator("input[type=file]").setInputFiles({
+    name: "backup.json",
+    mimeType: "application/json",
+    buffer: backup,
+  });
   await expect(restored.locator(".backup-preview")).toContainText("即将导入");
   await restored.getByRole("button", { name: "确认导入" }).click();
   await expect(restored.getByLabel("编辑笔记")).toHaveValue("备份往返测试");
@@ -190,6 +198,7 @@ for (const width of [390, 820, 1440])
     await page.goto("/read/chapter_searching/binary_search#b1");
     await expect(page.locator(".book-holder")).not.toHaveClass(/loading/);
     await expect(page).toHaveURL(/#blk-/);
+    await page.getByRole("button", { name: "更多阅读工具" }).click();
     await page.getByRole("button", { name: "阅读设置", exact: true }).click();
     await page.getByLabel("字号").fill("26");
     await page.getByLabel("字号").dispatchEvent("change");
@@ -209,18 +218,21 @@ for (const width of [390, 820, 1440])
           ).length,
       );
     expect(overflow).toBe(0);
+    await page.getByRole("button", { name: "更多阅读工具" }).click();
     await page.getByRole("button", { name: "搜索全书" }).click();
     await page.getByLabel("搜索关键词").fill("缩小一半搜索范围");
     await page.locator(".search-results>button").first().click();
     await expect(
       page.locator(".book-host .annotation-search:visible").first(),
     ).toBeVisible();
+    await page.getByRole("button", { name: "更多阅读工具" }).click();
     await page.getByRole("button", { name: "切换阅读模式" }).click();
     await expect(page.getByLabel("连续正文")).toBeVisible();
     await page.screenshot({
       path: `output/playwright/v02-study-${width}.png`,
       fullPage: true,
     });
+    await page.getByRole("button", { name: "更多阅读工具" }).click();
     await page.getByRole("button", { name: "打开学习实验室" }).click();
     if (width >= 1024) {
       const splitter = page.getByRole("separator");
@@ -231,3 +243,31 @@ for (const width of [390, 820, 1440])
     await page.keyboard.press("Escape");
     await expect(page.getByLabel("连续正文")).toBeVisible();
   });
+
+test("concurrent unit visits merge atomically without losing reflection", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const result = await page.evaluate(async (code) => {
+    const url = URL.createObjectURL(
+      new Blob([code], { type: "text/javascript" }),
+    );
+    const api = await import(url);
+    URL.revokeObjectURL(url);
+    const id = "unit:atomic-test";
+    await api.putLearning(id, { visited: [], reflection: "我的解释" });
+    await Promise.all(
+      Array.from({ length: 14 }, (_, i) =>
+        api.updateLearning(id, {}, (value: any) => ({
+          ...value,
+          visited: [...value.visited, i],
+        })),
+      ),
+    );
+    return api.getLearning(id, {});
+  }, store);
+  expect(result).toEqual({
+    visited: Array.from({ length: 14 }, (_, i) => i),
+    reflection: "我的解释",
+  });
+});

@@ -53,7 +53,7 @@ npm run build
 npm run preview
 ```
 
-这组命令与 Windows 使用相同来源和依赖锁；实际干净克隆验收平台见 [v0.2 验证记录](VALIDATION_V02.md)，未将文档中的启动说明当作跨平台实测结论。
+这组命令与 Windows 使用相同来源和依赖锁；实际干净克隆验收平台见 [v0.3 验证记录](VALIDATION_V03.md)，未将文档中的启动说明当作跨平台实测结论。
 
 打开 **http://127.0.0.1:5190/**，应先显示完整封面。拖开封面后进入扉页，目录、搜索、拖拽翻页、代码实验室和二分查找练习可使用。停止服务使用运行终端的 Ctrl+C。
 
@@ -87,7 +87,7 @@ PLEX_TEST_PORT=5192 PLEX_TEST_PREVIEW=1 PLEX_TEST_REUSE=0 npm run test:e2e
 
 Playwright 自动启动、结束该测试服务。默认是 5190 开发服务，`PLEX_TEST_PREVIEW=1` 切换到生产预览，`PLEX_TEST_REUSE=0` 拒绝误用已有服务。占用端口时请换一个未占用端口。
 
-完整套件包含 25 项测试，其中三项逐节遍历全部普通小节，另有 73 个 Python 源文件、24 题参考解法和错误起始代码的实际运行，可能需要数分钟。仅验证鼠标拖拽可运行 `npx playwright test tests/browser/drag.spec.ts`。
+完整套件包含 37 项测试，其中三项逐节遍历全部普通小节，另有 73 个 Python 源文件、27 题参考解法和错误起始代码的实际运行，可能需要数分钟。仅验证鼠标拖拽可运行 `npx playwright test tests/browser/drag.spec.ts`。
 
 ## 哪些文件必须能从克隆中恢复
 
@@ -111,7 +111,7 @@ Playwright 自动启动、结束该测试服务。默认是 5190 开发服务，
 
 ZIP 内的 `PACKAGE-MANIFEST.json` 提供每个文件的 SHA-256 和应用提交号，ZIP 旁的 `.zip.sha256` 校验整个压缩包。开发者先提交改动，再运行 `npm run package`，产物位于 `output/releases/`；该命令先构建，打包脚本拒绝有未提交改动的工作区。
 
-首次打开新浏览器应显示封面。阅读进度、书签、语言偏好与练习成绩保存在 localStorage，不属于教材内容，不随 clone 复制；它们按浏览器和来源（主机、协议、端口）隔离。页面实际分页依赖窗口大小和字体渲染，但内容和所有交互应保持一致。
+首次打开新浏览器应显示封面。阅读进度、书签、语言偏好与练习成绩保存在 IndexedDB（阅读设置和 H5P 另有 localStorage 镜像），不属于教材内容，不随 clone 复制；它们按浏览器和来源（主机、协议、端口）隔离。页面实际分页依赖窗口大小和字体渲染，但内容和所有交互应保持一致。
 
 ## 常见问题
 
@@ -121,3 +121,7 @@ ZIP 内的 `PACKAGE-MANIFEST.json` 提供每个文件的 SHA-256 和应用提交
 - **来源 / H5P 哈希报错**：检查是否下载不完整或编辑了原始文件，保留 `.gitattributes` 的字节策略，使用 Git 恢复对应来源；不要关闭完整性检查。
 - **端口已经被使用**：停止旧进程或执行 `npx vitepress preview web --host 127.0.0.1 --port 5192`；不要在已有固定端口的 npm preview 命令上重复追加 `--port`。测试端口使用上述环境变量。
 - **没有旧书签或成绩**：这是正常的新浏览器 / 新端口状态；验证同一来源下的刷新恢复即可。
+
+## v0.3 单元与 PLEX
+
+新增 14 页、3 道编程题和四题 H5P，`npm run build:activity` 同时重建两套练习。基础本机功能不要求安装 Flask、Docker 或配置模型服务；在线接入另见 [PLEX_INTEGRATION](PLEX_INTEGRATION.md)。

@@ -1,27 +1,34 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>二分查找 · 星轨试炼</title><style>body{margin:0;padding:12px;background:#fff;font-family:system-ui,sans-serif}#message{color:#416e68;padding:16px}iframe{width:100%;border:0}button{cursor:pointer}</style></head><body><p id="message" role="status">正在加载练习…</p><div id="activity"></div><script src="/vendor/h5p/main.bundle.js"></script><script>
-const KEY='plex:h5p:binary-search:v1';let instance;let interval;let dispatcher;let handler;
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>PLEX 理解自测</title><style>body{margin:0;padding:12px;background:#fff;font-family:system-ui,sans-serif}#message{color:#416e68;padding:16px}iframe{width:100%;border:0}button{cursor:pointer}</style></head><body><p id="message" role="status">正在加载练习…</p><div id="activity"></div><script src="/vendor/h5p/main.bundle.js"></script><script>
+const query=new URLSearchParams(location.search);
+const activity=query.get('activity')==='monty-hall'?'monty-hall':'binary-search';
+const scope=/^user:\d+:$/.test(query.get('scope')||'')?query.get('scope'):'';
+const KEY=`plex:${scope}h5p:${activity}:v1`;
+let instance, interval, dispatcher, handler;
 function saved(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}}
 function persist(){
  if(!instance)return;
- try{const state=instance.getCurrentState?.();const record={contentId:'binary-search',contentPath:'/h5p/binary-search',version:'1',state,score:instance.getScore?.(),maxScore:instance.getMaxScore?.(),completed:instance.getAnswerGiven?.()};localStorage.setItem(KEY,JSON.stringify(record));parent.postMessage({type:'plex-activity-state',record},location.origin)}catch(error){console.warn('Activity state save failed',error)}
+ try{
+  const state=instance.getCurrentState?.();
+  const questionScores=(instance.chapters||[]).filter(c=>!c.isSummary).map(c=>c.instance?.getScore?.()||0);
+  const record={contentId:activity,contentPath:'/h5p/'+activity,version:'1',state,score:instance.getScore?.(),maxScore:instance.getMaxScore?.(),completed:instance.getAnswerGiven?.(),questionScores};
+  localStorage.setItem(KEY,JSON.stringify(record));parent.postMessage({type:'plex-activity-state',record},location.origin);return record;
+ }catch(error){parent.postMessage({type:'plex-activity-storage-error',message:String(error)},location.origin)}
 }
 const previous=saved();
 new H5PStandalone.H5P(document.getElementById('activity'),{
- id:'plex-binary-search',h5pJsonPath:'/h5p/binary-search',frameJs:'/vendor/h5p/frame.bundle.js',frameCss:'/vendor/h5p/styles/h5p.css',frame:true,copyright:true,fullScreen:false,
- // H5P core gates previousState on a nonzero saveFreq, even for a local-only host.
+ id:'plex-'+activity,h5pJsonPath:'/h5p/'+activity,frameJs:'/vendor/h5p/frame.bundle.js',frameCss:'/vendor/h5p/styles/h5p.css',frame:true,copyright:true,fullScreen:false,
  contentUserData:[{state:previous.state?JSON.stringify(previous.state):'{}'}],saveFreq:3600,reportingIsEnabled:false
 }).then(async()=>{
  const embedded=document.querySelector('#activity iframe').contentWindow;
  for(let attempt=0;attempt<100&&!embedded.H5P?.instances?.length;attempt++)await new Promise(resolve=>setTimeout(resolve,50));
  const engine=embedded.H5P;
- instance=engine?.instances?.find(item=>item.contentId==='plex-binary-search')||engine?.instances?.at(-1);
+ instance=engine?.instances?.find(item=>item.contentId==='plex-'+activity)||engine?.instances?.at(-1);
  if(!instance)throw new Error('H5P 播放器未完成初始化');
  document.getElementById('message').hidden=true;
  dispatcher=engine.externalDispatcher;handler=()=>setTimeout(persist,0);dispatcher.on('xAPI',handler);
  interval=setInterval(persist,1000);parent.postMessage({type:'plex-activity-ready'},location.origin);
 }).catch(error=>{document.getElementById('message').textContent='练习加载失败，请关闭后重新打开。'+String(error)});
-addEventListener('message',event=>{if(event.origin===location.origin&&event.data?.type==='plex-save-activity'){persist();parent.postMessage({type:'plex-activity-saved'},location.origin)}});
-// The player lives in its own iframe realm. Its listeners die with that realm.
+addEventListener('message',event=>{if(event.origin===location.origin&&event.source===parent&&event.data?.type==='plex-save-activity'){persist();parent.postMessage({type:'plex-activity-saved'},location.origin)}});
 window.plexSaveActivity=persist;
 addEventListener('pagehide',()=>{persist();clearInterval(interval)});
 </script></body></html>
