@@ -143,6 +143,17 @@ test("four-question H5P records rule answer, grades, retries and restores", asyn
   const content = JSON.parse(
     readFileSync("content/h5p/monty-hall/content/content.json", "utf8"),
   );
+  const firstChoices = frame.getByRole("radio").filter({ visible: true });
+  await expect(firstChoices).toHaveCount(3);
+  await firstChoices.nth(1).click();
+  await frame
+    .getByRole("button", { name: "检查答案", exact: true })
+    .filter({ visible: true })
+    .click();
+  await frame
+    .getByRole("button", { name: "重新作答", exact: true })
+    .filter({ visible: true })
+    .click();
   for (let i = 0; i < 4; i++) {
     const choices = frame.getByRole("radio").filter({ visible: true });
     await expect(choices).toHaveCount(3);
