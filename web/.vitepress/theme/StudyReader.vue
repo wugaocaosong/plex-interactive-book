@@ -140,6 +140,7 @@ function scroll() {
   }, 120);
 }
 async function go(place: ReadingLocator) {
+  clearTimeout(scrollTimer);
   await nextTick();
   await document.fonts.ready;
   await Promise.all(

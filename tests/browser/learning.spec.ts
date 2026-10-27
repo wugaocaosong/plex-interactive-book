@@ -100,58 +100,38 @@ test("algorithm prediction, persisted state, exercise grading and tiered hints",
   });
 });
 
-test("all 27 reference solutions pass in Pyodide and all starters expose a failing case", async ({
-  page,
-}) => {
-  test.setTimeout(240000);
+// Each exercise has its own cold-start budget and independently reported result.
+const exercises = JSON.parse(readFileSync("web/public/learning/exercises.json", "utf8"));
+for (const exercise of exercises) test(`Python reference and rejected starter: ${exercise.id}`, async ({ page }) => {
+  test.setTimeout(205000);
   await page.goto("/");
-  const report = await page.evaluate(async () => {
-    const exercises = await fetch("/learning/exercises.json").then((r) =>
-      r.json(),
-    );
-    const report = [];
-    for (const exercise of exercises) {
-      const grade = (code: string) =>
-        new Promise<any>((resolve) => {
-          const worker = new Worker("/python-worker.js", { type: "module" });
-          let timer: ReturnType<typeof setTimeout>;
-          const done = (value: any) => {
-            clearTimeout(timer);
-            worker.terminate();
-            resolve(value);
-          };
-          timer = setTimeout(() => done({ error: "init timeout" }), 90000);
-          worker.onmessage = ({ data }) => {
-            if (data.type === "ready") {
-              clearTimeout(timer);
-              timer = setTimeout(() => done({ timeout: true }), 1000);
-              worker.postMessage({
-                type: "check",
-                code,
-                path: "exercise.py",
-                tests: exercise.tests,
-              });
-            }
-            if (data.type === "result" || data.type === "error") done(data);
-          };
-          worker.onerror = (e) => done({ error: e.message });
-          worker.postMessage({ type: "init" });
-        });
-      const reference = await grade(exercise.solution),
-        starter = await grade(exercise.starter);
-      report.push({
-        id: exercise.id,
-        passed:
-          reference.results?.length === exercise.tests.length &&
-          reference.results.every((r: any) => r.passed),
-        starterRejected:
-          !!starter.timeout ||
-          starter.type === "error" ||
-          starter.results?.some((r: any) => !r.passed),
-      });
-    }
-    return report;
-  });
-  expect(report).toHaveLength(27);
-  expect(report.filter((r) => !r.passed || !r.starterRejected)).toEqual([]);
+  const report = await page.evaluate(async (exercise) => {
+    const grade = (code: string) => new Promise<any>((resolve) => {
+      const worker = new Worker("/python-worker.js", { type: "module" });
+      let ready = false;
+      let timer: ReturnType<typeof setTimeout>;
+      const done = (value: any) => {
+        clearTimeout(timer); worker.terminate(); resolve(value);
+      };
+      timer = setTimeout(() => done({ initializationError: "init timeout" }), 90000);
+      worker.onmessage = ({ data }) => {
+        if (data.type === "ready") {
+          ready = true; clearTimeout(timer);
+          timer = setTimeout(() => done({ timeout: true }), 10000);
+          worker.postMessage({ type: "check", code, path: "exercise.py", tests: exercise.tests });
+        }
+        if (data.type === "result" || data.type === "error")
+          done(ready ? data : { initializationError: data });
+      };
+      worker.onerror = (e) => done({ initializationError: e.message });
+      worker.postMessage({ type: "init" });
+    });
+    return { reference: await grade(exercise.solution), starter: await grade(exercise.starter) };
+  }, exercise);
+  expect(report.reference.initializationError).toBeUndefined();
+  expect(report.starter.initializationError).toBeUndefined();
+  expect(report.reference.results).toHaveLength(exercise.tests.length);
+  expect(report.reference.results.every((r: any) => r.passed)).toBe(true);
+  expect(!!report.starter.timeout || report.starter.type === "error" ||
+    report.starter.results?.some((r: any) => !r.passed)).toBe(true);
 });

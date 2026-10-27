@@ -130,6 +130,7 @@ const splitPanel = computed(
     !!panel.value,
 );
 let studyRouting = false;
+let studyNavigation: string | undefined;
 let darkMedia: MediaQueryList | undefined;
 function updateSystemTheme() {
   systemDark.value = !!darkMedia?.matches;
@@ -251,6 +252,7 @@ async function fullscreen() {
   }
 }
 function studyPosition(place: ReadingLocator) {
+  if (studyNavigation) return;
   studyPlace.value = place;
   saveStore("reading", place);
   resume.value = place;
@@ -261,6 +263,7 @@ function studyPosition(place: ReadingLocator) {
   );
 }
 async function studySection(page: BookPage) {
+  if (studyNavigation) return;
   studyRouting = true;
   current.value = page;
   await router.go(page.route);
@@ -601,10 +604,12 @@ async function navigate(id: string, place?: ReadingLocator) {
     }
     return;
   }
+  if (preferences.value.mode === "study") studyNavigation = id;
   try {
     await getPage(id);
     navigationFailure.value = undefined;
   } catch (error) {
+    if (studyNavigation === id) studyNavigation = undefined;
     pendingLocator = undefined;
     navigationFailure.value = { id, place, message: String(error) };
     return;
@@ -1072,6 +1077,7 @@ async function layout(place?: ReadingLocator) {
 async function loadCurrent() {
   if (!mounted) return;
   const id = sectionId.value;
+  if (preferences.value.mode === "study") studyNavigation = id;
   error.value = "";
   loading.value = true;
   disposeDrag?.();
@@ -1104,7 +1110,7 @@ async function loadCurrent() {
           turn: next,
           onStart: stopAnimation,
         });
-    } else await layout(place);
+    } else await layout(preferences.value.mode === "study" ? studyPlace.value : place);
     for (const adjacent of [
       sections.value[sectionIndex.value - 1],
       sections.value[sectionIndex.value + 1],
@@ -1113,6 +1119,8 @@ async function loadCurrent() {
   } catch (e) {
     error.value = String(e);
     loading.value = false;
+  } finally {
+    if (studyNavigation === id) studyNavigation = undefined;
   }
 }
 function resize() {

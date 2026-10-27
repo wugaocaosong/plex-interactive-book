@@ -1,5 +1,5 @@
 import { chromium, expect } from "@playwright/test";
-import { writeFile, mkdir } from "node:fs/promises";
+import { writeFile, mkdir, readFile } from "node:fs/promises";
 const origin = process.env.PLEX_STATIC_URL || "http://127.0.0.1:5195";
 const output = process.env.PLEX_STATIC_REPORT || "output/v04-static-smoke.json";
 const browser = await chromium.launch({
@@ -70,6 +70,13 @@ try {
   await page.getByRole('button',{name:'下载独立 HTML 报告'}).click();
   const reportFile=await reportDownload;
   await reportFile.saveAs('output/v04-offline-learning-report.html');
+  const standaloneReport=await context.newPage();
+  await standaloneReport.setContent(await readFile('output/v04-offline-learning-report.html','utf8'));
+  await expect(standaloneReport.getByRole('heading',{name:'PLEX · 三扇舱门学习报告'})).toBeVisible();
+  await standaloneReport.emulateMedia({media:'print'});
+  await standaloneReport.pdf({path:'output/v04-offline-learning-report.pdf',format:'A4',printBackground:true});
+  expect((await readFile('output/v04-offline-learning-report.pdf')).subarray(0,4).toString()).toBe('%PDF');
+  await standaloneReport.close();
   await page.goto(origin + "/read/chapter_searching/binary_search");
   await expect(page.locator(".book-holder")).not.toHaveClass(/loading/);
   const block = await page
@@ -124,7 +131,7 @@ try {
       "Rough.js probability template",
       "local ECharts and actual single trial",
       "all three ungraded Python micro examples",
-      "standalone HTML report with inline SVG and reflection",
+      "standalone HTML report with inline SVG, reflection and PDF printing",
     ],
     failedResources: failures,
     externalRequests: external,

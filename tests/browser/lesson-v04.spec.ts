@@ -17,8 +17,8 @@ for(const width of [390,820,1440])test(`v04 page-specific lesson, geometry and r
   const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'下载独立 HTML 报告'}).click();const file=await downloaded;const body=readFileSync((await file.path())!,'utf8');expect(body).toContain('&lt;script&gt;');expect(body).not.toContain('<script>');expect(body).not.toMatch(/<script[^>]+src=|<link[^>]+href=/);
   await page.screenshot({path:`output/playwright/v04-report-${width}.png`});
   const reportAxe=await new AxeBuilder({page}).include('iframe[title="学习报告预览"]').analyze();expect(reportAxe.violations).toEqual([]);
-  await page.getByRole('button',{name:'关闭',exact:true}).click();await page.getByRole('button',{name:'更多阅读工具'}).click();await page.getByRole('button',{name:'切换阅读模式'}).click();await entry(page);await expect(page.getByRole('heading',{name:'小E可以打开哪些门？'})).toBeVisible();
-  await page.locator('.lesson-next').getByRole('button').click();await expect(page).toHaveURL(/monty\/choose/);await expect(page.getByRole('button',{name:'选择1号舱门',exact:true})).toBeVisible();expect(errors).toEqual([]);
+  await page.getByRole('button',{name:'关闭',exact:true}).click();await page.getByRole('button',{name:'更多阅读工具'}).click();await page.getByRole('button',{name:'切换阅读模式'}).click();await page.locator('.study-reader > .study-load').last().click();await expect(page.locator('.study-article[data-section="unit/monty/choose"]')).toHaveCount(1);await entry(page);await expect(page.getByRole('heading',{name:'小E可以打开哪些门？'})).toBeVisible();
+  await page.locator('.lesson-next').getByRole('button').click();await expect(page).toHaveURL(/monty\/choose/);await page.waitForTimeout(500);await expect(page).toHaveURL(/monty\/choose/);await expect(page.getByRole('button',{name:'选择1号舱门',exact:true})).toBeVisible();expect(errors).toEqual([]);
 });
 
 test('micro examples and single Python trial produce actual results; chart uses validated data',async({page})=>{
