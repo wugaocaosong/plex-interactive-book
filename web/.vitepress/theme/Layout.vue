@@ -1279,7 +1279,7 @@ onBeforeUnmount(() => {
           ><img src="/brand/plex-mark.png" alt="" /></span
         >PLEX<span>星轨编程</span>
       </button>
-      <span class="reader-edition">INTERACTIVE EDITION · 03</span>
+      <span class="reader-edition">INTERACTIVE EDITION · 04</span>
     </header>
     <p v-if="storageMessage" class="storage-notice" role="alert">
       {{ storageMessage

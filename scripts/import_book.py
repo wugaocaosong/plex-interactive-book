@@ -281,7 +281,7 @@ if __name__=='__main__':
     for item in nav:
         if item[0].startswith(('chapter_appendix/','chapter_reference/')): add_source(item)
     for id in ['index','about','back-cover']: add_editorial(id)
-    write_json(PUBLIC/'book/manifest.json',{'title':'星轨编程','subtitle':'Python 与算法的探索之旅','version':'0.3.0','sourceCommit':SHA,'pages':records})
+    write_json(PUBLIC/'book/manifest.json',{'title':'星轨编程','subtitle':'Python 与算法的探索之旅','version':'0.4.0','sourceCommit':SHA,'pages':records})
     write_json(registry_path,block_registry)
     write_json(ROOT/'docs/block-migration-report.json',block_changes)
     write_json(PUBLIC/'book/search.json',search)
