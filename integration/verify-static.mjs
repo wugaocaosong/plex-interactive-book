@@ -1,7 +1,7 @@
 import { chromium, expect } from "@playwright/test";
 import { writeFile, mkdir } from "node:fs/promises";
 const origin = process.env.PLEX_STATIC_URL || "http://127.0.0.1:5195";
-const output = process.env.PLEX_STATIC_REPORT || "output/v03-static-smoke.json";
+const output = process.env.PLEX_STATIC_REPORT || "output/v04-static-smoke.json";
 const browser = await chromium.launch({
   headless: true,
   executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE,
@@ -41,12 +41,35 @@ try {
   await page.getByRole("button", { name: "把这轮画到小黑板" }).click();
   await page.getByRole("button", { name: "插入三门状态图" }).click();
   await expect(page.locator(".blackboard-canvas [data-mark]")).toHaveCount(1);
+  await page.getByRole('button',{name:'插入概率分组模板'}).click();
+  await expect(page.locator('.blackboard-canvas [data-mark]')).toHaveCount(7);
+  await expect(page.locator('.blackboard-canvas path').first()).toBeVisible();
   await page.getByRole("button", { name: "批量实验", exact: true }).click();
   await page.getByRole("button", { name: "运行 Python 试验" }).click();
   await expect(page.locator(".monty-simulation .unit-status")).toContainText(
     "1000 次真实 Python",
     { timeout: 90000 },
   );
+  await expect(page.locator('.frequency-chart svg')).toBeVisible();
+  await page.getByRole('button',{name:'一次试验',exact:true}).click();
+  await page.getByRole('button',{name:'运行一次',exact:true}).click();
+  await expect(page.locator('.monty-simulation .unit-status')).toContainText('1 次真实 Python',{timeout:90000});
+  await page.getByRole('button',{name:'Python 补学',exact:true}).click();
+  for(const [id,expected] of [['variables','是否获奖： True'],['conditions','允许打开的门'],['repeat','第 10 次']]){
+    await page.getByLabel('补学示例').selectOption(id);
+    await page.getByRole('button',{name:'运行 Python',exact:true}).click();
+    await expect(page.getByLabel('运行结果')).toContainText(expected,{timeout:90000});
+  }
+  await page.getByRole('button',{name:'学习回顾',exact:true}).click();
+  await page.getByLabel('用自己的话解释，为什么换门更有利？').fill('初选错误占三种情况中的两种；小E按规则排除另一扇空门，因此换门有利。');
+  await page.getByRole('button',{name:'预览最新学习报告'}).click();
+  const reportFrame=page.frameLocator('iframe[title="学习报告预览"]');
+  await expect(reportFrame.locator('svg')).toBeVisible();
+  await expect(reportFrame.locator('blockquote').last()).toContainText('因此换门有利');
+  const reportDownload=page.waitForEvent('download');
+  await page.getByRole('button',{name:'下载独立 HTML 报告'}).click();
+  const reportFile=await reportDownload;
+  await reportFile.saveAs('output/v04-offline-learning-report.html');
   await page.goto(origin + "/read/chapter_searching/binary_search");
   await expect(page.locator(".book-holder")).not.toHaveClass(/loading/);
   const block = await page
@@ -98,6 +121,10 @@ try {
       "actual 1000-trial Pyodide simulation",
       "complete upstream Python example",
       "both real H5P players and saved scores",
+      "Rough.js probability template",
+      "local ECharts and actual single trial",
+      "all three ungraded Python micro examples",
+      "standalone HTML report with inline SVG and reflection",
     ],
     failedResources: failures,
     externalRequests: external,
