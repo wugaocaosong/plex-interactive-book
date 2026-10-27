@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { registerLearningFlush } from "./learning-flush";
 import { ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
+import FrequencyChart from "./FrequencyChart.vue";
+import MontyScene from "./MontyScene.vue";
 import CodeEditor from "./CodeEditor.vue";
 import { getLearning, putLearning, download } from "./learning-store";
 import { validateSimulation, type SimulationResult } from "./monty-hall";
 import type { Diagnostic } from "./types";
-const count = ref(1000),
+const props=defineProps<{single?:boolean}>();
+const emit=defineEmits<{completed:[]}>();
+const storageKey=props.single?"simulation:monty-single":"simulation:monty-hall";
+const count = ref(props.single?1:1000),
   seed = ref(2026),
   code = ref(""),
   original = ref(""),
@@ -25,6 +30,7 @@ let worker: Worker | undefined,
   playTimer: ReturnType<typeof setInterval> | undefined,
   runId = 0;
 const resultCode = ref("");
+const lastValid=ref<SimulationResult>(),lastCode=ref(""),resultAt=ref("");
 const stale = computed(
   () =>
     !!result.value &&
@@ -33,34 +39,17 @@ const stale = computed(
       seed.value !== result.value.seed),
 );
 const trial = computed(() => result.value?.trials[replay.value]);
-const curves = computed(() => {
-  let stay = 0,
-    change = 0;
-  const a: string[] = [],
-    b: string[] = [];
-  const trials = result.value?.trials || [];
-  const every = Math.max(1, Math.ceil(trials.length / 400));
-  trials.forEach((t, i) => {
-    stay += +t.stayWon;
-    change += +t.switchWon;
-    if (i % every === 0 || i === trials.length - 1) {
-      const x = 40 + (600 * (i + 1)) / trials.length;
-      a.push(`${x},${220 - (180 * stay) / (i + 1)}`);
-      b.push(`${x},${220 - (180 * change) / (i + 1)}`);
-    }
-  });
-  return [a.join(" "), b.join(" ")];
-});
 async function save() {
   clearTimeout(saveTimer);
   if (loaded.value)
-    await putLearning("simulation:monty-hall", {
+    await putLearning(storageKey, {
       count: count.value,
       seed: seed.value,
       code: code.value,
       prediction: prediction.value,
-      result: result.value,
-      resultCode: resultCode.value,
+      result: result.value || lastValid.value,
+      resultAt:resultAt.value,
+      resultCode: result.value?resultCode.value:lastCode.value,
       replay: replay.value,
       undo: undo.value,
     }).catch(() => {});
@@ -153,9 +142,11 @@ async function run() {
           throw Error("返回的试验次数或种子与本次请求不一致");
         result.value = validated;
         resultCode.value = code.value;
+        lastValid.value=validated;lastCode.value=code.value;resultAt.value=new Date().toISOString();
         replay.value = 0;
         status.value = `已完成 ${result.value.count} 次真实 Python 试验`;
         void save();
+        emit("completed");
       } catch (e) {
         status.value = String(e);
         if (msg.diagnostic) diagnostics.value = [msg.diagnostic];
@@ -169,16 +160,17 @@ onMounted(async () => {
     const response = await fetch("/learning/monty-simulation.py");
     if (!response.ok) throw Error("模拟程序加载失败");
     original.value = await response.text();
-    const saved = await getLearning<any>("simulation:monty-hall", undefined);
+    const saved = await getLearning<any>(storageKey, undefined);
     if (disposed) return;
     code.value = saved?.code ?? original.value;
-    count.value = saved?.count ?? 1000;
+    count.value = props.single?1:(saved?.count ?? 1000);
     seed.value = saved?.seed ?? 2026;
     prediction.value = saved?.prediction || "";
     undo.value = saved?.undo;
     if (saved?.result) {
       result.value = validateSimulation(saved.result);
       resultCode.value = saved.resultCode ?? saved.code;
+      lastValid.value=result.value;lastCode.value=resultCode.value;resultAt.value=saved.resultAt||"";
       replay.value = Math.min(saved.replay || 0, result.value!.count - 1);
     }
     loaded.value = true;
@@ -201,7 +193,7 @@ onBeforeUnmount(() => {
 <template>
   <section class="monty-simulation">
     <div class="unit-eyebrow">Python 实际运行 · 可复现实验</div>
-    <h3>让试验次数多起来</h3>
+    <h3>{{single?"核对一次真实试验":"让试验次数多起来"}}</h3>
     <p class="unit-muted">
       换门和不换门使用同一批核心位置、初选与开门结果。曲线不会被修饰成固定比例。
     </p>
@@ -214,7 +206,7 @@ onBeforeUnmount(() => {
     <div class="unit-actions">
       <label
         >试验次数<select v-model.number="count" :disabled="running">
-          <option v-for="n in [10, 100, 1000, 10000]" :value="n">
+          <option v-for="n in single?[1]:[10, 100, 1000, 10000]" :value="n">
             {{ n }}
           </option>
         </select></label
@@ -226,7 +218,7 @@ onBeforeUnmount(() => {
           max="2147483647"
           :disabled="running" /></label
       ><button class="primary" :disabled="!loaded" v-if="!running" @click="run">
-        运行 Python 试验</button
+        {{single?"运行一次":"运行 Python 试验"}}</button
       ><button v-else @click="stop()">停止试验</button>
     </div>
     <details>
@@ -297,40 +289,7 @@ onBeforeUnmount(() => {
           </tr>
         </tbody>
       </table>
-      <svg
-        class="frequency-chart"
-        viewBox="0 0 680 270"
-        role="img"
-        aria-label="累计获奖频率曲线：青色不换门，金色换门；虚线是理论概率"
-      >
-        <rect width="680" height="270" rx="12" fill="#131315" />
-        <path d="M40 40V220H640" stroke="#8d998f" fill="none" />
-        <path
-          d="M40 160H640 M40 100H640"
-          stroke="#8d998f"
-          stroke-dasharray="6 6"
-        />
-        <polyline
-          :points="curves[0]"
-          fill="none"
-          stroke="#70bbb0"
-          stroke-width="2.5"
-        />
-        <polyline
-          :points="curves[1]"
-          fill="none"
-          stroke="#D9B873"
-          stroke-width="2.5"
-        />
-        <g fill="#F7EEDB" font-size="14">
-          <text x="4" y="45">100%</text>
-          <text x="8" y="225">0%</text>
-          <text x="46" y="155">1/3</text>
-          <text x="46" y="95">2/3</text>
-          <text x="40" y="250">1 次</text>
-          <text x="550" y="250">{{ result.count }} 次</text>
-        </g>
-      </svg>
+      <FrequencyChart :result="result" />
       <p>青色：不换门；金色：换门。更多试验不保证每一步都更接近理论值。</p>
       <h4>实际记录回放 · {{ replay + 1 }} / {{ result.count }}</h4>
       <label class="unit-field"
@@ -348,6 +307,7 @@ onBeforeUnmount(() => {
           trial.switchWon ? "获奖" : "未获奖"
         }}。
       </p>
+      <MontyScene v-if="trial" :step="3" :prize="trial.prize" :first="trial.first" :opened="trial.opened" :final="trial.switch" :skip="true"/>
       <div class="unit-actions">
         <button
           :disabled="replay === 0"

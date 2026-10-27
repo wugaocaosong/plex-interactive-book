@@ -271,3 +271,17 @@ test("concurrent unit visits merge atomically without losing reflection", async 
     reflection: "我的解释",
   });
 });
+
+test('v04 migration is idempotent, backup v3 retains geometry and rejects invalid predictions',async({page})=>{
+ await page.goto('/');
+ const result=await page.evaluate(async(code)=>{
+  const url=URL.createObjectURL(new Blob([code],{type:'text/javascript'}));const s=await import(url);URL.revokeObjectURL(url);
+  const now=new Date().toISOString();
+  const old={format:'plex-learning',version:2,book:'plex-interactive-book',exportedAt:now,records:[{id:'unit:monty-hall',updatedAt:now,value:{version:1,visited:['unit/monty/start'],assessment:[],reflection:'旧反思',updatedAt:now}},{id:'lab:monty-hall',updatedAt:now,value:{version:1,seed:2026,round:0,step:0,prize:1,history:[]}},{id:'blackboard:unit/monty/start',updatedAt:now,value:{version:1,sectionId:'unit/monty/start',marks:[],updatedAt:now}}]};
+  await s.importBackup(old);const first=await s.allLearning();await s.migrateLessonData();const second=await s.allLearning();
+  const board=await s.getLearning('blackboard:unit/monty/start',null);board.marks=s.probabilityTemplate();await s.putLearning('blackboard:unit/monty/start',board);
+  const backup=await s.exportBackup();s.validateBackup(backup);let invalid=false;try{s.validateBackup({...backup,records:[{id:'lab:monty-hall',updatedAt:now,value:{...await s.getLearning('lab:monty-hall',null),firstPrediction:{choice:'invented',reason:'',round:0}}}]});}catch{invalid=true;}
+  return {same:JSON.stringify(first)===JSON.stringify(second),version:backup.version,unit:await s.getLearning('unit:monty-hall',null),story:await s.getLearning('lab:monty-hall',null),board,invalid};
+ },store);
+ expect(result.same).toBe(true);expect(result.version).toBe(3);expect(result.unit.completed).toEqual({});expect(result.story.firstPrediction).toBeUndefined();expect(result.board.version).toBe(2);expect(result.board.marks).toHaveLength(6);expect(result.invalid).toBe(true);
+});

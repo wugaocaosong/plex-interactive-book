@@ -268,9 +268,12 @@ if __name__=='__main__':
     for item in nav:
         if item[0].startswith(('chapter_hello_algo/','chapter_preface/')): add_source(item)
     add_editorial('contents')
-    for slug,title,mode,body in runpy.run_path(str(ROOT/'content/learning/monty.py'))['PAGES']:
+    lessons=runpy.run_path(str(ROOT/'content/learning/monty_lesson.py'))['LESSONS']
+    for page_index,(slug,title,mode,body) in enumerate(runpy.run_path(str(ROOT/'content/learning/monty.py'))['PAGES']):
         markup=markdown.markdown(body,extensions=['extra'])
-        markup+=f'<div class="activity-invitation"><span>PLEX · 三门探索</span><button data-action="unit" data-unit-mode="{mode}">打开本页学习活动</button><button data-action="blackboard">打开小黑板</button></div>'
+        lesson=lessons[page_index]
+        following=f'<button data-action="next-lesson" data-next="unit/monty/{lessons[page_index+1][0]}">下一教学环节 →</button>' if page_index+1<len(lessons) else ''
+        markup+=f'<div class="activity-invitation"><span>本页目标：{html.escape(lesson[3])}</span><button data-action="unit" data-unit-mode="{lesson[2]}">{html.escape(lesson[4])}</button><button data-action="blackboard">打开小黑板</button>{following}</div>'
         publish(page_record('unit/monty/'+slug,title,'unit','三扇舱门 · 45 分钟'),markup)
     for item in nav:
         if not item[0].startswith(('chapter_hello_algo/','chapter_preface/','chapter_appendix/','chapter_reference/')): add_source(item)

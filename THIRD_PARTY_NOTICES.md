@@ -46,3 +46,16 @@ H5P 库来自 [官方 InteractiveBook 分发包](https://api.h5p.org/v1/content-
 三门问题故事、中文讲解、CSS 舱门、板书图形、模拟程序与题目由本项目编写，未整本导入或翻译第二本教材。基础知识组织参考 [Allen B. Downey 的 Think Python 第三版](https://greenteapress.com/wp/think-python-3rd-edition/)（原书 CC BY-NC-SA 4.0）；经典问题的规则核对参考 [University of Illinois Data Science Discovery](https://discovery.cs.illinois.edu/guides/Classic-Problems/Monty-Hall-Problem-Interactive-Game-and-Solution/)，未复制该站交互代码或图片。
 
 小E与 PLEX 标志复用本项目方 PLEX 主工程已有素材，路径、提交与原样文件哈希见 `web/public/brand/SOURCES.json`，不额外声明开放许可。原封面和全部 Hello Algo 署名、许可证与快照仍保留。
+
+## v0.4 动画、图表、几何与检测
+
+| 官方项目 | 固定包 | 许可 | 用途 |
+|---|---|---|---|
+| [Motion for Vue](https://github.com/motiondivision/motion-vue) | motion-v 2.8.0 | MIT | 舱门、核心、小E二维过渡 |
+| [VueUse](https://github.com/vueuse/vueuse) | @vueuse/core 12.8.2 | MIT | Motion 配套依赖，显式固定 |
+| [Apache ECharts](https://github.com/apache/echarts) | echarts 6.1.0 | Apache-2.0 | 全部实际频率点、理论线及 SVG 导出 |
+| [Vue ECharts](https://github.com/ecomfe/vue-echarts) | vue-echarts 8.3.2 | MIT | 图表生命周期、容器缩放 |
+| [Rough.js](https://github.com/rough-stuff/rough) | roughjs 4.6.6 | MIT | 固定种子的手绘几何与模板 |
+| [axe-core npm](https://github.com/dequelabs/axe-core-npm) | @axe-core/playwright 4.14.0 | MPL-2.0 | 仅开发测试的自动无障碍检查 |
+
+完整许可证及转移依赖声明位于 `licenses/dependencies/`；新场景使用本项目 CSS/SVG 几何与既有品牌素材，没有引入付费动画或外链 CDN。

@@ -6,7 +6,7 @@
   "route": "/read/unit/monty/quiz",
   "sourcePath": null,
   "sourceCommit": null,
-  "html": "<h1 data-block=\"blk-ed49d16f60a81063\">四个问题，检查你的理解</h1>\n<p data-block=\"blk-e2273053dba63c5e\">自测包括主持人规则、初选情况、频率波动和策略解释。每题 1 分，可以重试并阅读反馈。</p>\n<p data-block=\"blk-0ff9b3aa47baa512\">完成标准：三道编程练习通过测试；四道自测至少答对三题，且主持人规则题正确。抽中奖品次数不参与评分。</p>\n<p data-block=\"blk-71a357ec09eb59c3\">尚未完成也可以继续翻阅。你可以随时回到薄弱知识点补学。</p><div class=\"activity-invitation\" data-block=\"blk-247959665960ae29\"><span>PLEX · 三门探索</span><button data-action=\"unit\" data-unit-mode=\"quiz\">打开本页学习活动</button><button data-action=\"blackboard\">打开小黑板</button></div>",
+  "html": "<h1 data-block=\"blk-ed49d16f60a81063\">四个问题，检查你的理解</h1>\n<p data-block=\"blk-e2273053dba63c5e\">自测包括主持人规则、初选情况、频率波动和策略解释。每题 1 分，可以重试并阅读反馈。</p>\n<p data-block=\"blk-0ff9b3aa47baa512\">完成标准：三道编程练习通过测试；四道自测至少答对三题，且主持人规则题正确。抽中奖品次数不参与评分。</p>\n<p data-block=\"blk-71a357ec09eb59c3\">尚未完成也可以继续翻阅。你可以随时回到薄弱知识点补学。</p><div class=\"activity-invitation\" data-block=\"blk-d2a8805af572d7b0\"><span>本页目标：用四道问题检查规则、初选情况、波动和策略解释。</span><button data-action=\"unit\" data-unit-mode=\"quiz\">开始理解自测</button><button data-action=\"blackboard\">打开小黑板</button><button data-action=\"next-lesson\" data-next=\"unit/monty/reflection\">下一教学环节 →</button></div>",
   "codeExamples": [],
   "animations": [],
   "conversion": null,
@@ -17,5 +17,5 @@
     "b3": "blk-71a357ec09eb59c3",
     "b4": "blk-247959665960ae29"
   },
-  "contentVersion": "5d93f25a031cef02"
+  "contentVersion": "3a0ea00f1e3d3423"
 }

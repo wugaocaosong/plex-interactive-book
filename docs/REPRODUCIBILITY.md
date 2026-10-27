@@ -125,3 +125,11 @@ ZIP 内的 `PACKAGE-MANIFEST.json` 提供每个文件的 SHA-256 和应用提交
 ## v0.3 单元与 PLEX
 
 新增 14 页、3 道编程题和四题 H5P，`npm run build:activity` 同时重建两套练习。基础本机功能不要求安装 Flask、Docker 或配置模型服务；在线接入另见 [PLEX_INTEGRATION](PLEX_INTEGRATION.md)。
+
+## v0.4 深化单元
+
+原 14 个地址与 27 题保持不变，`content/learning/monty_lesson.py` 管理逐页目标、活动、分层提示及三个不计分示例。更新后运行 `npm run import:book`；重复导入不会覆盖板书与浏览器数据。完整 ZIP 内的静态成品已包含动画、ECharts、Rough.js、Python 标准库、两套 H5P 和字体，无需运行时 CDN。
+
+备份导出为 v3，继续导入 v1/v2。新浏览器或新端口用“更多 → 笔记 → JSON 恢复”主动恢复；账号隔离保持不变。学习报告可单独下载 HTML 后离线查看和打印，返回原书链接需要本机预览服务器。
+
+推荐先运行 `npm run check`、`npm run build`，再设 `PLEX_TEST_PREVIEW=1` 和独立 `PLEX_TEST_PORT` 执行 `npm run test:e2e`。完整结果见 [VALIDATION_V04.md](VALIDATION_V04.md)，技术维护见 [LEARNING_V04.md](LEARNING_V04.md)。

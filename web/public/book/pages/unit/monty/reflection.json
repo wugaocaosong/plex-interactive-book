@@ -6,7 +6,7 @@
   "route": "/read/unit/monty/reflection",
   "sourcePath": null,
   "sourceCommit": null,
-  "html": "<h1 data-block=\"blk-fd20133d5e941867\">用自己的话解释</h1>\n<p data-block=\"blk-8e17e0fa0dd29644\">请补全这句话：<strong>我最开始认为……；现在我认为……；因为小E必须……。</strong></p>\n<p data-block=\"blk-f9d20ae8a5ee44e6\">试着向同学解释：如果小E不知道奖品位置、随便开门，这还属于本课的同一个实验吗？哪些假设需要重新检查？</p>\n<p data-block=\"blk-ce6578abc2bd1ea6\">在学习面板中保存反思，查看阅读、实验、练习与自测的独立记录。把值得保留的图画导出，或用 JSON 备份全部本机学习记录。</p>\n<h2 data-block=\"blk-e888d5672151bb45\">本单元来源</h2>\n<p data-block=\"blk-3ae5663cbe493071\">本单元故事、中文讲解、程序和练习由 PLEX 编写。基础知识组织参考 <a href=\"https://greenteapress.com/wp/think-python-3rd-edition/\">Think Python 第三版</a>；三门规则核对参考 <a href=\"https://discovery.cs.illinois.edu/guides/Classic-Problems/Monty-Hall-Problem-Interactive-Game-and-Solution/\">伊利诺伊大学教学材料</a>。原《Hello 算法》正文与来源记录仍完整保留。</p><div class=\"activity-invitation\" data-block=\"blk-3b44c9cac27f0315\"><span>PLEX · 三门探索</span><button data-action=\"unit\" data-unit-mode=\"progress\">打开本页学习活动</button><button data-action=\"blackboard\">打开小黑板</button></div>",
+  "html": "<h1 data-block=\"blk-fd20133d5e941867\">用自己的话解释</h1>\n<p data-block=\"blk-8e17e0fa0dd29644\">请补全这句话：<strong>我最开始认为……；现在我认为……；因为小E必须……。</strong></p>\n<p data-block=\"blk-f9d20ae8a5ee44e6\">试着向同学解释：如果小E不知道奖品位置、随便开门，这还属于本课的同一个实验吗？哪些假设需要重新检查？</p>\n<p data-block=\"blk-ce6578abc2bd1ea6\">在学习面板中保存反思，查看阅读、实验、练习与自测的独立记录。把值得保留的图画导出，或用 JSON 备份全部本机学习记录。</p>\n<h2 data-block=\"blk-e888d5672151bb45\">本单元来源</h2>\n<p data-block=\"blk-3ae5663cbe493071\">本单元故事、中文讲解、程序和练习由 PLEX 编写。基础知识组织参考 <a href=\"https://greenteapress.com/wp/think-python-3rd-edition/\">Think Python 第三版</a>；三门规则核对参考 <a href=\"https://discovery.cs.illinois.edu/guides/Classic-Problems/Monty-Hall-Problem-Interactive-Game-and-Solution/\">伊利诺伊大学教学材料</a>。原《Hello 算法》正文与来源记录仍完整保留。</p><div class=\"activity-invitation\" data-block=\"blk-af1d237acd53c67f\"><span>本页目标：比较最初预测与最终解释，决定下一步补学内容。</span><button data-action=\"unit\" data-unit-mode=\"progress\">查看学习报告</button><button data-action=\"blackboard\">打开小黑板</button></div>",
   "codeExamples": [],
   "animations": [],
   "conversion": null,
@@ -19,5 +19,5 @@
     "b5": "blk-3ae5663cbe493071",
     "b6": "blk-3b44c9cac27f0315"
   },
-  "contentVersion": "69cedc8d741c60a5"
+  "contentVersion": "013607366858fc41"
 }

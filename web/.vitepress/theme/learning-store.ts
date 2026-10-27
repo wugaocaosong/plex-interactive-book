@@ -250,8 +250,15 @@ export function validateBackup(value: unknown): Backup {
         throw Error("批量实验记录格式错误");
       if (simulation.result) validateSimulation(simulation.result);
     }
+    if(record.id.startsWith('lesson:monty-')){
+      const lesson=value as any;
+      if(!lesson||!doors.includes(lesson.first)||!doors.includes(lesson.prize)||!Array.isArray(lesson.selected)||lesson.selected.some((d:any)=>!doors.includes(d))||![0,1,2].includes(lesson.step)||typeof lesson.checked!=='boolean')throw Error('教学演示记录格式错误');
+    }
     if (record.id === "lab:monty-hall") {
       const story = value as any;
+      const validPrediction=(p:any)=>p&&['换门更好','不换门更好','两者一样','跳过预测'].includes(p.choice)&&typeof p.reason==='string'&&p.reason.length<=2000&&Number.isInteger(p.round)&&p.round>=0&&(p.at===undefined||(typeof p.at==='string'&&Number.isFinite(Date.parse(p.at))));
+      if(story?.firstPrediction&&!validPrediction(story.firstPrediction))throw Error('首次预测格式错误');
+      if(story?.revisions!==undefined&&(!Array.isArray(story.revisions)||story.revisions.length>200||story.revisions.some((p:any)=>!validPrediction(p))))throw Error('预测修正格式错误');
       if (
         !story ||
         ![1, 2].includes(story.version) ||
@@ -310,6 +317,11 @@ export function validateBackup(value: unknown): Backup {
     }
     if (record.id === "unit:monty-hall") {
       const unit = value as any;
+      for(const key of ['completed','hintUsage'])if(unit?.[key]!==undefined){
+        const map=unit[key];
+        if(!map||typeof map!=='object'||Array.isArray(map)||Object.entries(map).some(([k,v])=>!k.startsWith('unit/monty/')||(key==='completed'?(typeof v!=='string'||!Number.isFinite(Date.parse(v))):(!Number.isInteger(v)||Number(v)<0||Number(v)>10))))throw Error('活动完成或提示记录格式错误');
+      }
+      if(unit?.locator&&(!unit.locator.sectionId?.startsWith('unit/monty/')||typeof unit.locator.activity!=='string'))throw Error('活动定位格式错误');
       if (
         !unit ||
         ![1, 2].includes(unit.version) ||

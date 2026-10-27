@@ -12,6 +12,7 @@ import { getLearning, putLearning } from "./learning-store";
 import { registerLearningFlush } from "./learning-flush";
 import PlexCoach from "./PlexCoach.vue";
 import CodeEditor from "./CodeEditor.vue";
+const emit=defineEmits<{completed:[]}>();
 const props = defineProps<{
   example?: CodeExample;
   exercise?: ExerciseDefinition;
@@ -202,6 +203,7 @@ async function start(check = false) {
           msg.type === "error"
         ) {
           clearTimeout(timer);
+          if(msg.type==="done")emit("completed");
           running.value = false;
           status.value =
             msg.type === "error"
@@ -293,7 +295,7 @@ onBeforeUnmount(() => {
     </div>
     <div v-if="variant" class="code-file">
       <span>{{ variant.sourcePath }}</span
-      ><a :href="variant.sourceUrl" target="_blank" rel="noopener"
+      ><a v-if="variant.sourceUrl" :href="variant.sourceUrl" target="_blank" rel="noopener"
         >上游源码 ↗</a
       >
     </div>

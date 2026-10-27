@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import MontyScene from "./MontyScene.vue";
 import { registerLearningFlush } from "./learning-flush";
 import { ref, computed, onMounted, onBeforeUnmount, watch } from "vue";
 import { getLearning, putLearning } from "./learning-store";
@@ -9,13 +10,17 @@ import {
   revealHost,
   finishRound,
   nextRound,
+  upgradeSession,
+  revisePrediction,
   type MontyHallSession,
   type Door,
 } from "./monty-hall";
-const emit = defineEmits<{ blackboard: [] }>();
+const emit = defineEmits<{ blackboard: []; completed: [] }>();
 const session = ref<MontyHallSession>(newSession()),
   view = ref(0),
-  prediction = ref("换门更好"),
+  prediction = ref(""),
+  reason = ref(""),
+  skipAnimation = ref(false),
   loaded = ref(false),
   notice = ref("");
 const steps = ["选择舱门", "提出预测", "小E打开空门", "揭晓结果"];
@@ -34,12 +39,15 @@ onMounted(async () => {
     undefined,
   );
   if (disposed) return;
-  if (saved?.version === 1 && doors.includes(saved.prize))
-    session.value = saved;
+  if ((saved?.version === 1 || saved?.version === 2) && doors.includes(saved.prize))
+    session.value = upgradeSession(saved);
+  prediction.value=session.value.prediction || "";
+  reason.value=session.value.reason || "";
   view.value = session.value.step;
   loaded.value = true;
 });
 watch(session, () => void save(), { deep: true });
+watch([prediction,reason],()=>{if(loaded.value&&session.value.step===1){session.value={...session.value,prediction:prediction.value,reason:reason.value};}});
 let disposed = false;
 const unregisterFlush = registerLearningFlush(save);
 onBeforeUnmount(() => {
@@ -48,33 +56,44 @@ onBeforeUnmount(() => {
 });
 onBeforeUnmount(() => void save());
 function pick(door: Door) {
+  if(view.value!==session.value.step)return;
+  skipAnimation.value=false;
   session.value = chooseFirst(session.value, door);
   view.value = 1;
 }
 function open(skip = false) {
+  if(session.value.step!==1 || (!skip&&!prediction.value))return;
+  skipAnimation.value=false;
   session.value = revealHost(
     session.value,
-    skip ? "跳过预测" : prediction.value,
+    skip ? "跳过预测" : prediction.value, reason.value, new Date().toISOString(),
   );
   view.value = 2;
 }
 function finish(change: boolean) {
+  if(session.value.step!==2)return;
+  skipAnimation.value=false;
   session.value = finishRound(session.value, change);
   view.value = 3;
+  emit("completed");
 }
 function again() {
   session.value = nextRound(session.value);
   view.value = 0;
+  prediction.value="";reason.value="";
   notice.value = "已保存上一轮，开始新的试验。";
 }
 function reset() {
+  const {firstPrediction,revisions}=session.value;
   session.value = newSession(
     session.value.seed,
     session.value.round,
     session.value.history,
   );
   view.value = 0;
-  notice.value = "本轮重置，历史记录保留。";
+  session.value={...session.value,firstPrediction,revisions};
+  prediction.value="";reason.value="";
+  notice.value = "本轮重置，首次预测与历史记录保留。";
 }
 </script>
 <template>
@@ -93,38 +112,8 @@ function reset() {
         {{ i + 1 }} {{ label }}
       </li>
     </ol>
-    <div class="monty-doors" aria-label="三扇舱门">
-      <button
-        v-for="d in doors"
-        :key="d"
-        :aria-label="`选择${d + 1}号舱门`"
-        :disabled="view !== 0"
-        :class="{
-          chosen: session.first === d && view > 0,
-          opened: view >= 2 && session.opened === d,
-          prize: view === 3 && session.prize === d,
-          final: view === 3 && session.final === d,
-        }"
-        @click="pick(d)"
-      >
-        <span class="door-number">0{{ d + 1 }}</span
-        ><span class="door-window">{{
-          view === 3 && session.prize === d
-            ? "✦"
-            : view >= 2 && session.opened === d
-              ? "空舱"
-              : "·"
-        }}</span
-        ><span>{{ d + 1 }} 号舱门</span>
-        <small>{{
-          view === 3 && session.final === d
-            ? "最终选择"
-            : view > 0 && session.first === d
-              ? "你的初选"
-              : " "
-        }}</small>
-      </button>
-    </div>
+    <MontyScene :step="view" :prize="session.prize" :first="session.first" :opened="session.opened" :final="session.final" :interactive="view===0&&session.step===0" :skip="skipAnimation" @choose="pick" />
+    <button @click="skipAnimation=true">跳过动画</button>
     <p role="status" class="unit-status">
       {{
         view === 0
@@ -136,17 +125,18 @@ function reset() {
               : `核心在 ${session.prize + 1} 号门；你最终选择 ${session.final! + 1} 号门。${session.final === session.prize ? "本轮获奖。" : "本轮未获奖。"}`
       }}
     </p>
-    <div v-if="view === 1" class="unit-actions">
+    <div v-if="view === 1 && session.step===1" class="unit-actions">
       <label
         >我的预测<select v-model="prediction">
+          <option disabled value="">请选择预测</option>
           <option>换门更好</option>
           <option>不换门更好</option>
           <option>两者一样</option>
         </select></label
-      ><button class="primary" @click="open()">提交预测，打开空门</button
+      ><label>理由（可选）<textarea v-model="reason" maxlength="2000" /></label><button class="primary" :disabled="!prediction" @click="open()">提交预测，打开空门</button
       ><button @click="open(true)">跳过预测</button>
     </div>
-    <div v-if="view === 2" class="unit-actions">
+    <div v-if="view === 2 && session.step===2" class="unit-actions">
       <button @click="finish(false)">保留初选</button
       ><button class="primary" @click="finish(true)">换到另一扇门</button>
     </div>
@@ -159,6 +149,14 @@ function reset() {
       </p>
       <button class="primary" @click="again">记录并开始下一轮</button>
     </div>
+    <details v-if="session.firstPrediction">
+      <summary>首次预测与想法修正</summary>
+      <p>首次：{{session.firstPrediction.choice}}；理由：{{session.firstPrediction.reason || '未记录'}}</p>
+      <label>现在的想法<select v-model="prediction"><option value="" disabled>请选择</option><option>换门更好</option><option>不换门更好</option><option>两者一样</option></select></label>
+      <label class="unit-field">修正理由<textarea v-model="reason" maxlength="2000" /></label>
+      <button :disabled="!prediction" @click="session=revisePrediction(session,prediction,reason,new Date().toISOString());notice='已保存修正，首次预测保持不变。'">保存修正</button>
+      <p>已记录 {{session.revisions?.length || 0}} 次后续预测或修正。</p>
+    </details>
     <div class="unit-actions">
       <button :disabled="view === 0" @click="view--">上一步回看</button
       ><button :disabled="view >= session.step" @click="view++">

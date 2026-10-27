@@ -19,7 +19,8 @@ try {
     (process.env.PLEX_INTEGRATION_URL || "http://127.0.0.1:5193") +
       "/read/unit/monty/start",
   );
-  await page.getByRole("button", { name: "学习活动", exact: true }).click();
+  await page.getByTestId("lesson-entry").click();
+  await page.locator(".all-activities summary").click();
   await page.getByText("登录／查看 PLEX 学习画像", { exact: true }).click();
   await page.getByLabel("PLEX 学生账号").fill(credentials.username);
   await page.getByLabel("密码", { exact: true }).fill(credentials.password);
@@ -27,7 +28,8 @@ try {
     page.waitForEvent("domcontentloaded"),
     page.getByRole("button", { name: "登录 PLEX", exact: true }).click(),
   ]);
-  await page.getByRole("button", { name: "学习活动", exact: true }).click();
+  await page.getByTestId("lesson-entry").click();
+  await page.locator(".all-activities summary").click();
   await page.getByText("登录／查看 PLEX 学习画像", { exact: true }).click();
   await expect(page.locator(".plex-profile")).toContainText(
     "画像来自 PLEX 服务端",

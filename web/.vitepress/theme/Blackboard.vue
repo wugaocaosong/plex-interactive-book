@@ -3,22 +3,8 @@ import { registerLearningFlush } from "./learning-flush";
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { getLearning, putLearning } from "./learning-store";
 import type { MontyHallSession } from "./monty-hall";
-interface Mark {
-  id: string;
-  kind: "stroke" | "text" | "scene";
-  color: string;
-  points?: number[][];
-  text?: string;
-  x?: number;
-  y?: number;
-  scene?: MontyHallSession;
-}
-interface BlackboardDocument {
-  version: 1;
-  sectionId: string;
-  marks: Mark[];
-  updatedAt: string;
-}
+import RoughMark from './RoughMark.vue';
+import {probabilityTemplate,type BlackboardMark as Mark,type BlackboardDocument} from './blackboard-model';
 const props = defineProps<{ sectionId: string }>();
 const marks = ref<Mark[]>([]),
   redo = ref<Mark[][]>([]),
@@ -42,7 +28,7 @@ async function save() {
   clearTimeout(saveTimer);
   if (!loaded.value) return;
   const doc: BlackboardDocument = {
-    version: 1,
+    version: 2,
     sectionId: props.sectionId,
     marks: snapshot(),
     updatedAt: new Date().toISOString(),
@@ -92,7 +78,8 @@ function start(e: PointerEvent) {
   else {
     active = {
       id: crypto.randomUUID(),
-      kind: "stroke",
+      kind: tool.value==="pen"?"stroke":"shape",
+      shape:tool.value as Mark["shape"],x,y,width:0,height:0,seed:Math.floor(Math.random()*2147483646)+1,
       color: color.value,
       points: [[x, y]],
     };
@@ -104,6 +91,7 @@ function start(e: PointerEvent) {
 function move(e: PointerEvent) {
   if (!svg.value?.hasPointerCapture(e.pointerId)) return;
   if (tool.value === "eraser") erase(e);
+  else if(active?.kind==="shape"){const [x,y]=point(e);active.width=x-active.x!;active.height=y-active.y!;}
   else if (active && active.points!.length < 4000)
     active.points!.push(point(e));
   changed();
@@ -140,6 +128,8 @@ function redoStep() {
   marks.value = redo.value.pop()!;
   changed();
 }
+function template(){if(marks.value.length>294)return;checkpoint();marks.value.push(...probabilityTemplate().map(m=>({...m,id:crypto.randomUUID()})));changed();}
+function addShape(){if(marks.value.length>=300)return;checkpoint();marks.value.push({id:crypto.randomUUID(),kind:'shape',shape:['rectangle','ellipse','arrow'].includes(tool.value)?tool.value as Mark['shape']:'rectangle',x:80,y:80,width:240,height:140,seed:Math.floor(Math.random()*2147483646)+1,color:color.value});changed();}
 async function scene() {
   if (marks.value.length >= 300) {
     status.value = "本页对象已达 300 个，请先导出或清理。";
@@ -189,7 +179,7 @@ async function png() {
 onMounted(async () => {
   const doc = await getLearning<BlackboardDocument | undefined>(key, undefined);
   if (disposed) return;
-  if (doc?.version === 1 && Array.isArray(doc.marks)) marks.value = doc.marks;
+  if ((doc?.version === 1 || doc?.version===2) && Array.isArray(doc.marks)) marks.value = doc.marks;
   loaded.value = true;
 });
 let disposed = false;
@@ -205,8 +195,8 @@ onBeforeUnmount(() => void save());
     <p class="unit-muted">本页板书 · 支持鼠标、触笔与触屏</p>
     <div class="unit-actions">
       <label
-        >工具<select v-model="tool">
-          <option value="pen">画笔</option>
+        >工具<select v-model="tool" aria-label="工具">
+          <option value="pen">画笔</option><option value="rectangle">矩形</option><option value="ellipse">圆圈</option><option value="arrow">箭头</option>
           <option value="eraser">橡皮</option>
           <option value="text">点击放置文字</option>
         </select></label
@@ -231,7 +221,7 @@ onBeforeUnmount(() => void save());
         placeholder="输入解释，再点击添加或在黑板中定位"
         @keydown.enter="addText()"
       /><button @click="addText()">添加文字</button
-      ><button @click="scene">插入三门状态图</button
+      ><button @click="addShape">添加所选图形</button><button @click="template">插入概率分组模板</button><button @click="scene">插入三门状态图</button
       ><button @click="png">导出 PNG</button>
     </div>
     <svg
@@ -248,6 +238,7 @@ onBeforeUnmount(() => void save());
     >
       <rect width="1000" height="600" fill="#242723" />
       <g v-for="m in marks" :key="m.id" :data-mark="m.id">
+        <RoughMark v-if="m.kind==='shape'" :mark="m"/>
         <polyline
           v-if="m.kind === 'stroke'"
           :points="m.points?.map((p) => p.join(',')).join(' ')"
@@ -313,7 +304,7 @@ onBeforeUnmount(() => void save());
               ? m.text
               : m.kind === "scene"
                 ? `三门状态：初选 ${m.scene?.first !== undefined ? m.scene.first + 1 : "尚未选择"} 号；${m.scene?.step! >= 2 ? "打开 " + (m.scene!.opened! + 1) + " 号空门" : "尚未开门"}；${m.scene?.step === 3 ? "核心在 " + (m.scene.prize + 1) + " 号，最终选择 " + (m.scene.final! + 1) + " 号" : "核心位置尚未揭晓"}`
-                : "手绘笔画"
+                : m.kind==="shape" ? ({rectangle:"矩形",ellipse:"圆圈",arrow:"箭头"}[m.shape!]) : "手绘笔画"
           }}
         </li>
       </ul>

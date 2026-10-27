@@ -33,7 +33,8 @@ async function api(page: any, operation: string) {
   );
 }
 const openProfile = async (page: any) => {
-  await page.getByRole("button", { name: "学习活动", exact: true }).click();
+  await page.getByTestId("lesson-entry").click();
+  await page.locator(".all-activities summary").click();
   await page.getByText("登录／查看 PLEX 学习画像", { exact: true }).click();
 };
 
@@ -84,7 +85,7 @@ test("guest migration, accounts, backups and returning to guest never mix record
       )
       .toBe(name);
     await expect(
-      page.getByRole("button", { name: "学习活动", exact: true }),
+      page.getByTestId("lesson-entry"),
     ).toBeVisible();
   };
   await signIn("one");
@@ -100,7 +101,7 @@ test("guest migration, accounts, backups and returning to guest never mix record
     "await store.putLearning('draft:guest',{code:'account one'});",
   );
   const backup = await api(page, "return await store.exportBackup()");
-  expect(backup.version).toBe(2);
+  expect(backup.version).toBe(3);
   expect(JSON.stringify(backup)).not.toContain("sensitive-");
   expect(backup.records.some((r: any) => r.id.startsWith("blackboard:"))).toBe(
     true,
@@ -138,7 +139,8 @@ test("offline login keeps local story available", async ({ page }) => {
   await page.getByRole("button", { name: "登录 PLEX", exact: true }).click();
   await expect(page.locator(".plex-profile")).toContainText("服务暂不可用");
   await page.getByRole("button", { name: "关闭", exact: true }).click();
-  await page.getByRole("button", { name: "学习活动", exact: true }).click();
+  await page.getByTestId("lesson-entry").click();
+  await page.locator(".all-activities summary").click();
   await page.getByRole("button", { name: "三门挑战", exact: true }).click();
   await page.getByRole("button", { name: "选择1号舱门", exact: true }).click();
   await expect(
@@ -221,7 +223,8 @@ test("version conflict and quota are visible without substituting a model reply"
     });
   });
   await page.goto("/read/unit/monty/practice");
-  await page.getByRole("button", { name: "学习活动", exact: true }).click();
+  await page.getByTestId("lesson-entry").click();
+  await page.locator(".all-activities summary").click();
   await page.getByRole("button", { name: "编程练习", exact: true }).click();
   await page.locator(".unit-exercise-list>button").first().click();
   await page.getByText("小E在线辅导与 PLEX 正式提交", { exact: true }).click();
@@ -306,7 +309,8 @@ test("online context, duplicate submit identity, cancellation and model failure 
     });
   });
   await page.goto("/read/unit/monty/practice");
-  await page.getByRole("button", { name: "学习活动", exact: true }).click();
+  await page.getByTestId("lesson-entry").click();
+  await page.locator(".all-activities summary").click();
   await page.getByRole("button", { name: "编程练习", exact: true }).click();
   await page.locator(".unit-exercise-list>button").first().click();
   await page.getByText("小E在线辅导与 PLEX 正式提交", { exact: true }).click();

@@ -30,9 +30,11 @@ try {
   await expect(page.locator(".book-holder")).not.toHaveClass(/loading/);
   await expect(page.locator(".section-heading h1")).toHaveText("扉页");
   await page.goto(origin + "/read/unit/monty/choose");
-  await page.getByRole("button", { name: "学习活动", exact: true }).click();
+  await page.getByTestId("lesson-entry").click();
+  await page.locator(".all-activities summary").click();
   await page.getByRole("button", { name: "三门挑战", exact: true }).click();
   await page.getByRole("button", { name: "选择1号舱门", exact: true }).click();
+  await page.getByLabel("我的预测").selectOption("换门更好");
   await page.getByRole("button", { name: "提交预测，打开空门" }).click();
   await page.getByRole("button", { name: "换到另一扇门", exact: true }).click();
   await expect(page.locator(".unit-explanation")).toContainText("初选");

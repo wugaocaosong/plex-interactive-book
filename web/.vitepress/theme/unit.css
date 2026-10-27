@@ -539,3 +539,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+.lesson-goal{border-left:3px solid #4f8d86;padding:8px 16px;margin:0 0 16px}.lesson-goal p{margin:6px 0}.all-activities,.lesson-hint{padding:12px;border:1px solid #4f8d8666;border-radius:10px;margin:12px 0}.lesson-next{border-top:1px solid #4f8d8666;padding-top:20px;margin-top:30px}.lesson-stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding-left:24px}.lesson-stages li{padding:8px}.coach-association{font-size:13px;border-left:3px solid #d9b873;padding:8px 12px}
+
+.reader .unit-panel button.primary,.reader .unit-panel button.primary:hover{background:#d9b873;color:#131315;border-color:#d9b873}

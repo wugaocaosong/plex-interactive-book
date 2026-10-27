@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
 const open = async (page: any, mode = "三门挑战") => {
-  await page.getByRole("button", { name: "学习活动", exact: true }).click();
+  await page.getByTestId("lesson-entry").click();
+  await page.locator(".all-activities summary").click();
   await page
     .getByRole("navigation", { name: "三门学习活动" })
     .getByRole("button", { name: mode, exact: true })
@@ -20,6 +21,9 @@ for (const width of [390, 820, 1440])
     await page
       .getByRole("button", { name: "选择1号舱门", exact: true })
       .click();
+    await expect(page.getByRole("button", {name:"提交预测，打开空门"})).toBeDisabled();
+    await page.getByLabel("我的预测").selectOption("换门更好");
+    await page.getByLabel("理由（可选）").fill("我觉得小E的开门提供了信息");
     await page.getByRole("button", { name: "提交预测，打开空门" }).click();
     await expect(page.locator(".monty-story")).toContainText("号空门");
     await page

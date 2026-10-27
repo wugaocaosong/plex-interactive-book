@@ -8,9 +8,9 @@ import {
 } from "./plex-client";
 import { getLearning, putLearning } from "./learning-store";
 import type { ExerciseDefinition } from "./types";
-const props = defineProps<{ exercise?: ExerciseDefinition; code?: string }>();
+const props = defineProps<{ exercise?: ExerciseDefinition; code?: string; serverRef?: string; suggestedQuestion?:string }>();
 const mode = ref("next_step"),
-  question = ref(""),
+  question = ref(props.suggestedQuestion || ""),
   busy = ref(false),
   message = ref(""),
   reply = ref<TutorReply>(),
@@ -22,7 +22,7 @@ const sessionId = ref("");
 let controller: AbortController | undefined,
   serial = 0,
   disposed = false;
-const key = () => `online:${props.exercise?.id || "monty-general"}`;
+const key = () => `online:${props.exercise?.id || props.serverRef || "monty-general"}`;
 async function persist() {
   await putLearning(key(), {
     requestId: requestId.value,
@@ -35,7 +35,7 @@ async function loadContext(refresh = false) {
   if (!account()) throw Error("请在学习起点登录 PLEX 学生账号。");
   if (!context.value || refresh) {
     context.value = await plex<TutorContext>("/student/tutor/context", {
-      question_ref: props.exercise?.serverRef || "MH030001",
+      question_ref: props.exercise?.serverRef || props.serverRef || "MH030001",
       code: props.code || "",
     });
     if (!context.value.task)
@@ -220,6 +220,7 @@ onBeforeUnmount(() => {
 });
 </script>
 <template>
+  <p class="coach-association">本次关联题目：{{exercise?.serverRef || serverRef || "MH030001"}}。请核对下方问题后再发送；题目版本由 PLEX 服务器核验。</p>
   <section class="plex-coach">
     <div class="little-e-heading">
       <img src="/brand/little-e.png" alt="小E" />

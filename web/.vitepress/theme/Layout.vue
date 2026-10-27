@@ -43,6 +43,10 @@ import StarMap from "./StarMap.vue";
 import StudyReader from "./StudyReader.vue";
 import LearningNotebook from "./LearningNotebook.vue";
 const UnitPanel = defineAsyncComponent(() => import("./UnitPanel.vue"));
+import {blankProgress,upgradeProgress} from "./lesson-state";
+import type {LearningUnitDefinition} from "./unit-types";
+const unitDefinition=ref<LearningUnitDefinition>();
+const lesson=computed(()=>unitDefinition.value?.pages.find(p=>p.id===sectionId.value));
 const unitMode = ref("profile");
 const unitSection = ref("unit/monty/start");
 const CodePanel = defineAsyncComponent(() => import("./CodePanel.vue"));
@@ -134,9 +138,9 @@ async function recordUnitVisit(id: string) {
   if (!id.startsWith("unit/monty/")) return;
   await updateLearning<any>(
     "unit:monty-hall",
-    { version: 1, visited: [], assessment: [], reflection: "" },
+    blankProgress(),
     (p) => ({
-      ...p,
+      ...upgradeProgress(p),
       visited: [...new Set([...p.visited, id])],
       updatedAt: new Date().toISOString(),
     }),
@@ -582,7 +586,7 @@ function remember() {
 }
 async function navigate(id: string, place?: ReadingLocator) {
   menu.value = null;
-  panel.value = null;
+  if(panel.value!=="unit")panel.value = null;
   pendingLocator = place;
   stopAnimation();
   const route =
@@ -681,7 +685,18 @@ async function goSearch(entry: (typeof searchResults.value)[number]) {
         markRange(block, entry.offset, entry.end, "search", "search");
     });
 }
-function openUnit(mode = "profile", id = sectionId.value) {
+async function openLesson(id:string){
+  await flushLearning();
+  const page=unitDefinition.value?.pages.find(p=>p.id===id);
+  panel.value=null;
+  await nextTick();
+  await navigate(id);
+  openUnit(page?.mode||'profile',id);
+}
+async function openUnit(mode?:string, id = sectionId.value) {
+  await flushLearning();
+  if(!mode&&!unitDefinition.value){try{unitDefinition.value=await fetch('/learning/monty-unit.json').then(r=>r.json());}catch{}}
+  mode=mode||unitDefinition.value?.pages.find(p=>p.id===id)?.mode||'profile';
   menu.value = null;
   unitMode.value = mode;
   unitSection.value = id;
@@ -771,6 +786,7 @@ async function clickBook(event: MouseEvent) {
       openPanel("code");
     }
     if (value === "activity") openPanel("activity");
+    if(value==="next-lesson" && action.dataset.next)void openLesson(action.dataset.next);
     if (value === "unit" || value === "blackboard")
       openUnit(
         value === "blackboard"
@@ -1165,12 +1181,13 @@ function hashchange() {
 }
 watch(sectionId, () => {
   if (!studyRouting) {
-    panel.value = null;
+    if(panel.value!=="unit")panel.value = null;
     void loadCurrent();
   }
 });
 onMounted(async () => {
   mounted = true;
+  void fetch("/learning/monty-unit.json").then(r=>r.json()).then(d=>unitDefinition.value=d).catch(()=>{});
   desktop.value = window.innerWidth >= 1024;
   ready.value = true;
   window.addEventListener("plex-storage-error", storageNotice);
@@ -1321,9 +1338,9 @@ onBeforeUnmount(() => {
           <h1>{{ current?.title || "星轨编程" }}</h1>
           <button
             v-if="sectionId.startsWith('unit/monty/')"
-            @click="openUnit('profile')"
+            data-testid="lesson-entry" @click="openUnit()"
           >
-            学习活动</button
+            {{lesson?.activityLabel || "学习活动"}}</button
           ><button @click="blockNote()">本段笔记</button
           ><button
             class="bookmark-page"
@@ -1719,6 +1736,8 @@ onBeforeUnmount(() => {
           :key="unitSection + unitMode"
           :section-id="unitSection"
           :initial-mode="unitMode"
+          :current-section-id="sectionId"
+          @activity="openLesson"
           @navigate="navigate"
         />
         <LearningHub v-if="panel === 'learning'" :section-id="sectionId" />

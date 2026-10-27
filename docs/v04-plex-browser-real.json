@@ -1,0 +1,10 @@
+{
+  "realHTTP": true,
+  "proxy": true,
+  "login": true,
+  "profile": true,
+  "referenceSubmitted": true,
+  "errorSubmitted": true,
+  "coach": "服务端规则提示（非模型生成）\n\n这次还没有得到通过全部检查的针对性解释，可以先做一次小范围核对。\n\n从本次报错最后一行找到异常类型，再对照代码中的对应操作。\n\n本次未找到足够课程依据，下面只提供通用帮助。",
+  "errors": []
+}
