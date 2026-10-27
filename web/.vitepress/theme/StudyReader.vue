@@ -28,6 +28,7 @@ const root = ref<HTMLElement>(),
   error = ref("");
 let scrollTimer: ReturnType<typeof setTimeout> | undefined,
   disposed = false;
+let navigation = 0;
 async function render() {
   await nextTick();
   if (!root.value) return;
@@ -51,6 +52,7 @@ async function render() {
 }
 async function setPage(page: BookPage) {
   if (items.value.some((p) => p.id === page.id)) return;
+  navigation++;
   items.value = [page];
   await render();
   if (root.value) root.value.scrollTop = 0;
@@ -64,11 +66,13 @@ async function extend(direction: number) {
     ];
   if (!entry || entry.kind === "cover") return;
   busy.value = true;
+  // Explicit navigation supersedes any pending prepend/scroll compensation.
+  const generation = navigation;
   const oldHeight = root.value?.scrollHeight || 0,
     oldTop = root.value?.scrollTop || 0;
   try {
     const page = await props.getPage(entry.id);
-    if (disposed) return;
+    if (disposed || generation !== navigation) return;
     if (direction < 0) items.value.unshift(page);
     else items.value.push(page);
     await render();
@@ -77,6 +81,7 @@ async function extend(direction: number) {
         i.decode().catch(() => {}),
       ),
     );
+    if (disposed || generation !== navigation) return;
     if (direction < 0 && root.value)
       root.value.scrollTop = oldTop + root.value.scrollHeight - oldHeight;
     if (items.value.length > 5 && root.value) {
@@ -134,12 +139,14 @@ function scroll() {
     position();
     const box = root.value;
     if (!box) return;
-    if (box.scrollHeight - box.scrollTop - box.clientHeight < 500)
+    const last = box.querySelector<HTMLElement>(".study-article:last-of-type");
+    if (last && last.getBoundingClientRect().bottom - box.getBoundingClientRect().bottom < 500)
       void extend(1);
     if (box.scrollTop < 80) void extend(-1);
   }, 120);
 }
 async function go(place: ReadingLocator) {
+  navigation++;
   clearTimeout(scrollTimer);
   await nextTick();
   await document.fonts.ready;

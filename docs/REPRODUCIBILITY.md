@@ -1,5 +1,11 @@
 # 从 GitHub 克隆并复现本地效果
 
+## v0.4 三门样板课
+
+锁定依赖、学习资源和完整静态产物均随私有 v0.4.0 ZIP 提供。源码安装与构建仍使用下文命令；解压包运行无需安装依赖，执行 `node scripts/serve-dist.mjs` 即可。Motion 动画、ECharts 图表、Rough.js 板书、Python 与 H5P 不使用外部 CDN。学习报告可导出独立 HTML 并离线打印为 PDF。
+
+开发与 ZIP 预览默认通过 `/api` 连接 `http://127.0.0.1:5100`；可设置 `PLEX_API_TARGET` 为固定后端来源，或设为 `off` 使用本机功能。账户令牌不包含在学习备份或发布包中。最终 Windows 干净克隆与解压验收见 [v0.4 验证记录](VALIDATION_V04.md)；其他系统的命令说明不代表已做人工跨平台验收。
+
 ## v0.2 新增资源
 
 运行步骤沿用下文。`npm ci` 会安装锁定的 CodeMirror 与 Shiki；`web/public/learning/` 已随仓库保存，开发预览不需要先运行 Python。修改 `content/learning/` 后执行 `npm run build:learning`；`npm run check` 和 `npm run build` 都会检查这些资源与原始练习、术语定义一致。

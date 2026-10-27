@@ -315,6 +315,13 @@
   border-bottom: 1px solid #85928455;
   display: flow-root;
 }
+.study-reader::after {
+  /* Short final sections still need room to align a requested text anchor. */
+  content: "";
+  display: block;
+  height: calc(100% - 60px);
+  pointer-events: none;
+}
 .study-article > header {
   font-size: 11px;
   letter-spacing: 0.08em;

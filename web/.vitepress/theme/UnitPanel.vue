@@ -152,6 +152,7 @@ function changed(event: Event) {
     void refresh().catch(() => {});
 }
 async function change(value: string) {
+  if (value === mode.value && !selected.value) return;
   await flushLearning();
   mode.value = value;
   selected.value = undefined;
