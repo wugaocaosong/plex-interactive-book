@@ -59,3 +59,6 @@ H5P 库来自 [官方 InteractiveBook 分发包](https://api.h5p.org/v1/content-
 | [axe-core npm](https://github.com/dequelabs/axe-core-npm) | @axe-core/playwright 4.14.0 | MPL-2.0 | 仅开发测试的自动无障碍检查 |
 
 完整许可证及转移依赖声明位于 `licenses/dependencies/`；新场景使用本项目 CSS/SVG 几何与既有品牌素材，没有引入付费动画或外链 CDN。
+# 第 12 章示范新增说明（2026-10-29）
+
+本章能源模块、信号查找、连接树与能源环 SVG 是 PLEX 原创教学示意素材；原 Hello Algo 图解及源码继续保留原许可与来源。`@codemirror/language` 6.13.1（MIT）由已有传递依赖提升为精确直接依赖，用于折叠源码头信息，许可证随静态资源提供。未引入外站视频、额外模型服务或收费素材。

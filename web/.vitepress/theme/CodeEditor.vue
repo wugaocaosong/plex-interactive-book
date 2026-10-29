@@ -5,16 +5,23 @@ import { EditorState, Compartment } from "@codemirror/state";
 import { python } from "@codemirror/lang-python";
 import { setDiagnostics } from "@codemirror/lint";
 import { unifiedMergeView } from "@codemirror/merge";
+import {codeFolding, foldEffect} from "@codemirror/language";
 import type { Diagnostic } from "./types";
 const props = defineProps<{
   modelValue: string;
   readonly?: boolean;
   original?: string;
   diagnostics?: Diagnostic[];
+  foldSourceHeader?: boolean;
 }>();
 const emit = defineEmits<{ "update:modelValue": [value: string]; blur: [] }>();
 const host = ref<HTMLElement>();
 let view: EditorView | undefined;
+function foldHeader(){
+  if(!props.foldSourceHeader||!view)return;
+  const head=view.state.doc.toString().match(/^(?:"""[\s\S]*?"""|'''[\s\S]*?''')/);
+  if(head&&/Author:|Created Time:/.test(head[0]))view.dispatch({effects:foldEffect.of({from:0,to:head[0].length})});
+}
 const editable = new Compartment(),
   diff = new Compartment();
 onMounted(() => {
@@ -24,6 +31,7 @@ onMounted(() => {
       doc: props.modelValue,
       extensions: [
         basicSetup,
+        ...(props.foldSourceHeader?[codeFolding({placeholderDOM:(_view,onclick)=>{const button=document.createElement('button');button.textContent='源码信息（展开）';button.onclick=onclick;return button;}})]:[]),
         python(),
         EditorView.contentAttributes.of({
           "aria-label": "完整示例代码",
@@ -44,14 +52,17 @@ onMounted(() => {
       ],
     }),
   });
+  foldHeader();
 });
 watch(
   () => props.modelValue,
   (value) => {
-    if (view && view.state.doc.toString() !== value)
+    if (view && view.state.doc.toString() !== value) {
       view.dispatch({
         changes: { from: 0, to: view.state.doc.length, insert: value },
       });
+      foldHeader();
+    }
   },
 );
 watch(

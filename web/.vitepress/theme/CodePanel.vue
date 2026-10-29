@@ -16,6 +16,7 @@ const emit=defineEmits<{completed:[]}>();
 const props = defineProps<{
   example?: CodeExample;
   exercise?: ExerciseDefinition;
+  foldSourceHeader?: boolean;
 }>();
 const lang = ref(props.exercise ? "python" : readStore("language", "python")),
   more = ref(false),
@@ -312,6 +313,7 @@ onBeforeUnmount(() => {
       :readonly="running"
       :original="diff ? original : undefined"
       :diagnostics="diagnostics"
+      :fold-source-header="foldSourceHeader"
       @blur="persist"
     />
     <div

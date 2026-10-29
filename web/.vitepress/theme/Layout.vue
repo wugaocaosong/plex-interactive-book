@@ -41,6 +41,25 @@ import { bindPageDrag } from "./page-drag";
 import { flushLearning } from "./learning-flush";
 import StarMap from "./StarMap.vue";
 import StudyReader from "./StudyReader.vue";
+import ChapterTermNote from "./ChapterTermNote.vue";
+import ChapterAnnotation from "./ChapterAnnotation.vue";
+const Chapter12Panel = defineAsyncComponent(() => import("./Chapter12Panel.vue"));
+const chapter12Mode = ref("route");
+const annotationPoint = ref({x:16,y:120});
+function positionAnnotation(rect?: DOMRect) {
+  annotationPoint.value={x:Math.max(12,Math.min(rect?.left||16,window.innerWidth-372)),y:Math.max(16,Math.min((rect?.bottom||100)+10,window.innerHeight-320))};
+}
+async function chapterTermNote(element: HTMLElement) {
+  const range=document.createRange();range.selectNodeContents(element);
+  const selected=getSelection();selected?.removeAllRanges();selected?.addRange(range);
+  positionAnnotation(element.getBoundingClientRect());
+  const root=element.closest<HTMLElement>('[data-section]');if(root)await selectText(root);
+}
+async function chapterActivity(id:string, mode:string) {
+  await flushLearning();
+  if(id!==sectionId.value)await navigate(id);
+  chapter12Mode.value=mode;panelSource.value=current.value;openPanel("chapter12");
+}
 import LearningNotebook from "./LearningNotebook.vue";
 const UnitPanel = defineAsyncComponent(() => import("./UnitPanel.vue"));
 import {blankProgress,upgradeProgress} from "./lesson-state";
@@ -121,11 +140,11 @@ function decorateTerms(root: HTMLElement) {
       }
     }
   }
-  decorateGlossary(root, glossary.value);
+  if (!root.querySelector('.ch12-intro,.ch12-card,.ch12-video,.ch12-term')) decorateGlossary(root, glossary.value);
 }
 const splitPanel = computed(
   () =>
-    (preferences.value.mode === "study" || panel.value === "unit") &&
+    (preferences.value.mode === "study" || panel.value === "unit" || panel.value === "chapter12" || (panel.value === "code" && !!panelSource.value?.html.includes("ch12-"))) &&
     desktop.value &&
     !!panel.value,
 );
@@ -136,6 +155,9 @@ function updateSystemTheme() {
   systemDark.value = !!darkMedia?.matches;
 }
 async function recordUnitVisit(id: string) {
+  if(id.startsWith("chapter_divide_and_conquer/")) {
+    await updateLearning("chapter12:progress",{version:1,visited:[] as string[],completed:{} as Record<string,string>},p=>({...p,visited:[...new Set([...p.visited,id])]})).catch(()=>{});
+  }
   if (!id.startsWith("unit/monty/")) return;
   await updateLearning<any>(
     "unit:monty-hall",
@@ -165,7 +187,9 @@ async function annotate(kind: AnnotationRecord["kind"]) {
     record.updatedAt = new Date().toISOString();
     rebindNote.value = undefined;
   }
-  await putLearning("annotation:" + record.id, record);
+  try { await putLearning("annotation:" + record.id, {...record,updatedAt:new Date().toISOString()}); }
+  catch {storageMessage.value="批注保存失败，文字仍保留，请重试或复制备份。";return;}
+  storageMessage.value="";
   selection.value = undefined;
   noteText.value = "";
   getSelection()?.removeAllRanges();
@@ -173,6 +197,8 @@ async function annotate(kind: AnnotationRecord["kind"]) {
   await layout(locator());
 }
 async function selectText(root: HTMLElement) {
+  const nativeSelection=getSelection();
+  if(nativeSelection?.rangeCount)positionAnnotation(nativeSelection.getRangeAt(0).getBoundingClientRect());
   const selected = getSelection()?.anchorNode;
   const id =
     (selected?.nodeType === 3
@@ -205,7 +231,9 @@ async function selectText(root: HTMLElement) {
     captured.start.offset,
   );
   captured.suffix = last.slice(captured.end.offset, captured.end.offset + 32);
+  noteText.value="";
   selection.value = captured;
+  if(id.startsWith('chapter_divide_and_conquer/'))getSelection()?.removeAllRanges();
 }
 async function blockNote(place: ReadingLocator = locator()) {
   const page = await getPage(place.sectionId);
@@ -326,6 +354,7 @@ const panel = ref<
   | "learning"
   | "term"
   | "unit"
+  | "chapter12"
   | null
 >(null);
 const codeIndex = ref(0);
@@ -352,6 +381,7 @@ const panelLabel = computed(
       learning: "学习实验室",
       term: "术语解释",
       unit: "小E · 三门学习单元",
+      chapter12: "分治 · 探险工作台",
     })[panel.value || "expanded"],
 );
 const menuLabel = computed(
@@ -763,6 +793,11 @@ async function clickBook(event: MouseEvent) {
       blockId: contentBlock.dataset.block!,
       offset: 0,
     };
+  const noteMark=target.closest<HTMLElement>('[data-annotation]');
+  if(noteMark && (panelBlock.value?.sectionId||sectionId.value).startsWith('chapter_divide_and_conquer/')) {
+    const existing=notes.value.find(n=>n.id===noteMark.dataset.annotation);
+    if(existing){event.preventDefault();positionAnnotation(noteMark.getBoundingClientRect());selection.value={...existing};noteText.value=existing.note;return;}
+  }
   const action = target.closest<HTMLElement>("[data-action]");
   const anchor = target.closest<HTMLAnchorElement>("a[href]");
   if (action?.dataset.action === "code") {
@@ -782,6 +817,10 @@ async function clickBook(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
     const value = action.dataset.action;
+    if (value === "chapter12") {
+      await chapterActivity(panelBlock.value?.sectionId || sectionId.value,action.dataset.mode || "route");
+      return;
+    }
     if (value === "term") {
       term.value = glossary.value.find((e) => e.term === action.dataset.term);
       openPanel("term");
@@ -1131,6 +1170,14 @@ function resize() {
   resizeTimer = setTimeout(() => layout(place), 200);
 }
 function keydown(event: KeyboardEvent) {
+  const editing=(event.target as HTMLElement).closest('input,textarea,select,[contenteditable=true],.cm-editor');
+  if((event.ctrlKey||event.metaKey)&&event.altKey&&event.key.toLowerCase()==='m'&&!editing){
+    const native=getSelection();const node=native?.anchorNode;
+    const root=(node?.nodeType===3?node.parentElement:node as HTMLElement)?.closest<HTMLElement>('[data-section]');
+    if(root?.dataset.section?.startsWith('chapter_divide_and_conquer/')&&!native?.isCollapsed){event.preventDefault();void selectText(root);return;}
+  }
+  if(event.key==='Escape'&&selection.value?.sectionId.startsWith('chapter_divide_and_conquer/')){selection.value=undefined;event.preventDefault();return;}
+  if(selection.value?.sectionId.startsWith('chapter_divide_and_conquer/'))return;
   if (
     (event.key === "Enter" || event.key === " ") &&
     (event.target as HTMLElement).matches(".glossary-term")
@@ -1478,8 +1525,10 @@ onBeforeUnmount(() => {
       <div ref="stage" class="leaf-content source-stage" />
       <div ref="measure" class="leaf-content page-measure" />
     </div>
+    <ChapterTermNote :context="sectionId + ':' + pageIndex + ':' + preferences.mode" @note="chapterTermNote" />
+    <ChapterAnnotation v-if="selection?.sectionId.startsWith('chapter_divide_and_conquer/')" :key="selection.id" :record="selection" :point="annotationPoint" :error="storageMessage" @save="(kind,text)=>{noteText=text;annotate(kind)}" @close="selection=undefined" />
     <div
-      v-if="selection"
+      v-else-if="selection"
       class="selection-tools"
       role="region"
       aria-label="选区批注"
@@ -1738,7 +1787,9 @@ onBeforeUnmount(() => {
         <CodePanel
           v-if="panel === 'code' && panelSource?.codeExamples[codeIndex]"
           :example="panelSource.codeExamples[codeIndex]"
+          :fold-source-header="panelSource.html.includes('ch12-')"
         />
+        <Chapter12Panel v-if="panel === 'chapter12'" :key="chapter12Mode" :mode="chapter12Mode" @activity="chapterActivity" />
         <UnitPanel
           v-if="panel === 'unit'"
           :key="unitSection + unitMode"
