@@ -21,6 +21,7 @@ await cp(resolve(root, 'content/h5p/binary-search'),resolve(publicDir,'h5p/monty
 await cp(resolve(root, 'content/h5p/monty-hall'),resolve(publicDir,'h5p/monty-hall'),{recursive:true});
 await mkdir(resolve(publicDir, 'images'), {recursive:true});
 await cp(resolve(root,'assets/references/cover.png'),resolve(publicDir,'images/cover.png'));
+await cp(resolve(root,'assets/references/logo.png'),resolve(publicDir,'images/logo.png'));
 const notices = [];
 for(const name of ['vitepress','vue','page-flip','h5p-standalone','pyodide','katex','lucide-vue-next','codemirror','@codemirror/state','@codemirror/view','@codemirror/lang-python','@codemirror/merge','@codemirror/lint','shiki','motion-v','motion-dom','motion-utils','@vueuse/core','@vueuse/shared','echarts','zrender','vue-echarts','roughjs','hachure-fill','path-data-parser','points-on-curve','points-on-path','@axe-core/playwright','axe-core','@fontsource/noto-serif-sc','@fontsource/noto-sans-sc','@fontsource/jetbrains-mono']) {
   const dir=resolve(root,'node_modules',name);const pkg=JSON.parse(await readFile(resolve(dir,'package.json'),'utf8'));
