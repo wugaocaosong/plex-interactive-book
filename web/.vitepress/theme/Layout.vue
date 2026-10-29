@@ -142,12 +142,6 @@ function decorateTerms(root: HTMLElement) {
   }
   if (!root.querySelector('.ch12-intro,.ch12-card,.ch12-video,.ch12-term')) decorateGlossary(root, glossary.value);
 }
-const splitPanel = computed(
-  () =>
-    (preferences.value.mode === "study" || panel.value === "unit" || panel.value === "chapter12" || (panel.value === "code" && !!panelSource.value?.html.includes("ch12-"))) &&
-    desktop.value &&
-    !!panel.value,
-);
 let studyRouting = false;
 let studyNavigation: string | undefined;
 let darkMedia: MediaQueryList | undefined;
@@ -237,6 +231,7 @@ async function selectText(root: HTMLElement) {
 }
 async function blockNote(place: ReadingLocator = locator()) {
   const page = await getPage(place.sectionId);
+  if (overlayOpen.value) closeOverlay();
   const source = document.createElement("div");
   source.innerHTML = page.html;
   const block = source.querySelector<HTMLElement>(
@@ -258,6 +253,7 @@ async function blockNote(place: ReadingLocator = locator()) {
     createdAt: now,
     updatedAt: now,
   };
+  nextTick(() => document.querySelector<HTMLInputElement>('.selection-tools input')?.focus());
 }
 async function updatePreferences() {
   const place = locator();
@@ -306,38 +302,6 @@ async function refreshNotes() {
 function storageNotice(event: Event) {
   storageMessage.value = (event as CustomEvent).detail;
 }
-function splitKey(event: KeyboardEvent) {
-  if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-    event.preventDefault();
-    preferences.value.split = Math.max(
-      28,
-      Math.min(
-        55,
-        preferences.value.split + (event.key === "ArrowLeft" ? 2 : -2),
-      ),
-    );
-    saveStore("preferences", preferences.value);
-  }
-}
-function splitDrag(event: PointerEvent) {
-  const node = event.currentTarget as HTMLElement;
-  node.setPointerCapture(event.pointerId);
-  const move = (e: PointerEvent) => {
-    preferences.value.split = Math.max(
-      28,
-      Math.min(55, (100 * (window.innerWidth - e.clientX)) / window.innerWidth),
-    );
-  };
-  const end = () => {
-    node.removeEventListener("pointermove", move);
-    node.removeEventListener("pointerup", end);
-    node.removeEventListener("pointercancel", end);
-    saveStore("preferences", preferences.value);
-  };
-  node.addEventListener("pointermove", move);
-  node.addEventListener("pointerup", end);
-  node.addEventListener("pointercancel", end);
-}
 const bookmarks = ref<SavedBookmark[]>([]);
 const resume = ref<ReadingLocator>();
 const saved = ref(false);
@@ -357,6 +321,17 @@ const panel = ref<
   | "chapter12"
   | null
 >(null);
+const overlayOpen = computed(() => !!(menu.value || panel.value));
+const windowExpanded = ref(false);
+let previousBodyOverflow = "";
+watch(overlayOpen, (open) => {
+  if (typeof document === "undefined") return;
+  windowExpanded.value = false;
+  if (open) {
+    previousBodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+  } else document.body.style.overflow = previousBodyOverflow;
+});
 const codeIndex = ref(0);
 const imageUrl = ref("");
 const imageAlt = ref("");
@@ -395,11 +370,6 @@ const menuLabel = computed(
       more: "阅读工具",
     })[menu.value || "contents"],
 );
-watch(splitPanel, async () => {
-  const place = locator();
-  await nextTick();
-  if (!cover.value) await layout(place);
-});
 const coverElement = ref<HTMLElement>();
 let disposeDrag: (() => void) | undefined;
 const searchResults = computed(() => {
@@ -697,12 +667,12 @@ async function openMenu(type: typeof menu.value) {
     storageMessage.value = String(e);
   }
   panel.value = null;
-  lastFocus = document.activeElement as HTMLElement;
+  rememberFocus();
   menu.value = type;
   if (type === "search" && !index.value.length)
     index.value = await fetch("/book/search.json").then((r) => r.json());
   await nextTick();
-  document.querySelector<HTMLInputElement>(".search-input")?.focus();
+  (document.querySelector<HTMLInputElement>(".search-input") || document.querySelector<HTMLButtonElement>(".dialog-close"))?.focus();
 }
 async function goSearch(entry: (typeof searchResults.value)[number]) {
   await navigate(entry.id, {
@@ -741,10 +711,17 @@ async function openUnit(mode?:string, id = sectionId.value) {
 function closeOverlay() {
   menu.value = null;
   panel.value = null;
-  lastFocus?.focus();
+  nextTick(() => {
+    if (lastFocus?.isConnected && !lastFocus.closest('[inert]')) lastFocus.focus({preventScroll:true});
+    else document.getElementById('reading-content')?.focus({preventScroll:true});
+  });
+}
+function rememberFocus() {
+  const active = document.activeElement as HTMLElement | null;
+  if (active && !active.closest('[role="dialog"]')) lastFocus = active;
 }
 function openPanel(type: typeof panel.value) {
-  lastFocus = document.activeElement as HTMLElement;
+  rememberFocus();
   stopAnimation();
   panelSource.value ??= current.value;
   panel.value = type;
@@ -918,11 +895,7 @@ async function layout(place?: ReadingLocator) {
     ? Math.min(
         { narrow: 430, standard: 510, wide: 570 }[preferences.value.width],
         Math.floor(
-          ((splitPanel.value
-            ? window.innerWidth * (1 - preferences.value.split / 100)
-            : window.innerWidth) -
-            100) /
-            2,
+          (window.innerWidth - 100) / 2,
         ),
       )
     : Math.min(600, window.innerWidth - 24);
@@ -1191,7 +1164,7 @@ function keydown(event: KeyboardEvent) {
     return;
   }
   if (menu.value || panel.value) {
-    if (event.key === "Tab" && (menu.value || !splitPanel.value)) {
+    if (event.key === "Tab") {
       const box = document.querySelector<HTMLElement>('[role="dialog"]');
       const focusable = [
         ...(box?.querySelectorAll<HTMLElement>(
@@ -1200,7 +1173,9 @@ function keydown(event: KeyboardEvent) {
       ].filter((e) => e.offsetParent !== null);
       const first = focusable[0],
         last = focusable.at(-1);
-      if (event.shiftKey && document.activeElement === first) {
+      if (!box?.contains(document.activeElement)) {
+        event.preventDefault();first?.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last?.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
@@ -1292,6 +1267,7 @@ onMounted(async () => {
   window.addEventListener("hashchange", hashchange);
 });
 onBeforeUnmount(() => {
+  if (overlayOpen.value) document.body.style.overflow = previousBodyOverflow;
   ++serial;
   disposeDrag?.();
   flip?.destroy();
@@ -1314,7 +1290,7 @@ onBeforeUnmount(() => {
       'is-cover': cover,
       'is-back-cover': backCover,
       'theme-dark': dark,
-      'has-study-panel': splitPanel,
+      'has-floating-window': overlayOpen,
     }"
     :style="{
       '--page-width': pageWidth + 'px',
@@ -1324,17 +1300,16 @@ onBeforeUnmount(() => {
       '--reader-line': preferences.lineHeight,
       '--study-width':
         { narrow: 680, standard: 840, wide: 980 }[preferences.width] + 'px',
-      '--lab-width': preferences.split + 'vw',
     }"
   >
     <a class="skip-link" href="#reading-content">跳到正文</a>
-    <header class="reader-toolbar">
+    <header class="reader-toolbar" :inert="overlayOpen">
       <button class="brand" aria-label="返回封面" @click="navigate('cover')">
         <span class="plex-symbol"
           ><img src="/brand/plex-mark.png" alt="" /></span
         >PLEX<span>星轨编程</span>
       </button>
-      <span class="reader-edition">INTERACTIVE EDITION · 04</span>
+      <div class="reader-masthead"><span>交互式编程读本</span><button @click="openMenu('contents')">章节导航 <Compass :size="16" /></button></div>
     </header>
     <p v-if="storageMessage" class="storage-notice" role="alert">
       {{ storageMessage
@@ -1348,7 +1323,7 @@ onBeforeUnmount(() => {
         重试加载
       </button>
     </p>
-    <main id="reading-content" class="reading-main" tabindex="-1">
+    <main id="reading-content" class="reading-main" tabindex="-1" :inert="overlayOpen">
       <div v-if="error" class="reader-error" role="alert">
         <h1>暂时无法打开这一页</h1>
         <p>{{ error }}</p>
@@ -1356,6 +1331,7 @@ onBeforeUnmount(() => {
         ><button @click="navigate('cover')">返回封面</button>
       </div>
       <div v-else-if="cover" class="cover-scene">
+        <div class="cover-introduction"><span class="cover-series">PLEX / 星轨编程</span><h1>把好奇心<br /><span>写成代码。</span></h1><p>翻开一页，拆解一个问题。<br />和小E一起，把想法变成看得见的答案。</p><button class="cover-directory" @click="openMenu('contents')">探索全书 <ArrowRight :size="20" /></button></div>
         <button
           ref="coverElement"
           class="cover-book"
@@ -1488,7 +1464,7 @@ onBeforeUnmount(() => {
       </section>
       <div v-if="!ready" class="loading-label">正在打开星轨编程…</div>
     </main>
-    <nav class="bottom-navigation" aria-label="阅读主导航">
+    <nav class="bottom-navigation" aria-label="阅读主导航" :inert="overlayOpen">
       <button aria-label="打开目录" @click="openMenu('contents')">
         <Compass :size="20" /><span>目录</span>
       </button>
@@ -1547,7 +1523,7 @@ onBeforeUnmount(() => {
       ><button @click="selection = undefined">取消</button>
     </div>
 
-    <div v-if="menu" class="overlay" @click.self="closeOverlay">
+    <div v-if="menu" class="overlay" :data-window="menu" @click.self="closeOverlay">
       <section
         class="navigation-dialog"
         role="dialog"
@@ -1571,19 +1547,19 @@ onBeforeUnmount(() => {
               closeOverlay();
             "
           >
-            {{ preferences.mode === "flip" ? "学习模式" : "翻书模式" }}
+            切换阅读模式
           </button>
           <button aria-label="搜索全书" @click="openMenu('search')">
             搜索全书
           </button>
           <button aria-label="学习笔记" @click="openMenu('notes')">
-            笔记与备份
+            学习笔记
           </button>
           <button aria-label="阅读设置" @click="openMenu('settings')">
             阅读设置
           </button>
           <button aria-label="查看书签" @click="openMenu('bookmarks')">
-            我的书签
+            查看书签
           </button>
           <button
             @click="
@@ -1600,7 +1576,7 @@ onBeforeUnmount(() => {
               openPanel('learning');
             "
           >
-            六类算法实验与 24 题
+            打开学习实验室
           </button>
           <button @click="navigate('unit/monty/start')">
             学习起点 · 三门单元
@@ -1690,7 +1666,7 @@ onBeforeUnmount(() => {
               v-model="preferences.theme"
               @change="updatePreferences"
             >
-              <option value="light">明亮 · 暖白纸面</option>
+              <option value="light">明亮 · 浅色纸面</option>
               <option value="dark">深色</option>
               <option value="system">跟随系统</option>
             </select></label
@@ -1742,28 +1718,16 @@ onBeforeUnmount(() => {
     </div>
     <div
       v-if="panel"
-      class="overlay"
-      :class="{ 'study-panel': splitPanel }"
-      @click.self="!splitPanel && closeOverlay()"
+      class="overlay activity-overlay"
+      :class="{ 'window-expanded': windowExpanded }"
+      :data-window="panel"
+      @click.self="closeOverlay"
     >
-      <div
-        v-if="splitPanel"
-        class="study-separator"
-        role="separator"
-        tabindex="0"
-        aria-label="调整实验栏宽度"
-        aria-orientation="vertical"
-        :aria-valuenow="Math.round(preferences.split)"
-        :aria-valuemin="28"
-        :aria-valuemax="55"
-        @keydown="splitKey"
-        @pointerdown="splitDrag"
-      />
       <section
         class="content-dialog"
         :class="{ 'image-dialog': panel === 'image' }"
         role="dialog"
-        :aria-modal="!splitPanel"
+        aria-modal="true"
         :aria-label="panelLabel"
       >
         <div class="dialog-header">
@@ -1771,9 +1735,9 @@ onBeforeUnmount(() => {
             <span class="dialog-eyebrow">{{ current?.title }}</span>
             <h2>{{ panelLabel }}</h2>
           </div>
-          <button class="dialog-close" aria-label="关闭" @click="closeOverlay">
+          <div class="window-actions"><button class="window-expand" :aria-label="windowExpanded ? '还原窗口' : '放大窗口'" :aria-pressed="windowExpanded" @click="windowExpanded = !windowExpanded"><Expand :size="20" /></button><button class="dialog-close" aria-label="关闭" @click="closeOverlay">
             <X :size="22" />
-          </button>
+          </button></div>
         </div>
         <button
           v-if="

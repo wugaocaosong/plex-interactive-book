@@ -29,8 +29,9 @@ test('micro examples and single Python trial produce actual results; chart uses 
   await activity(page,'批量实验');await page.getByLabel('试验次数').selectOption('10');await page.getByRole('button',{name:'运行 Python 试验'}).click();await expect(page.locator('.monty-simulation .unit-status')).toContainText('10 次真实 Python',{timeout:90000});const axes=await new AxeBuilder({page}).include('.unit-panel').analyze();expect(axes.violations).toEqual([]);
 });
 
-test('ordinary book turns preserve the activity; explicit next stage saves and switches',async({page})=>{
+test('closing the floating activity preserves it across book turns',async({page})=>{
  await page.goto('/read/unit/monty/choose');await entry(page);await page.getByRole('button',{name:'选择1号舱门',exact:true}).focus();await page.keyboard.press('Enter');await page.getByLabel('我的预测').selectOption('两者一样');await page.getByLabel('理由（可选）').fill('最初的直觉');
+ await page.getByRole('button',{name:'关闭',exact:true}).click();
  for(let i=0;i<12&&!page.url().includes('/predict');i++){await page.getByRole('button',{name:'下一页',exact:true}).click();await page.waitForTimeout(700);}
- await expect(page).toHaveURL(/monty\/predict/);await expect(page.getByLabel('理由（可选）')).toHaveValue('最初的直觉');await page.getByRole('button',{name:'转到本页活动'}).click();await expect(page.getByLabel('理由（可选）')).toHaveValue('最初的直觉');await page.getByRole('button',{name:'提交预测，打开空门'}).focus();await page.keyboard.press('Enter');await page.getByRole('button',{name:'换到另一扇门',exact:true}).focus();await page.keyboard.press('Enter');await expect(page.locator('.unit-explanation')).toContainText('一次输赢');await page.keyboard.press('Escape');await expect(page.locator('.unit-panel')).toHaveCount(0);
+ await expect(page).toHaveURL(/monty\/predict/);await entry(page);await expect(page.getByLabel('理由（可选）')).toHaveValue('最初的直觉');await page.getByRole('button',{name:'提交预测，打开空门'}).focus();await page.keyboard.press('Enter');await page.getByRole('button',{name:'换到另一扇门',exact:true}).focus();await page.keyboard.press('Enter');await expect(page.locator('.unit-explanation')).toContainText('一次输赢');await page.keyboard.press('Escape');await expect(page.locator('.unit-panel')).toHaveCount(0);
 });
