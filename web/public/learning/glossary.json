@@ -27,7 +27,7 @@
     "term": "函数",
     "english": "function",
     "definition": "接收参数并执行特定任务的可复用代码单元。",
-    "sectionId": "chapter_divide_and_conquer/binary_search_recur"
+    "sectionId": "chapter_sorting/heap_sort"
   },
   {
     "term": "方法",

@@ -22,8 +22,16 @@ await cp(resolve(root, 'content/h5p/monty-hall'),resolve(publicDir,'h5p/monty-ha
 await mkdir(resolve(publicDir, 'images'), {recursive:true});
 await cp(resolve(root,'assets/references/cover.png'),resolve(publicDir,'images/cover.png'));
 await cp(resolve(root,'assets/references/logo.png'),resolve(publicDir,'images/logo.png'));
+const modelRoot=resolve(root,'content/input-models');
+const inputModels=JSON.parse(await readFile(resolve(modelRoot,'manifest.json'),'utf8'));
+for(const asset of inputModels.assets){
+ const file=resolve(modelRoot,asset.file);if(createHash('sha256').update(await readFile(file)).digest('hex')!==asset.sha256)throw Error('Input model integrity mismatch: '+asset.file);
+}
+await cp(modelRoot,resolve(publicDir,'input-models'),{recursive:true});
+await cp(resolve(root,'node_modules/@mediapipe/tasks-vision/wasm'),resolve(publicDir,'vendor/mediapipe'),{recursive:true});
+await cp(resolve(root,'node_modules/@mediapipe/tasks-vision/vision_bundle.cjs'),resolve(publicDir,'vendor/mediapipe/vision-bundle.js'));
 const notices = [];
-for(const name of ['vitepress','vue','page-flip','h5p-standalone','pyodide','katex','lucide-vue-next','codemirror','@codemirror/state','@codemirror/view','@codemirror/lang-python','@codemirror/merge','@codemirror/lint','shiki','motion-v','motion-dom','motion-utils','@vueuse/core','@vueuse/shared','echarts','zrender','vue-echarts','roughjs','hachure-fill','path-data-parser','points-on-curve','points-on-path','@axe-core/playwright','axe-core','@fontsource/noto-serif-sc','@fontsource/noto-sans-sc','@fontsource/jetbrains-mono']) {
+for(const name of ['@mediapipe/tasks-vision','vosk-browser','uuid','vitepress','vue','page-flip','h5p-standalone','pyodide','katex','lucide-vue-next','codemirror','@codemirror/state','@codemirror/view','@codemirror/lang-python','@codemirror/language','@codemirror/merge','@codemirror/lint','shiki','motion-v','motion-dom','motion-utils','@vueuse/core','@vueuse/shared','echarts','zrender','vue-echarts','roughjs','hachure-fill','path-data-parser','points-on-curve','points-on-path','@axe-core/playwright','axe-core','@fontsource/noto-serif-sc','@fontsource/noto-sans-sc','@fontsource/jetbrains-mono']) {
   const dir=resolve(root,'node_modules',name);const pkg=JSON.parse(await readFile(resolve(dir,'package.json'),'utf8'));
   notices.push(`${name} ${pkg.version}: ${pkg.license}`);
   for(const file of await readdir(dir)) if(/^(license|licence|ofl|copyright)/i.test(file)) {

@@ -4,6 +4,8 @@ import ast, hashlib, html, json, pathlib, re, shutil, runpy
 import markdown, yaml
 from bs4 import BeautifulSoup
 from block_ids import assign_blocks
+import chapter12
+from chapter12_tasks import publish as publish_chapter12_tasks
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'content/upstream/hello-algo'
@@ -216,12 +218,17 @@ def page_record(id,title,kind,group,source_path=None):
             'sourcePath':source_path,'sourceCommit':SHA if source_path else None}
 
 def publish(record,body,examples=None,animations=None):
+    body=chapter12.overlay(body,record['id'],block_registry)
     body,aliases,changes=assign_blocks(body,record['id'],block_registry)
+    body=chapter12.terms(body,record['id'])
     block_changes.extend(changes)
     conversion=None
     if record['sourcePath']:
         original=(SOURCE/'docs'/record['sourcePath']).read_bytes()
         conversion={'sourceSha256':hashlib.sha256(original).hexdigest(),'adapterVersion':1,'operations':['MkDocs Markdown to HTML','local asset and link rewriting','stable block anchors','math and footnotes','image caption grouping'], 'codeReferences':len(examples or []),'animationGroups':len(animations or [])}
+        if chapter12.CONFIG['enabled'] and record['id'].startswith(chapter12.PREFIX):
+            conversion['chapterEnhancementVersion']=chapter12.CONFIG['version']
+            conversion['operations']+=['authored chapter12 overlay','chapter-first term annotations','local PLEX diagrams and activity cards']
     data={**record,'html':body,'codeExamples':examples or [],'animations':animations or [],'conversion':conversion,'blockAliases':aliases,'contentVersion':hashlib.sha256(body.encode()).hexdigest()[:16]}
     write_json(PUBLIC/'book/pages'/f'{record["id"]}.json',data)
     routefile=ROOT/'web/read'/f'{record["id"]}.md'
@@ -232,6 +239,8 @@ def publish(record,body,examples=None,animations=None):
     records.append(record)
 
 if __name__=='__main__':
+    chapter12.prepare()
+    publish_chapter12_tasks()
     if not SOURCE.exists(): raise SystemExit('Run python scripts/download-source.py first')
     nav=flatten_nav(yaml.safe_load((SOURCE/'mkdocs.yml').read_text(encoding='utf8'))['nav'])
     nav=[n for n in nav if not n[0].startswith('chapter_paperbook/')]

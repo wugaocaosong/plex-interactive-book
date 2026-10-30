@@ -23,3 +23,5 @@ content/h5p/libraries/
 test-results/
 playwright-report/
 output/
+
+web/public/input-models/

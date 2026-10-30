@@ -215,7 +215,20 @@ onBeforeUnmount(() => {
   disposed = true;
   clearTimeout(scrollTimer);
 });
-defineExpose({ go, root, position });
+let turning=false;
+async function turnScreen(direction:number){
+ if(turning||busy.value||!root.value)return false;
+ turning=true;
+ try{
+  const box=root.value, distance=box.clientHeight*.85;
+  if(direction>0&&box.scrollTop+box.clientHeight+distance>box.scrollHeight)await extend(1);
+  if(direction<0&&box.scrollTop<distance)await extend(-1);
+  const before=box.scrollTop;
+  box.scrollTop=Math.max(0,Math.min(box.scrollHeight-box.clientHeight,before+direction*distance));
+  position();scroll();return Math.abs(before-box.scrollTop)>1;
+ }finally{turning=false;}
+}
+defineExpose({ go, root, position, turnScreen });
 </script>
 <template>
   <div

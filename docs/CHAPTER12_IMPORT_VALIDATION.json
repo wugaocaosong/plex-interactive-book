@@ -1,0 +1,63 @@
+{
+  "repeatImportIdentical": true,
+  "checkedFiles": 153,
+  "newBlockChangesOnRepeat": [],
+  "chapterMigration": [
+    {
+      "section": "chapter_divide_and_conquer/index",
+      "oldBlocks": 3,
+      "retained": 3,
+      "newBlocks": 2,
+      "replaced": 0,
+      "legacyAliasesPreserved": true
+    },
+    {
+      "section": "chapter_divide_and_conquer/divide_and_conquer",
+      "oldBlocks": 34,
+      "retained": 34,
+      "newBlocks": 4,
+      "replaced": 0,
+      "legacyAliasesPreserved": true
+    },
+    {
+      "section": "chapter_divide_and_conquer/binary_search_recur",
+      "oldBlocks": 18,
+      "retained": 18,
+      "newBlocks": 2,
+      "replaced": 0,
+      "legacyAliasesPreserved": true
+    },
+    {
+      "section": "chapter_divide_and_conquer/build_binary_tree_problem",
+      "oldBlocks": 30,
+      "retained": 30,
+      "newBlocks": 2,
+      "replaced": 0,
+      "legacyAliasesPreserved": true
+    },
+    {
+      "section": "chapter_divide_and_conquer/hanota_problem",
+      "oldBlocks": 28,
+      "retained": 28,
+      "newBlocks": 3,
+      "replaced": 0,
+      "legacyAliasesPreserved": true
+    },
+    {
+      "section": "chapter_divide_and_conquer/summary",
+      "oldBlocks": 3,
+      "retained": 3,
+      "newBlocks": 2,
+      "replaced": 0,
+      "legacyAliasesPreserved": true
+    },
+    {
+      "section": "chapter_divide_and_conquer/exercises",
+      "oldBlocks": 24,
+      "retained": 24,
+      "newBlocks": 1,
+      "replaced": 0,
+      "legacyAliasesPreserved": true
+    }
+  ]
+}

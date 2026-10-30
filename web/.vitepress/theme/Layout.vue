@@ -41,6 +41,50 @@ import { bindPageDrag } from "./page-drag";
 import { flushLearning } from "./learning-flush";
 import StarMap from "./StarMap.vue";
 import StudyReader from "./StudyReader.vue";
+import ReaderControls from './ReaderControls.vue';
+import FloatingToolWindow from './FloatingToolWindow.vue';
+import EbookPet from './EbookPet.vue';
+const Blackboard=defineAsyncComponent(()=>import('./Blackboard.vue'));
+const boardOpen=ref(false),boardSection=ref(''),petOpen=ref(false),dictating=ref(false);
+const pet=ref<InstanceType<typeof EbookPet>>();
+async function openBoard(id=sectionId.value){await flushLearning();closeOverlay();boardSection.value=id;boardOpen.value=true;}
+async function closeBoard(){try{await flushLearning();boardOpen.value=false;}catch(error){storageMessage.value='板书保存失败，窗口保持打开：'+String(error);}}
+import {CommandGate,type PageTurnCommand} from './reader-controls';
+const turnGate=new CommandGate();
+const controlNotice=ref('');let noticeTimer:ReturnType<typeof setTimeout>|undefined;
+function turnNotice(text:string){controlNotice.value=text;clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>controlNotice.value='',2200);}
+async function controlTurn(command:PageTurnCommand){
+ const editing=(document.activeElement as HTMLElement)?.closest('input,textarea,select,[contenteditable=true],.cm-editor');
+ const blocked=!!(menu.value||panel.value||boardOpen.value||petOpen.value||selection.value||loading.value||editing||!document.hasFocus()||document.hidden||!getSelection()?.isCollapsed||(flip&&flip.getState()!=='read'));
+ if(!turnGate.accept(command,performance.now(),blocked))return;
+ if(preferences.value.mode==='study'&&!cover.value&&study.value){
+  const moved=await turnStudy(command.direction==='next'?1:-1);turnNotice(moved?'已滚动一屏':'已到阅读边界');return;
+ }
+ const previousDirection=command.direction==='previous';
+ const available=previousDirection?(pageIndex.value>0||sectionIndex.value>0):(pageIndex.value+(desktop.value?2:1)<leaves.value.length||sectionIndex.value<sections.value.length-1);
+ if(!available){turnNotice(previousDirection?'已到封面':'已到封底');return;}
+ if(previousDirection)previous();else next();
+ turnNotice(previousDirection?'上一页':'下一页');
+}
+import ChapterTermNote from "./ChapterTermNote.vue";
+import ChapterAnnotation from "./ChapterAnnotation.vue";
+const Chapter12Panel = defineAsyncComponent(() => import("./Chapter12Panel.vue"));
+const chapter12Mode = ref("route");
+const annotationPoint = ref({x:16,y:120});
+function positionAnnotation(rect?: DOMRect) {
+  annotationPoint.value={x:Math.max(12,Math.min(rect?.left||16,window.innerWidth-372)),y:Math.max(16,Math.min((rect?.bottom||100)+10,window.innerHeight-320))};
+}
+async function chapterTermNote(element: HTMLElement) {
+  const range=document.createRange();range.selectNodeContents(element);
+  const selected=getSelection();selected?.removeAllRanges();selected?.addRange(range);
+  positionAnnotation(element.getBoundingClientRect());
+  const root=element.closest<HTMLElement>('[data-section]');if(root)await selectText(root);
+}
+async function chapterActivity(id:string, mode:string) {
+  await flushLearning();
+  if(id!==sectionId.value)await navigate(id);
+  chapter12Mode.value=mode;panelSource.value=current.value;openPanel("chapter12");
+}
 import LearningNotebook from "./LearningNotebook.vue";
 const UnitPanel = defineAsyncComponent(() => import("./UnitPanel.vue"));
 import {blankProgress,upgradeProgress} from "./lesson-state";
@@ -88,7 +132,7 @@ const sectionIndex = computed(() =>
 const cover = computed(() => current.value?.kind === "cover");
 const backCover = computed(() => current.value?.kind === "back-cover");
 const menu = ref<
-  "contents" | "search" | "bookmarks" | "settings" | "notes" | "more" | null
+  "contents" | "search" | "bookmarks" | "settings" | "notes" | "more" | "controls" | null
 >(null);
 const mapView = ref(true);
 const query = ref("");
@@ -121,14 +165,8 @@ function decorateTerms(root: HTMLElement) {
       }
     }
   }
-  decorateGlossary(root, glossary.value);
+  if (!root.querySelector('.ch12-intro,.ch12-card,.ch12-video,.ch12-term')) decorateGlossary(root, glossary.value);
 }
-const splitPanel = computed(
-  () =>
-    (preferences.value.mode === "study" || panel.value === "unit") &&
-    desktop.value &&
-    !!panel.value,
-);
 let studyRouting = false;
 let studyNavigation: string | undefined;
 let darkMedia: MediaQueryList | undefined;
@@ -136,6 +174,9 @@ function updateSystemTheme() {
   systemDark.value = !!darkMedia?.matches;
 }
 async function recordUnitVisit(id: string) {
+  if(id.startsWith("chapter_divide_and_conquer/")) {
+    await updateLearning("chapter12:progress",{version:1,visited:[] as string[],completed:{} as Record<string,string>},p=>({...p,visited:[...new Set([...p.visited,id])]})).catch(()=>{});
+  }
   if (!id.startsWith("unit/monty/")) return;
   await updateLearning<any>(
     "unit:monty-hall",
@@ -165,7 +206,9 @@ async function annotate(kind: AnnotationRecord["kind"]) {
     record.updatedAt = new Date().toISOString();
     rebindNote.value = undefined;
   }
-  await putLearning("annotation:" + record.id, record);
+  try { await putLearning("annotation:" + record.id, {...record,updatedAt:new Date().toISOString()}); }
+  catch {storageMessage.value="批注保存失败，文字仍保留，请重试或复制备份。";return;}
+  storageMessage.value="";
   selection.value = undefined;
   noteText.value = "";
   getSelection()?.removeAllRanges();
@@ -173,6 +216,8 @@ async function annotate(kind: AnnotationRecord["kind"]) {
   await layout(locator());
 }
 async function selectText(root: HTMLElement) {
+  const nativeSelection=getSelection();
+  if(nativeSelection?.rangeCount)positionAnnotation(nativeSelection.getRangeAt(0).getBoundingClientRect());
   const selected = getSelection()?.anchorNode;
   const id =
     (selected?.nodeType === 3
@@ -205,10 +250,13 @@ async function selectText(root: HTMLElement) {
     captured.start.offset,
   );
   captured.suffix = last.slice(captured.end.offset, captured.end.offset + 32);
+  noteText.value="";
   selection.value = captured;
+  if(id.startsWith('chapter_divide_and_conquer/'))getSelection()?.removeAllRanges();
 }
 async function blockNote(place: ReadingLocator = locator()) {
   const page = await getPage(place.sectionId);
+  if (overlayOpen.value) closeOverlay();
   const source = document.createElement("div");
   source.innerHTML = page.html;
   const block = source.querySelector<HTMLElement>(
@@ -230,6 +278,7 @@ async function blockNote(place: ReadingLocator = locator()) {
     createdAt: now,
     updatedAt: now,
   };
+  nextTick(() => document.querySelector<HTMLInputElement>('.selection-tools input')?.focus());
 }
 async function updatePreferences() {
   const place = locator();
@@ -278,38 +327,6 @@ async function refreshNotes() {
 function storageNotice(event: Event) {
   storageMessage.value = (event as CustomEvent).detail;
 }
-function splitKey(event: KeyboardEvent) {
-  if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-    event.preventDefault();
-    preferences.value.split = Math.max(
-      28,
-      Math.min(
-        55,
-        preferences.value.split + (event.key === "ArrowLeft" ? 2 : -2),
-      ),
-    );
-    saveStore("preferences", preferences.value);
-  }
-}
-function splitDrag(event: PointerEvent) {
-  const node = event.currentTarget as HTMLElement;
-  node.setPointerCapture(event.pointerId);
-  const move = (e: PointerEvent) => {
-    preferences.value.split = Math.max(
-      28,
-      Math.min(55, (100 * (window.innerWidth - e.clientX)) / window.innerWidth),
-    );
-  };
-  const end = () => {
-    node.removeEventListener("pointermove", move);
-    node.removeEventListener("pointerup", end);
-    node.removeEventListener("pointercancel", end);
-    saveStore("preferences", preferences.value);
-  };
-  node.addEventListener("pointermove", move);
-  node.addEventListener("pointerup", end);
-  node.addEventListener("pointercancel", end);
-}
 const bookmarks = ref<SavedBookmark[]>([]);
 const resume = ref<ReadingLocator>();
 const saved = ref(false);
@@ -326,8 +343,20 @@ const panel = ref<
   | "learning"
   | "term"
   | "unit"
+  | "chapter12"
   | null
 >(null);
+const overlayOpen = computed(() => !!(menu.value || panel.value));
+const windowExpanded = ref(false);
+let previousBodyOverflow = "";
+watch(overlayOpen, (open) => {
+  if (typeof document === "undefined") return;
+  windowExpanded.value = false;
+  if (open) {
+    previousBodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+  } else document.body.style.overflow = previousBodyOverflow;
+});
 const codeIndex = ref(0);
 const imageUrl = ref("");
 const imageAlt = ref("");
@@ -352,6 +381,7 @@ const panelLabel = computed(
       learning: "学习实验室",
       term: "术语解释",
       unit: "小E · 三门学习单元",
+      chapter12: "分治 · 探险工作台",
     })[panel.value || "expanded"],
 );
 const menuLabel = computed(
@@ -361,15 +391,11 @@ const menuLabel = computed(
       search: "搜索全书",
       bookmarks: "我的书签",
       settings: "阅读设置",
+      controls: "翻页控制",
       notes: "学习笔记",
       more: "阅读工具",
     })[menu.value || "contents"],
 );
-watch(splitPanel, async () => {
-  const place = locator();
-  await nextTick();
-  if (!cover.value) await layout(place);
-});
 const coverElement = ref<HTMLElement>();
 let disposeDrag: (() => void) | undefined;
 const searchResults = computed(() => {
@@ -616,11 +642,16 @@ async function navigate(id: string, place?: ReadingLocator) {
   }
   await router.go(route + (place ? `#${place.blockId}@${place.offset}` : ""));
 }
+async function turnStudy(direction:number){
+ const moved=await study.value?.turnScreen(direction);
+ if(!moved&&direction<0&&sectionIndex.value===1&&sections.value[0]?.kind==='cover'){
+  await navigate(sections.value[0].id);return true;
+ }
+ return !!moved;
+}
 function previous() {
-  if (preferences.value.mode === "study") {
-    const item = sections.value[sectionIndex.value - 1];
-    if (item) void navigate(item.id);
-    return;
+  if (preferences.value.mode === "study" && !cover.value && study.value) {
+    void turnStudy(-1); return;
   }
   stopAnimation();
   if (pageIndex.value > 0) {
@@ -632,10 +663,8 @@ function previous() {
     navigate(entry.id, { sectionId: entry.id, blockId: "__last", offset: 0 });
 }
 function next() {
-  if (preferences.value.mode === "study") {
-    const item = sections.value[sectionIndex.value + 1];
-    if (item) void navigate(item.id);
-    return;
+  if (preferences.value.mode === "study" && !cover.value && study.value) {
+    void turnStudy(1); return;
   }
   stopAnimation();
   const step = desktop.value ? 2 : 1;
@@ -667,12 +696,12 @@ async function openMenu(type: typeof menu.value) {
     storageMessage.value = String(e);
   }
   panel.value = null;
-  lastFocus = document.activeElement as HTMLElement;
+  rememberFocus();
   menu.value = type;
   if (type === "search" && !index.value.length)
     index.value = await fetch("/book/search.json").then((r) => r.json());
   await nextTick();
-  document.querySelector<HTMLInputElement>(".search-input")?.focus();
+  (document.querySelector<HTMLInputElement>(".search-input") || document.querySelector<HTMLButtonElement>(".dialog-close"))?.focus();
 }
 async function goSearch(entry: (typeof searchResults.value)[number]) {
   await navigate(entry.id, {
@@ -699,6 +728,7 @@ async function openLesson(id:string){
   openUnit(page?.mode||'profile',id);
 }
 async function openUnit(mode?:string, id = sectionId.value) {
+  if(mode==='blackboard'){await openBoard(id);return;}
   await flushLearning();
   if(!mode&&!unitDefinition.value){try{unitDefinition.value=await fetch('/learning/monty-unit.json').then(r=>r.json());}catch{}}
   mode=mode||unitDefinition.value?.pages.find(p=>p.id===id)?.mode||'profile';
@@ -711,10 +741,17 @@ async function openUnit(mode?:string, id = sectionId.value) {
 function closeOverlay() {
   menu.value = null;
   panel.value = null;
-  lastFocus?.focus();
+  nextTick(() => {
+    if (lastFocus?.isConnected && !lastFocus.closest('[inert]')) lastFocus.focus({preventScroll:true});
+    else document.getElementById('reading-content')?.focus({preventScroll:true});
+  });
+}
+function rememberFocus() {
+  const active = document.activeElement as HTMLElement | null;
+  if (active && !active.closest('[role="dialog"]')) lastFocus = active;
 }
 function openPanel(type: typeof panel.value) {
-  lastFocus = document.activeElement as HTMLElement;
+  rememberFocus();
   stopAnimation();
   panelSource.value ??= current.value;
   panel.value = type;
@@ -763,6 +800,11 @@ async function clickBook(event: MouseEvent) {
       blockId: contentBlock.dataset.block!,
       offset: 0,
     };
+  const noteMark=target.closest<HTMLElement>('[data-annotation]');
+  if(noteMark && (panelBlock.value?.sectionId||sectionId.value).startsWith('chapter_divide_and_conquer/')) {
+    const existing=notes.value.find(n=>n.id===noteMark.dataset.annotation);
+    if(existing){event.preventDefault();positionAnnotation(noteMark.getBoundingClientRect());selection.value={...existing};noteText.value=existing.note;return;}
+  }
   const action = target.closest<HTMLElement>("[data-action]");
   const anchor = target.closest<HTMLAnchorElement>("a[href]");
   if (action?.dataset.action === "code") {
@@ -782,6 +824,10 @@ async function clickBook(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
     const value = action.dataset.action;
+    if (value === "chapter12") {
+      await chapterActivity(panelBlock.value?.sectionId || sectionId.value,action.dataset.mode || "route");
+      return;
+    }
     if (value === "term") {
       term.value = glossary.value.find((e) => e.term === action.dataset.term);
       openPanel("term");
@@ -879,11 +925,7 @@ async function layout(place?: ReadingLocator) {
     ? Math.min(
         { narrow: 430, standard: 510, wide: 570 }[preferences.value.width],
         Math.floor(
-          ((splitPanel.value
-            ? window.innerWidth * (1 - preferences.value.split / 100)
-            : window.innerWidth) -
-            100) /
-            2,
+          (window.innerWidth - 100) / 2,
         ),
       )
     : Math.min(600, window.innerWidth - 24);
@@ -1131,6 +1173,14 @@ function resize() {
   resizeTimer = setTimeout(() => layout(place), 200);
 }
 function keydown(event: KeyboardEvent) {
+  const editing=(event.target as HTMLElement).closest('input,textarea,select,[contenteditable=true],.cm-editor');
+  if((event.ctrlKey||event.metaKey)&&event.altKey&&event.key.toLowerCase()==='m'&&!editing){
+    const native=getSelection();const node=native?.anchorNode;
+    const root=(node?.nodeType===3?node.parentElement:node as HTMLElement)?.closest<HTMLElement>('[data-section]');
+    if(root?.dataset.section?.startsWith('chapter_divide_and_conquer/')&&!native?.isCollapsed){event.preventDefault();void selectText(root);return;}
+  }
+  if(event.key==='Escape'&&selection.value?.sectionId.startsWith('chapter_divide_and_conquer/')){selection.value=undefined;event.preventDefault();return;}
+  if(selection.value?.sectionId.startsWith('chapter_divide_and_conquer/'))return;
   if (
     (event.key === "Enter" || event.key === " ") &&
     (event.target as HTMLElement).matches(".glossary-term")
@@ -1144,7 +1194,7 @@ function keydown(event: KeyboardEvent) {
     return;
   }
   if (menu.value || panel.value) {
-    if (event.key === "Tab" && (menu.value || !splitPanel.value)) {
+    if (event.key === "Tab") {
       const box = document.querySelector<HTMLElement>('[role="dialog"]');
       const focusable = [
         ...(box?.querySelectorAll<HTMLElement>(
@@ -1153,7 +1203,9 @@ function keydown(event: KeyboardEvent) {
       ].filter((e) => e.offsetParent !== null);
       const first = focusable[0],
         last = focusable.at(-1);
-      if (event.shiftKey && document.activeElement === first) {
+      if (!box?.contains(document.activeElement)) {
+        event.preventDefault();first?.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last?.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
@@ -1170,14 +1222,7 @@ function keydown(event: KeyboardEvent) {
     preferences.value.mode === "study"
   )
     return;
-  if (event.key === "ArrowRight") {
-    event.preventDefault();
-    next();
-  }
-  if (event.key === "ArrowLeft") {
-    event.preventDefault();
-    previous();
-  }
+
 }
 function hashchange() {
   const place = resolvePlace(parseHash());
@@ -1245,6 +1290,7 @@ onMounted(async () => {
   window.addEventListener("hashchange", hashchange);
 });
 onBeforeUnmount(() => {
+  if (overlayOpen.value) document.body.style.overflow = previousBodyOverflow;
   ++serial;
   disposeDrag?.();
   flip?.destroy();
@@ -1267,7 +1313,7 @@ onBeforeUnmount(() => {
       'is-cover': cover,
       'is-back-cover': backCover,
       'theme-dark': dark,
-      'has-study-panel': splitPanel,
+      'has-floating-window': overlayOpen,
     }"
     :style="{
       '--page-width': pageWidth + 'px',
@@ -1277,17 +1323,16 @@ onBeforeUnmount(() => {
       '--reader-line': preferences.lineHeight,
       '--study-width':
         { narrow: 680, standard: 840, wide: 980 }[preferences.width] + 'px',
-      '--lab-width': preferences.split + 'vw',
     }"
   >
     <a class="skip-link" href="#reading-content">跳到正文</a>
-    <header class="reader-toolbar">
+    <header class="reader-toolbar" :inert="overlayOpen">
       <button class="brand" aria-label="返回封面" @click="navigate('cover')">
         <span class="plex-symbol"
           ><img src="/brand/plex-mark.png" alt="" /></span
         >PLEX<span>星轨编程</span>
       </button>
-      <span class="reader-edition">INTERACTIVE EDITION · 04</span>
+      <div class="reader-masthead"><span>交互式编程读本</span><button @click="openMenu('contents')">章节导航 <Compass :size="16" /></button></div>
     </header>
     <p v-if="storageMessage" class="storage-notice" role="alert">
       {{ storageMessage
@@ -1301,7 +1346,7 @@ onBeforeUnmount(() => {
         重试加载
       </button>
     </p>
-    <main id="reading-content" class="reading-main" tabindex="-1">
+    <main id="reading-content" class="reading-main" tabindex="-1" :inert="overlayOpen">
       <div v-if="error" class="reader-error" role="alert">
         <h1>暂时无法打开这一页</h1>
         <p>{{ error }}</p>
@@ -1309,6 +1354,7 @@ onBeforeUnmount(() => {
         ><button @click="navigate('cover')">返回封面</button>
       </div>
       <div v-else-if="cover" class="cover-scene">
+        <div class="cover-introduction"><span class="cover-series">PLEX / 星轨编程</span><h1>把好奇心<br /><span>写成代码。</span></h1><p>翻开一页，拆解一个问题。<br />和小E一起，把想法变成看得见的答案。</p><button class="cover-directory" @click="openMenu('contents')">探索全书 <ArrowRight :size="20" /></button></div>
         <button
           ref="coverElement"
           class="cover-book"
@@ -1441,7 +1487,7 @@ onBeforeUnmount(() => {
       </section>
       <div v-if="!ready" class="loading-label">正在打开星轨编程…</div>
     </main>
-    <nav class="bottom-navigation" aria-label="阅读主导航">
+    <nav class="bottom-navigation" aria-label="阅读主导航" :inert="overlayOpen">
       <button aria-label="打开目录" @click="openMenu('contents')">
         <Compass :size="20" /><span>目录</span>
       </button>
@@ -1467,8 +1513,8 @@ onBeforeUnmount(() => {
       >
         <ChevronRight :size="22" /><span>下一页</span>
       </button>
-      <button aria-label="打开小E" @click="openUnit('coach')">
-        <img src="/brand/little-e.png" alt="" /><span>小E</span>
+      <button aria-label="打开小黑板" @click="openBoard()">
+        <BookOpen :size="20" /><span>小黑板</span>
       </button>
       <button aria-label="更多阅读工具" @click="openMenu('more')">
         <List :size="20" /><span>更多</span>
@@ -1478,8 +1524,10 @@ onBeforeUnmount(() => {
       <div ref="stage" class="leaf-content source-stage" />
       <div ref="measure" class="leaf-content page-measure" />
     </div>
+    <ChapterTermNote :context="sectionId + ':' + pageIndex + ':' + preferences.mode" @note="chapterTermNote" />
+    <ChapterAnnotation v-if="selection?.sectionId.startsWith('chapter_divide_and_conquer/')" :key="selection.id" :record="selection" :point="annotationPoint" :error="storageMessage" @save="(kind,text)=>{noteText=text;annotate(kind)}" @close="selection=undefined" />
     <div
-      v-if="selection"
+      v-else-if="selection"
       class="selection-tools"
       role="region"
       aria-label="选区批注"
@@ -1498,7 +1546,7 @@ onBeforeUnmount(() => {
       ><button @click="selection = undefined">取消</button>
     </div>
 
-    <div v-if="menu" class="overlay" @click.self="closeOverlay">
+    <div v-if="menu" class="overlay" :data-window="menu" @click.self="closeOverlay">
       <section
         class="navigation-dialog"
         role="dialog"
@@ -1514,7 +1562,9 @@ onBeforeUnmount(() => {
             <X :size="22" />
           </button>
         </div>
+        <div v-if="menu === 'controls'" id="reader-control-slot"></div>
         <div v-if="menu === 'more'" class="more-tools">
+          <button @click="openMenu('controls')">翻页控制</button>
           <button
             aria-label="切换阅读模式"
             @click="
@@ -1522,19 +1572,19 @@ onBeforeUnmount(() => {
               closeOverlay();
             "
           >
-            {{ preferences.mode === "flip" ? "学习模式" : "翻书模式" }}
+            切换阅读模式
           </button>
           <button aria-label="搜索全书" @click="openMenu('search')">
             搜索全书
           </button>
           <button aria-label="学习笔记" @click="openMenu('notes')">
-            笔记与备份
+            学习笔记
           </button>
           <button aria-label="阅读设置" @click="openMenu('settings')">
             阅读设置
           </button>
           <button aria-label="查看书签" @click="openMenu('bookmarks')">
-            我的书签
+            查看书签
           </button>
           <button
             @click="
@@ -1551,7 +1601,7 @@ onBeforeUnmount(() => {
               openPanel('learning');
             "
           >
-            六类算法实验与 24 题
+            打开学习实验室
           </button>
           <button @click="navigate('unit/monty/start')">
             学习起点 · 三门单元
@@ -1641,7 +1691,7 @@ onBeforeUnmount(() => {
               v-model="preferences.theme"
               @change="updatePreferences"
             >
-              <option value="light">明亮 · 暖白纸面</option>
+              <option value="light">明亮 · 浅色纸面</option>
               <option value="dark">深色</option>
               <option value="system">跟随系统</option>
             </select></label
@@ -1693,28 +1743,16 @@ onBeforeUnmount(() => {
     </div>
     <div
       v-if="panel"
-      class="overlay"
-      :class="{ 'study-panel': splitPanel }"
-      @click.self="!splitPanel && closeOverlay()"
+      class="overlay activity-overlay"
+      :class="{ 'window-expanded': windowExpanded }"
+      :data-window="panel"
+      @click.self="closeOverlay"
     >
-      <div
-        v-if="splitPanel"
-        class="study-separator"
-        role="separator"
-        tabindex="0"
-        aria-label="调整实验栏宽度"
-        aria-orientation="vertical"
-        :aria-valuenow="Math.round(preferences.split)"
-        :aria-valuemin="28"
-        :aria-valuemax="55"
-        @keydown="splitKey"
-        @pointerdown="splitDrag"
-      />
       <section
         class="content-dialog"
         :class="{ 'image-dialog': panel === 'image' }"
         role="dialog"
-        :aria-modal="!splitPanel"
+        aria-modal="true"
         :aria-label="panelLabel"
       >
         <div class="dialog-header">
@@ -1722,9 +1760,9 @@ onBeforeUnmount(() => {
             <span class="dialog-eyebrow">{{ current?.title }}</span>
             <h2>{{ panelLabel }}</h2>
           </div>
-          <button class="dialog-close" aria-label="关闭" @click="closeOverlay">
+          <div class="window-actions"><button class="window-expand" :aria-label="windowExpanded ? '还原窗口' : '放大窗口'" :aria-pressed="windowExpanded" @click="windowExpanded = !windowExpanded"><Expand :size="20" /></button><button class="dialog-close" aria-label="关闭" @click="closeOverlay">
             <X :size="22" />
-          </button>
+          </button></div>
         </div>
         <button
           v-if="
@@ -1738,7 +1776,9 @@ onBeforeUnmount(() => {
         <CodePanel
           v-if="panel === 'code' && panelSource?.codeExamples[codeIndex]"
           :example="panelSource.codeExamples[codeIndex]"
+          :fold-source-header="panelSource.html.includes('ch12-')"
         />
+        <Chapter12Panel v-if="panel === 'chapter12'" :key="chapter12Mode" :mode="chapter12Mode" @activity="chapterActivity" />
         <UnitPanel
           v-if="panel === 'unit'"
           :key="unitSection + unitMode"
@@ -1746,6 +1786,7 @@ onBeforeUnmount(() => {
           :initial-mode="unitMode"
           :current-section-id="sectionId"
           @activity="openLesson"
+          @blackboard="openBoard"
           @navigate="navigate"
         />
         <LearningHub v-if="panel === 'learning'" :section-id="sectionId" />
@@ -1768,5 +1809,8 @@ onBeforeUnmount(() => {
         />
       </section>
     </div>
+    <FloatingToolWindow v-if="boardOpen" v-show="!overlayOpen" :inert="overlayOpen" title="小黑板" storage-key="blackboard-window" @close="closeBoard"><Blackboard :key="boardSection" :section-id="boardSection" /></FloatingToolWindow>
+    <EbookPet ref="pet" :section-id="sectionId" :section-title="current?.title||'封面'" :suspended="overlayOpen" @open="petOpen=$event" @dictating="dictating=$event" @login="openUnit('profile')"/>
+    <ReaderControls :settings="menu==='controls'" :blocked="overlayOpen||boardOpen||petOpen" :dictating="dictating" :notice="controlNotice" @command="controlTurn" @fullscreen="fullscreen" @configure="openMenu('controls')" />
   </div>
 </template>

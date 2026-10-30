@@ -14930,6 +14930,18 @@
         "fingerprint": "41344a047bc12dd40c4cf65998f6de4cd96fcb5ea47d89355254ea1f686dac27",
         "heading": "分治",
         "previous": "blk-32fe26e7a0cd7fcf"
+      },
+      {
+        "id": "blk-82dc959852138d87",
+        "fingerprint": "bfce3bea47e707c2f73fc22325a0518fd1797a527169c0377869ad7edefc6a68",
+        "heading": "分治",
+        "previous": "blk-b82fff37eb1cc29f"
+      },
+      {
+        "id": "blk-fa8a955d0231b01d",
+        "fingerprint": "285b598eee6e9b32761134367d8a4f661ca07815e13ed453464557bd6f0dc810",
+        "heading": "分治",
+        "previous": "blk-82dc959852138d87"
       }
     ],
     "aliases": {
@@ -14947,10 +14959,22 @@
         "previous": ""
       },
       {
+        "id": "blk-ff43dfdfb420a5f1",
+        "fingerprint": "b299c9322f28811e3c8f0bd7da86cd89c296cba270687a07695d923542604079",
+        "heading": "分治算法",
+        "previous": "blk-ef6703c56f82e039"
+      },
+      {
+        "id": "blk-12031d18fa87ec75",
+        "fingerprint": "67d10e81b503cbf47b22493a332cc241b5428ae1f99599829fd575b0266d4d2a",
+        "heading": "分治算法",
+        "previous": "blk-ff43dfdfb420a5f1"
+      },
+      {
         "id": "blk-76fd809a8171fb34",
         "fingerprint": "6cabecc9e16726beb81f39106332c0c93b4eda80bde633b9cb03bcd34113b98c",
         "heading": "分治算法",
-        "previous": "blk-ef6703c56f82e039"
+        "previous": "blk-12031d18fa87ec75"
       },
       {
         "id": "blk-669530e7f82d0152",
@@ -14977,10 +15001,16 @@
         "previous": "blk-235d83ace421e2c1"
       },
       {
+        "id": "blk-5317a0dd06dbc239",
+        "fingerprint": "ebf74f56b0069e306370e83fd74ed46cecdf4b0308c98f5808760797fd9fa3e2",
+        "heading": "分治算法",
+        "previous": "blk-81807a723fd7ba6a"
+      },
+      {
         "id": "blk-a34dccc6a859f6df",
         "fingerprint": "683fff52a07b5052f9b8dc05ca83bac830bceb2b77093f1b902f9c6e5b206eed",
         "heading": "如何判断分治问题",
-        "previous": "blk-81807a723fd7ba6a"
+        "previous": "blk-5317a0dd06dbc239"
       },
       {
         "id": "blk-026cbf791c76b87a",
@@ -15143,6 +15173,12 @@
         "fingerprint": "7d714f91ec1a49be56ad8c9a90af8e5a04b7f3623265969629636d93433ea452",
         "heading": "分治常见应用",
         "previous": "blk-329dbefefb10ea61"
+      },
+      {
+        "id": "blk-15090a9f16e6d960",
+        "fingerprint": "489dde28ba367135905410a47f2444cf80f158b1ea718d16633b1a4f9d932c87",
+        "heading": "分治常见应用",
+        "previous": "blk-3ad91d9c50c51b2f"
       }
     ],
     "aliases": {
@@ -15191,10 +15227,16 @@
         "previous": ""
       },
       {
+        "id": "blk-c4403b9c412218da",
+        "fingerprint": "b01b4e0f474f34ca55d099973d35ce4a30691e8c6eaf9e41e0336402913782ed",
+        "heading": "分治搜索策略",
+        "previous": "blk-9a2d75998eea32f9"
+      },
+      {
         "id": "blk-4c7e87373534dd8a",
         "fingerprint": "c3e0b579a9dc35b87787f2c9cba1e95ee9e90efc88e4d39ef418b46dfcb308fd",
         "heading": "分治搜索策略",
-        "previous": "blk-9a2d75998eea32f9"
+        "previous": "blk-c4403b9c412218da"
       },
       {
         "id": "blk-bc13d959060b6f15",
@@ -15287,10 +15329,16 @@
         "previous": "blk-b1c4ec075a03fa4e"
       },
       {
+        "id": "blk-d162ec1f6ba194d9",
+        "fingerprint": "e55b76ac42355528e1c44f9de5228707235f1b0dc2ff32bb00755244b55f52cd",
+        "heading": "基于分治实现二分查找",
+        "previous": "blk-895d3e48c9d5dafd"
+      },
+      {
         "id": "blk-e0c95d9bc1a77a74",
         "fingerprint": "9e03df442c2e82d2d47d3640329f6eea5e2f99de7821c133ff7947c885d83354",
         "heading": "基于分治实现二分查找",
-        "previous": "blk-895d3e48c9d5dafd"
+        "previous": "blk-d162ec1f6ba194d9"
       }
     ],
     "aliases": {
@@ -15323,10 +15371,16 @@
         "previous": ""
       },
       {
+        "id": "blk-6ab39c8de905e7bd",
+        "fingerprint": "0159f60523bd30a89d3b129aa608113245f9fed83c7f2d9da4838f6ec5ed80e4",
+        "heading": "构建二叉树问题",
+        "previous": "blk-af6c6990d24c4598"
+      },
+      {
         "id": "blk-da938731e15a82a5",
         "fingerprint": "d1672b337cfbf12273da455472164d7e4536f8f3434e6d205dc900a42f997e38",
         "heading": "构建二叉树问题",
-        "previous": "blk-af6c6990d24c4598"
+        "previous": "blk-6ab39c8de905e7bd"
       },
       {
         "id": "blk-8329872e556cc9b0",
@@ -15455,10 +15509,16 @@
         "previous": "blk-859be1365f051385"
       },
       {
+        "id": "blk-96de804b6ff8a598",
+        "fingerprint": "ee7b6f2560a8fb5b601abc3f546ab6c9b5fa33db16085f46dacbcd1fd60256bb",
+        "heading": "代码实现",
+        "previous": "blk-d82bcbc51ed6f153"
+      },
+      {
         "id": "blk-8d36103397bfd3a5",
         "fingerprint": "bc3da4216fa0d352d1346243dfb143f318a5b7b0b02a1bbb4f9a7c6ec8823f1a",
         "heading": "代码实现",
-        "previous": "blk-d82bcbc51ed6f153"
+        "previous": "blk-96de804b6ff8a598"
       },
       {
         "id": "blk-a8acef704c0e143b",
@@ -15539,10 +15599,16 @@
         "previous": ""
       },
       {
+        "id": "blk-2d1f8c854b03b0db",
+        "fingerprint": "7ad908cf8a231b76c3b448a158eb9ac472bd9ff6a37acaee64860abdc18155dd",
+        "heading": "汉诺塔问题",
+        "previous": "blk-57d5175e3993a064"
+      },
+      {
         "id": "blk-5c78f0fa06037d0d",
         "fingerprint": "14ad11da5c80eb8e99a3fe98420afd65bdb5ee76e6afe15346db0fdc69bea24d",
         "heading": "汉诺塔问题",
-        "previous": "blk-57d5175e3993a064"
+        "previous": "blk-2d1f8c854b03b0db"
       },
       {
         "id": "blk-b0d28100adc429e2",
@@ -15575,10 +15641,16 @@
         "previous": "blk-9175edcca3854fd5"
       },
       {
-        "id": "blk-c27d6966c00bc83e",
-        "fingerprint": "18eb6c5d41b4d8d0f9f3f1340d7bf37cc71fcf78dad682d856b168a7a41f69ea",
+        "id": "blk-4537abf8366377a0",
+        "fingerprint": "fa9cab214b7909c1227a03a7374c087d6b1ef95552e1b1a7052948d94223f29e",
         "heading": "考虑基本情况",
         "previous": "blk-3ed69e3546e8aa1e"
+      },
+      {
+        "id": "blk-c27d6966c00bc83e",
+        "fingerprint": "8150394f4b196127e2194dec00dca4277b9cab8a167d96178056c7350db80d62",
+        "heading": "考虑基本情况",
+        "previous": "blk-4537abf8366377a0"
       },
       {
         "id": "blk-e2689126426c746f",
@@ -15594,7 +15666,7 @@
       },
       {
         "id": "blk-a2cc271a9df25967",
-        "fingerprint": "576cbe56c21a3dad129f3c74646e0ca9958d1070a23461559ead4e34d8edb460",
+        "fingerprint": "855fcad7f92903d79ae24480dcbe1b8540d6590f0ce65564a5252d37962e6420",
         "heading": "考虑基本情况",
         "previous": "blk-77d68885b1475b41"
       },
@@ -15630,7 +15702,7 @@
       },
       {
         "id": "blk-204a8074d6472998",
-        "fingerprint": "576cbe56c21a3dad129f3c74646e0ca9958d1070a23461559ead4e34d8edb460",
+        "fingerprint": "855fcad7f92903d79ae24480dcbe1b8540d6590f0ce65564a5252d37962e6420",
         "heading": "子问题分解",
         "previous": "blk-7af78db4fedbd090"
       },
@@ -15677,10 +15749,16 @@
         "previous": "blk-d19a4d9369168f33"
       },
       {
+        "id": "blk-76beaf2c8ea3da2d",
+        "fingerprint": "ccae985c65f91f6fb7df761df3181084a6d3d9ff759694feaa24210da80834e6",
+        "heading": "代码实现",
+        "previous": "blk-138bbd83390e5a75"
+      },
+      {
         "id": "blk-92415cffcba9a65f",
         "fingerprint": "3b5b425eb67aad56246989e826c24193aadd2bcaedbde5192b5b25026674679f",
         "heading": "代码实现",
-        "previous": "blk-138bbd83390e5a75"
+        "previous": "blk-76beaf2c8ea3da2d"
       },
       {
         "id": "blk-7a75ad29706ac6c9",
@@ -15741,16 +15819,28 @@
         "previous": ""
       },
       {
+        "id": "blk-ea81ce2c9817d0ec",
+        "fingerprint": "7fb54d25fd4ac8fb1ba89a15d23be2809fa08eba4f2aa38ea49b5305df48e58a",
+        "heading": "小结",
+        "previous": "blk-d5f753a8b9c95a41"
+      },
+      {
         "id": "blk-e0c2e923c9a819fc",
         "fingerprint": "0184020d2d9edfd79aeadf9022aa340d79f7f671a58df6b6961fa03ea0b74907",
         "heading": "重点回顾",
-        "previous": "blk-d5f753a8b9c95a41"
+        "previous": "blk-ea81ce2c9817d0ec"
       },
       {
         "id": "blk-4adf25464f90f309",
         "fingerprint": "0f3116f5b1c592d0be86b17966a13093d2c58834848a7b70a5e4aca151649d97",
         "heading": "重点回顾",
         "previous": "blk-e0c2e923c9a819fc"
+      },
+      {
+        "id": "blk-7f9eef4e27829e11",
+        "fingerprint": "088311c9bda646471da64f52154dba2a2df753cbdd9259ecad5a3e37f5cd1296",
+        "heading": "重点回顾",
+        "previous": "blk-4adf25464f90f309"
       }
     ],
     "aliases": {
@@ -15810,10 +15900,16 @@
         "previous": "blk-e284256d745951d9"
       },
       {
+        "id": "blk-6f1c98838357fdc5",
+        "fingerprint": "06a3badf68d887d255b3d27c084a3f666391749bb7a86a14affbdc90dd601634",
+        "heading": "快速幂是怎样减少计算的",
+        "previous": "blk-a2e4d9685844d5ee"
+      },
+      {
         "id": "blk-545b4bc8c36edf4f",
         "fingerprint": "efb3f67635a2f4b37c3416042619dda0f7ecc1fab29f904c074c1ba4d76c07f4",
         "heading": "快速幂是怎样减少计算的",
-        "previous": "blk-a2e4d9685844d5ee"
+        "previous": "blk-6f1c98838357fdc5"
       },
       {
         "id": "blk-9da04d619f8e4587",

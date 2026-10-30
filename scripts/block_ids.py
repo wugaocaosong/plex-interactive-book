@@ -11,6 +11,7 @@ def assign_blocks(body, section, registry):
     heading = ''
     tags = list(soup.find_all(recursive=False))
     for i, tag in enumerate(tags):
+        retained = tag.attrs.pop('data-preserve-block', None)
         text = tag.get_text()
         if tag.name in ('h1', 'h2', 'h3', 'h4'):
             heading = text
@@ -20,7 +21,9 @@ def assign_blocks(body, section, registry):
             candidates = [b for b in candidates if b['heading'] == heading]
         if len(candidates) > 1 and blocks:
             candidates = [b for b in candidates if b.get('previous') == blocks[-1]['id']]
-        if len(candidates) == 1:
+        if retained and retained not in used and (retained in previous['aliases'].values() or any(b['id']==retained for b in old)):
+            identity = retained
+        elif len(candidates) == 1:
             identity = candidates[0]['id']
         else:
             seed = f'{section}:{heading}:{fingerprint}:{i}'

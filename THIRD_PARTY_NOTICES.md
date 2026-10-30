@@ -59,3 +59,11 @@ H5P 库来自 [官方 InteractiveBook 分发包](https://api.h5p.org/v1/content-
 | [axe-core npm](https://github.com/dequelabs/axe-core-npm) | @axe-core/playwright 4.14.0 | MPL-2.0 | 仅开发测试的自动无障碍检查 |
 
 完整许可证及转移依赖声明位于 `licenses/dependencies/`；新场景使用本项目 CSS/SVG 几何与既有品牌素材，没有引入付费动画或外链 CDN。
+# 第 12 章示范新增说明（2026-10-29）
+
+本章能源模块、信号查找、连接树与能源环 SVG 是 PLEX 原创教学示意素材；原 Hello Algo 图解及源码继续保留原许可与来源。`@codemirror/language` 6.13.1（MIT）由已有传递依赖提升为精确直接依赖，用于折叠源码头信息，许可证随静态资源提供。未引入外站视频、额外模型服务或收费素材。
+## 翻页输入资源（2026-10-30 增补）
+
+小艺正面机器人 `web/public/brand/little-e-front.png` 基于项目提供的 `little-e.png` 背面图，通过 imagegen 生成。保留原有角色设计，来源与 SHA-256 记录于 `web/public/brand/SOURCES.json`，不宣称其为第三方开源角色素材。角色待机与交互动作由本项目 CSS 实现。
+
+MediaPipe Tasks Vision 0.10.32、Google hand_landmarker float16 v1、vosk-browser 0.0.8、Vosk 中文小模型 vosk-model-small-cn-0.22 使用 Apache-2.0；许可文本见 `licenses/dependencies/input-models-Apache-2.0.txt`，资源来源、版本与校验值见 `content/input-models/manifest.json`。Vosk 模型仅改变归档格式和目录权限，模型权重不变。测试手部图片来源及合成语音说明见 `tests/fixtures/input/README.md`。上述许可不替代《Hello 算法》教材本身的 CC BY-NC-SA 4.0。

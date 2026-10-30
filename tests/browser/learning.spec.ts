@@ -37,7 +37,8 @@ test("study mode, annotations, settings and persisted drafts share the reader", 
     .getByRole("button", { name: "查看 / 运行" })
     .first()
     .click();
-  await expect(page.locator(".study-panel")).toBeVisible();
+  await expect(page.locator('.content-dialog[aria-modal="true"]')).toBeVisible();
+  await expect(page.locator(".study-panel")).toHaveCount(0);
   await expect(page.getByLabel("完整示例代码")).toContainText("binary_search");
   await page.getByLabel("完整示例代码").fill('print("持久草稿")');
   await page.getByRole("button", { name: "运行 Python", exact: true }).click();
