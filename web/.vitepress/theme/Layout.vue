@@ -51,7 +51,7 @@ async function controlTurn(command:PageTurnCommand){
  const blocked=!!(menu.value||panel.value||selection.value||loading.value||editing||!document.hasFocus()||document.hidden||!getSelection()?.isCollapsed||(flip&&flip.getState()!=='read'));
  if(!turnGate.accept(command,performance.now(),blocked))return;
  if(preferences.value.mode==='study'&&!cover.value&&study.value){
-  const moved=await study.value.turnScreen(command.direction==='next'?1:-1);turnNotice(moved?'已滚动一屏':'已到阅读边界');return;
+  const moved=await turnStudy(command.direction==='next'?1:-1);turnNotice(moved?'已滚动一屏':'已到阅读边界');return;
  }
  const previousDirection=command.direction==='previous';
  const available=previousDirection?(pageIndex.value>0||sectionIndex.value>0):(pageIndex.value+(desktop.value?2:1)<leaves.value.length||sectionIndex.value<sections.value.length-1);
@@ -635,11 +635,16 @@ async function navigate(id: string, place?: ReadingLocator) {
   }
   await router.go(route + (place ? `#${place.blockId}@${place.offset}` : ""));
 }
+async function turnStudy(direction:number){
+ const moved=await study.value?.turnScreen(direction);
+ if(!moved&&direction<0&&sectionIndex.value===1&&sections.value[0]?.kind==='cover'){
+  await navigate(sections.value[0].id);return true;
+ }
+ return !!moved;
+}
 function previous() {
-  if (preferences.value.mode === "study") {
-    const item = sections.value[sectionIndex.value - 1];
-    if (item) void navigate(item.id);
-    return;
+  if (preferences.value.mode === "study" && !cover.value && study.value) {
+    void turnStudy(-1); return;
   }
   stopAnimation();
   if (pageIndex.value > 0) {
@@ -651,10 +656,8 @@ function previous() {
     navigate(entry.id, { sectionId: entry.id, blockId: "__last", offset: 0 });
 }
 function next() {
-  if (preferences.value.mode === "study") {
-    const item = sections.value[sectionIndex.value + 1];
-    if (item) void navigate(item.id);
-    return;
+  if (preferences.value.mode === "study" && !cover.value && study.value) {
+    void turnStudy(1); return;
   }
   stopAnimation();
   const step = desktop.value ? 2 : 1;

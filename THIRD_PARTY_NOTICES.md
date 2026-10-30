@@ -62,3 +62,6 @@ H5P 库来自 [官方 InteractiveBook 分发包](https://api.h5p.org/v1/content-
 # 第 12 章示范新增说明（2026-10-29）
 
 本章能源模块、信号查找、连接树与能源环 SVG 是 PLEX 原创教学示意素材；原 Hello Algo 图解及源码继续保留原许可与来源。`@codemirror/language` 6.13.1（MIT）由已有传递依赖提升为精确直接依赖，用于折叠源码头信息，许可证随静态资源提供。未引入外站视频、额外模型服务或收费素材。
+## 翻页输入资源（2026-10-30 增补）
+
+MediaPipe Tasks Vision 0.10.32、Google hand_landmarker float16 v1、vosk-browser 0.0.8、Vosk 中文小模型 vosk-model-small-cn-0.22 使用 Apache-2.0；许可文本见 `licenses/dependencies/input-models-Apache-2.0.txt`，资源来源、版本与校验值见 `content/input-models/manifest.json`。Vosk 模型仅改变归档格式和目录权限，模型权重不变。测试手部图片来源及合成语音说明见 `tests/fixtures/input/README.md`。上述许可不替代《Hello 算法》教材本身的 CC BY-NC-SA 4.0。

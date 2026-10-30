@@ -1,0 +1,21 @@
+{
+  "formatVersion": 1,
+  "assets": [
+    {
+      "file": "hand_landmarker.task",
+      "url": "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
+      "upstreamSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+      "sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+      "bytes": 7819105,
+      "license": "Apache-2.0"
+    },
+    {
+      "file": "vosk-model-small-cn-0.22.tar.gz",
+      "url": "https://alphacephei.com/vosk/models/vosk-model-small-cn-0.22.zip",
+      "upstreamSha256": "3af8b0e7e0f835ae9d414ce5df580237a3cfb08d586c9fbbb0f7ff29ad5b14ba",
+      "sha256": "932609b24dd6eafb9cbc03e2b5b70477822da035081e4b85edcb3d3b9018fb9b",
+      "bytes": 43986960,
+      "license": "Apache-2.0"
+    }
+  ]
+}

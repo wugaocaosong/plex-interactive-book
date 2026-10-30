@@ -19,7 +19,7 @@ const next = ['下','后','翻页','下一页','后一页','往后','向后','�
 export function voiceDirection(raw: string): TurnDirection | 'conflict' | undefined {
   const text = raw.replace(/[\s\p{P}]/gu,'').replace(/^(请|帮我|麻烦|请帮我)+/u,'');
   if (prev.includes(text)) return 'previous'; if (next.includes(text)) return 'next';
-  if (/(上一页|前一页|往前|向前)/.test(text) && /(下一页|后一页|往后|向后)/.test(text)) return 'conflict';
+  if ((/(上一页|前一页|往前|向前)/.test(text) && /(下一页|后一页|往后|向后)/.test(text)) || /^(上|前)(还是|或者|或|和|然后|再)?(下|后)$|^(下|后)(还是|或者|或|和|然后|再)?(上|前)$/.test(text)) return 'conflict';
 }
 export class CommandGate {
   private seen = new Map<string, number>(); private until = 0;
@@ -52,6 +52,8 @@ export class SwipeTracker {
       if(Math.hypot(dx,dy)>.04){this.anchor={x,y,t:now};return;}
       if(elapsed>=200){this.armed=true;this.anchor={x,y,t:now};}return;
     }
+    // A steady hand stays armed; measure the swipe window from movement, not from initial arming.
+    if(Math.hypot(dx,dy)<.03){this.anchor={x,y,t:now};return;}
     if(elapsed>900){this.reset();return;}
     const threshold={low:.28,standard:.2,high:.14}[prefs.sensitivity];
     if(elapsed>=150 && Math.abs(dx)>=threshold && Math.abs(dx)>Math.abs(dy)*2){
