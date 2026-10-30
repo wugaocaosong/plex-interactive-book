@@ -47,7 +47,10 @@ for(const width of [390,820,1440])for(const mode of ['flip','study'])test(`chapt
   await page.goto(`/read/chapter_${chapter}/index`);
   if(mode==='flip')await expect(page.locator('.book-holder')).not.toHaveClass(/loading/);else await expect(page.locator('.study-reader')).toBeVisible();
   await page.locator('#reading-content').focus();await page.keyboard.press('PageDown');await expect(page.locator('.input-turn-notice')).toContainText(mode==='flip'?'下一页':/已滚动一屏|已到阅读边界/);
-  await page.waitForTimeout(650);await page.keyboard.press('PageUp');await expect(page.locator('.input-turn-notice')).toContainText(mode==='flip'?'上一页':/已滚动一屏|已到阅读边界/);
+  await page.waitForTimeout(650);
+  // A boundary turn can start loading the next section after the animation.
+  if(mode==='flip')await expect(page.locator('.book-holder')).not.toHaveClass(/loading/);
+  await page.locator('#reading-content').focus();await page.keyboard.press('PageUp');await expect(page.locator('.input-turn-notice')).toContainText(mode==='flip'?'上一页':/已滚动一屏|已到阅读边界/);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  }
 });
