@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-30",
+  "runtime_commit": "d621492",
+  "test_fix_commit": "1359713",
+  "environment": {
+    "os": "Windows",
+    "node": "24.14.1",
+    "python": "3.14.3",
+    "browser": "system Chrome",
+    "preview_port": 5194
+  },
+  "checks": {
+    "clean_npm_ci": true,
+    "clean_python_venv": true,
+    "typecheck": true,
+    "content_audit": true,
+    "model_hashes": true,
+    "node_tests": 28,
+    "python_tests": 7,
+    "reference_cases": 130,
+    "build": true
+  },
+  "browser_reports": [
+    {
+      "report": "main-integration-regression",
+      "stats": {
+        "startTime": "2026-10-30T14:04:16.176Z",
+        "duration": 232988.38799999998,
+        "expected": 39,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    },
+    {
+      "report": "main-input-recheck",
+      "stats": {
+        "startTime": "2026-10-30T14:12:24.584Z",
+        "duration": 34042.426999999996,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "interpretation": "39 initial passes; boundary-load test corrected and passed 3 consecutive runs. No remaining observed failure; not a single 40/40 run."
+}
