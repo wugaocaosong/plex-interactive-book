@@ -42,13 +42,20 @@ import { flushLearning } from "./learning-flush";
 import StarMap from "./StarMap.vue";
 import StudyReader from "./StudyReader.vue";
 import ReaderControls from './ReaderControls.vue';
+import FloatingToolWindow from './FloatingToolWindow.vue';
+import EbookPet from './EbookPet.vue';
+const Blackboard=defineAsyncComponent(()=>import('./Blackboard.vue'));
+const boardOpen=ref(false),boardSection=ref(''),petOpen=ref(false),dictating=ref(false);
+const pet=ref<InstanceType<typeof EbookPet>>();
+async function openBoard(id=sectionId.value){await flushLearning();closeOverlay();boardSection.value=id;boardOpen.value=true;}
+async function closeBoard(){try{await flushLearning();boardOpen.value=false;}catch(error){storageMessage.value='板书保存失败，窗口保持打开：'+String(error);}}
 import {CommandGate,type PageTurnCommand} from './reader-controls';
 const turnGate=new CommandGate();
 const controlNotice=ref('');let noticeTimer:ReturnType<typeof setTimeout>|undefined;
 function turnNotice(text:string){controlNotice.value=text;clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>controlNotice.value='',2200);}
 async function controlTurn(command:PageTurnCommand){
  const editing=(document.activeElement as HTMLElement)?.closest('input,textarea,select,[contenteditable=true],.cm-editor');
- const blocked=!!(menu.value||panel.value||selection.value||loading.value||editing||!document.hasFocus()||document.hidden||!getSelection()?.isCollapsed||(flip&&flip.getState()!=='read'));
+ const blocked=!!(menu.value||panel.value||boardOpen.value||petOpen.value||selection.value||loading.value||editing||!document.hasFocus()||document.hidden||!getSelection()?.isCollapsed||(flip&&flip.getState()!=='read'));
  if(!turnGate.accept(command,performance.now(),blocked))return;
  if(preferences.value.mode==='study'&&!cover.value&&study.value){
   const moved=await turnStudy(command.direction==='next'?1:-1);turnNotice(moved?'已滚动一屏':'已到阅读边界');return;
@@ -721,6 +728,7 @@ async function openLesson(id:string){
   openUnit(page?.mode||'profile',id);
 }
 async function openUnit(mode?:string, id = sectionId.value) {
+  if(mode==='blackboard'){await openBoard(id);return;}
   await flushLearning();
   if(!mode&&!unitDefinition.value){try{unitDefinition.value=await fetch('/learning/monty-unit.json').then(r=>r.json());}catch{}}
   mode=mode||unitDefinition.value?.pages.find(p=>p.id===id)?.mode||'profile';
@@ -1505,8 +1513,8 @@ onBeforeUnmount(() => {
       >
         <ChevronRight :size="22" /><span>下一页</span>
       </button>
-      <button aria-label="打开小E" @click="openUnit('coach')">
-        <img src="/brand/little-e.png" alt="" /><span>小E</span>
+      <button aria-label="打开小黑板" @click="openBoard()">
+        <BookOpen :size="20" /><span>小黑板</span>
       </button>
       <button aria-label="更多阅读工具" @click="openMenu('more')">
         <List :size="20" /><span>更多</span>
@@ -1778,6 +1786,7 @@ onBeforeUnmount(() => {
           :initial-mode="unitMode"
           :current-section-id="sectionId"
           @activity="openLesson"
+          @blackboard="openBoard"
           @navigate="navigate"
         />
         <LearningHub v-if="panel === 'learning'" :section-id="sectionId" />
@@ -1800,6 +1809,8 @@ onBeforeUnmount(() => {
         />
       </section>
     </div>
-    <ReaderControls :settings="menu==='controls'" :blocked="overlayOpen" :notice="controlNotice" @command="controlTurn" @configure="openMenu('controls')" />
+    <FloatingToolWindow v-if="boardOpen" v-show="!overlayOpen" :inert="overlayOpen" title="小黑板" storage-key="blackboard-window" @close="closeBoard"><Blackboard :key="boardSection" :section-id="boardSection" /></FloatingToolWindow>
+    <EbookPet ref="pet" :section-id="sectionId" :section-title="current?.title||'封面'" :suspended="overlayOpen" @open="petOpen=$event" @dictating="dictating=$event" @login="openUnit('profile')"/>
+    <ReaderControls :settings="menu==='controls'" :blocked="overlayOpen||boardOpen||petOpen" :dictating="dictating" :notice="controlNotice" @command="controlTurn" @fullscreen="fullscreen" @configure="openMenu('controls')" />
   </div>
 </template>

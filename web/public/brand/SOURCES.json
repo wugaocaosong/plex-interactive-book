@@ -14,6 +14,13 @@
       "sha256": "8823cc24d0bcd45ab2b097095432ca64958163e1a919c9d13052cf14f4517bc7",
       "transformation": "none; CSS sizing only",
       "license": "Project-provided PLEX brand asset; no separate open license asserted"
+    },
+    {
+      "source": "Project-provided little-e.png rear view; front view generated with built-in imagegen on 2026-10-30",
+      "destination": "web/public/brand/little-e-front.png",
+      "sha256": "25e454e2ff4e0faa7b2a933c6a81504c478b227077f27e74e4da10e5b8966164",
+      "transformation": "Identity-preserving front-view generation with transparent background; CSS idle/greeting animation; no claim of rigged skeletal animation",
+      "license": "Project-provided PLEX character reference and AI-generated derivative; no separate open-source license asserted"
     }
   ]
 }

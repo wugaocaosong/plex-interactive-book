@@ -1,5 +1,5 @@
 import {upgradeProgress} from './lesson-state';
-import {upgradeBoard} from './blackboard-model';
+import {upgradeBoard,validBoardDocument} from './blackboard-model';
 import type { ReaderPreferences } from "./types";
 import { learningKey, learningScope, localLearningKey } from "./learning-scope";
 import {
@@ -281,40 +281,7 @@ export function validateBackup(value: unknown): Backup {
       )
         throw Error("三门故事记录格式错误");
     }
-    if (record.id.startsWith("blackboard:")) {
-      const board = value as any;
-      if (
-        !board ||
-        ![1, 2].includes(board.version) ||
-        typeof board.sectionId !== "string" ||
-        !Array.isArray(board.marks) ||
-        board.marks.length > 300 ||
-        board.marks.some(
-          (m: any) =>
-            !m ||
-            typeof m.id !== "string" ||
-            !["stroke", "text", "scene", "shape"].includes(m.kind) ||
-            !/^#[a-f0-9]{6}$/i.test(m.color) ||
-            (m.kind === "text" &&
-              (typeof m.text !== "string" ||
-                m.text.length > 200 ||
-                !Number.isFinite(m.x) ||
-                !Number.isFinite(m.y))) ||
-            (m.kind === "stroke" &&
-              (!Array.isArray(m.points) ||
-                m.points.length > 4000 ||
-                m.points.some(
-                  (p: any) =>
-                    !Array.isArray(p) ||
-                    p.length !== 2 ||
-                    !p.every(Number.isFinite),
-                ))) ||
-            (m.kind === "shape" && (!['rectangle','ellipse','arrow'].includes(m.shape) || !Number.isInteger(m.seed) || m.seed<1 || ![m.x,m.y,m.width,m.height].every((n:unknown)=>typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<=1000))) ||
-            (m.kind === "scene" && (!m.scene || ![1,2].includes(m.scene.version))),
-        )
-      )
-        throw Error("小黑板记录格式错误");
-    }
+    if (record.id.startsWith('blackboard:') && !validBoardDocument(value)) throw Error('小黑板记录格式错误');
     if (record.id === "unit:monty-hall") {
       const unit = value as any;
       for(const key of ['completed','hintUsage'])if(unit?.[key]!==undefined){

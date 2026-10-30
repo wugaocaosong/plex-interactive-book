@@ -31,9 +31,12 @@ for (const width of [390, 820, 1440])
       .click();
     await expect(page.locator(".unit-explanation")).toContainText("初选");
     await page.getByRole("button", { name: "把这轮画到小黑板" }).click();
+    await page.locator(".paint-options summary").click();
     await page.getByRole("button", { name: "插入三门状态图" }).click();
+    await page.getByRole("button", { name: "文字", exact: true }).click();
     await page.getByLabel("板书文字").fill("初选错误时换门获奖");
     await page.getByRole("button", { name: "添加文字", exact: true }).click();
+    await page.getByRole("button", { name: "画笔", exact: true }).click();
     const canvas = page.locator(".blackboard-canvas");
     const box = (await canvas.boundingBox())!;
     await page.mouse.move(box.x + 30, box.y + 30);
@@ -41,7 +44,7 @@ for (const width of [390, 820, 1440])
     await page.mouse.move(box.x + 90, box.y + 60, { steps: 8 });
     await page.mouse.up();
     await expect(canvas.locator("polyline")).toHaveCount(1);
-    await page.getByRole("button", { name: "清空（可撤销）" }).click();
+    await page.getByRole("button", { name: "清空", exact: true }).click();
     await expect(canvas.locator("[data-mark]")).toHaveCount(0);
     await page.getByRole("button", { name: "撤销", exact: true }).click();
     await expect(canvas.locator("[data-mark]")).toHaveCount(3);
@@ -49,7 +52,7 @@ for (const width of [390, 820, 1440])
     await page.getByRole("button", { name: "导出 PNG" }).click();
     expect((await download).suggestedFilename()).toContain(".png");
     await page.screenshot({ path: `output/playwright/v03-board-${width}.png` });
-    await page.getByRole("button", { name: "关闭", exact: true }).click();
+    await page.getByRole("button", { name: "关闭小黑板", exact: true }).click();
     await page.getByRole("button", { name: "更多阅读工具" }).click();
     await page.getByRole("button", { name: "切换阅读模式" }).click();
     await expect(page.getByLabel("连续正文")).toBeVisible();
@@ -59,7 +62,7 @@ for (const width of [390, 820, 1440])
         .locator(".blackboard-canvas text")
         .filter({ hasText: "初选错误时换门获奖" }),
     ).toHaveCount(1);
-    await page.getByRole("button", { name: "关闭", exact: true }).click();
+    await page.getByRole("button", { name: "关闭小黑板", exact: true }).click();
     await page.reload();
     await expect(page.getByLabel("连续正文")).toBeVisible();
     await open(page);

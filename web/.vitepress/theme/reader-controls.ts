@@ -1,12 +1,18 @@
 export type TurnDirection = 'previous' | 'next';
 export interface PageTurnCommand { direction: TurnDirection; source: 'keyboard' | 'gesture' | 'voice'; session: number; event: number }
-export interface ReaderControlPreferences { previous: string; next: string; sensitivity: 'low' | 'standard' | 'high'; reverse: boolean }
-export const defaultControls: ReaderControlPreferences = { previous: 'PageUp', next: 'PageDown', sensitivity: 'standard', reverse: false };
+export interface ReaderControlPreferences { previous: string; next: string; fullscreen: string; sensitivity: 'low' | 'standard' | 'high'; reverse: boolean }
+export const defaultControls: ReaderControlPreferences = { previous: 'PageUp', next: 'PageDown', fullscreen: '', sensitivity: 'standard', reverse: false };
 export function sanitizeControls(value: Partial<ReaderControlPreferences> = {}): ReaderControlPreferences {
   const p = { ...defaultControls, ...value };
   if (!validKey(p.previous) || !validKey(p.next) || p.previous === p.next) { p.previous = 'PageUp'; p.next = 'PageDown'; }
+  if (!validKey(p.fullscreen) || keyDirection(p.fullscreen,p)) p.fullscreen = '';
   if (!['low','standard','high'].includes(p.sensitivity)) p.sensitivity = 'standard';
   p.reverse = p.reverse === true; return p;
+}
+export function mappingConflict(code:string,action:'previous'|'next'|'fullscreen',prefs:ReaderControlPreferences){
+ if(!validKey(code))return true;
+ if(action==='fullscreen')return !!keyDirection(code,prefs);
+ return code===prefs.fullscreen||code===prefs[action==='next'?'previous':'next']||(action==='next'&&['ArrowLeft','PageUp'].includes(code))||(action==='previous'&&['ArrowRight','PageDown'].includes(code));
 }
 export function validKey(code: string) { return typeof code === 'string' && /^(Key[A-Z]|Digit[0-9]|Arrow(Left|Right|Up|Down)|Page(Up|Down)|Space|Enter|F([1-9]|1[0-2]))$/.test(code); }
 export function keyDirection(code: string, p: ReaderControlPreferences): TurnDirection | undefined {

@@ -1,313 +1,95 @@
 <script setup lang="ts">
-import { registerLearningFlush } from "./learning-flush";
-import { ref, onMounted, onBeforeUnmount } from "vue";
-import { getLearning, putLearning } from "./learning-store";
-import type { MontyHallSession } from "./monty-hall";
+import {ref,computed,onMounted,onBeforeUnmount,nextTick} from 'vue';
+import {getLearning,putLearning} from './learning-store';
+import {registerLearningFlush} from './learning-flush';
+import {boardWorkspace,createBoard,MAX_BOARDS,probabilityTemplate,type BlackboardMark as Mark,type BlackboardWorkspace,type BlackboardDocument,type DrawingBoard} from './blackboard-model';
 import RoughMark from './RoughMark.vue';
-import {probabilityTemplate,type BlackboardMark as Mark,type BlackboardDocument} from './blackboard-model';
-const props = defineProps<{ sectionId: string }>();
-const marks = ref<Mark[]>([]),
-  redo = ref<Mark[][]>([]),
-  undo = ref<Mark[][]>([]),
-  tool = ref("pen"),
-  color = ref("#F7EEDB"),
-  label = ref(""),
-  svg = ref<SVGSVGElement>(),
-  status = ref(""),
-  loaded = ref(false);
-const key = "blackboard:" + props.sectionId;
-let active: Mark | undefined,
-  saveTimer: ReturnType<typeof setTimeout> | undefined;
-const snapshot = () => JSON.parse(JSON.stringify(marks.value)) as Mark[];
-function checkpoint() {
-  undo.value.push(snapshot());
-  if (undo.value.length > 40) undo.value.shift();
-  redo.value = [];
+import type {MontyHallSession} from './monty-hall';
+const props=defineProps<{sectionId:string}>();
+const workspace=ref<BlackboardWorkspace>(boardWorkspace(props.sectionId));
+const board=computed(()=>workspace.value.boards.find(b=>b.id===workspace.value.activeId)!);
+const marks=computed({get:()=>board.value.marks,set:(v:Mark[])=>board.value.marks=v});
+const loaded=ref(false),tool=ref('pen'),color=ref('#F7EEDB'),thickness=ref(5),fontSize=ref(28),label=ref(''),selected=ref(''),status=ref(''),svg=ref<SVGSVGElement>(),upload=ref<HTMLInputElement>();
+const colors=['#F7EEDB','#64DCE4','#FFCC66','#FF809B','#A5DD78','#BFACFF'];
+const tools=[['select','选择 / 移动','V'],['pen','画笔','B'],['eraser','橡皮','E'],['text','文字','T'],['rectangle','矩形','R'],['ellipse','圆圈','O'],['arrow','箭头','A']];
+const histories=new Map<string,{undo:DrawingBoard[];redo:DrawingBoard[]}>();
+const tick=ref(0);
+const history=computed(()=>{void tick.value;return histories.get(board.value.id)||{undo:[],redo:[]}});
+const selectedMark=computed(()=>marks.value.find(m=>m.id===selected.value));
+const sizeW=ref(1000),sizeH=ref(600),deleted=ref<DrawingBoard>();
+const key='blackboard:'+props.sectionId;
+let disposed=false,timer:ReturnType<typeof setTimeout>|undefined,active:Mark|undefined,drag:{x:number;y:number;dx:number;dy:number}|undefined;
+function copy<T>(v:T):T{if(Array.isArray(v))return v.map(copy) as T;if(v&&typeof v==='object')return Object.fromEntries(Object.entries(v).map(([k,x])=>[k,copy(x)])) as T;return v;}
+function checkpoint(){const h=histories.get(board.value.id)||{undo:[],redo:[]};h.undo.push(copy(board.value));if(h.undo.length>40)h.undo.shift();h.redo=[];histories.set(board.value.id,h);tick.value++;}
+async function save(){clearTimeout(timer);if(!loaded.value)return;try{workspace.value.updatedAt=new Date().toISOString();await putLearning(key,workspace.value);status.value='已保存到本机';}catch{status.value='保存失败，画面仍保留；请重试或导出 PNG。';}}
+function changed(){clearTimeout(timer);timer=setTimeout(()=>void save(),500);}
+function switchBoard(id:string){active=undefined;drag=undefined;workspace.value.activeId=id;selected.value='';label.value='';sizeW.value=board.value.width;sizeH.value=board.value.height;changed();}
+function addBoard(){if(workspace.value.boards.length>=MAX_BOARDS)return;const b=createBoard('小黑板 '+(workspace.value.boards.length+1));workspace.value.boards.push(b);switchBoard(b.id);}
+function deleteBoard(){if(workspace.value.boards.length===1)return;deleted.value=copy(board.value);workspace.value.boards=workspace.value.boards.filter(b=>b.id!==board.value.id);switchBoard(workspace.value.boards[0].id);}
+function restoreBoard(){if(!deleted.value||workspace.value.boards.length>=MAX_BOARDS)return;workspace.value.boards.push(deleted.value);switchBoard(deleted.value.id);deleted.value=undefined;}
+function undoStep(){const h=history.value;if(!h.undo.length)return;h.redo.push(copy(board.value));Object.assign(board.value,h.undo.pop());selected.value='';tick.value++;changed();}
+function redoStep(){const h=history.value;if(!h.redo.length)return;h.undo.push(copy(board.value));Object.assign(board.value,h.redo.pop());selected.value='';tick.value++;changed();}
+function point(e:PointerEvent){const p=svg.value!.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const v=p.matrixTransform(svg.value!.getScreenCTM()!.inverse());return [Math.max(0,Math.min(board.value.width,v.x)),Math.max(0,Math.min(board.value.height,v.y))];}
+function hit(e:PointerEvent){return document.elementFromPoint(e.clientX,e.clientY)?.closest('[data-mark]')?.getAttribute('data-mark')||'';}
+function erase(e:PointerEvent){const id=hit(e);if(id)marks.value=marks.value.filter(m=>m.id!==id);}
+function choose(id:string){selected.value=id;const m=selectedMark.value;if(m){color.value=m.color;thickness.value=m.strokeWidth||5;fontSize.value=m.fontSize||28;label.value=m.kind==='text'?m.text||'':'';}}
+function start(e:PointerEvent){
+ if(e.button!==0||!loaded.value)return;e.preventDefault();svg.value!.focus({preventScroll:true});const [x,y]=point(e);
+ if(tool.value==='select'){choose(hit(e));if(selectedMark.value){checkpoint();active=selectedMark.value;drag={x,y,dx:active.dx||0,dy:active.dy||0};}}
+ else {if(marks.value.length>=300&&tool.value!=='eraser'){status.value='每块画板最多 300 个对象，请新建画板或导出。';return;}
+ checkpoint();selected.value='';
+ if(tool.value==='eraser')erase(e);
+ else if(tool.value==='text'){addText(x,y,false);}
+ else {marks.value.push({id:crypto.randomUUID(),kind:tool.value==='pen'?'stroke':'shape',shape:tool.value as Mark['shape'],x,y,width:0,height:0,seed:Math.floor(Math.random()*2147483646)+1,color:color.value,strokeWidth:thickness.value,points:[[x,y]]});active=marks.value.at(-1);}
+ }svg.value!.setPointerCapture(e.pointerId);changed();
 }
-async function save() {
-  clearTimeout(saveTimer);
-  if (!loaded.value) return;
-  const doc: BlackboardDocument = {
-    version: 2,
-    sectionId: props.sectionId,
-    marks: snapshot(),
-    updatedAt: new Date().toISOString(),
-  };
-  try {
-    await putLearning(key, doc);
-    status.value = "板书已保存到本机";
-  } catch {
-    status.value = "保存失败，请导出 PNG 保留当前板书";
-  }
-}
-function changed() {
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(() => void save(), 500);
-}
-function point(e: PointerEvent) {
-  const p = svg.value!.createSVGPoint();
-  p.x = e.clientX;
-  p.y = e.clientY;
-  const transformed = p.matrixTransform(svg.value!.getScreenCTM()!.inverse());
-  return [
-    Math.max(0, Math.min(1000, transformed.x)),
-    Math.max(0, Math.min(600, transformed.y)),
-  ];
-}
-function erase(e: PointerEvent) {
-  const target = document
-    .elementFromPoint(e.clientX, e.clientY)
-    ?.closest("[data-mark]");
-  if (target)
-    marks.value = marks.value.filter(
-      (m) => m.id !== target.getAttribute("data-mark"),
-    );
-}
-function start(e: PointerEvent) {
-  if (e.button !== 0 || !loaded.value) return;
-  e.preventDefault();
-  if (marks.value.length >= 300 && tool.value !== "eraser") {
-    status.value = "本页最多保留 300 个对象，请先导出或清理。";
-    return;
-  }
-  checkpoint();
-  svg.value!.setPointerCapture(e.pointerId);
-  const [x, y] = point(e);
-  if (tool.value === "eraser") erase(e);
-  else if (tool.value === "text") addText(x, y, false);
-  else {
-    active = {
-      id: crypto.randomUUID(),
-      kind: tool.value==="pen"?"stroke":"shape",
-      shape:tool.value as Mark["shape"],x,y,width:0,height:0,seed:Math.floor(Math.random()*2147483646)+1,
-      color: color.value,
-      points: [[x, y]],
-    };
-    marks.value.push(active);
-    active = marks.value.at(-1);
-  }
-  changed();
-}
-function move(e: PointerEvent) {
-  if (!svg.value?.hasPointerCapture(e.pointerId)) return;
-  if (tool.value === "eraser") erase(e);
-  else if(active?.kind==="shape"){const [x,y]=point(e);active.width=x-active.x!;active.height=y-active.y!;}
-  else if (active && active.points!.length < 4000)
-    active.points!.push(point(e));
-  changed();
-}
-function end(e: PointerEvent) {
-  active = undefined;
-  if (svg.value?.hasPointerCapture(e.pointerId))
-    svg.value.releasePointerCapture(e.pointerId);
-  void save();
-}
-function addText(x = 70, y = 90, remember = true) {
-  if (!label.value.trim() || marks.value.length >= 300) return;
-  if (remember) checkpoint();
-  marks.value.push({
-    id: crypto.randomUUID(),
-    kind: "text",
-    color: color.value,
-    text: label.value.slice(0, 200),
-    x,
-    y,
-  });
-  label.value = "";
-  changed();
-}
-function undoStep() {
-  if (!undo.value.length) return;
-  redo.value.push(snapshot());
-  marks.value = undo.value.pop()!;
-  changed();
-}
-function redoStep() {
-  if (!redo.value.length) return;
-  undo.value.push(snapshot());
-  marks.value = redo.value.pop()!;
-  changed();
-}
+function move(e:PointerEvent){if(!svg.value?.hasPointerCapture(e.pointerId))return;const [x,y]=point(e);
+ if(drag&&active){active.dx=drag.dx+x-drag.x;active.dy=drag.dy+y-drag.y;}
+ else if(tool.value==='eraser')erase(e);
+ else if(active?.kind==='shape'){active.width=x-active.x!;active.height=y-active.y!;}
+ else if(active?.points&&active.points.length<4000)active.points.push([x,y]);changed();}
+function end(e:PointerEvent){active=undefined;drag=undefined;if(svg.value?.hasPointerCapture(e.pointerId))svg.value.releasePointerCapture(e.pointerId);void save();}
+function addText(x=60,y=70,remember=true){if(!label.value.trim()||marks.value.length>=300)return;if(remember)checkpoint();const m:Mark={id:crypto.randomUUID(),kind:'text',text:label.value.slice(0,2000),x,y,color:color.value,fontSize:fontSize.value};marks.value.push(m);selected.value=m.id;tool.value='select';changed();}
+function editText(){if(selectedMark.value?.kind!=='text')return;checkpoint();selectedMark.value.text=label.value.slice(0,2000);selectedMark.value.fontSize=fontSize.value;changed();}
+function styleSelection(){if(!selectedMark.value)return;checkpoint();Object.assign(selectedMark.value,{color:color.value,strokeWidth:thickness.value,fontSize:fontSize.value});changed();}
+function removeSelected(){if(!selected.value)return;checkpoint();marks.value=marks.value.filter(m=>m.id!==selected.value);selected.value='';changed();}
+function duplicate(){if(!selectedMark.value||marks.value.length>=300)return;checkpoint();const m=copy(selectedMark.value);m.id=crypto.randomUUID();m.dx=(m.dx||0)+20;m.dy=(m.dy||0)+20;marks.value.push(m);selected.value=m.id;changed();}
+function layer(front:boolean){if(!selectedMark.value)return;checkpoint();const m=selectedMark.value;marks.value=marks.value.filter(v=>v.id!==m.id);front?marks.value.push(m):marks.value.unshift(m);changed();}
+function addShape(){if(marks.value.length>=300)return;checkpoint();const m:Mark={id:crypto.randomUUID(),kind:'shape',shape:['rectangle','ellipse','arrow'].includes(tool.value)?tool.value as Mark['shape']:'rectangle',x:80,y:80,width:240,height:140,seed:123,color:color.value,strokeWidth:thickness.value};marks.value.push(m);selected.value=m.id;changed();}
+async function scene(){const state=await getLearning<MontyHallSession|undefined>('lab:monty-hall',undefined);if(!state){status.value='请先完成一次选门。';return;}if(marks.value.length>=300)return;checkpoint();marks.value.push({id:crypto.randomUUID(),kind:'scene',color:'#D9B873',scene:copy(state)});changed();}
+function resizeCanvas(){checkpoint();board.value.width=Math.round(Math.max(320,Math.min(2400,Number(sizeW.value)||1000)));board.value.height=Math.round(Math.max(240,Math.min(1800,Number(sizeH.value)||600)));sizeW.value=board.value.width;sizeH.value=board.value.height;changed();}
+async function insertImage(e:Event){const input=e.target as HTMLInputElement,file=input.files?.[0];input.value='';if(!file)return;if(!/^image\/(png|jpeg|webp|gif)$/.test(file.type)||file.size>5*1024*1024){status.value='请选择 5 MB 以内的 PNG、JPEG、WebP 或 GIF 图片。';return;}
+ const target=board.value;const url=URL.createObjectURL(file);try{const im=new Image();im.src=url;await im.decode();if(disposed)return;if(im.width*im.height>32_000_000)throw Error('图片像素过大');const c=document.createElement('canvas'),scale=Math.min(1,1600/Math.max(im.width,im.height));c.width=Math.round(im.width*scale);c.height=Math.round(im.height*scale);c.getContext('2d')!.drawImage(im,0,0,c.width,c.height);const src=c.toDataURL('image/png');if(src.length>8_000_000)throw Error('图片过大，请压缩后重试');if(target.id!==board.value.id||marks.value.length>=300)throw Error('画板已切换或对象已达上限，请重新插入');checkpoint();const ratio=Math.min(1,(target.width-80)/c.width,(target.height-80)/c.height);const m:Mark={id:crypto.randomUUID(),kind:'image',color:'#F7EEDB',src,x:40,y:40,width:c.width*ratio,height:c.height*ratio};marks.value.push(m);choose(m.id);tool.value='select';changed();}catch(e){status.value='图片未插入：'+String(e);}finally{URL.revokeObjectURL(url);}}
+function scaleImage(factor:number){if(selectedMark.value?.kind!=='image')return;checkpoint();const m=selectedMark.value;m.width=Math.max(16,Math.min(2400,m.width!*factor));m.height=Math.max(16,Math.min(1800,m.height!*factor));changed();}
+async function png(){await save();await nextTick();const clone=svg.value!.cloneNode(true) as SVGSVGElement;clone.querySelectorAll('[data-selection]').forEach(el=>el.remove());clone.setAttribute('width',String(board.value.width));clone.setAttribute('height',String(board.value.height));const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clone)],{type:'image/svg+xml'}));try{const im=new Image();im.src=url;await im.decode();const c=document.createElement('canvas');c.width=board.value.width;c.height=board.value.height;c.getContext('2d')!.drawImage(im,0,0);const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='PLEX-'+board.value.name.replace(/[\\/:*?"<>|]/g,'-')+'.png';a.click();}catch(e){status.value='导出失败：'+String(e);}finally{URL.revokeObjectURL(url);}}
+function keyboard(e:KeyboardEvent){if((e.target as HTMLElement).closest('input,textarea,select,[contenteditable=true]'))return;if(e.ctrlKey||e.metaKey){if(e.key.toLowerCase()==='z'){e.preventDefault();e.stopPropagation();e.shiftKey?redoStep():undoStep();}return;}if(e.altKey)return;if(/^[1-6]$/.test(e.key)){color.value=colors[Number(e.key)-1];styleSelection();}else if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();removeSelected();}else if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)&&selectedMark.value){e.preventDefault();checkpoint();const m=selectedMark.value,d=e.shiftKey?10:1;m.dx=(m.dx||0)+(e.key==='ArrowLeft'?-d:e.key==='ArrowRight'?d:0);m.dy=(m.dy||0)+(e.key==='ArrowUp'?-d:e.key==='ArrowDown'?d:0);changed();}else{const t=tools.find(t=>t[2].toLowerCase()===e.key.toLowerCase());if(t){tool.value=t[0];e.preventDefault();}}e.stopPropagation();}
 function template(){if(marks.value.length>294)return;checkpoint();marks.value.push(...probabilityTemplate().map(m=>({...m,id:crypto.randomUUID()})));changed();}
-function addShape(){if(marks.value.length>=300)return;checkpoint();marks.value.push({id:crypto.randomUUID(),kind:'shape',shape:['rectangle','ellipse','arrow'].includes(tool.value)?tool.value as Mark['shape']:'rectangle',x:80,y:80,width:240,height:140,seed:Math.floor(Math.random()*2147483646)+1,color:color.value});changed();}
-async function scene() {
-  if (marks.value.length >= 300) {
-    status.value = "本页对象已达 300 个，请先导出或清理。";
-    return;
-  }
-  const state = await getLearning<MontyHallSession | undefined>(
-    "lab:monty-hall",
-    undefined,
-  );
-  if (!state) {
-    status.value = "先完成一次选门，再插入状态图。";
-    return;
-  }
-  checkpoint();
-  marks.value.push({
-    id: crypto.randomUUID(),
-    kind: "scene",
-    color: "#D9B873",
-    scene: state,
-  });
-  changed();
-}
-async function png() {
-  await save();
-  const source = new XMLSerializer().serializeToString(svg.value!);
-  const url = URL.createObjectURL(
-    new Blob([source], { type: "image/svg+xml" }),
-  );
-  const image = new Image();
-  try {
-    image.src = url;
-    await image.decode();
-    const canvas = document.createElement("canvas");
-    canvas.width = 1600;
-    canvas.height = 960;
-    canvas.getContext("2d")!.drawImage(image, 0, 0, 1600, 960);
-    const a = document.createElement("a");
-    a.href = canvas.toDataURL("image/png");
-    a.download = "PLEX-板书-" + props.sectionId.replaceAll("/", "-") + ".png";
-    a.click();
-  } catch (e) {
-    status.value = "导出失败：" + String(e);
-  } finally {
-    URL.revokeObjectURL(url);
-  }
-}
-onMounted(async () => {
-  const doc = await getLearning<BlackboardDocument | undefined>(key, undefined);
-  if (disposed) return;
-  if ((doc?.version === 1 || doc?.version===2) && Array.isArray(doc.marks)) marks.value = doc.marks;
-  loaded.value = true;
-});
-let disposed = false;
-const unregisterFlush = registerLearningFlush(save);
-onBeforeUnmount(() => {
-  disposed = true;
-  unregisterFlush();
-});
-onBeforeUnmount(() => void save());
+onMounted(async()=>{const old=await getLearning<BlackboardWorkspace|BlackboardDocument|undefined>(key,undefined);if(disposed)return;workspace.value=boardWorkspace(props.sectionId,old);sizeW.value=board.value.width;sizeH.value=board.value.height;loaded.value=true;});
+const unregister=registerLearningFlush(save);onBeforeUnmount(()=>{disposed=true;unregister();void save();});
 </script>
 <template>
-  <section class="blackboard-panel">
-    <p class="unit-muted">本页板书 · 支持鼠标、触笔与触屏</p>
-    <div class="unit-actions">
-      <label
-        >工具<select v-model="tool" aria-label="工具">
-          <option value="pen">画笔</option><option value="rectangle">矩形</option><option value="ellipse">圆圈</option><option value="arrow">箭头</option>
-          <option value="eraser">橡皮</option>
-          <option value="text">点击放置文字</option>
-        </select></label
-      ><label>颜色<input v-model="color" type="color" /></label
-      ><button :disabled="!undo.length" @click="undoStep">撤销</button
-      ><button :disabled="!redo.length" @click="redoStep">重做</button
-      ><button
-        @click="
-          checkpoint();
-          marks = [];
-          changed();
-        "
-      >
-        清空（可撤销）
-      </button>
-    </div>
-    <div class="unit-actions">
-      <input
-        v-model="label"
-        maxlength="200"
-        aria-label="板书文字"
-        placeholder="输入解释，再点击添加或在黑板中定位"
-        @keydown.enter="addText()"
-      /><button @click="addText()">添加文字</button
-      ><button @click="addShape">添加所选图形</button><button @click="template">插入概率分组模板</button><button @click="scene">插入三门状态图</button
-      ><button @click="png">导出 PNG</button>
-    </div>
-    <svg
-      ref="svg"
-      class="blackboard-canvas"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1000 600"
-      role="img"
-      aria-label="本页小黑板；可使用文字输入和插入状态图按钮"
-      @pointerdown="start"
-      @pointermove="move"
-      @pointerup="end"
-      @pointercancel="end"
-    >
-      <rect width="1000" height="600" fill="#242723" />
-      <g v-for="m in marks" :key="m.id" :data-mark="m.id">
-        <RoughMark v-if="m.kind==='shape'" :mark="m"/>
-        <polyline
-          v-if="m.kind === 'stroke'"
-          :points="m.points?.map((p) => p.join(',')).join(' ')"
-          :stroke="m.color"
-          stroke-width="5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          fill="none"
-        />
-        <text
-          v-if="m.kind === 'text'"
-          :x="m.x"
-          :y="m.y"
-          :fill="m.color"
-          font-family="sans-serif"
-          font-size="28"
-        >
-          {{ m.text }}
-        </text>
-        <g
-          v-if="m.kind === 'scene' && m.scene"
-          font-family="sans-serif"
-          text-anchor="middle"
-        >
-          <g v-for="d in [0, 1, 2]" :key="d">
-            <rect
-              :x="90 + d * 300"
-              y="200"
-              width="220"
-              height="230"
-              rx="15"
-              fill="#131315"
-              :stroke="m.scene.first === d ? '#D9B873' : '#4F8D86'"
-              stroke-width="4"
-            />
-            <text :x="200 + d * 300" y="270" fill="#F7EEDB" font-size="26">
-              {{ d + 1 }} 号舱门
-            </text>
-            <text :x="200 + d * 300" y="350" fill="#D9B873" font-size="28">
-              {{
-                m.scene.step === 3 && m.scene.prize === d
-                  ? "能源核心"
-                  : m.scene.step >= 2 && m.scene.opened === d
-                    ? "空舱"
-                    : "尚未揭晓"
-              }}
-            </text>
-            <text :x="200 + d * 300" y="470" fill="#F7EEDB" font-size="22">
-              {{ m.scene.first === d ? "初选" : "" }}
-              {{ m.scene.step === 3 && m.scene.final === d ? "最终选择" : "" }}
-            </text>
-          </g>
-        </g>
-      </g>
-    </svg>
-    <p role="status">{{ status }}</p>
-    <details>
-      <summary>查看板书文字描述</summary>
-      <ul>
-        <li v-for="m in marks" :key="m.id">
-          {{
-            m.kind === "text"
-              ? m.text
-              : m.kind === "scene"
-                ? `三门状态：初选 ${m.scene?.first !== undefined ? m.scene.first + 1 : "尚未选择"} 号；${m.scene?.step! >= 2 ? "打开 " + (m.scene!.opened! + 1) + " 号空门" : "尚未开门"}；${m.scene?.step === 3 ? "核心在 " + (m.scene.prize + 1) + " 号，最终选择 " + (m.scene.final! + 1) + " 号" : "核心位置尚未揭晓"}`
-                : m.kind==="shape" ? ({rectangle:"矩形",ellipse:"圆圈",arrow:"箭头"}[m.shape!]) : "手绘笔画"
-          }}
-        </li>
-      </ul>
-    </details>
-  </section>
+<section class="blackboard-panel paint-panel" @keydown="keyboard" aria-label="绘画工具与画布">
+ <div class="paint-boards"><label>画板<select aria-label="画板" :value="workspace.activeId" @change="switchBoard(($event.target as HTMLSelectElement).value)"><option v-for="b in workspace.boards" :value="b.id" :key="b.id">{{b.name}}</option></select></label><span>{{workspace.boards.length}} / 10</span><button :disabled="!loaded||workspace.boards.length>=MAX_BOARDS" @click="addBoard">新建画板</button><button :disabled="workspace.boards.length===1" @click="deleteBoard">删除画板</button><button v-if="deleted" :disabled="workspace.boards.length>=MAX_BOARDS" @click="restoreBoard">恢复已删画板</button><label>名称<input :value="board.name" maxlength="40" @change="board.name=($event.target as HTMLInputElement).value.trim()||'未命名画板';changed()" /></label></div>
+ <div class="paint-tools" role="toolbar" aria-label="画图工具"><button v-for="[id,name,key] in tools" :key="id" :aria-pressed="tool===id" :title="name+' ('+key+')'" @click="tool=id">{{name}}</button><button :disabled="!history.undo.length" @click="undoStep">撤销</button><button :disabled="!history.redo.length" @click="redoStep">重做</button><button @click="checkpoint();marks=[];selected='';changed()">清空</button><button @click="upload?.click()">插入图片</button><input ref="upload" hidden type="file" accept="image/png,image/jpeg,image/webp,image/gif" @change="insertImage"/><button @click="png">导出 PNG</button></div>
+ <div class="paint-tools"><button v-for="(c,i) in colors" :key="c" class="paint-color" :style="{background:c}" :aria-label="'颜色 '+(i+1)" :aria-pressed="color===c" :title="'颜色快捷键 '+(i+1)" @click="color=c;styleSelection()">{{i+1}}</button><label>自选色<input v-model="color" type="color" @change="styleSelection"/></label><label>粗细<input v-model.number="thickness" type="range" min="1" max="40" @change="styleSelection"/>{{thickness}}</label><label>字号<input v-model.number="fontSize" type="number" min="12" max="120" @change="fontSize=Math.max(12,Math.min(120,fontSize||28));styleSelection()"/></label></div>
+ <div v-if="tool==='text'||selectedMark?.kind==='text'" class="paint-text"><textarea v-model="label" aria-label="板书文字" maxlength="2000" placeholder="输入文字，点击添加；选择工具可拖动文字框"/><button @click="addText()">添加文字</button><button v-if="selectedMark?.kind==='text'" @click="editText">更新文字</button></div>
+ <div v-if="selectedMark" class="paint-tools"><span>已选中{{selectedMark.kind==='text'?'文字':selectedMark.kind==='image'?'图片':'对象'}} · 可拖动 / 方向键微调</span><button @click="duplicate">复制对象</button><button @click="removeSelected">删除对象</button><button @click="layer(true)">置顶</button><button @click="layer(false)">置底</button><button v-if="selectedMark.kind==='image'" @click="scaleImage(1.2)">放大图片</button><button v-if="selectedMark.kind==='image'" @click="scaleImage(1/1.2)">缩小图片</button></div>
+ <div class="paint-stage"><svg ref="svg" class="blackboard-canvas" xmlns="http://www.w3.org/2000/svg" :viewBox="`0 0 ${board.width} ${board.height}`" tabindex="0" role="img" aria-label="小黑板画布，选择工具可以拖动对象" @pointerdown="start" @pointermove="move" @pointerup="end" @pointercancel="end">
+ <rect :width="board.width" :height="board.height" :fill="board.background"/>
+ <g v-for="m in marks" :key="m.id" :data-mark="m.id" :transform="`translate(${m.dx||0} ${m.dy||0})`">
+ <rect v-if="m.kind==='text'" :x="m.x" :y="(m.y||0)-(m.fontSize||28)" :width="Math.max(24,...(m.text||'').split('\n').map(line=>line.length*(m.fontSize||28)))" :height="(m.fontSize||28)*1.35*(m.text||'').split('\n').length" fill="transparent" pointer-events="all"/>
+ <RoughMark v-if="m.kind==='shape'" :mark="m"/>
+ <circle v-if="m.kind==='stroke'&&m.points?.length===1" :cx="m.points[0][0]" :cy="m.points[0][1]" :r="(m.strokeWidth||5)/2" :fill="m.color"/>
+ <polyline v-if="m.kind==='stroke'" :points="m.points?.map(p=>p.join(',')).join(' ')" :stroke="m.color" :stroke-width="m.strokeWidth||5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+ <text v-if="m.kind==='text'" :x="m.x" :y="m.y" :fill="m.color" font-family="sans-serif" :font-size="m.fontSize||28"><tspan v-for="(line,i) in m.text?.split('\n')" :key="i" :x="m.x" :dy="i?(m.fontSize||28)*1.35:0">{{line||' '}}</tspan></text>
+ <image v-if="m.kind==='image'" :href="m.src" :x="m.x" :y="m.y" :width="m.width" :height="m.height" preserveAspectRatio="xMidYMid meet"/>
+ <g v-if="m.kind==='scene'&&m.scene" font-family="sans-serif" text-anchor="middle"><g v-for="d in [0,1,2]" :key="d"><rect :x="90+d*300" y="200" width="220" height="230" rx="15" fill="#131315" :stroke="m.scene.first===d?'#D9B873':'#4F8D86'" stroke-width="4"/><text :x="200+d*300" y="270" fill="#F7EEDB" font-size="26">{{d+1}} 号舱门</text><text :x="200+d*300" y="350" fill="#D9B873" font-size="28">{{m.scene.step===3&&m.scene.prize===d?'能源核心':m.scene.step>=2&&m.scene.opened===d?'空舱':'尚未揭晓'}}</text></g></g>
+ <rect v-if="m.id===selected" data-selection :x="(m.x||0)-5" :y="(m.y||0)-(m.kind==='text'?(m.fontSize||28):0)-5" :width="Math.max(24,Math.abs(m.width||((m.text?.length||3)*(m.fontSize||28))))" :height="Math.max(24,Math.abs(m.height||(m.fontSize||28)*1.5))" fill="none" stroke="#64DCE4" stroke-width="2" stroke-dasharray="6 4" pointer-events="none"/>
+ </g></svg></div>
+ <details class="paint-options"><summary>画布尺寸与快捷键</summary><div class="paint-tools"><label>宽<input v-model.number="sizeW" type="number" min="320" max="2400"/></label><label>高<input v-model.number="sizeH" type="number" min="240" max="1800"/></label><button @click="resizeCanvas">应用画布尺寸</button><label>底色<input v-model="board.background" type="color" @change="changed"/></label><button @click="template">插入概率分组模板</button><button @click="scene">插入三门状态图</button><button @click="addShape">添加所选图形</button></div><p>1–6 换色 · B 画笔 · V 选择移动 · E 橡皮 · T 文字 · R 矩形 · O 圆圈 · A 箭头 · Ctrl/⌘ Z 撤销 · Ctrl/⌘ Shift Z 重做 · Delete 删除选中对象。改变画布尺寸不删除已有内容，恢复原尺寸即可重新查看。</p></details>
+ <p class="paint-status" role="status">{{status||'自动保存 · 可拖动标题栏与右下角调整窗口'}} <button v-if="status.includes('失败')" @click="save">重试保存</button></p>
+</section>
 </template>
+<style>
+.paint-panel{display:flex;flex-direction:column;gap:10px;min-height:0;color:#e2f3f8;padding:12px}.paint-boards,.paint-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.paint-panel button,.paint-panel input,.paint-panel select,.paint-panel textarea{font:inherit;font-size:13px;background:#132c40;color:#eef9ff;border:1px solid #54778e;border-radius:5px;padding:6px 9px;max-width:100%}.paint-panel button:disabled{opacity:.5}.paint-panel button[aria-pressed=true]{outline:2px solid #77d9ee;outline-offset:1px}.paint-panel label{display:inline-flex;align-items:center;gap:6px;font-size:12px}.paint-boards input{width:120px}.paint-panel input[type=number]{width:74px}.paint-panel input[type=range]{width:90px;padding:0}.paint-panel input[type=color]{width:36px;height:30px;padding:2px}.paint-panel .paint-color{width:30px;height:30px;padding:0;color:#102333;border:2px solid transparent;font-weight:800}.paint-text{display:flex;gap:8px;align-items:center}.paint-text textarea{flex:1;min-width:0;resize:vertical;min-height:54px}.paint-stage{overflow:auto;flex:1;min-height:240px;background:#0a1621;border:1px solid #54778e;border-radius:6px}.paint-panel .blackboard-canvas{display:block;width:100%;height:auto;min-height:240px;touch-action:none;user-select:none;border:0}.paint-options{font-size:12px}.paint-options summary{cursor:pointer}.paint-options p{line-height:1.7}.paint-status{font-size:12px;margin:0;color:#b3cbd6}.paint-panel :focus-visible{outline:2px solid #ffe48f;outline-offset:2px}
+</style>

@@ -24,13 +24,12 @@ const MontyStory = defineAsyncComponent(() => import("./MontyStory.vue"));
 const MontySimulation = defineAsyncComponent(
   () => import("./MontySimulation.vue"),
 );
-const Blackboard = defineAsyncComponent(() => import("./Blackboard.vue"));
 const CodePanel = defineAsyncComponent(() => import("./CodePanel.vue"));
 const H5PPanel = defineAsyncComponent(() => import("./H5PPanel.vue"));
 const PlexProfile = defineAsyncComponent(() => import("./PlexProfile.vue"));
 const PlexCoach = defineAsyncComponent(() => import("./PlexCoach.vue"));
 const props = defineProps<{ sectionId: string; initialMode?: string; currentSectionId?:string }>();
-const emit = defineEmits<{ navigate: [id: string]; activity:[id:string] }>();
+const emit = defineEmits<{ navigate: [id: string]; activity:[id:string]; blackboard:[id:string] }>();
 const tabs = [
   ["profile", "学习起点"],
   ["rules","开门规则"],
@@ -152,6 +151,7 @@ function changed(event: Event) {
     void refresh().catch(() => {});
 }
 async function change(value: string) {
+  if(value==='blackboard'){await flushLearning();emit('blackboard',props.sectionId);return;}
   if (value === mode.value && !selected.value) return;
   await flushLearning();
   mode.value = value;
@@ -306,11 +306,6 @@ onBeforeUnmount(() => {
         </div></template
       >
       <H5PPanel v-if="mode === 'quiz'" activity-id="monty-hall" />
-      <Blackboard
-        v-if="mode === 'blackboard'"
-        :key="sectionId"
-        :section-id="sectionId"
-      />
       <PlexCoach v-if="mode === 'coach'" :server-ref="lesson?.serverRef" :suggested-question="lesson?.prompt"/>
       <section v-if="mode === 'progress'" class="unit-progress">
         <span class="unit-eyebrow">MISSION LOG · 学习回顾</span>
