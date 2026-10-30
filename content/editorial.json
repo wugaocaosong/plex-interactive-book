@@ -6,11 +6,11 @@
   },
   "title": {
     "title": "扉页",
-    "markdown": "# 星轨编程\n\n## Python 与算法的探索之旅\n\nPLEX 交互式数字教材\n\n从第一个变量，到一片算法星空。\n\n正文：**《Genius 算法》**\n\n原作作者：**krahets 及 Hello Algo 贡献者**\n\n数字教材编者：待填写\n\n出版机构：**PLEX 数字教材工作室（暂定）**\n\n试阅版 · 2026"
+    "markdown": "# 星轨编程\n\n## Python 与算法的探索之旅\n\nPLEX 交互式数字教材\n\n从第一个变量，到一片算法星空。\n\n正文来源：**《Hello 算法》**\n\n原作者：**krahets 及 Hello Algo 贡献者**\n\n数字教材编者：待填写\n\n试阅版 · 2026"
   },
   "copyright": {
     "title": "版权与来源",
-    "markdown": "# 版权与来源\n\n本电子书《Genius 算法》采用并改编自《Hello 算法》。上游文本、代码和图像的作者为 krahets 及 Hello Algo 贡献者，采用 **CC BY-NC-SA 4.0** 许可。\n\n[原项目](https://github.com/krahets/hello-algo) · [许可全文](https://creativecommons.org/licenses/by-nc-sa/4.0/)\n\n采用版本：`350f483801b2badb95180047aa82cadb825852a2`。正文仅进行阅读格式转换、代码展开、链接适配与编排调整。PLEX 献辞、编者前言、后记和新增练习为本数字教材的新增内容，不代表原作者观点。改编教材内容按 CC BY-NC-SA 4.0 分享；商业用途需另行取得授权。\n\nVitePress、StPageFlip、H5P Interactive Book 与 H5P Standalone 使用 MIT 许可，Pyodide 使用 MPL-2.0；字体和其他依赖的许可随项目保存。\n\n封面由用户提供。出版机构暂列 **PLEX 数字教材工作室（暂定）**，正式出版机构、书号与编者信息待确认。本项目尚未取得正式出版资质，本试阅版不声明已正式出版。\n\n[随书软件与字体许可](/licenses/THIRD_PARTY_NOTICES.md)"
+    "markdown": "# 版权与来源\n\n本电子书基于《Hello 算法》制作。上游文本、代码和图像的作者为 krahets 及 Hello Algo 贡献者，采用 **CC BY-NC-SA 4.0** 许可。\n\n[原项目](https://github.com/krahets/hello-algo) · [许可全文](https://creativecommons.org/licenses/by-nc-sa/4.0/)\n\n采用版本：`350f483801b2badb95180047aa82cadb825852a2`。正文仅进行阅读格式转换、代码展开、链接适配与编排调整。PLEX 献辞、编者前言、后记和新增练习为本数字教材的新增内容，不代表原作者观点。改编教材内容按 CC BY-NC-SA 4.0 分享；商业用途需另行取得授权。\n\nVitePress、StPageFlip、H5P Interactive Book 与 H5P Standalone 使用 MIT 许可，Pyodide 使用 MPL-2.0；字体和其他依赖的许可随项目保存。\n\n封面由用户提供。编者姓名、出版机构、书号：待填写。本试阅版不声明已正式出版。\n\n[随书软件与字体许可](/licenses/THIRD_PARTY_NOTICES.md)"
   },
   "dedication": {
     "title": "献给每一位探索者",
@@ -18,7 +18,7 @@
   },
   "editor-preface": {
     "title": "编者前言：把知识变成探索",
-    "markdown": "# 把知识变成探索\n\n这本书邀请你边读边做：翻过一页，观察算法的一步；修改一行代码，看看结果如何改变。\n\n我们保留《Genius 算法》的完整中文教材内容，在它周围加入星轨目录、翻页阅读、Python 运行与练习。星图上的每一颗行星通向一个知识主题，文字目录则帮助你按顺序稳步前进。\n\n初次阅读时，从“初识算法”开始。看到图解，可以逐帧观察；遇到代码，可以打开完整示例运行。如果暂时没理解，留下书签，稍后再回来。\n\n本书正文改编自《Hello 算法》；原序与前言保留原作者叙述并标注来源。\n\n*本页为 PLEX 数字教材编者草稿。*"
+    "markdown": "# 把知识变成探索\n\n这本书邀请你边读边做：翻过一页，观察算法的一步；修改一行代码，看看结果如何改变。\n\n我们保留《Hello 算法》的完整中文教材内容，在它周围加入星轨目录、翻页阅读、Python 运行与练习。星图上的每一颗行星通向一个知识主题，文字目录则帮助你按顺序稳步前进。\n\n初次阅读时，从“初识算法”开始。看到图解，可以逐帧观察；遇到代码，可以打开完整示例运行。如果暂时没理解，留下书签，稍后再回来。\n\n接下来的原序与前言来自《Hello 算法》，保留原作者的叙述。\n\n*本页为 PLEX 数字教材编者草稿。*"
   },
   "contents": {
     "title": "星域目录",
@@ -33,7 +33,7 @@
   "acknowledgements": {
     "title": "致谢",
     "group": "卷末",
-    "markdown": "# 致谢\n\n感谢 krahets 与 Hello Algo 开源贡献者，为算法入门提供系统、清晰的文字、代码和图解，成为《Genius 算法》的重要内容来源。\n\n感谢 VitePress、Vue、H5P、StPageFlip、Pyodide 及相关开源项目的维护者，让教材能够在浏览器中被阅读、操作和运行。\n\n[查看原项目贡献者](https://github.com/krahets/hello-algo/graphs/contributors)\n\n本数字教材的编辑、设计与测试参与者名单将在确认后补充。\n\n*本页为 PLEX 数字教材致谢草稿。*"
+    "markdown": "# 致谢\n\n感谢 krahets 与 Hello Algo 开源贡献者，为算法入门提供系统、清晰的文字、代码和图解。\n\n感谢 VitePress、Vue、H5P、StPageFlip、Pyodide 及相关开源项目的维护者，让教材能够在浏览器中被阅读、操作和运行。\n\n[查看 Hello Algo 贡献者](https://github.com/krahets/hello-algo/graphs/contributors)\n\n本数字教材的编辑、设计与测试参与者名单将在确认后补充。\n\n*本页为 PLEX 数字教材致谢草稿。*"
   },
   "index": {
     "title": "知识索引",
@@ -44,12 +44,12 @@
   "about": {
     "title": "作者与编者",
     "group": "卷末",
-    "markdown": "# 作者与编者\n\n## 原作作者\n\n**krahets 及 Hello Algo 贡献者**\n\n《Genius 算法》正文改编自开源项目《Hello 算法》。原作者及贡献者署名保留，改编内容依 CC BY-NC-SA 4.0 许可分享。\n\n[访问原作者主页](https://github.com/krahets)\n\n## 数字教材编者\n\nPLEX 数字教材制作团队。\n\n姓名、机构与个人简介：待填写。"
+    "markdown": "# 作者与编者\n\n## 原作作者\n\n**krahets 及 Hello Algo 贡献者**\n\n本书算法正文来自开源项目《Hello 算法》。原作及代码贡献者的署名保留在来源记录和源文件中。\n\n[访问原作者主页](https://github.com/krahets)\n\n## 数字教材编者\n\nPLEX 数字教材制作团队。\n\n姓名、机构与个人简介：待填写。"
   },
   "back-cover": {
     "title": "封底",
     "group": "卷末",
     "kind": "back-cover",
-    "markdown": "# 探索，仍在继续。\n\n把抽象的算法，变成可看见的每一步。\n\n把第一次尝试，变成下一次出发。\n\n**PLEX · 星轨编程**\n\nPython 与算法的探索之旅\n\nPLEX 数字教材工作室（暂定）\n\n《Genius 算法》· 改编自《Hello 算法》· CC BY-NC-SA 4.0"
+    "markdown": "# 探索，仍在继续。\n\n把抽象的算法，变成可看见的每一步。\n\n把第一次尝试，变成下一次出发。\n\n**PLEX · 星轨编程**\n\nPython 与算法的探索之旅\n\n基于《Hello 算法》制作 · CC BY-NC-SA 4.0"
   }
 }
