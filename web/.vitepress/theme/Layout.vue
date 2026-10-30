@@ -41,6 +41,24 @@ import { bindPageDrag } from "./page-drag";
 import { flushLearning } from "./learning-flush";
 import StarMap from "./StarMap.vue";
 import StudyReader from "./StudyReader.vue";
+import ReaderControls from './ReaderControls.vue';
+import {CommandGate,type PageTurnCommand} from './reader-controls';
+const turnGate=new CommandGate();
+const controlNotice=ref('');let noticeTimer:ReturnType<typeof setTimeout>|undefined;
+function turnNotice(text:string){controlNotice.value=text;clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>controlNotice.value='',2200);}
+async function controlTurn(command:PageTurnCommand){
+ const editing=(document.activeElement as HTMLElement)?.closest('input,textarea,select,[contenteditable=true],.cm-editor');
+ const blocked=!!(menu.value||panel.value||selection.value||loading.value||editing||!document.hasFocus()||document.hidden||!getSelection()?.isCollapsed||(flip&&flip.getState()!=='read'));
+ if(!turnGate.accept(command,performance.now(),blocked))return;
+ if(preferences.value.mode==='study'&&!cover.value&&study.value){
+  const moved=await study.value.turnScreen(command.direction==='next'?1:-1);turnNotice(moved?'已滚动一屏':'已到阅读边界');return;
+ }
+ const previousDirection=command.direction==='previous';
+ const available=previousDirection?(pageIndex.value>0||sectionIndex.value>0):(pageIndex.value+(desktop.value?2:1)<leaves.value.length||sectionIndex.value<sections.value.length-1);
+ if(!available){turnNotice(previousDirection?'已到封面':'已到封底');return;}
+ if(previousDirection)previous();else next();
+ turnNotice(previousDirection?'上一页':'下一页');
+}
 import ChapterTermNote from "./ChapterTermNote.vue";
 import ChapterAnnotation from "./ChapterAnnotation.vue";
 const Chapter12Panel = defineAsyncComponent(() => import("./Chapter12Panel.vue"));
@@ -107,7 +125,7 @@ const sectionIndex = computed(() =>
 const cover = computed(() => current.value?.kind === "cover");
 const backCover = computed(() => current.value?.kind === "back-cover");
 const menu = ref<
-  "contents" | "search" | "bookmarks" | "settings" | "notes" | "more" | null
+  "contents" | "search" | "bookmarks" | "settings" | "notes" | "more" | "controls" | null
 >(null);
 const mapView = ref(true);
 const query = ref("");
@@ -366,6 +384,7 @@ const menuLabel = computed(
       search: "搜索全书",
       bookmarks: "我的书签",
       settings: "阅读设置",
+      controls: "翻页控制",
       notes: "学习笔记",
       more: "阅读工具",
     })[menu.value || "contents"],
@@ -1192,14 +1211,7 @@ function keydown(event: KeyboardEvent) {
     preferences.value.mode === "study"
   )
     return;
-  if (event.key === "ArrowRight") {
-    event.preventDefault();
-    next();
-  }
-  if (event.key === "ArrowLeft") {
-    event.preventDefault();
-    previous();
-  }
+
 }
 function hashchange() {
   const place = resolvePlace(parseHash());
@@ -1539,7 +1551,9 @@ onBeforeUnmount(() => {
             <X :size="22" />
           </button>
         </div>
+        <div v-if="menu === 'controls'" id="reader-control-slot"></div>
         <div v-if="menu === 'more'" class="more-tools">
+          <button @click="openMenu('controls')">翻页控制</button>
           <button
             aria-label="切换阅读模式"
             @click="
@@ -1783,5 +1797,6 @@ onBeforeUnmount(() => {
         />
       </section>
     </div>
+    <ReaderControls :settings="menu==='controls'" :blocked="overlayOpen" :notice="controlNotice" @command="controlTurn" @configure="openMenu('controls')" />
   </div>
 </template>
