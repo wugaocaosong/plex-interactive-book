@@ -1,0 +1,18 @@
+{
+  "id": "cover",
+  "title": "星轨编程",
+  "kind": "cover",
+  "group": "卷首",
+  "route": "/read/cover",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-67bf6fb7e5f4328f\">星轨编程</h1>\n<p data-block=\"blk-088d6fa5e734efd1\">Python 与算法的探索之旅</p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-67bf6fb7e5f4328f",
+    "b1": "blk-088d6fa5e734efd1"
+  },
+  "contentVersion": "f84880682792d2e8"
+}

@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-22",
+  "applicationCommit": "330482fa81052fb94b0f296c58689217ec656b09",
+  "source": "fresh clone from private GitHub repository",
+  "environment": {
+    "os": "Windows",
+    "node": "24.14.1",
+    "npm": "11.11.0",
+    "python": "3.14.3",
+    "pythonEnvironment": "isolated venv, requirements.lock.txt",
+    "nodeInstall": "npm ci",
+    "browser": "local Chromium, Playwright 1.56.1"
+  },
+  "checks": {
+    "import": "passed, generated output equals committed content",
+    "types": "passed",
+    "contentAudit": "passed",
+    "nodeTests": 5,
+    "pythonTests": 4,
+    "productionBuild": "passed",
+    "browserTests": {
+      "startTime": "2026-10-22T09:08:44.389Z",
+      "duration": 133775.486,
+      "expected": 16,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "pagination": [
+    {
+      "width": 390,
+      "sections": 127,
+      "leaves": 882,
+      "failedSections": 0
+    },
+    {
+      "width": 820,
+      "sections": 127,
+      "leaves": 606,
+      "failedSections": 0
+    },
+    {
+      "width": 1440,
+      "sections": 127,
+      "leaves": 657,
+      "failedSections": 0
+    }
+  ],
+  "pythonExamplesExecuted": 73,
+  "upstreamSourceFilesTracked": 2051,
+  "h5pContentAndLibraryFilesTracked": 277,
+  "packageSmoke": {
+    "status": "passed",
+    "source": "extracted ZIP without node_modules or Python environment",
+    "checks": [
+      "cover and title",
+      "clean subsection route",
+      "Python full binary-search example",
+      "H5P answer and saved score"
+    ],
+    "failedResources": [],
+    "externalRequests": []
+  }
+}

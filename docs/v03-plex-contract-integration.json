@@ -1,0 +1,67 @@
+{
+  "plexCommit": "536ac132f35dfff88f97bc85f1515a77d405b153",
+  "database": "isolated temporary SQLite",
+  "import": [
+    {
+      "ref": "MH030001",
+      "canonical_ref": "bank-1",
+      "changed": true,
+      "source_ref": "plex-interactive-book:monty:v1:monty-frequency",
+      "tests": 4
+    },
+    {
+      "ref": "MH030002",
+      "canonical_ref": "bank-2",
+      "changed": true,
+      "source_ref": "plex-interactive-book:monty:v1:monty-host",
+      "tests": 9
+    },
+    {
+      "ref": "MH030003",
+      "canonical_ref": "bank-3",
+      "changed": true,
+      "source_ref": "plex-interactive-book:monty:v1:monty-strategy",
+      "tests": 5
+    }
+  ],
+  "authProfileRefresh": true,
+  "execution": "mocked contract only",
+  "submissions": [
+    {
+      "ref": "MH030001",
+      "referencePassed": true,
+      "wrongStarterRejected": false,
+      "duplicateIdempotent": true,
+      "staleVersionRejected": true
+    },
+    {
+      "ref": "MH030002",
+      "referencePassed": true,
+      "wrongStarterRejected": false,
+      "duplicateIdempotent": true,
+      "staleVersionRejected": true
+    },
+    {
+      "ref": "MH030003",
+      "referencePassed": true,
+      "wrongStarterRejected": false,
+      "duplicateIdempotent": true,
+      "staleVersionRejected": true
+    }
+  ],
+  "model": {
+    "requested": false,
+    "status": "safe_fallback",
+    "generation_mode": "rules",
+    "policy": {
+      "checks": [],
+      "reason": "model_unavailable",
+      "status": "safe_fallback",
+      "version": "tutor-modes-5"
+    },
+    "summary": "这次还没有得到通过全部检查的针对性解释，可以先做一次小范围核对。",
+    "next_step": "把当前最不确定的一个条件写出来，并说明你预计它何时成立。"
+  },
+  "failedModelNotImpersonated": true,
+  "logoutRevokesRefresh": true
+}

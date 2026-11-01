@@ -1,0 +1,19 @@
+{
+  "id": "index",
+  "title": "知识索引",
+  "kind": "index",
+  "group": "卷末",
+  "route": "/read/index",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-70ddaf8ac462829e\">知识索引</h1>\n<p data-block=\"blk-69f54aa07ba36e5f\">通过工具栏的“搜索”查找全书中的术语、算法与代码。</p>\n<ul data-block=\"blk-27d74e1f33672b90\">\n<li><a href=\"/read/chapter_appendix/terminology\">算法术语表</a></li>\n<li><a href=\"/read/chapter_computational_complexity/index\">复杂度分析</a></li>\n<li><a href=\"/read/chapter_data_structure/index\">数据结构</a></li>\n<li><a href=\"/read/chapter_searching/index\">搜索</a></li>\n<li><a href=\"/read/chapter_sorting/index\">排序</a></li>\n<li><a href=\"/read/chapter_dynamic_programming/index\">动态规划</a></li>\n<li><a href=\"/read/chapter_reference/index\">参考文献</a></li>\n</ul>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-70ddaf8ac462829e",
+    "b1": "blk-69f54aa07ba36e5f",
+    "b2": "blk-27d74e1f33672b90"
+  },
+  "contentVersion": "b0de9dbe74701efd"
+}

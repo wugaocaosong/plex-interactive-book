@@ -1,0 +1,45 @@
+{
+  "id": "chapter_appendix/contribution",
+  "title": "16.2   一起参与创作",
+  "kind": "chapter",
+  "group": "第 16 章   附录",
+  "route": "/read/chapter_appendix/contribution",
+  "sourcePath": "chapter_appendix/contribution.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"blk-65f837bfbd9d258a\" id=\"_1\">一起参与创作</h1>\n<p data-block=\"blk-3685842d0f59c648\">由于笔者能力有限，书中难免存在一些遗漏和错误，请您谅解。如果您发现了笔误、链接失效、内容缺失、文字歧义、解释不清晰或行文结构不合理等问题，请协助我们进行修正，以给读者提供更优质的学习资源。</p>\n<p data-block=\"blk-cd03b3e0806a1e00\">所有<a href=\"https://github.com/krahets/hello-algo/graphs/contributors\">撰稿人</a>的 GitHub ID 将在本书仓库、网页版和 PDF 版的主页上进行展示，以感谢他们对开源社区的无私奉献。</p>\n<div class=\"admonition success\" data-block=\"blk-bd5102b1fa3a7a60\">\n<p class=\"admonition-title\">开源的魅力</p>\n<p>纸质图书的两次印刷的间隔时间往往较久，内容更新非常不方便。</p>\n<p>而在本开源书中，内容更迭的时间被缩短至数日甚至几个小时。</p>\n</div>\n<h3 data-block=\"blk-065ec55aeb4e653d\" id=\"_2\">内容微调</h3>\n<p data-block=\"blk-8cfbf3f181d4aedc\">如下图所示，每个页面的右上角都有“编辑图标”。您可以按照以下步骤修改文本或代码。</p>\n<ol data-block=\"blk-25d785ba82d00836\">\n<li>点击“编辑图标”，如果遇到“需要 Fork 此仓库”的提示，请同意该操作。</li>\n<li>修改 Markdown 源文件内容，检查内容的正确性，并尽量保持排版格式的统一。</li>\n<li>在页面底部填写修改说明，然后点击“Propose file change”按钮。页面跳转后，点击“Create pull request”按钮即可发起拉取请求。</li>\n</ol>\n<figure data-block=\"blk-a90133d96d3afbcc\"><img alt=\"页面编辑按键\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_appendix/contribution.assets/edit_markdown.png\"/><figcaption>页面编辑按键</figcaption></figure>\n<p data-block=\"blk-70ce4b99575b4c68\">图片无法直接修改，需要通过新建 <a href=\"https://github.com/krahets/hello-algo/issues\">Issue</a> 或评论留言来描述问题，我们会尽快重新绘制并替换图片。</p>\n<h3 data-block=\"blk-5c22efcd06debc56\" id=\"_3\">内容创作</h3>\n<p data-block=\"blk-0e27b2215e0b9ea6\">如果您有兴趣参与此开源项目，包括将代码翻译成其他编程语言、扩展文章内容等，那么需要实施以下 Pull Request 工作流程。</p>\n<ol data-block=\"blk-5ecfb9957e928e74\">\n<li>登录 GitHub ，将本书的<a href=\"https://github.com/krahets/hello-algo\">代码仓库</a> Fork 到个人账号下。</li>\n<li>进入您的 Fork 仓库网页，使用 <code>git clone</code> 命令将仓库克隆至本地。</li>\n<li>在本地进行内容创作，并进行完整测试，验证代码的正确性。</li>\n<li>将本地所做更改 Commit ，然后 Push 至远程仓库。</li>\n<li>刷新仓库网页，点击“Create pull request”按钮即可发起拉取请求。</li>\n</ol>\n<h3 data-block=\"blk-22e20b7e8c29f02d\" id=\"docker\">Docker 部署</h3>\n<p data-block=\"blk-aa67d02932a216e4\">在 <code>hello-algo</code> 根目录下，执行以下 Docker 脚本，即可在 <code>http://localhost:8000</code> 访问本项目：</p>\n<pre class=\"highlight\" data-block=\"blk-59118bca25b7cc0a\"><code class=\"language-shell\">docker-compose up -d</code></pre>\n<p data-block=\"blk-687033cffbd4529a\">使用以下命令即可删除部署：</p>\n<pre class=\"highlight\" data-block=\"blk-96df93f6658caab8\"><code class=\"language-shell\">docker-compose down</code></pre>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "748c5873123aba805ca529bf62db34463d80025ecd4f620464dd41294c011e11",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  },
+  "blockAliases": {
+    "b0": "blk-65f837bfbd9d258a",
+    "b1": "blk-3685842d0f59c648",
+    "b2": "blk-cd03b3e0806a1e00",
+    "b3": "blk-bd5102b1fa3a7a60",
+    "b4": "blk-065ec55aeb4e653d",
+    "b5": "blk-8cfbf3f181d4aedc",
+    "b6": "blk-25d785ba82d00836",
+    "b7": "blk-a90133d96d3afbcc",
+    "b8": "blk-70ce4b99575b4c68",
+    "b9": "blk-5c22efcd06debc56",
+    "b10": "blk-0e27b2215e0b9ea6",
+    "b11": "blk-5ecfb9957e928e74",
+    "b12": "blk-22e20b7e8c29f02d",
+    "b13": "blk-aa67d02932a216e4",
+    "b14": "blk-59118bca25b7cc0a",
+    "b15": "blk-687033cffbd4529a",
+    "b16": "blk-96df93f6658caab8"
+  },
+  "contentVersion": "e82f644073e244d6"
+}

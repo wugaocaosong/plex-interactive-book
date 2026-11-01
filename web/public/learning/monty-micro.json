@@ -1,0 +1,53 @@
+[
+  {
+    "id": "monty-micro-variables",
+    "file": "variables.py",
+    "className": "",
+    "functionName": "",
+    "variants": [
+      {
+        "language": "python",
+        "snippet": "prize = 2\nfirst = 0\nfinal = 2\nwins = 3\ntotal = 10\nwon = final == prize\nfrequency = wins / total if total else 0\nprint(\"是否获奖：\", won)\nprint(\"本次频率：\", frequency)\n",
+        "fullSource": "prize = 2\nfirst = 0\nfinal = 2\nwins = 3\ntotal = 10\nwon = final == prize\nfrequency = wins / total if total else 0\nprint(\"是否获奖：\", won)\nprint(\"本次频率：\", frequency)\n",
+        "sourcePath": "learning/variables.py",
+        "sourceUrl": "",
+        "extraction": "PLEX original micro-example",
+        "runnable": true
+      }
+    ]
+  },
+  {
+    "id": "monty-micro-conditions",
+    "file": "conditions.py",
+    "className": "",
+    "functionName": "",
+    "variants": [
+      {
+        "language": "python",
+        "snippet": "prize = 0\nfirst = 1\nallowed = []\nfor door in [0, 1, 2]:\n    if door != first and door != prize:\n        allowed.append(door)\nprint(\"允许打开的门（程序编号）：\", allowed)\n",
+        "fullSource": "prize = 0\nfirst = 1\nallowed = []\nfor door in [0, 1, 2]:\n    if door != first and door != prize:\n        allowed.append(door)\nprint(\"允许打开的门（程序编号）：\", allowed)\n",
+        "sourcePath": "learning/conditions.py",
+        "sourceUrl": "",
+        "extraction": "PLEX original micro-example",
+        "runnable": true
+      }
+    ]
+  },
+  {
+    "id": "monty-micro-repeat",
+    "file": "repeat.py",
+    "className": "",
+    "functionName": "",
+    "variants": [
+      {
+        "language": "python",
+        "snippet": "import random\nrng = random.Random(2026)\nfor trial in range(10):\n    prize = rng.choice([0, 1, 2])\n    print(\"第\", trial + 1, \"次，核心程序编号：\", prize)\n",
+        "fullSource": "import random\nrng = random.Random(2026)\nfor trial in range(10):\n    prize = rng.choice([0, 1, 2])\n    print(\"第\", trial + 1, \"次，核心程序编号：\", prize)\n",
+        "sourcePath": "learning/repeat.py",
+        "sourceUrl": "",
+        "extraction": "PLEX original micro-example",
+        "runnable": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "id": "chapter_dynamic_programming/index",
+  "title": "动态规划",
+  "kind": "chapter",
+  "group": "第 14 章   动态规划",
+  "route": "/read/chapter_dynamic_programming/index",
+  "sourcePath": "chapter_dynamic_programming/index.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"blk-c3a8f0fcf2a5df15\" id=\"_1\">动态规划</h1>\n<figure data-block=\"blk-2c5b76ff778fb858\"><img alt=\"动态规划\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_dynamic_programming.jpg\"/><figcaption>动态规划</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-052f5a15974daa3e\">\n<p class=\"admonition-title\">Abstract</p>\n<p>小溪汇入河流，江河汇入大海。</p>\n<p>动态规划将小问题的解汇集成大问题的答案，一步步引领我们走向解决问题的彼岸。</p>\n</div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "9463f47ae92c63932946355d69c799bc9656ba97dc500fbbddd2cd825a1fec4c",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  },
+  "blockAliases": {
+    "b0": "blk-c3a8f0fcf2a5df15",
+    "b1": "blk-2c5b76ff778fb858",
+    "b2": "blk-052f5a15974daa3e"
+  },
+  "contentVersion": "5d39bfa0536e882d"
+}

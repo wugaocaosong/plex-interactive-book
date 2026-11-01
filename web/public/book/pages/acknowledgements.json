@@ -1,0 +1,22 @@
+{
+  "id": "acknowledgements",
+  "title": "致谢",
+  "kind": "editorial",
+  "group": "卷末",
+  "route": "/read/acknowledgements",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-0a6499ed37497052\">致谢</h1>\n<p data-block=\"blk-70cff7c4037bcd44\">感谢 krahets 与 Hello Algo 开源贡献者，为算法入门提供系统、清晰的文字、代码和图解。</p>\n<p data-block=\"blk-d2edb973e31f230c\">感谢 VitePress、Vue、H5P、StPageFlip、Pyodide 及相关开源项目的维护者，让教材能够在浏览器中被阅读、操作和运行。</p>\n<p data-block=\"blk-c805b5f67e662493\"><a href=\"https://github.com/krahets/hello-algo/graphs/contributors\">查看 Hello Algo 贡献者</a></p>\n<p data-block=\"blk-87cfe81c206bf4e4\">本数字教材的编辑、设计与测试参与者名单将在确认后补充。</p>\n<p data-block=\"blk-be7996f51e51d662\"><em>本页为 PLEX 数字教材致谢草稿。</em></p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-0a6499ed37497052",
+    "b1": "blk-70cff7c4037bcd44",
+    "b2": "blk-d2edb973e31f230c",
+    "b3": "blk-c805b5f67e662493",
+    "b4": "blk-87cfe81c206bf4e4",
+    "b5": "blk-be7996f51e51d662"
+  },
+  "contentVersion": "37f3ee0370868835"
+}

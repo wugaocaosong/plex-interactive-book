@@ -1,0 +1,22 @@
+{
+  "plexCommit": "536ac132f35dfff88f97bc85f1515a77d405b153",
+  "apiPrefix": "/api/v1",
+  "questionRefs": [
+    "MH030001",
+    "MH030002",
+    "MH030003"
+  ],
+  "paths": {
+    "backend/app/routes/auth.py": "f22dea8725c60fe42a73c8159980e855f242acc99c1612fea52b7ce9d845cc13",
+    "backend/app/routes/agent_service.py": "2b368d7065ef83497c013227af0f81f3fc85e0b5d909679b8bd3f7b5c0d9b286",
+    "backend/app/routes/student_practice.py": "ed7cdfb8501694d11c36b76fcddf8bae2c2c6a398cb2d06547b6247c31d8049e",
+    "backend/app/routes/student_profile.py": "c0d0b0397eaf34887cfecbb9e9070c114e314e8a67cfe0f91b345f247a0e0c70",
+    "backend/app/routes/code.py": "4ecff017ea27f97caeee32a61f87a0778aea6ccb801f921de67bda4b60533b53",
+    "backend/app/services/tutor_context.py": "468eb912b7d57bfa670bdeed8e9e98e744fd1d37379f23c3cd9550ae3a5a68fa",
+    "backend/app/models/problem_bank.py": "0a1a60be20cd243edce3d61f58e9f63b9a735b29511f5bf18b9fcd4649a9e6a7",
+    "frontend/src/api/tutoring.ts": "5ce4dda4e56c17e471b6957b973dd0c0c526ee2535727c8070e9bf464403037b"
+  },
+  "changesToPlexSource": false,
+  "databaseImport": "Only three owned plex_ebook questions; no schema changes",
+  "auth": "separate sessionStorage; never learning backup"
+}

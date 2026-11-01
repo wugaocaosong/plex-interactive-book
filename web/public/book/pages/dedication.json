@@ -1,0 +1,21 @@
+{
+  "id": "dedication",
+  "title": "献给每一位探索者",
+  "kind": "editorial",
+  "group": "卷首",
+  "route": "/read/dedication",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-9c5ae871f54f1e60\">献给每一位探索者</h1>\n<p data-block=\"blk-03095445259e8ea9\">献给第一次写下代码的你。</p>\n<p data-block=\"blk-0cb9e0414ba1763f\">也献给在报错之后，仍愿意再试一次的你。</p>\n<blockquote data-block=\"blk-4eafe04542849ad5\">\n<p>不必一次看清整片星空。\n从眼前的一束光开始。</p>\n</blockquote>\n<p data-block=\"blk-83da0344b85a0c6b\">—— PLEX 数字教材原创题记</p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-9c5ae871f54f1e60",
+    "b1": "blk-03095445259e8ea9",
+    "b2": "blk-0cb9e0414ba1763f",
+    "b3": "blk-4eafe04542849ad5",
+    "b4": "blk-83da0344b85a0c6b"
+  },
+  "contentVersion": "a637ff44b4751337"
+}

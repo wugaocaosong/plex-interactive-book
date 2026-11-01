@@ -1,0 +1,21 @@
+{
+  "id": "unit/monty/repeat",
+  "title": "Python 补学：循环与随机选择",
+  "kind": "unit",
+  "group": "三扇舱门 · 45 分钟",
+  "route": "/read/unit/monty/repeat",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-9c07b6dd63036a5b\">让计算机重复试验</h1>\n<pre data-block=\"blk-41d9279b04c49532\"><code class=\"language-python\">import random\nrng = random.Random(2026)\nfor trial in range(10):\n    prize = rng.choice([0, 1, 2])\n    print(prize)\n</code></pre>\n<p data-block=\"blk-c712906712dd240b\"><code>range(10)</code> 让循环执行十次；<code>choice</code> 从列表中随机选一个值。种子 2026 用于复现这一组伪随机试验，不代表这个数字更幸运。</p>\n<p data-block=\"blk-279fd66c7e4dd8a8\">我们对换门和不换门使用<strong>同一组核心位置、初选和开门结果</strong>，避免比较两份不同的试验。</p><div class=\"activity-invitation\" data-block=\"blk-ab8f4dcca5154bf6\"><span>本页目标：观察循环次数和固定种子的作用。</span><button data-action=\"unit\" data-unit-mode=\"micro\">运行循环示例</button><button data-action=\"blackboard\">打开小黑板</button><button data-action=\"next-lesson\" data-next=\"unit/monty/single-run\">下一教学环节 →</button></div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-9c07b6dd63036a5b",
+    "b1": "blk-41d9279b04c49532",
+    "b2": "blk-c712906712dd240b",
+    "b3": "blk-279fd66c7e4dd8a8",
+    "b4": "blk-6e478a2e9f2c3350"
+  },
+  "contentVersion": "9b2cc9592c029ead"
+}

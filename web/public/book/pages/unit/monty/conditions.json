@@ -1,0 +1,21 @@
+{
+  "id": "unit/monty/conditions",
+  "title": "Python 补学：条件决定选择",
+  "kind": "unit",
+  "group": "三扇舱门 · 45 分钟",
+  "route": "/read/unit/monty/conditions",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-5677e73f39f1862c\">主持人能打开哪扇门？</h1>\n<pre data-block=\"blk-f4e15d739953d572\"><code class=\"language-python\">allowed = []\nfor door in [0, 1, 2]:\n    if door != first and door != prize:\n        allowed.append(door)\n</code></pre>\n<p data-block=\"blk-0322949d6150a9a9\"><code>!=</code> 表示不相等；<code>and</code> 要求两个条件同时成立。门既不能是初选门，也不能是奖品门。</p>\n<p data-block=\"blk-d8244e27d8fe12c6\"><code>allowed</code> 是列表，<code>append</code> 将一扇符合条件的门加入列表。初选正确时有两扇合法空门；初选错误时只有一扇。</p><div class=\"activity-invitation\" data-block=\"blk-6fc8aa7e47985fa0\"><span>本页目标：用 and 同时排除初选门与核心门。</span><button data-action=\"unit\" data-unit-mode=\"micro\">运行条件示例</button><button data-action=\"blackboard\">打开小黑板</button><button data-action=\"next-lesson\" data-next=\"unit/monty/repeat\">下一教学环节 →</button></div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-5677e73f39f1862c",
+    "b1": "blk-f4e15d739953d572",
+    "b2": "blk-0322949d6150a9a9",
+    "b3": "blk-d8244e27d8fe12c6",
+    "b4": "blk-00149362ae2614cc"
+  },
+  "contentVersion": "d2a5c204bb64de28"
+}

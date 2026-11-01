@@ -1,0 +1,72 @@
+{
+  "plexCommit": "536ac132f35dfff88f97bc85f1515a77d405b153",
+  "database": "isolated temporary SQLite",
+  "import": [
+    {
+      "ref": "MH030001",
+      "canonical_ref": "bank-1",
+      "changed": true,
+      "source_ref": "plex-interactive-book:monty:v1:monty-frequency",
+      "tests": 4
+    },
+    {
+      "ref": "MH030002",
+      "canonical_ref": "bank-2",
+      "changed": true,
+      "source_ref": "plex-interactive-book:monty:v1:monty-host",
+      "tests": 9
+    },
+    {
+      "ref": "MH030003",
+      "canonical_ref": "bank-3",
+      "changed": true,
+      "source_ref": "plex-interactive-book:monty:v1:monty-strategy",
+      "tests": 5
+    }
+  ],
+  "authProfileRefresh": true,
+  "execution": "docker",
+  "submissions": [
+    {
+      "ref": "MH030001",
+      "referencePassed": true,
+      "wrongStarterRejected": true,
+      "duplicateIdempotent": true,
+      "staleVersionRejected": true
+    },
+    {
+      "ref": "MH030002",
+      "referencePassed": true,
+      "wrongStarterRejected": true,
+      "duplicateIdempotent": true,
+      "staleVersionRejected": true
+    },
+    {
+      "ref": "MH030003",
+      "referencePassed": true,
+      "wrongStarterRejected": true,
+      "duplicateIdempotent": true,
+      "staleVersionRejected": true
+    }
+  ],
+  "model": {
+    "requested": true,
+    "status": "ok",
+    "generation_mode": "llm_reviewed",
+    "policy": {
+      "checks": [
+        "schema",
+        "line_bounds",
+        "citation_allowlist",
+        "semantic_review"
+      ],
+      "reason": null,
+      "status": "ok",
+      "version": "tutor-modes-5"
+    },
+    "summary": "你用的是“或”，但题目要求同时排除初选门和奖品门，所以这里需要的是“两个条件都成立”的连接方式；当前写法会让某些门被保留下来。",
+    "next_step": "先只取一个门编号（比如 d=0）代入你的条件，分别看 d != first 和 d != prize 的真假，再判断这个门是否应该被保留。"
+  },
+  "failedModelNotImpersonated": true,
+  "logoutRevokesRefresh": true
+}

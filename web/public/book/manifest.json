@@ -1,0 +1,1350 @@
+{
+  "title": "星轨编程",
+  "subtitle": "Python 与算法的探索之旅",
+  "version": "0.4.0",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "pages": [
+    {
+      "id": "cover",
+      "title": "星轨编程",
+      "kind": "cover",
+      "group": "卷首",
+      "route": "/read/cover",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "title",
+      "title": "扉页",
+      "kind": "editorial",
+      "group": "卷首",
+      "route": "/read/title",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "copyright",
+      "title": "版权与来源",
+      "kind": "editorial",
+      "group": "卷首",
+      "route": "/read/copyright",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "dedication",
+      "title": "献给每一位探索者",
+      "kind": "editorial",
+      "group": "卷首",
+      "route": "/read/dedication",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "editor-preface",
+      "title": "编者前言：把知识变成探索",
+      "kind": "editorial",
+      "group": "卷首",
+      "route": "/read/editor-preface",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "chapter_hello_algo/index",
+      "title": "序",
+      "kind": "chapter",
+      "group": "序",
+      "route": "/read/chapter_hello_algo/index",
+      "sourcePath": "chapter_hello_algo/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_preface/index",
+      "title": "前言",
+      "kind": "chapter",
+      "group": "第 0 章   前言",
+      "route": "/read/chapter_preface/index",
+      "sourcePath": "chapter_preface/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_preface/about_the_book",
+      "title": "0.1   关于本书",
+      "kind": "chapter",
+      "group": "第 0 章   前言",
+      "route": "/read/chapter_preface/about_the_book",
+      "sourcePath": "chapter_preface/about_the_book.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_preface/suggestions",
+      "title": "0.2   如何使用本书",
+      "kind": "chapter",
+      "group": "第 0 章   前言",
+      "route": "/read/chapter_preface/suggestions",
+      "sourcePath": "chapter_preface/suggestions.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_preface/summary",
+      "title": "0.3   小结",
+      "kind": "chapter",
+      "group": "第 0 章   前言",
+      "route": "/read/chapter_preface/summary",
+      "sourcePath": "chapter_preface/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "contents",
+      "title": "星域目录",
+      "kind": "contents",
+      "group": "卷首",
+      "route": "/read/contents",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/start",
+      "title": "学习起点：三扇舱门",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/start",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/rules",
+      "title": "任务规则：小E知道什么？",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/rules",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/choose",
+      "title": "第一轮：做出你的选择",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/choose",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/predict",
+      "title": "揭晓前：把理由说出来",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/predict",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/cases",
+      "title": "枚举：把核心放在三个位置",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/cases",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/explain",
+      "title": "解释：空门不是白白消失",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/explain",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/variables",
+      "title": "Python 补学：变量与比较",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/variables",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/conditions",
+      "title": "Python 补学：条件决定选择",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/conditions",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/repeat",
+      "title": "Python 补学：循环与随机选择",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/repeat",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/single-run",
+      "title": "运行一次：把选择写成程序",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/single-run",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/compare",
+      "title": "批量实验：频率会波动",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/compare",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/practice",
+      "title": "编程任务：填空、修错、修改",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/practice",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/quiz",
+      "title": "自测：解释比猜中更重要",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/quiz",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/monty/reflection",
+      "title": "回顾：你的直觉发生了什么变化？",
+      "kind": "unit",
+      "group": "三扇舱门 · 45 分钟",
+      "route": "/read/unit/monty/reflection",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "chapter_introduction/index",
+      "title": "初识算法",
+      "kind": "chapter",
+      "group": "第 1 章   初识算法",
+      "route": "/read/chapter_introduction/index",
+      "sourcePath": "chapter_introduction/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_introduction/algorithms_are_everywhere",
+      "title": "1.1   算法无处不在",
+      "kind": "chapter",
+      "group": "第 1 章   初识算法",
+      "route": "/read/chapter_introduction/algorithms_are_everywhere",
+      "sourcePath": "chapter_introduction/algorithms_are_everywhere.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_introduction/what_is_dsa",
+      "title": "1.2   算法是什么",
+      "kind": "chapter",
+      "group": "第 1 章   初识算法",
+      "route": "/read/chapter_introduction/what_is_dsa",
+      "sourcePath": "chapter_introduction/what_is_dsa.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_introduction/summary",
+      "title": "1.3   小结",
+      "kind": "chapter",
+      "group": "第 1 章   初识算法",
+      "route": "/read/chapter_introduction/summary",
+      "sourcePath": "chapter_introduction/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_computational_complexity/index",
+      "title": "复杂度分析",
+      "kind": "chapter",
+      "group": "第 2 章   复杂度分析",
+      "route": "/read/chapter_computational_complexity/index",
+      "sourcePath": "chapter_computational_complexity/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_computational_complexity/performance_evaluation",
+      "title": "2.1   算法效率评估",
+      "kind": "chapter",
+      "group": "第 2 章   复杂度分析",
+      "route": "/read/chapter_computational_complexity/performance_evaluation",
+      "sourcePath": "chapter_computational_complexity/performance_evaluation.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_computational_complexity/iteration_and_recursion",
+      "title": "2.2   迭代与递归",
+      "kind": "chapter",
+      "group": "第 2 章   复杂度分析",
+      "route": "/read/chapter_computational_complexity/iteration_and_recursion",
+      "sourcePath": "chapter_computational_complexity/iteration_and_recursion.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_computational_complexity/time_complexity",
+      "title": "2.3   时间复杂度",
+      "kind": "chapter",
+      "group": "第 2 章   复杂度分析",
+      "route": "/read/chapter_computational_complexity/time_complexity",
+      "sourcePath": "chapter_computational_complexity/time_complexity.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_computational_complexity/space_complexity",
+      "title": "2.4   空间复杂度",
+      "kind": "chapter",
+      "group": "第 2 章   复杂度分析",
+      "route": "/read/chapter_computational_complexity/space_complexity",
+      "sourcePath": "chapter_computational_complexity/space_complexity.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_computational_complexity/summary",
+      "title": "2.5   小结",
+      "kind": "chapter",
+      "group": "第 2 章   复杂度分析",
+      "route": "/read/chapter_computational_complexity/summary",
+      "sourcePath": "chapter_computational_complexity/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_computational_complexity/exercises",
+      "title": "2.6   练习",
+      "kind": "chapter",
+      "group": "第 2 章   复杂度分析",
+      "route": "/read/chapter_computational_complexity/exercises",
+      "sourcePath": "chapter_computational_complexity/exercises.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_data_structure/index",
+      "title": "数据结构",
+      "kind": "chapter",
+      "group": "第 3 章   数据结构",
+      "route": "/read/chapter_data_structure/index",
+      "sourcePath": "chapter_data_structure/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_data_structure/classification_of_data_structure",
+      "title": "3.1   数据结构分类",
+      "kind": "chapter",
+      "group": "第 3 章   数据结构",
+      "route": "/read/chapter_data_structure/classification_of_data_structure",
+      "sourcePath": "chapter_data_structure/classification_of_data_structure.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_data_structure/basic_data_types",
+      "title": "3.2   基本数据类型",
+      "kind": "chapter",
+      "group": "第 3 章   数据结构",
+      "route": "/read/chapter_data_structure/basic_data_types",
+      "sourcePath": "chapter_data_structure/basic_data_types.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_data_structure/number_encoding",
+      "title": "3.3   数字编码 *",
+      "kind": "chapter",
+      "group": "第 3 章   数据结构",
+      "route": "/read/chapter_data_structure/number_encoding",
+      "sourcePath": "chapter_data_structure/number_encoding.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_data_structure/character_encoding",
+      "title": "3.4   字符编码 *",
+      "kind": "chapter",
+      "group": "第 3 章   数据结构",
+      "route": "/read/chapter_data_structure/character_encoding",
+      "sourcePath": "chapter_data_structure/character_encoding.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_data_structure/summary",
+      "title": "3.5   小结",
+      "kind": "chapter",
+      "group": "第 3 章   数据结构",
+      "route": "/read/chapter_data_structure/summary",
+      "sourcePath": "chapter_data_structure/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_data_structure/exercises",
+      "title": "3.6   练习",
+      "kind": "chapter",
+      "group": "第 3 章   数据结构",
+      "route": "/read/chapter_data_structure/exercises",
+      "sourcePath": "chapter_data_structure/exercises.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_array_and_linkedlist/index",
+      "title": "数组与链表",
+      "kind": "chapter",
+      "group": "第 4 章   数组与链表",
+      "route": "/read/chapter_array_and_linkedlist/index",
+      "sourcePath": "chapter_array_and_linkedlist/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_array_and_linkedlist/array",
+      "title": "4.1   数组",
+      "kind": "chapter",
+      "group": "第 4 章   数组与链表",
+      "route": "/read/chapter_array_and_linkedlist/array",
+      "sourcePath": "chapter_array_and_linkedlist/array.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_array_and_linkedlist/linked_list",
+      "title": "4.2   链表",
+      "kind": "chapter",
+      "group": "第 4 章   数组与链表",
+      "route": "/read/chapter_array_and_linkedlist/linked_list",
+      "sourcePath": "chapter_array_and_linkedlist/linked_list.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_array_and_linkedlist/list",
+      "title": "4.3   列表",
+      "kind": "chapter",
+      "group": "第 4 章   数组与链表",
+      "route": "/read/chapter_array_and_linkedlist/list",
+      "sourcePath": "chapter_array_and_linkedlist/list.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_array_and_linkedlist/ram_and_cache",
+      "title": "4.4   内存与缓存 *",
+      "kind": "chapter",
+      "group": "第 4 章   数组与链表",
+      "route": "/read/chapter_array_and_linkedlist/ram_and_cache",
+      "sourcePath": "chapter_array_and_linkedlist/ram_and_cache.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_array_and_linkedlist/summary",
+      "title": "4.5   小结",
+      "kind": "chapter",
+      "group": "第 4 章   数组与链表",
+      "route": "/read/chapter_array_and_linkedlist/summary",
+      "sourcePath": "chapter_array_and_linkedlist/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_array_and_linkedlist/exercises",
+      "title": "4.6   练习",
+      "kind": "chapter",
+      "group": "第 4 章   数组与链表",
+      "route": "/read/chapter_array_and_linkedlist/exercises",
+      "sourcePath": "chapter_array_and_linkedlist/exercises.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_stack_and_queue/index",
+      "title": "栈与队列",
+      "kind": "chapter",
+      "group": "第 5 章   栈与队列",
+      "route": "/read/chapter_stack_and_queue/index",
+      "sourcePath": "chapter_stack_and_queue/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_stack_and_queue/stack",
+      "title": "5.1   栈",
+      "kind": "chapter",
+      "group": "第 5 章   栈与队列",
+      "route": "/read/chapter_stack_and_queue/stack",
+      "sourcePath": "chapter_stack_and_queue/stack.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_stack_and_queue/queue",
+      "title": "5.2   队列",
+      "kind": "chapter",
+      "group": "第 5 章   栈与队列",
+      "route": "/read/chapter_stack_and_queue/queue",
+      "sourcePath": "chapter_stack_and_queue/queue.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_stack_and_queue/deque",
+      "title": "5.3   双向队列",
+      "kind": "chapter",
+      "group": "第 5 章   栈与队列",
+      "route": "/read/chapter_stack_and_queue/deque",
+      "sourcePath": "chapter_stack_and_queue/deque.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_stack_and_queue/summary",
+      "title": "5.4   小结",
+      "kind": "chapter",
+      "group": "第 5 章   栈与队列",
+      "route": "/read/chapter_stack_and_queue/summary",
+      "sourcePath": "chapter_stack_and_queue/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_stack_and_queue/exercises",
+      "title": "5.5   练习",
+      "kind": "chapter",
+      "group": "第 5 章   栈与队列",
+      "route": "/read/chapter_stack_and_queue/exercises",
+      "sourcePath": "chapter_stack_and_queue/exercises.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_hashing/index",
+      "title": "哈希表",
+      "kind": "chapter",
+      "group": "第 6 章   哈希表",
+      "route": "/read/chapter_hashing/index",
+      "sourcePath": "chapter_hashing/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_hashing/hash_map",
+      "title": "6.1   哈希表",
+      "kind": "chapter",
+      "group": "第 6 章   哈希表",
+      "route": "/read/chapter_hashing/hash_map",
+      "sourcePath": "chapter_hashing/hash_map.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_hashing/hash_collision",
+      "title": "6.2   哈希冲突",
+      "kind": "chapter",
+      "group": "第 6 章   哈希表",
+      "route": "/read/chapter_hashing/hash_collision",
+      "sourcePath": "chapter_hashing/hash_collision.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_hashing/hash_algorithm",
+      "title": "6.3   哈希算法",
+      "kind": "chapter",
+      "group": "第 6 章   哈希表",
+      "route": "/read/chapter_hashing/hash_algorithm",
+      "sourcePath": "chapter_hashing/hash_algorithm.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_hashing/summary",
+      "title": "6.4   小结",
+      "kind": "chapter",
+      "group": "第 6 章   哈希表",
+      "route": "/read/chapter_hashing/summary",
+      "sourcePath": "chapter_hashing/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_hashing/exercises",
+      "title": "6.5   练习",
+      "kind": "chapter",
+      "group": "第 6 章   哈希表",
+      "route": "/read/chapter_hashing/exercises",
+      "sourcePath": "chapter_hashing/exercises.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_tree/index",
+      "title": "树",
+      "kind": "chapter",
+      "group": "第 7 章   树",
+      "route": "/read/chapter_tree/index",
+      "sourcePath": "chapter_tree/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_tree/binary_tree",
+      "title": "7.1   二叉树",
+      "kind": "chapter",
+      "group": "第 7 章   树",
+      "route": "/read/chapter_tree/binary_tree",
+      "sourcePath": "chapter_tree/binary_tree.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_tree/binary_tree_traversal",
+      "title": "7.2   二叉树遍历",
+      "kind": "chapter",
+      "group": "第 7 章   树",
+      "route": "/read/chapter_tree/binary_tree_traversal",
+      "sourcePath": "chapter_tree/binary_tree_traversal.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_tree/array_representation_of_tree",
+      "title": "7.3   二叉树数组表示",
+      "kind": "chapter",
+      "group": "第 7 章   树",
+      "route": "/read/chapter_tree/array_representation_of_tree",
+      "sourcePath": "chapter_tree/array_representation_of_tree.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_tree/binary_search_tree",
+      "title": "7.4   二叉搜索树",
+      "kind": "chapter",
+      "group": "第 7 章   树",
+      "route": "/read/chapter_tree/binary_search_tree",
+      "sourcePath": "chapter_tree/binary_search_tree.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_tree/avl_tree",
+      "title": "7.5   AVL 树 *",
+      "kind": "chapter",
+      "group": "第 7 章   树",
+      "route": "/read/chapter_tree/avl_tree",
+      "sourcePath": "chapter_tree/avl_tree.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_tree/summary",
+      "title": "7.6   小结",
+      "kind": "chapter",
+      "group": "第 7 章   树",
+      "route": "/read/chapter_tree/summary",
+      "sourcePath": "chapter_tree/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_tree/exercises",
+      "title": "7.7   练习",
+      "kind": "chapter",
+      "group": "第 7 章   树",
+      "route": "/read/chapter_tree/exercises",
+      "sourcePath": "chapter_tree/exercises.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_heap/index",
+      "title": "堆",
+      "kind": "chapter",
+      "group": "第 8 章   堆",
+      "route": "/read/chapter_heap/index",
+      "sourcePath": "chapter_heap/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_heap/heap",
+      "title": "8.1   堆",
+      "kind": "chapter",
+      "group": "第 8 章   堆",
+      "route": "/read/chapter_heap/heap",
+      "sourcePath": "chapter_heap/heap.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_heap/build_heap",
+      "title": "8.2   建堆操作",
+      "kind": "chapter",
+      "group": "第 8 章   堆",
+      "route": "/read/chapter_heap/build_heap",
+      "sourcePath": "chapter_heap/build_heap.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_heap/top_k",
+      "title": "8.3   Top-k 问题",
+      "kind": "chapter",
+      "group": "第 8 章   堆",
+      "route": "/read/chapter_heap/top_k",
+      "sourcePath": "chapter_heap/top_k.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_heap/summary",
+      "title": "8.4   小结",
+      "kind": "chapter",
+      "group": "第 8 章   堆",
+      "route": "/read/chapter_heap/summary",
+      "sourcePath": "chapter_heap/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_heap/exercises",
+      "title": "8.5   练习",
+      "kind": "chapter",
+      "group": "第 8 章   堆",
+      "route": "/read/chapter_heap/exercises",
+      "sourcePath": "chapter_heap/exercises.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_graph/index",
+      "title": "图",
+      "kind": "chapter",
+      "group": "第 9 章   图",
+      "route": "/read/chapter_graph/index",
+      "sourcePath": "chapter_graph/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_graph/graph",
+      "title": "9.1   图",
+      "kind": "chapter",
+      "group": "第 9 章   图",
+      "route": "/read/chapter_graph/graph",
+      "sourcePath": "chapter_graph/graph.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_graph/graph_operations",
+      "title": "9.2   图基础操作",
+      "kind": "chapter",
+      "group": "第 9 章   图",
+      "route": "/read/chapter_graph/graph_operations",
+      "sourcePath": "chapter_graph/graph_operations.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_graph/graph_traversal",
+      "title": "9.3   图的遍历",
+      "kind": "chapter",
+      "group": "第 9 章   图",
+      "route": "/read/chapter_graph/graph_traversal",
+      "sourcePath": "chapter_graph/graph_traversal.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_graph/summary",
+      "title": "9.4   小结",
+      "kind": "chapter",
+      "group": "第 9 章   图",
+      "route": "/read/chapter_graph/summary",
+      "sourcePath": "chapter_graph/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_graph/exercises",
+      "title": "9.5   练习",
+      "kind": "chapter",
+      "group": "第 9 章   图",
+      "route": "/read/chapter_graph/exercises",
+      "sourcePath": "chapter_graph/exercises.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_searching/index",
+      "title": "搜索",
+      "kind": "chapter",
+      "group": "第 10 章   搜索",
+      "route": "/read/chapter_searching/index",
+      "sourcePath": "chapter_searching/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_searching/binary_search",
+      "title": "10.1   二分查找",
+      "kind": "chapter",
+      "group": "第 10 章   搜索",
+      "route": "/read/chapter_searching/binary_search",
+      "sourcePath": "chapter_searching/binary_search.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "activityId": "binary-search"
+    },
+    {
+      "id": "chapter_searching/binary_search_insertion",
+      "title": "10.2   二分查找插入点",
+      "kind": "chapter",
+      "group": "第 10 章   搜索",
+      "route": "/read/chapter_searching/binary_search_insertion",
+      "sourcePath": "chapter_searching/binary_search_insertion.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_searching/binary_search_edge",
+      "title": "10.3   二分查找边界",
+      "kind": "chapter",
+      "group": "第 10 章   搜索",
+      "route": "/read/chapter_searching/binary_search_edge",
+      "sourcePath": "chapter_searching/binary_search_edge.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_searching/replace_linear_by_hashing",
+      "title": "10.4   哈希优化策略",
+      "kind": "chapter",
+      "group": "第 10 章   搜索",
+      "route": "/read/chapter_searching/replace_linear_by_hashing",
+      "sourcePath": "chapter_searching/replace_linear_by_hashing.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_searching/searching_algorithm_revisited",
+      "title": "10.5   重识搜索算法",
+      "kind": "chapter",
+      "group": "第 10 章   搜索",
+      "route": "/read/chapter_searching/searching_algorithm_revisited",
+      "sourcePath": "chapter_searching/searching_algorithm_revisited.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_searching/summary",
+      "title": "10.6   小结",
+      "kind": "chapter",
+      "group": "第 10 章   搜索",
+      "route": "/read/chapter_searching/summary",
+      "sourcePath": "chapter_searching/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_searching/exercises",
+      "title": "10.7   练习",
+      "kind": "chapter",
+      "group": "第 10 章   搜索",
+      "route": "/read/chapter_searching/exercises",
+      "sourcePath": "chapter_searching/exercises.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_sorting/index",
+      "title": "排序",
+      "kind": "chapter",
+      "group": "第 11 章   排序",
+      "route": "/read/chapter_sorting/index",
+      "sourcePath": "chapter_sorting/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_sorting/sorting_algorithm",
+      "title": "11.1   排序算法",
+      "kind": "chapter",
+      "group": "第 11 章   排序",
+      "route": "/read/chapter_sorting/sorting_algorithm",
+      "sourcePath": "chapter_sorting/sorting_algorithm.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_sorting/selection_sort",
+      "title": "11.2   选择排序",
+      "kind": "chapter",
+      "group": "第 11 章   排序",
+      "route": "/read/chapter_sorting/selection_sort",
+      "sourcePath": "chapter_sorting/selection_sort.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_sorting/bubble_sort",
+      "title": "11.3   冒泡排序",
+      "kind": "chapter",
+      "group": "第 11 章   排序",
+      "route": "/read/chapter_sorting/bubble_sort",
+      "sourcePath": "chapter_sorting/bubble_sort.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_sorting/insertion_sort",
+      "title": "11.4   插入排序",
+      "kind": "chapter",
+      "group": "第 11 章   排序",
+      "route": "/read/chapter_sorting/insertion_sort",
+      "sourcePath": "chapter_sorting/insertion_sort.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_sorting/quick_sort",
+      "title": "11.5   快速排序",
+      "kind": "chapter",
+      "group": "第 11 章   排序",
+      "route": "/read/chapter_sorting/quick_sort",
+      "sourcePath": "chapter_sorting/quick_sort.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_sorting/merge_sort",
+      "title": "11.6   归并排序",
+      "kind": "chapter",
+      "group": "第 11 章   排序",
+      "route": "/read/chapter_sorting/merge_sort",
+      "sourcePath": "chapter_sorting/merge_sort.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_sorting/heap_sort",
+      "title": "11.7   堆排序",
+      "kind": "chapter",
+      "group": "第 11 章   排序",
+      "route": "/read/chapter_sorting/heap_sort",
+      "sourcePath": "chapter_sorting/heap_sort.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_sorting/bucket_sort",
+      "title": "11.8   桶排序",
+      "kind": "chapter",
+      "group": "第 11 章   排序",
+      "route": "/read/chapter_sorting/bucket_sort",
+      "sourcePath": "chapter_sorting/bucket_sort.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_sorting/counting_sort",
+      "title": "11.9   计数排序",
+      "kind": "chapter",
+      "group": "第 11 章   排序",
+      "route": "/read/chapter_sorting/counting_sort",
+      "sourcePath": "chapter_sorting/counting_sort.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_sorting/radix_sort",
+      "title": "11.10   基数排序",
+      "kind": "chapter",
+      "group": "第 11 章   排序",
+      "route": "/read/chapter_sorting/radix_sort",
+      "sourcePath": "chapter_sorting/radix_sort.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_sorting/summary",
+      "title": "11.11   小结",
+      "kind": "chapter",
+      "group": "第 11 章   排序",
+      "route": "/read/chapter_sorting/summary",
+      "sourcePath": "chapter_sorting/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_sorting/exercises",
+      "title": "11.12   练习",
+      "kind": "chapter",
+      "group": "第 11 章   排序",
+      "route": "/read/chapter_sorting/exercises",
+      "sourcePath": "chapter_sorting/exercises.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "unit/lab/index",
+      "title": "实验导览　从一张地图开始",
+      "kind": "unit",
+      "group": "综合实验 · 星航实验室",
+      "route": "/read/unit/lab/index",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/lab/graph",
+      "title": "实验一　建图：把航线写成两张表",
+      "kind": "unit",
+      "group": "综合实验 · 星航实验室",
+      "route": "/read/unit/lab/graph",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/lab/traversal",
+      "title": "实验二　遍历：最少几跳能到",
+      "kind": "unit",
+      "group": "综合实验 · 星航实验室",
+      "route": "/read/unit/lab/traversal",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/lab/sort-search",
+      "title": "实验三　排序与检索：先理牌，再抽牌",
+      "kind": "unit",
+      "group": "综合实验 · 星航实验室",
+      "route": "/read/unit/lab/sort-search",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/lab/dispatch",
+      "title": "实验四　综合调度：谁先送、怎么送",
+      "kind": "unit",
+      "group": "综合实验 · 星航实验室",
+      "route": "/read/unit/lab/dispatch",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/lab/report",
+      "title": "实验报告　对照、反思与延伸",
+      "kind": "unit",
+      "group": "综合实验 · 星航实验室",
+      "route": "/read/unit/lab/report",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "chapter_divide_and_conquer/index",
+      "title": "分治",
+      "kind": "chapter",
+      "group": "第 12 章   分治",
+      "route": "/read/chapter_divide_and_conquer/index",
+      "sourcePath": "chapter_divide_and_conquer/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_divide_and_conquer/divide_and_conquer",
+      "title": "12.1   分治算法",
+      "kind": "chapter",
+      "group": "第 12 章   分治",
+      "route": "/read/chapter_divide_and_conquer/divide_and_conquer",
+      "sourcePath": "chapter_divide_and_conquer/divide_and_conquer.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_divide_and_conquer/binary_search_recur",
+      "title": "12.2   分治搜索策略",
+      "kind": "chapter",
+      "group": "第 12 章   分治",
+      "route": "/read/chapter_divide_and_conquer/binary_search_recur",
+      "sourcePath": "chapter_divide_and_conquer/binary_search_recur.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_divide_and_conquer/build_binary_tree_problem",
+      "title": "12.3   构建树问题",
+      "kind": "chapter",
+      "group": "第 12 章   分治",
+      "route": "/read/chapter_divide_and_conquer/build_binary_tree_problem",
+      "sourcePath": "chapter_divide_and_conquer/build_binary_tree_problem.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_divide_and_conquer/hanota_problem",
+      "title": "12.4   汉诺塔问题",
+      "kind": "chapter",
+      "group": "第 12 章   分治",
+      "route": "/read/chapter_divide_and_conquer/hanota_problem",
+      "sourcePath": "chapter_divide_and_conquer/hanota_problem.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_divide_and_conquer/summary",
+      "title": "12.5   小结",
+      "kind": "chapter",
+      "group": "第 12 章   分治",
+      "route": "/read/chapter_divide_and_conquer/summary",
+      "sourcePath": "chapter_divide_and_conquer/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_divide_and_conquer/exercises",
+      "title": "12.6   练习",
+      "kind": "chapter",
+      "group": "第 12 章   分治",
+      "route": "/read/chapter_divide_and_conquer/exercises",
+      "sourcePath": "chapter_divide_and_conquer/exercises.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_backtracking/index",
+      "title": "回溯",
+      "kind": "chapter",
+      "group": "第 13 章   回溯",
+      "route": "/read/chapter_backtracking/index",
+      "sourcePath": "chapter_backtracking/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_backtracking/backtracking_algorithm",
+      "title": "13.1   回溯算法",
+      "kind": "chapter",
+      "group": "第 13 章   回溯",
+      "route": "/read/chapter_backtracking/backtracking_algorithm",
+      "sourcePath": "chapter_backtracking/backtracking_algorithm.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_backtracking/permutations_problem",
+      "title": "13.2   全排列问题",
+      "kind": "chapter",
+      "group": "第 13 章   回溯",
+      "route": "/read/chapter_backtracking/permutations_problem",
+      "sourcePath": "chapter_backtracking/permutations_problem.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_backtracking/subset_sum_problem",
+      "title": "13.3   子集和问题",
+      "kind": "chapter",
+      "group": "第 13 章   回溯",
+      "route": "/read/chapter_backtracking/subset_sum_problem",
+      "sourcePath": "chapter_backtracking/subset_sum_problem.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_backtracking/n_queens_problem",
+      "title": "13.4   N 皇后问题",
+      "kind": "chapter",
+      "group": "第 13 章   回溯",
+      "route": "/read/chapter_backtracking/n_queens_problem",
+      "sourcePath": "chapter_backtracking/n_queens_problem.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_backtracking/summary",
+      "title": "13.5   小结",
+      "kind": "chapter",
+      "group": "第 13 章   回溯",
+      "route": "/read/chapter_backtracking/summary",
+      "sourcePath": "chapter_backtracking/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_backtracking/exercises",
+      "title": "13.6   练习",
+      "kind": "chapter",
+      "group": "第 13 章   回溯",
+      "route": "/read/chapter_backtracking/exercises",
+      "sourcePath": "chapter_backtracking/exercises.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_dynamic_programming/index",
+      "title": "动态规划",
+      "kind": "chapter",
+      "group": "第 14 章   动态规划",
+      "route": "/read/chapter_dynamic_programming/index",
+      "sourcePath": "chapter_dynamic_programming/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_dynamic_programming/intro_to_dynamic_programming",
+      "title": "14.1   初探动态规划",
+      "kind": "chapter",
+      "group": "第 14 章   动态规划",
+      "route": "/read/chapter_dynamic_programming/intro_to_dynamic_programming",
+      "sourcePath": "chapter_dynamic_programming/intro_to_dynamic_programming.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_dynamic_programming/dp_problem_features",
+      "title": "14.2   DP 问题特性",
+      "kind": "chapter",
+      "group": "第 14 章   动态规划",
+      "route": "/read/chapter_dynamic_programming/dp_problem_features",
+      "sourcePath": "chapter_dynamic_programming/dp_problem_features.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_dynamic_programming/dp_solution_pipeline",
+      "title": "14.3   DP 解题思路",
+      "kind": "chapter",
+      "group": "第 14 章   动态规划",
+      "route": "/read/chapter_dynamic_programming/dp_solution_pipeline",
+      "sourcePath": "chapter_dynamic_programming/dp_solution_pipeline.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_dynamic_programming/knapsack_problem",
+      "title": "14.4   0-1 背包问题",
+      "kind": "chapter",
+      "group": "第 14 章   动态规划",
+      "route": "/read/chapter_dynamic_programming/knapsack_problem",
+      "sourcePath": "chapter_dynamic_programming/knapsack_problem.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_dynamic_programming/unbounded_knapsack_problem",
+      "title": "14.5   完全背包问题",
+      "kind": "chapter",
+      "group": "第 14 章   动态规划",
+      "route": "/read/chapter_dynamic_programming/unbounded_knapsack_problem",
+      "sourcePath": "chapter_dynamic_programming/unbounded_knapsack_problem.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_dynamic_programming/edit_distance_problem",
+      "title": "14.6   编辑距离问题",
+      "kind": "chapter",
+      "group": "第 14 章   动态规划",
+      "route": "/read/chapter_dynamic_programming/edit_distance_problem",
+      "sourcePath": "chapter_dynamic_programming/edit_distance_problem.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_dynamic_programming/summary",
+      "title": "14.7   小结",
+      "kind": "chapter",
+      "group": "第 14 章   动态规划",
+      "route": "/read/chapter_dynamic_programming/summary",
+      "sourcePath": "chapter_dynamic_programming/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_dynamic_programming/exercises",
+      "title": "14.8   练习",
+      "kind": "chapter",
+      "group": "第 14 章   动态规划",
+      "route": "/read/chapter_dynamic_programming/exercises",
+      "sourcePath": "chapter_dynamic_programming/exercises.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_greedy/index",
+      "title": "贪心",
+      "kind": "chapter",
+      "group": "第 15 章   贪心",
+      "route": "/read/chapter_greedy/index",
+      "sourcePath": "chapter_greedy/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_greedy/greedy_algorithm",
+      "title": "15.1   贪心算法",
+      "kind": "chapter",
+      "group": "第 15 章   贪心",
+      "route": "/read/chapter_greedy/greedy_algorithm",
+      "sourcePath": "chapter_greedy/greedy_algorithm.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_greedy/fractional_knapsack_problem",
+      "title": "15.2   分数背包问题",
+      "kind": "chapter",
+      "group": "第 15 章   贪心",
+      "route": "/read/chapter_greedy/fractional_knapsack_problem",
+      "sourcePath": "chapter_greedy/fractional_knapsack_problem.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_greedy/max_capacity_problem",
+      "title": "15.3   最大容量问题",
+      "kind": "chapter",
+      "group": "第 15 章   贪心",
+      "route": "/read/chapter_greedy/max_capacity_problem",
+      "sourcePath": "chapter_greedy/max_capacity_problem.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_greedy/max_product_cutting_problem",
+      "title": "15.4   最大切分乘积问题",
+      "kind": "chapter",
+      "group": "第 15 章   贪心",
+      "route": "/read/chapter_greedy/max_product_cutting_problem",
+      "sourcePath": "chapter_greedy/max_product_cutting_problem.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_greedy/summary",
+      "title": "15.5   小结",
+      "kind": "chapter",
+      "group": "第 15 章   贪心",
+      "route": "/read/chapter_greedy/summary",
+      "sourcePath": "chapter_greedy/summary.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_greedy/exercises",
+      "title": "15.6   练习",
+      "kind": "chapter",
+      "group": "第 15 章   贪心",
+      "route": "/read/chapter_greedy/exercises",
+      "sourcePath": "chapter_greedy/exercises.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "afterword",
+      "title": "后记：下一段轨道",
+      "kind": "editorial",
+      "group": "卷末",
+      "route": "/read/afterword",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "acknowledgements",
+      "title": "致谢",
+      "kind": "editorial",
+      "group": "卷末",
+      "route": "/read/acknowledgements",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "chapter_appendix/index",
+      "title": "附录",
+      "kind": "chapter",
+      "group": "第 16 章   附录",
+      "route": "/read/chapter_appendix/index",
+      "sourcePath": "chapter_appendix/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_appendix/installation",
+      "title": "16.1   编程环境安装",
+      "kind": "chapter",
+      "group": "第 16 章   附录",
+      "route": "/read/chapter_appendix/installation",
+      "sourcePath": "chapter_appendix/installation.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_appendix/contribution",
+      "title": "16.2   一起参与创作",
+      "kind": "chapter",
+      "group": "第 16 章   附录",
+      "route": "/read/chapter_appendix/contribution",
+      "sourcePath": "chapter_appendix/contribution.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_appendix/terminology",
+      "title": "16.3   术语表",
+      "kind": "chapter",
+      "group": "第 16 章   附录",
+      "route": "/read/chapter_appendix/terminology",
+      "sourcePath": "chapter_appendix/terminology.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "chapter_reference/index",
+      "title": "参考文献",
+      "kind": "chapter",
+      "group": "参考文献",
+      "route": "/read/chapter_reference/index",
+      "sourcePath": "chapter_reference/index.md",
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+    },
+    {
+      "id": "index",
+      "title": "知识索引",
+      "kind": "index",
+      "group": "卷末",
+      "route": "/read/index",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "about",
+      "title": "作者与编者",
+      "kind": "editorial",
+      "group": "卷末",
+      "route": "/read/about",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "back-cover",
+      "title": "封底",
+      "kind": "back-cover",
+      "group": "卷末",
+      "route": "/read/back-cover",
+      "sourcePath": null,
+      "sourceCommit": null
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+import { cp, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { createHash } from 'node:crypto';
+const root = resolve(import.meta.dirname, '..');
+const publicDir = resolve(root, 'web/public');
+const h5pLock=JSON.parse(await readFile(resolve(root,'content/h5p/runtime-lock.json'),'utf8'));
+for(const [name,library] of Object.entries(h5pLock.libraries)){
+  for(const [file,expected] of Object.entries(library.files)){
+    const actual=createHash('sha256').update(await readFile(resolve(root,'content/h5p/binary-search',name,file))).digest('hex');
+    if(actual!==expected)throw Error(`H5P runtime integrity mismatch: ${name}/${file}`);
+  }
+}
+await mkdir(resolve(publicDir, 'vendor'), {recursive: true});
+await cp(resolve(root, 'node_modules/h5p-standalone/dist'), resolve(publicDir, 'vendor/h5p'), {recursive: true});
+await mkdir(resolve(publicDir, 'vendor/pyodide'), {recursive: true});
+for (const file of ['pyodide.mjs','pyodide.asm.mjs','pyodide.asm.wasm','pyodide-lock.json','python_stdlib.zip']) {
+  await cp(resolve(root, 'node_modules/pyodide',file),resolve(publicDir, 'vendor/pyodide',file));
+}
+await cp(resolve(root, 'content/h5p/binary-search'),resolve(publicDir,'h5p/binary-search'),{recursive:true});
+await cp(resolve(root, 'content/h5p/binary-search'),resolve(publicDir,'h5p/monty-hall'),{recursive:true});
+await cp(resolve(root, 'content/h5p/monty-hall'),resolve(publicDir,'h5p/monty-hall'),{recursive:true});
+await mkdir(resolve(publicDir, 'images'), {recursive:true});
+await cp(resolve(root,'assets/references/cover.png'),resolve(publicDir,'images/cover.png'));
+const notices = [];
+for(const name of ['vitepress','vue','page-flip','h5p-standalone','pyodide','katex','lucide-vue-next','codemirror','@codemirror/state','@codemirror/view','@codemirror/lang-python','@codemirror/language','@codemirror/merge','@codemirror/lint','shiki','motion-v','motion-dom','motion-utils','@vueuse/core','@vueuse/shared','echarts','zrender','vue-echarts','roughjs','hachure-fill','path-data-parser','points-on-curve','points-on-path','@axe-core/playwright','axe-core','@fontsource/noto-serif-sc','@fontsource/noto-sans-sc','@fontsource/jetbrains-mono']) {
+  const dir=resolve(root,'node_modules',name);const pkg=JSON.parse(await readFile(resolve(dir,'package.json'),'utf8'));
+  notices.push(`${name} ${pkg.version}: ${pkg.license}`);
+  for(const file of await readdir(dir)) if(/^(license|licence|ofl|copyright)/i.test(file)) {
+    await mkdir(resolve(root,'licenses/dependencies'),{recursive:true});
+    await cp(resolve(dir,file),resolve(root,'licenses/dependencies',name.replaceAll('/','-')+'-'+file),{recursive:true});
+  }
+}
+await writeFile(resolve(root,'licenses/dependencies.txt'),notices.join('\n')+'\n');
+await cp(resolve(root,'licenses'),resolve(publicDir,'licenses'),{recursive:true});
+await cp(resolve(root,'THIRD_PARTY_NOTICES.md'),resolve(publicDir,'licenses/THIRD_PARTY_NOTICES.md'));
+console.log('Prepared local H5P, Python runtime, cover and dependency licenses.');

@@ -1,0 +1,23 @@
+{
+  "id": "copyright",
+  "title": "版权与来源",
+  "kind": "editorial",
+  "group": "卷首",
+  "route": "/read/copyright",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-1945c09771c42310\">版权与来源</h1>\n<p data-block=\"blk-b020b22aa22cad38\">本电子书基于《Hello 算法》制作。上游文本、代码和图像的作者为 krahets 及 Hello Algo 贡献者，采用 <strong>CC BY-NC-SA 4.0</strong> 许可。</p>\n<p data-block=\"blk-c8339d7a77621b52\"><a href=\"https://github.com/krahets/hello-algo\">原项目</a> · <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/\">许可全文</a></p>\n<p data-block=\"blk-b5fb99a090f4c240\">采用版本：<code>350f483801b2badb95180047aa82cadb825852a2</code>。正文仅进行阅读格式转换、代码展开、链接适配与编排调整。PLEX 献辞、编者前言、后记和新增练习为本数字教材的新增内容，不代表原作者观点。改编教材内容按 CC BY-NC-SA 4.0 分享；商业用途需另行取得授权。</p>\n<p data-block=\"blk-c287a68651420404\">VitePress、StPageFlip、H5P Interactive Book 与 H5P Standalone 使用 MIT 许可，Pyodide 使用 MPL-2.0；字体和其他依赖的许可随项目保存。</p>\n<p data-block=\"blk-20041d66b8e36a11\">封面由用户提供。编者姓名、出版机构、书号：待填写。本试阅版不声明已正式出版。</p>\n<p data-block=\"blk-8abd9704c99f1c80\"><a href=\"/licenses/THIRD_PARTY_NOTICES.md\">随书软件与字体许可</a></p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-1945c09771c42310",
+    "b1": "blk-b020b22aa22cad38",
+    "b2": "blk-c8339d7a77621b52",
+    "b3": "blk-b5fb99a090f4c240",
+    "b4": "blk-c287a68651420404",
+    "b5": "blk-20041d66b8e36a11",
+    "b6": "blk-8abd9704c99f1c80"
+  },
+  "contentVersion": "2fa1cda2e8ed34c8"
+}

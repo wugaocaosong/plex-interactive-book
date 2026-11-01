@@ -1,0 +1,20 @@
+{
+  "id": "unit/monty/cases",
+  "title": "枚举：把核心放在三个位置",
+  "kind": "unit",
+  "group": "三扇舱门 · 45 分钟",
+  "route": "/read/unit/monty/cases",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-55654e12e58cc11d\">固定初选 1 号门，分别考虑三种情况</h1>\n<table data-block=\"blk-ef10441946a86492\">\n<thead>\n<tr>\n<th>核心位置</th>\n<th>小E会打开</th>\n<th>保留初选</th>\n<th>换门</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1 号</td>\n<td>2 或 3 号空门</td>\n<td>获奖</td>\n<td>未获奖</td>\n</tr>\n<tr>\n<td>2 号</td>\n<td>3 号空门</td>\n<td>未获奖</td>\n<td>获奖</td>\n</tr>\n<tr>\n<td>3 号</td>\n<td>2 号空门</td>\n<td>未获奖</td>\n<td>获奖</td>\n</tr>\n</tbody>\n</table>\n<p data-block=\"blk-56926057c643653b\">三个核心位置等可能。保留初选在一种情况下获奖；换门在两种情况下获奖。你也可以固定初选 2 号或 3 号，重新画这张表。</p><div class=\"activity-invitation\" data-block=\"blk-e668f61705bda96a\"><span>本页目标：固定初选，逐一比较三个等可能的核心位置。</span><button data-action=\"unit\" data-unit-mode=\"cases\">展开三种情况</button><button data-action=\"blackboard\">打开小黑板</button><button data-action=\"next-lesson\" data-next=\"unit/monty/explain\">下一教学环节 →</button></div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-55654e12e58cc11d",
+    "b1": "blk-ef10441946a86492",
+    "b2": "blk-56926057c643653b",
+    "b3": "blk-fd084a7f7df39a09"
+  },
+  "contentVersion": "b89c77b683e64b36"
+}

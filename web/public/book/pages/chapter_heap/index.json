@@ -1,0 +1,31 @@
+{
+  "id": "chapter_heap/index",
+  "title": "堆",
+  "kind": "chapter",
+  "group": "第 8 章   堆",
+  "route": "/read/chapter_heap/index",
+  "sourcePath": "chapter_heap/index.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"blk-f579daf1ecafd4bc\" id=\"_1\">堆</h1>\n<figure data-block=\"blk-dd0105e6130c5916\"><img alt=\"堆\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_heap.jpg\"/><figcaption>堆</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-f23d6b8f4e6c2ba5\">\n<p class=\"admonition-title\">Abstract</p>\n<p>堆就像是山岳峰峦，层叠起伏、形态各异。</p>\n<p>座座山峰高低错落，而最高的山峰总是最先映入眼帘。</p>\n</div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "9d158b57f27f17fa9fbd078bc4f11a4fc9e653a9c3ec1c322bccadb0ede98c36",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  },
+  "blockAliases": {
+    "b0": "blk-f579daf1ecafd4bc",
+    "b1": "blk-dd0105e6130c5916",
+    "b2": "blk-f23d6b8f4e6c2ba5"
+  },
+  "contentVersion": "fadd8f52f3588467"
+}

@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "origin": "http://127.0.0.1:5195",
+  "checks": [
+    "cover and clean route",
+    "story and persisted blackboard",
+    "actual 1000-trial Pyodide simulation",
+    "complete upstream Python example",
+    "both real H5P players and saved scores",
+    "Rough.js probability template",
+    "local ECharts and actual single trial",
+    "all three ungraded Python micro examples",
+    "standalone HTML report with inline SVG, reflection and PDF printing"
+  ],
+  "failedResources": [],
+  "externalRequests": []
+}

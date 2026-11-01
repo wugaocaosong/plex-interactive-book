@@ -1,0 +1,22 @@
+{
+  "id": "back-cover",
+  "title": "封底",
+  "kind": "back-cover",
+  "group": "卷末",
+  "route": "/read/back-cover",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-fed5206bf8c56900\">探索，仍在继续。</h1>\n<p data-block=\"blk-75469cbf19da83c9\">把抽象的算法，变成可看见的每一步。</p>\n<p data-block=\"blk-142a0b3f8f496607\">把第一次尝试，变成下一次出发。</p>\n<p data-block=\"blk-743f43753852719d\"><strong>PLEX · 星轨编程</strong></p>\n<p data-block=\"blk-8c7982aba7e7a79e\">Python 与算法的探索之旅</p>\n<p data-block=\"blk-155f2e2d7287d2c1\">基于《Hello 算法》制作 · CC BY-NC-SA 4.0</p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-fed5206bf8c56900",
+    "b1": "blk-75469cbf19da83c9",
+    "b2": "blk-142a0b3f8f496607",
+    "b3": "blk-743f43753852719d",
+    "b4": "blk-8c7982aba7e7a79e",
+    "b5": "blk-155f2e2d7287d2c1"
+  },
+  "contentVersion": "1171e9e7459b8729"
+}

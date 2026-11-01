@@ -1,0 +1,10 @@
+import { spawn } from 'node:child_process';
+import { resolve } from 'node:path';
+const root=resolve(import.meta.dirname,'..');
+const [mode='dev',port='5190']=process.argv.slice(2);
+if(!['dev','preview'].includes(mode)||!/^\d+$/.test(port))throw Error('Expected dev|preview and a numeric port');
+if(mode==='dev')await import('./prepare-assets.mjs');
+const child=spawn(process.execPath,[resolve(root,'node_modules/vitepress/bin/vitepress.js'),mode,'web','--host','127.0.0.1','--port',port],{cwd:root,stdio:'inherit'});
+child.on('error',error=>{console.error(error);process.exitCode=1});
+child.on('exit',code=>{process.exitCode=code??1});
+for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>child.kill(signal));

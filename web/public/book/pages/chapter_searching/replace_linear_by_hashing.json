@@ -1,0 +1,329 @@
+{
+  "id": "chapter_searching/replace_linear_by_hashing",
+  "title": "10.4   哈希优化策略",
+  "kind": "chapter",
+  "group": "第 10 章   搜索",
+  "route": "/read/chapter_searching/replace_linear_by_hashing",
+  "sourcePath": "chapter_searching/replace_linear_by_hashing.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"blk-398a21f5b4a93d4c\" id=\"_1\">哈希优化策略</h1>\n<p data-block=\"blk-e25e5bc63a2d58f5\">在算法题中，<strong>我们常通过将线性查找替换为哈希查找来降低算法的时间复杂度</strong>。我们借助一个算法题来加深理解。</p>\n<div class=\"admonition question\" data-block=\"blk-4e2de9dd75414b3d\">\n<p class=\"admonition-title\">Question</p>\n<p>给定一个整数数组 <code>nums</code> 和一个目标元素 <code>target</code> ，请在数组中搜索“和”为 <code>target</code> 的两个元素，并返回它们的数组索引。返回任意一个解即可。</p>\n</div>\n<h2 data-block=\"blk-da45786701559d0f\" id=\"_2\">线性查找：以时间换空间</h2>\n<p data-block=\"blk-80581669be37d182\">考虑直接遍历所有可能的组合。如下图所示，我们开启一个两层循环，在每轮中判断两个整数的和是否为 <code>target</code> ，若是，则返回它们的索引。</p>\n<figure data-block=\"blk-d1ebe259fa476b71\"><img alt=\"线性查找求解两数之和\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_searching/replace_linear_by_hashing.assets/two_sum_brute_force.png\"/><figcaption>线性查找求解两数之和</figcaption></figure>\n<p data-block=\"blk-d9fd5865953cd105\">代码如下所示：</p>\n<div class=\"code-example\" data-block=\"blk-aa9051c6c14d6c5a\" data-code=\"0\"><div class=\"code-caption\"><span>two_sum · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def two_sum_brute_force(nums: list[int], target: int) -&gt; list[int]:\n    \"\"\"方法一：暴力枚举\"\"\"\n    # 两层循环，时间复杂度为 O(n^2)\n    for i in range(len(nums) - 1):\n        for j in range(i + 1, len(nums)):\n            if nums[i] + nums[j] == target:\n                return [i, j]\n    return []</code></pre></div>\n<p data-block=\"blk-0ebef8b094b5c012\">此方法的时间复杂度为 <span class=\"arithmatex\">\\(O(n^2)\\)</span> ，空间复杂度为 <span class=\"arithmatex\">\\(O(1)\\)</span> ，在大数据量下非常耗时。</p>\n<h2 data-block=\"blk-adf63deeec945f91\" id=\"_3\">哈希查找：以空间换时间</h2>\n<p data-block=\"blk-c34615968279eaaf\">考虑借助一个哈希表，键值对分别为数组元素和元素索引。循环遍历数组，每轮执行下图所示的步骤。</p>\n<ol data-block=\"blk-e14bdca33724ba1f\">\n<li>判断数字 <code>target - nums[i]</code> 是否在哈希表中，若是，则直接返回这两个元素的索引。</li>\n<li>将键值对 <code>nums[i]</code> 和索引 <code>i</code> 添加进哈希表。</li>\n</ol>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-03a94c8afac606e9\"><img alt=\"辅助哈希表求解两数之和\" data-action=\"image\" src=\"/upstream/chapter_searching/replace_linear_by_hashing.assets/two_sum_hashtable_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 3</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<p data-block=\"blk-2113460a386f19cb\">实现代码如下所示，仅需单层循环即可：</p>\n<div class=\"code-example\" data-block=\"blk-83be0bd7b97dc777\" data-code=\"1\"><div class=\"code-caption\"><span>two_sum · python</span><button data-action=\"code\" data-code=\"1\">查看 / 运行</button></div><pre><code>def two_sum_hash_table(nums: list[int], target: int) -&gt; list[int]:\n    \"\"\"方法二：辅助哈希表\"\"\"\n    # 辅助哈希表，空间复杂度为 O(n)\n    dic = {}\n    # 单层循环，时间复杂度为 O(n)\n    for i in range(len(nums)):\n        if target - nums[i] in dic:\n            return [dic[target - nums[i]], i]\n        dic[nums[i]] = i\n    return []</code></pre></div>\n<p data-block=\"blk-6946e123c15bb8bc\">此方法通过哈希查找将时间复杂度从 <span class=\"arithmatex\">\\(O(n^2)\\)</span> 降至 <span class=\"arithmatex\">\\(O(n)\\)</span> ，大幅提升运行效率。</p>\n<p data-block=\"blk-1f33e4ec6ba492ab\">由于需要维护一个额外的哈希表，因此空间复杂度为 <span class=\"arithmatex\">\\(O(n)\\)</span> 。<strong>尽管如此，该方法的整体时空效率更为均衡，因此它是本题的最优解法</strong>。</p>",
+  "codeExamples": [
+    {
+      "id": "example-4d9e23ac89978a87",
+      "file": "two_sum",
+      "className": "",
+      "functionName": "two_sum_brute_force",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def two_sum_brute_force(nums: list[int], target: int) -> list[int]:\n    \"\"\"方法一：暴力枚举\"\"\"\n    # 两层循环，时间复杂度为 O(n^2)\n    for i in range(len(nums) - 1):\n        for j in range(i + 1, len(nums)):\n            if nums[i] + nums[j] == target:\n                return [i, j]\n    return []",
+          "fullSource": "\"\"\"\nFile: two_sum.py\nCreated Time: 2022-11-25\nAuthor: krahets (krahets@163.com)\n\"\"\"\n\n\ndef two_sum_brute_force(nums: list[int], target: int) -> list[int]:\n    \"\"\"方法一：暴力枚举\"\"\"\n    # 两层循环，时间复杂度为 O(n^2)\n    for i in range(len(nums) - 1):\n        for j in range(i + 1, len(nums)):\n            if nums[i] + nums[j] == target:\n                return [i, j]\n    return []\n\n\ndef two_sum_hash_table(nums: list[int], target: int) -> list[int]:\n    \"\"\"方法二：辅助哈希表\"\"\"\n    # 辅助哈希表，空间复杂度为 O(n)\n    dic = {}\n    # 单层循环，时间复杂度为 O(n)\n    for i in range(len(nums)):\n        if target - nums[i] in dic:\n            return [dic[target - nums[i]], i]\n        dic[nums[i]] = i\n    return []\n\n\n\"\"\"Driver Code\"\"\"\nif __name__ == \"__main__\":\n    # ======= Test Case =======\n    nums = [2, 7, 11, 15]\n    target = 13\n\n    # ====== Driver Code ======\n    # 方法一\n    res: list[int] = two_sum_brute_force(nums, target)\n    print(\"方法一 res =\", res)\n    # 方法二\n    res: list[int] = two_sum_hash_table(nums, target)\n    print(\"方法二 res =\", res)\n",
+          "sourcePath": "codes/python/chapter_searching/two_sum.py",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/python/chapter_searching/two_sum.py",
+          "extraction": "symbol",
+          "runnable": true
+        },
+        {
+          "language": "java",
+          "snippet": "    static int[] twoSumBruteForce(int[] nums, int target) {\n        int size = nums.length;\n        // 两层循环，时间复杂度为 O(n^2)\n        for (int i = 0; i < size - 1; i++) {\n            for (int j = i + 1; j < size; j++) {\n                if (nums[i] + nums[j] == target)\n                    return new int[] { i, j };\n            }\n        }\n        return new int[0];\n    }",
+          "fullSource": "/**\n * File: two_sum.java\n * Created Time: 2022-11-25\n * Author: krahets (krahets@163.com)\n */\n\npackage chapter_searching;\n\nimport java.util.*;\n\npublic class two_sum {\n    /* 方法一：暴力枚举 */\n    static int[] twoSumBruteForce(int[] nums, int target) {\n        int size = nums.length;\n        // 两层循环，时间复杂度为 O(n^2)\n        for (int i = 0; i < size - 1; i++) {\n            for (int j = i + 1; j < size; j++) {\n                if (nums[i] + nums[j] == target)\n                    return new int[] { i, j };\n            }\n        }\n        return new int[0];\n    }\n\n    /* 方法二：辅助哈希表 */\n    static int[] twoSumHashTable(int[] nums, int target) {\n        int size = nums.length;\n        // 辅助哈希表，空间复杂度为 O(n)\n        Map<Integer, Integer> dic = new HashMap<>();\n        // 单层循环，时间复杂度为 O(n)\n        for (int i = 0; i < size; i++) {\n            if (dic.containsKey(target - nums[i])) {\n                return new int[] { dic.get(target - nums[i]), i };\n            }\n            dic.put(nums[i], i);\n        }\n        return new int[0];\n    }\n\n    public static void main(String[] args) {\n        // ======= Test Case =======\n        int[] nums = { 2, 7, 11, 15 };\n        int target = 13;\n\n        // ====== Driver Code ======\n        // 方法一\n        int[] res = twoSumBruteForce(nums, target);\n        System.out.println(\"方法一 res = \" + Arrays.toString(res));\n        // 方法二\n        res = twoSumHashTable(nums, target);\n        System.out.println(\"方法二 res = \" + Arrays.toString(res));\n    }\n}\n",
+          "sourcePath": "codes/java/chapter_searching/two_sum.java",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/java/chapter_searching/two_sum.java",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "cpp",
+          "snippet": "vector<int> twoSumBruteForce(vector<int> &nums, int target) {\n    int size = nums.size();\n    // 两层循环，时间复杂度为 O(n^2)\n    for (int i = 0; i < size - 1; i++) {\n        for (int j = i + 1; j < size; j++) {\n            if (nums[i] + nums[j] == target)\n                return {i, j};\n        }\n    }\n    return {};\n}",
+          "fullSource": "/**\n * File: two_sum.cpp\n * Created Time: 2022-11-25\n * Author: krahets (krahets@163.com)\n */\n\n#include \"../utils/common.hpp\"\n\n/* 方法一：暴力枚举 */\nvector<int> twoSumBruteForce(vector<int> &nums, int target) {\n    int size = nums.size();\n    // 两层循环，时间复杂度为 O(n^2)\n    for (int i = 0; i < size - 1; i++) {\n        for (int j = i + 1; j < size; j++) {\n            if (nums[i] + nums[j] == target)\n                return {i, j};\n        }\n    }\n    return {};\n}\n\n/* 方法二：辅助哈希表 */\nvector<int> twoSumHashTable(vector<int> &nums, int target) {\n    int size = nums.size();\n    // 辅助哈希表，空间复杂度为 O(n)\n    unordered_map<int, int> dic;\n    // 单层循环，时间复杂度为 O(n)\n    for (int i = 0; i < size; i++) {\n        if (dic.find(target - nums[i]) != dic.end()) {\n            return {dic[target - nums[i]], i};\n        }\n        dic.emplace(nums[i], i);\n    }\n    return {};\n}\n\n/* Driver Code */\nint main() {\n    // ======= Test Case =======\n    vector<int> nums = {2, 7, 11, 15};\n    int target = 13;\n\n    // ====== Driver Code ======\n    // 方法一\n    vector<int> res = twoSumBruteForce(nums, target);\n    cout << \"方法一 res = \";\n    printVector(res);\n    // 方法二\n    res = twoSumHashTable(nums, target);\n    cout << \"方法二 res = \";\n    printVector(res);\n\n    return 0;\n}\n",
+          "sourcePath": "codes/cpp/chapter_searching/two_sum.cpp",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/cpp/chapter_searching/two_sum.cpp",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "c",
+          "snippet": "int *twoSumBruteForce(int *nums, int numsSize, int target, int *returnSize) {\n    for (int i = 0; i < numsSize; ++i) {\n        for (int j = i + 1; j < numsSize; ++j) {\n            if (nums[i] + nums[j] == target) {\n                int *res = malloc(sizeof(int) * 2);\n                res[0] = i, res[1] = j;\n                *returnSize = 2;\n                return res;\n            }\n        }\n    }\n    *returnSize = 0;\n    return NULL;\n}",
+          "fullSource": "/**\n * File: two_sum.c\n * Created Time: 2023-01-19\n * Author: Reanon (793584285@qq.com)\n */\n\n#include \"../utils/common.h\"\n\n/* 方法一：暴力枚举 */\nint *twoSumBruteForce(int *nums, int numsSize, int target, int *returnSize) {\n    for (int i = 0; i < numsSize; ++i) {\n        for (int j = i + 1; j < numsSize; ++j) {\n            if (nums[i] + nums[j] == target) {\n                int *res = malloc(sizeof(int) * 2);\n                res[0] = i, res[1] = j;\n                *returnSize = 2;\n                return res;\n            }\n        }\n    }\n    *returnSize = 0;\n    return NULL;\n}\n\n/* 哈希表 */\ntypedef struct {\n    int key;\n    int val;\n    UT_hash_handle hh; // 基于 uthash.h 实现\n} HashTable;\n\n/* 哈希表查询 */\nHashTable *find(HashTable *h, int key) {\n    HashTable *tmp;\n    HASH_FIND_INT(h, &key, tmp);\n    return tmp;\n}\n\n/* 哈希表元素插入 */\nvoid insert(HashTable **h, int key, int val) {\n    HashTable *t = find(*h, key);\n    if (t == NULL) {\n        HashTable *tmp = malloc(sizeof(HashTable));\n        tmp->key = key, tmp->val = val;\n        HASH_ADD_INT(*h, key, tmp);\n    } else {\n        t->val = val;\n    }\n}\n\n/* 方法二：辅助哈希表 */\nint *twoSumHashTable(int *nums, int numsSize, int target, int *returnSize) {\n    HashTable *hashtable = NULL;\n    for (int i = 0; i < numsSize; i++) {\n        HashTable *t = find(hashtable, target - nums[i]);\n        if (t != NULL) {\n            int *res = malloc(sizeof(int) * 2);\n            res[0] = t->val, res[1] = i;\n            *returnSize = 2;\n            return res;\n        }\n        insert(&hashtable, nums[i], i);\n    }\n    *returnSize = 0;\n    return NULL;\n}\n\n/* Driver Code */\nint main() {\n    // ======= Test Case =======\n    int nums[] = {2, 7, 11, 15};\n    int target = 13;\n    // ====== Driver Code ======\n    int returnSize;\n    int *res = twoSumBruteForce(nums, sizeof(nums) / sizeof(int), target, &returnSize);\n    // 方法一\n    printf(\"方法一 res = \");\n    printArray(res, returnSize);\n\n    // 方法二\n    res = twoSumHashTable(nums, sizeof(nums) / sizeof(int), target, &returnSize);\n    printf(\"方法二 res = \");\n    printArray(res, returnSize);\n\n    return 0;\n}",
+          "sourcePath": "codes/c/chapter_searching/two_sum.c",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/c/chapter_searching/two_sum.c",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "csharp",
+          "snippet": "    int[] TwoSumBruteForce(int[] nums, int target) {\n        int size = nums.Length;\n        // 两层循环，时间复杂度为 O(n^2)\n        for (int i = 0; i < size - 1; i++) {\n            for (int j = i + 1; j < size; j++) {\n                if (nums[i] + nums[j] == target)\n                    return [i, j];\n            }\n        }\n        return [];\n    }",
+          "fullSource": "﻿/**\n * File: two_sum.cs\n * Created Time: 2022-12-23\n * Author: haptear (haptear@hotmail.com)\n */\n\nnamespace hello_algo.chapter_searching;\n\npublic class two_sum {\n    /* 方法一：暴力枚举 */\n    int[] TwoSumBruteForce(int[] nums, int target) {\n        int size = nums.Length;\n        // 两层循环，时间复杂度为 O(n^2)\n        for (int i = 0; i < size - 1; i++) {\n            for (int j = i + 1; j < size; j++) {\n                if (nums[i] + nums[j] == target)\n                    return [i, j];\n            }\n        }\n        return [];\n    }\n\n    /* 方法二：辅助哈希表 */\n    int[] TwoSumHashTable(int[] nums, int target) {\n        int size = nums.Length;\n        // 辅助哈希表，空间复杂度为 O(n)\n        Dictionary<int, int> dic = [];\n        // 单层循环，时间复杂度为 O(n)\n        for (int i = 0; i < size; i++) {\n            if (dic.ContainsKey(target - nums[i])) {\n                return [dic[target - nums[i]], i];\n            }\n            dic.Add(nums[i], i);\n        }\n        return [];\n    }\n\n    [Test]\n    public void Test() {\n        // ======= Test Case =======\n        int[] nums = [2, 7, 11, 15];\n        int target = 13;\n\n        // ====== Driver Code ======\n        // 方法一\n        int[] res = TwoSumBruteForce(nums, target);\n        Console.WriteLine(\"方法一 res = \" + string.Join(\",\", res));\n        // 方法二\n        res = TwoSumHashTable(nums, target);\n        Console.WriteLine(\"方法二 res = \" + string.Join(\",\", res));\n    }\n}\n",
+          "sourcePath": "codes/csharp/chapter_searching/two_sum.cs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/csharp/chapter_searching/two_sum.cs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "go",
+          "snippet": "func twoSumBruteForce(nums []int, target int) []int {\n\tsize := len(nums)\n\t// 两层循环，时间复杂度为 O(n^2)\n\tfor i := 0; i < size-1; i++ {\n\t\tfor j := i + 1; j < size; j++ {\n\t\t\tif nums[i]+nums[j] == target {\n\t\t\t\treturn []int{i, j}\n\t\t\t}\n\t\t}\n\t}\n\treturn nil\n}",
+          "fullSource": "// File: two_sum.go\n// Created Time: 2022-11-25\n// Author: reanon (793584285@qq.com)\n\npackage chapter_searching\n\n/* 方法一：暴力枚举 */\nfunc twoSumBruteForce(nums []int, target int) []int {\n\tsize := len(nums)\n\t// 两层循环，时间复杂度为 O(n^2)\n\tfor i := 0; i < size-1; i++ {\n\t\tfor j := i + 1; j < size; j++ {\n\t\t\tif nums[i]+nums[j] == target {\n\t\t\t\treturn []int{i, j}\n\t\t\t}\n\t\t}\n\t}\n\treturn nil\n}\n\n/* 方法二：辅助哈希表 */\nfunc twoSumHashTable(nums []int, target int) []int {\n\t// 辅助哈希表，空间复杂度为 O(n)\n\thashTable := map[int]int{}\n\t// 单层循环，时间复杂度为 O(n)\n\tfor idx, val := range nums {\n\t\tif preIdx, ok := hashTable[target-val]; ok {\n\t\t\treturn []int{preIdx, idx}\n\t\t}\n\t\thashTable[val] = idx\n\t}\n\treturn nil\n}\n",
+          "sourcePath": "codes/go/chapter_searching/two_sum.go",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/go/chapter_searching/two_sum.go",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "javascript",
+          "snippet": "function twoSumBruteForce(nums, target) {\n    const n = nums.length;\n    // 两层循环，时间复杂度为 O(n^2)\n    for (let i = 0; i < n; i++) {\n        for (let j = i + 1; j < n; j++) {\n            if (nums[i] + nums[j] === target) {\n                return [i, j];\n            }\n        }\n    }\n    return [];\n}",
+          "fullSource": "/**\n * File: two_sum.js\n * Created Time: 2022-12-15\n * Author: gyt95 (gytkwan@gmail.com)\n */\n\n/* 方法一：暴力枚举 */\nfunction twoSumBruteForce(nums, target) {\n    const n = nums.length;\n    // 两层循环，时间复杂度为 O(n^2)\n    for (let i = 0; i < n; i++) {\n        for (let j = i + 1; j < n; j++) {\n            if (nums[i] + nums[j] === target) {\n                return [i, j];\n            }\n        }\n    }\n    return [];\n}\n\n/* 方法二：辅助哈希表 */\nfunction twoSumHashTable(nums, target) {\n    // 辅助哈希表，空间复杂度为 O(n)\n    let m = {};\n    // 单层循环，时间复杂度为 O(n)\n    for (let i = 0; i < nums.length; i++) {\n        if (m[target - nums[i]] !== undefined) {\n            return [m[target - nums[i]], i];\n        } else {\n            m[nums[i]] = i;\n        }\n    }\n    return [];\n}\n\n/* Driver Code */\n// 方法一\nconst nums = [2, 7, 11, 15],\n    target = 13;\n\nlet res = twoSumBruteForce(nums, target);\nconsole.log('方法一 res = ', res);\n\n// 方法二\nres = twoSumHashTable(nums, target);\nconsole.log('方法二 res = ', res);\n",
+          "sourcePath": "codes/javascript/chapter_searching/two_sum.js",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/javascript/chapter_searching/two_sum.js",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "typescript",
+          "snippet": "function twoSumBruteForce(nums: number[], target: number): number[] {\n    const n = nums.length;\n    // 两层循环，时间复杂度为 O(n^2)\n    for (let i = 0; i < n; i++) {\n        for (let j = i + 1; j < n; j++) {\n            if (nums[i] + nums[j] === target) {\n                return [i, j];\n            }\n        }\n    }\n    return [];\n}",
+          "fullSource": "/**\n * File: two_sum.ts\n * Created Time: 2022-12-15\n * Author: gyt95 (gytkwan@gmail.com)\n */\n\n/* 方法一：暴力枚举 */\nfunction twoSumBruteForce(nums: number[], target: number): number[] {\n    const n = nums.length;\n    // 两层循环，时间复杂度为 O(n^2)\n    for (let i = 0; i < n; i++) {\n        for (let j = i + 1; j < n; j++) {\n            if (nums[i] + nums[j] === target) {\n                return [i, j];\n            }\n        }\n    }\n    return [];\n}\n\n/* 方法二：辅助哈希表 */\nfunction twoSumHashTable(nums: number[], target: number): number[] {\n    // 辅助哈希表，空间复杂度为 O(n)\n    let m: Map<number, number> = new Map();\n    // 单层循环，时间复杂度为 O(n)\n    for (let i = 0; i < nums.length; i++) {\n        let index = m.get(target - nums[i]);\n        if (index !== undefined) {\n            return [index, i];\n        } else {\n            m.set(nums[i], i);\n        }\n    }\n    return [];\n}\n\n/* Driver Code */\n// 方法一\nconst nums = [2, 7, 11, 15],\n    target = 13;\n\nlet res = twoSumBruteForce(nums, target);\nconsole.log('方法一 res = ', res);\n\n// 方法二\nres = twoSumHashTable(nums, target);\nconsole.log('方法二 res = ', res);\n\nexport {};\n",
+          "sourcePath": "codes/typescript/chapter_searching/two_sum.ts",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/typescript/chapter_searching/two_sum.ts",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "swift",
+          "snippet": "func twoSumBruteForce(nums: [Int], target: Int) -> [Int] {\n    // 两层循环，时间复杂度为 O(n^2)\n    for i in nums.indices.dropLast() {\n        for j in nums.indices.dropFirst(i + 1) {\n            if nums[i] + nums[j] == target {\n                return [i, j]\n            }\n        }\n    }\n    return [0]\n}",
+          "fullSource": "/**\n * File: two_sum.swift\n * Created Time: 2023-01-03\n * Author: nuomi1 (nuomi1@qq.com)\n */\n\n/* 方法一：暴力枚举 */\nfunc twoSumBruteForce(nums: [Int], target: Int) -> [Int] {\n    // 两层循环，时间复杂度为 O(n^2)\n    for i in nums.indices.dropLast() {\n        for j in nums.indices.dropFirst(i + 1) {\n            if nums[i] + nums[j] == target {\n                return [i, j]\n            }\n        }\n    }\n    return [0]\n}\n\n/* 方法二：辅助哈希表 */\nfunc twoSumHashTable(nums: [Int], target: Int) -> [Int] {\n    // 辅助哈希表，空间复杂度为 O(n)\n    var dic: [Int: Int] = [:]\n    // 单层循环，时间复杂度为 O(n)\n    for i in nums.indices {\n        if let j = dic[target - nums[i]] {\n            return [j, i]\n        }\n        dic[nums[i]] = i\n    }\n    return [0]\n}\n\n@main\nenum LeetcodeTwoSum {\n    /* Driver Code */\n    static func main() {\n        // ======= Test Case =======\n        let nums = [2, 7, 11, 15]\n        let target = 13\n        // ====== Driver Code ======\n        // 方法一\n        var res = twoSumBruteForce(nums: nums, target: target)\n        print(\"方法一 res = \\(res)\")\n        // 方法二\n        res = twoSumHashTable(nums: nums, target: target)\n        print(\"方法二 res = \\(res)\")\n    }\n}\n",
+          "sourcePath": "codes/swift/chapter_searching/two_sum.swift",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/swift/chapter_searching/two_sum.swift",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "rust",
+          "snippet": "pub fn two_sum_brute_force(nums: &Vec<i32>, target: i32) -> Option<Vec<i32>> {\n    let size = nums.len();\n    // 两层循环，时间复杂度为 O(n^2)\n    for i in 0..size - 1 {\n        for j in i + 1..size {\n            if nums[i] + nums[j] == target {\n                return Some(vec![i as i32, j as i32]);\n            }\n        }\n    }\n    None\n}",
+          "fullSource": "/*\n * File: two_sum.rs\n * Created Time: 2023-01-14\n * Author: xBLACICEx (xBLACKICEx@outlook.com), codingonion (coderonion@gmail.com)\n */\n\nuse hello_algo_rust::include::print_util;\nuse std::collections::HashMap;\n\n/* 方法一：暴力枚举 */\npub fn two_sum_brute_force(nums: &Vec<i32>, target: i32) -> Option<Vec<i32>> {\n    let size = nums.len();\n    // 两层循环，时间复杂度为 O(n^2)\n    for i in 0..size - 1 {\n        for j in i + 1..size {\n            if nums[i] + nums[j] == target {\n                return Some(vec![i as i32, j as i32]);\n            }\n        }\n    }\n    None\n}\n\n/* 方法二：辅助哈希表 */\npub fn two_sum_hash_table(nums: &Vec<i32>, target: i32) -> Option<Vec<i32>> {\n    // 辅助哈希表，空间复杂度为 O(n)\n    let mut dic = HashMap::new();\n    // 单层循环，时间复杂度为 O(n)\n    for (i, num) in nums.iter().enumerate() {\n        match dic.get(&(target - num)) {\n            Some(v) => return Some(vec![*v as i32, i as i32]),\n            None => dic.insert(num, i as i32),\n        };\n    }\n    None\n}\n\nfn main() {\n    // ======= Test Case =======\n    let nums = vec![2, 7, 11, 15];\n    let target = 13;\n\n    // ====== Driver Code ======\n    // 方法一\n    let res = two_sum_brute_force(&nums, target).unwrap();\n    print!(\"方法一 res = \");\n    print_util::print_array(&res);\n    // 方法二\n    let res = two_sum_hash_table(&nums, target).unwrap();\n    print!(\"\\n方法二 res = \");\n    print_util::print_array(&res);\n}\n",
+          "sourcePath": "codes/rust/chapter_searching/two_sum.rs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/rust/chapter_searching/two_sum.rs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "kotlin",
+          "snippet": "fun twoSumBruteForce(nums: IntArray, target: Int): IntArray {\n    val size = nums.size\n    // 两层循环，时间复杂度为 O(n^2)\n    for (i in 0..<size - 1) {\n        for (j in i + 1..<size) {\n            if (nums[i] + nums[j] == target) return intArrayOf(i, j)\n        }\n    }\n    return IntArray(0)\n}",
+          "fullSource": "/**\n * File: two_sum.kt\n * Created Time: 2024-01-25\n * Author: curtishd (1023632660@qq.com)\n */\n\npackage chapter_searching\n\n/* 方法一：暴力枚举 */\nfun twoSumBruteForce(nums: IntArray, target: Int): IntArray {\n    val size = nums.size\n    // 两层循环，时间复杂度为 O(n^2)\n    for (i in 0..<size - 1) {\n        for (j in i + 1..<size) {\n            if (nums[i] + nums[j] == target) return intArrayOf(i, j)\n        }\n    }\n    return IntArray(0)\n}\n\n/* 方法二：辅助哈希表 */\nfun twoSumHashTable(nums: IntArray, target: Int): IntArray {\n    val size = nums.size\n    // 辅助哈希表，空间复杂度为 O(n)\n    val dic = HashMap<Int, Int>()\n    // 单层循环，时间复杂度为 O(n)\n    for (i in 0..<size) {\n        if (dic.containsKey(target - nums[i])) {\n            return intArrayOf(dic[target - nums[i]]!!, i)\n        }\n        dic[nums[i]] = i\n    }\n    return IntArray(0)\n}\n\n/* Driver Code */\nfun main() {\n    // ======= Test Case =======\n    val nums = intArrayOf(2, 7, 11, 15)\n    val target = 13\n\n    // ====== Driver Code ======\n    // 方法一\n    var res = twoSumBruteForce(nums, target)\n    println(\"方法一 res = ${res.contentToString()}\")\n    // 方法二\n    res = twoSumHashTable(nums, target)\n    println(\"方法二 res = ${res.contentToString()}\")\n}",
+          "sourcePath": "codes/kotlin/chapter_searching/two_sum.kt",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/kotlin/chapter_searching/two_sum.kt",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "dart",
+          "snippet": "List<int> twoSumBruteForce(List<int> nums, int target) {\n  int size = nums.length;\n  // 两层循环，时间复杂度为 O(n^2)\n  for (var i = 0; i < size - 1; i++) {\n    for (var j = i + 1; j < size; j++) {\n      if (nums[i] + nums[j] == target) return [i, j];\n    }\n  }\n  return [0];\n}",
+          "fullSource": "/**\n * File: two_sum.dart\n * Created Time: 2023-2-11\n * Author: Jefferson (JeffersonHuang77@gmail.com)\n */\n\nimport 'dart:collection';\n\n/* 方法一： 暴力枚举 */\nList<int> twoSumBruteForce(List<int> nums, int target) {\n  int size = nums.length;\n  // 两层循环，时间复杂度为 O(n^2)\n  for (var i = 0; i < size - 1; i++) {\n    for (var j = i + 1; j < size; j++) {\n      if (nums[i] + nums[j] == target) return [i, j];\n    }\n  }\n  return [0];\n}\n\n/* 方法二： 辅助哈希表 */\nList<int> twoSumHashTable(List<int> nums, int target) {\n  int size = nums.length;\n  // 辅助哈希表，空间复杂度为 O(n)\n  Map<int, int> dic = HashMap();\n  // 单层循环，时间复杂度为 O(n)\n  for (var i = 0; i < size; i++) {\n    if (dic.containsKey(target - nums[i])) {\n      return [dic[target - nums[i]]!, i];\n    }\n    dic.putIfAbsent(nums[i], () => i);\n  }\n  return [0];\n}\n\n/* Driver Code */\nvoid main() {\n  // ======= Test Case =======\n  List<int> nums = [2, 7, 11, 15];\n  int target = 13;\n\n  // ====== Driver Code ======\n  // 方法一\n  List<int> res = twoSumBruteForce(nums, target);\n  print('方法一 res = $res');\n  // 方法二\n  res = twoSumHashTable(nums, target);\n  print('方法二 res = $res');\n}\n",
+          "sourcePath": "codes/dart/chapter_searching/two_sum.dart",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/dart/chapter_searching/two_sum.dart",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "ruby",
+          "snippet": "def two_sum_brute_force(nums, target)\n  # 两层循环，时间复杂度为 O(n^2)\n  for i in 0...(nums.length - 1)\n    for j in (i + 1)...nums.length\n      return [i, j] if nums[i] + nums[j] == target\n    end\n  end\n\n  []\nend",
+          "fullSource": "=begin\nFile: two_sum.rb\nCreated Time: 2024-04-09\nAuthor: Blue Bean (lonnnnnnner@gmail.com)\n=end\n\n### 方法一：暴力枚举 ###\ndef two_sum_brute_force(nums, target)\n  # 两层循环，时间复杂度为 O(n^2)\n  for i in 0...(nums.length - 1)\n    for j in (i + 1)...nums.length\n      return [i, j] if nums[i] + nums[j] == target\n    end\n  end\n\n  []\nend\n\n### 方法二：辅助哈希表 ###\ndef two_sum_hash_table(nums, target)\n  # 辅助哈希表，空间复杂度为 O(n)\n  dic = {}\n  # 单层循环，时间复杂度为 O(n)\n  for i in 0...nums.length\n    return [dic[target - nums[i]], i] if dic.has_key?(target - nums[i])\n\n    dic[nums[i]] = i\n  end\n\n  []\nend\n\n### Driver Code ###\nif __FILE__ == $0\n  # ======= Test Case =======\n  nums = [2, 7, 11, 15]\n  target = 13\n\n  # ====== Driver Code ======\n  # 方法一\n  res = two_sum_brute_force(nums, target)\n  puts \"方法一 res = #{res}\"\n  # 方法二\n  res = two_sum_hash_table(nums, target)\n  puts \"方法二 res = #{res}\"\nend\n",
+          "sourcePath": "codes/ruby/chapter_searching/two_sum.rb",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/ruby/chapter_searching/two_sum.rb",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "zig",
+          "snippet": "pub fn twoSumBruteForce(nums: []i32, target: i32) ?[2]i32 {\n    var size: usize = nums.len;\n    var i: usize = 0;\n    // 两层循环，时间复杂度为 O(n^2)\n    while (i < size - 1) : (i += 1) {\n        var j = i + 1;\n        while (j < size) : (j += 1) {\n            if (nums[i] + nums[j] == target) {\n                return [_]i32{@intCast(i), @intCast(j)};\n            }\n        }\n    }\n    return null;\n}",
+          "fullSource": "// File: two_sum.zig\n// Created Time: 2023-01-07\n// Author: codingonion (coderonion@gmail.com)\n\nconst std = @import(\"std\");\nconst inc = @import(\"include\");\n\n// 方法一：暴力枚举\npub fn twoSumBruteForce(nums: []i32, target: i32) ?[2]i32 {\n    var size: usize = nums.len;\n    var i: usize = 0;\n    // 两层循环，时间复杂度为 O(n^2)\n    while (i < size - 1) : (i += 1) {\n        var j = i + 1;\n        while (j < size) : (j += 1) {\n            if (nums[i] + nums[j] == target) {\n                return [_]i32{@intCast(i), @intCast(j)};\n            }\n        }\n    }\n    return null;\n}\n\n// 方法二：辅助哈希表\npub fn twoSumHashTable(nums: []i32, target: i32) !?[2]i32 {\n    var size: usize = nums.len;\n    // 辅助哈希表，空间复杂度为 O(n)\n    var dic = std.AutoHashMap(i32, i32).init(std.heap.page_allocator);\n    defer dic.deinit();\n    var i: usize = 0;\n    // 单层循环，时间复杂度为 O(n)\n    while (i < size) : (i += 1) {\n        if (dic.contains(target - nums[i])) {\n            return [_]i32{dic.get(target - nums[i]).?, @intCast(i)};\n        }\n        try dic.put(nums[i], @intCast(i));\n    }\n    return null;\n}\n\n\npub fn main() !void {\n    // ======= Test Case =======\n    var nums = [_]i32{ 2, 7, 11, 15 };\n    var target: i32 = 9;\n\n    // ====== Driver Code ======\n    // 方法一\n    var res = twoSumBruteForce(&nums, target).?;\n    std.debug.print(\"方法一 res = \", .{});\n    inc.PrintUtil.printArray(i32, &res); \n    // 方法二\n    res = (try twoSumHashTable(&nums, target)).?;\n    std.debug.print(\"\\n方法二 res = \", .{});\n    inc.PrintUtil.printArray(i32, &res); \n\n    _ = try std.io.getStdIn().reader().readByte();\n}\n",
+          "sourcePath": "codes/zig/chapter_searching/two_sum.zig",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/zig/chapter_searching/two_sum.zig",
+          "extraction": "symbol",
+          "runnable": false
+        }
+      ]
+    },
+    {
+      "id": "example-e88225b2e361c2f9",
+      "file": "two_sum",
+      "className": "",
+      "functionName": "two_sum_hash_table",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def two_sum_hash_table(nums: list[int], target: int) -> list[int]:\n    \"\"\"方法二：辅助哈希表\"\"\"\n    # 辅助哈希表，空间复杂度为 O(n)\n    dic = {}\n    # 单层循环，时间复杂度为 O(n)\n    for i in range(len(nums)):\n        if target - nums[i] in dic:\n            return [dic[target - nums[i]], i]\n        dic[nums[i]] = i\n    return []",
+          "fullSource": "\"\"\"\nFile: two_sum.py\nCreated Time: 2022-11-25\nAuthor: krahets (krahets@163.com)\n\"\"\"\n\n\ndef two_sum_brute_force(nums: list[int], target: int) -> list[int]:\n    \"\"\"方法一：暴力枚举\"\"\"\n    # 两层循环，时间复杂度为 O(n^2)\n    for i in range(len(nums) - 1):\n        for j in range(i + 1, len(nums)):\n            if nums[i] + nums[j] == target:\n                return [i, j]\n    return []\n\n\ndef two_sum_hash_table(nums: list[int], target: int) -> list[int]:\n    \"\"\"方法二：辅助哈希表\"\"\"\n    # 辅助哈希表，空间复杂度为 O(n)\n    dic = {}\n    # 单层循环，时间复杂度为 O(n)\n    for i in range(len(nums)):\n        if target - nums[i] in dic:\n            return [dic[target - nums[i]], i]\n        dic[nums[i]] = i\n    return []\n\n\n\"\"\"Driver Code\"\"\"\nif __name__ == \"__main__\":\n    # ======= Test Case =======\n    nums = [2, 7, 11, 15]\n    target = 13\n\n    # ====== Driver Code ======\n    # 方法一\n    res: list[int] = two_sum_brute_force(nums, target)\n    print(\"方法一 res =\", res)\n    # 方法二\n    res: list[int] = two_sum_hash_table(nums, target)\n    print(\"方法二 res =\", res)\n",
+          "sourcePath": "codes/python/chapter_searching/two_sum.py",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/python/chapter_searching/two_sum.py",
+          "extraction": "symbol",
+          "runnable": true
+        },
+        {
+          "language": "java",
+          "snippet": "    static int[] twoSumHashTable(int[] nums, int target) {\n        int size = nums.length;\n        // 辅助哈希表，空间复杂度为 O(n)\n        Map<Integer, Integer> dic = new HashMap<>();\n        // 单层循环，时间复杂度为 O(n)\n        for (int i = 0; i < size; i++) {\n            if (dic.containsKey(target - nums[i])) {\n                return new int[] { dic.get(target - nums[i]), i };\n            }\n            dic.put(nums[i], i);\n        }\n        return new int[0];\n    }",
+          "fullSource": "/**\n * File: two_sum.java\n * Created Time: 2022-11-25\n * Author: krahets (krahets@163.com)\n */\n\npackage chapter_searching;\n\nimport java.util.*;\n\npublic class two_sum {\n    /* 方法一：暴力枚举 */\n    static int[] twoSumBruteForce(int[] nums, int target) {\n        int size = nums.length;\n        // 两层循环，时间复杂度为 O(n^2)\n        for (int i = 0; i < size - 1; i++) {\n            for (int j = i + 1; j < size; j++) {\n                if (nums[i] + nums[j] == target)\n                    return new int[] { i, j };\n            }\n        }\n        return new int[0];\n    }\n\n    /* 方法二：辅助哈希表 */\n    static int[] twoSumHashTable(int[] nums, int target) {\n        int size = nums.length;\n        // 辅助哈希表，空间复杂度为 O(n)\n        Map<Integer, Integer> dic = new HashMap<>();\n        // 单层循环，时间复杂度为 O(n)\n        for (int i = 0; i < size; i++) {\n            if (dic.containsKey(target - nums[i])) {\n                return new int[] { dic.get(target - nums[i]), i };\n            }\n            dic.put(nums[i], i);\n        }\n        return new int[0];\n    }\n\n    public static void main(String[] args) {\n        // ======= Test Case =======\n        int[] nums = { 2, 7, 11, 15 };\n        int target = 13;\n\n        // ====== Driver Code ======\n        // 方法一\n        int[] res = twoSumBruteForce(nums, target);\n        System.out.println(\"方法一 res = \" + Arrays.toString(res));\n        // 方法二\n        res = twoSumHashTable(nums, target);\n        System.out.println(\"方法二 res = \" + Arrays.toString(res));\n    }\n}\n",
+          "sourcePath": "codes/java/chapter_searching/two_sum.java",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/java/chapter_searching/two_sum.java",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "cpp",
+          "snippet": "vector<int> twoSumHashTable(vector<int> &nums, int target) {\n    int size = nums.size();\n    // 辅助哈希表，空间复杂度为 O(n)\n    unordered_map<int, int> dic;\n    // 单层循环，时间复杂度为 O(n)\n    for (int i = 0; i < size; i++) {\n        if (dic.find(target - nums[i]) != dic.end()) {\n            return {dic[target - nums[i]], i};\n        }\n        dic.emplace(nums[i], i);\n    }\n    return {};\n}",
+          "fullSource": "/**\n * File: two_sum.cpp\n * Created Time: 2022-11-25\n * Author: krahets (krahets@163.com)\n */\n\n#include \"../utils/common.hpp\"\n\n/* 方法一：暴力枚举 */\nvector<int> twoSumBruteForce(vector<int> &nums, int target) {\n    int size = nums.size();\n    // 两层循环，时间复杂度为 O(n^2)\n    for (int i = 0; i < size - 1; i++) {\n        for (int j = i + 1; j < size; j++) {\n            if (nums[i] + nums[j] == target)\n                return {i, j};\n        }\n    }\n    return {};\n}\n\n/* 方法二：辅助哈希表 */\nvector<int> twoSumHashTable(vector<int> &nums, int target) {\n    int size = nums.size();\n    // 辅助哈希表，空间复杂度为 O(n)\n    unordered_map<int, int> dic;\n    // 单层循环，时间复杂度为 O(n)\n    for (int i = 0; i < size; i++) {\n        if (dic.find(target - nums[i]) != dic.end()) {\n            return {dic[target - nums[i]], i};\n        }\n        dic.emplace(nums[i], i);\n    }\n    return {};\n}\n\n/* Driver Code */\nint main() {\n    // ======= Test Case =======\n    vector<int> nums = {2, 7, 11, 15};\n    int target = 13;\n\n    // ====== Driver Code ======\n    // 方法一\n    vector<int> res = twoSumBruteForce(nums, target);\n    cout << \"方法一 res = \";\n    printVector(res);\n    // 方法二\n    res = twoSumHashTable(nums, target);\n    cout << \"方法二 res = \";\n    printVector(res);\n\n    return 0;\n}\n",
+          "sourcePath": "codes/cpp/chapter_searching/two_sum.cpp",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/cpp/chapter_searching/two_sum.cpp",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "c",
+          "snippet": "int *twoSumHashTable(int *nums, int numsSize, int target, int *returnSize) {\n    HashTable *hashtable = NULL;\n    for (int i = 0; i < numsSize; i++) {\n        HashTable *t = find(hashtable, target - nums[i]);\n        if (t != NULL) {\n            int *res = malloc(sizeof(int) * 2);\n            res[0] = t->val, res[1] = i;\n            *returnSize = 2;\n            return res;\n        }\n        insert(&hashtable, nums[i], i);\n    }\n    *returnSize = 0;\n    return NULL;\n}",
+          "fullSource": "/**\n * File: two_sum.c\n * Created Time: 2023-01-19\n * Author: Reanon (793584285@qq.com)\n */\n\n#include \"../utils/common.h\"\n\n/* 方法一：暴力枚举 */\nint *twoSumBruteForce(int *nums, int numsSize, int target, int *returnSize) {\n    for (int i = 0; i < numsSize; ++i) {\n        for (int j = i + 1; j < numsSize; ++j) {\n            if (nums[i] + nums[j] == target) {\n                int *res = malloc(sizeof(int) * 2);\n                res[0] = i, res[1] = j;\n                *returnSize = 2;\n                return res;\n            }\n        }\n    }\n    *returnSize = 0;\n    return NULL;\n}\n\n/* 哈希表 */\ntypedef struct {\n    int key;\n    int val;\n    UT_hash_handle hh; // 基于 uthash.h 实现\n} HashTable;\n\n/* 哈希表查询 */\nHashTable *find(HashTable *h, int key) {\n    HashTable *tmp;\n    HASH_FIND_INT(h, &key, tmp);\n    return tmp;\n}\n\n/* 哈希表元素插入 */\nvoid insert(HashTable **h, int key, int val) {\n    HashTable *t = find(*h, key);\n    if (t == NULL) {\n        HashTable *tmp = malloc(sizeof(HashTable));\n        tmp->key = key, tmp->val = val;\n        HASH_ADD_INT(*h, key, tmp);\n    } else {\n        t->val = val;\n    }\n}\n\n/* 方法二：辅助哈希表 */\nint *twoSumHashTable(int *nums, int numsSize, int target, int *returnSize) {\n    HashTable *hashtable = NULL;\n    for (int i = 0; i < numsSize; i++) {\n        HashTable *t = find(hashtable, target - nums[i]);\n        if (t != NULL) {\n            int *res = malloc(sizeof(int) * 2);\n            res[0] = t->val, res[1] = i;\n            *returnSize = 2;\n            return res;\n        }\n        insert(&hashtable, nums[i], i);\n    }\n    *returnSize = 0;\n    return NULL;\n}\n\n/* Driver Code */\nint main() {\n    // ======= Test Case =======\n    int nums[] = {2, 7, 11, 15};\n    int target = 13;\n    // ====== Driver Code ======\n    int returnSize;\n    int *res = twoSumBruteForce(nums, sizeof(nums) / sizeof(int), target, &returnSize);\n    // 方法一\n    printf(\"方法一 res = \");\n    printArray(res, returnSize);\n\n    // 方法二\n    res = twoSumHashTable(nums, sizeof(nums) / sizeof(int), target, &returnSize);\n    printf(\"方法二 res = \");\n    printArray(res, returnSize);\n\n    return 0;\n}",
+          "sourcePath": "codes/c/chapter_searching/two_sum.c",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/c/chapter_searching/two_sum.c",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "csharp",
+          "snippet": "    int[] TwoSumHashTable(int[] nums, int target) {\n        int size = nums.Length;\n        // 辅助哈希表，空间复杂度为 O(n)\n        Dictionary<int, int> dic = [];\n        // 单层循环，时间复杂度为 O(n)\n        for (int i = 0; i < size; i++) {\n            if (dic.ContainsKey(target - nums[i])) {\n                return [dic[target - nums[i]], i];\n            }\n            dic.Add(nums[i], i);\n        }\n        return [];\n    }",
+          "fullSource": "﻿/**\n * File: two_sum.cs\n * Created Time: 2022-12-23\n * Author: haptear (haptear@hotmail.com)\n */\n\nnamespace hello_algo.chapter_searching;\n\npublic class two_sum {\n    /* 方法一：暴力枚举 */\n    int[] TwoSumBruteForce(int[] nums, int target) {\n        int size = nums.Length;\n        // 两层循环，时间复杂度为 O(n^2)\n        for (int i = 0; i < size - 1; i++) {\n            for (int j = i + 1; j < size; j++) {\n                if (nums[i] + nums[j] == target)\n                    return [i, j];\n            }\n        }\n        return [];\n    }\n\n    /* 方法二：辅助哈希表 */\n    int[] TwoSumHashTable(int[] nums, int target) {\n        int size = nums.Length;\n        // 辅助哈希表，空间复杂度为 O(n)\n        Dictionary<int, int> dic = [];\n        // 单层循环，时间复杂度为 O(n)\n        for (int i = 0; i < size; i++) {\n            if (dic.ContainsKey(target - nums[i])) {\n                return [dic[target - nums[i]], i];\n            }\n            dic.Add(nums[i], i);\n        }\n        return [];\n    }\n\n    [Test]\n    public void Test() {\n        // ======= Test Case =======\n        int[] nums = [2, 7, 11, 15];\n        int target = 13;\n\n        // ====== Driver Code ======\n        // 方法一\n        int[] res = TwoSumBruteForce(nums, target);\n        Console.WriteLine(\"方法一 res = \" + string.Join(\",\", res));\n        // 方法二\n        res = TwoSumHashTable(nums, target);\n        Console.WriteLine(\"方法二 res = \" + string.Join(\",\", res));\n    }\n}\n",
+          "sourcePath": "codes/csharp/chapter_searching/two_sum.cs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/csharp/chapter_searching/two_sum.cs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "go",
+          "snippet": "func twoSumHashTable(nums []int, target int) []int {\n\t// 辅助哈希表，空间复杂度为 O(n)\n\thashTable := map[int]int{}\n\t// 单层循环，时间复杂度为 O(n)\n\tfor idx, val := range nums {\n\t\tif preIdx, ok := hashTable[target-val]; ok {\n\t\t\treturn []int{preIdx, idx}\n\t\t}\n\t\thashTable[val] = idx\n\t}\n\treturn nil\n}",
+          "fullSource": "// File: two_sum.go\n// Created Time: 2022-11-25\n// Author: reanon (793584285@qq.com)\n\npackage chapter_searching\n\n/* 方法一：暴力枚举 */\nfunc twoSumBruteForce(nums []int, target int) []int {\n\tsize := len(nums)\n\t// 两层循环，时间复杂度为 O(n^2)\n\tfor i := 0; i < size-1; i++ {\n\t\tfor j := i + 1; j < size; j++ {\n\t\t\tif nums[i]+nums[j] == target {\n\t\t\t\treturn []int{i, j}\n\t\t\t}\n\t\t}\n\t}\n\treturn nil\n}\n\n/* 方法二：辅助哈希表 */\nfunc twoSumHashTable(nums []int, target int) []int {\n\t// 辅助哈希表，空间复杂度为 O(n)\n\thashTable := map[int]int{}\n\t// 单层循环，时间复杂度为 O(n)\n\tfor idx, val := range nums {\n\t\tif preIdx, ok := hashTable[target-val]; ok {\n\t\t\treturn []int{preIdx, idx}\n\t\t}\n\t\thashTable[val] = idx\n\t}\n\treturn nil\n}\n",
+          "sourcePath": "codes/go/chapter_searching/two_sum.go",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/go/chapter_searching/two_sum.go",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "javascript",
+          "snippet": "function twoSumHashTable(nums, target) {\n    // 辅助哈希表，空间复杂度为 O(n)\n    let m = {};\n    // 单层循环，时间复杂度为 O(n)\n    for (let i = 0; i < nums.length; i++) {\n        if (m[target - nums[i]] !== undefined) {\n            return [m[target - nums[i]], i];\n        } else {\n            m[nums[i]] = i;\n        }\n    }\n    return [];\n}",
+          "fullSource": "/**\n * File: two_sum.js\n * Created Time: 2022-12-15\n * Author: gyt95 (gytkwan@gmail.com)\n */\n\n/* 方法一：暴力枚举 */\nfunction twoSumBruteForce(nums, target) {\n    const n = nums.length;\n    // 两层循环，时间复杂度为 O(n^2)\n    for (let i = 0; i < n; i++) {\n        for (let j = i + 1; j < n; j++) {\n            if (nums[i] + nums[j] === target) {\n                return [i, j];\n            }\n        }\n    }\n    return [];\n}\n\n/* 方法二：辅助哈希表 */\nfunction twoSumHashTable(nums, target) {\n    // 辅助哈希表，空间复杂度为 O(n)\n    let m = {};\n    // 单层循环，时间复杂度为 O(n)\n    for (let i = 0; i < nums.length; i++) {\n        if (m[target - nums[i]] !== undefined) {\n            return [m[target - nums[i]], i];\n        } else {\n            m[nums[i]] = i;\n        }\n    }\n    return [];\n}\n\n/* Driver Code */\n// 方法一\nconst nums = [2, 7, 11, 15],\n    target = 13;\n\nlet res = twoSumBruteForce(nums, target);\nconsole.log('方法一 res = ', res);\n\n// 方法二\nres = twoSumHashTable(nums, target);\nconsole.log('方法二 res = ', res);\n",
+          "sourcePath": "codes/javascript/chapter_searching/two_sum.js",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/javascript/chapter_searching/two_sum.js",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "typescript",
+          "snippet": "function twoSumHashTable(nums: number[], target: number): number[] {\n    // 辅助哈希表，空间复杂度为 O(n)\n    let m: Map<number, number> = new Map();\n    // 单层循环，时间复杂度为 O(n)\n    for (let i = 0; i < nums.length; i++) {\n        let index = m.get(target - nums[i]);\n        if (index !== undefined) {\n            return [index, i];\n        } else {\n            m.set(nums[i], i);\n        }\n    }\n    return [];\n}",
+          "fullSource": "/**\n * File: two_sum.ts\n * Created Time: 2022-12-15\n * Author: gyt95 (gytkwan@gmail.com)\n */\n\n/* 方法一：暴力枚举 */\nfunction twoSumBruteForce(nums: number[], target: number): number[] {\n    const n = nums.length;\n    // 两层循环，时间复杂度为 O(n^2)\n    for (let i = 0; i < n; i++) {\n        for (let j = i + 1; j < n; j++) {\n            if (nums[i] + nums[j] === target) {\n                return [i, j];\n            }\n        }\n    }\n    return [];\n}\n\n/* 方法二：辅助哈希表 */\nfunction twoSumHashTable(nums: number[], target: number): number[] {\n    // 辅助哈希表，空间复杂度为 O(n)\n    let m: Map<number, number> = new Map();\n    // 单层循环，时间复杂度为 O(n)\n    for (let i = 0; i < nums.length; i++) {\n        let index = m.get(target - nums[i]);\n        if (index !== undefined) {\n            return [index, i];\n        } else {\n            m.set(nums[i], i);\n        }\n    }\n    return [];\n}\n\n/* Driver Code */\n// 方法一\nconst nums = [2, 7, 11, 15],\n    target = 13;\n\nlet res = twoSumBruteForce(nums, target);\nconsole.log('方法一 res = ', res);\n\n// 方法二\nres = twoSumHashTable(nums, target);\nconsole.log('方法二 res = ', res);\n\nexport {};\n",
+          "sourcePath": "codes/typescript/chapter_searching/two_sum.ts",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/typescript/chapter_searching/two_sum.ts",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "swift",
+          "snippet": "func twoSumHashTable(nums: [Int], target: Int) -> [Int] {\n    // 辅助哈希表，空间复杂度为 O(n)\n    var dic: [Int: Int] = [:]\n    // 单层循环，时间复杂度为 O(n)\n    for i in nums.indices {\n        if let j = dic[target - nums[i]] {\n            return [j, i]\n        }\n        dic[nums[i]] = i\n    }\n    return [0]\n}",
+          "fullSource": "/**\n * File: two_sum.swift\n * Created Time: 2023-01-03\n * Author: nuomi1 (nuomi1@qq.com)\n */\n\n/* 方法一：暴力枚举 */\nfunc twoSumBruteForce(nums: [Int], target: Int) -> [Int] {\n    // 两层循环，时间复杂度为 O(n^2)\n    for i in nums.indices.dropLast() {\n        for j in nums.indices.dropFirst(i + 1) {\n            if nums[i] + nums[j] == target {\n                return [i, j]\n            }\n        }\n    }\n    return [0]\n}\n\n/* 方法二：辅助哈希表 */\nfunc twoSumHashTable(nums: [Int], target: Int) -> [Int] {\n    // 辅助哈希表，空间复杂度为 O(n)\n    var dic: [Int: Int] = [:]\n    // 单层循环，时间复杂度为 O(n)\n    for i in nums.indices {\n        if let j = dic[target - nums[i]] {\n            return [j, i]\n        }\n        dic[nums[i]] = i\n    }\n    return [0]\n}\n\n@main\nenum LeetcodeTwoSum {\n    /* Driver Code */\n    static func main() {\n        // ======= Test Case =======\n        let nums = [2, 7, 11, 15]\n        let target = 13\n        // ====== Driver Code ======\n        // 方法一\n        var res = twoSumBruteForce(nums: nums, target: target)\n        print(\"方法一 res = \\(res)\")\n        // 方法二\n        res = twoSumHashTable(nums: nums, target: target)\n        print(\"方法二 res = \\(res)\")\n    }\n}\n",
+          "sourcePath": "codes/swift/chapter_searching/two_sum.swift",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/swift/chapter_searching/two_sum.swift",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "rust",
+          "snippet": "pub fn two_sum_hash_table(nums: &Vec<i32>, target: i32) -> Option<Vec<i32>> {\n    // 辅助哈希表，空间复杂度为 O(n)\n    let mut dic = HashMap::new();\n    // 单层循环，时间复杂度为 O(n)\n    for (i, num) in nums.iter().enumerate() {\n        match dic.get(&(target - num)) {\n            Some(v) => return Some(vec![*v as i32, i as i32]),\n            None => dic.insert(num, i as i32),\n        };\n    }\n    None\n}",
+          "fullSource": "/*\n * File: two_sum.rs\n * Created Time: 2023-01-14\n * Author: xBLACICEx (xBLACKICEx@outlook.com), codingonion (coderonion@gmail.com)\n */\n\nuse hello_algo_rust::include::print_util;\nuse std::collections::HashMap;\n\n/* 方法一：暴力枚举 */\npub fn two_sum_brute_force(nums: &Vec<i32>, target: i32) -> Option<Vec<i32>> {\n    let size = nums.len();\n    // 两层循环，时间复杂度为 O(n^2)\n    for i in 0..size - 1 {\n        for j in i + 1..size {\n            if nums[i] + nums[j] == target {\n                return Some(vec![i as i32, j as i32]);\n            }\n        }\n    }\n    None\n}\n\n/* 方法二：辅助哈希表 */\npub fn two_sum_hash_table(nums: &Vec<i32>, target: i32) -> Option<Vec<i32>> {\n    // 辅助哈希表，空间复杂度为 O(n)\n    let mut dic = HashMap::new();\n    // 单层循环，时间复杂度为 O(n)\n    for (i, num) in nums.iter().enumerate() {\n        match dic.get(&(target - num)) {\n            Some(v) => return Some(vec![*v as i32, i as i32]),\n            None => dic.insert(num, i as i32),\n        };\n    }\n    None\n}\n\nfn main() {\n    // ======= Test Case =======\n    let nums = vec![2, 7, 11, 15];\n    let target = 13;\n\n    // ====== Driver Code ======\n    // 方法一\n    let res = two_sum_brute_force(&nums, target).unwrap();\n    print!(\"方法一 res = \");\n    print_util::print_array(&res);\n    // 方法二\n    let res = two_sum_hash_table(&nums, target).unwrap();\n    print!(\"\\n方法二 res = \");\n    print_util::print_array(&res);\n}\n",
+          "sourcePath": "codes/rust/chapter_searching/two_sum.rs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/rust/chapter_searching/two_sum.rs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "kotlin",
+          "snippet": "fun twoSumHashTable(nums: IntArray, target: Int): IntArray {\n    val size = nums.size\n    // 辅助哈希表，空间复杂度为 O(n)\n    val dic = HashMap<Int, Int>()\n    // 单层循环，时间复杂度为 O(n)\n    for (i in 0..<size) {\n        if (dic.containsKey(target - nums[i])) {\n            return intArrayOf(dic[target - nums[i]]!!, i)\n        }\n        dic[nums[i]] = i\n    }\n    return IntArray(0)\n}",
+          "fullSource": "/**\n * File: two_sum.kt\n * Created Time: 2024-01-25\n * Author: curtishd (1023632660@qq.com)\n */\n\npackage chapter_searching\n\n/* 方法一：暴力枚举 */\nfun twoSumBruteForce(nums: IntArray, target: Int): IntArray {\n    val size = nums.size\n    // 两层循环，时间复杂度为 O(n^2)\n    for (i in 0..<size - 1) {\n        for (j in i + 1..<size) {\n            if (nums[i] + nums[j] == target) return intArrayOf(i, j)\n        }\n    }\n    return IntArray(0)\n}\n\n/* 方法二：辅助哈希表 */\nfun twoSumHashTable(nums: IntArray, target: Int): IntArray {\n    val size = nums.size\n    // 辅助哈希表，空间复杂度为 O(n)\n    val dic = HashMap<Int, Int>()\n    // 单层循环，时间复杂度为 O(n)\n    for (i in 0..<size) {\n        if (dic.containsKey(target - nums[i])) {\n            return intArrayOf(dic[target - nums[i]]!!, i)\n        }\n        dic[nums[i]] = i\n    }\n    return IntArray(0)\n}\n\n/* Driver Code */\nfun main() {\n    // ======= Test Case =======\n    val nums = intArrayOf(2, 7, 11, 15)\n    val target = 13\n\n    // ====== Driver Code ======\n    // 方法一\n    var res = twoSumBruteForce(nums, target)\n    println(\"方法一 res = ${res.contentToString()}\")\n    // 方法二\n    res = twoSumHashTable(nums, target)\n    println(\"方法二 res = ${res.contentToString()}\")\n}",
+          "sourcePath": "codes/kotlin/chapter_searching/two_sum.kt",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/kotlin/chapter_searching/two_sum.kt",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "dart",
+          "snippet": "List<int> twoSumHashTable(List<int> nums, int target) {\n  int size = nums.length;\n  // 辅助哈希表，空间复杂度为 O(n)\n  Map<int, int> dic = HashMap();\n  // 单层循环，时间复杂度为 O(n)\n  for (var i = 0; i < size; i++) {\n    if (dic.containsKey(target - nums[i])) {\n      return [dic[target - nums[i]]!, i];\n    }\n    dic.putIfAbsent(nums[i], () => i);\n  }\n  return [0];\n}",
+          "fullSource": "/**\n * File: two_sum.dart\n * Created Time: 2023-2-11\n * Author: Jefferson (JeffersonHuang77@gmail.com)\n */\n\nimport 'dart:collection';\n\n/* 方法一： 暴力枚举 */\nList<int> twoSumBruteForce(List<int> nums, int target) {\n  int size = nums.length;\n  // 两层循环，时间复杂度为 O(n^2)\n  for (var i = 0; i < size - 1; i++) {\n    for (var j = i + 1; j < size; j++) {\n      if (nums[i] + nums[j] == target) return [i, j];\n    }\n  }\n  return [0];\n}\n\n/* 方法二： 辅助哈希表 */\nList<int> twoSumHashTable(List<int> nums, int target) {\n  int size = nums.length;\n  // 辅助哈希表，空间复杂度为 O(n)\n  Map<int, int> dic = HashMap();\n  // 单层循环，时间复杂度为 O(n)\n  for (var i = 0; i < size; i++) {\n    if (dic.containsKey(target - nums[i])) {\n      return [dic[target - nums[i]]!, i];\n    }\n    dic.putIfAbsent(nums[i], () => i);\n  }\n  return [0];\n}\n\n/* Driver Code */\nvoid main() {\n  // ======= Test Case =======\n  List<int> nums = [2, 7, 11, 15];\n  int target = 13;\n\n  // ====== Driver Code ======\n  // 方法一\n  List<int> res = twoSumBruteForce(nums, target);\n  print('方法一 res = $res');\n  // 方法二\n  res = twoSumHashTable(nums, target);\n  print('方法二 res = $res');\n}\n",
+          "sourcePath": "codes/dart/chapter_searching/two_sum.dart",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/dart/chapter_searching/two_sum.dart",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "ruby",
+          "snippet": "def two_sum_hash_table(nums, target)\n  # 辅助哈希表，空间复杂度为 O(n)\n  dic = {}\n  # 单层循环，时间复杂度为 O(n)\n  for i in 0...nums.length\n    return [dic[target - nums[i]], i] if dic.has_key?(target - nums[i])\n\n    dic[nums[i]] = i\n  end\n\n  []\nend",
+          "fullSource": "=begin\nFile: two_sum.rb\nCreated Time: 2024-04-09\nAuthor: Blue Bean (lonnnnnnner@gmail.com)\n=end\n\n### 方法一：暴力枚举 ###\ndef two_sum_brute_force(nums, target)\n  # 两层循环，时间复杂度为 O(n^2)\n  for i in 0...(nums.length - 1)\n    for j in (i + 1)...nums.length\n      return [i, j] if nums[i] + nums[j] == target\n    end\n  end\n\n  []\nend\n\n### 方法二：辅助哈希表 ###\ndef two_sum_hash_table(nums, target)\n  # 辅助哈希表，空间复杂度为 O(n)\n  dic = {}\n  # 单层循环，时间复杂度为 O(n)\n  for i in 0...nums.length\n    return [dic[target - nums[i]], i] if dic.has_key?(target - nums[i])\n\n    dic[nums[i]] = i\n  end\n\n  []\nend\n\n### Driver Code ###\nif __FILE__ == $0\n  # ======= Test Case =======\n  nums = [2, 7, 11, 15]\n  target = 13\n\n  # ====== Driver Code ======\n  # 方法一\n  res = two_sum_brute_force(nums, target)\n  puts \"方法一 res = #{res}\"\n  # 方法二\n  res = two_sum_hash_table(nums, target)\n  puts \"方法二 res = #{res}\"\nend\n",
+          "sourcePath": "codes/ruby/chapter_searching/two_sum.rb",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/ruby/chapter_searching/two_sum.rb",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "zig",
+          "snippet": "pub fn twoSumHashTable(nums: []i32, target: i32) !?[2]i32 {\n    var size: usize = nums.len;\n    // 辅助哈希表，空间复杂度为 O(n)\n    var dic = std.AutoHashMap(i32, i32).init(std.heap.page_allocator);\n    defer dic.deinit();\n    var i: usize = 0;\n    // 单层循环，时间复杂度为 O(n)\n    while (i < size) : (i += 1) {\n        if (dic.contains(target - nums[i])) {\n            return [_]i32{dic.get(target - nums[i]).?, @intCast(i)};\n        }\n        try dic.put(nums[i], @intCast(i));\n    }\n    return null;\n}",
+          "fullSource": "// File: two_sum.zig\n// Created Time: 2023-01-07\n// Author: codingonion (coderonion@gmail.com)\n\nconst std = @import(\"std\");\nconst inc = @import(\"include\");\n\n// 方法一：暴力枚举\npub fn twoSumBruteForce(nums: []i32, target: i32) ?[2]i32 {\n    var size: usize = nums.len;\n    var i: usize = 0;\n    // 两层循环，时间复杂度为 O(n^2)\n    while (i < size - 1) : (i += 1) {\n        var j = i + 1;\n        while (j < size) : (j += 1) {\n            if (nums[i] + nums[j] == target) {\n                return [_]i32{@intCast(i), @intCast(j)};\n            }\n        }\n    }\n    return null;\n}\n\n// 方法二：辅助哈希表\npub fn twoSumHashTable(nums: []i32, target: i32) !?[2]i32 {\n    var size: usize = nums.len;\n    // 辅助哈希表，空间复杂度为 O(n)\n    var dic = std.AutoHashMap(i32, i32).init(std.heap.page_allocator);\n    defer dic.deinit();\n    var i: usize = 0;\n    // 单层循环，时间复杂度为 O(n)\n    while (i < size) : (i += 1) {\n        if (dic.contains(target - nums[i])) {\n            return [_]i32{dic.get(target - nums[i]).?, @intCast(i)};\n        }\n        try dic.put(nums[i], @intCast(i));\n    }\n    return null;\n}\n\n\npub fn main() !void {\n    // ======= Test Case =======\n    var nums = [_]i32{ 2, 7, 11, 15 };\n    var target: i32 = 9;\n\n    // ====== Driver Code ======\n    // 方法一\n    var res = twoSumBruteForce(&nums, target).?;\n    std.debug.print(\"方法一 res = \", .{});\n    inc.PrintUtil.printArray(i32, &res); \n    // 方法二\n    res = (try twoSumHashTable(&nums, target)).?;\n    std.debug.print(\"\\n方法二 res = \", .{});\n    inc.PrintUtil.printArray(i32, &res); \n\n    _ = try std.io.getStdIn().reader().readByte();\n}\n",
+          "sourcePath": "codes/zig/chapter_searching/two_sum.zig",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/zig/chapter_searching/two_sum.zig",
+          "extraction": "symbol",
+          "runnable": false
+        }
+      ]
+    }
+  ],
+  "animations": [
+    [
+      {
+        "src": "/upstream/chapter_searching/replace_linear_by_hashing.assets/two_sum_hashtable_step1.png",
+        "alt": "辅助哈希表求解两数之和"
+      },
+      {
+        "src": "/upstream/chapter_searching/replace_linear_by_hashing.assets/two_sum_hashtable_step2.png",
+        "alt": "two_sum_hashtable_step2"
+      },
+      {
+        "src": "/upstream/chapter_searching/replace_linear_by_hashing.assets/two_sum_hashtable_step3.png",
+        "alt": "two_sum_hashtable_step3"
+      }
+    ]
+  ],
+  "conversion": {
+    "sourceSha256": "50bcfce9d21f0d868967108cde27bf5f9bc4d4eae27d15011186cea4149126af",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 2,
+    "animationGroups": 1
+  },
+  "blockAliases": {
+    "b0": "blk-398a21f5b4a93d4c",
+    "b1": "blk-e25e5bc63a2d58f5",
+    "b2": "blk-4e2de9dd75414b3d",
+    "b3": "blk-da45786701559d0f",
+    "b4": "blk-80581669be37d182",
+    "b5": "blk-d1ebe259fa476b71",
+    "b6": "blk-d9fd5865953cd105",
+    "b7": "blk-aa9051c6c14d6c5a",
+    "b8": "blk-0ebef8b094b5c012",
+    "b9": "blk-adf63deeec945f91",
+    "b10": "blk-c34615968279eaaf",
+    "b11": "blk-e14bdca33724ba1f",
+    "b12": "blk-03a94c8afac606e9",
+    "b13": "blk-2113460a386f19cb",
+    "b14": "blk-83be0bd7b97dc777",
+    "b15": "blk-6946e123c15bb8bc",
+    "b16": "blk-1f33e4ec6ba492ab"
+  },
+  "contentVersion": "d032ae34d41d0e56"
+}

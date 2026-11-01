@@ -1,0 +1,31 @@
+{
+  "id": "chapter_greedy/index",
+  "title": "贪心",
+  "kind": "chapter",
+  "group": "第 15 章   贪心",
+  "route": "/read/chapter_greedy/index",
+  "sourcePath": "chapter_greedy/index.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"blk-982229c9a488c7e3\" id=\"_1\">贪心</h1>\n<figure data-block=\"blk-f806b274c4f0469f\"><img alt=\"贪心\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_greedy.jpg\"/><figcaption>贪心</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-d8de6b138e62ca7b\">\n<p class=\"admonition-title\">Abstract</p>\n<p>向日葵朝着太阳转动，时刻追求自身成长的最大可能。</p>\n<p>贪心策略在一轮轮的简单选择中，逐步导向最佳答案。</p>\n</div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "2272fd8229be78cf59ff1e3436a2bb72b25f1c8cb1fbd313a184f057fa320e03",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  },
+  "blockAliases": {
+    "b0": "blk-982229c9a488c7e3",
+    "b1": "blk-f806b274c4f0469f",
+    "b2": "blk-d8de6b138e62ca7b"
+  },
+  "contentVersion": "f07d4f19c2d033d1"
+}

@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-27",
+  "repository": "https://github.com/yeniwu46-max/plex-interactive-book",
+  "branch": "codex/monty-lesson-v04",
+  "applicationCommit": "3cc10cd1ccbeed10bf8ee0383e305000da40577b",
+  "environment": {
+    "platform": "Windows",
+    "node": "24.14.1",
+    "python": "3.14.3"
+  },
+  "freshInstall": {
+    "npmCi": true,
+    "pythonVenvAndLockedRequirements": true
+  },
+  "contentImport": {
+    "runs": 2,
+    "contentUnchanged": true,
+    "onlyGeneratedMigrationReportChanged": true
+  },
+  "checks": {
+    "typecheck": true,
+    "contentAudit": true,
+    "learningAudit": true,
+    "nodeTests": 17,
+    "pythonTests": 5,
+    "upstreamPages": 118,
+    "logicalSections": 143,
+    "pythonExamples": 73,
+    "exercises": 27,
+    "exerciseTestCases": 130,
+    "h5pActivities": 2
+  },
+  "build": {
+    "success": true,
+    "knownChunkSizeWarning": true,
+    "staticFiles": 2556,
+    "distManifestSHA256": "ef95307aa39423fc9e2afe7e3fa0bdf22bf424ee4256de3eba03fbd91bd0a8f0"
+  }
+}

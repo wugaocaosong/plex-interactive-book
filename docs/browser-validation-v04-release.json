@@ -1,0 +1,482 @@
+{
+  "date": "2026-10-27",
+  "applicationCommit": "3cc10cd",
+  "note": "Composed latest evidence, not a single all-green invocation. Pagination and exercise runtime inputs are unchanged from the first clean build; all affected interaction flows rerun on the final application commit.",
+  "initialCleanRun": {
+    "commit": "bca460a",
+    "stats": {
+      "startTime": "2026-10-27T02:19:11.119Z",
+      "duration": 1216704.3,
+      "expected": 40,
+      "skipped": 0,
+      "unexpected": 3,
+      "flaky": 0
+    },
+    "failures": [
+      {
+        "name": "all 27 reference solutions pass in Pyodide and all starters expose a failing case",
+        "status": "unexpected",
+        "durationMs": 244445
+      },
+      {
+        "name": "v04 page-specific lesson, geometry and report 390",
+        "status": "unexpected",
+        "durationMs": 23572
+      },
+      {
+        "name": "version conflict and quota are visible without substituting a model reply",
+        "status": "unexpected",
+        "durationMs": 120373
+      }
+    ]
+  },
+  "finalInteraction": {
+    "commit": "3cc10cd",
+    "stats": {
+      "startTime": "2026-10-27T02:49:19.052Z",
+      "duration": 356568.532,
+      "expected": 39,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "isolatedExercises": {
+    "testCommit": "23756c2",
+    "runtimeCommit": "bca460a",
+    "stats": {
+      "startTime": "2026-10-27T02:42:16.078Z",
+      "duration": 357601.984,
+      "expected": 27,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "unchangedRuntimeFiles": [
+      "web/public/python-worker.js",
+      "web/public/learning/exercises.json"
+    ]
+  },
+  "latestResults": [
+    {
+      "name": "mouse folds, completes, reverses and cancels pages at 1440px",
+      "status": "expected",
+      "durationMs": 7357,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "mouse folds, completes, reverses and cancels pages at 820px",
+      "status": "expected",
+      "durationMs": 8688,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "mouse folds, completes, reverses and cancels pages at 390px",
+      "status": "expected",
+      "durationMs": 10917,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "cover drag opens only one section and edge drag crosses section boundaries",
+      "status": "expected",
+      "durationMs": 4520,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "reduced motion supports drag and paper interactions still open their panels",
+      "status": "expected",
+      "durationMs": 3929,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "legacy bookmarks migrate and notebook backups round-trip through the UI",
+      "status": "expected",
+      "durationMs": 7704,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "quote anchors recover uniquely, refuse ambiguous or removed text and preserve formula offsets",
+      "status": "expected",
+      "durationMs": 2248,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "legacy migration, complete backups, conflict preservation and storage failure reporting",
+      "status": "expected",
+      "durationMs": 6711,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "settings, exact search and keyboard navigation at 390px",
+      "status": "expected",
+      "durationMs": 7416,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "settings, exact search and keyboard navigation at 820px",
+      "status": "expected",
+      "durationMs": 9812,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "settings, exact search and keyboard navigation at 1440px",
+      "status": "expected",
+      "durationMs": 12192,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "concurrent unit visits merge atomically without losing reflection",
+      "status": "expected",
+      "durationMs": 2086,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "v04 migration is idempotent, backup v3 retains geometry and rejects invalid predictions",
+      "status": "expected",
+      "durationMs": 2117,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "study mode, annotations, settings and persisted drafts share the reader",
+      "status": "expected",
+      "durationMs": 27389,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "algorithm prediction, persisted state, exercise grading and tiered hints",
+      "status": "expected",
+      "durationMs": 35760,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "v04 page-specific lesson, geometry and report 390",
+      "status": "expected",
+      "durationMs": 6521,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "v04 page-specific lesson, geometry and report 820",
+      "status": "expected",
+      "durationMs": 8144,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "v04 page-specific lesson, geometry and report 1440",
+      "status": "expected",
+      "durationMs": 7128,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "micro examples and single Python trial produce actual results; chart uses validated data",
+      "status": "expected",
+      "durationMs": 27885,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "ordinary book turns preserve the activity; explicit next stage saves and switches",
+      "status": "expected",
+      "durationMs": 3271,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "Monty story, board, restore and both reader modes 390px",
+      "status": "expected",
+      "durationMs": 5049,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "Monty story, board, restore and both reader modes 820px",
+      "status": "expected",
+      "durationMs": 5116,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "Monty story, board, restore and both reader modes 1440px",
+      "status": "expected",
+      "durationMs": 4551,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "actual seeded Python simulations validate all records and repeat exactly",
+      "status": "expected",
+      "durationMs": 13308,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "four-question H5P records rule answer, grades, retries and restores",
+      "status": "expected",
+      "durationMs": 5718,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "opening a learning activity survives delayed initial book loading",
+      "status": "expected",
+      "durationMs": 6819,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "guest migration, accounts, backups and returning to guest never mix records or tokens",
+      "status": "expected",
+      "durationMs": 6007,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "offline login keeps local story available",
+      "status": "expected",
+      "durationMs": 2447,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "expired refresh clears profile, keeps account scope and reports re-login",
+      "status": "expected",
+      "durationMs": 1782,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "version conflict and quota are visible without substituting a model reply",
+      "status": "expected",
+      "durationMs": 3326,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "online context, duplicate submit identity, cancellation and model failure are explicit",
+      "status": "expected",
+      "durationMs": 4440,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "cover, complete table of contents, opening pages and bookmarks",
+      "status": "expected",
+      "durationMs": 3310,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "search, diagram stepping, Python execution and error recovery",
+      "status": "expected",
+      "durationMs": 34579,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "H5P real player grades and persists a correct answer across refresh",
+      "status": "expected",
+      "durationMs": 5087,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "H5P reader panel saves immediately when closed and reopens a single player",
+      "status": "expected",
+      "durationMs": 5888,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "cross-section navigation, history, continue reading and language preference",
+      "status": "expected",
+      "durationMs": 6757,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "mobile pagination preserves every paragraph and survives resize and reload",
+      "status": "expected",
+      "durationMs": 5515,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "every bundled Python example referenced by the book runs with its own driver",
+      "status": "expected",
+      "durationMs": 9967,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "failed Python initialization offers a working retry without blocking reading",
+      "status": "expected",
+      "durationMs": 17024,
+      "phase": "final-interaction"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-1-1",
+      "status": "expected",
+      "durationMs": 8506,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-1-2",
+      "status": "expected",
+      "durationMs": 22669,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-1-3",
+      "status": "expected",
+      "durationMs": 20062,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-1-4",
+      "status": "expected",
+      "durationMs": 18067,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-2-1",
+      "status": "expected",
+      "durationMs": 14362,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-2-2",
+      "status": "expected",
+      "durationMs": 14561,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-2-3",
+      "status": "expected",
+      "durationMs": 18554,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-2-4",
+      "status": "expected",
+      "durationMs": 16814,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-3-1",
+      "status": "expected",
+      "durationMs": 15325,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-3-2",
+      "status": "expected",
+      "durationMs": 17057,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-3-3",
+      "status": "expected",
+      "durationMs": 30254,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-3-4",
+      "status": "expected",
+      "durationMs": 15919,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-4-1",
+      "status": "expected",
+      "durationMs": 8426,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-4-2",
+      "status": "expected",
+      "durationMs": 8885,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-4-3",
+      "status": "expected",
+      "durationMs": 9467,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-4-4",
+      "status": "expected",
+      "durationMs": 9203,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-5-1",
+      "status": "expected",
+      "durationMs": 7920,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-5-2",
+      "status": "expected",
+      "durationMs": 8793,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-5-3",
+      "status": "expected",
+      "durationMs": 7996,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-5-4",
+      "status": "expected",
+      "durationMs": 8878,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-6-1",
+      "status": "expected",
+      "durationMs": 7480,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-6-2",
+      "status": "expected",
+      "durationMs": 7396,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-6-3",
+      "status": "expected",
+      "durationMs": 8049,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: practice-6-4",
+      "status": "expected",
+      "durationMs": 9116,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: monty-frequency",
+      "status": "expected",
+      "durationMs": 9185,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: monty-host",
+      "status": "expected",
+      "durationMs": 18630,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "Python reference and rejected starter: monty-strategy",
+      "status": "expected",
+      "durationMs": 8385,
+      "phase": "isolated-exercises"
+    },
+    {
+      "name": "all book sections preserve content and fit at 390px",
+      "status": "expected",
+      "durationMs": 138847,
+      "phase": "clean-full-pagination"
+    },
+    {
+      "name": "all book sections preserve content and fit at 820px",
+      "status": "expected",
+      "durationMs": 134143,
+      "phase": "clean-full-pagination"
+    },
+    {
+      "name": "all book sections preserve content and fit at 1440px",
+      "status": "expected",
+      "durationMs": 112156,
+      "phase": "clean-full-pagination"
+    }
+  ],
+  "total": 69,
+  "passed": 69,
+  "pendingManual": [
+    "45-minute classroom trial",
+    "NVDA/VoiceOver screen-reader review"
+  ]
+}

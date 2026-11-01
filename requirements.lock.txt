@@ -1,0 +1,12 @@
+# Resolved in a clean Python 3.14.3 environment; install with pip install -r requirements.lock.txt.
+beautifulsoup4==4.14.2
+certifi==2026.10.19
+charset-normalizer==3.5.2
+idna==3.20
+Markdown==3.9
+pymdown-extensions==10.16.1
+PyYAML==6.0.3
+requests==2.32.5
+soupsieve==3.0.4
+typing_extensions==4.16.0
+urllib3==2.8.0

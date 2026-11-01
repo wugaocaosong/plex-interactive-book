@@ -1,0 +1,286 @@
+{
+  "date": "2026-10-27",
+  "scope": "v0.4 development branch, not final release",
+  "baseline": {
+    "startTime": "2026-10-26T16:43:41.621Z",
+    "duration": 413058.10199999996,
+    "expected": 40,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  },
+  "focusedRerun": {
+    "startTime": "2026-10-27T02:07:15.080Z",
+    "duration": 67022.887,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "coveredTests": 43,
+  "allLatestResultsPassed": true,
+  "corrections": [
+    "Wait for asynchronous board restore before comparing seeded SVG paths",
+    "Backup format assertion updated from v2 to v3"
+  ],
+  "tests": [
+    {
+      "title": "mouse folds, completes, reverses and cancels pages at 1440px",
+      "file": "drag.spec.ts",
+      "status": "expected",
+      "durationMs": 6052
+    },
+    {
+      "title": "mouse folds, completes, reverses and cancels pages at 820px",
+      "file": "drag.spec.ts",
+      "status": "expected",
+      "durationMs": 5984
+    },
+    {
+      "title": "mouse folds, completes, reverses and cancels pages at 390px",
+      "file": "drag.spec.ts",
+      "status": "expected",
+      "durationMs": 5794
+    },
+    {
+      "title": "cover drag opens only one section and edge drag crosses section boundaries",
+      "file": "drag.spec.ts",
+      "status": "expected",
+      "durationMs": 2295
+    },
+    {
+      "title": "reduced motion supports drag and paper interactions still open their panels",
+      "file": "drag.spec.ts",
+      "status": "expected",
+      "durationMs": 2232
+    },
+    {
+      "title": "legacy bookmarks migrate and notebook backups round-trip through the UI",
+      "file": "learning-data.spec.ts",
+      "status": "expected",
+      "durationMs": 3516
+    },
+    {
+      "title": "quote anchors recover uniquely, refuse ambiguous or removed text and preserve formula offsets",
+      "file": "learning-data.spec.ts",
+      "status": "expected",
+      "durationMs": 891
+    },
+    {
+      "title": "legacy migration, complete backups, conflict preservation and storage failure reporting",
+      "file": "learning-data.spec.ts",
+      "status": "expected",
+      "durationMs": 958
+    },
+    {
+      "title": "settings, exact search and keyboard navigation at 390px",
+      "file": "learning-data.spec.ts",
+      "status": "expected",
+      "durationMs": 5181
+    },
+    {
+      "title": "settings, exact search and keyboard navigation at 820px",
+      "file": "learning-data.spec.ts",
+      "status": "expected",
+      "durationMs": 5069
+    },
+    {
+      "title": "settings, exact search and keyboard navigation at 1440px",
+      "file": "learning-data.spec.ts",
+      "status": "expected",
+      "durationMs": 4812
+    },
+    {
+      "title": "concurrent unit visits merge atomically without losing reflection",
+      "file": "learning-data.spec.ts",
+      "status": "expected",
+      "durationMs": 875
+    },
+    {
+      "title": "v04 migration is idempotent, backup v3 retains geometry and rejects invalid predictions",
+      "file": "learning-data.spec.ts",
+      "status": "expected",
+      "durationMs": 1033
+    },
+    {
+      "title": "study mode, annotations, settings and persisted drafts share the reader",
+      "file": "learning.spec.ts",
+      "status": "expected",
+      "durationMs": 7620
+    },
+    {
+      "title": "algorithm prediction, persisted state, exercise grading and tiered hints",
+      "file": "learning.spec.ts",
+      "status": "expected",
+      "durationMs": 9273
+    },
+    {
+      "title": "all 27 reference solutions pass in Pyodide and all starters expose a failing case",
+      "file": "learning.spec.ts",
+      "status": "expected",
+      "durationMs": 102626
+    },
+    {
+      "title": "v04 page-specific lesson, geometry and report 390",
+      "file": "lesson-v04.spec.ts",
+      "status": "expected",
+      "durationMs": 4919
+    },
+    {
+      "title": "v04 page-specific lesson, geometry and report 820",
+      "file": "lesson-v04.spec.ts",
+      "status": "expected",
+      "durationMs": 6632
+    },
+    {
+      "title": "v04 page-specific lesson, geometry and report 1440",
+      "file": "lesson-v04.spec.ts",
+      "status": "expected",
+      "durationMs": 5119
+    },
+    {
+      "title": "micro examples and single Python trial produce actual results; chart uses validated data",
+      "file": "lesson-v04.spec.ts",
+      "status": "expected",
+      "durationMs": 29619
+    },
+    {
+      "title": "ordinary book turns preserve the activity; explicit next stage saves and switches",
+      "file": "lesson-v04.spec.ts",
+      "status": "expected",
+      "durationMs": 3974
+    },
+    {
+      "title": "Monty story, board, restore and both reader modes 390px",
+      "file": "monty.spec.ts",
+      "status": "expected",
+      "durationMs": 2635
+    },
+    {
+      "title": "Monty story, board, restore and both reader modes 820px",
+      "file": "monty.spec.ts",
+      "status": "expected",
+      "durationMs": 2990
+    },
+    {
+      "title": "Monty story, board, restore and both reader modes 1440px",
+      "file": "monty.spec.ts",
+      "status": "expected",
+      "durationMs": 2838
+    },
+    {
+      "title": "actual seeded Python simulations validate all records and repeat exactly",
+      "file": "monty.spec.ts",
+      "status": "expected",
+      "durationMs": 8083
+    },
+    {
+      "title": "four-question H5P records rule answer, grades, retries and restores",
+      "file": "monty.spec.ts",
+      "status": "expected",
+      "durationMs": 3391
+    },
+    {
+      "title": "opening a learning activity survives delayed initial book loading",
+      "file": "monty.spec.ts",
+      "status": "expected",
+      "durationMs": 2328
+    },
+    {
+      "title": "all book sections preserve content and fit at 390px",
+      "file": "pagination.spec.ts",
+      "status": "expected",
+      "durationMs": 37820
+    },
+    {
+      "title": "all book sections preserve content and fit at 820px",
+      "file": "pagination.spec.ts",
+      "status": "expected",
+      "durationMs": 35485
+    },
+    {
+      "title": "all book sections preserve content and fit at 1440px",
+      "file": "pagination.spec.ts",
+      "status": "expected",
+      "durationMs": 41906
+    },
+    {
+      "title": "guest migration, accounts, backups and returning to guest never mix records or tokens",
+      "file": "plex.spec.ts",
+      "status": "expected",
+      "durationMs": 9243
+    },
+    {
+      "title": "offline login keeps local story available",
+      "file": "plex.spec.ts",
+      "status": "expected",
+      "durationMs": 1914
+    },
+    {
+      "title": "expired refresh clears profile, keeps account scope and reports re-login",
+      "file": "plex.spec.ts",
+      "status": "expected",
+      "durationMs": 1313
+    },
+    {
+      "title": "version conflict and quota are visible without substituting a model reply",
+      "file": "plex.spec.ts",
+      "status": "expected",
+      "durationMs": 2855
+    },
+    {
+      "title": "online context, duplicate submit identity, cancellation and model failure are explicit",
+      "file": "plex.spec.ts",
+      "status": "expected",
+      "durationMs": 3585
+    },
+    {
+      "title": "cover, complete table of contents, opening pages and bookmarks",
+      "file": "reader.spec.ts",
+      "status": "expected",
+      "durationMs": 2534
+    },
+    {
+      "title": "search, diagram stepping, Python execution and error recovery",
+      "file": "reader.spec.ts",
+      "status": "expected",
+      "durationMs": 30427
+    },
+    {
+      "title": "H5P real player grades and persists a correct answer across refresh",
+      "file": "reader.spec.ts",
+      "status": "expected",
+      "durationMs": 3362
+    },
+    {
+      "title": "H5P reader panel saves immediately when closed and reopens a single player",
+      "file": "reader.spec.ts",
+      "status": "expected",
+      "durationMs": 3811
+    },
+    {
+      "title": "cross-section navigation, history, continue reading and language preference",
+      "file": "reader.spec.ts",
+      "status": "expected",
+      "durationMs": 4727
+    },
+    {
+      "title": "mobile pagination preserves every paragraph and survives resize and reload",
+      "file": "reader.spec.ts",
+      "status": "expected",
+      "durationMs": 4029
+    },
+    {
+      "title": "every bundled Python example referenced by the book runs with its own driver",
+      "file": "reader.spec.ts",
+      "status": "expected",
+      "durationMs": 5926
+    },
+    {
+      "title": "failed Python initialization offers a working retry without blocking reading",
+      "file": "recovery.spec.ts",
+      "status": "expected",
+      "durationMs": 8920
+    }
+  ]
+}

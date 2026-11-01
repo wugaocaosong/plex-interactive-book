@@ -1,0 +1,22 @@
+{
+  "id": "unit/monty/explain",
+  "title": "解释：空门不是白白消失",
+  "kind": "unit",
+  "group": "三扇舱门 · 45 分钟",
+  "route": "/read/unit/monty/explain",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-c8bb6fdd08757cf5\">换门获奖，恰好对应“最开始选错了”</h1>\n<p data-block=\"blk-859f01c388253aef\">初选正确的机会是 <strong>1/3</strong>，初选错误的机会是 <strong>2/3</strong>。</p>\n<p data-block=\"blk-ddd2b687573ce968\">当初选错误时，另外两扇门是一扇空门、一扇奖品门。小E必须打开空门，因此剩下的一扇就是奖品门。</p>\n<p data-block=\"blk-c11078b5a843f43b\">所以，在本课规定的规则下：<strong>一直保留初选，理论胜率为 1/3；一直换门，理论胜率为 2/3。</strong></p>\n<p data-block=\"blk-407ba4b9364890fd\">“剩下两扇门”不能单独推出各一半：还要考虑其中一扇门是怎样被排除的。</p><div class=\"activity-invitation\" data-block=\"blk-eab3f61b8b640b11\"><span>本页目标：用初选正确／错误解释换门的理论结果。</span><button data-action=\"unit\" data-unit-mode=\"explain\">推演概率关系</button><button data-action=\"blackboard\">打开小黑板</button><button data-action=\"next-lesson\" data-next=\"unit/monty/variables\">下一教学环节 →</button></div>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-c8bb6fdd08757cf5",
+    "b1": "blk-859f01c388253aef",
+    "b2": "blk-ddd2b687573ce968",
+    "b3": "blk-c11078b5a843f43b",
+    "b4": "blk-407ba4b9364890fd",
+    "b5": "blk-6a917ebb8f53bf74"
+  },
+  "contentVersion": "b7296ea847e6cebf"
+}

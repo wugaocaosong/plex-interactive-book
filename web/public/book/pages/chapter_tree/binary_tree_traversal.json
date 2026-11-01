@@ -1,0 +1,369 @@
+{
+  "id": "chapter_tree/binary_tree_traversal",
+  "title": "7.2   二叉树遍历",
+  "kind": "chapter",
+  "group": "第 7 章   树",
+  "route": "/read/chapter_tree/binary_tree_traversal",
+  "sourcePath": "chapter_tree/binary_tree_traversal.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"blk-47b5f131816e1d35\" id=\"_1\">二叉树遍历</h1>\n<p data-block=\"blk-06ff817dbea13de2\">从物理结构的角度来看，树是一种基于链表的数据结构，因此其遍历方式是通过指针逐个访问节点。然而，树是一种非线性数据结构，这使得遍历树比遍历链表更加复杂，需要借助搜索算法来实现。</p>\n<p data-block=\"blk-e8c19148b13b6ae9\">二叉树常见的遍历方式包括层序遍历、前序遍历、中序遍历和后序遍历等。</p>\n<h2 data-block=\"blk-21e593c5afd54fda\" id=\"_2\">层序遍历</h2>\n<p data-block=\"blk-0e6d17cfdce2dd8d\">如下图所示，<u>层序遍历（level-order traversal）</u>从顶部到底部逐层遍历二叉树，并在每一层按照从左到右的顺序访问节点。</p>\n<p data-block=\"blk-f146ec14a0d225c1\">层序遍历本质上属于<u>广度优先遍历（breadth-first traversal）</u>，也称<u>广度优先搜索（breadth-first search, BFS）</u>，它体现了一种“一圈一圈向外扩展”的逐层遍历方式。</p>\n<figure data-block=\"blk-891d24378bc57f83\"><img alt=\"二叉树的层序遍历\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_tree/binary_tree_traversal.assets/binary_tree_bfs.png\"/><figcaption>二叉树的层序遍历</figcaption></figure>\n<h3 data-block=\"blk-93e3c5ddc26d0722\" id=\"_3\">代码实现</h3>\n<p data-block=\"blk-33fd27647ca22dab\">广度优先遍历通常借助“队列”来实现。队列遵循“先进先出”的规则，而广度优先遍历则遵循“逐层推进”的规则，两者背后的思想是一致的。实现代码如下：</p>\n<div class=\"code-example\" data-block=\"blk-fb8b73e956a41019\" data-code=\"0\"><div class=\"code-caption\"><span>binary_tree_bfs · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def level_order(root: TreeNode | None) -&gt; list[int]:\n    \"\"\"层序遍历\"\"\"\n    # 初始化队列，加入根节点\n    queue: deque[TreeNode] = deque()\n    queue.append(root)\n    # 初始化一个列表，用于保存遍历序列\n    res = []\n    while queue:\n        node: TreeNode = queue.popleft()  # 队列出队\n        res.append(node.val)  # 保存节点值\n        if node.left is not None:\n            queue.append(node.left)  # 左子节点入队\n        if node.right is not None:\n            queue.append(node.right)  # 右子节点入队\n    return res</code></pre></div>\n<h3 data-block=\"blk-f0e8958aa08f468d\" id=\"_4\">复杂度分析</h3>\n<ul data-block=\"blk-7b74ef2a1cb32935\">\n<li><strong>时间复杂度为 <span class=\"arithmatex\">\\(O(n)\\)</span></strong> ：所有节点被访问一次，使用 <span class=\"arithmatex\">\\(O(n)\\)</span> 时间，其中 <span class=\"arithmatex\">\\(n\\)</span> 为节点数量。</li>\n<li><strong>空间复杂度为 <span class=\"arithmatex\">\\(O(n)\\)</span></strong> ：在最差情况下，即满二叉树时，遍历到最底层之前，队列中最多同时存在 <span class=\"arithmatex\">\\((n + 1) / 2\\)</span> 个节点，占用 <span class=\"arithmatex\">\\(O(n)\\)</span> 空间。</li>\n</ul>\n<h2 data-block=\"blk-a55720ddce6eccfe\" id=\"_5\">前序、中序、后序遍历</h2>\n<p data-block=\"blk-2dba8a14f141d202\">相应地，前序、中序和后序遍历都属于<u>深度优先遍历（depth-first traversal）</u>，也称<u>深度优先搜索（depth-first search, DFS）</u>，它体现了一种“先走到尽头，再回溯继续”的遍历方式。</p>\n<p data-block=\"blk-32ce28b5c22950ea\">下图展示了对二叉树进行深度优先遍历的工作原理。<strong>深度优先遍历就像是绕着整棵二叉树的外围“走”一圈</strong>，在每个节点都会遇到三个位置，分别对应前序遍历、中序遍历和后序遍历。</p>\n<figure data-block=\"blk-24a7f07da15b30c4\"><img alt=\"二叉搜索树的前序、中序、后序遍历\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_tree/binary_tree_traversal.assets/binary_tree_dfs.png\"/><figcaption>二叉搜索树的前序、中序、后序遍历</figcaption></figure>\n<h3 data-block=\"blk-a4fd7ede5d82095d\" id=\"_6\">代码实现</h3>\n<p data-block=\"blk-2b085a9f9407978a\">深度优先搜索通常基于递归实现：</p>\n<div class=\"code-example\" data-block=\"blk-7f310cd20d3e25ff\" data-code=\"1\"><div class=\"code-caption\"><span>binary_tree_dfs · python</span><button data-action=\"code\" data-code=\"1\">查看 / 运行</button></div><pre><code>def post_order(root: TreeNode | None):\n    \"\"\"后序遍历\"\"\"\n    if root is None:\n        return\n    # 访问优先级：左子树 -&gt; 右子树 -&gt; 根节点\n    post_order(root=root.left)\n    post_order(root=root.right)\n    res.append(root.val)</code></pre></div>\n<div class=\"admonition tip\" data-block=\"blk-2eced8ea1343473d\">\n<p class=\"admonition-title\">Tip</p>\n<p>深度优先搜索也可以基于迭代实现，有兴趣的读者可以自行研究。</p>\n</div>\n<p data-block=\"blk-6a9c7843660c52a1\">下图展示了前序遍历二叉树的递归过程，其可分为“递”和“归”两个逆向的部分。</p>\n<ol data-block=\"blk-553982699a489114\">\n<li>“递”表示开启新方法，程序在此过程中访问下一个节点。</li>\n<li>“归”表示函数返回，代表当前节点已经访问完毕。</li>\n</ol>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-d63567a3d73f261d\"><img alt=\"前序遍历的递归过程\" data-action=\"image\" src=\"/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 11</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<h3 data-block=\"blk-69ae2aa94ca3418e\" id=\"_7\">复杂度分析</h3>\n<ul data-block=\"blk-b28f4b5c790d4666\">\n<li><strong>时间复杂度为 <span class=\"arithmatex\">\\(O(n)\\)</span></strong> ：所有节点被访问一次，使用 <span class=\"arithmatex\">\\(O(n)\\)</span> 时间。</li>\n<li><strong>空间复杂度为 <span class=\"arithmatex\">\\(O(n)\\)</span></strong> ：在最差情况下，即树退化为链表时，递归深度达到 <span class=\"arithmatex\">\\(n\\)</span> ，系统占用 <span class=\"arithmatex\">\\(O(n)\\)</span> 栈帧空间。</li>\n</ul>",
+  "codeExamples": [
+    {
+      "id": "example-ef7ad067b326d5bb",
+      "file": "binary_tree_bfs",
+      "className": "",
+      "functionName": "level_order",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def level_order(root: TreeNode | None) -> list[int]:\n    \"\"\"层序遍历\"\"\"\n    # 初始化队列，加入根节点\n    queue: deque[TreeNode] = deque()\n    queue.append(root)\n    # 初始化一个列表，用于保存遍历序列\n    res = []\n    while queue:\n        node: TreeNode = queue.popleft()  # 队列出队\n        res.append(node.val)  # 保存节点值\n        if node.left is not None:\n            queue.append(node.left)  # 左子节点入队\n        if node.right is not None:\n            queue.append(node.right)  # 右子节点入队\n    return res",
+          "fullSource": "\"\"\"\nFile: binary_tree_bfs.py\nCreated Time: 2022-12-20\nAuthor: a16su (lpluls001@gmail.com)\n\"\"\"\n\nimport sys\nfrom pathlib import Path\n\nsys.path.append(str(Path(__file__).parent.parent))\nfrom modules import TreeNode, list_to_tree, print_tree\nfrom collections import deque\n\n\ndef level_order(root: TreeNode | None) -> list[int]:\n    \"\"\"层序遍历\"\"\"\n    # 初始化队列，加入根节点\n    queue: deque[TreeNode] = deque()\n    queue.append(root)\n    # 初始化一个列表，用于保存遍历序列\n    res = []\n    while queue:\n        node: TreeNode = queue.popleft()  # 队列出队\n        res.append(node.val)  # 保存节点值\n        if node.left is not None:\n            queue.append(node.left)  # 左子节点入队\n        if node.right is not None:\n            queue.append(node.right)  # 右子节点入队\n    return res\n\n\n\"\"\"Driver Code\"\"\"\nif __name__ == \"__main__\":\n    # 初始化二叉树\n    # 这里借助了一个从数组直接生成二叉树的函数\n    root: TreeNode = list_to_tree(arr=[1, 2, 3, 4, 5, 6, 7])\n    print(\"\\n初始化二叉树\\n\")\n    print_tree(root)\n\n    # 层序遍历\n    res: list[int] = level_order(root)\n    print(\"\\n层序遍历的节点打印序列 = \", res)\n",
+          "sourcePath": "codes/python/chapter_tree/binary_tree_bfs.py",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/python/chapter_tree/binary_tree_bfs.py",
+          "extraction": "symbol",
+          "runnable": true
+        },
+        {
+          "language": "java",
+          "snippet": "    static List<Integer> levelOrder(TreeNode root) {\n        // 初始化队列，加入根节点\n        Queue<TreeNode> queue = new LinkedList<>();\n        queue.add(root);\n        // 初始化一个列表，用于保存遍历序列\n        List<Integer> list = new ArrayList<>();\n        while (!queue.isEmpty()) {\n            TreeNode node = queue.poll(); // 队列出队\n            list.add(node.val);           // 保存节点值\n            if (node.left != null)\n                queue.offer(node.left);   // 左子节点入队\n            if (node.right != null)\n                queue.offer(node.right);  // 右子节点入队\n        }\n        return list;\n    }",
+          "fullSource": "/**\n * File: binary_tree_bfs.java\n * Created Time: 2022-11-25\n * Author: krahets (krahets@163.com)\n */\n\npackage chapter_tree;\n\nimport utils.*;\nimport java.util.*;\n\npublic class binary_tree_bfs {\n    /* 层序遍历 */\n    static List<Integer> levelOrder(TreeNode root) {\n        // 初始化队列，加入根节点\n        Queue<TreeNode> queue = new LinkedList<>();\n        queue.add(root);\n        // 初始化一个列表，用于保存遍历序列\n        List<Integer> list = new ArrayList<>();\n        while (!queue.isEmpty()) {\n            TreeNode node = queue.poll(); // 队列出队\n            list.add(node.val);           // 保存节点值\n            if (node.left != null)\n                queue.offer(node.left);   // 左子节点入队\n            if (node.right != null)\n                queue.offer(node.right);  // 右子节点入队\n        }\n        return list;\n    }\n\n    public static void main(String[] args) {\n        /* 初始化二叉树 */\n        // 这里借助了一个从数组直接生成二叉树的函数\n        TreeNode root = TreeNode.listToTree(Arrays.asList(1, 2, 3, 4, 5, 6, 7));\n        System.out.println(\"\\n初始化二叉树\\n\");\n        PrintUtil.printTree(root);\n\n        /* 层序遍历 */\n        List<Integer> list = levelOrder(root);\n        System.out.println(\"\\n层序遍历的节点打印序列 = \" + list);\n    }\n}\n",
+          "sourcePath": "codes/java/chapter_tree/binary_tree_bfs.java",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/java/chapter_tree/binary_tree_bfs.java",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "cpp",
+          "snippet": "vector<int> levelOrder(TreeNode *root) {\n    // 初始化队列，加入根节点\n    queue<TreeNode *> queue;\n    queue.push(root);\n    // 初始化一个列表，用于保存遍历序列\n    vector<int> vec;\n    while (!queue.empty()) {\n        TreeNode *node = queue.front();\n        queue.pop();              // 队列出队\n        vec.push_back(node->val); // 保存节点值\n        if (node->left != nullptr)\n            queue.push(node->left); // 左子节点入队\n        if (node->right != nullptr)\n            queue.push(node->right); // 右子节点入队\n    }\n    return vec;\n}",
+          "fullSource": "/**\n * File: binary_tree_bfs.cpp\n * Created Time: 2022-11-25\n * Author: krahets (krahets@163.com)\n */\n\n#include \"../utils/common.hpp\"\n\n/* 层序遍历 */\nvector<int> levelOrder(TreeNode *root) {\n    // 初始化队列，加入根节点\n    queue<TreeNode *> queue;\n    queue.push(root);\n    // 初始化一个列表，用于保存遍历序列\n    vector<int> vec;\n    while (!queue.empty()) {\n        TreeNode *node = queue.front();\n        queue.pop();              // 队列出队\n        vec.push_back(node->val); // 保存节点值\n        if (node->left != nullptr)\n            queue.push(node->left); // 左子节点入队\n        if (node->right != nullptr)\n            queue.push(node->right); // 右子节点入队\n    }\n    return vec;\n}\n\n/* Driver Code */\nint main() {\n    /* 初始化二叉树 */\n    // 这里借助了一个从数组直接生成二叉树的函数\n    TreeNode *root = vectorToTree(vector<int>{1, 2, 3, 4, 5, 6, 7});\n    cout << endl << \"初始化二叉树\\n\" << endl;\n    printTree(root);\n\n    /* 层序遍历 */\n    vector<int> vec = levelOrder(root);\n    cout << endl << \"层序遍历的节点打印序列 = \";\n    printVector(vec);\n\n    return 0;\n}\n",
+          "sourcePath": "codes/cpp/chapter_tree/binary_tree_bfs.cpp",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/cpp/chapter_tree/binary_tree_bfs.cpp",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "c",
+          "snippet": "int *levelOrder(TreeNode *root, int *size) {\n    /* 辅助队列 */\n    int front, rear;\n    int index, *arr;\n    TreeNode *node;\n    TreeNode **queue;\n\n    /* 辅助队列 */\n    queue = (TreeNode **)malloc(sizeof(TreeNode *) * MAX_SIZE);\n    // 队列指针\n    front = 0, rear = 0;\n    // 加入根节点\n    queue[rear++] = root;\n    // 初始化一个列表，用于保存遍历序列\n    /* 辅助数组 */\n    arr = (int *)malloc(sizeof(int) * MAX_SIZE);\n    // 数组指针\n    index = 0;\n    while (front < rear) {\n        // 队列出队\n        node = queue[front++];\n        // 保存节点值\n        arr[index++] = node->val;\n        if (node->left != NULL) {\n            // 左子节点入队\n            queue[rear++] = node->left;\n        }\n        if (node->right != NULL) {\n            // 右子节点入队\n            queue[rear++] = node->right;\n        }\n    }\n    // 更新数组长度的值\n    *size = index;\n    arr = realloc(arr, sizeof(int) * (*size));\n\n    // 释放辅助数组空间\n    free(queue);\n    return arr;\n}",
+          "fullSource": "/**\n * File: binary_tree_bfs.c\n * Created Time: 2023-01-11\n * Author: Reanon (793584285@qq.com)\n */\n\n#include \"../utils/common.h\"\n\n#define MAX_SIZE 100\n\n/* 层序遍历 */\nint *levelOrder(TreeNode *root, int *size) {\n    /* 辅助队列 */\n    int front, rear;\n    int index, *arr;\n    TreeNode *node;\n    TreeNode **queue;\n\n    /* 辅助队列 */\n    queue = (TreeNode **)malloc(sizeof(TreeNode *) * MAX_SIZE);\n    // 队列指针\n    front = 0, rear = 0;\n    // 加入根节点\n    queue[rear++] = root;\n    // 初始化一个列表，用于保存遍历序列\n    /* 辅助数组 */\n    arr = (int *)malloc(sizeof(int) * MAX_SIZE);\n    // 数组指针\n    index = 0;\n    while (front < rear) {\n        // 队列出队\n        node = queue[front++];\n        // 保存节点值\n        arr[index++] = node->val;\n        if (node->left != NULL) {\n            // 左子节点入队\n            queue[rear++] = node->left;\n        }\n        if (node->right != NULL) {\n            // 右子节点入队\n            queue[rear++] = node->right;\n        }\n    }\n    // 更新数组长度的值\n    *size = index;\n    arr = realloc(arr, sizeof(int) * (*size));\n\n    // 释放辅助数组空间\n    free(queue);\n    return arr;\n}\n\n/* Driver Code */\nint main() {\n    /* 初始化二叉树 */\n    // 这里借助了一个从数组直接生成二叉树的函数\n    int nums[] = {1, 2, 3, 4, 5, 6, 7};\n    int size = sizeof(nums) / sizeof(int);\n    TreeNode *root = arrayToTree(nums, size);\n    printf(\"初始化二叉树\\n\");\n    printTree(root);\n\n    /* 层序遍历 */\n    // 需要传入数组的长度\n    int *arr = levelOrder(root, &size);\n    printf(\"层序遍历的节点打印序列 = \");\n    printArray(arr, size);\n\n    // 释放内存\n    freeMemoryTree(root);\n    free(arr);\n    return 0;\n}\n",
+          "sourcePath": "codes/c/chapter_tree/binary_tree_bfs.c",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/c/chapter_tree/binary_tree_bfs.c",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "csharp",
+          "snippet": "    List<int> LevelOrder(TreeNode root) {\n        // 初始化队列，加入根节点\n        Queue<TreeNode> queue = new();\n        queue.Enqueue(root);\n        // 初始化一个列表，用于保存遍历序列\n        List<int> list = [];\n        while (queue.Count != 0) {\n            TreeNode node = queue.Dequeue(); // 队列出队\n            list.Add(node.val!.Value);       // 保存节点值\n            if (node.left != null)\n                queue.Enqueue(node.left);    // 左子节点入队\n            if (node.right != null)\n                queue.Enqueue(node.right);   // 右子节点入队\n        }\n        return list;\n    }",
+          "fullSource": "﻿/**\n * File: binary_tree_bfs.cs\n * Created Time: 2022-12-23\n * Author: haptear (haptear@hotmail.com)\n */\n\nnamespace hello_algo.chapter_tree;\n\npublic class binary_tree_bfs {\n\n    /* 层序遍历 */\n    List<int> LevelOrder(TreeNode root) {\n        // 初始化队列，加入根节点\n        Queue<TreeNode> queue = new();\n        queue.Enqueue(root);\n        // 初始化一个列表，用于保存遍历序列\n        List<int> list = [];\n        while (queue.Count != 0) {\n            TreeNode node = queue.Dequeue(); // 队列出队\n            list.Add(node.val!.Value);       // 保存节点值\n            if (node.left != null)\n                queue.Enqueue(node.left);    // 左子节点入队\n            if (node.right != null)\n                queue.Enqueue(node.right);   // 右子节点入队\n        }\n        return list;\n    }\n\n    [Test]\n    public void Test() {\n        /* 初始化二叉树 */\n        // 这里借助了一个从数组直接生成二叉树的函数\n        TreeNode? root = TreeNode.ListToTree([1, 2, 3, 4, 5, 6, 7]);\n        Console.WriteLine(\"\\n初始化二叉树\\n\");\n        PrintUtil.PrintTree(root);\n\n        List<int> list = LevelOrder(root!);\n        Console.WriteLine(\"\\n层序遍历的节点打印序列 = \" + string.Join(\",\", list));\n    }\n}\n",
+          "sourcePath": "codes/csharp/chapter_tree/binary_tree_bfs.cs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/csharp/chapter_tree/binary_tree_bfs.cs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "go",
+          "snippet": "func levelOrder(root *TreeNode) []any {\n\t// 初始化队列，加入根节点\n\tqueue := list.New()\n\tqueue.PushBack(root)\n\t// 初始化一个切片，用于保存遍历序列\n\tnums := make([]any, 0)\n\tfor queue.Len() > 0 {\n\t\t// 队列出队\n\t\tnode := queue.Remove(queue.Front()).(*TreeNode)\n\t\t// 保存节点值\n\t\tnums = append(nums, node.Val)\n\t\tif node.Left != nil {\n\t\t\t// 左子节点入队\n\t\t\tqueue.PushBack(node.Left)\n\t\t}\n\t\tif node.Right != nil {\n\t\t\t// 右子节点入队\n\t\t\tqueue.PushBack(node.Right)\n\t\t}\n\t}\n\treturn nums\n}",
+          "fullSource": "// File: binary_tree_bfs.go\n// Created Time: 2022-11-26\n// Author: Reanon (793584285@qq.com)\n\npackage chapter_tree\n\nimport (\n\t\"container/list\"\n\n\t. \"github.com/krahets/hello-algo/pkg\"\n)\n\n/* 层序遍历 */\nfunc levelOrder(root *TreeNode) []any {\n\t// 初始化队列，加入根节点\n\tqueue := list.New()\n\tqueue.PushBack(root)\n\t// 初始化一个切片，用于保存遍历序列\n\tnums := make([]any, 0)\n\tfor queue.Len() > 0 {\n\t\t// 队列出队\n\t\tnode := queue.Remove(queue.Front()).(*TreeNode)\n\t\t// 保存节点值\n\t\tnums = append(nums, node.Val)\n\t\tif node.Left != nil {\n\t\t\t// 左子节点入队\n\t\t\tqueue.PushBack(node.Left)\n\t\t}\n\t\tif node.Right != nil {\n\t\t\t// 右子节点入队\n\t\t\tqueue.PushBack(node.Right)\n\t\t}\n\t}\n\treturn nums\n}\n",
+          "sourcePath": "codes/go/chapter_tree/binary_tree_bfs.go",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/go/chapter_tree/binary_tree_bfs.go",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "javascript",
+          "snippet": "function levelOrder(root) {\n    // 初始化队列，加入根节点\n    const queue = [root];\n    // 初始化一个列表，用于保存遍历序列\n    const list = [];\n    while (queue.length) {\n        let node = queue.shift(); // 队列出队\n        list.push(node.val); // 保存节点值\n        if (node.left) queue.push(node.left); // 左子节点入队\n        if (node.right) queue.push(node.right); // 右子节点入队\n    }\n    return list;\n}",
+          "fullSource": "/**\n * File: binary_tree_bfs.js\n * Created Time: 2022-12-04\n * Author: IsChristina (christinaxia77@foxmail.com)\n */\n\nconst { arrToTree } = require('../modules/TreeNode');\nconst { printTree } = require('../modules/PrintUtil');\n\n/* 层序遍历 */\nfunction levelOrder(root) {\n    // 初始化队列，加入根节点\n    const queue = [root];\n    // 初始化一个列表，用于保存遍历序列\n    const list = [];\n    while (queue.length) {\n        let node = queue.shift(); // 队列出队\n        list.push(node.val); // 保存节点值\n        if (node.left) queue.push(node.left); // 左子节点入队\n        if (node.right) queue.push(node.right); // 右子节点入队\n    }\n    return list;\n}\n\n/* Driver Code */\n/* 初始化二叉树 */\n// 这里借助了一个从数组直接生成二叉树的函数\nconst root = arrToTree([1, 2, 3, 4, 5, 6, 7]);\nconsole.log('\\n初始化二叉树\\n');\nprintTree(root);\n\n/* 层序遍历 */\nconst list = levelOrder(root);\nconsole.log('\\n层序遍历的节点打印序列 = ' + list);\n",
+          "sourcePath": "codes/javascript/chapter_tree/binary_tree_bfs.js",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/javascript/chapter_tree/binary_tree_bfs.js",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "typescript",
+          "snippet": "function levelOrder(root: TreeNode | null): number[] {\n    // 初始化队列，加入根节点\n    const queue = [root];\n    // 初始化一个列表，用于保存遍历序列\n    const list: number[] = [];\n    while (queue.length) {\n        let node = queue.shift() as TreeNode; // 队列出队\n        list.push(node.val); // 保存节点值\n        if (node.left) {\n            queue.push(node.left); // 左子节点入队\n        }\n        if (node.right) {\n            queue.push(node.right); // 右子节点入队\n        }\n    }\n    return list;\n}",
+          "fullSource": "/**\n * File: binary_tree_bfs.ts\n * Created Time: 2022-12-14\n * Author: Justin (xiefahit@gmail.com)\n */\n\nimport { type TreeNode } from '../modules/TreeNode';\nimport { arrToTree } from '../modules/TreeNode';\nimport { printTree } from '../modules/PrintUtil';\n\n/* 层序遍历 */\nfunction levelOrder(root: TreeNode | null): number[] {\n    // 初始化队列，加入根节点\n    const queue = [root];\n    // 初始化一个列表，用于保存遍历序列\n    const list: number[] = [];\n    while (queue.length) {\n        let node = queue.shift() as TreeNode; // 队列出队\n        list.push(node.val); // 保存节点值\n        if (node.left) {\n            queue.push(node.left); // 左子节点入队\n        }\n        if (node.right) {\n            queue.push(node.right); // 右子节点入队\n        }\n    }\n    return list;\n}\n\n/* Driver Code */\n/* 初始化二叉树 */\n// 这里借助了一个从数组直接生成二叉树的函数\nconst root = arrToTree([1, 2, 3, 4, 5, 6, 7]);\nconsole.log('\\n初始化二叉树\\n');\nprintTree(root);\n\n/* 层序遍历 */\nconst list = levelOrder(root);\nconsole.log('\\n层序遍历的节点打印序列 = ' + list);\n\nexport {};\n",
+          "sourcePath": "codes/typescript/chapter_tree/binary_tree_bfs.ts",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/typescript/chapter_tree/binary_tree_bfs.ts",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "swift",
+          "snippet": "func levelOrder(root: TreeNode) -> [Int] {\n    // 初始化队列，加入根节点\n    var queue: [TreeNode] = [root]\n    // 初始化一个列表，用于保存遍历序列\n    var list: [Int] = []\n    while !queue.isEmpty {\n        let node = queue.removeFirst() // 队列出队\n        list.append(node.val) // 保存节点值\n        if let left = node.left {\n            queue.append(left) // 左子节点入队\n        }\n        if let right = node.right {\n            queue.append(right) // 右子节点入队\n        }\n    }\n    return list\n}",
+          "fullSource": "/**\n * File: binary_tree_bfs.swift\n * Created Time: 2023-01-18\n * Author: nuomi1 (nuomi1@qq.com)\n */\n\nimport utils\n\n/* 层序遍历 */\nfunc levelOrder(root: TreeNode) -> [Int] {\n    // 初始化队列，加入根节点\n    var queue: [TreeNode] = [root]\n    // 初始化一个列表，用于保存遍历序列\n    var list: [Int] = []\n    while !queue.isEmpty {\n        let node = queue.removeFirst() // 队列出队\n        list.append(node.val) // 保存节点值\n        if let left = node.left {\n            queue.append(left) // 左子节点入队\n        }\n        if let right = node.right {\n            queue.append(right) // 右子节点入队\n        }\n    }\n    return list\n}\n\n@main\nenum BinaryTreeBFS {\n    /* Driver Code */\n    static func main() {\n        /* 初始化二叉树 */\n        // 这里借助了一个从数组直接生成二叉树的函数\n        let node = TreeNode.listToTree(arr: [1, 2, 3, 4, 5, 6, 7])!\n        print(\"\\n初始化二叉树\\n\")\n        PrintUtil.printTree(root: node)\n\n        /* 层序遍历 */\n        let list = levelOrder(root: node)\n        print(\"\\n层序遍历的节点打印序列 = \\(list)\")\n    }\n}\n",
+          "sourcePath": "codes/swift/chapter_tree/binary_tree_bfs.swift",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/swift/chapter_tree/binary_tree_bfs.swift",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "rust",
+          "snippet": "fn level_order(root: &Rc<RefCell<TreeNode>>) -> Vec<i32> {\n    // 初始化队列，加入根节点\n    let mut que = VecDeque::new();\n    que.push_back(root.clone());\n    // 初始化一个列表，用于保存遍历序列\n    let mut vec = Vec::new();\n\n    while let Some(node) = que.pop_front() {\n        // 队列出队\n        vec.push(node.borrow().val); // 保存节点值\n        if let Some(left) = node.borrow().left.as_ref() {\n            que.push_back(left.clone()); // 左子节点入队\n        }\n        if let Some(right) = node.borrow().right.as_ref() {\n            que.push_back(right.clone()); // 右子节点入队\n        };\n    }\n    vec\n}",
+          "fullSource": "/*\n * File: binary_tree_bfs.rs\n * Created Time: 2023-04-07\n * Author: xBLACKICEx (xBLACKICE@outlook.com)\n */\n\nuse hello_algo_rust::include::{print_util, vec_to_tree, TreeNode};\nuse hello_algo_rust::op_vec;\n\nuse std::collections::VecDeque;\nuse std::{cell::RefCell, rc::Rc};\n\n/* 层序遍历 */\nfn level_order(root: &Rc<RefCell<TreeNode>>) -> Vec<i32> {\n    // 初始化队列，加入根节点\n    let mut que = VecDeque::new();\n    que.push_back(root.clone());\n    // 初始化一个列表，用于保存遍历序列\n    let mut vec = Vec::new();\n\n    while let Some(node) = que.pop_front() {\n        // 队列出队\n        vec.push(node.borrow().val); // 保存节点值\n        if let Some(left) = node.borrow().left.as_ref() {\n            que.push_back(left.clone()); // 左子节点入队\n        }\n        if let Some(right) = node.borrow().right.as_ref() {\n            que.push_back(right.clone()); // 右子节点入队\n        };\n    }\n    vec\n}\n\n/* Driver Code */\nfn main() {\n    /* 初始化二叉树 */\n    // 这里借助了一个从数组直接生成二叉树的函数\n    let root = vec_to_tree(op_vec![1, 2, 3, 4, 5, 6, 7]).unwrap();\n    println!(\"初始化二叉树\\n\");\n    print_util::print_tree(&root);\n\n    /* 层序遍历 */\n    let vec = level_order(&root);\n    print!(\"\\n层序遍历的节点打印序列 = {:?}\", vec);\n}\n",
+          "sourcePath": "codes/rust/chapter_tree/binary_tree_bfs.rs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/rust/chapter_tree/binary_tree_bfs.rs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "kotlin",
+          "snippet": "fun levelOrder(root: TreeNode?): MutableList<Int> {\n    // 初始化队列，加入根节点\n    val queue = LinkedList<TreeNode?>()\n    queue.add(root)\n    // 初始化一个列表，用于保存遍历序列\n    val list = mutableListOf<Int>()\n    while (queue.isNotEmpty()) {\n        val node = queue.poll()      // 队列出队\n        list.add(node?._val!!)       // 保存节点值\n        if (node.left != null)\n            queue.offer(node.left)   // 左子节点入队\n        if (node.right != null)\n            queue.offer(node.right)  // 右子节点入队\n    }\n    return list\n}",
+          "fullSource": "/**\n * File: binary_tree_bfs.kt\n * Created Time: 2024-01-25\n * Author: curtishd (1023632660@qq.com)\n */\n\npackage chapter_tree\n\nimport utils.TreeNode\nimport utils.printTree\nimport java.util.*\n\n/* 层序遍历 */\nfun levelOrder(root: TreeNode?): MutableList<Int> {\n    // 初始化队列，加入根节点\n    val queue = LinkedList<TreeNode?>()\n    queue.add(root)\n    // 初始化一个列表，用于保存遍历序列\n    val list = mutableListOf<Int>()\n    while (queue.isNotEmpty()) {\n        val node = queue.poll()      // 队列出队\n        list.add(node?._val!!)       // 保存节点值\n        if (node.left != null)\n            queue.offer(node.left)   // 左子节点入队\n        if (node.right != null)\n            queue.offer(node.right)  // 右子节点入队\n    }\n    return list\n}\n\n/* Driver Code */\nfun main() {\n    /* 初始化二叉树 */\n    // 这里借助了一个从列表直接生成二叉树的函数\n    val root = TreeNode.listToTree(mutableListOf(1, 2, 3, 4, 5, 6, 7))\n    println(\"\\n初始化二叉树\\n\")\n    printTree(root)\n\n    /* 层序遍历 */\n    val list = levelOrder(root)\n    println(\"\\n层序遍历的节点打印序列 = $list\")\n}",
+          "sourcePath": "codes/kotlin/chapter_tree/binary_tree_bfs.kt",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/kotlin/chapter_tree/binary_tree_bfs.kt",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "dart",
+          "snippet": "List<int> levelOrder(TreeNode? root) {\n  // 初始化队列，加入根节点\n  Queue<TreeNode?> queue = Queue();\n  queue.add(root);\n  // 初始化一个列表，用于保存遍历序列\n  List<int> res = [];\n  while (queue.isNotEmpty) {\n    TreeNode? node = queue.removeFirst(); // 队列出队\n    res.add(node!.val); // 保存节点值\n    if (node.left != null) queue.add(node.left); // 左子节点入队\n    if (node.right != null) queue.add(node.right); // 右子节点入队\n  }\n  return res;\n}",
+          "fullSource": "/**\n * File: binary_tree_bfs.dart\n * Created Time: 2023-04-03\n * Author: liuyuxin (gvenusleo@gmai.com)\n */\n\nimport 'dart:collection';\nimport '../utils/print_util.dart';\nimport '../utils/tree_node.dart';\n\n/* 层序遍历 */\nList<int> levelOrder(TreeNode? root) {\n  // 初始化队列，加入根节点\n  Queue<TreeNode?> queue = Queue();\n  queue.add(root);\n  // 初始化一个列表，用于保存遍历序列\n  List<int> res = [];\n  while (queue.isNotEmpty) {\n    TreeNode? node = queue.removeFirst(); // 队列出队\n    res.add(node!.val); // 保存节点值\n    if (node.left != null) queue.add(node.left); // 左子节点入队\n    if (node.right != null) queue.add(node.right); // 右子节点入队\n  }\n  return res;\n}\n\n/* Driver Code */\nvoid main() {\n  /* 初始化二叉树 */\n  // 这里借助了一个从数组直接生成二叉树的函数\n  TreeNode? root = listToTree([1, 2, 3, 4, 5, 6, 7]);\n  print(\"\\n初始化二叉树\\n\");\n  printTree(root);\n\n  // 层序遍历\n  List<int> res = levelOrder(root);\n  print(\"\\n层序遍历的节点打印序列 = $res\");\n}\n",
+          "sourcePath": "codes/dart/chapter_tree/binary_tree_bfs.dart",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/dart/chapter_tree/binary_tree_bfs.dart",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "ruby",
+          "snippet": "def level_order(root)\n  # 初始化队列，加入根节点\n  queue = [root]\n  # 初始化一个列表，用于保存遍历序列\n  res = []\n  while !queue.empty?\n    node = queue.shift # 队列出队\n    res << node.val # 保存节点值\n    queue << node.left unless node.left.nil? # 左子节点入队\n    queue << node.right unless node.right.nil? # 右子节点入队\n  end\n  res\nend",
+          "fullSource": "=begin\nFile: binary_tree_bfs.rb\nCreated Time: 2024-04-18\nAuthor: Xuan Khoa Tu Nguyen (ngxktuzkai2000@gmail.com)\n=end\n\nrequire_relative '../utils/tree_node'\nrequire_relative '../utils/print_util'\n\n### 层序遍历 ###\ndef level_order(root)\n  # 初始化队列，加入根节点\n  queue = [root]\n  # 初始化一个列表，用于保存遍历序列\n  res = []\n  while !queue.empty?\n    node = queue.shift # 队列出队\n    res << node.val # 保存节点值\n    queue << node.left unless node.left.nil? # 左子节点入队\n    queue << node.right unless node.right.nil? # 右子节点入队\n  end\n  res\nend\n\n### Driver Code ###\nif __FILE__ == $0\n  # 初始化二叉树\n  # 这里借助了一个从数组直接生成二叉树的函数\n  root = arr_to_tree([1, 2, 3, 4, 5, 6, 7])\n  puts \"\\n初始化二叉树\\n\\n\"\n  print_tree(root)\n\n  # 层序遍历\n  res = level_order(root)\n  puts \"\\n层序遍历的节点打印序列 = #{res}\"\nend\n",
+          "sourcePath": "codes/ruby/chapter_tree/binary_tree_bfs.rb",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/ruby/chapter_tree/binary_tree_bfs.rb",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "zig",
+          "snippet": "fn levelOrder(comptime T: type, mem_allocator: std.mem.Allocator, root: *inc.TreeNode(T)) !std.ArrayList(T) {\n    // 初始化队列，加入根节点\n    const L = std.TailQueue(*inc.TreeNode(T));\n    var queue = L{};\n    var root_node = try mem_allocator.create(L.Node);\n    root_node.data = root;\n    queue.append(root_node); \n    // 初始化一个列表，用于保存遍历序列\n    var list = std.ArrayList(T).init(std.heap.page_allocator);\n    while (queue.len > 0) {\n        var queue_node = queue.popFirst().?;    // 队列出队\n        var node = queue_node.data;\n        try list.append(node.val);              // 保存节点值\n        if (node.left != null) {\n            var tmp_node = try mem_allocator.create(L.Node);\n            tmp_node.data = node.left.?;\n            queue.append(tmp_node);             // 左子节点入队\n        }\n        if (node.right != null) {\n            var tmp_node = try mem_allocator.create(L.Node);\n            tmp_node.data = node.right.?;\n            queue.append(tmp_node);             // 右子节点入队\n        }        \n    }\n    return list;\n}",
+          "fullSource": "// File: binary_tree_bfs.zig\n// Created Time: 2023-01-15\n// Author: codingonion (coderonion@gmail.com)\n\nconst std = @import(\"std\");\nconst inc = @import(\"include\");\n\n// 层序遍历\nfn levelOrder(comptime T: type, mem_allocator: std.mem.Allocator, root: *inc.TreeNode(T)) !std.ArrayList(T) {\n    // 初始化队列，加入根节点\n    const L = std.TailQueue(*inc.TreeNode(T));\n    var queue = L{};\n    var root_node = try mem_allocator.create(L.Node);\n    root_node.data = root;\n    queue.append(root_node); \n    // 初始化一个列表，用于保存遍历序列\n    var list = std.ArrayList(T).init(std.heap.page_allocator);\n    while (queue.len > 0) {\n        var queue_node = queue.popFirst().?;    // 队列出队\n        var node = queue_node.data;\n        try list.append(node.val);              // 保存节点值\n        if (node.left != null) {\n            var tmp_node = try mem_allocator.create(L.Node);\n            tmp_node.data = node.left.?;\n            queue.append(tmp_node);             // 左子节点入队\n        }\n        if (node.right != null) {\n            var tmp_node = try mem_allocator.create(L.Node);\n            tmp_node.data = node.right.?;\n            queue.append(tmp_node);             // 右子节点入队\n        }        \n    }\n    return list;\n}\n\n// Driver Code\npub fn main() !void {\n    // 初始化内存分配器\n    var mem_arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\n    defer mem_arena.deinit();\n    const mem_allocator = mem_arena.allocator();\n\n    // 初始化二叉树\n    // 这里借助了一个从数组直接生成二叉树的函数\n    var nums = [_]i32{1, 2, 3, 4, 5, 6, 7};\n    var root = try inc.TreeUtil.arrToTree(i32, mem_allocator, &nums);\n    std.debug.print(\"初始化二叉树\\n\", .{});\n    try inc.PrintUtil.printTree(root, null, false);\n\n    // 层序遍历\n    var list = try levelOrder(i32, mem_allocator, root.?);\n    defer list.deinit();\n    std.debug.print(\"\\n层序遍历的节点打印序列 = \", .{});\n    inc.PrintUtil.printList(i32, list);\n\n    _ = try std.io.getStdIn().reader().readByte();\n}",
+          "sourcePath": "codes/zig/chapter_tree/binary_tree_bfs.zig",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/zig/chapter_tree/binary_tree_bfs.zig",
+          "extraction": "symbol",
+          "runnable": false
+        }
+      ]
+    },
+    {
+      "id": "example-61b8582337aea076",
+      "file": "binary_tree_dfs",
+      "className": "",
+      "functionName": "post_order",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def post_order(root: TreeNode | None):\n    \"\"\"后序遍历\"\"\"\n    if root is None:\n        return\n    # 访问优先级：左子树 -> 右子树 -> 根节点\n    post_order(root=root.left)\n    post_order(root=root.right)\n    res.append(root.val)",
+          "fullSource": "\"\"\"\nFile: binary_tree_dfs.py\nCreated Time: 2022-12-20\nAuthor: a16su (lpluls001@gmail.com)\n\"\"\"\n\nimport sys\nfrom pathlib import Path\n\nsys.path.append(str(Path(__file__).parent.parent))\nfrom modules import TreeNode, list_to_tree, print_tree\n\n\ndef pre_order(root: TreeNode | None):\n    \"\"\"前序遍历\"\"\"\n    if root is None:\n        return\n    # 访问优先级：根节点 -> 左子树 -> 右子树\n    res.append(root.val)\n    pre_order(root=root.left)\n    pre_order(root=root.right)\n\n\ndef in_order(root: TreeNode | None):\n    \"\"\"中序遍历\"\"\"\n    if root is None:\n        return\n    # 访问优先级：左子树 -> 根节点 -> 右子树\n    in_order(root=root.left)\n    res.append(root.val)\n    in_order(root=root.right)\n\n\ndef post_order(root: TreeNode | None):\n    \"\"\"后序遍历\"\"\"\n    if root is None:\n        return\n    # 访问优先级：左子树 -> 右子树 -> 根节点\n    post_order(root=root.left)\n    post_order(root=root.right)\n    res.append(root.val)\n\n\n\"\"\"Driver Code\"\"\"\nif __name__ == \"__main__\":\n    # 初始化二叉树\n    # 这里借助了一个从数组直接生成二叉树的函数\n    root = list_to_tree(arr=[1, 2, 3, 4, 5, 6, 7])\n    print(\"\\n初始化二叉树\\n\")\n    print_tree(root)\n\n    # 前序遍历\n    res = []\n    pre_order(root)\n    print(\"\\n前序遍历的节点打印序列 = \", res)\n\n    # 中序遍历\n    res.clear()\n    in_order(root)\n    print(\"\\n中序遍历的节点打印序列 = \", res)\n\n    # 后序遍历\n    res.clear()\n    post_order(root)\n    print(\"\\n后序遍历的节点打印序列 = \", res)\n",
+          "sourcePath": "codes/python/chapter_tree/binary_tree_dfs.py",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/python/chapter_tree/binary_tree_dfs.py",
+          "extraction": "symbol",
+          "runnable": true
+        },
+        {
+          "language": "java",
+          "snippet": "    static void postOrder(TreeNode root) {\n        if (root == null)\n            return;\n        // 访问优先级：左子树 -> 右子树 -> 根节点\n        postOrder(root.left);\n        postOrder(root.right);\n        list.add(root.val);\n    }",
+          "fullSource": "/**\n * File: binary_tree_dfs.java\n * Created Time: 2022-11-25\n * Author: krahets (krahets@163.com)\n */\n\npackage chapter_tree;\n\nimport utils.*;\nimport java.util.*;\n\npublic class binary_tree_dfs {\n    // 初始化列表，用于存储遍历序列\n    static ArrayList<Integer> list = new ArrayList<>();\n\n    /* 前序遍历 */\n    static void preOrder(TreeNode root) {\n        if (root == null)\n            return;\n        // 访问优先级：根节点 -> 左子树 -> 右子树\n        list.add(root.val);\n        preOrder(root.left);\n        preOrder(root.right);\n    }\n\n    /* 中序遍历 */\n    static void inOrder(TreeNode root) {\n        if (root == null)\n            return;\n        // 访问优先级：左子树 -> 根节点 -> 右子树\n        inOrder(root.left);\n        list.add(root.val);\n        inOrder(root.right);\n    }\n\n    /* 后序遍历 */\n    static void postOrder(TreeNode root) {\n        if (root == null)\n            return;\n        // 访问优先级：左子树 -> 右子树 -> 根节点\n        postOrder(root.left);\n        postOrder(root.right);\n        list.add(root.val);\n    }\n\n    public static void main(String[] args) {\n        /* 初始化二叉树 */\n        // 这里借助了一个从数组直接生成二叉树的函数\n        TreeNode root = TreeNode.listToTree(Arrays.asList(1, 2, 3, 4, 5, 6, 7));\n        System.out.println(\"\\n初始化二叉树\\n\");\n        PrintUtil.printTree(root);\n\n        /* 前序遍历 */\n        list.clear();\n        preOrder(root);\n        System.out.println(\"\\n前序遍历的节点打印序列 = \" + list);\n\n        /* 中序遍历 */\n        list.clear();\n        inOrder(root);\n        System.out.println(\"\\n中序遍历的节点打印序列 = \" + list);\n\n        /* 后序遍历 */\n        list.clear();\n        postOrder(root);\n        System.out.println(\"\\n后序遍历的节点打印序列 = \" + list);\n    }\n}\n",
+          "sourcePath": "codes/java/chapter_tree/binary_tree_dfs.java",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/java/chapter_tree/binary_tree_dfs.java",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "cpp",
+          "snippet": "void postOrder(TreeNode *root) {\n    if (root == nullptr)\n        return;\n    // 访问优先级：左子树 -> 右子树 -> 根节点\n    postOrder(root->left);\n    postOrder(root->right);\n    vec.push_back(root->val);\n}",
+          "fullSource": "/**\n * File: binary_tree_dfs.cpp\n * Created Time: 2022-11-25\n * Author: krahets (krahets@163.com)\n */\n\n#include \"../utils/common.hpp\"\n\n// 初始化列表，用于存储遍历序列\nvector<int> vec;\n\n/* 前序遍历 */\nvoid preOrder(TreeNode *root) {\n    if (root == nullptr)\n        return;\n    // 访问优先级：根节点 -> 左子树 -> 右子树\n    vec.push_back(root->val);\n    preOrder(root->left);\n    preOrder(root->right);\n}\n\n/* 中序遍历 */\nvoid inOrder(TreeNode *root) {\n    if (root == nullptr)\n        return;\n    // 访问优先级：左子树 -> 根节点 -> 右子树\n    inOrder(root->left);\n    vec.push_back(root->val);\n    inOrder(root->right);\n}\n\n/* 后序遍历 */\nvoid postOrder(TreeNode *root) {\n    if (root == nullptr)\n        return;\n    // 访问优先级：左子树 -> 右子树 -> 根节点\n    postOrder(root->left);\n    postOrder(root->right);\n    vec.push_back(root->val);\n}\n\n/* Driver Code */\nint main() {\n    /* 初始化二叉树 */\n    // 这里借助了一个从数组直接生成二叉树的函数\n    TreeNode *root = vectorToTree(vector<int>{1, 2, 3, 4, 5, 6, 7});\n    cout << endl << \"初始化二叉树\\n\" << endl;\n    printTree(root);\n\n    /* 前序遍历 */\n    vec.clear();\n    preOrder(root);\n    cout << endl << \"前序遍历的节点打印序列 = \";\n    printVector(vec);\n\n    /* 中序遍历 */\n    vec.clear();\n    inOrder(root);\n    cout << endl << \"中序遍历的节点打印序列 = \";\n    printVector(vec);\n\n    /* 后序遍历 */\n    vec.clear();\n    postOrder(root);\n    cout << endl << \"后序遍历的节点打印序列 = \";\n    printVector(vec);\n\n    return 0;\n}\n",
+          "sourcePath": "codes/cpp/chapter_tree/binary_tree_dfs.cpp",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/cpp/chapter_tree/binary_tree_dfs.cpp",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "c",
+          "snippet": "void postOrder(TreeNode *root, int *size) {\n    if (root == NULL)\n        return;\n    // 访问优先级：左子树 -> 右子树 -> 根节点\n    postOrder(root->left, size);\n    postOrder(root->right, size);\n    arr[(*size)++] = root->val;\n}",
+          "fullSource": "/**\n * File: binary_tree_dfs.c\n * Created Time: 2023-01-11\n * Author: Reanon (793584285@qq.com)\n */\n\n#include \"../utils/common.h\"\n\n#define MAX_SIZE 100\n\n// 辅助数组，用于存储遍历序列\nint arr[MAX_SIZE];\n\n/* 前序遍历 */\nvoid preOrder(TreeNode *root, int *size) {\n    if (root == NULL)\n        return;\n    // 访问优先级：根节点 -> 左子树 -> 右子树\n    arr[(*size)++] = root->val;\n    preOrder(root->left, size);\n    preOrder(root->right, size);\n}\n\n/* 中序遍历 */\nvoid inOrder(TreeNode *root, int *size) {\n    if (root == NULL)\n        return;\n    // 访问优先级：左子树 -> 根节点 -> 右子树\n    inOrder(root->left, size);\n    arr[(*size)++] = root->val;\n    inOrder(root->right, size);\n}\n\n/* 后序遍历 */\nvoid postOrder(TreeNode *root, int *size) {\n    if (root == NULL)\n        return;\n    // 访问优先级：左子树 -> 右子树 -> 根节点\n    postOrder(root->left, size);\n    postOrder(root->right, size);\n    arr[(*size)++] = root->val;\n}\n\n/* Driver Code */\nint main() {\n    /* 初始化二叉树 */\n    // 这里借助了一个从数组直接生成二叉树的函数\n    int nums[] = {1, 2, 3, 4, 5, 6, 7};\n    int size = sizeof(nums) / sizeof(int);\n    TreeNode *root = arrayToTree(nums, size);\n    printf(\"初始化二叉树\\n\");\n    printTree(root);\n\n    /* 前序遍历 */\n    // 初始化辅助数组\n    size = 0;\n    preOrder(root, &size);\n    printf(\"前序遍历的节点打印序列 = \");\n    printArray(arr, size);\n\n    /* 中序遍历 */\n    size = 0;\n    inOrder(root, &size);\n    printf(\"中序遍历的节点打印序列 = \");\n    printArray(arr, size);\n\n    /* 后序遍历 */\n    size = 0;\n    postOrder(root, &size);\n    printf(\"后序遍历的节点打印序列 = \");\n    printArray(arr, size);\n\n    freeMemoryTree(root);\n    return 0;\n}\n",
+          "sourcePath": "codes/c/chapter_tree/binary_tree_dfs.c",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/c/chapter_tree/binary_tree_dfs.c",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "csharp",
+          "snippet": "    void PostOrder(TreeNode? root) {\n        if (root == null) return;\n        // 访问优先级：左子树 -> 右子树 -> 根节点\n        PostOrder(root.left);\n        PostOrder(root.right);\n        list.Add(root.val!.Value);\n    }",
+          "fullSource": "/**\n * File: binary_tree_dfs.cs\n * Created Time: 2022-12-23\n * Author: haptear (haptear@hotmail.com)\n */\n\nnamespace hello_algo.chapter_tree;\n\npublic class binary_tree_dfs {\n    List<int> list = [];\n\n    /* 前序遍历 */\n    void PreOrder(TreeNode? root) {\n        if (root == null) return;\n        // 访问优先级：根节点 -> 左子树 -> 右子树\n        list.Add(root.val!.Value);\n        PreOrder(root.left);\n        PreOrder(root.right);\n    }\n\n    /* 中序遍历 */\n    void InOrder(TreeNode? root) {\n        if (root == null) return;\n        // 访问优先级：左子树 -> 根节点 -> 右子树\n        InOrder(root.left);\n        list.Add(root.val!.Value);\n        InOrder(root.right);\n    }\n\n    /* 后序遍历 */\n    void PostOrder(TreeNode? root) {\n        if (root == null) return;\n        // 访问优先级：左子树 -> 右子树 -> 根节点\n        PostOrder(root.left);\n        PostOrder(root.right);\n        list.Add(root.val!.Value);\n    }\n\n    [Test]\n    public void Test() {\n        /* 初始化二叉树 */\n        // 这里借助了一个从数组直接生成二叉树的函数\n        TreeNode? root = TreeNode.ListToTree([1, 2, 3, 4, 5, 6, 7]);\n        Console.WriteLine(\"\\n初始化二叉树\\n\");\n        PrintUtil.PrintTree(root);\n\n        list.Clear();\n        PreOrder(root);\n        Console.WriteLine(\"\\n前序遍历的节点打印序列 = \" + string.Join(\",\", list));\n\n        list.Clear();\n        InOrder(root);\n        Console.WriteLine(\"\\n中序遍历的节点打印序列 = \" + string.Join(\",\", list));\n\n        list.Clear();\n        PostOrder(root);\n        Console.WriteLine(\"\\n后序遍历的节点打印序列 = \" + string.Join(\",\", list));\n    }\n}\n",
+          "sourcePath": "codes/csharp/chapter_tree/binary_tree_dfs.cs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/csharp/chapter_tree/binary_tree_dfs.cs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "go",
+          "snippet": "func postOrder(node *TreeNode) {\n\tif node == nil {\n\t\treturn\n\t}\n\t// 访问优先级：左子树 -> 右子树 -> 根节点\n\tpostOrder(node.Left)\n\tpostOrder(node.Right)\n\tnums = append(nums, node.Val)\n}",
+          "fullSource": "// File: binary_tree_dfs.go\n// Created Time: 2022-11-26\n// Author: Reanon (793584285@qq.com)\n\npackage chapter_tree\n\nimport (\n\t. \"github.com/krahets/hello-algo/pkg\"\n)\n\nvar nums []any\n\n/* 前序遍历 */\nfunc preOrder(node *TreeNode) {\n\tif node == nil {\n\t\treturn\n\t}\n\t// 访问优先级：根节点 -> 左子树 -> 右子树\n\tnums = append(nums, node.Val)\n\tpreOrder(node.Left)\n\tpreOrder(node.Right)\n}\n\n/* 中序遍历 */\nfunc inOrder(node *TreeNode) {\n\tif node == nil {\n\t\treturn\n\t}\n\t// 访问优先级：左子树 -> 根节点 -> 右子树\n\tinOrder(node.Left)\n\tnums = append(nums, node.Val)\n\tinOrder(node.Right)\n}\n\n/* 后序遍历 */\nfunc postOrder(node *TreeNode) {\n\tif node == nil {\n\t\treturn\n\t}\n\t// 访问优先级：左子树 -> 右子树 -> 根节点\n\tpostOrder(node.Left)\n\tpostOrder(node.Right)\n\tnums = append(nums, node.Val)\n}\n",
+          "sourcePath": "codes/go/chapter_tree/binary_tree_dfs.go",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/go/chapter_tree/binary_tree_dfs.go",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "javascript",
+          "snippet": "function postOrder(root) {\n    if (root === null) return;\n    // 访问优先级：左子树 -> 右子树 -> 根节点\n    postOrder(root.left);\n    postOrder(root.right);\n    list.push(root.val);\n}",
+          "fullSource": "/**\n * File: binary_tree_dfs.js\n * Created Time: 2022-12-04\n * Author: IsChristina (christinaxia77@foxmail.com)\n */\n\nconst { arrToTree } = require('../modules/TreeNode');\nconst { printTree } = require('../modules/PrintUtil');\n\n// 初始化列表，用于存储遍历序列\nconst list = [];\n\n/* 前序遍历 */\nfunction preOrder(root) {\n    if (root === null) return;\n    // 访问优先级：根节点 -> 左子树 -> 右子树\n    list.push(root.val);\n    preOrder(root.left);\n    preOrder(root.right);\n}\n\n/* 中序遍历 */\nfunction inOrder(root) {\n    if (root === null) return;\n    // 访问优先级：左子树 -> 根节点 -> 右子树\n    inOrder(root.left);\n    list.push(root.val);\n    inOrder(root.right);\n}\n\n/* 后序遍历 */\nfunction postOrder(root) {\n    if (root === null) return;\n    // 访问优先级：左子树 -> 右子树 -> 根节点\n    postOrder(root.left);\n    postOrder(root.right);\n    list.push(root.val);\n}\n\n/* Driver Code */\n/* 初始化二叉树 */\n// 这里借助了一个从数组直接生成二叉树的函数\nconst root = arrToTree([1, 2, 3, 4, 5, 6, 7]);\nconsole.log('\\n初始化二叉树\\n');\nprintTree(root);\n\n/* 前序遍历 */\nlist.length = 0;\npreOrder(root);\nconsole.log('\\n前序遍历的节点打印序列 = ' + list);\n\n/* 中序遍历 */\nlist.length = 0;\ninOrder(root);\nconsole.log('\\n中序遍历的节点打印序列 = ' + list);\n\n/* 后序遍历 */\nlist.length = 0;\npostOrder(root);\nconsole.log('\\n后序遍历的节点打印序列 = ' + list);\n",
+          "sourcePath": "codes/javascript/chapter_tree/binary_tree_dfs.js",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/javascript/chapter_tree/binary_tree_dfs.js",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "typescript",
+          "snippet": "function postOrder(root: TreeNode | null): void {\n    if (root === null) {\n        return;\n    }\n    // 访问优先级：左子树 -> 右子树 -> 根节点\n    postOrder(root.left);\n    postOrder(root.right);\n    list.push(root.val);\n}",
+          "fullSource": "/**\n * File: binary_tree_dfs.ts\n * Created Time: 2022-12-14\n * Author: Justin (xiefahit@gmail.com)\n */\n\nimport { type TreeNode } from '../modules/TreeNode';\nimport { arrToTree } from '../modules/TreeNode';\nimport { printTree } from '../modules/PrintUtil';\n\n// 初始化列表，用于存储遍历序列\nconst list: number[] = [];\n\n/* 前序遍历 */\nfunction preOrder(root: TreeNode | null): void {\n    if (root === null) {\n        return;\n    }\n    // 访问优先级：根节点 -> 左子树 -> 右子树\n    list.push(root.val);\n    preOrder(root.left);\n    preOrder(root.right);\n}\n\n/* 中序遍历 */\nfunction inOrder(root: TreeNode | null): void {\n    if (root === null) {\n        return;\n    }\n    // 访问优先级：左子树 -> 根节点 -> 右子树\n    inOrder(root.left);\n    list.push(root.val);\n    inOrder(root.right);\n}\n\n/* 后序遍历 */\nfunction postOrder(root: TreeNode | null): void {\n    if (root === null) {\n        return;\n    }\n    // 访问优先级：左子树 -> 右子树 -> 根节点\n    postOrder(root.left);\n    postOrder(root.right);\n    list.push(root.val);\n}\n\n/* Driver Code */\n/* 初始化二叉树 */\n// 这里借助了一个从数组直接生成二叉树的函数\nconst root = arrToTree([1, 2, 3, 4, 5, 6, 7]);\nconsole.log('\\n初始化二叉树\\n');\nprintTree(root);\n\n/* 前序遍历 */\nlist.length = 0;\npreOrder(root);\nconsole.log('\\n前序遍历的节点打印序列 = ' + list);\n\n/* 中序遍历 */\nlist.length = 0;\ninOrder(root);\nconsole.log('\\n中序遍历的节点打印序列 = ' + list);\n\n/* 后序遍历 */\nlist.length = 0;\npostOrder(root);\nconsole.log('\\n后序遍历的节点打印序列 = ' + list);\n\nexport {};\n",
+          "sourcePath": "codes/typescript/chapter_tree/binary_tree_dfs.ts",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/typescript/chapter_tree/binary_tree_dfs.ts",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "swift",
+          "snippet": "func postOrder(root: TreeNode?) {\n    guard let root = root else {\n        return\n    }\n    // 访问优先级：左子树 -> 右子树 -> 根节点\n    postOrder(root: root.left)\n    postOrder(root: root.right)\n    list.append(root.val)\n}",
+          "fullSource": "/**\n * File: binary_tree_dfs.swift\n * Created Time: 2023-01-18\n * Author: nuomi1 (nuomi1@qq.com)\n */\n\nimport utils\n\n// 初始化列表，用于存储遍历序列\nvar list: [Int] = []\n\n/* 前序遍历 */\nfunc preOrder(root: TreeNode?) {\n    guard let root = root else {\n        return\n    }\n    // 访问优先级：根节点 -> 左子树 -> 右子树\n    list.append(root.val)\n    preOrder(root: root.left)\n    preOrder(root: root.right)\n}\n\n/* 中序遍历 */\nfunc inOrder(root: TreeNode?) {\n    guard let root = root else {\n        return\n    }\n    // 访问优先级：左子树 -> 根节点 -> 右子树\n    inOrder(root: root.left)\n    list.append(root.val)\n    inOrder(root: root.right)\n}\n\n/* 后序遍历 */\nfunc postOrder(root: TreeNode?) {\n    guard let root = root else {\n        return\n    }\n    // 访问优先级：左子树 -> 右子树 -> 根节点\n    postOrder(root: root.left)\n    postOrder(root: root.right)\n    list.append(root.val)\n}\n\n@main\nenum BinaryTreeDFS {\n    /* Driver Code */\n    static func main() {\n        /* 初始化二叉树 */\n        // 这里借助了一个从数组直接生成二叉树的函数\n        let root = TreeNode.listToTree(arr: [1, 2, 3, 4, 5, 6, 7])!\n        print(\"\\n初始化二叉树\\n\")\n        PrintUtil.printTree(root: root)\n\n        /* 前序遍历 */\n        list.removeAll()\n        preOrder(root: root)\n        print(\"\\n前序遍历的节点打印序列 = \\(list)\")\n\n        /* 中序遍历 */\n        list.removeAll()\n        inOrder(root: root)\n        print(\"\\n中序遍历的节点打印序列 = \\(list)\")\n\n        /* 后序遍历 */\n        list.removeAll()\n        postOrder(root: root)\n        print(\"\\n后序遍历的节点打印序列 = \\(list)\")\n    }\n}\n",
+          "sourcePath": "codes/swift/chapter_tree/binary_tree_dfs.swift",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/swift/chapter_tree/binary_tree_dfs.swift",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "rust",
+          "snippet": "fn post_order(root: Option<&Rc<RefCell<TreeNode>>>) -> Vec<i32> {\n    let mut result = vec![];\n\n    fn dfs(root: Option<&Rc<RefCell<TreeNode>>>, res: &mut Vec<i32>) {\n        if let Some(node) = root {\n            // 访问优先级：左子树 -> 右子树 -> 根节点\n            let node = node.borrow();\n            dfs(node.left.as_ref(), res);\n            dfs(node.right.as_ref(), res);\n            res.push(node.val);\n        }\n    }\n\n    dfs(root, &mut result);\n\n    result\n}",
+          "fullSource": "/*\n * File: binary_tree_dfs.rs\n * Created Time: 2023-04-06\n * Author: xBLACKICEx (xBLACKICE@outlook.com)\n */\n\nuse hello_algo_rust::include::{print_util, vec_to_tree, TreeNode};\nuse hello_algo_rust::op_vec;\n\nuse std::cell::RefCell;\nuse std::rc::Rc;\n\n/* 前序遍历 */\nfn pre_order(root: Option<&Rc<RefCell<TreeNode>>>) -> Vec<i32> {\n    let mut result = vec![];\n\n    fn dfs(root: Option<&Rc<RefCell<TreeNode>>>, res: &mut Vec<i32>) {\n        if let Some(node) = root {\n            // 访问优先级：根节点 -> 左子树 -> 右子树\n            let node = node.borrow();\n            res.push(node.val);\n            dfs(node.left.as_ref(), res);\n            dfs(node.right.as_ref(), res);\n        }\n    }\n    dfs(root, &mut result);\n\n    result\n}\n\n/* 中序遍历 */\nfn in_order(root: Option<&Rc<RefCell<TreeNode>>>) -> Vec<i32> {\n    let mut result = vec![];\n\n    fn dfs(root: Option<&Rc<RefCell<TreeNode>>>, res: &mut Vec<i32>) {\n        if let Some(node) = root {\n            // 访问优先级：左子树 -> 根节点 -> 右子树\n            let node = node.borrow();\n            dfs(node.left.as_ref(), res);\n            res.push(node.val);\n            dfs(node.right.as_ref(), res);\n        }\n    }\n    dfs(root, &mut result);\n\n    result\n}\n\n/* 后序遍历 */\nfn post_order(root: Option<&Rc<RefCell<TreeNode>>>) -> Vec<i32> {\n    let mut result = vec![];\n\n    fn dfs(root: Option<&Rc<RefCell<TreeNode>>>, res: &mut Vec<i32>) {\n        if let Some(node) = root {\n            // 访问优先级：左子树 -> 右子树 -> 根节点\n            let node = node.borrow();\n            dfs(node.left.as_ref(), res);\n            dfs(node.right.as_ref(), res);\n            res.push(node.val);\n        }\n    }\n\n    dfs(root, &mut result);\n\n    result\n}\n\n/* Driver Code */\nfn main() {\n    /* 初始化二叉树 */\n    // 这里借助了一个从数组直接生成二叉树的函数\n    let root = vec_to_tree(op_vec![1, 2, 3, 4, 5, 6, 7]);\n    println!(\"初始化二叉树\\n\");\n    print_util::print_tree(root.as_ref().unwrap());\n\n    /* 前序遍历 */\n    let vec = pre_order(root.as_ref());\n    println!(\"\\n前序遍历的节点打印序列 = {:?}\", vec);\n\n    /* 中序遍历 */\n    let vec = in_order(root.as_ref());\n    println!(\"\\n中序遍历的节点打印序列 = {:?}\", vec);\n\n    /* 后序遍历 */\n    let vec = post_order(root.as_ref());\n    print!(\"\\n后序遍历的节点打印序列 = {:?}\", vec);\n}\n",
+          "sourcePath": "codes/rust/chapter_tree/binary_tree_dfs.rs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/rust/chapter_tree/binary_tree_dfs.rs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "kotlin",
+          "snippet": "fun postOrder(root: TreeNode?) {\n    if (root == null) return\n    // 访问优先级：左子树 -> 右子树 -> 根节点\n    postOrder(root.left)\n    postOrder(root.right)\n    list.add(root._val)\n}",
+          "fullSource": "/**\n * File: binary_tree_dfs.kt\n * Created Time: 2024-01-25\n * Author: curtishd (1023632660@qq.com)\n */\n\npackage chapter_tree\n\nimport utils.TreeNode\nimport utils.printTree\n\n// 初始化列表，用于存储遍历序列\nvar list = mutableListOf<Int>()\n\n/* 前序遍历 */\nfun preOrder(root: TreeNode?) {\n    if (root == null) return\n    // 访问优先级：根节点 -> 左子树 -> 右子树\n    list.add(root._val)\n    preOrder(root.left)\n    preOrder(root.right)\n}\n\n/* 中序遍历 */\nfun inOrder(root: TreeNode?) {\n    if (root == null) return\n    // 访问优先级：左子树 -> 根节点 -> 右子树\n    inOrder(root.left)\n    list.add(root._val)\n    inOrder(root.right)\n}\n\n/* 后序遍历 */\nfun postOrder(root: TreeNode?) {\n    if (root == null) return\n    // 访问优先级：左子树 -> 右子树 -> 根节点\n    postOrder(root.left)\n    postOrder(root.right)\n    list.add(root._val)\n}\n\n/* Driver Code */\nfun main() {\n    /* 初始化二叉树 */\n    // 这里借助了一个从列表直接生成二叉树的函数\n    val root = TreeNode.listToTree(mutableListOf(1, 2, 3, 4, 5, 6, 7))\n    println(\"\\n初始化二叉树\\n\")\n    printTree(root)\n\n    /* 前序遍历 */\n    list.clear()\n    preOrder(root)\n    println(\"\\n前序遍历的节点打印序列 = $list\")\n\n    /* 中序遍历 */\n    list.clear()\n    inOrder(root)\n    println(\"\\n中序遍历的节点打印序列 = $list\")\n\n    /* 后序遍历 */\n    list.clear()\n    postOrder(root)\n    println(\"\\n后序遍历的节点打印序列 = $list\")\n}",
+          "sourcePath": "codes/kotlin/chapter_tree/binary_tree_dfs.kt",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/kotlin/chapter_tree/binary_tree_dfs.kt",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "dart",
+          "snippet": "void postOrder(TreeNode? node) {\n  if (node == null) return;\n  // 访问优先级：左子树 -> 右子树 -> 根节点\n  postOrder(node.left);\n  postOrder(node.right);\n  list.add(node.val);\n}",
+          "fullSource": "/**\n * File: binary_tree_dfs.dart\n * Created Time: 2023-04-04\n * Author: liuyuxin (gvenusleo@gmail.com)\n */\n\nimport '../utils/print_util.dart';\nimport '../utils/tree_node.dart';\n\n// 初始化列表，用于存储遍历序列\nList<int> list = [];\n\n/* 前序遍历 */\nvoid preOrder(TreeNode? node) {\n  if (node == null) return;\n  // 访问优先级：根节点 -> 左子树 -> 右子树\n  list.add(node.val);\n  preOrder(node.left);\n  preOrder(node.right);\n}\n\n/* 中序遍历 */\nvoid inOrder(TreeNode? node) {\n  if (node == null) return;\n  // 访问优先级：左子树 -> 根节点 -> 右子树\n  inOrder(node.left);\n  list.add(node.val);\n  inOrder(node.right);\n}\n\n/* 后序遍历 */\nvoid postOrder(TreeNode? node) {\n  if (node == null) return;\n  // 访问优先级：左子树 -> 右子树 -> 根节点\n  postOrder(node.left);\n  postOrder(node.right);\n  list.add(node.val);\n}\n\n/* Driver Code */\nvoid main() {\n  /* 初始化二叉树 */\n  // 这里借助了一个从数组直接生成二叉树的函数\n  TreeNode? root = listToTree([1, 2, 3, 4, 5, 6, 7]);\n  print(\"\\n初始化二叉树\\n\");\n  printTree(root);\n\n  /* 前序遍历 */\n  list.clear();\n  preOrder(root);\n  print(\"\\n前序遍历的节点打印序列 = $list\");\n\n  /* 中序遍历 */\n  list.clear();\n  inOrder(root);\n  print(\"\\n中序遍历的节点打印序列 = $list\");\n\n  /* 后序遍历 */\n  list.clear();\n  postOrder(root);\n  print(\"\\n后序遍历的节点打印序列 = $list\");\n}\n",
+          "sourcePath": "codes/dart/chapter_tree/binary_tree_dfs.dart",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/dart/chapter_tree/binary_tree_dfs.dart",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "ruby",
+          "snippet": "def post_order(root)\n  return if root.nil?\n\n  # 访问优先级：左子树 -> 右子树 -> 根节点\n  post_order(root.left)\n  post_order(root.right)\n  $res << root.val\nend",
+          "fullSource": "=begin\nFile: binary_tree_dfs.rb\nCreated Time: 2024-04-18\nAuthor: Xuan Khoa Tu Nguyen (ngxktuzkai2000@gmail.com)\n=end\n\nrequire_relative '../utils/tree_node'\nrequire_relative '../utils/print_util'\n\n### 前序遍历 ###\ndef pre_order(root)\n  return if root.nil?\n\n  # 访问优先级：根节点 -> 左子树 -> 右子树\n  $res << root.val\n  pre_order(root.left)\n  pre_order(root.right)\nend\n\n### 中序遍历 ###\ndef in_order(root)\n  return if root.nil?\n\n  # 访问优先级：左子树 -> 根节点 -> 右子树\n  in_order(root.left)\n  $res << root.val\n  in_order(root.right)\nend\n\n### 后序遍历 ###\ndef post_order(root)\n  return if root.nil?\n\n  # 访问优先级：左子树 -> 右子树 -> 根节点\n  post_order(root.left)\n  post_order(root.right)\n  $res << root.val\nend\n\n### Driver Code ###\nif __FILE__ == $0\n  # 初始化二叉树\n  # 这里借助了一个从数组直接生成二叉树的函数\n  root = arr_to_tree([1, 2, 3, 4, 5, 6, 7])\n  puts \"\\n初始化二叉树\\n\\n\"\n  print_tree(root)\n\n  # 前序遍历\n  $res = []\n  pre_order(root)\n  puts \"\\n前序遍历的节点打印序列 = #{$res}\"\n\n  # 中序遍历\n  $res.clear\n  in_order(root)\n  puts \"\\nn中序遍历的节点打印序列 = #{$res}\"\n\n  # 后序遍历\n  $res.clear\n  post_order(root)\n  puts \"\\nn后序遍历的节点打印序列 = #{$res}\"\nend\n",
+          "sourcePath": "codes/ruby/chapter_tree/binary_tree_dfs.rb",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/ruby/chapter_tree/binary_tree_dfs.rb",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "zig",
+          "snippet": "fn postOrder(comptime T: type, root: ?*inc.TreeNode(T)) !void {\n    if (root == null) return;\n    // 访问优先级：左子树 -> 右子树 -> 根节点\n    try postOrder(T, root.?.left);\n    try postOrder(T, root.?.right);\n    try list.append(root.?.val);\n}",
+          "fullSource": "// File: binary_tree_dfs.zig\n// Created Time: 2023-01-15\n// Author: codingonion (coderonion@gmail.com)\n\nconst std = @import(\"std\");\nconst inc = @import(\"include\");\n\nvar list = std.ArrayList(i32).init(std.heap.page_allocator);\n\n// 前序遍历\nfn preOrder(comptime T: type, root: ?*inc.TreeNode(T)) !void {\n    if (root == null) return;\n    // 访问优先级：根节点 -> 左子树 -> 右子树\n    try list.append(root.?.val);\n    try preOrder(T, root.?.left);\n    try preOrder(T, root.?.right);\n}\n\n// 中序遍历\nfn inOrder(comptime T: type, root: ?*inc.TreeNode(T)) !void {\n    if (root == null) return;\n    // 访问优先级：左子树 -> 根节点 -> 右子树\n    try inOrder(T, root.?.left);\n    try list.append(root.?.val);\n    try inOrder(T, root.?.right);\n}\n\n// 后序遍历\nfn postOrder(comptime T: type, root: ?*inc.TreeNode(T)) !void {\n    if (root == null) return;\n    // 访问优先级：左子树 -> 右子树 -> 根节点\n    try postOrder(T, root.?.left);\n    try postOrder(T, root.?.right);\n    try list.append(root.?.val);\n}\n\n// Driver Code\npub fn main() !void {\n    // 初始化内存分配器\n    var mem_arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);\n    defer mem_arena.deinit();\n    const mem_allocator = mem_arena.allocator();\n\n    // 初始化二叉树\n    // 这里借助了一个从数组直接生成二叉树的函数\n    var nums = [_]i32{1, 2, 3, 4, 5, 6, 7};\n    var root = try inc.TreeUtil.arrToTree(i32, mem_allocator, &nums);\n    std.debug.print(\"初始化二叉树\\n\", .{});\n    try inc.PrintUtil.printTree(root, null, false);\n\n    // 前序遍历\n    list.clearRetainingCapacity();\n    try preOrder(i32, root);\n    std.debug.print(\"\\n前序遍历的节点打印序列 = \", .{});\n    inc.PrintUtil.printList(i32, list);\n\n    // 中序遍历\n    list.clearRetainingCapacity();\n    try inOrder(i32, root);\n    std.debug.print(\"\\n中序遍历的节点打印序列 = \", .{});\n    inc.PrintUtil.printList(i32, list);\n\n    // 后序遍历\n    list.clearRetainingCapacity();\n    try postOrder(i32, root);\n    std.debug.print(\"\\n后续遍历的节点打印序列 = \", .{});\n    inc.PrintUtil.printList(i32, list);\n\n    _ = try std.io.getStdIn().reader().readByte();\n}",
+          "sourcePath": "codes/zig/chapter_tree/binary_tree_dfs.zig",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/zig/chapter_tree/binary_tree_dfs.zig",
+          "extraction": "symbol",
+          "runnable": false
+        }
+      ]
+    }
+  ],
+  "animations": [
+    [
+      {
+        "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step1.png",
+        "alt": "前序遍历的递归过程"
+      },
+      {
+        "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step2.png",
+        "alt": "preorder_step2"
+      },
+      {
+        "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step3.png",
+        "alt": "preorder_step3"
+      },
+      {
+        "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step4.png",
+        "alt": "preorder_step4"
+      },
+      {
+        "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step5.png",
+        "alt": "preorder_step5"
+      },
+      {
+        "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step6.png",
+        "alt": "preorder_step6"
+      },
+      {
+        "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step7.png",
+        "alt": "preorder_step7"
+      },
+      {
+        "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step8.png",
+        "alt": "preorder_step8"
+      },
+      {
+        "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step9.png",
+        "alt": "preorder_step9"
+      },
+      {
+        "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step10.png",
+        "alt": "preorder_step10"
+      },
+      {
+        "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step11.png",
+        "alt": "preorder_step11"
+      }
+    ]
+  ],
+  "conversion": {
+    "sourceSha256": "09330a1fbf84eb19b1d3ffbb4f56201aae422cf4caa32bdfae3289db6adbe5bd",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 2,
+    "animationGroups": 1
+  },
+  "blockAliases": {
+    "b0": "blk-47b5f131816e1d35",
+    "b1": "blk-06ff817dbea13de2",
+    "b2": "blk-e8c19148b13b6ae9",
+    "b3": "blk-21e593c5afd54fda",
+    "b4": "blk-0e6d17cfdce2dd8d",
+    "b5": "blk-f146ec14a0d225c1",
+    "b6": "blk-891d24378bc57f83",
+    "b7": "blk-93e3c5ddc26d0722",
+    "b8": "blk-33fd27647ca22dab",
+    "b9": "blk-fb8b73e956a41019",
+    "b10": "blk-f0e8958aa08f468d",
+    "b11": "blk-7b74ef2a1cb32935",
+    "b12": "blk-a55720ddce6eccfe",
+    "b13": "blk-2dba8a14f141d202",
+    "b14": "blk-32ce28b5c22950ea",
+    "b15": "blk-24a7f07da15b30c4",
+    "b16": "blk-a4fd7ede5d82095d",
+    "b17": "blk-2b085a9f9407978a",
+    "b18": "blk-7f310cd20d3e25ff",
+    "b19": "blk-2eced8ea1343473d",
+    "b20": "blk-6a9c7843660c52a1",
+    "b21": "blk-553982699a489114",
+    "b22": "blk-d63567a3d73f261d",
+    "b23": "blk-69ae2aa94ca3418e",
+    "b24": "blk-b28f4b5c790d4666"
+  },
+  "contentVersion": "9fa0ba528ad11f12"
+}

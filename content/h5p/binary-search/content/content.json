@@ -1,0 +1,468 @@
+{
+  "showCoverPage": false,
+  "bookCover": {
+    "coverDescription": "<p style=\"text-align: center;\"></p>"
+  },
+  "behaviour": {
+    "baseColor": "#4f8d86",
+    "defaultTableOfContents": false,
+    "progressIndicators": true,
+    "progressAuto": true,
+    "displaySummary": true,
+    "enableRetry": true
+  },
+  "read": "开始",
+  "displayTOC": "显示目录",
+  "hideTOC": "隐藏目录",
+  "nextPage": "下一页",
+  "previousPage": "上一页",
+  "chapterCompleted": "本页已完成",
+  "partCompleted": "已完成 @pages / @total",
+  "incompleteChapter": "本页未完成",
+  "navigateToTop": "返回顶部",
+  "markAsFinished": "本页已完成",
+  "fullscreen": "全屏",
+  "exitFullscreen": "退出全屏",
+  "bookProgressSubtext": "@count / @total 页",
+  "interactionsProgressSubtext": "@count / @total 题",
+  "submitReport": "完成练习",
+  "restartLabel": "重新开始",
+  "summaryHeader": "练习总结",
+  "allInteractions": "全部题目",
+  "unansweredInteractions": "未答题目",
+  "scoreText": "@score / @maxscore",
+  "leftOutOfTotalCompleted": "已完成 @left / @max 题",
+  "noInteractions": "没有互动题目",
+  "score": "得分",
+  "summaryAndSubmit": "总结",
+  "noChapterInteractionBoldText": "你还没有开始答题。",
+  "noChapterInteractionText": "完成至少一道题目后即可查看总结。",
+  "yourAnswersAreSubmittedForReview": "练习已完成，结果已保存到本机。",
+  "bookProgress": "阅读进度",
+  "interactionsProgress": "答题进度",
+  "totalScoreLabel": "总分",
+  "a11y": {
+    "progress": "第 @page 页，共 @total 页。",
+    "menu": "切换章节目录"
+  },
+  "chapters": [
+    {
+      "library": "H5P.Column 1.18",
+      "metadata": {
+        "title": "二分查找的前提",
+        "contentType": "Column",
+        "license": "CC BY-NC-SA",
+        "licenseVersion": "4.0",
+        "authors": [
+          {
+            "name": "PLEX 数字教材编者",
+            "role": "Author"
+          }
+        ]
+      },
+      "params": {
+        "content": [
+          {
+            "content": {
+              "library": "H5P.AdvancedText 1.1",
+              "metadata": {
+                "title": "概念回顾",
+                "contentType": "AdvancedText",
+                "license": "CC BY-NC-SA",
+                "licenseVersion": "4.0",
+                "authors": [
+                  {
+                    "name": "PLEX 数字教材编者",
+                    "role": "Author"
+                  }
+                ]
+              },
+              "params": {
+                "text": "<h2>二分查找 · 星轨试炼</h2><p>在有序数组中比较中间元素，每次排除一半搜索范围。完成三个小任务，看看你是否掌握了这一思路。</p>"
+              },
+              "subContentId": "b214af7d-a365-5d1c-9d57-b9f4c6ff78ed"
+            },
+            "useSeparator": "auto"
+          },
+          {
+            "content": {
+              "library": "H5P.MultiChoice 1.16",
+              "metadata": {
+                "title": "二分查找的前提",
+                "contentType": "MultiChoice",
+                "license": "CC BY-NC-SA",
+                "licenseVersion": "4.0",
+                "authors": [
+                  {
+                    "name": "PLEX 数字教材编者",
+                    "role": "Author"
+                  }
+                ]
+              },
+              "params": {
+                "media": {
+                  "disableImageZooming": false
+                },
+                "overallFeedback": [
+                  {
+                    "from": 0,
+                    "to": 99,
+                    "feedback": "再想一想。二分查找通过有序关系排除一半范围；正负数与奇偶长度不影响这一前提。"
+                  },
+                  {
+                    "from": 100,
+                    "to": 100,
+                    "feedback": "回答正确！二分查找通过有序关系排除一半范围；正负数与奇偶长度不影响这一前提。"
+                  }
+                ],
+                "UI": {
+                  "checkAnswerButton": "检查答案",
+                  "submitAnswerButton": "提交",
+                  "showSolutionButton": "查看答案",
+                  "tryAgainButton": "重试",
+                  "tipsLabel": "Show tip",
+                  "scoreBarLabel": "得分 :num / :total",
+                  "tipAvailable": "Tip available",
+                  "feedbackAvailable": "Feedback available",
+                  "readFeedback": "Read feedback",
+                  "wrongAnswer": "Wrong answer",
+                  "correctAnswer": "Correct answer",
+                  "shouldCheck": "Should have been checked",
+                  "shouldNotCheck": "Should not have been checked",
+                  "noInput": "Please answer before viewing the solution",
+                  "a11yCheck": "检查答案",
+                  "a11yShowSolution": "查看正确答案",
+                  "a11yRetry": "重新作答"
+                },
+                "behaviour": {
+                  "enableRetry": true,
+                  "enableSolutionsButton": true,
+                  "enableCheckButton": true,
+                  "type": "single",
+                  "singlePoint": false,
+                  "randomAnswers": false,
+                  "showSolutionsRequiresInput": true,
+                  "confirmCheckDialog": false,
+                  "confirmRetryDialog": false,
+                  "autoCheck": false,
+                  "passPercentage": 100,
+                  "showScorePoints": true,
+                  "singleAnswer": true
+                },
+                "confirmCheck": {
+                  "header": "Finish ?",
+                  "body": "Are you sure you wish to finish ?",
+                  "cancelLabel": "Cancel",
+                  "confirmLabel": "Finish"
+                },
+                "confirmRetry": {
+                  "header": "Retry ?",
+                  "body": "Are you sure you wish to retry ?",
+                  "cancelLabel": "Cancel",
+                  "confirmLabel": "Confirm"
+                },
+                "question": "<p>二分查找要求待查找的数组具备什么条件？</p>",
+                "answers": [
+                  {
+                    "text": "<p>元素已经有序排列</p>",
+                    "correct": true,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "二分查找通过有序关系排除一半范围；正负数与奇偶长度不影响这一前提。",
+                      "notChosenFeedback": ""
+                    }
+                  },
+                  {
+                    "text": "<p>元素必须全部为正数</p>",
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "二分查找通过有序关系排除一半范围；正负数与奇偶长度不影响这一前提。",
+                      "notChosenFeedback": ""
+                    }
+                  },
+                  {
+                    "text": "<p>数组长度必须是偶数</p>",
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "二分查找通过有序关系排除一半范围；正负数与奇偶长度不影响这一前提。",
+                      "notChosenFeedback": ""
+                    }
+                  }
+                ]
+              },
+              "subContentId": "68646982-be1a-51e0-b28d-2bb299899838"
+            },
+            "useSeparator": "auto"
+          }
+        ]
+      },
+      "subContentId": "55ba3687-3311-54c5-94d2-e22dad2c38cf"
+    },
+    {
+      "library": "H5P.Column 1.18",
+      "metadata": {
+        "title": "下一步搜索范围",
+        "contentType": "Column",
+        "license": "CC BY-NC-SA",
+        "licenseVersion": "4.0",
+        "authors": [
+          {
+            "name": "PLEX 数字教材编者",
+            "role": "Author"
+          }
+        ]
+      },
+      "params": {
+        "content": [
+          {
+            "content": {
+              "library": "H5P.MultiChoice 1.16",
+              "metadata": {
+                "title": "下一步搜索范围",
+                "contentType": "MultiChoice",
+                "license": "CC BY-NC-SA",
+                "licenseVersion": "4.0",
+                "authors": [
+                  {
+                    "name": "PLEX 数字教材编者",
+                    "role": "Author"
+                  }
+                ]
+              },
+              "params": {
+                "media": {
+                  "disableImageZooming": false
+                },
+                "overallFeedback": [
+                  {
+                    "from": 0,
+                    "to": 99,
+                    "feedback": "再想一想。12 大于中点值 8，因此可以排除左半部分和中点，继续搜索右半部分。"
+                  },
+                  {
+                    "from": 100,
+                    "to": 100,
+                    "feedback": "回答正确！12 大于中点值 8，因此可以排除左半部分和中点，继续搜索右半部分。"
+                  }
+                ],
+                "UI": {
+                  "checkAnswerButton": "检查答案",
+                  "submitAnswerButton": "提交",
+                  "showSolutionButton": "查看答案",
+                  "tryAgainButton": "重试",
+                  "tipsLabel": "Show tip",
+                  "scoreBarLabel": "得分 :num / :total",
+                  "tipAvailable": "Tip available",
+                  "feedbackAvailable": "Feedback available",
+                  "readFeedback": "Read feedback",
+                  "wrongAnswer": "Wrong answer",
+                  "correctAnswer": "Correct answer",
+                  "shouldCheck": "Should have been checked",
+                  "shouldNotCheck": "Should not have been checked",
+                  "noInput": "Please answer before viewing the solution",
+                  "a11yCheck": "检查答案",
+                  "a11yShowSolution": "查看正确答案",
+                  "a11yRetry": "重新作答"
+                },
+                "behaviour": {
+                  "enableRetry": true,
+                  "enableSolutionsButton": true,
+                  "enableCheckButton": true,
+                  "type": "single",
+                  "singlePoint": false,
+                  "randomAnswers": false,
+                  "showSolutionsRequiresInput": true,
+                  "confirmCheckDialog": false,
+                  "confirmRetryDialog": false,
+                  "autoCheck": false,
+                  "passPercentage": 100,
+                  "showScorePoints": true,
+                  "singleAnswer": true
+                },
+                "confirmCheck": {
+                  "header": "Finish ?",
+                  "body": "Are you sure you wish to finish ?",
+                  "cancelLabel": "Cancel",
+                  "confirmLabel": "Finish"
+                },
+                "confirmRetry": {
+                  "header": "Retry ?",
+                  "body": "Are you sure you wish to retry ?",
+                  "cancelLabel": "Cancel",
+                  "confirmLabel": "Confirm"
+                },
+                "question": "<p>数组 [1, 3, 6, 8, 12, 15, 23] 中查找 12，首次中点是 8。下一步应搜索哪部分？</p>",
+                "answers": [
+                  {
+                    "text": "<p>[1, 3, 6]</p>",
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "12 大于中点值 8，因此可以排除左半部分和中点，继续搜索右半部分。",
+                      "notChosenFeedback": ""
+                    }
+                  },
+                  {
+                    "text": "<p>[12, 15, 23]</p>",
+                    "correct": true,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "12 大于中点值 8，因此可以排除左半部分和中点，继续搜索右半部分。",
+                      "notChosenFeedback": ""
+                    }
+                  },
+                  {
+                    "text": "<p>整个数组重新开始</p>",
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "12 大于中点值 8，因此可以排除左半部分和中点，继续搜索右半部分。",
+                      "notChosenFeedback": ""
+                    }
+                  }
+                ]
+              },
+              "subContentId": "6dc1405a-aaf3-5628-8b84-e84e686cdbc7"
+            },
+            "useSeparator": "auto"
+          }
+        ]
+      },
+      "subContentId": "013a4fd1-fb38-57c5-ac62-40bcdb821dae"
+    },
+    {
+      "library": "H5P.Column 1.18",
+      "metadata": {
+        "title": "时间复杂度",
+        "contentType": "Column",
+        "license": "CC BY-NC-SA",
+        "licenseVersion": "4.0",
+        "authors": [
+          {
+            "name": "PLEX 数字教材编者",
+            "role": "Author"
+          }
+        ]
+      },
+      "params": {
+        "content": [
+          {
+            "content": {
+              "library": "H5P.MultiChoice 1.16",
+              "metadata": {
+                "title": "时间复杂度",
+                "contentType": "MultiChoice",
+                "license": "CC BY-NC-SA",
+                "licenseVersion": "4.0",
+                "authors": [
+                  {
+                    "name": "PLEX 数字教材编者",
+                    "role": "Author"
+                  }
+                ]
+              },
+              "params": {
+                "media": {
+                  "disableImageZooming": false
+                },
+                "overallFeedback": [
+                  {
+                    "from": 0,
+                    "to": 99,
+                    "feedback": "再想一想。最多经过对数数量的折半，搜索区间就会缩小至一个元素。"
+                  },
+                  {
+                    "from": 100,
+                    "to": 100,
+                    "feedback": "回答正确！最多经过对数数量的折半，搜索区间就会缩小至一个元素。"
+                  }
+                ],
+                "UI": {
+                  "checkAnswerButton": "检查答案",
+                  "submitAnswerButton": "提交",
+                  "showSolutionButton": "查看答案",
+                  "tryAgainButton": "重试",
+                  "tipsLabel": "Show tip",
+                  "scoreBarLabel": "得分 :num / :total",
+                  "tipAvailable": "Tip available",
+                  "feedbackAvailable": "Feedback available",
+                  "readFeedback": "Read feedback",
+                  "wrongAnswer": "Wrong answer",
+                  "correctAnswer": "Correct answer",
+                  "shouldCheck": "Should have been checked",
+                  "shouldNotCheck": "Should not have been checked",
+                  "noInput": "Please answer before viewing the solution",
+                  "a11yCheck": "检查答案",
+                  "a11yShowSolution": "查看正确答案",
+                  "a11yRetry": "重新作答"
+                },
+                "behaviour": {
+                  "enableRetry": true,
+                  "enableSolutionsButton": true,
+                  "enableCheckButton": true,
+                  "type": "single",
+                  "singlePoint": false,
+                  "randomAnswers": false,
+                  "showSolutionsRequiresInput": true,
+                  "confirmCheckDialog": false,
+                  "confirmRetryDialog": false,
+                  "autoCheck": false,
+                  "passPercentage": 100,
+                  "showScorePoints": true,
+                  "singleAnswer": true
+                },
+                "confirmCheck": {
+                  "header": "Finish ?",
+                  "body": "Are you sure you wish to finish ?",
+                  "cancelLabel": "Cancel",
+                  "confirmLabel": "Finish"
+                },
+                "confirmRetry": {
+                  "header": "Retry ?",
+                  "body": "Are you sure you wish to retry ?",
+                  "cancelLabel": "Cancel",
+                  "confirmLabel": "Confirm"
+                },
+                "question": "<p>每轮把搜索范围缩小一半，二分查找的时间复杂度是？</p>",
+                "answers": [
+                  {
+                    "text": "<p>O(n²)</p>",
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "最多经过对数数量的折半，搜索区间就会缩小至一个元素。",
+                      "notChosenFeedback": ""
+                    }
+                  },
+                  {
+                    "text": "<p>O(n)</p>",
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "最多经过对数数量的折半，搜索区间就会缩小至一个元素。",
+                      "notChosenFeedback": ""
+                    }
+                  },
+                  {
+                    "text": "<p>O(log n)</p>",
+                    "correct": true,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "最多经过对数数量的折半，搜索区间就会缩小至一个元素。",
+                      "notChosenFeedback": ""
+                    }
+                  }
+                ]
+              },
+              "subContentId": "a155fb26-69e7-5ed0-af55-31f29faf7943"
+            },
+            "useSeparator": "auto"
+          }
+        ]
+      },
+      "subContentId": "0a9d6cc2-56e5-57d1-87dd-820a9c86b833"
+    }
+  ]
+}

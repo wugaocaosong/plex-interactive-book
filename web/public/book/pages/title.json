@@ -1,0 +1,24 @@
+{
+  "id": "title",
+  "title": "扉页",
+  "kind": "editorial",
+  "group": "卷首",
+  "route": "/read/title",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-5a16d667438397d2\">星轨编程</h1>\n<h2 data-block=\"blk-c52684d58bdb7132\">Python 与算法的探索之旅</h2>\n<p data-block=\"blk-96d8658d0d15e765\">PLEX 交互式数字教材</p>\n<p data-block=\"blk-5eed73ad233fbf72\">从第一个变量，到一片算法星空。</p>\n<p data-block=\"blk-69f07585de101c90\">正文来源：<strong>《Hello 算法》</strong></p>\n<p data-block=\"blk-bf368bd47299dd10\">原作者：<strong>krahets 及 Hello Algo 贡献者</strong></p>\n<p data-block=\"blk-bbb4dd8371d03d3e\">数字教材编者：待填写</p>\n<p data-block=\"blk-1b50f583fb14a0d5\">试阅版 · 2026</p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-5a16d667438397d2",
+    "b1": "blk-c52684d58bdb7132",
+    "b2": "blk-96d8658d0d15e765",
+    "b3": "blk-5eed73ad233fbf72",
+    "b4": "blk-69f07585de101c90",
+    "b5": "blk-bf368bd47299dd10",
+    "b6": "blk-bbb4dd8371d03d3e",
+    "b7": "blk-1b50f583fb14a0d5"
+  },
+  "contentVersion": "ae312f136ae0b6ec"
+}

@@ -1,0 +1,50 @@
+{
+  "id": "chapter_backtracking/exercises",
+  "title": "13.6   练习",
+  "kind": "chapter",
+  "group": "第 13 章   回溯",
+  "route": "/read/chapter_backtracking/exercises",
+  "sourcePath": "chapter_backtracking/exercises.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"blk-b55829fb2b3bee5f\" id=\"_1\">练习</h1>\n<h2 data-block=\"blk-2d8b877a7ca25cdd\" id=\"_2\">知识巩固</h2>\n<h3 data-block=\"blk-9ca0e2a069c861e7\" id=\"_3\">这段排列算法会漏掉结果吗</h3>\n<p data-block=\"blk-3de182258f3bae02\">一个回溯算法按 <code>1、2、3</code> 的顺序尝试生成全部排列。每次选择数字 <code>x</code> 时，它会：</p>\n<ol data-block=\"blk-40e45217fbee1e87\">\n<li>把 <code>x</code> 加到当前路径末尾；</li>\n<li>把 <code>x</code> 标记为“已使用”；</li>\n<li>递归填写下一个位置。</li>\n</ol>\n<p data-block=\"blk-37d94daa70f4e909\">递归返回后，同学只从路径末尾删除了 <code>x</code>，然后继续尝试下一个数字。</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"blk-fa35aae12418f6d4\">\n<li>算法首先得到哪个排列？它还能得到全部 6 个排列吗？</li>\n<li>递归返回上一层前，只删除路径末尾的数字是否足够？如果不够，还需要做什么？说明理由。</li>\n</ol>\n<details class=\"success\" data-block=\"blk-03330e59462d7ad5\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>它首先得到 <code>[1, 2, 3]</code>，但无法得到全部排列。虽然返回时路径变短了，\n    数字 1、2、3 的标记仍都是“已使用”，后续分支便没有可选数字。</p>\n</li>\n<li>\n<p>不够。删除路径末尾的 <code>x</code> 后，还必须把 <code>x</code> 重新标记为“未使用”。\n    当前路径和已使用标记共同描述搜索状态；选择时修改了两处，回退时也必须把两处都恢复，\n    其他分支才能再次选择 <code>x</code>。</p>\n</li>\n</ol>\n</details>\n<h3 data-block=\"blk-e418fe9e4fb672ae\" id=\"_4\">数字的选择顺序重要吗</h3>\n<p data-block=\"blk-789a5357db003ee0\">给定排好序的数组 <code>[2, 3, 5]</code> 和目标值 5，每个数可以重复选择。\n算法规定每条搜索路径中的数字只能按从小到大的顺序出现。</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"blk-cd2fdcffb3acc57b\">\n<li>能得到哪些不同的组合？</li>\n<li>为什么同一组数字不需要按不同顺序重复搜索？“从小到大”的限制起到了什么作用？</li>\n<li>当前路径为 <code>[3]</code>、还差 2 时，下一个候选数是 3。为什么此时可以停止检查这一层后面的所有候选数？</li>\n</ol>\n<details class=\"success\" data-block=\"blk-d729ec656245f24a\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>不同的组合为 <code>[2, 3]</code> 和 <code>[5]</code>。</p>\n</li>\n<li>\n<p>本题把 <code>[2, 3]</code> 和 <code>[3, 2]</code> 看作同一种组合，数字的选择顺序不计入答案。\n    规定路径中的数字从小到大出现，就能在搜索时直接跳过 <code>[3, 2]</code> 这类重复组合。</p>\n</li>\n<li>\n<p>当前还差 2，而候选数 3 已经大于 2。因为数组已经排好序，\n    3 后面的候选数只会更大，也都不可能加入当前组合，所以可以直接结束这一层的检查。</p>\n</li>\n</ol>\n</details>\n<h3 data-block=\"blk-a24fccf70a5e6aaa\" id=\"_5\">下一枚皇后可以放在哪些位置</h3>\n<p data-block=\"blk-cefe9e1cc7484616\">在一个 <code>4 × 4</code> 棋盘上按行放置皇后，行、列下标都从 0 开始。\n目前已经在 <code>(0, 1)</code> 和 <code>(1, 3)</code> 放置了皇后，现在要在第 2 行放置下一个皇后。</p>\n<!-- numbered-subquestions -->\n<ol data-block=\"blk-b2723a2a48dc0dfc\">\n<li>哪些列会因为“同列”而被排除？</li>\n<li>在剩余列中，哪些位置会因为“同一条对角线”而被排除？</li>\n<li>第 2 行还剩哪些位置可以尝试？</li>\n</ol>\n<details class=\"success\" data-block=\"blk-3166413c729acfec\">\n<summary>参考答案</summary>\n<ol>\n<li>\n<p>第 1 列和第 3 列已经有皇后，因此位置 <code>(2, 1)</code> 和 <code>(2, 3)</code> 被排除。</p>\n</li>\n<li>\n<p>在剩余位置中，<code>(2, 2)</code> 与 <code>(1, 3)</code> 位于同一条对角线上，因此也被排除。\n    位置 <code>(2, 0)</code> 与已有两个皇后都不在同列或同一条对角线上。</p>\n</li>\n<li>\n<p>第 2 行可以尝试的位置只有 <code>(2, 0)</code>。</p>\n<p>这一步只说明当前放置合法；之后若无法完成棋盘，仍需回退并尝试更早的其他选择。</p>\n</li>\n</ol>\n</details>\n<h2 data-block=\"blk-60a0fa33d95bdfd0\" id=\"_6\">编程练习</h2>\n<h3 data-block=\"blk-39988326cc82f3fc\" id=\"_7\">无重复元素的全排列</h3>\n<p data-block=\"blk-94f5403acb4211cd\">整数数组 <code>nums</code> 至少包含一个元素，并且其中各元素互不相同。\n请列出把这些元素各使用一次所能形成的全部顺序，并将每一种顺序作为一个数组返回。\n结果中各排列的先后次序不作要求。\n请使用回溯，并用布尔数组记录每个位置的元素是否已经选入当前排列。</p>\n<details class=\"tip\" data-block=\"blk-1575b3af4cd6381e\">\n<summary>解题提示</summary>\n<ol>\n<li>递归深度表示正在填写排列中的第几个位置</li>\n<li>每一层只尝试尚未使用的元素</li>\n<li>路径长度达到 <code>nums</code> 的长度时，把它的副本加入答案</li>\n</ol>\n</details>\n<p data-block=\"blk-6b744d9b87072f9d\"><a class=\"rounded-button exercise-button\" href=\"https://leetcode.cn/problems/permutations/\" rel=\"noopener noreferrer\" target=\"_blank\">LeetCode</a> <a class=\"rounded-button exercise-button\" href=\"https://leetcode.cn/problems/permutations/solutions/2363882/46-quan-pai-lie-hui-su-qing-xi-tu-jie-by-6o7h/\" rel=\"noopener noreferrer\" target=\"_blank\">题目解析</a></p>\n<blockquote data-block=\"blk-f3cba7d6afa26b8a\">\n<p><strong>说明：</strong> 链接题解通过交换数组元素，把已选元素依次放到数组前部；本练习使用布尔数组记录每个元素是否已选。两种方法都能避免同一元素被重复选择，但代码结构不同</p>\n</blockquote>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "358f18932d11133e082b2f914767ffe1d75e214b1d62a2fc262ce3195a02cc68",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  },
+  "blockAliases": {
+    "b0": "blk-b55829fb2b3bee5f",
+    "b1": "blk-2d8b877a7ca25cdd",
+    "b2": "blk-9ca0e2a069c861e7",
+    "b3": "blk-3de182258f3bae02",
+    "b4": "blk-40e45217fbee1e87",
+    "b5": "blk-37d94daa70f4e909",
+    "b6": "blk-fa35aae12418f6d4",
+    "b7": "blk-03330e59462d7ad5",
+    "b8": "blk-e418fe9e4fb672ae",
+    "b9": "blk-789a5357db003ee0",
+    "b10": "blk-cd2fdcffb3acc57b",
+    "b11": "blk-d729ec656245f24a",
+    "b12": "blk-a24fccf70a5e6aaa",
+    "b13": "blk-cefe9e1cc7484616",
+    "b14": "blk-b2723a2a48dc0dfc",
+    "b15": "blk-3166413c729acfec",
+    "b16": "blk-60a0fa33d95bdfd0",
+    "b17": "blk-39988326cc82f3fc",
+    "b18": "blk-94f5403acb4211cd",
+    "b19": "blk-1575b3af4cd6381e",
+    "b20": "blk-6b744d9b87072f9d",
+    "b21": "blk-f3cba7d6afa26b8a"
+  },
+  "contentVersion": "e620a8d7a58d5465"
+}

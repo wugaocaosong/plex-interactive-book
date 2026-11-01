@@ -1,0 +1,50 @@
+{
+  "id": "chapter_preface/about_the_book",
+  "title": "0.1   关于本书",
+  "kind": "chapter",
+  "group": "第 0 章   前言",
+  "route": "/read/chapter_preface/about_the_book",
+  "sourcePath": "chapter_preface/about_the_book.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"blk-2b6ec73c28aab8a4\" id=\"_1\">关于本书</h1>\n<p data-block=\"blk-42bcd78381ddba60\">本项目旨在创建一本开源、免费、对新手友好的数据结构与算法入门教程。</p>\n<ul data-block=\"blk-44795a49248e274a\">\n<li>全书采用动画图解，内容清晰易懂、学习曲线平滑，引导初学者探索数据结构与算法的知识地图。</li>\n<li>源代码可一键运行，帮助读者在练习中提升编程技能，了解算法工作原理和数据结构底层实现。</li>\n<li>提倡读者互助学习，欢迎大家在评论区提出问题与分享见解，在交流讨论中共同进步。</li>\n</ul>\n<h2 data-block=\"blk-2a3830879578aee2\" id=\"_2\">读者对象</h2>\n<p data-block=\"blk-c5bc6a777995ccf6\">若你是算法初学者，从未接触过算法，或者已经有一些刷题经验，对数据结构与算法有模糊的认识，在会与不会之间反复横跳，那么本书正是为你量身定制的！</p>\n<p data-block=\"blk-486c49e35215a7d4\">如果你已经积累一定的刷题量，熟悉大部分题型，那么本书可助你回顾与梳理算法知识体系，仓库源代码可以当作“刷题工具库”或“算法字典”来使用。</p>\n<p data-block=\"blk-e716ef8d0816a1de\">若你是算法“大神”，我们期待收到你的宝贵建议，或者<a href=\"https://www.hello-algo.com/chapter_appendix/contribution/\">一起参与创作</a>。</p>\n<div class=\"admonition success\" data-block=\"blk-f00caf42337c1ee3\">\n<p class=\"admonition-title\">前置条件</p>\n<p>你需要至少具备任一语言的编程基础，能够阅读和编写简单代码。</p>\n</div>\n<h2 data-block=\"blk-98da14c9e53d2970\" id=\"_3\">内容结构</h2>\n<p data-block=\"blk-23d3255d6e9c26e6\">本书的主要内容如下图所示。</p>\n<ul data-block=\"blk-a7036b7f8bca6fc1\">\n<li><strong>复杂度分析</strong>：数据结构和算法的评价维度与方法。时间复杂度和空间复杂度的推算方法、常见类型、示例等。</li>\n<li><strong>数据结构</strong>：基本数据类型和数据结构的分类方法。数组、链表、栈、队列、哈希表、树、堆、图等数据结构的定义、优缺点、常用操作、常见类型、典型应用、实现方法等。</li>\n<li><strong>算法</strong>：搜索、排序、分治、回溯、动态规划、贪心等算法的定义、优缺点、效率、应用场景、解题步骤和示例问题等。</li>\n</ul>\n<figure data-block=\"blk-bf756dbcc191db2d\"><img alt=\"本书主要内容\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_preface/about_the_book.assets/hello_algo_mindmap.png\"/><figcaption>本书主要内容</figcaption></figure>\n<h2 data-block=\"blk-1fe45604a62003fd\" id=\"_4\">致谢</h2>\n<p data-block=\"blk-3c760f010a988d43\">本书在开源社区众多贡献者的共同努力下不断完善。感谢每一位投入时间与精力的撰稿人，他们是（按照 GitHub 自动生成的顺序）：krahets、coderonion、Gonglja、nuomi1、Reanon、justin-tse、hpstory、danielsss、curtishd、night-cruise、S-N-O-R-L-A-X、rongyi、msk397、gvenusleo、khoaxuantu、rivertwilight、K3v123、gyt95、zhuoqinyue、yuelinxin、Zuoxun、mingXta、Phoenix0415、FangYuan33、GN-Yu、longsizhuo、pengchzn、QiLOL、Cathay-Chen、guowei-gong、xBLACKICEx、IsChristina、JoseHung、qualifier1024、hello-ikun、magentaqin、Guanngxu、thomasq0、sunshinesDL、L-Super、Transmigration-zhou、WSL0809、Slone123c、lhxsm、yuan0221、what-is-me、theNefelibatas、Shyam-Chen、sangxiaai、longranger2、codeberg-user、xiongsp、JeffersonHuang、prinpal、seven1240、Wonderdch、malone6、xiaomiusa87、gaofer、bluebean-cloud、a16su、SamJin98、hongyun-robot、nanlei、XiaChuerwu、yd-j、iron-irax、mgisr、steventimes、junminhong、heshuyue、danny900714、Nigh、Dr-XYZ、MolDuM、XC-Zero、reeswell、PXG-XPG、NI-SW、Horbin-Magician、Enlightenus、YangXuanyi、xjr7670、beatrix-chan、DullSword、qq909244296、iStig、boloboloda、hts0000、gledfish、fbigm、echo1937、jiaxianhua、wenjianmin、keshida、kilikilikid、lclc6、lwbaptx、linyejoe2、liuxjerry、szu17dmy、dshlstarr、Yucao-cy、coderlef、czruby、bongbongbakudan、beintentional、ZongYangL、ZhongYuuu、ZhongGuanbin、hezhizhen、linzeyan、ZJKung、JTCPOWI、KawaiiAsh、luluxia、xb534、ztkuaikuai、yw-1021、ElaBosak233、baagod、zhouLion、yishangzhang、yi427、yanedie、yabo083、weibk、wangwang105、th1nk3r-ing、tao363、4yDX3906、syd168、sslmj2020、smilelsb、siqyka、selear、sdshaoda、Xi-Row、popozhu、nuquist19、noobcodemaker、XiaoK29、chadyi、lyl625760、lucaswangdev、llql1211、0130w、shanghai-Jerry、EJackYang、Javesun99、eltociear、lipusheng、KNChiu、BlindTerran、ShiMaRing、lovelock、FreddieLi、FloranceYeh、fanchenggang、gltianwen、goerll、nedchu、curly210102、CuB3y0nd、KraHsu、CarrotDLaw、youshaoXG、bubble9um、Asashishi、Asa0oo0o0o、fanenr、eagleanurag、akshiterate、52coder、foursevenlove、KorsChen、hopkings2008、yang-le、realwujing、Evilrabbit520、Umer-Jahangir、Turing-1024-Lee、Suremotoo、paoxiaomooo、Chieko-Seren、Senrian、Allen-Scai、19santosh99、ymmmas、Risuntsy、Richard-Zhang1019、RafaelCaso、qingpeng9802、primexiao、Urbaner3、codetypess、nidhoggfgg、MwumLi、CreatorMetaSky、martinx、ZnYang2018、hugtyftg、logan-qiu、psychelzh、Kunchen-Luo、Keynman 和 KeiichiKasai。</p>\n<p data-block=\"blk-ffffbccc38e98a10\">本书的代码审阅工作由 coderonion、curtishd、Gonglja、gvenusleo、hpstory、justin-tse、khoaxuantu、krahets、night-cruise、nuomi1、Reanon 和 rongyi 完成（按照首字母顺序排列）。感谢他们付出的时间与精力，正是他们确保了各语言代码的规范与统一。</p>\n<p data-block=\"blk-11b7bb7b872afba6\">本书的英文版由 yuelinxin、K3v123、magentaqin、QiLOL、Phoenix0415、SamJin98、yanedie、RafaelCaso、pengchzn 和 thomasq0 审阅；日文版由 eltociear 审阅；俄文版由 И. А. Шевкун 和 Yuyan Huang 审阅；繁体中文版由 Shyam-Chen 和 Dr-XYZ 审阅。正是因为他们的贡献，这本书才能够服务于更广泛的读者群体，感谢他们。</p>\n<p data-block=\"blk-84ebc488cc15bc54\">本书的 ePub 电子书生成工具由 zhongfq 开发。感谢他的贡献，为读者提供了更灵活的阅读方式。</p>\n<p data-block=\"blk-4d3cf9ecca030fe7\">在本书的创作过程中，我得到了许多人的帮助。</p>\n<ul data-block=\"blk-ec2f2a2bf29bf284\">\n<li>感谢我在公司的导师李汐博士，在一次畅谈中你鼓励我“快行动起来”，坚定了我写这本书的决心；</li>\n<li>感谢我的女朋友泡泡作为本书的首位读者，从算法小白的角度提出许多宝贵建议，使得本书更适合新手阅读；</li>\n<li>感谢腾宝、琦宝、飞宝为本书起了一个富有创意的名字，唤起大家写下第一行代码“Hello World!”的美好回忆；</li>\n<li>感谢校铨在知识产权方面提供的专业帮助，这对本开源书的完善起到了重要作用；</li>\n<li>感谢苏潼为本书设计了精美的封面和 logo ，并在我的强迫症的驱使下多次耐心修改；</li>\n<li>感谢 @squidfunk 提供的排版建议，以及他开发的开源文档主题 <a href=\"https://github.com/squidfunk/mkdocs-material\">Material-for-MkDocs</a> 。</li>\n</ul>\n<p data-block=\"blk-db8dfb7c2ba865fc\">在写作过程中，我阅读了许多关于数据结构与算法的教材和文章。这些作品为本书提供了优秀的范本，确保了本书内容的准确性与品质。在此感谢所有老师和前辈的杰出贡献！</p>\n<p data-block=\"blk-335abc9df05aa917\">本书倡导手脑并用的学习方式，在这一点上我深受<a href=\"https://github.com/d2l-ai/d2l-zh\">《动手学深度学习》</a>的启发。在此向各位读者强烈推荐这本优秀的著作。</p>\n<p data-block=\"blk-a502a294ef6e00b7\"><strong>衷心感谢我的父母，正是你们一直以来的支持与鼓励，让我有机会做这件富有趣味的事</strong>。</p>",
+  "codeExamples": [],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "786d96b354d85bcf91cc5b1b3882418a901536964f4c623f4c8bfaabb6d281b4",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 0,
+    "animationGroups": 0
+  },
+  "blockAliases": {
+    "b0": "blk-2b6ec73c28aab8a4",
+    "b1": "blk-42bcd78381ddba60",
+    "b2": "blk-44795a49248e274a",
+    "b3": "blk-2a3830879578aee2",
+    "b4": "blk-c5bc6a777995ccf6",
+    "b5": "blk-486c49e35215a7d4",
+    "b6": "blk-e716ef8d0816a1de",
+    "b7": "blk-f00caf42337c1ee3",
+    "b8": "blk-98da14c9e53d2970",
+    "b9": "blk-23d3255d6e9c26e6",
+    "b10": "blk-a7036b7f8bca6fc1",
+    "b11": "blk-bf756dbcc191db2d",
+    "b12": "blk-1fe45604a62003fd",
+    "b13": "blk-3c760f010a988d43",
+    "b14": "blk-ffffbccc38e98a10",
+    "b15": "blk-11b7bb7b872afba6",
+    "b16": "blk-84ebc488cc15bc54",
+    "b17": "blk-4d3cf9ecca030fe7",
+    "b18": "blk-ec2f2a2bf29bf284",
+    "b19": "blk-db8dfb7c2ba865fc",
+    "b20": "blk-335abc9df05aa917",
+    "b21": "blk-a502a294ef6e00b7"
+  },
+  "contentVersion": "967d0a86681330dd"
+}

@@ -1,0 +1,182 @@
+{
+  "id": "chapter_sorting/insertion_sort",
+  "title": "11.4   插入排序",
+  "kind": "chapter",
+  "group": "第 11 章   排序",
+  "route": "/read/chapter_sorting/insertion_sort",
+  "sourcePath": "chapter_sorting/insertion_sort.md",
+  "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+  "html": "<h1 data-block=\"blk-84120558058887ea\" id=\"_1\">插入排序</h1>\n<p data-block=\"blk-0fa05cebeac69ad0\"><u>插入排序（insertion sort）</u>是一种简单的排序算法，它的工作原理与手动整理一副牌的过程非常相似。</p>\n<p data-block=\"blk-85565588568bf5c6\">具体来说，我们在未排序区间选择一个基准元素，将该元素与其左侧已排序区间的元素逐一比较大小，并将该元素插入到正确的位置。</p>\n<p data-block=\"blk-77922a0fb51a5d34\">下图展示了数组插入元素的操作流程。设基准元素为 <code>base</code> ，我们需要将从目标索引到 <code>base</code> 之间的所有元素向右移动一位，然后将 <code>base</code> 赋值给目标索引。</p>\n<figure data-block=\"blk-2a6df1795acd48fc\"><img alt=\"单次插入操作\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_sorting/insertion_sort.assets/insertion_operation.png\"/><figcaption>单次插入操作</figcaption></figure>\n<h2 data-block=\"blk-3c58dcba9b887056\" id=\"_2\">算法流程</h2>\n<p data-block=\"blk-d4575c4e980dfe08\">插入排序的整体流程如下图所示。</p>\n<ol data-block=\"blk-a51c3ffba5a93835\">\n<li>初始状态下，数组的第 1 个元素已完成排序。</li>\n<li>选取数组的第 2 个元素作为 <code>base</code> ，将其插入到正确位置后，<strong>数组的前 2 个元素已排序</strong>。</li>\n<li>选取第 3 个元素作为 <code>base</code> ，将其插入到正确位置后，<strong>数组的前 3 个元素已排序</strong>。</li>\n<li>以此类推，在最后一轮中，选取最后一个元素作为 <code>base</code> ，将其插入到正确位置后，<strong>所有元素均已排序</strong>。</li>\n</ol>\n<figure data-block=\"blk-e6da2299d25a8faa\"><img alt=\"插入排序流程\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_sorting/insertion_sort.assets/insertion_sort_overview.png\"/><figcaption>插入排序流程</figcaption></figure>\n<p data-block=\"blk-641d20a54df21b08\">示例代码如下：</p>\n<div class=\"code-example\" data-block=\"blk-b7655d36dba8ef55\" data-code=\"0\"><div class=\"code-caption\"><span>insertion_sort · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def insertion_sort(nums: list[int]):\n    \"\"\"插入排序\"\"\"\n    # 外循环：已排序区间为 [0, i-1]\n    for i in range(1, len(nums)):\n        base = nums[i]\n        j = i - 1\n        # 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while j &gt;= 0 and nums[j] &gt; base:\n            nums[j + 1] = nums[j]  # 将 nums[j] 向右移动一位\n            j -= 1\n        nums[j + 1] = base  # 将 base 赋值到正确位置</code></pre></div>\n<h2 data-block=\"blk-b7958609c283eab0\" id=\"_3\">算法特性</h2>\n<ul data-block=\"blk-19b7a4a71adb4309\">\n<li><strong>时间复杂度为 <span class=\"arithmatex\">\\(O(n^2)\\)</span>、自适应排序</strong>：在最差情况下，每次插入操作分别需要循环 <span class=\"arithmatex\">\\(n - 1\\)</span>、<span class=\"arithmatex\">\\(n-2\\)</span>、<span class=\"arithmatex\">\\(\\dots\\)</span>、<span class=\"arithmatex\">\\(2\\)</span>、<span class=\"arithmatex\">\\(1\\)</span> 次，求和得到 <span class=\"arithmatex\">\\((n - 1) n / 2\\)</span> ，因此时间复杂度为 <span class=\"arithmatex\">\\(O(n^2)\\)</span> 。在遇到有序数据时，插入操作会提前终止。当输入数组完全有序时，插入排序达到最佳时间复杂度 <span class=\"arithmatex\">\\(O(n)\\)</span> 。</li>\n<li><strong>空间复杂度为 <span class=\"arithmatex\">\\(O(1)\\)</span>、原地排序</strong>：指针 <span class=\"arithmatex\">\\(i\\)</span> 和 <span class=\"arithmatex\">\\(j\\)</span> 使用常数大小的额外空间。</li>\n<li><strong>稳定排序</strong>：在插入操作过程中，我们会将元素插入到相等元素的右侧，不会改变它们的顺序。</li>\n</ul>\n<h2 data-block=\"blk-54b5d9ce06a7a085\" id=\"_4\">插入排序的优势</h2>\n<p data-block=\"blk-7469490c56146be3\">插入排序的时间复杂度为 <span class=\"arithmatex\">\\(O(n^2)\\)</span> ，而我们即将学习的快速排序的时间复杂度为 <span class=\"arithmatex\">\\(O(n \\log n)\\)</span> 。尽管插入排序的时间复杂度更高，<strong>但在数据量较小的情况下，插入排序通常更快</strong>。</p>\n<p data-block=\"blk-b249b7e2482aae60\">这个结论与线性查找和二分查找的适用情况的结论类似。快速排序这类 <span class=\"arithmatex\">\\(O(n \\log n)\\)</span> 的算法属于基于分治策略的排序算法，往往包含更多单元计算操作。而在数据量较小时，<span class=\"arithmatex\">\\(n^2\\)</span> 和 <span class=\"arithmatex\">\\(n \\log n\\)</span> 的数值比较接近，复杂度不占主导地位，每轮中的单元操作数量起到决定性作用。</p>\n<p data-block=\"blk-1c8893b6ebc49dc4\">实际上，许多编程语言（例如 Java）的内置排序函数采用了插入排序，大致思路为：对于长数组，采用基于分治策略的排序算法，例如快速排序；对于短数组，直接使用插入排序。</p>\n<p data-block=\"blk-d608829155dac096\">虽然冒泡排序、选择排序和插入排序的时间复杂度都为 <span class=\"arithmatex\">\\(O(n^2)\\)</span> ，但在实际情况中，<strong>插入排序的使用频率显著高于冒泡排序和选择排序</strong>，主要有以下原因。</p>\n<ul data-block=\"blk-7a94b746b87ecc63\">\n<li>冒泡排序基于元素交换实现，需要借助一个临时变量，共涉及 3 个单元操作；插入排序基于元素赋值实现，仅需 1 个单元操作。因此，<strong>冒泡排序的计算开销通常比插入排序更高</strong>。</li>\n<li>选择排序在任何情况下的时间复杂度都为 <span class=\"arithmatex\">\\(O(n^2)\\)</span> 。<strong>如果给定一组部分有序的数据，插入排序通常比选择排序效率更高</strong>。</li>\n<li>选择排序不稳定，无法应用于多级排序。</li>\n</ul>",
+  "codeExamples": [
+    {
+      "id": "example-2bfe90ab82bf7c2e",
+      "file": "insertion_sort",
+      "className": "",
+      "functionName": "insertion_sort",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def insertion_sort(nums: list[int]):\n    \"\"\"插入排序\"\"\"\n    # 外循环：已排序区间为 [0, i-1]\n    for i in range(1, len(nums)):\n        base = nums[i]\n        j = i - 1\n        # 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while j >= 0 and nums[j] > base:\n            nums[j + 1] = nums[j]  # 将 nums[j] 向右移动一位\n            j -= 1\n        nums[j + 1] = base  # 将 base 赋值到正确位置",
+          "fullSource": "\"\"\"\nFile: insertion_sort.py\nCreated Time: 2022-11-25\nAuthor: timi (xisunyy@163.com)\n\"\"\"\n\n\ndef insertion_sort(nums: list[int]):\n    \"\"\"插入排序\"\"\"\n    # 外循环：已排序区间为 [0, i-1]\n    for i in range(1, len(nums)):\n        base = nums[i]\n        j = i - 1\n        # 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while j >= 0 and nums[j] > base:\n            nums[j + 1] = nums[j]  # 将 nums[j] 向右移动一位\n            j -= 1\n        nums[j + 1] = base  # 将 base 赋值到正确位置\n\n\n\"\"\"Driver Code\"\"\"\nif __name__ == \"__main__\":\n    nums = [4, 1, 3, 1, 5, 2]\n    insertion_sort(nums)\n    print(\"插入排序完成后 nums =\", nums)\n",
+          "sourcePath": "codes/python/chapter_sorting/insertion_sort.py",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/python/chapter_sorting/insertion_sort.py",
+          "extraction": "symbol",
+          "runnable": true
+        },
+        {
+          "language": "java",
+          "snippet": "public class insertion_sort {\n    /* 插入排序 */\n    static void insertionSort(int[] nums) {\n        // 外循环：已排序区间为 [0, i-1]\n        for (int i = 1; i < nums.length; i++) {\n            int base = nums[i], j = i - 1;\n            // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n            while (j >= 0 && nums[j] > base) {\n                nums[j + 1] = nums[j]; // 将 nums[j] 向右移动一位\n                j--;\n            }\n            nums[j + 1] = base;        // 将 base 赋值到正确位置\n        }\n    }\n\n    public static void main(String[] args) {\n        int[] nums = { 4, 1, 3, 1, 5, 2 };\n        insertionSort(nums);\n        System.out.println(\"插入排序完成后 nums = \" + Arrays.toString(nums));\n    }\n}",
+          "fullSource": "/**\n * File: insertion_sort.java\n * Created Time: 2022-11-25\n * Author: krahets (krahets@163.com)\n */\n\npackage chapter_sorting;\n\nimport java.util.*;\n\npublic class insertion_sort {\n    /* 插入排序 */\n    static void insertionSort(int[] nums) {\n        // 外循环：已排序区间为 [0, i-1]\n        for (int i = 1; i < nums.length; i++) {\n            int base = nums[i], j = i - 1;\n            // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n            while (j >= 0 && nums[j] > base) {\n                nums[j + 1] = nums[j]; // 将 nums[j] 向右移动一位\n                j--;\n            }\n            nums[j + 1] = base;        // 将 base 赋值到正确位置\n        }\n    }\n\n    public static void main(String[] args) {\n        int[] nums = { 4, 1, 3, 1, 5, 2 };\n        insertionSort(nums);\n        System.out.println(\"插入排序完成后 nums = \" + Arrays.toString(nums));\n    }\n}\n",
+          "sourcePath": "codes/java/chapter_sorting/insertion_sort.java",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/java/chapter_sorting/insertion_sort.java",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "cpp",
+          "snippet": "void insertionSort(vector<int> &nums) {\n    // 外循环：已排序区间为 [0, i-1]\n    for (int i = 1; i < nums.size(); i++) {\n        int base = nums[i], j = i - 1;\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while (j >= 0 && nums[j] > base) {\n            nums[j + 1] = nums[j]; // 将 nums[j] 向右移动一位\n            j--;\n        }\n        nums[j + 1] = base; // 将 base 赋值到正确位置\n    }\n}",
+          "fullSource": "/**\n * File: insertion_sort.cpp\n * Created Time: 2022-11-25\n * Author: krahets (krahets@163.com)\n */\n\n#include \"../utils/common.hpp\"\n\n/* 插入排序 */\nvoid insertionSort(vector<int> &nums) {\n    // 外循环：已排序区间为 [0, i-1]\n    for (int i = 1; i < nums.size(); i++) {\n        int base = nums[i], j = i - 1;\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while (j >= 0 && nums[j] > base) {\n            nums[j + 1] = nums[j]; // 将 nums[j] 向右移动一位\n            j--;\n        }\n        nums[j + 1] = base; // 将 base 赋值到正确位置\n    }\n}\n\n/* Driver Code */\nint main() {\n    vector<int> nums = {4, 1, 3, 1, 5, 2};\n    insertionSort(nums);\n    cout << \"插入排序完成后 nums = \";\n    printVector(nums);\n\n    return 0;\n}\n",
+          "sourcePath": "codes/cpp/chapter_sorting/insertion_sort.cpp",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/cpp/chapter_sorting/insertion_sort.cpp",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "c",
+          "snippet": "void insertionSort(int nums[], int size) {\n    // 外循环：已排序区间为 [0, i-1]\n    for (int i = 1; i < size; i++) {\n        int base = nums[i], j = i - 1;\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while (j >= 0 && nums[j] > base) {\n            // 将 nums[j] 向右移动一位\n            nums[j + 1] = nums[j];\n            j--;\n        }\n        // 将 base 赋值到正确位置\n        nums[j + 1] = base;\n    }\n}",
+          "fullSource": "/**\n * File: insertion_sort.c\n * Created Time: 2022-12-29\n * Author: Listening (https://github.com/L-Super)\n */\n\n#include \"../utils/common.h\"\n\n/* 插入排序 */\nvoid insertionSort(int nums[], int size) {\n    // 外循环：已排序区间为 [0, i-1]\n    for (int i = 1; i < size; i++) {\n        int base = nums[i], j = i - 1;\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while (j >= 0 && nums[j] > base) {\n            // 将 nums[j] 向右移动一位\n            nums[j + 1] = nums[j];\n            j--;\n        }\n        // 将 base 赋值到正确位置\n        nums[j + 1] = base;\n    }\n}\n\n/* Driver Code */\nint main() {\n    int nums[] = {4, 1, 3, 1, 5, 2};\n    insertionSort(nums, 6);\n    printf(\"插入排序完成后 nums = \");\n    for (int i = 0; i < 6; i++) {\n        printf(\"%d \", nums[i]);\n    }\n    printf(\"\\n\");\n\n    return 0;\n}\n",
+          "sourcePath": "codes/c/chapter_sorting/insertion_sort.c",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/c/chapter_sorting/insertion_sort.c",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "csharp",
+          "snippet": "public class insertion_sort {\n    /* 插入排序 */\n    void InsertionSort(int[] nums) {\n        // 外循环：已排序区间为 [0, i-1]\n        for (int i = 1; i < nums.Length; i++) {\n            int bas = nums[i], j = i - 1;\n            // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n            while (j >= 0 && nums[j] > bas) {\n                nums[j + 1] = nums[j]; // 将 nums[j] 向右移动一位\n                j--;\n            }\n            nums[j + 1] = bas;         // 将 base 赋值到正确位置\n        }\n    }\n\n    [Test]\n    public void Test() {\n        int[] nums = [4, 1, 3, 1, 5, 2];\n        InsertionSort(nums);\n        Console.WriteLine(\"插入排序完成后 nums = \" + string.Join(\",\", nums));\n    }\n}",
+          "fullSource": "﻿/**\n * File: insertion_sort.cs\n * Created Time: 2022-12-23\n * Author: haptear (haptear@hotmail.com)\n */\n\nnamespace hello_algo.chapter_sorting;\n\npublic class insertion_sort {\n    /* 插入排序 */\n    void InsertionSort(int[] nums) {\n        // 外循环：已排序区间为 [0, i-1]\n        for (int i = 1; i < nums.Length; i++) {\n            int bas = nums[i], j = i - 1;\n            // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n            while (j >= 0 && nums[j] > bas) {\n                nums[j + 1] = nums[j]; // 将 nums[j] 向右移动一位\n                j--;\n            }\n            nums[j + 1] = bas;         // 将 base 赋值到正确位置\n        }\n    }\n\n    [Test]\n    public void Test() {\n        int[] nums = [4, 1, 3, 1, 5, 2];\n        InsertionSort(nums);\n        Console.WriteLine(\"插入排序完成后 nums = \" + string.Join(\",\", nums));\n    }\n}\n",
+          "sourcePath": "codes/csharp/chapter_sorting/insertion_sort.cs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/csharp/chapter_sorting/insertion_sort.cs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "go",
+          "snippet": "func insertionSort(nums []int) {\n\t// 外循环：已排序区间为 [0, i-1]\n\tfor i := 1; i < len(nums); i++ {\n\t\tbase := nums[i]\n\t\tj := i - 1\n\t\t// 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n\t\tfor j >= 0 && nums[j] > base {\n\t\t\tnums[j+1] = nums[j] // 将 nums[j] 向右移动一位\n\t\t\tj--\n\t\t}\n\t\tnums[j+1] = base // 将 base 赋值到正确位置\n\t}\n}",
+          "fullSource": "// File: insertion_sort.go\n// Created Time: 2022-12-12\n// Author: msk397 (machangxinq@gmail.com)\n\npackage chapter_sorting\n\n/* 插入排序 */\nfunc insertionSort(nums []int) {\n\t// 外循环：已排序区间为 [0, i-1]\n\tfor i := 1; i < len(nums); i++ {\n\t\tbase := nums[i]\n\t\tj := i - 1\n\t\t// 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n\t\tfor j >= 0 && nums[j] > base {\n\t\t\tnums[j+1] = nums[j] // 将 nums[j] 向右移动一位\n\t\t\tj--\n\t\t}\n\t\tnums[j+1] = base // 将 base 赋值到正确位置\n\t}\n}\n",
+          "sourcePath": "codes/go/chapter_sorting/insertion_sort.go",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/go/chapter_sorting/insertion_sort.go",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "javascript",
+          "snippet": "function insertionSort(nums) {\n    // 外循环：已排序区间为 [0, i-1]\n    for (let i = 1; i < nums.length; i++) {\n        let base = nums[i],\n            j = i - 1;\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while (j >= 0 && nums[j] > base) {\n            nums[j + 1] = nums[j]; // 将 nums[j] 向右移动一位\n            j--;\n        }\n        nums[j + 1] = base; // 将 base 赋值到正确位置\n    }\n}",
+          "fullSource": "/**\n * File: insertion_sort.js\n * Created Time: 2022-12-01\n * Author: IsChristina (christinaxia77@foxmail.com)\n */\n\n/* 插入排序 */\nfunction insertionSort(nums) {\n    // 外循环：已排序区间为 [0, i-1]\n    for (let i = 1; i < nums.length; i++) {\n        let base = nums[i],\n            j = i - 1;\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while (j >= 0 && nums[j] > base) {\n            nums[j + 1] = nums[j]; // 将 nums[j] 向右移动一位\n            j--;\n        }\n        nums[j + 1] = base; // 将 base 赋值到正确位置\n    }\n}\n\n/* Driver Code */\nconst nums = [4, 1, 3, 1, 5, 2];\ninsertionSort(nums);\nconsole.log('插入排序完成后 nums =', nums);\n",
+          "sourcePath": "codes/javascript/chapter_sorting/insertion_sort.js",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/javascript/chapter_sorting/insertion_sort.js",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "typescript",
+          "snippet": "function insertionSort(nums: number[]): void {\n    // 外循环：已排序区间为 [0, i-1]\n    for (let i = 1; i < nums.length; i++) {\n        const base = nums[i];\n        let j = i - 1;\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while (j >= 0 && nums[j] > base) {\n            nums[j + 1] = nums[j]; // 将 nums[j] 向右移动一位\n            j--;\n        }\n        nums[j + 1] = base; // 将 base 赋值到正确位置\n    }\n}",
+          "fullSource": "/**\n * File: insertion_sort.ts\n * Created Time: 2022-12-12\n * Author: Justin (xiefahit@gmail.com)\n */\n\n/* 插入排序 */\nfunction insertionSort(nums: number[]): void {\n    // 外循环：已排序区间为 [0, i-1]\n    for (let i = 1; i < nums.length; i++) {\n        const base = nums[i];\n        let j = i - 1;\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while (j >= 0 && nums[j] > base) {\n            nums[j + 1] = nums[j]; // 将 nums[j] 向右移动一位\n            j--;\n        }\n        nums[j + 1] = base; // 将 base 赋值到正确位置\n    }\n}\n\n/* Driver Code */\nconst nums = [4, 1, 3, 1, 5, 2];\ninsertionSort(nums);\nconsole.log('插入排序完成后 nums =', nums);\n\nexport {};\n",
+          "sourcePath": "codes/typescript/chapter_sorting/insertion_sort.ts",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/typescript/chapter_sorting/insertion_sort.ts",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "swift",
+          "snippet": "func insertionSort(nums: inout [Int]) {\n    // 外循环：已排序区间为 [0, i-1]\n    for i in nums.indices.dropFirst() {\n        let base = nums[i]\n        var j = i - 1\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while j >= 0, nums[j] > base {\n            nums[j + 1] = nums[j] // 将 nums[j] 向右移动一位\n            j -= 1\n        }\n        nums[j + 1] = base // 将 base 赋值到正确位置\n    }\n}",
+          "fullSource": "/**\n * File: insertion_sort.swift\n * Created Time: 2023-01-29\n * Author: nuomi1 (nuomi1@qq.com)\n */\n\n/* 插入排序 */\nfunc insertionSort(nums: inout [Int]) {\n    // 外循环：已排序区间为 [0, i-1]\n    for i in nums.indices.dropFirst() {\n        let base = nums[i]\n        var j = i - 1\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while j >= 0, nums[j] > base {\n            nums[j + 1] = nums[j] // 将 nums[j] 向右移动一位\n            j -= 1\n        }\n        nums[j + 1] = base // 将 base 赋值到正确位置\n    }\n}\n\n@main\nenum InsertionSort {\n    /* Driver Code */\n    static func main() {\n        var nums = [4, 1, 3, 1, 5, 2]\n        insertionSort(nums: &nums)\n        print(\"插入排序完成后 nums = \\(nums)\")\n    }\n}\n",
+          "sourcePath": "codes/swift/chapter_sorting/insertion_sort.swift",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/swift/chapter_sorting/insertion_sort.swift",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "rust",
+          "snippet": "fn insertion_sort(nums: &mut [i32]) {\n    // 外循环：已排序区间为 [0, i-1]\n    for i in 1..nums.len() {\n        let (base, mut j) = (nums[i], (i - 1) as i32);\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while j >= 0 && nums[j as usize] > base {\n            nums[(j + 1) as usize] = nums[j as usize]; // 将 nums[j] 向右移动一位\n            j -= 1;\n        }\n        nums[(j + 1) as usize] = base; // 将 base 赋值到正确位置\n    }\n}",
+          "fullSource": "/*\n * File: insertion_sort.rs\n * Created Time: 2023-02-13\n * Author: xBLACKICEx (xBLACKICEx@outlook.com)\n */\n\nuse hello_algo_rust::include::print_util;\n\n/* 插入排序 */\nfn insertion_sort(nums: &mut [i32]) {\n    // 外循环：已排序区间为 [0, i-1]\n    for i in 1..nums.len() {\n        let (base, mut j) = (nums[i], (i - 1) as i32);\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while j >= 0 && nums[j as usize] > base {\n            nums[(j + 1) as usize] = nums[j as usize]; // 将 nums[j] 向右移动一位\n            j -= 1;\n        }\n        nums[(j + 1) as usize] = base; // 将 base 赋值到正确位置\n    }\n}\n\n/* Driver Code */\nfn main() {\n    let mut nums = [4, 1, 3, 1, 5, 2];\n    insertion_sort(&mut nums);\n    print!(\"插入排序完成后 nums = \");\n    print_util::print_array(&nums);\n}\n",
+          "sourcePath": "codes/rust/chapter_sorting/insertion_sort.rs",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/rust/chapter_sorting/insertion_sort.rs",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "kotlin",
+          "snippet": "fun insertionSort(nums: IntArray) {\n    //外循环: 已排序元素为 1, 2, ..., n\n    for (i in nums.indices) {\n        val base = nums[i]\n        var j = i - 1\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while (j >= 0 && nums[j] > base) {\n            nums[j + 1] = nums[j] // 将 nums[j] 向右移动一位\n            j--\n        }\n        nums[j + 1] = base        // 将 base 赋值到正确位置\n    }\n}",
+          "fullSource": "/**\n * File: insertion_sort.kt\n * Created Time: 2024-01-25\n * Author: curtishd (1023632660@qq.com)\n */\n\npackage chapter_sorting\n\n/* 插入排序 */\nfun insertionSort(nums: IntArray) {\n    //外循环: 已排序元素为 1, 2, ..., n\n    for (i in nums.indices) {\n        val base = nums[i]\n        var j = i - 1\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while (j >= 0 && nums[j] > base) {\n            nums[j + 1] = nums[j] // 将 nums[j] 向右移动一位\n            j--\n        }\n        nums[j + 1] = base        // 将 base 赋值到正确位置\n    }\n}\n\n/* Driver Code */\nfun main() {\n    val nums = intArrayOf(4, 1, 3, 1, 5, 2)\n    insertionSort(nums)\n    println(\"插入排序完成后 nums = ${nums.contentToString()}\")\n}",
+          "sourcePath": "codes/kotlin/chapter_sorting/insertion_sort.kt",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/kotlin/chapter_sorting/insertion_sort.kt",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "dart",
+          "snippet": "void insertionSort(List<int> nums) {\n  // 外循环：已排序区间为 [0, i-1]\n  for (int i = 1; i < nums.length; i++) {\n    int base = nums[i], j = i - 1;\n    // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n    while (j >= 0 && nums[j] > base) {\n      nums[j + 1] = nums[j]; // 将 nums[j] 向右移动一位\n      j--;\n    }\n    nums[j + 1] = base; // 将 base 赋值到正确位置\n  }\n}",
+          "fullSource": "/**\n * File: insertion_sort.dart\n * Created Time: 2023-02-14\n * Author: what-is-me (whatisme@outlook.jp)\n */\n\n/* 插入排序 */\nvoid insertionSort(List<int> nums) {\n  // 外循环：已排序区间为 [0, i-1]\n  for (int i = 1; i < nums.length; i++) {\n    int base = nums[i], j = i - 1;\n    // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n    while (j >= 0 && nums[j] > base) {\n      nums[j + 1] = nums[j]; // 将 nums[j] 向右移动一位\n      j--;\n    }\n    nums[j + 1] = base; // 将 base 赋值到正确位置\n  }\n}\n\n/* Driver Code */\nvoid main() {\n  List<int> nums = [4, 1, 3, 1, 5, 2];\n  insertionSort(nums);\n  print(\"插入排序完成后 nums = $nums\");\n}\n",
+          "sourcePath": "codes/dart/chapter_sorting/insertion_sort.dart",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/dart/chapter_sorting/insertion_sort.dart",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "ruby",
+          "snippet": "def insertion_sort(nums)\n  n = nums.length\n  # 外循环：已排序区间为 [0, i-1]\n  for i in 1...n\n    base = nums[i]\n    j = i - 1\n    # 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n    while j >= 0 && nums[j] > base\n      nums[j + 1] = nums[j] # 将 nums[j] 向右移动一位\n      j -= 1\n    end\n    nums[j + 1] = base # 将 base 赋值到正确位置\n  end\nend",
+          "fullSource": "=begin\nFile: insertion_sort.rb\nCreated Time: 2024-04-02\nAuthor: Cy (3739004@gmail.com), Xuan Khoa Tu Nguyen (ngxktuzkai2000@gmail.com)\n=end\n\n### 插入排序 ###\ndef insertion_sort(nums)\n  n = nums.length\n  # 外循环：已排序区间为 [0, i-1]\n  for i in 1...n\n    base = nums[i]\n    j = i - 1\n    # 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n    while j >= 0 && nums[j] > base\n      nums[j + 1] = nums[j] # 将 nums[j] 向右移动一位\n      j -= 1\n    end\n    nums[j + 1] = base # 将 base 赋值到正确位置\n  end\nend\n\n### Driver Code ###\nnums = [4, 1, 3, 1, 5, 2]\ninsertion_sort(nums)\nputs \"插入排序完成后 nums = #{nums}\"\n",
+          "sourcePath": "codes/ruby/chapter_sorting/insertion_sort.rb",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/ruby/chapter_sorting/insertion_sort.rb",
+          "extraction": "symbol",
+          "runnable": false
+        },
+        {
+          "language": "zig",
+          "snippet": "fn insertionSort(nums: []i32) void {\n    // 外循环：已排序区间为 [0, i-1]\n    var i: usize = 1;\n    while (i < nums.len) : (i += 1) {\n        var base = nums[i];\n        var j: usize = i;\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while (j >= 1 and nums[j - 1] > base) : (j -= 1) {\n            nums[j] = nums[j - 1];  // 将 nums[j] 向右移动一位\n        }\n        nums[j] = base;             // 将 base 赋值到正确位置\n    }\n}",
+          "fullSource": "// File: insertion_sort.zig\n// Created Time: 2023-01-08\n// Author: codingonion (coderonion@gmail.com)\n\nconst std = @import(\"std\");\nconst inc = @import(\"include\");\n\n// 插入排序\nfn insertionSort(nums: []i32) void {\n    // 外循环：已排序区间为 [0, i-1]\n    var i: usize = 1;\n    while (i < nums.len) : (i += 1) {\n        var base = nums[i];\n        var j: usize = i;\n        // 内循环：将 base 插入到已排序区间 [0, i-1] 中的正确位置\n        while (j >= 1 and nums[j - 1] > base) : (j -= 1) {\n            nums[j] = nums[j - 1];  // 将 nums[j] 向右移动一位\n        }\n        nums[j] = base;             // 将 base 赋值到正确位置\n    }\n}\n\n// Driver Code\npub fn main() !void {\n    var nums = [_]i32{ 4, 1, 3, 1, 5, 2 };\n    insertionSort(&nums);\n    std.debug.print(\"插入排序完成后 nums = \", .{});\n    inc.PrintUtil.printArray(i32, &nums);\n    \n    _ = try std.io.getStdIn().reader().readByte();\n}",
+          "sourcePath": "codes/zig/chapter_sorting/insertion_sort.zig",
+          "sourceUrl": "https://github.com/krahets/hello-algo/blob/350f483801b2badb95180047aa82cadb825852a2/codes/zig/chapter_sorting/insertion_sort.zig",
+          "extraction": "symbol",
+          "runnable": false
+        }
+      ]
+    }
+  ],
+  "animations": [],
+  "conversion": {
+    "sourceSha256": "27e53af7e4515387a5b928e37eb4862b43bcda7fa83fd5e3f642e06989f15940",
+    "adapterVersion": 1,
+    "operations": [
+      "MkDocs Markdown to HTML",
+      "local asset and link rewriting",
+      "stable block anchors",
+      "math and footnotes",
+      "image caption grouping"
+    ],
+    "codeReferences": 1,
+    "animationGroups": 0
+  },
+  "blockAliases": {
+    "b0": "blk-84120558058887ea",
+    "b1": "blk-0fa05cebeac69ad0",
+    "b2": "blk-85565588568bf5c6",
+    "b3": "blk-77922a0fb51a5d34",
+    "b4": "blk-2a6df1795acd48fc",
+    "b5": "blk-3c58dcba9b887056",
+    "b6": "blk-d4575c4e980dfe08",
+    "b7": "blk-a51c3ffba5a93835",
+    "b8": "blk-e6da2299d25a8faa",
+    "b9": "blk-641d20a54df21b08",
+    "b10": "blk-b7655d36dba8ef55",
+    "b11": "blk-b7958609c283eab0",
+    "b12": "blk-19b7a4a71adb4309",
+    "b13": "blk-54b5d9ce06a7a085",
+    "b14": "blk-7469490c56146be3",
+    "b15": "blk-b249b7e2482aae60",
+    "b16": "blk-1c8893b6ebc49dc4",
+    "b17": "blk-d608829155dac096",
+    "b18": "blk-7a94b746b87ecc63"
+  },
+  "contentVersion": "62070069f0280399"
+}
