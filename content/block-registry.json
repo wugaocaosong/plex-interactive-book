@@ -14995,16 +14995,28 @@
         "previous": "blk-2255a33f5858a5f9"
       },
       {
+        "id": "blk-0062659834475c4a",
+        "fingerprint": "3988bbbc9295de7c625f8f22ac061d1a7d9e6596cbe675cba95469be833e5ad2",
+        "heading": "分治算法",
+        "previous": "blk-235d83ace421e2c1"
+      },
+      {
         "id": "blk-81807a723fd7ba6a",
         "fingerprint": "2e2f71d4a9a7ba9a215099d3a6d323e3d35d21c6785745dccfb2b78eba1ee93f",
         "heading": "分治算法",
-        "previous": "blk-235d83ace421e2c1"
+        "previous": "blk-0062659834475c4a"
+      },
+      {
+        "id": "blk-ce979859d99cdcbb",
+        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
+        "heading": "分治算法",
+        "previous": "blk-81807a723fd7ba6a"
       },
       {
         "id": "blk-5317a0dd06dbc239",
         "fingerprint": "ebf74f56b0069e306370e83fd74ed46cecdf4b0308c98f5808760797fd9fa3e2",
         "heading": "分治算法",
-        "previous": "blk-81807a723fd7ba6a"
+        "previous": "blk-ce979859d99cdcbb"
       },
       {
         "id": "blk-a34dccc6a859f6df",
@@ -15317,16 +15329,28 @@
         "previous": "blk-d003eecbd46dc911"
       },
       {
+        "id": "blk-0c692057d8bad2d7",
+        "fingerprint": "58dc0a6bbc0c1a6afbfdb7318bee4eb4a9e2e1d15e508d147b7d9f7453a19125",
+        "heading": "基于分治实现二分查找",
+        "previous": "blk-c4c3faacf654b44f"
+      },
+      {
         "id": "blk-b1c4ec075a03fa4e",
         "fingerprint": "e171206690d1881db820323ddcccfaa789369d074e4ba770a82e15cf8d88c5fd",
         "heading": "基于分治实现二分查找",
-        "previous": "blk-c4c3faacf654b44f"
+        "previous": "blk-0c692057d8bad2d7"
+      },
+      {
+        "id": "blk-5697ca2a2a726415",
+        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
+        "heading": "基于分治实现二分查找",
+        "previous": "blk-b1c4ec075a03fa4e"
       },
       {
         "id": "blk-895d3e48c9d5dafd",
         "fingerprint": "3786f30efc77cb810412110f573c2addc94334ff7535cc0465f4b4aa9dc66ce4",
         "heading": "基于分治实现二分查找",
-        "previous": "blk-b1c4ec075a03fa4e"
+        "previous": "blk-5697ca2a2a726415"
       },
       {
         "id": "blk-d162ec1f6ba194d9",
@@ -15383,16 +15407,28 @@
         "previous": "blk-6ab39c8de905e7bd"
       },
       {
+        "id": "blk-27dbd16e76e287f9",
+        "fingerprint": "4244cf172919247e829f7214e4457ba473ca429ce95e2070937c92a7e0d4e587",
+        "heading": "构建二叉树问题",
+        "previous": "blk-da938731e15a82a5"
+      },
+      {
         "id": "blk-8329872e556cc9b0",
         "fingerprint": "97cd9566fb31dd06b857f6249b73a1051c5779a22dd85f1efa344245a8151430",
         "heading": "构建二叉树问题",
-        "previous": "blk-da938731e15a82a5"
+        "previous": "blk-27dbd16e76e287f9"
+      },
+      {
+        "id": "blk-c74ac401091aba42",
+        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
+        "heading": "构建二叉树问题",
+        "previous": "blk-8329872e556cc9b0"
       },
       {
         "id": "blk-bc334e7ca866d5fd",
         "fingerprint": "ef00de6b7416bc6b27a02d3029d3efb8f9c008bb7c626caec2149c759afa65f6",
         "heading": "判断是否为分治问题",
-        "previous": "blk-8329872e556cc9b0"
+        "previous": "blk-c74ac401091aba42"
       },
       {
         "id": "blk-14a9109e33423abe",
@@ -15617,16 +15653,28 @@
         "previous": "blk-5c78f0fa06037d0d"
       },
       {
+        "id": "blk-1828848e8365abae",
+        "fingerprint": "8356af1c89f52b5d053c0d73c281c529ef03274809877b19fd7c1fc843e59eff",
+        "heading": "汉诺塔问题",
+        "previous": "blk-b0d28100adc429e2"
+      },
+      {
         "id": "blk-49bf5f40c96cf7b9",
         "fingerprint": "5d2c2996b8f1e82a28d195a1fd6e014d2db0aec93ddb8aeb91eae31d7f9d721f",
         "heading": "汉诺塔问题",
-        "previous": "blk-b0d28100adc429e2"
+        "previous": "blk-1828848e8365abae"
+      },
+      {
+        "id": "blk-3f52ff86e90f6224",
+        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
+        "heading": "汉诺塔问题",
+        "previous": "blk-49bf5f40c96cf7b9"
       },
       {
         "id": "blk-b0febbcf397ce0dd",
         "fingerprint": "75469033c6d7ae5735be3ba2c17869d4d27dd2810559e2ad709147a254e32ee7",
         "heading": "汉诺塔问题",
-        "previous": "blk-49bf5f40c96cf7b9"
+        "previous": "blk-3f52ff86e90f6224"
       },
       {
         "id": "blk-9175edcca3854fd5",
@@ -16503,16 +16551,28 @@
         "previous": "blk-17d052b61baea3c5"
       },
       {
+        "id": "blk-dd9f573f88f83819",
+        "fingerprint": "cc0511ce77201d73c8d99e27847efbf145e89c1f9bf5a1bd8e2a863a08b8df2f",
+        "heading": "无相等元素的情况",
+        "previous": "blk-3574e872988c5f0a"
+      },
+      {
         "id": "blk-9eafeb7363d43021",
         "fingerprint": "89de1741253a5a2ba12d2bcf9cb3254ec02388a88ece1ba50cdda3e52c4070a0",
         "heading": "无相等元素的情况",
-        "previous": "blk-3574e872988c5f0a"
+        "previous": "blk-dd9f573f88f83819"
+      },
+      {
+        "id": "blk-5c3c39d4f2c94dc1",
+        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
+        "heading": "无相等元素的情况",
+        "previous": "blk-9eafeb7363d43021"
       },
       {
         "id": "blk-19b4d5d973fa338f",
         "fingerprint": "2622978ee77801e1c206730703fbe4ea06c74f3cc6d8e00fc42d43d51001a5cb",
         "heading": "重复选择剪枝",
-        "previous": "blk-9eafeb7363d43021"
+        "previous": "blk-5c3c39d4f2c94dc1"
       },
       {
         "id": "blk-f82363dd48ad259a",
@@ -17040,16 +17100,28 @@
         "previous": "blk-e5709c7d170893f1"
       },
       {
+        "id": "blk-3133d9c564f2af8a",
+        "fingerprint": "dd208c09bf03c56b2ca1f141d95c21a0423e119616d25d7e0b3fa988dfed23f0",
+        "heading": "n 皇后问题",
+        "previous": "blk-f578944751733b6a"
+      },
+      {
         "id": "blk-cd20aad569a6e5ec",
         "fingerprint": "39039f7950a770258b4a4e8d43cd4deb3fae7582313e0f190b627c620a3150fa",
         "heading": "n 皇后问题",
-        "previous": "blk-f578944751733b6a"
+        "previous": "blk-3133d9c564f2af8a"
+      },
+      {
+        "id": "blk-e7dac6e4539a6542",
+        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
+        "heading": "n 皇后问题",
+        "previous": "blk-cd20aad569a6e5ec"
       },
       {
         "id": "blk-4fbb551ae395d4b8",
         "fingerprint": "8b7894a63fdb35022aa01e511a510b3ef8071edf677640a427af1027c8d01972",
         "heading": "n 皇后问题",
-        "previous": "blk-cd20aad569a6e5ec"
+        "previous": "blk-e7dac6e4539a6542"
       },
       {
         "id": "blk-8fa0cc2b67080554",
@@ -17468,16 +17540,28 @@
         "previous": "blk-9462c7a166d18e51"
       },
       {
+        "id": "blk-fc94a4e64d08d239",
+        "fingerprint": "1d81ad21374e2e2b83f496b9dbb5f308e185dbea81a5d7dd2acbf34f67158441",
+        "heading": "初探动态规划",
+        "previous": "blk-51d2f954b32be770"
+      },
+      {
         "id": "blk-b0f30a14afa1fb0b",
         "fingerprint": "b903b7c090e42e24ec74c21f60e32af47735626c7b7c625b506d6c84ddab5e94",
         "heading": "初探动态规划",
-        "previous": "blk-51d2f954b32be770"
+        "previous": "blk-fc94a4e64d08d239"
+      },
+      {
+        "id": "blk-b9d51a9841ae7f3f",
+        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
+        "heading": "初探动态规划",
+        "previous": "blk-b0f30a14afa1fb0b"
       },
       {
         "id": "blk-5d66e250afff34fb",
         "fingerprint": "2cd722cf43e8b87da6289658358683094b0ceca366e5f3c165ff0026c5590c9d",
         "heading": "初探动态规划",
-        "previous": "blk-b0f30a14afa1fb0b"
+        "previous": "blk-b9d51a9841ae7f3f"
       },
       {
         "id": "blk-20929bd6848efc2b",
@@ -18508,16 +18592,28 @@
         "previous": "blk-712a74c8af7e1b83"
       },
       {
+        "id": "blk-74093f7a83fa729a",
+        "fingerprint": "08fcb9f35d3fe7e7d7eb2bac219aed6e8b7e774b739fa8bbf7e31ec333e6b388",
+        "heading": "0-1 背包问题",
+        "previous": "blk-75f2a50fcb74ef65"
+      },
+      {
         "id": "blk-256c5649416678eb",
         "fingerprint": "9f7b4bdb04437e92a9ad79663aa18114f9022c8fc153871213056611fe0caa4f",
         "heading": "0-1 背包问题",
-        "previous": "blk-75f2a50fcb74ef65"
+        "previous": "blk-74093f7a83fa729a"
+      },
+      {
+        "id": "blk-3b2818202a4c48ac",
+        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
+        "heading": "0-1 背包问题",
+        "previous": "blk-256c5649416678eb"
       },
       {
         "id": "blk-76582d9f0d7fefdf",
         "fingerprint": "236ec7ff79e21a2fdf68f4f83e56b4149a33f7a08b4cc0ed777fe9b87f0f2e0c",
         "heading": "0-1 背包问题",
-        "previous": "blk-256c5649416678eb"
+        "previous": "blk-3b2818202a4c48ac"
       },
       {
         "id": "blk-8a4c79e77f55cea6",
@@ -20051,16 +20147,28 @@
         "previous": "blk-380da40a6e41e70c"
       },
       {
+        "id": "blk-1e63e6fac3b350f3",
+        "fingerprint": "634eb4340b5d76af2b9e9cf9a02eabeec41a086161bc021a58648b745e8f110d",
+        "heading": "分数背包问题",
+        "previous": "blk-681d540c2a94ffba"
+      },
+      {
         "id": "blk-be9b838e559266a7",
         "fingerprint": "230405a40e16c00fcee3d30584bc2ac51b49297ab7a808873848c709eafc9a70",
         "heading": "分数背包问题",
-        "previous": "blk-681d540c2a94ffba"
+        "previous": "blk-1e63e6fac3b350f3"
+      },
+      {
+        "id": "blk-26c79a203a59c69c",
+        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
+        "heading": "分数背包问题",
+        "previous": "blk-be9b838e559266a7"
       },
       {
         "id": "blk-5da8646d41c88943",
         "fingerprint": "3ec166f928663c1027b8c85849db3b7a73195d0b2aaf4c2ef1f47d9c3e319d46",
         "heading": "分数背包问题",
-        "previous": "blk-be9b838e559266a7"
+        "previous": "blk-26c79a203a59c69c"
       },
       {
         "id": "blk-8ff3092474019c1a",
@@ -20218,16 +20326,28 @@
         "previous": "blk-7f220af1413267dc"
       },
       {
+        "id": "blk-d06d9e2668ba6d9f",
+        "fingerprint": "29fdf9888964a20fb1197894ad9a2e97500de4b9828f75898971b6b2e644fa35",
+        "heading": "最大容量问题",
+        "previous": "blk-4ed72712bb9ca227"
+      },
+      {
         "id": "blk-0cafc8f199b10dbe",
         "fingerprint": "f2e8a74c5d73eaf10497fd144fe3d96840fefc8a0345314c0d84df1a7c11d096",
         "heading": "最大容量问题",
-        "previous": "blk-4ed72712bb9ca227"
+        "previous": "blk-d06d9e2668ba6d9f"
+      },
+      {
+        "id": "blk-d5278a6c2ece65d0",
+        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
+        "heading": "最大容量问题",
+        "previous": "blk-0cafc8f199b10dbe"
       },
       {
         "id": "blk-04620b994fd4efa8",
         "fingerprint": "dfc713b072f48cb16382ee7caff4ffcab501c36c1728a54f23b6208e04e57da5",
         "heading": "最大容量问题",
-        "previous": "blk-0cafc8f199b10dbe"
+        "previous": "blk-d5278a6c2ece65d0"
       },
       {
         "id": "blk-417428f450589ba2",
@@ -20945,16 +21065,28 @@
         "previous": "blk-1cb82ad907d24430"
       },
       {
+        "id": "blk-653e8fd68a1c97b0",
+        "fingerprint": "f47a544133375a46f84b60e41e73077111fb5345048c6134116603359adf3e10",
+        "heading": "安装 IDE",
+        "previous": "blk-e3b9da08946b5754"
+      },
+      {
         "id": "blk-b3e6212251708c07",
         "fingerprint": "cefe188336e8e5f73cdcf4863bfa085c24d6b8138e52158064e338ec22a979c5",
         "heading": "安装 IDE",
-        "previous": "blk-e3b9da08946b5754"
+        "previous": "blk-653e8fd68a1c97b0"
+      },
+      {
+        "id": "blk-57f58da34a1d2402",
+        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
+        "heading": "安装 IDE",
+        "previous": "blk-b3e6212251708c07"
       },
       {
         "id": "blk-963b570ec97a9966",
         "fingerprint": "5662958e18e3d2899cae371340c05323dc95b8ffdee4d558a4c9a706181b08d8",
         "heading": "安装 IDE",
-        "previous": "blk-b3e6212251708c07"
+        "previous": "blk-57f58da34a1d2402"
       },
       {
         "id": "blk-3654e097b19a554a",

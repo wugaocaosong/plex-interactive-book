@@ -14,7 +14,7 @@ const props = defineProps<{
   diagnostics?: Diagnostic[];
   foldSourceHeader?: boolean;
 }>();
-const emit = defineEmits<{ "update:modelValue": [value: string]; blur: [] }>();
+const emit = defineEmits<{ "update:modelValue": [value: string]; blur: []; selection:[value:string] }>();
 const host = ref<HTMLElement>();
 let view: EditorView | undefined;
 function foldHeader(){
@@ -45,6 +45,7 @@ onMounted(() => {
             : [],
         ),
         EditorView.updateListener.of((update) => {
+          if(update.selectionSet||update.docChanged)emit("selection",update.state.sliceDoc(update.state.selection.main.from,update.state.selection.main.to));
           if (update.docChanged)
             emit("update:modelValue", update.state.doc.toString());
         }),
@@ -115,6 +116,6 @@ function focusLine(line: number) {
   view.focus();
 }
 onBeforeUnmount(() => view?.destroy());
-defineExpose({ focusLine });
+defineExpose({ focusLine, getSelection:()=>view?view.state.sliceDoc(view.state.selection.main.from,view.state.selection.main.to):"" });
 </script>
 <template><div ref="host" class="code-editor-host" /></template>

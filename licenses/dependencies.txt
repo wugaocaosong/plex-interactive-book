@@ -1,3 +1,7 @@
+@tresjs/core 5.10.0: MIT
+three 0.187.0: MIT
+@pmndrs/pointer-events 6.6.32: SEE LICENSE IN LICENSE
+radashi 12.9.8: MIT
 @mediapipe/tasks-vision 0.10.32: Apache-2.0
 vosk-browser 0.0.8: Apache-2.0
 uuid 9.0.0: MIT

@@ -1,4 +1,5 @@
 export interface ReadingLocator {
+  bookId?: string;
   sectionId: string;
   blockId: string;
   offset: number;
@@ -55,6 +56,7 @@ export interface ActivityRecord {
   completed?: boolean;
 }
 export interface SavedBookmark extends ReadingLocator {
+  id?:string;groupId?:string;tags?:string[];importance?:string;createdAt?:string;
   title: string;
 }
 export interface SearchEntry {
@@ -65,6 +67,8 @@ export interface SearchEntry {
   blocks: { blockId: string; text: string }[];
 }
 export interface ReaderPreferences {
+  customWidth?: Partial<Record<"flip" | "study", number>>;
+  galaxySimple?: boolean;
   mode: "flip" | "study";
   fontSize: number;
   lineHeight: number;

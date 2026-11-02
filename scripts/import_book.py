@@ -5,6 +5,7 @@ import markdown, yaml
 from bs4 import BeautifulSoup
 from block_ids import assign_blocks
 import chapter12
+import chapter_scenes
 from chapter12_tasks import publish as publish_chapter12_tasks
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -219,6 +220,7 @@ def page_record(id,title,kind,group,source_path=None):
 
 def publish(record,body,examples=None,animations=None):
     body=chapter12.overlay(body,record['id'],block_registry)
+    body=chapter_scenes.overlay(body,record['id'])
     body,aliases,changes=assign_blocks(body,record['id'],block_registry)
     body=chapter12.terms(body,record['id'])
     block_changes.extend(changes)

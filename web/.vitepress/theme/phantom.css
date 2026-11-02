@@ -210,3 +210,11 @@
   .overlay .ch12-lab { padding: 16px; }
 }
 @media (prefers-reduced-motion:reduce) { .reader .navigation-dialog,.reader .content-dialog { animation: none; } }
+
+.arithmatex{position:relative}.arithmatex .formula-copy{font:11px sans-serif!important;padding:4px 7px!important;min-height:26px;margin:0 2px;vertical-align:middle;opacity:0;background:#22465a!important;color:#ecf8ff!important;border:1px solid #75a4b8!important}.arithmatex:hover .formula-copy,.arithmatex:focus-within .formula-copy,div.arithmatex .formula-copy{opacity:1}.arithmatex textarea{width:100%;min-height:60px}@media(hover:none){.arithmatex .formula-copy{opacity:1}}
+
+.reader .movable-activity.content-dialog{width:100%;max-width:none;max-height:none;height:auto;position:static;transform:none;border:0;padding:16px;background:transparent;box-shadow:none;overflow:visible}.reader .floating-tool-body{min-width:0}.reader .summon-code-assistant{margin:12px}
+
+.chapter-scene-card{border:1px solid #7896a7;border-left:4px solid #d9b873;padding:16px;margin:20px 0;background:#25465412}.chapter-scene-card p{font-size:.85em}.chapter-scene-card button{background:#204c5d;color:#f1f9fd;border:1px solid #70aebf;border-radius:4px;padding:10px 16px}.paint-tools[role=toolbar] button{position:relative}.paint-tools[role=toolbar] button:focus-visible:after{content:attr(title);position:absolute;top:100%;left:0;background:#0a1828;color:white;white-space:nowrap;z-index:5;padding:5px;border:1px solid #a1cddd;font-size:11px}
+
+::view-transition-old(root){animation-duration:.4s}::view-transition-new(root){animation-duration:.6s}.organized-bookmarks.bookmark-list{display:block}.organized-bookmarks.bookmark-list>div{display:flex}.organized-bookmarks .organized-bookmark h3{font-size:15px;margin:4px 6px}

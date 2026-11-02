@@ -24,6 +24,13 @@ import {
   Expand,
   RotateCcw,
 } from "lucide-vue-next";
+import type {SceneId} from "./teaching-models";
+const TeachingScene=defineAsyncComponent(()=>import("./TeachingScene.vue"));
+const teachingScene=ref<SceneId>("merge");
+import BookmarkLibrary from "./BookmarkLibrary.vue";
+import {organizeBookmarks} from "./bookmark-model";
+import {decorateFormulaCopies,handleFormulaCopy} from "./formula-copy";
+import ReaderWidth from "./ReaderWidth.vue";
 import renderMathInElement from "katex/contrib/auto-render";
 import type { PageFlip } from "page-flip";
 import type {
@@ -341,6 +348,7 @@ const panel = ref<
   | "image"
   | "expanded"
   | "learning"
+  | "teaching"
   | "term"
   | "unit"
   | "chapter12"
@@ -361,6 +369,9 @@ const codeIndex = ref(0);
 const imageUrl = ref("");
 const imageAlt = ref("");
 const expandedHtml = ref("");
+const widthViewport = ref(typeof window === 'undefined' ? 1440 : window.innerWidth);
+const actualReaderWidth = computed(() => Math.min(widthViewport.value-48, preferences.value.customWidth?.[preferences.value.mode] ?? (preferences.value.mode==='flip'?{narrow:860,standard:1020,wide:1140}:{narrow:680,standard:840,wide:980})[preferences.value.width]));
+async function commitWidth(width?:number) {const place=locator(); preferences.value.customWidth={...preferences.value.customWidth,[preferences.value.mode]:width};saveStore('preferences',preferences.value);await layout(place);}
 const pageWidth = ref(510);
 const pageHeight = ref(670);
 const desktop = ref(true);
@@ -379,6 +390,7 @@ const panelLabel = computed(
       image: "查看图解",
       expanded: "展开阅读",
       learning: "学习实验室",
+      teaching: "算法教学演示",
       term: "术语解释",
       unit: "小E · 三门学习单元",
       chapter12: "分治 · 探险工作台",
@@ -504,6 +516,7 @@ async function prepareAdjacent(page: BookPage) {
         { left: "\\[", right: "\\]", display: true },
       ],
     });
+    decorateFormulaCopies(source);
     await Promise.all(
       [...source.querySelectorAll("img")].map((image) => {
         image.loading = "eager";
@@ -577,9 +590,10 @@ function getPage(id: string) {
 }
 function locator(): ReadingLocator {
   if (preferences.value.mode === "study" && studyPlace.value)
-    return studyPlace.value;
+    return {...studyPlace.value,bookId:"plex-programming"};
   const leaf = leaves.value[pageIndex.value];
   return {
+    bookId: "plex-programming",
     sectionId: leafSections.value[pageIndex.value] || sectionId.value,
     blockId: leaf?.blockId || "b0",
     offset: leaf?.offset || 0,
@@ -619,7 +633,7 @@ async function navigate(id: string, place?: ReadingLocator) {
   pendingLocator = place;
   stopAnimation();
   const route =
-    id === "cover" ? "/" : sections.value.find((p) => p.id === id)?.route;
+    id === "cover" ? "/read/cover" : sections.value.find((p) => p.id === id)?.route;
   if (!route) return;
   if (id === sectionId.value) {
     if (place) {
@@ -684,7 +698,7 @@ function addBookmark() {
       b.offset === place.offset,
   );
   if (existing < 0)
-    bookmarks.value.push({ ...place, title: current.value?.title || "书签" });
+    bookmarks.value.push({...organizeBookmarks([{...place,title:current.value?.title||"书签"}])[0],id:crypto.randomUUID(),createdAt:new Date().toISOString()});
   saveStore("bookmarks", bookmarks.value);
   saved.value = true;
   setTimeout(() => (saved.value = false), 1500);
@@ -790,6 +804,7 @@ async function stepFigure(figure: HTMLElement, delta: number) {
     `${next + 1} / ${frames.length}`;
 }
 async function clickBook(event: MouseEvent) {
+  if(await handleFormulaCopy(event))return;
   const target = event.target as HTMLElement;
   const contentBlock = target.closest<HTMLElement>("[data-block]");
   if (contentBlock)
@@ -824,6 +839,7 @@ async function clickBook(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
     const value = action.dataset.action;
+    if(value === "teaching-scene"){teachingScene.value=action.dataset.scene as SceneId;openPanel("teaching");return;}
     if (value === "chapter12") {
       await chapterActivity(panelBlock.value?.sectionId || sectionId.value,action.dataset.mode || "route");
       return;
@@ -846,8 +862,8 @@ async function clickBook(event: MouseEvent) {
         panelBlock.value?.sectionId || sectionId.value,
       );
     if (value === "image") {
-      imageUrl.value = (action as HTMLImageElement).src;
-      imageAlt.value = (action as HTMLImageElement).alt;
+      imageUrl.value = action.dataset.src || (action as HTMLImageElement).src;
+      imageAlt.value = action.dataset.alt || (action as HTMLImageElement).alt;
       openPanel("image");
     }
     if (value === "expand") {
@@ -910,6 +926,7 @@ async function layout(place?: ReadingLocator) {
     loading.value = false;
     rendering = false;
     stage.value.innerHTML = current.value.html;
+  stage.value.dataset.section=current.value.id;
     await nextTick();
     if (place) await study.value?.go(place);
     return;
@@ -919,18 +936,15 @@ async function layout(place?: ReadingLocator) {
   rendering = true;
   loading.value = true;
   stopAnimation();
-  desktop.value = window.innerWidth >= 1024;
+  const available = Math.max(280, window.innerWidth - 48);
+  const wanted = preferences.value.customWidth?.flip ?? ({narrow:860,standard:1020,wide:1140}[preferences.value.width]);
+  const total = Math.min(available, wanted);
+  desktop.value = window.innerWidth >= 1024 && total >= 800;
   pageHeight.value = Math.max(300, Math.min(window.innerHeight - 240, 850));
-  pageWidth.value = desktop.value
-    ? Math.min(
-        { narrow: 430, standard: 510, wide: 570 }[preferences.value.width],
-        Math.floor(
-          (window.innerWidth - 100) / 2,
-        ),
-      )
-    : Math.min(600, window.innerWidth - 24);
+  pageWidth.value = desktop.value ? Math.floor(total/2) : total;
   await nextTick();
   stage.value.innerHTML = current.value.html;
+  stage.value.dataset.section=current.value.id;
   const pageNotes = notes.value.filter(
     (n) => n.sectionId === current.value!.id,
   );
@@ -952,6 +966,7 @@ async function layout(place?: ReadingLocator) {
       { left: "\\[", right: "\\]", display: true },
     ],
   });
+  decorateFormulaCopies(stage.value);
   stage.value
     .querySelectorAll<HTMLImageElement>("img")
     .forEach((img) => (img.loading = "eager"));
@@ -1166,7 +1181,8 @@ async function loadCurrent() {
   }
 }
 function resize() {
-  desktop.value = window.innerWidth >= 1024;
+  widthViewport.value=window.innerWidth;
+  desktop.value = window.innerWidth >= 1024 && actualReaderWidth.value >= 800;
   if (cover.value) return;
   const place = locator();
   clearTimeout(resizeTimer);
@@ -1193,7 +1209,8 @@ function keydown(event: KeyboardEvent) {
     closeOverlay();
     return;
   }
-  if (menu.value || panel.value) {
+  if (panel.value && !menu.value) return;
+  if (menu.value) {
     if (event.key === "Tab") {
       const box = document.querySelector<HTMLElement>('[role="dialog"]');
       const focusable = [
@@ -1241,7 +1258,7 @@ watch(sectionId, () => {
 onMounted(async () => {
   mounted = true;
   void fetch("/learning/monty-unit.json").then(r=>r.json()).then(d=>unitDefinition.value=d).catch(()=>{});
-  desktop.value = window.innerWidth >= 1024;
+  desktop.value = window.innerWidth >= 1024 && actualReaderWidth.value >= 800;
   ready.value = true;
   window.addEventListener("plex-storage-error", storageNotice);
   darkMedia = matchMedia("(prefers-color-scheme: dark)");
@@ -1322,7 +1339,7 @@ onBeforeUnmount(() => {
       '--reader-font': preferences.fontSize + 'px',
       '--reader-line': preferences.lineHeight,
       '--study-width':
-        { narrow: 680, standard: 840, wide: 980 }[preferences.width] + 'px',
+        (preferences.customWidth?.study ?? { narrow: 680, standard: 840, wide: 980 }[preferences.width]) + 'px',
     }"
   >
     <a class="skip-link" href="#reading-content">跳到正文</a>
@@ -1404,6 +1421,7 @@ onBeforeUnmount(() => {
             <Check v-if="saved" :size="17" /><Bookmark v-else :size="17" />
           </button>
         </div>
+        <ReaderWidth v-if="!loading" :width="actualReaderWidth" @commit="commitWidth" @reset="commitWidth()"/>
         <StudyReader
           v-if="preferences.mode === 'study' && current"
           ref="study"
@@ -1487,7 +1505,7 @@ onBeforeUnmount(() => {
       </section>
       <div v-if="!ready" class="loading-label">正在打开星轨编程…</div>
     </main>
-    <nav class="bottom-navigation" aria-label="阅读主导航" :inert="overlayOpen">
+    <nav class="bottom-navigation" aria-label="阅读主导航" :inert="overlayOpen || loading">
       <button aria-label="打开目录" @click="openMenu('contents')">
         <Compass :size="20" /><span>目录</span>
       </button>
@@ -1583,7 +1601,7 @@ onBeforeUnmount(() => {
           <button aria-label="阅读设置" @click="openMenu('settings')">
             阅读设置
           </button>
-          <button aria-label="查看书签" @click="openMenu('bookmarks')">
+          <a href="/" class="galaxy-return">返回银河书库</a><button aria-label="查看书签" @click="openMenu('bookmarks')">
             查看书签
           </button>
           <button
@@ -1718,52 +1736,11 @@ onBeforeUnmount(() => {
             }
           "
         />
-        <div v-if="menu === 'bookmarks'" class="bookmark-list">
-          <p v-if="!bookmarks.length" class="empty-note">
-            阅读时点击页顶的书签图标，把值得重读的一页留在这里。
-          </p>
-          <div
-            v-for="(mark, i) in bookmarks"
-            :key="mark.sectionId + mark.blockId + mark.offset"
-          >
-            <button @click="navigate(mark.sectionId, mark)">
-              <Bookmark :size="16" />{{ mark.title }}</button
-            ><button
-              aria-label="删除书签"
-              @click="
-                bookmarks.splice(i, 1);
-                saveStore('bookmarks', bookmarks);
-              "
-            >
-              <X :size="16" />
-            </button>
-          </div>
-        </div>
+        <BookmarkLibrary v-if="menu==='bookmarks'" :marks="bookmarks" :sections="sections" @update="bookmarks=$event" @navigate="navigate($event.sectionId,$event)"/>
       </section>
     </div>
-    <div
-      v-if="panel"
-      class="overlay activity-overlay"
-      :class="{ 'window-expanded': windowExpanded }"
-      :data-window="panel"
-      @click.self="closeOverlay"
-    >
-      <section
-        class="content-dialog"
-        :class="{ 'image-dialog': panel === 'image' }"
-        role="dialog"
-        aria-modal="true"
-        :aria-label="panelLabel"
-      >
-        <div class="dialog-header">
-          <div>
-            <span class="dialog-eyebrow">{{ current?.title }}</span>
-            <h2>{{ panelLabel }}</h2>
-          </div>
-          <div class="window-actions"><button class="window-expand" :aria-label="windowExpanded ? '还原窗口' : '放大窗口'" :aria-pressed="windowExpanded" @click="windowExpanded = !windowExpanded"><Expand :size="20" /></button><button class="dialog-close" aria-label="关闭" @click="closeOverlay">
-            <X :size="22" />
-          </button></div>
-        </div>
+    <FloatingToolWindow v-if="panel" :title="panelLabel" storage-key="activity-window" mobile-fullscreen @close="closeOverlay">
+      <section class="content-dialog movable-activity" :data-window="panel">
         <button
           v-if="
             panelBlock && ['code', 'image', 'expanded'].includes(panel || '')
@@ -1778,6 +1755,7 @@ onBeforeUnmount(() => {
           :example="panelSource.codeExamples[codeIndex]"
           :fold-source-header="panelSource.html.includes('ch12-')"
         />
+        <TeachingScene v-if="panel==='teaching'" :key="teachingScene" :scene-id="teachingScene"/>
         <Chapter12Panel v-if="panel === 'chapter12'" :key="chapter12Mode" :mode="chapter12Mode" @activity="chapterActivity" />
         <UnitPanel
           v-if="panel === 'unit'"
@@ -1808,9 +1786,9 @@ onBeforeUnmount(() => {
           @click="clickBook"
         />
       </section>
-    </div>
+    </FloatingToolWindow>
     <FloatingToolWindow v-if="boardOpen" v-show="!overlayOpen" :inert="overlayOpen" title="小黑板" storage-key="blackboard-window" @close="closeBoard"><Blackboard :key="boardSection" :section-id="boardSection" /></FloatingToolWindow>
-    <EbookPet ref="pet" :section-id="sectionId" :section-title="current?.title||'封面'" :suspended="overlayOpen" @open="petOpen=$event" @dictating="dictating=$event" @login="openUnit('profile')"/>
+    <EbookPet ref="pet" :section-id="sectionId" :section-title="current?.title||'封面'" :suspended="!!menu" @open="petOpen=$event" @dictating="dictating=$event" @login="openUnit('profile')"/>
     <ReaderControls :settings="menu==='controls'" :blocked="overlayOpen||boardOpen||petOpen" :dictating="dictating" :notice="controlNotice" @command="controlTurn" @fullscreen="fullscreen" @configure="openMenu('controls')" />
   </div>
 </template>

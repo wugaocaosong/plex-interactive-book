@@ -67,3 +67,11 @@ H5P 库来自 [官方 InteractiveBook 分发包](https://api.h5p.org/v1/content-
 小艺正面机器人 `web/public/brand/little-e-front.png` 基于项目提供的 `little-e.png` 背面图，通过 imagegen 生成。保留原有角色设计，来源与 SHA-256 记录于 `web/public/brand/SOURCES.json`，不宣称其为第三方开源角色素材。角色待机与交互动作由本项目 CSS 实现。
 
 MediaPipe Tasks Vision 0.10.32、Google hand_landmarker float16 v1、vosk-browser 0.0.8、Vosk 中文小模型 vosk-model-small-cn-0.22 使用 Apache-2.0；许可文本见 `licenses/dependencies/input-models-Apache-2.0.txt`，资源来源、版本与校验值见 `content/input-models/manifest.json`。Vosk 模型仅改变归档格式和目录权限，模型权重不变。测试手部图片来源及合成语音说明见 `tests/fixtures/input/README.md`。上述许可不替代《Hello 算法》教材本身的 CC BY-NC-SA 4.0。
+
+## 银河阅读升级（2026-11-02）
+
+- TresJS / @tresjs/core 5.10.0：https://github.com/Tresjs/tres ，MIT。
+- Three.js 0.187.0：https://github.com/mrdoob/three.js ，MIT。
+- @pmndrs/pointer-events 与 radashi 为 TresJS 的运行依赖，精确解析版本见 package-lock.json；许可副本由 assets 脚本收集。
+- 银河粒子、静态星球、实体书结构和 RobotRig 分层机器人为本项目程序绘制，未导入外站纹理或付费素材。角色延续已有小艺机器人外形语言；原 PNG 仍保留。
+- 教学场景为本项目编写的确定性算法模型，原教材文本、图解及署名继续按原来源许可保留。

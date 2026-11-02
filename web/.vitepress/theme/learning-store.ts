@@ -31,6 +31,7 @@ export function sanitizePreferences(
   if (![1.5, 1.8, 2.1].includes(result.lineHeight)) result.lineHeight = 1.8;
   if (!Number.isFinite(result.split)) result.split = 40;
   result.split = Math.max(28, Math.min(55, result.split));
+  if(result.customWidth) result.customWidth=Object.fromEntries(Object.entries(result.customWidth).filter(([k,v])=>["flip","study"].includes(k)&&typeof v==="number"&&Number.isFinite(v)&&v>=280&&v<=10000));
   return result;
 }
 export interface LearningRecord {
@@ -237,6 +238,16 @@ export function validateBackup(value: unknown): Backup {
     )
       throw Error("备份记录格式错误");
     const value = record.value as Record<string, unknown> | null;
+    if(record.id==='bookmark:groups'||record.id==='bookmark:levels'){
+      const rows=record.value as any;
+      if(!Array.isArray(rows)||rows.length>1000||new Set(rows.map((r:any)=>r?.id)).size!==rows.length||rows.some((r:any)=>!r||typeof r.id!=='string'||!r.id||typeof r.name!=='string'||!r.name.trim()||r.name.length>100))throw Error('书签分类格式错误');
+      if(record.id==='bookmark:levels'&&(!rows.some((r:any)=>r.id==='normal')||rows.some((r:any)=>!/^#[0-9a-f]{6}$/i.test(r.color))))throw Error('书签重要程度格式错误');
+    }
+    if(record.id==='bookmarks'){
+      const rows=record.value as any;
+      if(!Array.isArray(rows)||rows.some((r:any)=>!r||typeof r.sectionId!=='string'||typeof r.blockId!=='string'||!Number.isFinite(r.offset)||r.offset<0||typeof r.title!=='string'||(r.tags!==undefined&&(!Array.isArray(r.tags)||r.tags.some((t:any)=>typeof t!=='string')))))throw Error('书签记录格式错误');
+    }
+
     if (["simulation:monty-hall", "simulation:monty-single"].includes(record.id)) {
       const simulation = value as any;
       if (

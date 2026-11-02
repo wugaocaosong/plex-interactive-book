@@ -234,10 +234,10 @@ for (const width of [390, 820, 1440])
     });
     await page.getByRole("button", { name: "更多阅读工具" }).click();
     await page.getByRole("button", { name: "打开学习实验室" }).click();
-    await expect(page.locator('.content-dialog')).toHaveAttribute('aria-modal','true');
+    await expect(page.locator('.floating-tool-window')).toHaveAttribute('role','dialog');
     await expect(page.getByRole("separator")).toHaveCount(0);
     await page.getByRole('button',{name:'放大窗口'}).click();
-    await expect(page.locator('.overlay')).toHaveClass(/window-expanded/);
+    await expect(page.locator('.floating-tool-window')).toHaveClass(/window-expanded/);
     await page.getByRole('button',{name:'还原窗口'}).click();
     await page.keyboard.press("Escape");
     await expect(page.getByLabel("连续正文")).toBeVisible();
