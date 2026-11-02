@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 const section='/read/chapter_divide_and_conquer/divide_and_conquer';
 async function study(page:any){await page.getByRole('button',{name:'更多阅读工具',exact:true}).click();await page.getByRole('button',{name:"切换阅读模式"}).click();await expect(page.locator('.study-reader')).toBeVisible();}
 for(const width of [390,820,1440])test(`galaxy and book journey ${width}`,async({page})=>{
- await page.setViewportSize({width,height:900});const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');await expect(page.getByRole('heading',{name:/每一本书/})).toBeVisible();await expect(page.locator('.library-planet:disabled')).toHaveCount(2);
+ await page.setViewportSize({width,height:900});const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');await expect(page.getByRole('heading',{name:/每一本书/})).toBeVisible();await expect(page.locator('.library-index button:disabled')).toHaveCount(6);
  await page.locator('.planet-0').click();await expect(page.getByRole('button',{name:'翻开星轨编程',exact:true})).toBeVisible();await page.getByRole('button',{name:'翻开星轨编程',exact:true}).click();await expect(page).toHaveURL(/\/read\/title/);await expect(page.locator('.book-host')).toBeVisible();
  await page.goto(section);await expect(page.locator('.galaxy-library')).toHaveCount(0);await expect(page.getByRole('slider',{name:'拖动调整书籍宽度'})).toBeVisible();await page.getByRole('slider').press('ArrowLeft');await expect(page.locator('.book-holder')).not.toHaveClass(/loading/);
  await page.screenshot({path:`output/playwright/galaxy-reader-${width}.png`});expect(errors).toEqual([]);
@@ -17,7 +17,7 @@ test('formula copy and classified bookmarks',async({page,context})=>{
  await page.getByRole('button',{name:'收藏当前页'}).click();await page.getByRole('button',{name:'更多阅读工具'}).click();await page.getByRole('button',{name:'查看书签'}).click();await expect(page.locator('.organized-bookmark')).toHaveCount(1);await page.getByText('管理分组与重要程度',{exact:true}).click();await page.getByLabel('新名称').fill('分治复习');await page.getByRole('button',{name:'新建分组'}).click();await page.locator('.organized-bookmark').getByLabel('分组',{exact:true}).selectOption({label:'分治复习'});await page.reload();await page.getByRole('button',{name:'更多阅读工具'}).click();await page.getByRole('button',{name:'查看书签'}).click();await expect(page.locator('.organized-bookmark').getByLabel('分组',{exact:true})).not.toHaveValue('');
 });
 test('static galaxy accessible and no fabricated book',async({page})=>{
- await page.goto('/');await page.getByRole('button',{name:'简化模式',exact:true}).click();await expect(page.locator('.galaxy-static')).toBeVisible();const axe=await new AxeBuilder({page}).include('.galaxy-library').analyze();expect(axe.violations).toEqual([]);
+ await page.goto('/');await page.getByRole('button',{name:'简化显示',exact:true}).click();await expect(page.locator('.galaxy-static')).toBeVisible();const axe=await new AxeBuilder({page}).include('.galaxy-library').analyze();expect(axe.violations).toEqual([]);
 });
 test('code assistant sends fresh full snapshot and optional output only on request',async({page})=>{
  await page.addInitScript(()=>{sessionStorage.setItem('plex-account',JSON.stringify({id:77}));sessionStorage.setItem('plex-session',JSON.stringify({access_token:'test-only'}));});

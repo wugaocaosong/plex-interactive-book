@@ -75,3 +75,11 @@ MediaPipe Tasks Vision 0.10.32、Google hand_landmarker float16 v1、vosk-browse
 - @pmndrs/pointer-events 与 radashi 为 TresJS 的运行依赖，精确解析版本见 package-lock.json；许可副本由 assets 脚本收集。
 - 银河粒子、静态星球、实体书结构和 RobotRig 分层机器人为本项目程序绘制，未导入外站纹理或付费素材。角色延续已有小艺机器人外形语言；原 PNG 仍保留。
 - 教学场景为本项目编写的确定性算法模型，原教材文本、图解及署名继续按原来源许可保留。
+
+## 漫画银河首页（2026-11-02）
+
+银河尘埃聚类与底图着色器改编自 [Galaxy Explorer](https://github.com/zjoooooo/galaxy-explorer)，固定提交 `2df71512c45e6de15a50f5e36dfd5dbe5e462ecd`，Copyright (c) 2026 Justin Zhang Jun，MIT。完整许可保存在 `licenses/galaxy-explorer-MIT.txt`，构建时随静态资源提供。
+
+复用范围为 `index.html` 的 `buildDust` 与 `buildPaintedGalaxy` 中的程序化噪声、沿旋臂卷积与尘埃分布。适配现代 Three.js，缩放坐标、使用固定随机种子、调整青紫配色、减少烘焙步数并修正逆序 smoothstep；未复制其旧版 Three、音乐、NASA/第三方摄影、太阳系或外部数据接口。相机使用当前 Three.js 的 OrbitControls，本项目实现书籍导航转场。
+
+星球着色、完整实体书几何、书籍封底、漫画控件和睁眼遮罩由本项目制作；封面仍为已有项目素材。三张视觉提案由 imagegen 生成，只保存在设计文档中，不作为可交互场景或阅读正文。
