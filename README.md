@@ -4,7 +4,7 @@
 
 **漫画银河首页**：在已确认的视觉稿上接入 Galaxy Explorer 的程序银河，支持星球点选、实体书旋转、封面点击和黑场睁眼入书。查看 [操作、开源来源与验收说明](docs/GALAXY_HOME_REDESIGN.md)。从首页开始体验；已有章节链接继续直达正文。
 
-**2026-11-03 功能分支更新**：动态书籍恒星系、three.quarks 点击粒子、16 章太阳系目录与精绘 Q 版小E（缩放／隐藏／随机动作）。本轮位于 `codex/galaxy-particles-chibi-pet`，未合并 main、未部署线上。查看 [操作、来源与验收记录](docs/STELLAR_LIBRARY_2026-11-03.md)。安装前执行 `git switch codex/galaxy-particles-chibi-pet`。
+**2026-11-03 main 更新**：动态书籍恒星系、three.quarks 点击粒子、16 章太阳系目录与精绘 Q 版小E（缩放／隐藏／随机动作）已纳入 main，克隆默认分支即可使用。查看 [操作、来源与验收记录](docs/STELLAR_LIBRARY_2026-11-03.md) 和 [本次合并说明](docs/MAIN_GALAXY_2026-11-03.md)。本次仅更新仓库，未另行执行线上部署。
 
 **行星与特效精修**：全部三维星体增加本地 2K 贴图，包含云层、大气和环带；星云降噪，彗星与点击爆发采用连续拖尾，加入噪声冲击波与按性能降级的柔光。章节编号移出球面，可直接点星体跳转。查看 [素材许可、复现与本轮验证](docs/SPACE_SURFACES_2026-11-03.md)。
 

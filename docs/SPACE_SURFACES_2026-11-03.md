@@ -63,4 +63,4 @@ Windows、Chrome 159、ANGLE / Intel UHD Graphics / D3D11，生产预览，每�
 
 ![点击冲击波与放射轨迹](validation/space-surfaces/click-feedback.png)
 
-交付仍在 `codex/galaxy-particles-chibi-pet`，不合并 main、不修改线上站点。开发预览为 `http://127.0.0.1:5196/`。
+最初在 `codex/galaxy-particles-chibi-pet` 交付；随后按用户要求将完整功能纳入 main，见 [合并说明](MAIN_GALAXY_2026-11-03.md)。未另行执行线上部署。开发预览为 `http://127.0.0.1:5196/`。
