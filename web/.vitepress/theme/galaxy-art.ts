@@ -15,28 +15,20 @@ export function galaxyDust(count:number){
   let r:number,major:boolean;
   if(rand()<.8){const c=clusters[Math.floor(rand()*clusters.length)];r=c.r;major=c.major;coords.push(c.x+grand()*c.size,c.y+grand()*c.size,grand()*1.2*((1-r)+.2)*.45);}
   else{r=rand()**.72;const a=arm(r),d=r*R+(rand()-.5)*2.3;major=a.major;coords.push(Math.cos(a.angle)*d,Math.sin(a.angle)*d,(rand()-.5)*1.2*((1-r)+.2));}
-  color.copy(inner).lerp(outer,T.MathUtils.clamp((r-.12)*3,0,1));if(rand()<.2)color.set('#a276d6');color.multiplyScalar(major?.8:.4);colors.push(color.r,color.g,color.b);sizes.push(.35+rand()*1.4);
+  color.copy(inner).lerp(outer,T.MathUtils.clamp((r-.12)*3,0,1));if(rand()<.2)color.set('#a276d6');color.multiplyScalar(major?.28:.12);colors.push(color.r,color.g,color.b);sizes.push(.16+rand()**5*2.2);
  }
  const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(coords,3));geometry.setAttribute('aColor',new T.Float32BufferAttribute(colors,3));geometry.setAttribute('aScale',new T.Float32BufferAttribute(sizes,1));
- const material=new T.ShaderMaterial({uniforms:{uTime:{value:0}},transparent:true,depthWrite:false,blending:T.AdditiveBlending,vertexShader:`uniform float uTime;attribute vec3 aColor;attribute float aScale;varying vec3 tint;void main(){float r=length(position.xy);float a=uTime*(.018+.035/(1.+r));mat2 spin=mat2(cos(a),-sin(a),sin(a),cos(a));vec3 q=vec3(spin*position.xy,position.z+sin(uTime*.5+r)*.08);vec4 p=modelViewMatrix*vec4(q,1.);gl_Position=projectionMatrix*p;gl_PointSize=clamp(aScale*45./max(1.,-p.z),1.,7.);tint=aColor*(.7+.3*sin(uTime*1.4+aScale*12.));}`,fragmentShader:`varying vec3 tint;void main(){float d=length(gl_PointCoord-.5)*2.;if(d>1.)discard;float glow=exp(-d*d*5.);gl_FragColor=vec4(tint,glow);}`});
+ const material=new T.ShaderMaterial({uniforms:{uTime:{value:0}},transparent:true,depthWrite:false,blending:T.AdditiveBlending,vertexShader:`uniform float uTime;attribute vec3 aColor;attribute float aScale;varying vec3 tint;void main(){float r=length(position.xy);float a=uTime*(.018+.035/(1.+r));mat2 spin=mat2(cos(a),-sin(a),sin(a),cos(a));vec3 q=vec3(spin*position.xy,position.z+sin(uTime*.5+r)*.08);vec4 p=modelViewMatrix*vec4(q,1.);gl_Position=projectionMatrix*p;gl_PointSize=clamp(aScale*45./max(1.,-p.z),.45,5.);tint=aColor*(.82+.18*sin(uTime*.7+aScale*12.));}`,fragmentShader:`varying vec3 tint;void main(){float d=length(gl_PointCoord-.5)*2.;if(d>1.)discard;float glow=exp(-d*d*5.);gl_FragColor=vec4(tint,glow);}`});
  return new T.Points(geometry,material);
 }
 
 export function paintedGalaxy(renderer:T.WebGLRenderer,mobile:boolean){
  const size=mobile?512:1024,target=new T.WebGLRenderTarget(size,size,{depthBuffer:false});
- const material=new T.ShaderMaterial({uniforms:{uR:{value:360},uArms:{value:4},uTight:{value:.85},uBright:{value:1.1},uInter:{value:.14},uLane:{value:.95},uHii:{value:.6}},vertexShader:'varying vec2 vP;void main(){vP=position.xy;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:galaxyFragment});
+ const material=new T.ShaderMaterial({uniforms:{uR:{value:360},uArms:{value:4},uTight:{value:.85},uBright:{value:.65},uInter:{value:.14},uLane:{value:.82},uHii:{value:.6}},vertexShader:'varying vec2 vP;void main(){vP=position.xy;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:galaxyFragment});
  const geometry=new T.PlaneGeometry(900,900),scene=new T.Scene(),camera=new T.OrthographicCamera(-450,450,450,-450,.1,10);camera.position.z=1;scene.add(new T.Mesh(geometry,material));
  renderer.setRenderTarget(target);renderer.render(scene,camera);renderer.setRenderTarget(null);geometry.dispose();material.dispose();
- const plane=new T.Mesh(new T.PlaneGeometry(45,45),new T.MeshBasicMaterial({map:target.texture,transparent:true,depthWrite:false,blending:T.AdditiveBlending,side:T.DoubleSide,opacity:.85}));
+ const plane=new T.Mesh(new T.PlaneGeometry(45,45),new T.MeshBasicMaterial({map:target.texture,transparent:true,depthWrite:false,blending:T.AdditiveBlending,side:T.DoubleSide,opacity:.65}));
  return {plane,target};
-}
-
-export function planetMaterial(color:string,seed:number){
- return new T.ShaderMaterial({uniforms:{tint:{value:new T.Color(color)},seed:{value:seed}},vertexShader:`varying vec3 p;varying vec3 n;varying vec3 v;void main(){p=position;n=normalize(normalMatrix*normal);vec4 mv=modelViewMatrix*vec4(position,1.);v=normalize(-mv.xyz);gl_Position=projectionMatrix*mv;}`,fragmentShader:`uniform vec3 tint;uniform float seed;varying vec3 p;varying vec3 n;varying vec3 v;
- float hash(vec3 q){return fract(sin(dot(q,vec3(127.1,311.7,74.7)))*43758.5453);}
- float noise(vec3 q){vec3 i=floor(q),f=fract(q);f=f*f*(3.-2.*f);return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);}
- float fbm(vec3 q){float a=.5,r=0.;for(int i=0;i<5;i++){r+=a*noise(q);q=q*2.03+1.7;a*=.5;}return r;}
- void main(){vec3 q=normalize(p);float terrain=fbm(q*5.+seed);float light=max(0.,dot(normalize(n),normalize(vec3(-.6,.7,.8))));light=floor(light*5.)/5.;vec3 sea=tint*.55;vec3 land=mix(tint*.7,vec3(.71,.76,.66),smoothstep(.46,.64,terrain));vec3 c=mix(sea,land,smoothstep(.48,.51,terrain));float cloud=smoothstep(.62,.72,fbm(q*8.+seed+22.));c=mix(c,vec3(.87,.93,.92),cloud*.85);float rim=pow(1.-max(0.,dot(normalize(n),normalize(v))),3.);c=c*(.12+light*.98)+rim*tint*.75;gl_FragColor=vec4(c,1.);}`});
 }
 
 export function canvasTexture(draw:(ctx:CanvasRenderingContext2D)=>void,w=512,h=512){const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;draw(canvas.getContext('2d')!);const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;return texture;}

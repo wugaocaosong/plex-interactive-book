@@ -1,0 +1,84 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "scene": "galaxy",
+      "initial": {
+        "fps": "50.0",
+        "quality": "full"
+      },
+      "final": {
+        "fps": "61.0",
+        "quality": "full",
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A78B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    {
+      "width": 1440,
+      "scene": "solar",
+      "initial": {
+        "fps": "145.5",
+        "quality": "full"
+      },
+      "final": {
+        "fps": "165.0",
+        "quality": "full",
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A78B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    {
+      "width": 820,
+      "scene": "galaxy",
+      "initial": {
+        "fps": "83.2",
+        "quality": "full"
+      },
+      "final": {
+        "fps": "98.9",
+        "quality": "full",
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A78B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    {
+      "width": 820,
+      "scene": "solar",
+      "initial": {
+        "fps": "148.5",
+        "quality": "full"
+      },
+      "final": {
+        "fps": "165.0",
+        "quality": "full",
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A78B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    {
+      "width": 390,
+      "scene": "galaxy",
+      "initial": {
+        "fps": "145.4",
+        "quality": "full"
+      },
+      "final": {
+        "fps": "163.5",
+        "quality": "full",
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A78B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    {
+      "width": 390,
+      "scene": "solar",
+      "initial": {
+        "fps": "139.6",
+        "quality": "full"
+      },
+      "final": {
+        "fps": "164.8",
+        "quality": "full",
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A78B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    }
+  ],
+  "errors": [],
+  "external": []
+}

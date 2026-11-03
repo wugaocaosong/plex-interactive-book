@@ -6,6 +6,8 @@
 
 **2026-11-03 功能分支更新**：动态书籍恒星系、three.quarks 点击粒子、16 章太阳系目录与精绘 Q 版小E（缩放／隐藏／随机动作）。本轮位于 `codex/galaxy-particles-chibi-pet`，未合并 main、未部署线上。查看 [操作、来源与验收记录](docs/STELLAR_LIBRARY_2026-11-03.md)。安装前执行 `git switch codex/galaxy-particles-chibi-pet`。
 
+**行星与特效精修**：全部三维星体增加本地 2K 贴图，包含云层、大气和环带；星云降噪，彗星与点击爆发采用连续拖尾，加入噪声冲击波与按性能降级的柔光。章节编号移出球面，可直接点星体跳转。查看 [素材许可、复现与本轮验证](docs/SPACE_SURFACES_2026-11-03.md)。
+
 此前银河书库、阅读宽度、分类书签、公式复制、教学场景与代码助手已在当前基线中；历史说明见 [银河阅读升级](docs/GALAXY_READING_UPGRADE.md)、[代码答疑接口](docs/CODE_CONTEXT_API.md)。本轮不修改后端。
 
 **2026-10-30 main 更新**：已整合第 12 章示范、暗色 UI、离线翻页控制、翻页笔全屏切换、可移动多画板和小艺桌宠。保留 PLEX·星轨编程书名及 Logo。查看 [更新总览与启动命令](docs/UPDATE_2026-10-30.md)、[main 集成验收](docs/MAIN_INTEGRATION_2026-10-30.md) 和 [四人开发交接](docs/team-open-source/README.md)。下述 v0.4 为基础版本说明；新增章节任务不替换原有 27 题。

@@ -96,3 +96,16 @@ MediaPipe Tasks Vision 0.10.32、Google hand_landmarker float16 v1、vosk-browse
 - Galaxy Explorer 继续固定上述 `2df71512c45e6de15a50f5e36dfd5dbe5e462ecd`。新增恒星系、章节公转模型、局部点击涟漪及导航由本项目实现；没有复制其太阳系、摄影、音乐或外部数据服务。
 - `web/public/brand/chibi-e/poses.png`、`parts.png` 为 imagegen 基于本项目小艺／小E机器人生成的设定与透明分层素材，不标为第三方 MIT 素材。生成方法、提示词摘要及 SHA-256 见同目录 `SOURCES.json`。原始图集保留，渲染时裁取头、躯干、四肢、天线及光屏，眼睛和嘴部由本项目绘制并独立动画。
 - 新场景的光晕、星尘纹理均本地生成；新增运行资源不请求外站。此说明不改变上面的智能搜索首次下载模型限制。
+
+## 行星贴图与空间特效精修（2026-11-03）
+
+本节更新前面“未导入外站纹理”的历史描述：现在的银河、章节目录和静态降级视图使用以下本地打包的第三方地图。
+
+- **Solar System Scope / INOVE**：11 张 2K 地表、太阳、云层与土星环纹理，作者来源 https://www.solarsystemscope.com/textures/ ，**CC BY 4.0**，https://creativecommons.org/licenses/by/4.0/ 。原图未作改动；其在虚构教材星体上的使用、光照和着色为本项目适配。原供应者说明部分未测区域为虚构填补，颜色经过增强，不能当作科学测量数据。
+- 原站从本地下载不可达，采用注明同一作者及许可的固定 GitHub 镜像：`RTF22/Orrery@6c81feb760cb36d7d83d1421aef257833ba9768e`、`elymas/solar-simulator@d34a9f973a7c4ad683eeb7d080b0accaba81e840`。只下载贴图，没有引入两者应用代码。每张资源的原址、下载地址、字节数和 SHA-256 见 `web/public/space/surfaces/manifest.json`，署名亦随该目录发布。
+- **stegu/webgl-noise**：https://github.com/stegu/webgl-noise ，固定提交 `22434e04d7753f7e949e8d724ab3da2864c17a0f`。未修改的 `src/noise3D.glsl`，Copyright Ashima Arts / Stefan Gustavson，**MIT**；源码旁保留完整许可证，构建另复制至 `/licenses/webgl-noise-MIT.txt`。用于恒星、星云与冲击波的连续噪声。
+- **Three.js 0.187.0**：直接调用其 MIT 官方 `EffectComposer`、`UnrealBloomPass` 与 `OutputPass`，没有另加渲染器。
+- **three.quarks / quarks.core 0.17.1**：由原拉伸点粒子改为 `RenderMode.Trail`，用于连续彗尾、汇聚和爆发轨迹。拖尾截面纹理、云层组合、气氛光、环带映射和交互逻辑由本项目编写。
+- Galaxy Explorer 底图仍为原固定来源；此次调整空间频率及软边缘以降低低分辨率烘焙的混叠。
+
+正常安装后的构建、浏览不连接上述素材站；不改变智能搜索首次下载模型的既有限制。

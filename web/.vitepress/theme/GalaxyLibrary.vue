@@ -35,7 +35,7 @@ onBeforeUnmount(()=>{disposed=true;clearTimeout(timer);query?.removeEventListene
 </script>
 <template><main class="galaxy-library manga-library" :class="{ 'is-book':phase==='book'||phase==='opening','is-simple':fallback }" :data-phase="phase">
  <Scene v-if="!initializing&&!fallback" ref="scene" :phase="phase" :active="active" :reduced="reduced" @failed="onFail" @ready="sceneReady=true" @select="choose" @open="enter" @labels="labels=$event"/>
- <div v-else class="galaxy-static" aria-hidden="true"><div class="static-arm"/><div v-if="phase==='galaxy'" class="static-worlds"><i v-for="(entry,i) in library.books" :key="entry.id" :style="{...labelStyle(entry.id,i),'--world':entry.color}" :class="{'static-main':i===0}"/></div></div>
+ <div v-else class="galaxy-static" aria-hidden="true"><div class="static-arm"/><div v-if="phase==='galaxy'" class="static-worlds"><i v-for="(entry,i) in library.books" :key="entry.id" :style="{...labelStyle(entry.id,i),'--world':entry.color,'--surface':`url(/space/surfaces/2k_${['sun','earth_daymap','jupiter','mars','neptune','saturn','moon'][i]}.jpg)`}" :class="{'static-main':i===0}"/></div></div>
  <div class="galaxy-vignette" aria-hidden="true"/>
  <header class="galaxy-header"><div class="galaxy-brand"><span class="plex-sticker">PLEX</span><span class="brand-caption">GALACTIC LIBRARY</span><h1>星轨书库</h1></div><button class="comic-button utility" :aria-pressed="simple" :disabled="initializing||phase==='approaching'||phase==='opening'" @click="simplify">{{fallback?'开启三维':'简化显示'}}</button></header>
  <template v-if="phase==='galaxy'||phase==='approaching'">

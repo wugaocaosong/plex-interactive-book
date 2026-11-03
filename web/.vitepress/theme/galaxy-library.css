@@ -14,3 +14,4 @@
 .manga-library .distant-label{cursor:pointer;min-height:44px}.manga-library .distant-label:focus-visible{outline:3px solid #f2d094;outline-offset:3px}
 
 .manga-library .distant-label{pointer-events:auto;z-index:1}.manga-library .planet-title{z-index:2}
+.static-worlds i{background-image:radial-gradient(circle at 28% 22%,transparent 18%,#050d2040 45%,#030818ed 83%),var(--surface);background-size:cover;background-position:center;box-shadow:inset -8px -4px 14px #02091b77,0 0 22px #76b6d22b}

@@ -1,6 +1,7 @@
 import { cp, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
+import './audit-space.mjs';
 const root = resolve(import.meta.dirname, '..');
 const publicDir = resolve(root, 'web/public');
 const h5pLock=JSON.parse(await readFile(resolve(root,'content/h5p/runtime-lock.json'),'utf8'));
@@ -41,5 +42,6 @@ for(const name of ['three.quarks','quarks.core','@huggingface/transformers','@or
 }
 await writeFile(resolve(root,'licenses/dependencies.txt'),notices.join('\n')+'\n');
 await cp(resolve(root,'licenses'),resolve(publicDir,'licenses'),{recursive:true});
+await cp(resolve(root,'web/.vitepress/theme/vendor/webgl-noise/LICENSE'),resolve(publicDir,'licenses/webgl-noise-MIT.txt'));
 await cp(resolve(root,'THIRD_PARTY_NOTICES.md'),resolve(publicDir,'licenses/THIRD_PARTY_NOTICES.md'));
 console.log('Prepared local H5P, Python runtime, cover and dependency licenses.');
