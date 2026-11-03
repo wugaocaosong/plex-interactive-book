@@ -1,3 +1,5 @@
+three.quarks 0.17.1: MIT
+quarks.core 0.17.1: MIT
 @huggingface/transformers 4.3.2: Apache-2.0
 @orama/orama 3.1.18: Apache-2.0
 onnxruntime-web 1.31.0-dev.20260914-8d85527a0: MIT

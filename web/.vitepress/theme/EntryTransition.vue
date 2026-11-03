@@ -4,7 +4,7 @@ import {nextTick,watch} from 'vue';
 import {entryTransition,cancelEntryTransition,revealReader,skipEntryAnimation} from './galaxy-transition';
 const router=useRouter();
 async function back(){cancelEntryTransition();await router.go('/');}
-function retry(){void revealReader(async()=>{const button=document.querySelector<HTMLButtonElement>('.reader-error button');if(button){button.click();await nextTick();}else await router.go('/read/title');},matchMedia('(prefers-reduced-motion: reduce)').matches);}
+function retry(){void revealReader(async()=>{const button=document.querySelector<HTMLButtonElement>('.reader-error button');if(button){button.click();await nextTick();}else await router.go('/library/plex-programming/contents');},matchMedia('(prefers-reduced-motion: reduce)').matches);}
 watch(()=>entryTransition.phase,async phase=>{if(phase==='idle'||phase==='revealing')return;await nextTick();document.querySelector<HTMLButtonElement>('.entry-veil button')?.focus();});
 function key(event:KeyboardEvent){if(event.key!=='Tab')return;const buttons=[...document.querySelectorAll<HTMLButtonElement>('.entry-veil button')].filter(b=>getComputedStyle(b).visibility!=='hidden');if(!buttons.length){event.preventDefault();return;}const i=buttons.indexOf(document.activeElement as HTMLButtonElement);event.preventDefault();buttons[(i+(event.shiftKey?-1:1)+buttons.length)%buttons.length].focus();}
 </script>

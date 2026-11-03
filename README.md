@@ -4,7 +4,9 @@
 
 **漫画银河首页**：在已确认的视觉稿上接入 Galaxy Explorer 的程序银河，支持星球点选、实体书旋转、封面点击和黑场睁眼入书。查看 [操作、开源来源与验收说明](docs/GALAXY_HOME_REDESIGN.md)。从首页开始体验；已有章节链接继续直达正文。
 
-**2026-11-02 功能分支更新**：银河书库、可拉伸阅读宽度、分类书签、公式复制、11 个教学场景、分层小艺动作和可移动代码助手窗口。实现位于 `codex/galaxy-reading-upgrade`，尚未合并 main；后端配套分支为 `codex/ebook-code-context`。查看 [操作与技术说明](docs/GALAXY_READING_UPGRADE.md)、[本轮验收记录](docs/GALAXY_VALIDATION.md) 和 [代码答疑接口](docs/CODE_CONTEXT_API.md)。体验本轮功能请在安装前执行 `git switch codex/galaxy-reading-upgrade`。
+**2026-11-03 功能分支更新**：动态书籍恒星系、three.quarks 点击粒子、16 章太阳系目录与精绘 Q 版小E（缩放／隐藏／随机动作）。本轮位于 `codex/galaxy-particles-chibi-pet`，未合并 main、未部署线上。查看 [操作、来源与验收记录](docs/STELLAR_LIBRARY_2026-11-03.md)。安装前执行 `git switch codex/galaxy-particles-chibi-pet`。
+
+此前银河书库、阅读宽度、分类书签、公式复制、教学场景与代码助手已在当前基线中；历史说明见 [银河阅读升级](docs/GALAXY_READING_UPGRADE.md)、[代码答疑接口](docs/CODE_CONTEXT_API.md)。本轮不修改后端。
 
 **2026-10-30 main 更新**：已整合第 12 章示范、暗色 UI、离线翻页控制、翻页笔全屏切换、可移动多画板和小艺桌宠。保留 PLEX·星轨编程书名及 Logo。查看 [更新总览与启动命令](docs/UPDATE_2026-10-30.md)、[main 集成验收](docs/MAIN_INTEGRATION_2026-10-30.md) 和 [四人开发交接](docs/team-open-source/README.md)。下述 v0.4 为基础版本说明；新增章节任务不替换原有 27 题。
 

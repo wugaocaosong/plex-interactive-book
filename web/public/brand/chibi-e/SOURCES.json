@@ -1,0 +1,23 @@
+{
+  "created": "2026-11-03",
+  "method": "image_gen.imagegen",
+  "reference": "Existing PLEX little-e-front.png robot identity; generated poses then used as reference for parts",
+  "license_note": "AI-generated project artwork, not a third-party open-source character. Original PLEX identity retained.",
+  "assets": [
+    {
+      "path": "poses.png",
+      "sha256": "13a3aa51e9c1b47a0c0507461f5d029351615350f485b6f2a67ce01b6f98806b",
+      "bytes": 2045042
+    },
+    {
+      "path": "parts.png",
+      "sha256": "ef5fa11a5810f288e3dcbc84520b5ebe3138d481e89e9d573664cc4440eead92",
+      "bytes": 640135
+    }
+  ],
+  "prompts": {
+    "poses": "Six poses of the same polished two-head-tall chibi robot: neutral, held aloft, landing, thinking with holographic tablet, explaining, puzzled. Pearl white shell, navy faceplate, glowing cyan details, teal scarf and diamond badge. 3 by 2 contact sheet; transparent background. Preserve the reference robot identity.",
+    "parts": "Using the pose sheet as identity reference, make a transparent 4 by 2 equal-cell atlas of isolated finely painted robot parts: empty-face head without fin, torso with scarf without limbs, left arm, right arm, left foot/leg, right foot/leg, antenna fin, holographic tablet. No eyes in faceplate (added as animated vector features in application). No outside glow or cast shadows. Do not assemble the robot."
+  },
+  "rendering": "Atlas is preserved unchanged. RobotRig.vue clips its separate parts with nested SVG viewBoxes and animates each part. Eyes and mouth are local vectors; no sprite-frame animation or whole-image rocking."
+}

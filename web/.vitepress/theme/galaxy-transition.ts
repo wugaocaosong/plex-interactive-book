@@ -18,7 +18,7 @@ export async function revealReader(navigate:()=>Promise<unknown>,reduced=false){
   while(run===generation){
    const failure=document.querySelector('.reader-error');
    if(failure?.textContent?.trim())throw new Error('书页尚未准备完成');
-   if(document.querySelector('.book-holder:not(.loading), .study-reader'))break;
+   if(document.querySelector('.book-holder:not(.loading), .study-reader, .solar-directory[data-ready=true]'))break;
    if(performance.now()-start>15000)throw new Error('书页加载超时');
    await delay(50);
   }
@@ -29,6 +29,6 @@ export async function revealReader(navigate:()=>Promise<unknown>,reduced=false){
   if(!reduced&&!skipRequested)await delay(1200);
   if(run!==generation)return;
   entryTransition.phase='idle';
-  (document.querySelector('.reader button') as HTMLElement|null)?.focus({preventScroll:true});
+  (document.querySelector('.reader button, .solar-directory button') as HTMLElement|null)?.focus({preventScroll:true});
  }catch(error){if(run!==generation)return;entryTransition.error=String(error instanceof Error?error.message:error);entryTransition.phase='error';}
 }

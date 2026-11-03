@@ -4,8 +4,8 @@ const section='/read/chapter_divide_and_conquer/divide_and_conquer';
 async function study(page:any){await page.getByRole('button',{name:'更多阅读工具',exact:true}).click();await page.getByRole('button',{name:"切换阅读模式"}).click();await expect(page.locator('.study-reader')).toBeVisible();}
 for(const width of [390,820,1440])test(`galaxy and book journey ${width}`,async({page})=>{
  await page.setViewportSize({width,height:900});const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');await expect(page.getByRole('heading',{name:/每一本书/})).toBeVisible();await expect(page.locator('.library-index button:disabled')).toHaveCount(6);
- await page.locator('.planet-0').click();await expect(page.getByRole('button',{name:'翻开星轨编程',exact:true})).toBeVisible();await page.getByRole('button',{name:'翻开星轨编程',exact:true}).click();await expect(page).toHaveURL(/\/read\/title/);await expect(page.locator('.book-host')).toBeVisible();
- await page.goto(section);await expect(page.locator('.galaxy-library')).toHaveCount(0);await expect(page.getByRole('slider',{name:'拖动调整书籍宽度'})).toBeVisible();await page.getByRole('slider').press('ArrowLeft');await expect(page.locator('.book-holder')).not.toHaveClass(/loading/);
+ await page.locator('.planet-0').click();await expect(page.getByRole('button',{name:'翻开星轨编程',exact:true})).toBeVisible();await page.getByRole('button',{name:'翻开星轨编程',exact:true}).click();await expect(page).toHaveURL(/\/library\/plex-programming\/contents/);await expect(page.locator('.solar-directory')).toHaveAttribute('data-ready','true');
+ await page.goto(section);await expect(page.locator('.galaxy-library')).toHaveCount(0);await expect(page.getByRole('slider',{name:'拖动调整书籍宽度'})).toBeVisible();await page.getByRole('slider',{name:'拖动调整书籍宽度'}).press('ArrowLeft');await expect(page.locator('.book-holder')).not.toHaveClass(/loading/);
  await page.screenshot({path:`output/playwright/galaxy-reader-${width}.png`});expect(errors).toEqual([]);
 });
 test('teaching scene keyboard playback, code window and context use same pet',async({page})=>{

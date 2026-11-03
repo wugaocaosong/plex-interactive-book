@@ -238,6 +238,7 @@ export function validateBackup(value: unknown): Backup {
     )
       throw Error("备份记录格式错误");
     const value = record.value as Record<string, unknown> | null;
+    if(record.id==='pet:appearance'&&(!value||value.version!==1||typeof value.scale!=='number'||!Number.isFinite(value.scale)||value.scale<.7||value.scale>2||typeof value.visible!=='boolean'||typeof value.idleMotion!=='boolean'))throw Error('小E外观记录格式错误');
     if(record.id==='bookmark:groups'||record.id==='bookmark:levels'){
       const rows=record.value as any;
       if(!Array.isArray(rows)||rows.length>1000||new Set(rows.map((r:any)=>r?.id)).size!==rows.length||rows.some((r:any)=>!r||typeof r.id!=='string'||!r.id||typeof r.name!=='string'||!r.name.trim()||r.name.length>100))throw Error('书签分类格式错误');

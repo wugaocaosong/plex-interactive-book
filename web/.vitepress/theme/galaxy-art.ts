@@ -18,7 +18,7 @@ export function galaxyDust(count:number){
   color.copy(inner).lerp(outer,T.MathUtils.clamp((r-.12)*3,0,1));if(rand()<.2)color.set('#a276d6');color.multiplyScalar(major?.8:.4);colors.push(color.r,color.g,color.b);sizes.push(.35+rand()*1.4);
  }
  const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(coords,3));geometry.setAttribute('aColor',new T.Float32BufferAttribute(colors,3));geometry.setAttribute('aScale',new T.Float32BufferAttribute(sizes,1));
- const material=new T.ShaderMaterial({transparent:true,depthWrite:false,blending:T.AdditiveBlending,vertexShader:`attribute vec3 aColor;attribute float aScale;varying vec3 tint;void main(){vec4 p=modelViewMatrix*vec4(position,1.);gl_Position=projectionMatrix*p;gl_PointSize=clamp(aScale*45./max(1.,-p.z),1.,7.);tint=aColor;}`,fragmentShader:`varying vec3 tint;void main(){float d=length(gl_PointCoord-.5)*2.;if(d>1.)discard;float glow=exp(-d*d*5.);gl_FragColor=vec4(tint,glow);}`});
+ const material=new T.ShaderMaterial({uniforms:{uTime:{value:0}},transparent:true,depthWrite:false,blending:T.AdditiveBlending,vertexShader:`uniform float uTime;attribute vec3 aColor;attribute float aScale;varying vec3 tint;void main(){float r=length(position.xy);float a=uTime*(.018+.035/(1.+r));mat2 spin=mat2(cos(a),-sin(a),sin(a),cos(a));vec3 q=vec3(spin*position.xy,position.z+sin(uTime*.5+r)*.08);vec4 p=modelViewMatrix*vec4(q,1.);gl_Position=projectionMatrix*p;gl_PointSize=clamp(aScale*45./max(1.,-p.z),1.,7.);tint=aColor*(.7+.3*sin(uTime*1.4+aScale*12.));}`,fragmentShader:`varying vec3 tint;void main(){float d=length(gl_PointCoord-.5)*2.;if(d>1.)discard;float glow=exp(-d*d*5.);gl_FragColor=vec4(tint,glow);}`});
  return new T.Points(geometry,material);
 }
 

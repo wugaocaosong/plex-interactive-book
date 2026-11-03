@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   computed,
+  toRef,
   nextTick,
   onBeforeUnmount,
   onMounted,
@@ -46,14 +47,14 @@ import { paginate, locateLeaf, type Leaf } from "./pagination";
 import { readStore, saveStore } from "./storage";
 import { bindPageDrag } from "./page-drag";
 import { flushLearning } from "./learning-flush";
-import StarMap from "./StarMap.vue";
+const StarMap=defineAsyncComponent(()=>import("./SolarDirectory.vue"));
 import StudyReader from "./StudyReader.vue";
 import ReaderControls from './ReaderControls.vue';
 import FloatingToolWindow from './FloatingToolWindow.vue';
-import EbookPet from './EbookPet.vue';
+import {petHost,showPet} from './pet-host';
 const Blackboard=defineAsyncComponent(()=>import('./Blackboard.vue'));
-const boardOpen=ref(false),boardSection=ref(''),petOpen=ref(false),dictating=ref(false);
-const pet=ref<InstanceType<typeof EbookPet>>();
+const boardOpen=ref(false),boardSection=ref(''),petOpen=toRef(petHost,'open'),dictating=toRef(petHost,'dictating');
+function petLogin(){openUnit('profile');}
 async function openBoard(id=sectionId.value){await flushLearning();closeOverlay();boardSection.value=id;boardOpen.value=true;}
 async function closeBoard(){try{await flushLearning();boardOpen.value=false;}catch(error){storageMessage.value='板书保存失败，窗口保持打开：'+String(error);}}
 import {CommandGate,type PageTurnCommand} from './reader-controls';
@@ -1533,7 +1534,9 @@ watch(sectionId, () => {
     currentLoadTask = loadCurrent();
   }
 });
+watch([sectionId,()=>current.value?.title,menu],()=>{petHost.sectionId=sectionId.value;petHost.sectionTitle=current.value?.title||'星轨编程';petHost.suspended=!!menu.value;},{immediate:true});
 onMounted(async () => {
+  window.addEventListener('plex-pet-login',petLogin);
   mounted = true;
   document.addEventListener("pointerdown", dismissSearch);
   void fetch("/learning/monty-unit.json").then(r=>r.json()).then(d=>unitDefinition.value=d).catch(()=>{});
@@ -1577,6 +1580,7 @@ onMounted(async () => {
     )
       await navigate(resume.value.sectionId, resume.value);
     else await loadCurrent();
+    if(petHost.pendingLogin){petHost.pendingLogin=false;petLogin();}
   } catch (e) {
     error.value = String(e);
     loading.value = false;
@@ -1586,6 +1590,8 @@ onMounted(async () => {
   window.addEventListener("hashchange", hashchange);
 });
 onBeforeUnmount(() => {
+  window.removeEventListener('plex-pet-login',petLogin);
+  petHost.suspended=false;
   if (overlayOpen.value) document.body.style.overflow = previousBodyOverflow;
   ++serial;
   if (semanticSearchTimer) clearTimeout(semanticSearchTimer);
@@ -1954,7 +1960,7 @@ onBeforeUnmount(() => {
         </div>
         <div v-if="menu === 'controls'" id="reader-control-slot"></div>
         <div v-if="menu === 'more'" class="more-tools">
-          <button @click="openMenu('controls')">翻页控制</button>
+          <button @click="openMenu('controls')">翻页控制</button><button @click="closeOverlay();showPet()">显示小E</button>
           <button
             aria-label="切换阅读模式"
             @click="
@@ -2013,7 +2019,7 @@ onBeforeUnmount(() => {
             >
               学习起点 · 三扇舱门：直觉可靠吗？ →
             </button>
-            <StarMap v-if="mapView" :sections="sections" @navigate="navigate" />
+            <StarMap v-if="mapView" :sections="sections" :current="sectionId" @navigate="navigate" />
             <div v-if="!mapView || !desktop" class="chapter-directory">
               <section v-for="[group, items] in groups" :key="group">
                 <h3>{{ group }}</h3>
@@ -2132,7 +2138,7 @@ onBeforeUnmount(() => {
       </section>
     </FloatingToolWindow>
     <FloatingToolWindow v-if="boardOpen" v-show="!overlayOpen" :inert="overlayOpen" title="小黑板" storage-key="blackboard-window" @close="closeBoard"><Blackboard :key="boardSection" :section-id="boardSection" /></FloatingToolWindow>
-    <EbookPet ref="pet" :section-id="sectionId" :section-title="current?.title||'封面'" :suspended="!!menu" @open="petOpen=$event" @dictating="dictating=$event" @login="openUnit('profile')"/>
+
     <ReaderControls :settings="menu==='controls'" :blocked="overlayOpen||boardOpen||petOpen" :dictating="dictating" :notice="controlNotice" @command="controlTurn" @fullscreen="fullscreen" @configure="openMenu('controls')" />
   </div>
 </template>

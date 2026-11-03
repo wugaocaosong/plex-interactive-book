@@ -1,0 +1,51 @@
+<script setup lang="ts">
+import {ref,computed,onMounted,onBeforeUnmount,watch} from 'vue';
+import type {BookSection} from './types';
+import {chapterWorlds} from './space-model';
+import type {SolarEngine,SolarLabel} from './solar-engine';
+const props=defineProps<{sections:BookSection[];current?:string}>();
+const emit=defineEmits<{navigate:[id:string]}>();
+const worlds=computed(()=>chapterWorlds(props.sections));const canvas=ref<HTMLCanvasElement>(),labels=ref<SolarLabel[]>([]),paused=ref(false),simple=ref(false),ready=ref(false),failed=ref(false),hovered=ref(-1),notice=ref('');
+let engine:SolarEngine|undefined,disposed=false,generation=0,query:MediaQueryList;
+const pinned=ref<{index:number;x:number;y:number}>();
+// Keep 44px hit targets separate even where projected orbits overlap on phones.
+const targets=computed(()=>{
+ const w=canvas.value?.clientWidth||340,h=canvas.value?.clientHeight||420;
+ const points=labels.value.map(p=>({...p,x:p.x*w/100,y:p.y*h/100}));
+ const fixed=pinned.value;
+ if(fixed&&points[fixed.index])Object.assign(points[fixed.index],{x:fixed.x*w/100,y:fixed.y*h/100});
+ for(let pass=0;pass<48;pass++){
+  for(let i=0;i<points.length;i++)for(let j=i+1;j<points.length;j++){
+   const a=points[i],b=points[j];if(!a.visible||!b.visible)continue;
+   const dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy);if(d>=49)continue;
+   const ux=d?dx/d:1,uy=d?dy/d:0,overlap=49-d;
+   const fa=fixed?.index===i,fb=fixed?.index===j;
+   if(!fa){a.x-=ux*overlap*(fb?1:.5);a.y-=uy*overlap*(fb?1:.5);}
+   if(!fb){b.x+=ux*overlap*(fa?1:.5);b.y+=uy*overlap*(fa?1:.5);}
+  }
+  points.forEach((p,i)=>{if(fixed?.index!==i){p.x=Math.max(23,Math.min(w-23,p.x));p.y=Math.max(23,Math.min(h-75,p.y));}});
+ }
+ return points.map(p=>({...p,x:p.x/w*100,y:p.y/h*100}));
+});
+const style=(i:number)=>({left:(targets.value[i]?.x??(18+(i%4)*21))+'%',top:(targets.value[i]?.y??(20+Math.floor(i/4)*19))+'%',visibility:labels.value[i]?.visible===false?'hidden' as const:'visible' as const});
+function focus(i:number){const p=targets.value[i];pinned.value=p?{index:i,x:p.x,y:p.y}:undefined;hovered.value=i;engine?.hover(i);}
+function select(i:number){emit('navigate',worlds.value[i].section.id);}
+async function start(){const own=++generation;engine?.dispose();engine=undefined;ready.value=false;if(simple.value){ready.value=true;return;}try{const {SolarEngine}=await import('./solar-engine');if(disposed||own!==generation)return;engine=new SolarEngine(canvas.value!,worlds.value.length,v=>labels.value=v,select,()=>{failed.value=true;simple.value=true;notice.value='三维目录不可用，已显示文字章节。';});engine.pause(paused.value);ready.value=true;}catch{if(disposed||own!==generation)return;failed.value=true;simple.value=true;notice.value='已切换为简化目录。';}}
+function reduced(){if(query.matches){paused.value=true;simple.value=true;}}
+watch(paused,v=>engine?.pause(v));watch(simple,()=>void start());
+onMounted(()=>{query=matchMedia('(prefers-reduced-motion: reduce)');reduced();query.addEventListener('change',reduced);void start();});
+onBeforeUnmount(()=>{disposed=true;generation++;query?.removeEventListener('change',reduced);engine?.dispose();});
+</script>
+<template><section class="solar-directory" :data-ready="ready" aria-label="动态太阳系目录">
+ <header class="solar-heading"><div><small>PLEX / SOLAR CHAPTER ATLAS</small><h2>一颗星体，一段探索。</h2></div><div class="solar-tools"><button :aria-pressed="paused" @click="paused=!paused">{{paused?'继续公转':'暂停公转'}}</button><button :aria-pressed="simple" @click="simple=!simple;failed=false">{{simple?'开启三维':'简化显示'}}</button></div></header>
+ <div v-show="!simple" class="solar-stage"><canvas ref="canvas" aria-label="太阳系轨道：拖动观察，使用章节按钮跳转"/><svg class="solar-leaders" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><template v-for="(p,i) in targets" :key="i"><line v-if="p.visible&&labels[i]" :x1="labels[i].x" :y1="labels[i].y" :x2="p.x" :y2="p.y"/></template></svg><div class="solar-center" aria-hidden="true">PLEX<small>星轨编程</small></div>
+  <nav class="solar-labels" aria-label="章节星体"><button v-for="(world,i) in worlds" :key="world.section.id" :style="style(i)" :class="{'is-current':current?.startsWith(world.section.id.replace('/index',''))}" :aria-label="`进入${world.section.title}`" @pointerenter="focus(i)" @pointerleave="focus(-1)" @focus="focus(i)" @blur="focus(-1)" @click="select(i)"><b>{{String(world.number).padStart(2,'0')}}</b><span v-if="hovered===i">{{world.section.title}}</span></button></nav>
+  <div v-if="!ready" class="solar-loading" role="status">正在点亮章节星体…</div>
+  <p class="solar-caption">{{hovered>=0?worlds[hovered].section.title:'拖动观察轨道 · 点选章节星体'}}<small>教学导航示意，轨道与天体比例非真实天文尺度</small></p>
+ </div>
+ <p v-if="notice" role="status">{{notice}}</p>
+ <nav class="solar-chapter-list" aria-label="全部章节文字目录"><button v-for="(world,i) in worlds" :key="world.section.id" :class="{'is-current':current?.startsWith(world.section.id.replace('/index',''))}" @click="select(i)" @focus="focus(i)" @blur="focus(-1)"><span>{{String(world.number).padStart(2,'0')}}</span><strong>{{world.section.title.replace(/^\d+\.?\s*/, '')}}</strong><small>{{world.number===16?'附录':'进入章节'}} ↗</small></button></nav>
+</section></template>
+<style>
+.solar-directory{color:#e9f5ff;background:radial-gradient(ellipse at 45% 35%,#15253c,#060d1b 75%);padding:clamp(14px,3vw,32px);border:1px solid #4d8b9c44;border-radius:3px}.solar-heading{display:flex;justify-content:space-between;align-items:start;gap:16px}.solar-heading small{color:#78cbd8;font:10px monospace;letter-spacing:.18em}.solar-heading h2{color:#ecf7fc!important;margin:8px 0!important;font-size:clamp(20px,3vw,32px)!important}.solar-tools{display:flex;gap:8px;flex-wrap:wrap}.solar-directory button{min-height:44px;color:#d5eef8;background:#173245;border:1px solid #548a9b;padding:7px 12px;cursor:pointer;font:inherit}.solar-tools button{font-size:12px;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}.solar-stage{position:relative;height:550px;isolation:isolate}.solar-stage canvas{width:100%;height:100%;touch-action:none}.solar-leaders{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.solar-leaders line{stroke:#86cddd66;stroke-width:.12;vector-effect:non-scaling-stroke}.solar-center{position:absolute;top:47%;left:50%;transform:translate(-50%,-50%);font:700 12px sans-serif;color:#fff6dd;text-shadow:0 2px 6px #000;pointer-events:none;text-align:center}.solar-center small{display:block;font-size:9px}.solar-labels button{position:absolute;transform:translate(-50%,-50%);padding:0;min-width:44px;height:44px;border:1px solid #87dce777;border-radius:50%;background:#1024379c;font-size:12px;box-shadow:0 0 20px #6bdbe02b;z-index:1}.solar-labels button:hover,.solar-labels button:focus-visible{z-index:3;background:#244b61;border-color:#fff}.solar-labels span{position:absolute;bottom:49px;left:50%;transform:translateX(-50%);white-space:nowrap;background:#091725;padding:7px 10px;border:1px solid #71c4da;pointer-events:none}.solar-directory .is-current{border-color:#f29d72;background:#482b32}.solar-caption{position:absolute;bottom:0;left:0;right:0;pointer-events:none;text-align:center;color:#a4c4d5;font-size:12px}.solar-caption small{display:block;color:#7597ab;font-size:10px;margin-top:5px}.solar-loading{position:absolute;inset:0;display:grid;place-items:center;background:#070d19cc}.solar-chapter-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding-top:20px}.solar-chapter-list button{display:grid;grid-template-columns:26px 1fr;gap:5px;text-align:left;background:#0b192a;padding:12px}.solar-chapter-list span{grid-row:span 2;color:#73cbd7;font:16px monospace}.solar-chapter-list strong{font-size:13px}.solar-chapter-list small{font-size:10px;color:#91aabd}.solar-directory :focus-visible{outline:3px solid #f1cb82;outline-offset:3px}@media(max-width:700px){.solar-heading{flex-direction:column}.solar-stage{height:420px}.solar-chapter-list{grid-template-columns:repeat(2,minmax(0,1fr))}.solar-labels button{background:#142a3eaa}.solar-directory{padding:12px}}
+</style>

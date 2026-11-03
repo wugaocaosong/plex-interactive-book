@@ -89,3 +89,10 @@ MediaPipe Tasks Vision 0.10.32、Google hand_landmarker float16 v1、vosk-browse
 - `@huggingface/transformers` 4.3.2：Apache-2.0；`@orama/orama` 3.1.18：Apache-2.0；`onnxruntime-web`：MIT（解析版本见锁文件）。许可由 assets 脚本复制到静态产物。
 - 模型引用为 `Xenova/bge-small-zh-v1.5`，由 Transformers.js 首次按需从 Hugging Face 获取；模型权重尚未随项目固定版本打包。不要将本次搜索功能描述为完全离线可复现。网络失败时显示错误，可返回精确查找。
 - 预设概念关联属于教材导航规则，与模型向量检索分别标识。查询在浏览器处理，没有新增聊天或成绩服务。
+
+## 动态恒星系与 Q 版小E（2026-11-03）
+
+- [three.quarks / quarks.core](https://github.com/Alchemist0823/three.quarks)：均固定为 0.17.1，MIT。使用 BatchedRenderer、ParticleSystem、SphereEmitter、粒子颜色生命周期及拉伸 billboard，实现局部汇聚、彗星和点选爆发；继续使用现有 Three.js 0.187.0，没有装载第二套渲染器。完整许可证由 `npm run assets` 复制至静态资源。
+- Galaxy Explorer 继续固定上述 `2df71512c45e6de15a50f5e36dfd5dbe5e462ecd`。新增恒星系、章节公转模型、局部点击涟漪及导航由本项目实现；没有复制其太阳系、摄影、音乐或外部数据服务。
+- `web/public/brand/chibi-e/poses.png`、`parts.png` 为 imagegen 基于本项目小艺／小E机器人生成的设定与透明分层素材，不标为第三方 MIT 素材。生成方法、提示词摘要及 SHA-256 见同目录 `SOURCES.json`。原始图集保留，渲染时裁取头、躯干、四肢、天线及光屏，眼睛和嘴部由本项目绘制并独立动画。
+- 新场景的光晕、星尘纹理均本地生成；新增运行资源不请求外站。此说明不改变上面的智能搜索首次下载模型限制。

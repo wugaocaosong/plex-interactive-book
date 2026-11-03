@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 import { readFileSync } from 'node:fs'
 test('cover, complete table of contents, opening pages and bookmarks',async({page})=>{
   const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message))
-  await page.goto('/');await expect(page.getByRole('button',{name:'打开星轨编程，进入扉页'})).toBeVisible()
+  await page.goto('/read/cover');await expect(page.getByRole('button',{name:'打开星轨编程，进入扉页'})).toBeVisible()
   await page.screenshot({path:'output/playwright/cover.png',fullPage:true})
   await page.getByRole('button',{name:'翻开这本书'}).click()
   await expect(page.locator('.book-holder')).not.toHaveClass(/loading/)
@@ -10,10 +10,10 @@ test('cover, complete table of contents, opening pages and bookmarks',async({pag
   await page.getByRole('button',{name:'收藏当前页'}).click()
   await page.getByRole("button", {name:"更多阅读工具"}).click();
   await page.getByRole('button',{name:'查看书签'}).click()
-  await expect(page.locator('.bookmark-list')).toContainText('扉页')
+  await expect(page.locator('.organized-bookmark')).toContainText('扉页')
   await page.getByRole('button',{name:'关闭',exact:true}).click()
   await page.getByRole('button',{name:'打开目录'}).click()
-  await expect(page.getByRole('button',{name:'进入搜索',exact:true})).toBeVisible()
+  await expect(page.locator('.solar-chapter-list button')).toHaveCount(16)
   await page.screenshot({path:'output/playwright/star-map.png',fullPage:true})
   await page.getByRole('button',{name:'全部章节',exact:true}).click()
   await expect(page.locator('.chapter-directory')).toContainText('参考文献')
