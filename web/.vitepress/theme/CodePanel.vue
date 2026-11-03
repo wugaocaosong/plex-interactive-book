@@ -10,6 +10,7 @@ import type {
 import { readStore, saveStore } from "./storage";
 import { getLearning, putLearning } from "./learning-store";
 import { registerLearningFlush } from "./learning-flush";
+import {summonCodeAssistant,activeCodeProvider,snapshotVersion} from "./code-context";
 import PlexCoach from "./PlexCoach.vue";
 import CodeEditor from "./CodeEditor.vue";
 const emit=defineEmits<{completed:[]}>();
@@ -33,6 +34,9 @@ const lang = ref(props.exercise ? "python" : readStore("language", "python")),
   diagnostics = ref<Diagnostic[]>([]),
   readonlyHtml = ref(""),
   editor = ref<InstanceType<typeof CodeEditor>>();
+const selectedCode=ref('');
+const codeSnapshot=()=>({file:props.example?.file||props.exercise?.title||'example.py',reference:props.exercise?.id||props.example?.id||'',language:lang.value,code:code.value,selection:selectedCode.value,output:output.value,diagnostics:diagnostics.value.map(d=>`${d.line||'?'}: ${d.message}`).join('\n'),version:snapshotVersion(code.value)});
+onBeforeUnmount(()=>{if(activeCodeProvider.value===codeSnapshot)activeCodeProvider.value=null;});
 const variant = computed(
   () =>
     props.example?.variants.find((v) => v.language === lang.value) ||
@@ -314,7 +318,7 @@ onBeforeUnmount(() => {
       :original="diff ? original : undefined"
       :diagnostics="diagnostics"
       :fold-source-header="foldSourceHeader"
-      @blur="persist"
+      @blur="persist" @selection="selectedCode=$event"
     />
     <div
       v-else-if="readonlyHtml"
@@ -332,6 +336,7 @@ onBeforeUnmount(() => {
         :disabled="running"
       />
     </label>
+    <button class="summon-code-assistant" @click="summonCodeAssistant(codeSnapshot)">召唤小E · 查看代码上下文</button>
     <div class="execution-actions">
       <button
         v-if="python && !running"

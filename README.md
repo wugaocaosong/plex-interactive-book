@@ -2,6 +2,10 @@
 
 **Python 与算法的探索之旅** — 可从封面连续读到封底的 H5 交互式数字教材。
 
+**漫画银河首页**：在已确认的视觉稿上接入 Galaxy Explorer 的程序银河，支持星球点选、实体书旋转、封面点击和黑场睁眼入书。查看 [操作、开源来源与验收说明](docs/GALAXY_HOME_REDESIGN.md)。从首页开始体验；已有章节链接继续直达正文。
+
+**2026-11-02 功能分支更新**：银河书库、可拉伸阅读宽度、分类书签、公式复制、11 个教学场景、分层小艺动作和可移动代码助手窗口。实现位于 `codex/galaxy-reading-upgrade`，尚未合并 main；后端配套分支为 `codex/ebook-code-context`。查看 [操作与技术说明](docs/GALAXY_READING_UPGRADE.md)、[本轮验收记录](docs/GALAXY_VALIDATION.md) 和 [代码答疑接口](docs/CODE_CONTEXT_API.md)。体验本轮功能请在安装前执行 `git switch codex/galaxy-reading-upgrade`。
+
 **2026-10-30 main 更新**：已整合第 12 章示范、暗色 UI、离线翻页控制、翻页笔全屏切换、可移动多画板和小艺桌宠。保留 PLEX·星轨编程书名及 Logo。查看 [更新总览与启动命令](docs/UPDATE_2026-10-30.md)、[main 集成验收](docs/MAIN_INTEGRATION_2026-10-30.md) 和 [四人开发交接](docs/team-open-source/README.md)。下述 v0.4 为基础版本说明；新增章节任务不替换原有 27 题。
 
 **v0.4 三门深化版**保留 118 个教材页面、11 个 PLEX 附页、双模式阅读、六类算法实验、24 题与全部代码图解，增加 14 页「三扇舱门：直觉可靠吗？」：故事预测、真实 Python 模拟、3 道模板练习、4 题 H5P 自测、小黑板与学习反思。

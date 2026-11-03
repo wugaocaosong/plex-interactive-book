@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {readFileSync} from 'node:fs';
 const entry=async(page:any)=>{await page.getByTestId('lesson-entry').click();await expect(page.locator('.unit-panel')).toBeVisible();};
-const activity=async(page:any,name:string)=>{if(await page.locator('.floating-tool-window').isVisible()){await page.getByRole('button',{name:'关闭小黑板',exact:true}).click();await entry(page);}const details=page.locator('.all-activities');if(!await details.evaluate((el:HTMLElement)=>el.hasAttribute('open')))await details.locator('summary').click();await page.getByRole('navigation',{name:'三门学习活动'}).getByRole('button',{name,exact:true}).click();};
+const activity=async(page:any,name:string)=>{if(await page.getByRole('dialog',{name:'小黑板',exact:true}).isVisible()){await page.getByRole('button',{name:'关闭小黑板',exact:true}).click();await entry(page);}const details=page.locator('.all-activities');if(!await details.evaluate((el:HTMLElement)=>el.hasAttribute('open')))await details.locator('summary').click();await page.getByRole('navigation',{name:'三门学习活动'}).getByRole('button',{name,exact:true}).click();};
 for(const width of [390,820,1440])test(`v04 page-specific lesson, geometry and report ${width}`,async({page},info)=>{
   await page.setViewportSize({width,height:1000});const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('/read/unit/monty/rules');await entry(page);

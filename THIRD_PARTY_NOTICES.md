@@ -67,3 +67,25 @@ H5P 库来自 [官方 InteractiveBook 分发包](https://api.h5p.org/v1/content-
 小艺正面机器人 `web/public/brand/little-e-front.png` 基于项目提供的 `little-e.png` 背面图，通过 imagegen 生成。保留原有角色设计，来源与 SHA-256 记录于 `web/public/brand/SOURCES.json`，不宣称其为第三方开源角色素材。角色待机与交互动作由本项目 CSS 实现。
 
 MediaPipe Tasks Vision 0.10.32、Google hand_landmarker float16 v1、vosk-browser 0.0.8、Vosk 中文小模型 vosk-model-small-cn-0.22 使用 Apache-2.0；许可文本见 `licenses/dependencies/input-models-Apache-2.0.txt`，资源来源、版本与校验值见 `content/input-models/manifest.json`。Vosk 模型仅改变归档格式和目录权限，模型权重不变。测试手部图片来源及合成语音说明见 `tests/fixtures/input/README.md`。上述许可不替代《Hello 算法》教材本身的 CC BY-NC-SA 4.0。
+
+## 银河阅读升级（2026-11-02）
+
+- TresJS / @tresjs/core 5.10.0：https://github.com/Tresjs/tres ，MIT。
+- Three.js 0.187.0：https://github.com/mrdoob/three.js ，MIT。
+- @pmndrs/pointer-events 与 radashi 为 TresJS 的运行依赖，精确解析版本见 package-lock.json；许可副本由 assets 脚本收集。
+- 银河粒子、静态星球、实体书结构和 RobotRig 分层机器人为本项目程序绘制，未导入外站纹理或付费素材。角色延续已有小艺机器人外形语言；原 PNG 仍保留。
+- 教学场景为本项目编写的确定性算法模型，原教材文本、图解及署名继续按原来源许可保留。
+
+## 漫画银河首页（2026-11-02）
+
+银河尘埃聚类与底图着色器改编自 [Galaxy Explorer](https://github.com/zjoooooo/galaxy-explorer)，固定提交 `2df71512c45e6de15a50f5e36dfd5dbe5e462ecd`，Copyright (c) 2026 Justin Zhang Jun，MIT。完整许可保存在 `licenses/galaxy-explorer-MIT.txt`，构建时随静态资源提供。
+
+复用范围为 `index.html` 的 `buildDust` 与 `buildPaintedGalaxy` 中的程序化噪声、沿旋臂卷积与尘埃分布。适配现代 Three.js，缩放坐标、使用固定随机种子、调整青紫配色、减少烘焙步数并修正逆序 smoothstep；未复制其旧版 Three、音乐、NASA/第三方摄影、太阳系或外部数据接口。相机使用当前 Three.js 的 OrbitControls，本项目实现书籍导航转场。
+
+星球着色、完整实体书几何、书籍封底、漫画控件和睁眼遮罩由本项目制作；封面仍为已有项目素材。三张视觉提案由 imagegen 生成，只保存在设计文档中，不作为可交互场景或阅读正文。
+
+## 教材智能搜索（2026-11-03）
+
+- `@huggingface/transformers` 4.3.2：Apache-2.0；`@orama/orama` 3.1.18：Apache-2.0；`onnxruntime-web`：MIT（解析版本见锁文件）。许可由 assets 脚本复制到静态产物。
+- 模型引用为 `Xenova/bge-small-zh-v1.5`，由 Transformers.js 首次按需从 Hugging Face 获取；模型权重尚未随项目固定版本打包。不要将本次搜索功能描述为完全离线可复现。网络失败时显示错误，可返回精确查找。
+- 预设概念关联属于教材导航规则，与模型向量检索分别标识。查询在浏览器处理，没有新增聊天或成绩服务。

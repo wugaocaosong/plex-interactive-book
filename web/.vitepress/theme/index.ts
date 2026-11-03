@@ -1,5 +1,5 @@
 import type { Theme } from 'vitepress'
-import Layout from './Layout.vue'
+import Layout from './AppLayout.vue'
 import './style.css'
 import './learning.css'
 import 'katex/dist/katex.min.css'

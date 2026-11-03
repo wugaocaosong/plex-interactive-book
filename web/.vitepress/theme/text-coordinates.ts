@@ -13,6 +13,7 @@ export function canonicalText(root: Node): string {
     .forEach(
       (node) => (node.textContent = node.dataset.tex ?? node.textContent),
     );
+  clone.querySelectorAll?.("[data-text-ignore]").forEach(n=>n.remove());
   return clone.textContent || "";
 }
 export function textSegments(root: HTMLElement) {
@@ -23,6 +24,7 @@ export function textSegments(root: HTMLElement) {
   while ((next = walker.nextNode())) {
     const node = next as Text,
       math = node.parentElement?.closest<HTMLElement>(".arithmatex");
+    if(node.parentElement?.closest("[data-text-ignore]"))continue;
     if (math) {
       if (!seen.has(math)) {
         seen.add(math);

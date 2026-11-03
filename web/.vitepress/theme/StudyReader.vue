@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import {decorateFormulaCopies} from "./formula-copy";
 import renderMath from "katex/contrib/auto-render";
 import type {
   BookPage,
@@ -43,6 +44,7 @@ async function render() {
         { left: "\\[", right: "\\]", display: true },
       ],
     });
+    decorateFormulaCopies(el);
     props.decorate?.(el);
     decorateAnnotations(
       el,

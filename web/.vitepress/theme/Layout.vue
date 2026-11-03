@@ -24,6 +24,13 @@ import {
   Expand,
   RotateCcw,
 } from "lucide-vue-next";
+import type {SceneId} from "./teaching-models";
+const TeachingScene=defineAsyncComponent(()=>import("./TeachingScene.vue"));
+const teachingScene=ref<SceneId>("merge");
+import BookmarkLibrary from "./BookmarkLibrary.vue";
+import {organizeBookmarks} from "./bookmark-model";
+import {decorateFormulaCopies,handleFormulaCopy} from "./formula-copy";
+import ReaderWidth from "./ReaderWidth.vue";
 import renderMathInElement from "katex/contrib/auto-render";
 import type { PageFlip } from "page-flip";
 import type {
@@ -55,7 +62,7 @@ const controlNotice=ref('');let noticeTimer:ReturnType<typeof setTimeout>|undefi
 function turnNotice(text:string){controlNotice.value=text;clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>controlNotice.value='',2200);}
 async function controlTurn(command:PageTurnCommand){
  const editing=(document.activeElement as HTMLElement)?.closest('input,textarea,select,[contenteditable=true],.cm-editor');
- const blocked=!!(menu.value||panel.value||boardOpen.value||petOpen.value||selection.value||loading.value||editing||!document.hasFocus()||document.hidden||!getSelection()?.isCollapsed||(flip&&flip.getState()!=='read'));
+ const blocked=!!(menu.value||searchOpen.value||panel.value||boardOpen.value||petOpen.value||selection.value||loading.value||editing||!document.hasFocus()||document.hidden||!getSelection()?.isCollapsed||(flip&&flip.getState()!=='read'));
  if(!turnGate.accept(command,performance.now(),blocked))return;
  if(preferences.value.mode==='study'&&!cover.value&&study.value){
   const moved=await turnStudy(command.direction==='next'?1:-1);turnNotice(moved?'已滚动一屏':'已到阅读边界');return;
@@ -132,11 +139,23 @@ const sectionIndex = computed(() =>
 const cover = computed(() => current.value?.kind === "cover");
 const backCover = computed(() => current.value?.kind === "back-cover");
 const menu = ref<
-  "contents" | "search" | "bookmarks" | "settings" | "notes" | "more" | "controls" | null
+  "contents" | "bookmarks" | "settings" | "notes" | "more" | "controls" | null
 >(null);
 const mapView = ref(true);
 const query = ref("");
 const index = ref<SearchEntry[]>([]);
+const searchMode = ref<"exact" | "ai">("exact");
+const searchOpen = ref(false);
+const searchIndexError = ref("");
+const aiSearchProgress = ref("");
+const aiSearchError = ref("");
+const aiSearching = ref(false);
+let searchIndexRequest: Promise<SearchEntry[]> | undefined;
+let semanticSearchModule: typeof import("./smart-search") | undefined;
+let semanticDatabase: Awaited<ReturnType<(typeof import("./smart-search"))["prepareSemanticIndex"]>> | undefined;
+let semanticSearchTimer: ReturnType<typeof setTimeout> | undefined;
+let semanticSearchGeneration = 0;
+const semanticSectionHits = ref<{ sectionId: string; score: number }[]>([]);
 const preferences = ref<ReaderPreferences>({ ...defaultPreferences }),
   study = ref<InstanceType<typeof StudyReader>>(),
   studyPlace = ref<ReadingLocator>(),
@@ -341,6 +360,7 @@ const panel = ref<
   | "image"
   | "expanded"
   | "learning"
+  | "teaching"
   | "term"
   | "unit"
   | "chapter12"
@@ -361,6 +381,9 @@ const codeIndex = ref(0);
 const imageUrl = ref("");
 const imageAlt = ref("");
 const expandedHtml = ref("");
+const widthViewport = ref(typeof window === 'undefined' ? 1440 : window.innerWidth);
+const actualReaderWidth = computed(() => Math.min(widthViewport.value-48, preferences.value.customWidth?.[preferences.value.mode] ?? (preferences.value.mode==='flip'?{narrow:860,standard:1020,wide:1140}:{narrow:680,standard:840,wide:980})[preferences.value.width]));
+async function commitWidth(width?:number) {const place=locator(); preferences.value.customWidth={...preferences.value.customWidth,[preferences.value.mode]:width};saveStore('preferences',preferences.value);await layout(place);}
 const pageWidth = ref(510);
 const pageHeight = ref(670);
 const desktop = ref(true);
@@ -379,6 +402,7 @@ const panelLabel = computed(
       image: "查看图解",
       expanded: "展开阅读",
       learning: "学习实验室",
+      teaching: "算法教学演示",
       term: "术语解释",
       unit: "小E · 三门学习单元",
       chapter12: "分治 · 探险工作台",
@@ -388,7 +412,6 @@ const menuLabel = computed(
   () =>
     ({
       contents: "星域目录",
-      search: "搜索全书",
       bookmarks: "我的书签",
       settings: "阅读设置",
       controls: "翻页控制",
@@ -423,9 +446,265 @@ const searchResults = computed(() => {
               : [];
           }),
         )
-        .slice(0, 80)
     : [];
 });
+const previewSearchStart = computed(() => {
+  const visibleCount = 6;
+  const lastStart = Math.max(0, searchResults.value.length - visibleCount);
+  return Math.min(Math.max(0, activeSearchResultIndex.value - 2), lastStart);
+});
+const previewSearchResults = computed(() =>
+  searchResults.value.slice(previewSearchStart.value, previewSearchStart.value + 6),
+);
+type ConceptSearchResult = {
+  concept: string;
+  related: string[];
+  sectionIds: string[];
+  explanation: string;
+  preferredTerms?: string[];
+};
+const conceptRelations: (ConceptSearchResult & {
+  aliases: string[];
+})[] = [
+  {
+    aliases: ["先进先出", "先入先出", "fifo", "first in first out"],
+    concept: "队列",
+    related: ["先进先出", "队首", "队尾", "入队", "出队", "广度优先搜索", "层序遍历"],
+    sectionIds: ["chapter_stack_and_queue/queue", "chapter_tree/binary_tree_traversal", "chapter_graph/graph_traversal"],
+    explanation: "先进先出是队列的核心规则。除了队列本身，还能在树的层序遍历和图的广度优先搜索中看到它的实际用法。",
+    preferredTerms: ["先入先出"],
+  },
+  {
+    aliases: ["后进先出", "后入先出", "lifo"],
+    concept: "栈",
+    related: ["后进先出", "栈顶", "入栈", "出栈"],
+    sectionIds: ["chapter_stack_and_queue/stack"],
+    explanation: "后进先出对应栈：最后放入栈顶的数据，会最先被取出。",
+  },
+  {
+    aliases: ["层序遍历", "按层遍历", "广度优先", "bfs"],
+    concept: "广度优先搜索与层序遍历",
+    related: ["广度优先搜索", "层序遍历", "队列"],
+    sectionIds: ["chapter_tree/binary_tree_traversal", "chapter_graph/graph_traversal"],
+    explanation: "这类遍历会先访问近处节点，再逐层向外扩展，通常借助队列保存待访问节点。",
+  },
+  {
+    aliases: ["最近最少使用", "最久未使用", "lru"],
+    concept: "缓存与 LRU",
+    related: ["缓存", "最近最少使用", "链表"],
+    sectionIds: ["chapter_array_and_linkedlist/ram_and_cache"],
+    explanation: "LRU 会优先淘汰最长时间没有被使用的数据，常结合哈希表和链表实现。",
+  },
+  {
+    aliases: ["分而治之", "分治"],
+    concept: "分治策略",
+    related: ["分治", "递归", "子问题"],
+    sectionIds: ["chapter_divide_and_conquer/divide_and_conquer"],
+    explanation: "分治把大问题拆成若干同类小问题，分别解决后再合并结果。",
+  },
+];
+const matchedConcept = computed<ConceptSearchResult | undefined>(() => {
+  const term = query.value.trim().replace(/\s+/g, "").toLocaleLowerCase();
+  if (!term) return undefined;
+  const relation = conceptRelations.find((item) =>
+    item.aliases.some((alias) => term.includes(alias.replace(/\s+/g, "").toLocaleLowerCase())),
+  );
+  if (relation) return relation;
+  const glossaryMatch = glossary.value
+    .map((item) => {
+      const name = item.term.toLocaleLowerCase();
+      const english = item.english.toLocaleLowerCase().replace(/\s+/g, "");
+      const definition = item.definition.toLocaleLowerCase().replace(/\s+/g, "");
+      const score = name === term ? 6 : english === term ? 5 : name.includes(term) ? 4 : definition.includes(term) ? 3 : english.includes(term) ? 2 : 0;
+      return { item, score };
+    })
+    .filter((entry) => entry.score > 0)
+    .sort((a, b) => b.score - a.score)[0]?.item;
+  if (!glossaryMatch) return undefined;
+  return {
+    concept: glossaryMatch.term,
+    related: [glossaryMatch.term, glossaryMatch.english],
+    sectionIds: [glossaryMatch.sectionId],
+    explanation: glossaryMatch.definition,
+  };
+});
+const relatedSearchResults = computed(() => {
+  const relation = matchedConcept.value;
+  if (!relation || !index.value.length) return [];
+  return relation.sectionIds.flatMap((sectionId) => {
+    const root = index.value.find((item) => item.id === sectionId);
+    const prefix = sectionId.endsWith("/index") ? sectionId.slice(0, -"index".length) : "";
+    const siblings = prefix
+      ? index.value.filter((item) => item.id.startsWith(prefix) && item.id !== sectionId)
+      : [];
+    const targets = siblings.length
+      ? siblings.map((entry) => {
+          const titleScore = relation.related.some((word) => entry.title.toLocaleLowerCase().includes(word.toLocaleLowerCase())) ? 8 : 0;
+          const bodyScore = relation.related.reduce((total, word) => total + (entry.text.includes(word) ? 1 : 0), 0);
+          return { entry, score: titleScore + bodyScore };
+        }).filter((item) => item.score > 0).sort((a, b) => b.score - a.score).slice(0, 2).map((item) => item.entry)
+      : [];
+    const entries = targets.length ? targets : root ? [root] : [];
+    return entries.flatMap((entry) => {
+      const candidates = entry.blocks
+        .map((block) => ({
+          block,
+          score: relation.related.reduce(
+            (score, word) => score + (block.text.includes(word) ? 1 : 0),
+            0,
+          ),
+        }))
+        .sort((a, b) => b.score - a.score);
+      const preferred = relation.preferredTerms?.find((word) =>
+        entry.blocks.some((item) => item.text.includes(word)),
+      );
+      const block = (preferred
+        ? entry.blocks.find((item) => item.text.includes(preferred))
+        : undefined) || candidates[0]?.block || entry.blocks[0];
+      if (!block) return [];
+      const matchedTerm = preferred || relation.related.find((word) => block.text.includes(word));
+      const match = matchedTerm ? searchText(block.text, matchedTerm) : null;
+      const offset = match?.offset || 0;
+      const end = match?.end || 0;
+      return [{
+        ...entry,
+        blockId: block.blockId,
+        offset,
+        end,
+        before: match ? block.text.slice(Math.max(0, offset - 35), offset) : "",
+        hit: match ? block.text.slice(offset, end) : "",
+        after: match ? block.text.slice(end, end + 90) : block.text.slice(0, 125),
+        relation: relation.concept,
+      }];
+    });
+  });
+});
+const aiSearchResults = computed(() => {
+  const relationResults = relatedSearchResults.value;
+  const relatedIds = new Set(relationResults.map((item) => item.id));
+  const semanticResults = semanticSectionHits.value.flatMap(({ sectionId }) => {
+    if (relatedIds.has(sectionId)) return [];
+    const entry = index.value.find((item) => item.id === sectionId);
+    if (!entry) return [];
+    const block = [...entry.blocks]
+      .filter((item) => item.text.trim().length > 35)
+      .sort((a, b) => b.text.length - a.text.length)[0] || entry.blocks[0];
+    if (!block) return [];
+    const exactMatch = searchText(block.text, query.value.trim());
+    const offset = exactMatch?.offset || 0;
+    const end = exactMatch?.end || 0;
+    return [{
+      ...entry,
+      blockId: block.blockId,
+      offset,
+      end,
+      before: exactMatch ? block.text.slice(Math.max(0, offset - 35), offset) : "",
+      hit: exactMatch ? block.text.slice(offset, end) : "",
+      after: exactMatch ? block.text.slice(end, end + 90) : block.text.slice(0, 125),
+      relation: "语义匹配",
+    }];
+  });
+  return [...relationResults, ...semanticResults].slice(0, 20);
+});
+const activeSearchResults = computed(() =>
+  searchMode.value === "exact" ? searchResults.value : aiSearchResults.value,
+);
+const activeSearchResultIndex = ref(0);
+async function ensureSearchIndex() {
+  if (index.value.length) return;
+  searchIndexRequest ??= fetch("/book/search.json").then(async (response) => {
+    if (!response.ok) throw Error("全书搜索索引加载失败");
+    const entries = await response.json();
+    if (!Array.isArray(entries)) throw Error("全书搜索索引格式不正确");
+    index.value = entries;
+    return entries as SearchEntry[];
+  });
+  try {
+    searchIndexError.value = "";
+    await searchIndexRequest;
+  } catch (error) {
+    searchIndexError.value = String(error);
+    throw error;
+  } finally {
+    searchIndexRequest = undefined;
+  }
+}
+watch(query, (rawTerm) => {
+  const term = rawTerm.trim();
+  activeSearchResultIndex.value = 0;
+  searchOpen.value = !!term && !menu.value;
+  if (term) void ensureSearchIndex().catch(() => {});
+  if (searchMode.value === "ai") queueSemanticSearch();
+});
+function queueSemanticSearch() {
+  if (semanticSearchTimer) clearTimeout(semanticSearchTimer);
+  const term = query.value.trim();
+  const generation = ++semanticSearchGeneration;
+  semanticSectionHits.value = [];
+  aiSearchError.value = "";
+  if (!term || searchMode.value !== "ai") {
+    aiSearching.value = false;
+    aiSearchProgress.value = "";
+    return;
+  }
+  aiSearching.value = true;
+  aiSearchProgress.value = "准备本地语义搜索…";
+  semanticSearchTimer = setTimeout(async () => {
+    try {
+      await ensureSearchIndex();
+      semanticSearchModule ??= await import("./smart-search");
+      semanticDatabase ??= await semanticSearchModule.prepareSemanticIndex(
+        index.value,
+        (message) => {
+          if (generation === semanticSearchGeneration) aiSearchProgress.value = message;
+        },
+      );
+      if (generation !== semanticSearchGeneration) return;
+      aiSearchProgress.value = "正在理解你的问题…";
+      const hits = await semanticSearchModule.searchSemanticIndex(semanticDatabase, term);
+      if (generation === semanticSearchGeneration) semanticSectionHits.value = hits;
+    } catch (error) {
+      if (generation === semanticSearchGeneration) {
+        aiSearchError.value = "本地语义搜索暂时不可用，请检查网络后重试。";
+        console.error("Local semantic search failed", error);
+      }
+    } finally {
+      if (generation === semanticSearchGeneration) {
+        aiSearching.value = false;
+        aiSearchProgress.value = "";
+      }
+    }
+  }, 320);
+}
+function selectSearchMode(mode: "exact" | "ai") {
+  searchMode.value = mode;
+  activeSearchResultIndex.value = 0;
+  searchOpen.value = true;
+  if (mode === "ai") queueSemanticSearch();
+  else {
+    semanticSearchGeneration++;
+    aiSearching.value = false;
+  }
+}
+function stepSearchResult(direction: -1 | 1) {
+  const results = activeSearchResults.value;
+  if (!results.length) return;
+  activeSearchResultIndex.value =
+    (activeSearchResultIndex.value + direction + results.length) % results.length;
+  void goSearch(results[activeSearchResultIndex.value]);
+}
+function openSearchResult(entry: (typeof activeSearchResults.value)[number], index: number) {
+  activeSearchResultIndex.value = index;
+  void goSearch(entry);
+}
+function submitSmartSearch() {
+  const entry = activeSearchResults.value[0];
+  if (entry) void goSearch(entry);
+}
+function dismissSearch(event: PointerEvent) {
+  if (!(event.target as HTMLElement).closest(".smart-search-anchor"))
+    searchOpen.value = false;
+}
 const groups = computed(() => {
   const map = new Map<string, typeof sections.value>();
   for (const item of sections.value) {
@@ -448,6 +727,7 @@ let animationTimer: ReturnType<typeof setInterval> | undefined;
 let serial = 0;
 let rendering = false;
 let pendingLocator: ReadingLocator | undefined;
+let currentLoadTask: Promise<void> | undefined;
 let lastFocus: HTMLElement | null = null;
 let mounted = false;
 const cache = new Map<string, Promise<BookPage>>();
@@ -504,6 +784,7 @@ async function prepareAdjacent(page: BookPage) {
         { left: "\\[", right: "\\]", display: true },
       ],
     });
+    decorateFormulaCopies(source);
     await Promise.all(
       [...source.querySelectorAll("img")].map((image) => {
         image.loading = "eager";
@@ -577,9 +858,10 @@ function getPage(id: string) {
 }
 function locator(): ReadingLocator {
   if (preferences.value.mode === "study" && studyPlace.value)
-    return studyPlace.value;
+    return {...studyPlace.value,bookId:"plex-programming"};
   const leaf = leaves.value[pageIndex.value];
   return {
+    bookId: "plex-programming",
     sectionId: leafSections.value[pageIndex.value] || sectionId.value,
     blockId: leaf?.blockId || "b0",
     offset: leaf?.offset || 0,
@@ -619,7 +901,7 @@ async function navigate(id: string, place?: ReadingLocator) {
   pendingLocator = place;
   stopAnimation();
   const route =
-    id === "cover" ? "/" : sections.value.find((p) => p.id === id)?.route;
+    id === "cover" ? "/read/cover" : sections.value.find((p) => p.id === id)?.route;
   if (!route) return;
   if (id === sectionId.value) {
     if (place) {
@@ -684,7 +966,7 @@ function addBookmark() {
       b.offset === place.offset,
   );
   if (existing < 0)
-    bookmarks.value.push({ ...place, title: current.value?.title || "书签" });
+    bookmarks.value.push({...organizeBookmarks([{...place,title:current.value?.title||"书签"}])[0],id:crypto.randomUUID(),createdAt:new Date().toISOString()});
   saveStore("bookmarks", bookmarks.value);
   saved.value = true;
   setTimeout(() => (saved.value = false), 1500);
@@ -698,18 +980,26 @@ async function openMenu(type: typeof menu.value) {
   panel.value = null;
   rememberFocus();
   menu.value = type;
-  if (type === "search" && !index.value.length)
-    index.value = await fetch("/book/search.json").then((r) => r.json());
   await nextTick();
   (document.querySelector<HTMLInputElement>(".search-input") || document.querySelector<HTMLButtonElement>(".dialog-close"))?.focus();
 }
+async function focusSmartSearch() {
+  menu.value = null;
+  panel.value = null;
+  searchOpen.value = !!query.value.trim();
+  await nextTick();
+  document.querySelector<HTMLInputElement>(".cir-search__field")?.focus({preventScroll:true});
+}
 async function goSearch(entry: (typeof searchResults.value)[number]) {
+  searchOpen.value = false;
   await navigate(entry.id, {
     sectionId: entry.id,
     blockId: entry.blockId,
     offset: entry.offset,
   });
   await nextTick();
+  await currentLoadTask;
+  if (sectionId.value !== entry.id || error.value) return;
   document
     .querySelectorAll<HTMLElement>(
       ".book-host [data-block],.study-reader [data-block]",
@@ -728,6 +1018,7 @@ async function openLesson(id:string){
   openUnit(page?.mode||'profile',id);
 }
 async function openUnit(mode?:string, id = sectionId.value) {
+  searchOpen.value = false;
   if(mode==='blackboard'){await openBoard(id);return;}
   await flushLearning();
   if(!mode&&!unitDefinition.value){try{unitDefinition.value=await fetch('/learning/monty-unit.json').then(r=>r.json());}catch{}}
@@ -790,6 +1081,7 @@ async function stepFigure(figure: HTMLElement, delta: number) {
     `${next + 1} / ${frames.length}`;
 }
 async function clickBook(event: MouseEvent) {
+  if(await handleFormulaCopy(event))return;
   const target = event.target as HTMLElement;
   const contentBlock = target.closest<HTMLElement>("[data-block]");
   if (contentBlock)
@@ -824,6 +1116,7 @@ async function clickBook(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
     const value = action.dataset.action;
+    if(value === "teaching-scene"){teachingScene.value=action.dataset.scene as SceneId;openPanel("teaching");return;}
     if (value === "chapter12") {
       await chapterActivity(panelBlock.value?.sectionId || sectionId.value,action.dataset.mode || "route");
       return;
@@ -846,8 +1139,8 @@ async function clickBook(event: MouseEvent) {
         panelBlock.value?.sectionId || sectionId.value,
       );
     if (value === "image") {
-      imageUrl.value = (action as HTMLImageElement).src;
-      imageAlt.value = (action as HTMLImageElement).alt;
+      imageUrl.value = action.dataset.src || (action as HTMLImageElement).src;
+      imageAlt.value = action.dataset.alt || (action as HTMLImageElement).alt;
       openPanel("image");
     }
     if (value === "expand") {
@@ -910,6 +1203,7 @@ async function layout(place?: ReadingLocator) {
     loading.value = false;
     rendering = false;
     stage.value.innerHTML = current.value.html;
+  stage.value.dataset.section=current.value.id;
     await nextTick();
     if (place) await study.value?.go(place);
     return;
@@ -919,18 +1213,15 @@ async function layout(place?: ReadingLocator) {
   rendering = true;
   loading.value = true;
   stopAnimation();
-  desktop.value = window.innerWidth >= 1024;
+  const available = Math.max(280, window.innerWidth - 48);
+  const wanted = preferences.value.customWidth?.flip ?? ({narrow:860,standard:1020,wide:1140}[preferences.value.width]);
+  const total = Math.min(available, wanted);
+  desktop.value = window.innerWidth >= 1024 && total >= 800;
   pageHeight.value = Math.max(300, Math.min(window.innerHeight - 240, 850));
-  pageWidth.value = desktop.value
-    ? Math.min(
-        { narrow: 430, standard: 510, wide: 570 }[preferences.value.width],
-        Math.floor(
-          (window.innerWidth - 100) / 2,
-        ),
-      )
-    : Math.min(600, window.innerWidth - 24);
+  pageWidth.value = desktop.value ? Math.floor(total/2) : total;
   await nextTick();
   stage.value.innerHTML = current.value.html;
+  stage.value.dataset.section=current.value.id;
   const pageNotes = notes.value.filter(
     (n) => n.sectionId === current.value!.id,
   );
@@ -952,6 +1243,7 @@ async function layout(place?: ReadingLocator) {
       { left: "\\[", right: "\\]", display: true },
     ],
   });
+  decorateFormulaCopies(stage.value);
   stage.value
     .querySelectorAll<HTMLImageElement>("img")
     .forEach((img) => (img.loading = "eager"));
@@ -1166,7 +1458,8 @@ async function loadCurrent() {
   }
 }
 function resize() {
-  desktop.value = window.innerWidth >= 1024;
+  widthViewport.value=window.innerWidth;
+  desktop.value = window.innerWidth >= 1024 && actualReaderWidth.value >= 800;
   if (cover.value) return;
   const place = locator();
   clearTimeout(resizeTimer);
@@ -1190,10 +1483,12 @@ function keydown(event: KeyboardEvent) {
     return;
   }
   if (event.key === "Escape") {
+    searchOpen.value = false;
     closeOverlay();
     return;
   }
-  if (menu.value || panel.value) {
+  if (panel.value && !menu.value) return;
+  if (menu.value) {
     if (event.key === "Tab") {
       const box = document.querySelector<HTMLElement>('[role="dialog"]');
       const focusable = [
@@ -1235,13 +1530,14 @@ function hashchange() {
 watch(sectionId, () => {
   if (!studyRouting) {
     if(panel.value!=="unit")panel.value = null;
-    void loadCurrent();
+    currentLoadTask = loadCurrent();
   }
 });
 onMounted(async () => {
   mounted = true;
+  document.addEventListener("pointerdown", dismissSearch);
   void fetch("/learning/monty-unit.json").then(r=>r.json()).then(d=>unitDefinition.value=d).catch(()=>{});
-  desktop.value = window.innerWidth >= 1024;
+  desktop.value = window.innerWidth >= 1024 && actualReaderWidth.value >= 800;
   ready.value = true;
   window.addEventListener("plex-storage-error", storageNotice);
   darkMedia = matchMedia("(prefers-color-scheme: dark)");
@@ -1292,6 +1588,8 @@ onMounted(async () => {
 onBeforeUnmount(() => {
   if (overlayOpen.value) document.body.style.overflow = previousBodyOverflow;
   ++serial;
+  if (semanticSearchTimer) clearTimeout(semanticSearchTimer);
+  document.removeEventListener("pointerdown", dismissSearch);
   disposeDrag?.();
   flip?.destroy();
   stopAnimation();
@@ -1322,7 +1620,7 @@ onBeforeUnmount(() => {
       '--reader-font': preferences.fontSize + 'px',
       '--reader-line': preferences.lineHeight,
       '--study-width':
-        { narrow: 680, standard: 840, wide: 980 }[preferences.width] + 'px',
+        (preferences.customWidth?.study ?? { narrow: 680, standard: 840, wide: 980 }[preferences.width]) + 'px',
     }"
   >
     <a class="skip-link" href="#reading-content">跳到正文</a>
@@ -1396,6 +1694,83 @@ onBeforeUnmount(() => {
           >
             {{lesson?.activityLabel || "学习活动"}}</button
           ><button @click="blockNote()">本段笔记</button
+          ><div class="smart-search-anchor">
+            <form class="cir-search" role="search" @submit.prevent="submitSmartSearch">
+              <Search class="cir-search__icon" :size="16" aria-hidden="true" />
+              <input
+                v-model="query"
+                class="cir-search__field"
+                aria-label="搜索全书内容"
+                placeholder="搜索全书"
+                autocomplete="off"
+                @focus="searchOpen = !!query.trim()"
+                @keydown.esc.stop.prevent="searchOpen = false"
+              />
+            </form>
+            <section
+              v-if="searchOpen && query.trim() && !menu"
+              class="smart-search-popover"
+              aria-label="搜索结果"
+              @pointerdown.stop
+            >
+              <div class="smart-search-tabs" role="tablist" aria-label="搜索方式">
+                <button type="button" role="tab" :aria-selected="searchMode === 'exact'" @click="selectSearchMode('exact')">
+                  精确查找 <span>{{ index.length ? searchResults.length : "…" }}</span>
+                </button>
+                <button type="button" role="tab" :aria-selected="searchMode === 'ai'" @click="selectSearchMode('ai')">
+                  AI 模糊查找 <span>{{ aiSearching && !aiSearchResults.length ? "…" : aiSearchResults.length }}</span>
+                </button>
+              </div>
+              <div class="smart-search-toolbar">
+                <span class="smart-search-count">找到 <strong>{{ activeSearchResults.length }}</strong> 个匹配项</span>
+                <div class="smart-search-actions">
+                  <button type="button" class="smart-search-all" :disabled="aiSearching" @click="selectSearchMode('ai')">{{ aiSearching ? "AI 查找中…" : "AI 查找全部" }}</button>
+                  <button type="button" :disabled="!activeSearchResults.length" @click="stepSearchResult(-1)">上一个</button>
+                  <button type="button" :disabled="!activeSearchResults.length" @click="stepSearchResult(1)">下一个</button>
+                </div>
+              </div>
+              <div v-if="searchMode === 'exact'" class="smart-search-body">
+                <p v-if="searchIndexError" class="smart-search-message" role="alert">{{ searchIndexError }}</p>
+                <p v-else-if="!index.length" class="smart-search-message">正在查找教材内容…</p>
+                <p v-else-if="!previewSearchResults.length" class="smart-search-message">没有找到精确匹配，可以试试 AI 相关搜索。</p>
+                <button
+                  v-for="(entry, resultIndex) in previewSearchResults"
+                  :key="entry.id + entry.blockId"
+                  type="button"
+                  class="smart-search-hit"
+                  :class="{ 'is-current': activeSearchResultIndex === previewSearchStart + resultIndex }"
+                  @click="openSearchResult(entry, previewSearchStart + resultIndex)"
+                >
+                  <small><span class="smart-search-number">{{ String(resultIndex + 1).padStart(2, "0") }}</span>{{ entry.group }}</small>
+                  <strong>{{ entry.title }}</strong>
+                  <p>…{{ entry.before }}<mark v-if="entry.hit">{{ entry.hit }}</mark>{{ entry.after }}…</p>
+                </button>
+              </div>
+              <div v-else class="smart-search-body smart-ai-body">
+                <div v-if="aiSearching" class="reader-loading-indicator smart-search-loading" role="status" aria-live="polite">
+                  <div class="loader" aria-hidden="true"><span class="loader-text">GENIUS</span><span class="load"></span></div>
+                  <small class="loading-caption">{{ aiSearchProgress || "正在理解你的问题…" }}<template v-if="aiSearchResults.length"> · 已先显示教材匹配结果</template></small>
+                </div>
+                <p v-if="aiSearchError" class="smart-search-message" role="alert">{{ aiSearchError }} <button type="button" class="smart-search-retry" @click="queueSemanticSearch">重试</button></p>
+                <p v-if="!aiSearchResults.length && !aiSearching && !aiSearchError" class="smart-search-message">暂未找到相关知识点。可以换一种说法，或切换到精确搜索。</p>
+                <template v-if="aiSearchResults.length">
+                  <p class="smart-search-message"><strong v-if="matchedConcept">关联知识点：{{ matchedConcept.concept }}</strong><strong v-else>教材语义匹配</strong><br>{{ matchedConcept?.explanation || "根据问题含义，从教材章节中找到了这些相关内容。" }}<small class="smart-search-local-note">{{ matchedConcept ? '预设知识关联；语义模型就绪后补充检索结果' : '本地语义检索' }} · 无需登录</small></p>
+                  <button
+                    v-for="(entry, resultIndex) in aiSearchResults"
+                    :key="entry.id + entry.blockId"
+                    type="button"
+                    class="smart-search-hit"
+                    :class="{ 'is-current': activeSearchResultIndex === resultIndex }"
+                    @click="openSearchResult(entry, resultIndex)"
+                  >
+                    <small><span class="smart-search-number">{{ String(resultIndex + 1).padStart(2, "0") }}</span>{{ entry.group }} · {{ entry.relation }}</small>
+                    <strong>{{ entry.title }}</strong>
+                    <p>…{{ entry.before }}<mark v-if="entry.hit">{{ entry.hit }}</mark>{{ entry.after }}…</p>
+                  </button>
+                </template>
+              </div>
+            </section>
+          </div
           ><button
             class="bookmark-page"
             :aria-label="saved ? '已加入书签' : '收藏当前页'"
@@ -1404,6 +1779,7 @@ onBeforeUnmount(() => {
             <Check v-if="saved" :size="17" /><Bookmark v-else :size="17" />
           </button>
         </div>
+        <ReaderWidth v-if="!loading" :width="actualReaderWidth" @commit="commitWidth" @reset="commitWidth()"/>
         <StudyReader
           v-if="preferences.mode === 'study' && current"
           ref="study"
@@ -1454,8 +1830,14 @@ onBeforeUnmount(() => {
             <ChevronRight :size="24" />
           </button>
         </div>
-        <div v-if="loading" class="loading-label" role="status">
-          正在排版这一节…
+        <div v-if="loading" class="loading-label" role="status" aria-label="正在排版这一节">
+          <div class="reader-loading-indicator">
+            <div class="loader" aria-hidden="true">
+              <p class="loader-text">Loading...</p>
+              <span class="load"></span>
+            </div>
+            <span class="loading-caption">正在排版这一节…</span>
+          </div>
         </div>
         <div class="page-navigation">
           <button
@@ -1485,9 +1867,17 @@ onBeforeUnmount(() => {
           按住页边向内拖动翻书 · 拖回可取消
         </p>
       </section>
-      <div v-if="!ready" class="loading-label">正在打开星轨编程…</div>
+      <div v-if="!ready" class="loading-label" role="status" aria-label="正在打开星轨编程">
+        <div class="reader-loading-indicator">
+          <div class="loader" aria-hidden="true">
+            <p class="loader-text">Loading...</p>
+            <span class="load"></span>
+          </div>
+          <span class="loading-caption">正在打开星轨编程…</span>
+        </div>
+      </div>
     </main>
-    <nav class="bottom-navigation" aria-label="阅读主导航" :inert="overlayOpen">
+    <nav class="bottom-navigation" aria-label="阅读主导航" :inert="overlayOpen || loading">
       <button aria-label="打开目录" @click="openMenu('contents')">
         <Compass :size="20" /><span>目录</span>
       </button>
@@ -1574,7 +1964,7 @@ onBeforeUnmount(() => {
           >
             切换阅读模式
           </button>
-          <button aria-label="搜索全书" @click="openMenu('search')">
+          <button aria-label="搜索全书" @click="focusSmartSearch">
             搜索全书
           </button>
           <button aria-label="学习笔记" @click="openMenu('notes')">
@@ -1583,7 +1973,7 @@ onBeforeUnmount(() => {
           <button aria-label="阅读设置" @click="openMenu('settings')">
             阅读设置
           </button>
-          <button aria-label="查看书签" @click="openMenu('bookmarks')">
+          <a href="/" class="galaxy-return">返回银河书库</a><button aria-label="查看书签" @click="openMenu('bookmarks')">
             查看书签
           </button>
           <button
@@ -1639,34 +2029,6 @@ onBeforeUnmount(() => {
             </div>
           </div>
         </template>
-        <template v-if="menu === 'search'"
-          ><div class="search-box">
-            <Search :size="20" /><input
-              v-model="query"
-              class="search-input"
-              aria-label="搜索关键词"
-              placeholder="试试「二分查找」或「链表」"
-            />
-          </div>
-          <div class="search-results">
-            <p v-if="!query" class="empty-note">搜索全书的章节、术语和代码。</p>
-            <p v-else-if="!searchResults.length" class="empty-note">
-              没有找到相关内容，换个关键词试试。
-            </p>
-            <button
-              v-for="entry in searchResults"
-              :key="entry.id + entry.blockId"
-              @click="goSearch(entry)"
-            >
-              <small>{{ entry.group }}</small
-              ><strong>{{ entry.title }}</strong>
-              <p>
-                …{{ entry.before }}<mark>{{ entry.hit }}</mark
-                >{{ entry.after }}…
-              </p>
-            </button>
-          </div></template
-        >
         <div v-if="menu === 'settings'" class="reader-settings">
           <h2>阅读设置</h2>
           <label
@@ -1718,52 +2080,11 @@ onBeforeUnmount(() => {
             }
           "
         />
-        <div v-if="menu === 'bookmarks'" class="bookmark-list">
-          <p v-if="!bookmarks.length" class="empty-note">
-            阅读时点击页顶的书签图标，把值得重读的一页留在这里。
-          </p>
-          <div
-            v-for="(mark, i) in bookmarks"
-            :key="mark.sectionId + mark.blockId + mark.offset"
-          >
-            <button @click="navigate(mark.sectionId, mark)">
-              <Bookmark :size="16" />{{ mark.title }}</button
-            ><button
-              aria-label="删除书签"
-              @click="
-                bookmarks.splice(i, 1);
-                saveStore('bookmarks', bookmarks);
-              "
-            >
-              <X :size="16" />
-            </button>
-          </div>
-        </div>
+        <BookmarkLibrary v-if="menu==='bookmarks'" :marks="bookmarks" :sections="sections" @update="bookmarks=$event" @navigate="navigate($event.sectionId,$event)"/>
       </section>
     </div>
-    <div
-      v-if="panel"
-      class="overlay activity-overlay"
-      :class="{ 'window-expanded': windowExpanded }"
-      :data-window="panel"
-      @click.self="closeOverlay"
-    >
-      <section
-        class="content-dialog"
-        :class="{ 'image-dialog': panel === 'image' }"
-        role="dialog"
-        aria-modal="true"
-        :aria-label="panelLabel"
-      >
-        <div class="dialog-header">
-          <div>
-            <span class="dialog-eyebrow">{{ current?.title }}</span>
-            <h2>{{ panelLabel }}</h2>
-          </div>
-          <div class="window-actions"><button class="window-expand" :aria-label="windowExpanded ? '还原窗口' : '放大窗口'" :aria-pressed="windowExpanded" @click="windowExpanded = !windowExpanded"><Expand :size="20" /></button><button class="dialog-close" aria-label="关闭" @click="closeOverlay">
-            <X :size="22" />
-          </button></div>
-        </div>
+    <FloatingToolWindow v-if="panel" :title="panelLabel" storage-key="activity-window" mobile-fullscreen @close="closeOverlay">
+      <section class="content-dialog movable-activity" :data-window="panel">
         <button
           v-if="
             panelBlock && ['code', 'image', 'expanded'].includes(panel || '')
@@ -1778,6 +2099,7 @@ onBeforeUnmount(() => {
           :example="panelSource.codeExamples[codeIndex]"
           :fold-source-header="panelSource.html.includes('ch12-')"
         />
+        <TeachingScene v-if="panel==='teaching'" :key="teachingScene" :scene-id="teachingScene"/>
         <Chapter12Panel v-if="panel === 'chapter12'" :key="chapter12Mode" :mode="chapter12Mode" @activity="chapterActivity" />
         <UnitPanel
           v-if="panel === 'unit'"
@@ -1808,9 +2130,9 @@ onBeforeUnmount(() => {
           @click="clickBook"
         />
       </section>
-    </div>
+    </FloatingToolWindow>
     <FloatingToolWindow v-if="boardOpen" v-show="!overlayOpen" :inert="overlayOpen" title="小黑板" storage-key="blackboard-window" @close="closeBoard"><Blackboard :key="boardSection" :section-id="boardSection" /></FloatingToolWindow>
-    <EbookPet ref="pet" :section-id="sectionId" :section-title="current?.title||'封面'" :suspended="overlayOpen" @open="petOpen=$event" @dictating="dictating=$event" @login="openUnit('profile')"/>
+    <EbookPet ref="pet" :section-id="sectionId" :section-title="current?.title||'封面'" :suspended="!!menu" @open="petOpen=$event" @dictating="dictating=$event" @login="openUnit('profile')"/>
     <ReaderControls :settings="menu==='controls'" :blocked="overlayOpen||boardOpen||petOpen" :dictating="dictating" :notice="controlNotice" @command="controlTurn" @fullscreen="fullscreen" @configure="openMenu('controls')" />
   </div>
 </template>

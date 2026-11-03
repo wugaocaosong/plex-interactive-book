@@ -1,0 +1,16 @@
+{
+ "version":1,
+ "chapters": {
+  "chapter_divide_and_conquer/divide_and_conquer":{"scene":"merge","title":"拆分合并"},
+  "chapter_divide_and_conquer/binary_search_recur":{"scene":"binary","title":"递归二分查找"},
+  "chapter_divide_and_conquer/build_binary_tree_problem":{"scene":"tree","title":"前序／中序构建树"},
+  "chapter_divide_and_conquer/hanota_problem":{"scene":"hanoi","title":"汉诺塔"},
+  "chapter_backtracking/permutations_problem":{"scene":"permutations","title":"全排列搜索树"},
+  "chapter_backtracking/n_queens_problem":{"scene":"queens","title":"N 皇后冲突检查与回退"},
+  "chapter_dynamic_programming/intro_to_dynamic_programming":{"scene":"stairs","title":"爬楼梯状态转移"},
+  "chapter_dynamic_programming/knapsack_problem":{"scene":"knapsack","title":"0-1 背包填表与选取"},
+  "chapter_greedy/fractional_knapsack_problem":{"scene":"fractional","title":"分数背包"},
+  "chapter_greedy/max_capacity_problem":{"scene":"capacity","title":"最大容量双指针"},
+  "chapter_appendix/installation":{"scene":"workflow","title":"编辑、运行与修正"}
+ }
+}

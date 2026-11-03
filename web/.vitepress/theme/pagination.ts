@@ -49,7 +49,7 @@ export function paginate(
       offset = Number(element.dataset.start || 0);
     }
   };
-  const fits = () => measure.scrollHeight <= maxHeight + 1;
+  const fits = () => measure.scrollHeight <= maxHeight + 1 && measure.scrollWidth <= measure.clientWidth + 1;
   const queue = [...source.children].map(
     (node) => node.cloneNode(true) as HTMLElement,
   );

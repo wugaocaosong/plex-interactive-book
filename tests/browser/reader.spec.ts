@@ -55,8 +55,8 @@ test('search, diagram stepping, Python execution and error recovery',async({page
   await page.screenshot({path:'output/playwright/code-lab.png',fullPage:true})
   await page.getByRole('button',{name:'关闭',exact:true}).click()
   await page.getByRole("button", {name:"更多阅读工具"}).click();
-  await page.getByRole('button',{name:'搜索全书'}).click();await page.getByLabel('搜索关键词').fill('链表')
-  await expect(page.locator('.search-results')).toContainText('链表')
+  await page.getByRole('button',{name:'搜索全书'}).click();await page.getByLabel('搜索全书内容').fill('链表')
+  await expect(page.locator('.smart-search-popover')).toContainText('链表')
 })
 test('H5P real player grades and persists a correct answer across refresh',async({page})=>{
   const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message))
