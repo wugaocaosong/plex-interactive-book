@@ -444,10 +444,16 @@ const searchResults = computed(() => {
               : [];
           }),
         )
-        .slice(0, 80)
     : [];
 });
-const previewSearchResults = computed(() => searchResults.value.slice(0, 6));
+const previewSearchStart = computed(() => {
+  const visibleCount = 6;
+  const lastStart = Math.max(0, searchResults.value.length - visibleCount);
+  return Math.min(Math.max(0, activeSearchResultIndex.value - 2), lastStart);
+});
+const previewSearchResults = computed(() =>
+  searchResults.value.slice(previewSearchStart.value, previewSearchStart.value + 6),
+);
 type ConceptSearchResult = {
   concept: string;
   related: string[];
@@ -596,8 +602,12 @@ const aiSearchResults = computed(() => {
       relation: "语义匹配",
     }];
   });
-  return [...relationResults, ...semanticResults].slice(0, 6);
+  return [...relationResults, ...semanticResults].slice(0, 20);
 });
+const activeSearchResults = computed(() =>
+  searchMode.value === "exact" ? searchResults.value : aiSearchResults.value,
+);
+const activeSearchResultIndex = ref(0);
 async function ensureSearchIndex() {
   if (index.value.length) return;
   searchIndexRequest ??= fetch("/book/search.json").then(async (response) => {
@@ -619,6 +629,7 @@ async function ensureSearchIndex() {
 }
 watch(query, (rawTerm) => {
   const term = rawTerm.trim();
+  activeSearchResultIndex.value = 0;
   searchOpen.value = !!term && !menu.value;
   if (term) void ensureSearchIndex().catch(() => {});
   if (searchMode.value === "ai") queueSemanticSearch();
@@ -665,6 +676,7 @@ function queueSemanticSearch() {
 }
 function selectSearchMode(mode: "exact" | "ai") {
   searchMode.value = mode;
+  activeSearchResultIndex.value = 0;
   searchOpen.value = true;
   if (mode === "ai") queueSemanticSearch();
   else {
@@ -672,10 +684,19 @@ function selectSearchMode(mode: "exact" | "ai") {
     aiSearching.value = false;
   }
 }
+function stepSearchResult(direction: -1 | 1) {
+  const results = activeSearchResults.value;
+  if (!results.length) return;
+  activeSearchResultIndex.value =
+    (activeSearchResultIndex.value + direction + results.length) % results.length;
+  void goSearch(results[activeSearchResultIndex.value]);
+}
+function openSearchResult(entry: (typeof activeSearchResults.value)[number], index: number) {
+  activeSearchResultIndex.value = index;
+  void goSearch(entry);
+}
 function submitSmartSearch() {
-  const entry = searchMode.value === "ai"
-    ? aiSearchResults.value[0]
-    : searchResults.value[0];
+  const entry = activeSearchResults.value[0];
   if (entry) void goSearch(entry);
 }
 function dismissSearch(event: PointerEvent) {
@@ -1687,26 +1708,35 @@ onBeforeUnmount(() => {
             >
               <div class="smart-search-tabs" role="tablist" aria-label="搜索方式">
                 <button type="button" role="tab" :aria-selected="searchMode === 'exact'" @click="selectSearchMode('exact')">
-                  精确搜索 <span>{{ index.length ? searchResults.length : "…" }}</span>
+                  精确查找 <span>{{ index.length ? searchResults.length : "…" }}</span>
                 </button>
                 <button type="button" role="tab" :aria-selected="searchMode === 'ai'" @click="selectSearchMode('ai')">
-                  AI 相关搜索 <span>免登录</span>
+                  AI 模糊查找 <span>{{ aiSearching && !aiSearchResults.length ? "…" : aiSearchResults.length }}</span>
                 </button>
+              </div>
+              <div class="smart-search-toolbar">
+                <span class="smart-search-count">找到 <strong>{{ activeSearchResults.length }}</strong> 个匹配项</span>
+                <div class="smart-search-actions">
+                  <button type="button" class="smart-search-all" :disabled="aiSearching" @click="selectSearchMode('ai')">{{ aiSearching ? "AI 查找中…" : "AI 查找全部" }}</button>
+                  <button type="button" :disabled="!activeSearchResults.length" @click="stepSearchResult(-1)">上一个</button>
+                  <button type="button" :disabled="!activeSearchResults.length" @click="stepSearchResult(1)">下一个</button>
+                </div>
               </div>
               <div v-if="searchMode === 'exact'" class="smart-search-body">
                 <p v-if="searchIndexError" class="smart-search-message" role="alert">{{ searchIndexError }}</p>
                 <p v-else-if="!index.length" class="smart-search-message">正在查找教材内容…</p>
                 <p v-else-if="!previewSearchResults.length" class="smart-search-message">没有找到精确匹配，可以试试 AI 相关搜索。</p>
                 <button
-                  v-for="entry in previewSearchResults"
+                  v-for="(entry, resultIndex) in previewSearchResults"
                   :key="entry.id + entry.blockId"
                   type="button"
                   class="smart-search-hit"
-                  @click="goSearch(entry)"
+                  :class="{ 'is-current': activeSearchResultIndex === previewSearchStart + resultIndex }"
+                  @click="openSearchResult(entry, previewSearchStart + resultIndex)"
                 >
-                  <small>{{ entry.group }}</small>
+                  <small><span class="smart-search-number">{{ String(resultIndex + 1).padStart(2, "0") }}</span>{{ entry.group }}</small>
                   <strong>{{ entry.title }}</strong>
-                  <p>…{{ entry.before }}<mark>{{ entry.hit }}</mark>{{ entry.after }}…</p>
+                  <p>…{{ entry.before }}<mark v-if="entry.hit">{{ entry.hit }}</mark>{{ entry.after }}…</p>
                 </button>
               </div>
               <div v-else class="smart-search-body smart-ai-body">
@@ -1719,15 +1749,16 @@ onBeforeUnmount(() => {
                 <template v-if="aiSearchResults.length">
                   <p class="smart-search-message"><strong v-if="matchedConcept">关联知识点：{{ matchedConcept.concept }}</strong><strong v-else>教材语义匹配</strong><br>{{ matchedConcept?.explanation || "根据问题含义，从教材章节中找到了这些相关内容。" }}<small class="smart-search-local-note">本地语义检索 · 无需登录</small></p>
                   <button
-                    v-for="entry in aiSearchResults"
+                    v-for="(entry, resultIndex) in aiSearchResults"
                     :key="entry.id + entry.blockId"
                     type="button"
                     class="smart-search-hit"
-                    @click="goSearch(entry)"
+                    :class="{ 'is-current': activeSearchResultIndex === resultIndex }"
+                    @click="openSearchResult(entry, resultIndex)"
                   >
-                    <small>{{ entry.group }} · {{ entry.relation }}</small>
+                    <small><span class="smart-search-number">{{ String(resultIndex + 1).padStart(2, "0") }}</span>{{ entry.group }} · {{ entry.relation }}</small>
                     <strong>{{ entry.title }}</strong>
-                    <p>…{{ entry.before }}<mark>{{ entry.hit }}</mark>{{ entry.after }}…</p>
+                    <p>…{{ entry.before }}<mark v-if="entry.hit">{{ entry.hit }}</mark>{{ entry.after }}…</p>
                   </button>
                 </template>
               </div>

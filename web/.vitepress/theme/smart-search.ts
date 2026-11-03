@@ -161,7 +161,7 @@ export async function searchSemanticIndex(
     mode: "vector",
     vector: { value: vector, property: "embedding" },
     similarity: 0.35,
-    limit: 6,
+    limit: 20,
   });
   return results.hits.map(({ document, score }) => ({
     sectionId: document.sectionId,
