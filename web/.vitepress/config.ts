@@ -7,6 +7,6 @@ export default defineConfig({
   lang: 'zh-CN', cleanUrls: true, lastUpdated: false,
   srcExclude: ['public/**'],
   head: [['meta', { name: 'theme-color', content: '#131315' }], ['link', {rel:'icon',type:'image/svg+xml',href:'/favicon.svg'}]],
-  vite: { cacheDir: 'C:/Users/gao/AppData/Local/Temp/plex-main-preview-vite-cache', server: { proxy, fs: { allow: ['..'] }, watch: { ignored: ['**/.vitepress/dist/**'] } }, preview:{proxy}, optimizeDeps: { include: ['@huggingface/transformers', '@orama/orama'], exclude: ['h5p-standalone'] } },
+  vite: { cacheDir: '.vitepress/cache/vite', server: { proxy, fs: { allow: ['..'] }, watch: { ignored: ['**/.vitepress/dist/**'] } }, preview:{proxy}, optimizeDeps: { include: ['@huggingface/transformers', '@orama/orama'], exclude: ['h5p-standalone'] } },
   ignoreDeadLinks: false
 })
