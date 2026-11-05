@@ -5,6 +5,44 @@ from bs4 import BeautifulSoup
 from block_ids import assign_blocks
 
 class ImportTests(unittest.TestCase):
+    def test_teammate_labs_keep_routes_ids_and_are_repeatable(self):
+        import route_lab
+        registry={}
+        pages=list(route_lab.pages())
+        self.assertEqual(len(pages),6)
+        self.assertEqual(sum(len(examples)-1 for _,_,examples in pages),15)
+        for original,body,examples in pages:
+            route_lab.seed_registry(original,registry)
+            first,aliases,_=assign_blocks(body,original['id'],registry)
+            second,_,changes=assign_blocks(body,original['id'],registry)
+            self.assertEqual(first,second);self.assertEqual(changes,[])
+            self.assertEqual(set(original['blockAliases'].values()),set(aliases.values()))
+            soup=BeautifulSoup(first,'html.parser')
+            self.assertFalse(soup.select('textarea,.lab-editor,[data-action="lab-run"]'))
+            for button in soup.select('[data-action="code"]'):
+                self.assertLess(int(button['data-code']),len(examples))
+            for example in examples:
+                self.assertEqual(example['variants'][0]['sourceOrigin'],'authored')
+
+    def test_route_lab_reference_and_basic_cards_run_in_fresh_namespaces(self):
+        import route_lab,contextlib,io
+        scope={'__name__':'test'};exec(route_lab.reference(),scope)
+        graph=scope['build_adj_list'](3,[[0,1]])
+        self.assertEqual(scope['bfs_shortest'](graph,0),[0,1,-1])
+        self.assertEqual(scope['build_adj_matrix'](0,[]),[])
+        self.assertEqual(scope['bubble_sort_desc']([3,1,3]),[3,3,1])
+        self.assertEqual(scope['binary_search']([],3),-1)
+        self.assertEqual(scope['binary_search']([1,3,5],5),2)
+        self.assertEqual(scope['dispatch_plan'](),[0,4,2,7,5,1,6,3])
+        for original,body,examples in route_lab.pages():
+            soup=BeautifulSoup(body,'html.parser')
+            for card in soup.select('.route-lab-card'):
+                if card.get('data-level','basic')!='basic':continue
+                code=examples[int(card.button['data-code'])]['variants'][0]['fullSource']
+                with contextlib.redirect_stdout(io.StringIO()) as output:
+                    exec(code,{'__name__':'__main__'})
+                self.assertTrue(output.getvalue().strip(),card['data-lab-key'])
+
     def test_chapter12_overlay_preserves_unchanged_ids_and_repeated_import(self):
         import chapter12
         section=chapter12.PREFIX+'divide_and_conquer'

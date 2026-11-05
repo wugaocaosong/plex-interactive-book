@@ -12,6 +12,7 @@ import { decorateAnnotations } from "./annotations";
 import { retainMathText, textSegments } from "./text-coordinates";
 const props = defineProps<{
   page: BookPage;
+  revision?: number;
   sections: BookSection[];
   getPage: (id: string) => Promise<BookPage>;
   notes: AnnotationRecord[];
@@ -211,6 +212,14 @@ watch(
     await render();
   },
 );
+watch(() => props.revision, async () => {
+  for(const article of root.value?.querySelectorAll<HTMLElement>(".study-article")||[]) {
+    const page=items.value.find(p=>p.id===article.dataset.section);
+    if(page&&article.lastElementChild) article.lastElementChild.innerHTML=page.html;
+    delete article.dataset.decorated;
+  }
+  await render();
+});
 watch(() => props.page, setPage);
 onMounted(() => setPage(props.page));
 onBeforeUnmount(() => {

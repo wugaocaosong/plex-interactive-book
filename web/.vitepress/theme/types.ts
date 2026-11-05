@@ -23,6 +23,7 @@ export interface BookManifest {
   pages: BookSection[];
 }
 export interface CodeVariant {
+  sourceOrigin?: "authored";
   language: string;
   snippet: string;
   fullSource: string;
@@ -32,6 +33,8 @@ export interface CodeVariant {
   runnable: boolean;
 }
 export interface CodeExample {
+  legacyDraftKey?: string;
+  labKey?: string;
   id: string;
   file: string;
   className: string;
@@ -67,6 +70,9 @@ export interface SearchEntry {
   blocks: { blockId: string; text: string }[];
 }
 export interface ReaderPreferences {
+  labLevel: "basic" | "advanced" | "challenge";
+  font: "sans" | "serif";
+  immersion: boolean;
   customWidth?: Partial<Record<"flip" | "study", number>>;
   galaxySimple?: boolean;
   mode: "flip" | "study";

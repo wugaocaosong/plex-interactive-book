@@ -16,6 +16,9 @@ export const defaultPreferences: ReaderPreferences = {
   theme: "light",
   width: "standard",
   split: 40,
+  labLevel: "basic",
+  font: "sans",
+  immersion: false,
 };
 export function sanitizePreferences(
   value: Partial<ReaderPreferences> | undefined,
@@ -32,6 +35,9 @@ export function sanitizePreferences(
   if (!Number.isFinite(result.split)) result.split = 40;
   result.split = Math.max(28, Math.min(55, result.split));
   if(result.customWidth) result.customWidth=Object.fromEntries(Object.entries(result.customWidth).filter(([k,v])=>["flip","study"].includes(k)&&typeof v==="number"&&Number.isFinite(v)&&v>=280&&v<=10000));
+  if (!["basic", "advanced", "challenge"].includes(result.labLevel)) result.labLevel = "basic";
+  if (!["sans", "serif"].includes(result.font)) result.font = "sans";
+  result.immersion = result.immersion === true;
   return result;
 }
 export interface LearningRecord {
@@ -238,6 +244,7 @@ export function validateBackup(value: unknown): Backup {
     )
       throw Error("备份记录格式错误");
     const value = record.value as Record<string, unknown> | null;
+    if(record.id.startsWith('lab-run:') && (!value || typeof value.key!=='string' || record.id!=='lab-run:'+value.key || !['done','error','stopped'].includes(String(value.state)) || typeof value.codeVersion!=='string' || typeof value.updatedAt!=='string' || !Number.isFinite(Date.parse(value.updatedAt)))) throw Error('综合实验运行记录格式错误');
     if(record.id==='pet:appearance'&&(!value||value.version!==1||typeof value.scale!=='number'||!Number.isFinite(value.scale)||value.scale<.7||value.scale>2||typeof value.visible!=='boolean'||typeof value.idleMotion!=='boolean'))throw Error('小E外观记录格式错误');
     if(record.id==='bookmark:groups'||record.id==='bookmark:levels'){
       const rows=record.value as any;

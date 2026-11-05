@@ -1,0 +1,143 @@
+{
+  "id": "unit/lab/dispatch",
+  "title": "实验四　综合调度：谁先送、怎么送",
+  "kind": "unit",
+  "group": "星航驿站 · 综合实验",
+  "route": "/read/unit/lab/dispatch",
+  "sourcePath": null,
+  "sourceCommit": null,
+  "html": "<h1 data-block=\"blk-lab-dispatch-000\">实验四　综合调度：谁先送、怎么送</h1>\n<p data-block=\"blk-lab-dispatch-001\">三块零件都齐了：图告诉你谁连着谁，遍历告诉你几跳能到，排序把包裹量理顺。最后一步，是把它们装成一台会做决定的机器。</p>\n<h2 data-block=\"blk-lab-dispatch-002\">一、原理速览</h2>\n<p data-block=\"blk-lab-dispatch-003\">配送顺序不是单关键字排序。包裹多的先送；包裹一样多的时候，近的先送。这是一个二元组比较：<span class=\"arithmatex\" data-tex=\"\\((-\\text{包裹量},\\ \\text{跳数})\\)\">\\((-\\text{包裹量},\\ \\text{跳数})\\)</span>——负号把「越大越前」翻译成「越小越前」，于是两个关键字都能用默认的升序规则处理。</p>\n<p data-block=\"blk-lab-dispatch-004\">Python 的元组比较正是字典序：先比第一项，相同才比第二项。写成 <code>sorted(range(n), key=lambda i: (-PACKAGES[i], hops[i]))</code> 就够了。</p>\n<h2 data-block=\"blk-lab-dispatch-005\" data-level=\"basic\">二、跟着做：把三个结果拼成一句话</h2>\n<ol data-block=\"blk-lab-dispatch-006\" data-level=\"basic\"><li><strong>跑一遍</strong>：在下面实验台点「运行」，把前五站抄下来；</li><li><strong>验证优先级</strong>：开阳 9 份排在第 2 位，望舒 8 份排在第 3 位——尽管望舒只要 1 跳。包裹量的优先级高于距离；</li><li><strong>换策略</strong>：把 key 改成 <code>(hops[i], -PACKAGES[i])</code> 再运行，顺序立刻变成「距离优先」；</li><li><strong>说清取舍</strong>：这两种策略，分别在什么情况下更合理？</li></ol>\n<div class=\"route-lab-card\" data-block=\"blk-lab-dispatch-007\" data-lab-key=\"lab-dispatch-b1\" data-level=\"basic\"><h3>实验台 · 综合调度</h3><p>修改代码，运行后对照输出。运行成功不代表已通过知识测验。</p><pre aria-label=\"起始代码预览，完整代码可在实验台编辑\" tabindex=\"0\">def build_adj_list(n: int, routes: list[list[int]]) -&gt; list[list[int]]:\n    \"\"\"返回 n 个列表，第 i 个装 i 的全部邻居\"\"\"\n    graph = [[] for _ in range(n)]\n    for a, b in routes:\n…</pre><button data-action=\"code\" data-code=\"1\" type=\"button\">动手写代码</button><p class=\"route-lab-result\" data-lab-result=\"lab-dispatch-b1\" role=\"status\">尚未运行</p></div>\n<p data-block=\"blk-lab-dispatch-008\" data-level=\"basic\">想看完整程序？<button class=\"lab-open-full\" data-action=\"code\" data-code=\"0\">打开完整程序</button></p>\n<p data-block=\"blk-lab-dispatch-009\" data-level=\"advanced\">想动手写自己的版本？<button class=\"lab-open-full\" data-action=\"code\" data-code=\"0\">打开完整程序，清空后照签名写</button></p>\n<p data-block=\"blk-lab-dispatch-010\" data-level=\"challenge\">要验证自己的改动？<button class=\"lab-open-full\" data-action=\"code\" data-code=\"0\">打开完整程序</button></p>\n<details data-block=\"blk-lab-dispatch-011\" data-level=\"basic\"><summary>本步预期输出（配送顺序 + 二分结果）</summary><pre>== 4. 综合调度 ==\n配送顺序建议（包裹量优先，同量就近）：\n  第1站  总站（12 份，0 跳可达）\n  第2站  开阳（9 份，2 跳可达）\n  第3站  望舒（8 份，1 跳可达）\n  第4站  摇光（7 份，4 跳可达）\n  第5站  玉衡（6 份，3 跳可达）\n  第6站  天枢（5 份，1 跳可达）\n  第7站  天璇（4 份，3 跳可达）\n  第8站  瑶光（3 份，2 跳可达）\n\n二分查找恰好 2 跳可达的驿站：瑶光</pre></details>\n<p data-block=\"blk-lab-dispatch-012\" data-level=\"basic\">注意最后那行二分结果：它查的不是包裹量，而是「恰好 2 跳可达的驿站」——二分的用武之地不止排序，只要数据有序，它随时能上场。</p>\n<h2 data-block=\"blk-lab-dispatch-013\" data-level=\"advanced\">二、自己做：不看代码，把决策写出来</h2>\n<p data-block=\"blk-lab-dispatch-014\" data-level=\"advanced\">任务：只用 <code>hops</code> 和 <code>PACKAGES</code>，自己写 <code>dispatch_plan()</code>，输出前 3 站，每行带上（包裹量，跳数）。不许翻上面的代码窗口。</p>\n<div class=\"route-lab-card\" data-block=\"blk-lab-dispatch-015\" data-lab-key=\"lab-dispatch-a1\" data-level=\"advanced\"><h3>实验台 · 自己排配送顺序</h3><p>修改代码，运行后对照输出。运行成功不代表已通过知识测验。</p><pre aria-label=\"起始代码预览，完整代码可在实验台编辑\" tabindex=\"0\">def build_adj_list(n: int, routes: list[list[int]]) -&gt; list[list[int]]:\n    \"\"\"返回 n 个列表，第 i 个装 i 的全部邻居\"\"\"\n    graph = [[] for _ in range(n)]\n    for a, b in routes:\n…</pre><button data-action=\"code\" data-code=\"2\" type=\"button\">动手写代码</button><p class=\"route-lab-result\" data-lab-result=\"lab-dispatch-a1\" role=\"status\">尚未运行</p></div>\n<table data-block=\"blk-lab-dispatch-016\" data-level=\"advanced\"><thead><tr><th>验收项</th><th>应该是</th></tr></thead><tbody><tr><td>前三站</td><td>总站 → 开阳 → 望舒</td></tr><tr><td>每行信息</td><td>站名、包裹量、跳数三项齐全</td></tr><tr><td>写法</td><td>用一次 <code>sorted</code>，key 返回二元组</td></tr></tbody></table>\n<details data-block=\"blk-lab-dispatch-017\" data-level=\"advanced\"><summary>卡住了？三条提示</summary><ol><li><code>range(len(STATIONS))</code> 当索引列表，遍历的是编号，取数据靠下标；</li><li>key 返回元组：<code>(-PACKAGES[i], hops[i])</code>，负号只加在包裹量上；</li><li>别用两次 <code>sorted</code> 叠（先按距离排、再按包裹量排）——虽然稳定排序确实能做到，但一次元组比较更清楚。</li></ol></details>\n<p data-block=\"blk-lab-dispatch-018\" data-level=\"advanced\">追问一个细节：如果两站的包裹量和跳数都相同，谁在前？<code>sorted</code> 是<strong>稳定</strong>的，会保持原编号顺序。这算不算一条隐式的平局规则？它公平吗？</p>\n<h2 data-block=\"blk-lab-dispatch-019\" data-level=\"challenge\">二、再难一点：一个人，一次只能带 20 份</h2>\n<ol data-block=\"blk-lab-dispatch-020\" data-level=\"challenge\"><li><strong>载重约束</strong>：快递员一趟最多带 20 份，每趟从总站出发、回总站。怎么分组最省趟次？</li><li><strong>算代价</strong>：给每条航线加距离，比较「包裹量优先」和「距离优先」两种策略下，一趟要飞多少跳。</li><li><strong>换目标</strong>：如果目标是「所有包裹平均送达时间最短」，排序键该怎么设计？写出来，说清理由。</li></ol>\n<details data-block=\"blk-lab-dispatch-021\" data-level=\"challenge\"><summary>做完再看：一种可行解</summary><p>总包裹 54 份，理论下界是 3 趟（⌈54/20⌉）。按「降序 + 装不下就开下一趟」的首次适应：<br/>第 1 趟 12 + 8 = 20（总站、望舒）<br/>第 2 趟 9 + 7 + 4 = 20（开阳、摇光、天璇）<br/>第 3 趟 6 + 5 + 3 = 14（玉衡、天枢、瑶光）<br/>正好 3 趟，达到了下界——但这只是「一种」可行解，不保证一定最优。第 3 问没有标准答案：常见做法是把 <code>跳数 / 包裹量</code> 当作紧迫度，或者用「先送最远的」做近似。这类问题在工程里叫调度问题，属于 NP-难的一族，你现在能做的，是写清一个方案、跑出来、说清它好在哪。</p></details>\n<div class=\"route-lab-card\" data-block=\"blk-lab-dispatch-022\" data-lab-key=\"lab-dispatch-c1\" data-level=\"challenge\"><h3>实验台 · 一趟只带 20 份</h3><p>修改代码，运行后对照输出。运行成功不代表已通过知识测验。</p><pre aria-label=\"起始代码预览，完整代码可在实验台编辑\" tabindex=\"0\">def build_adj_list(n: int, routes: list[list[int]]) -&gt; list[list[int]]:\n    \"\"\"返回 n 个列表，第 i 个装 i 的全部邻居\"\"\"\n    graph = [[] for _ in range(n)]\n    for a, b in routes:\n…</pre><button data-action=\"code\" data-code=\"3\" type=\"button\">动手写代码</button><p class=\"route-lab-result\" data-lab-result=\"lab-dispatch-c1\" role=\"status\">尚未运行</p></div>\n<p data-block=\"blk-lab-dispatch-023\">四步到这儿就走完了。最后一步不是写代码，是对答案和收尾。</p>",
+  "codeExamples": [
+    {
+      "id": "example-lab-dispatch-00",
+      "file": "route_planner.py",
+      "className": "",
+      "functionName": "",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "# -*- coding: utf-8 -*-\n\"\"\"星航驿站 · 配送规划\n\n第 9–11 章综合实验的参考实现：一张航线图、一张包裹表，\n走完建图 → 遍历 → 排序 → 调度四步，输出一份配送建议。\n\"\"\"\n\nSTATIONS = [\"总站\", \"天枢\", \"望舒\", \"瑶光\", \"开阳\", \"玉衡\", \"天璇\", \"摇光\"]\nROUTES = [[0, 1], [0, 2], [1, 3], [2, 3], [2, 4], [3, 5], [4, 5], [4, 6], [5, 7], [6, 7]]\nPACKAGES = [12, 5, 8, 3, 9, 6, 4, 7]\n\n\ndef build_adj_list(n: int, routes: list[list[int]]) -> list[list[int]]:\n    \"\"\"返回 n 个列表，第 i 个装 i 的全部邻居\"\"\"\n    graph = [[] for _ in range(n)]\n    for a, b in routes:\n        graph[a].append(b)\n        graph[b].append(a)\n    return graph\n\n\ndef build_adj_matrix(n: int, routes: list[list[int]]) -> list[list[int]]:\n    \"\"\"返回 n×n 的 0/1 矩阵\"\"\"\n    matrix = [[0] * n for _ in range(n)]\n    for a, b in routes:\n        matrix[a][b] = 1\n        matrix[b][a] = 1\n    return matrix\n\n\ndef bfs_shortest(graph: list[list[int]], start: int) -> list[int]:\n    \"\"\"从 start 出发，返回每一站的最少跳数；不可达记 -1\"\"\"\n    hops = [-1] * len(graph)\n    hops[start] = 0\n    queue = [start]\n    head = 0\n    while head < len(queue):\n        node = queue[head]\n        head += 1\n        for nxt in graph[node]:\n            if hops[nxt] == -1:\n                hops[nxt] = hops[node] + 1\n                queue.append(nxt)\n    return hops\n\n\ndef bubble_sort_desc(nums: list[int]) -> list[int]:\n    \"\"\"冒泡排序（降序），返回新数组，不改原数据\"\"\"\n    arr = list(nums)\n    n = len(arr)\n    for i in range(n - 1):\n        for j in range(n - 1 - i):\n            if arr[j] < arr[j + 1]:\n                arr[j], arr[j + 1] = arr[j + 1], arr[j]\n    return arr\n\n\ndef binary_search(nums: list[int], target: int) -> int:\n    \"\"\"在升序数组里找 target，返回下标；找不到返回 -1\"\"\"\n    lo, hi = 0, len(nums) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if nums[mid] == target:\n            return mid\n        if nums[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1\n\n\ndef dispatch_plan() -> list[int]:\n    \"\"\"返回配送顺序：包裹量大的先送，同量时近的先送\"\"\"\n    graph = build_adj_list(len(STATIONS), ROUTES)\n    hops = bfs_shortest(graph, 0)\n    return sorted(range(len(STATIONS)), key=lambda i: (-PACKAGES[i], hops[i]))\n\n\ndef main() -> None:\n    print(\"== 1. 建图 ==\")\n    graph = build_adj_list(len(STATIONS), ROUTES)\n    print(\"邻接表：\")\n    for i, neighbors in enumerate(graph):\n        names = \"、\".join(STATIONS[j] for j in neighbors)\n        print(f\"  {STATIONS[i]} → {names}\")\n    matrix = build_adj_matrix(len(STATIONS), ROUTES)\n    edges = sum(sum(row) for row in matrix) // 2\n    print(f\"邻接矩阵共记录 {edges} 条航线（矩阵对称，取一半）\")\n\n    print()\n    print(\"== 2. 广度优先遍历：最少跳数 ==\")\n    hops = bfs_shortest(graph, 0)\n    for i, h in enumerate(hops):\n        print(f\"  {STATIONS[0]} → {STATIONS[i]}：{h} 跳\")\n\n    print()\n    print(\"== 3. 冒泡排序：包裹量降序 ==\")\n    print(f\"  排序前：{PACKAGES}\")\n    print(f\"  排序后：{bubble_sort_desc(PACKAGES)}\")\n\n    print()\n    print(\"== 4. 综合调度 ==\")\n    print(\"配送顺序建议（包裹量优先，同量就近）：\")\n    for rank, i in enumerate(dispatch_plan(), start=1):\n        print(f\"  第{rank}站  {STATIONS[i]}（{PACKAGES[i]} 份，{hops[i]} 跳可达）\")\n\n    order = sorted(range(len(STATIONS)), key=lambda i: hops[i])\n    sorted_hops = [hops[i] for i in order]\n    pos = binary_search(sorted_hops, 2)\n    hit = STATIONS[order[pos]]\n    print()\n    print(f\"二分查找恰好 2 跳可达的驿站：{hit}\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
+          "fullSource": "# -*- coding: utf-8 -*-\n\"\"\"星航驿站 · 配送规划\n\n第 9–11 章综合实验的参考实现：一张航线图、一张包裹表，\n走完建图 → 遍历 → 排序 → 调度四步，输出一份配送建议。\n\"\"\"\n\nSTATIONS = [\"总站\", \"天枢\", \"望舒\", \"瑶光\", \"开阳\", \"玉衡\", \"天璇\", \"摇光\"]\nROUTES = [[0, 1], [0, 2], [1, 3], [2, 3], [2, 4], [3, 5], [4, 5], [4, 6], [5, 7], [6, 7]]\nPACKAGES = [12, 5, 8, 3, 9, 6, 4, 7]\n\n\ndef build_adj_list(n: int, routes: list[list[int]]) -> list[list[int]]:\n    \"\"\"返回 n 个列表，第 i 个装 i 的全部邻居\"\"\"\n    graph = [[] for _ in range(n)]\n    for a, b in routes:\n        graph[a].append(b)\n        graph[b].append(a)\n    return graph\n\n\ndef build_adj_matrix(n: int, routes: list[list[int]]) -> list[list[int]]:\n    \"\"\"返回 n×n 的 0/1 矩阵\"\"\"\n    matrix = [[0] * n for _ in range(n)]\n    for a, b in routes:\n        matrix[a][b] = 1\n        matrix[b][a] = 1\n    return matrix\n\n\ndef bfs_shortest(graph: list[list[int]], start: int) -> list[int]:\n    \"\"\"从 start 出发，返回每一站的最少跳数；不可达记 -1\"\"\"\n    hops = [-1] * len(graph)\n    hops[start] = 0\n    queue = [start]\n    head = 0\n    while head < len(queue):\n        node = queue[head]\n        head += 1\n        for nxt in graph[node]:\n            if hops[nxt] == -1:\n                hops[nxt] = hops[node] + 1\n                queue.append(nxt)\n    return hops\n\n\ndef bubble_sort_desc(nums: list[int]) -> list[int]:\n    \"\"\"冒泡排序（降序），返回新数组，不改原数据\"\"\"\n    arr = list(nums)\n    n = len(arr)\n    for i in range(n - 1):\n        for j in range(n - 1 - i):\n            if arr[j] < arr[j + 1]:\n                arr[j], arr[j + 1] = arr[j + 1], arr[j]\n    return arr\n\n\ndef binary_search(nums: list[int], target: int) -> int:\n    \"\"\"在升序数组里找 target，返回下标；找不到返回 -1\"\"\"\n    lo, hi = 0, len(nums) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if nums[mid] == target:\n            return mid\n        if nums[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1\n\n\ndef dispatch_plan() -> list[int]:\n    \"\"\"返回配送顺序：包裹量大的先送，同量时近的先送\"\"\"\n    graph = build_adj_list(len(STATIONS), ROUTES)\n    hops = bfs_shortest(graph, 0)\n    return sorted(range(len(STATIONS)), key=lambda i: (-PACKAGES[i], hops[i]))\n\n\ndef main() -> None:\n    print(\"== 1. 建图 ==\")\n    graph = build_adj_list(len(STATIONS), ROUTES)\n    print(\"邻接表：\")\n    for i, neighbors in enumerate(graph):\n        names = \"、\".join(STATIONS[j] for j in neighbors)\n        print(f\"  {STATIONS[i]} → {names}\")\n    matrix = build_adj_matrix(len(STATIONS), ROUTES)\n    edges = sum(sum(row) for row in matrix) // 2\n    print(f\"邻接矩阵共记录 {edges} 条航线（矩阵对称，取一半）\")\n\n    print()\n    print(\"== 2. 广度优先遍历：最少跳数 ==\")\n    hops = bfs_shortest(graph, 0)\n    for i, h in enumerate(hops):\n        print(f\"  {STATIONS[0]} → {STATIONS[i]}：{h} 跳\")\n\n    print()\n    print(\"== 3. 冒泡排序：包裹量降序 ==\")\n    print(f\"  排序前：{PACKAGES}\")\n    print(f\"  排序后：{bubble_sort_desc(PACKAGES)}\")\n\n    print()\n    print(\"== 4. 综合调度 ==\")\n    print(\"配送顺序建议（包裹量优先，同量就近）：\")\n    for rank, i in enumerate(dispatch_plan(), start=1):\n        print(f\"  第{rank}站  {STATIONS[i]}（{PACKAGES[i]} 份，{hops[i]} 跳可达）\")\n\n    order = sorted(range(len(STATIONS)), key=lambda i: hops[i])\n    sorted_hops = [hops[i] for i in order]\n    pos = binary_search(sorted_hops, 2)\n    hit = STATIONS[order[pos]]\n    print()\n    print(f\"二分查找恰好 2 跳可达的驿站：{hit}\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
+          "sourcePath": "learning/route-lab/route_planner.py",
+          "sourceUrl": "",
+          "extraction": "file",
+          "runnable": true,
+          "sourceOrigin": "authored"
+        }
+      ]
+    },
+    {
+      "id": "example-lab-dispatch-b1",
+      "file": "lab-dispatch-b1.py",
+      "className": "",
+      "functionName": "",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def build_adj_list(n: int, routes: list[list[int]]) -> list[list[int]]:\n    \"\"\"返回 n 个列表，第 i 个装 i 的全部邻居\"\"\"\n    graph = [[] for _ in range(n)]\n    for a, b in routes:\n        graph[a].append(b)\n        graph[b].append(a)\n    return graph\n\ndef bfs_shortest(graph: list[list[int]], start: int) -> list[int]:\n    \"\"\"从 start 出发，返回每一站的最少跳数；不可达记 -1\"\"\"\n    hops = [-1] * len(graph)\n    hops[start] = 0\n    queue = [start]\n    head = 0\n    while head < len(queue):\n        node = queue[head]\n        head += 1\n        for nxt in graph[node]:\n            if hops[nxt] == -1:\n                hops[nxt] = hops[node] + 1\n                queue.append(nxt)\n    return hops\n\nSTATIONS = [\"总站\", \"天枢\", \"望舒\", \"瑶光\", \"开阳\", \"玉衡\", \"天璇\", \"摇光\"]\nROUTES = [[0,1], [0,2], [1,3], [2,3], [2,4], [3,5], [4,5], [4,6], [5,7], [6,7]]\nPACKAGES = [12, 5, 8, 3, 9, 6, 4, 7]\n\ndef dispatch_plan() -> list[int]:\n    \"\"\"返回配送顺序：包裹量大的先送，同量时近的先送\"\"\"\n    graph = build_adj_list(len(STATIONS), ROUTES)\n    hops = bfs_shortest(graph, 0)\n    return sorted(range(len(STATIONS)), key=lambda i: (-PACKAGES[i], hops[i]))\n\n# ---- 试运行：把 key 里的负号挪个位置，看策略怎么变 ----\nprint(dispatch_plan())\n",
+          "fullSource": "def build_adj_list(n: int, routes: list[list[int]]) -> list[list[int]]:\n    \"\"\"返回 n 个列表，第 i 个装 i 的全部邻居\"\"\"\n    graph = [[] for _ in range(n)]\n    for a, b in routes:\n        graph[a].append(b)\n        graph[b].append(a)\n    return graph\n\ndef bfs_shortest(graph: list[list[int]], start: int) -> list[int]:\n    \"\"\"从 start 出发，返回每一站的最少跳数；不可达记 -1\"\"\"\n    hops = [-1] * len(graph)\n    hops[start] = 0\n    queue = [start]\n    head = 0\n    while head < len(queue):\n        node = queue[head]\n        head += 1\n        for nxt in graph[node]:\n            if hops[nxt] == -1:\n                hops[nxt] = hops[node] + 1\n                queue.append(nxt)\n    return hops\n\nSTATIONS = [\"总站\", \"天枢\", \"望舒\", \"瑶光\", \"开阳\", \"玉衡\", \"天璇\", \"摇光\"]\nROUTES = [[0,1], [0,2], [1,3], [2,3], [2,4], [3,5], [4,5], [4,6], [5,7], [6,7]]\nPACKAGES = [12, 5, 8, 3, 9, 6, 4, 7]\n\ndef dispatch_plan() -> list[int]:\n    \"\"\"返回配送顺序：包裹量大的先送，同量时近的先送\"\"\"\n    graph = build_adj_list(len(STATIONS), ROUTES)\n    hops = bfs_shortest(graph, 0)\n    return sorted(range(len(STATIONS)), key=lambda i: (-PACKAGES[i], hops[i]))\n\n# ---- 试运行：把 key 里的负号挪个位置，看策略怎么变 ----\nprint(dispatch_plan())\n",
+          "sourcePath": "learning/route-lab/lab-dispatch-b1.py",
+          "sourceUrl": "",
+          "extraction": "file",
+          "runnable": true,
+          "sourceOrigin": "authored"
+        }
+      ],
+      "legacyDraftKey": "draft:lab-editor:lab-dispatch-b1",
+      "labKey": "lab-dispatch-b1"
+    },
+    {
+      "id": "example-lab-dispatch-a1",
+      "file": "lab-dispatch-a1.py",
+      "className": "",
+      "functionName": "",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def build_adj_list(n: int, routes: list[list[int]]) -> list[list[int]]:\n    \"\"\"返回 n 个列表，第 i 个装 i 的全部邻居\"\"\"\n    graph = [[] for _ in range(n)]\n    for a, b in routes:\n        graph[a].append(b)\n        graph[b].append(a)\n    return graph\n\ndef bfs_shortest(graph: list[list[int]], start: int) -> list[int]:\n    \"\"\"从 start 出发，返回每一站的最少跳数；不可达记 -1\"\"\"\n    hops = [-1] * len(graph)\n    hops[start] = 0\n    queue = [start]\n    head = 0\n    while head < len(queue):\n        node = queue[head]\n        head += 1\n        for nxt in graph[node]:\n            if hops[nxt] == -1:\n                hops[nxt] = hops[node] + 1\n                queue.append(nxt)\n    return hops\n\nPACKAGES = [12, 5, 8, 3, 9, 6, 4, 7]\nSTATIONS = [\"总站\", \"天枢\", \"望舒\", \"瑶光\", \"开阳\", \"玉衡\", \"天璇\", \"摇光\"]\nhops = [0, 1, 1, 2, 2, 3, 3, 4]   # 来自实验二\n\ndef dispatch_plan():\n    \"\"\"打印配送顺序前 3 站，每行带上（包裹量, 跳数）\"\"\"\n    ...  # TODO：用一次 sorted，key 返回二元组 (-包裹量, 跳数)\n\n# ==== 自检 ====\ndispatch_plan()\n# 应输出：总站（12 份，0 跳）→ 开阳（9 份，2 跳）→ 望舒（8 份，1 跳）\n",
+          "fullSource": "def build_adj_list(n: int, routes: list[list[int]]) -> list[list[int]]:\n    \"\"\"返回 n 个列表，第 i 个装 i 的全部邻居\"\"\"\n    graph = [[] for _ in range(n)]\n    for a, b in routes:\n        graph[a].append(b)\n        graph[b].append(a)\n    return graph\n\ndef bfs_shortest(graph: list[list[int]], start: int) -> list[int]:\n    \"\"\"从 start 出发，返回每一站的最少跳数；不可达记 -1\"\"\"\n    hops = [-1] * len(graph)\n    hops[start] = 0\n    queue = [start]\n    head = 0\n    while head < len(queue):\n        node = queue[head]\n        head += 1\n        for nxt in graph[node]:\n            if hops[nxt] == -1:\n                hops[nxt] = hops[node] + 1\n                queue.append(nxt)\n    return hops\n\nPACKAGES = [12, 5, 8, 3, 9, 6, 4, 7]\nSTATIONS = [\"总站\", \"天枢\", \"望舒\", \"瑶光\", \"开阳\", \"玉衡\", \"天璇\", \"摇光\"]\nhops = [0, 1, 1, 2, 2, 3, 3, 4]   # 来自实验二\n\ndef dispatch_plan():\n    \"\"\"打印配送顺序前 3 站，每行带上（包裹量, 跳数）\"\"\"\n    ...  # TODO：用一次 sorted，key 返回二元组 (-包裹量, 跳数)\n\n# ==== 自检 ====\ndispatch_plan()\n# 应输出：总站（12 份，0 跳）→ 开阳（9 份，2 跳）→ 望舒（8 份，1 跳）\n",
+          "sourcePath": "learning/route-lab/lab-dispatch-a1.py",
+          "sourceUrl": "",
+          "extraction": "file",
+          "runnable": true,
+          "sourceOrigin": "authored"
+        }
+      ],
+      "legacyDraftKey": "draft:lab-editor:lab-dispatch-a1",
+      "labKey": "lab-dispatch-a1"
+    },
+    {
+      "id": "example-lab-dispatch-c1",
+      "file": "lab-dispatch-c1.py",
+      "className": "",
+      "functionName": "",
+      "variants": [
+        {
+          "language": "python",
+          "snippet": "def build_adj_list(n: int, routes: list[list[int]]) -> list[list[int]]:\n    \"\"\"返回 n 个列表，第 i 个装 i 的全部邻居\"\"\"\n    graph = [[] for _ in range(n)]\n    for a, b in routes:\n        graph[a].append(b)\n        graph[b].append(a)\n    return graph\n\ndef bfs_shortest(graph: list[list[int]], start: int) -> list[int]:\n    \"\"\"从 start 出发，返回每一站的最少跳数；不可达记 -1\"\"\"\n    hops = [-1] * len(graph)\n    hops[start] = 0\n    queue = [start]\n    head = 0\n    while head < len(queue):\n        node = queue[head]\n        head += 1\n        for nxt in graph[node]:\n            if hops[nxt] == -1:\n                hops[nxt] = hops[node] + 1\n                queue.append(nxt)\n    return hops\n\nSTATIONS = [\"总站\", \"天枢\", \"望舒\", \"瑶光\", \"开阳\", \"玉衡\", \"天璇\", \"摇光\"]\nROUTES = [[0,1], [0,2], [1,3], [2,3], [2,4], [3,5], [4,5], [4,6], [5,7], [6,7]]\nPACKAGES = [12, 5, 8, 3, 9, 6, 4, 7]\n\nCAPACITY = 20   # 快递员一趟最多带 20 份\n\ndef plan_trips(packages, capacity):\n    \"\"\"返回若干趟，每趟是一个站名列表\"\"\"\n    ...  # TODO：先把包裹量降序排，再「装不下就开下一趟」\n\n# 写好后取消注释并运行：\n# for t, trip in enumerate(plan_trips(PACKAGES, CAPACITY), 1):\n#     print(f\"第 {t} 趟:\", \" → \".join(trip))\n# 第 2、3 问把方案和理由写进实验报告。\n",
+          "fullSource": "def build_adj_list(n: int, routes: list[list[int]]) -> list[list[int]]:\n    \"\"\"返回 n 个列表，第 i 个装 i 的全部邻居\"\"\"\n    graph = [[] for _ in range(n)]\n    for a, b in routes:\n        graph[a].append(b)\n        graph[b].append(a)\n    return graph\n\ndef bfs_shortest(graph: list[list[int]], start: int) -> list[int]:\n    \"\"\"从 start 出发，返回每一站的最少跳数；不可达记 -1\"\"\"\n    hops = [-1] * len(graph)\n    hops[start] = 0\n    queue = [start]\n    head = 0\n    while head < len(queue):\n        node = queue[head]\n        head += 1\n        for nxt in graph[node]:\n            if hops[nxt] == -1:\n                hops[nxt] = hops[node] + 1\n                queue.append(nxt)\n    return hops\n\nSTATIONS = [\"总站\", \"天枢\", \"望舒\", \"瑶光\", \"开阳\", \"玉衡\", \"天璇\", \"摇光\"]\nROUTES = [[0,1], [0,2], [1,3], [2,3], [2,4], [3,5], [4,5], [4,6], [5,7], [6,7]]\nPACKAGES = [12, 5, 8, 3, 9, 6, 4, 7]\n\nCAPACITY = 20   # 快递员一趟最多带 20 份\n\ndef plan_trips(packages, capacity):\n    \"\"\"返回若干趟，每趟是一个站名列表\"\"\"\n    ...  # TODO：先把包裹量降序排，再「装不下就开下一趟」\n\n# 写好后取消注释并运行：\n# for t, trip in enumerate(plan_trips(PACKAGES, CAPACITY), 1):\n#     print(f\"第 {t} 趟:\", \" → \".join(trip))\n# 第 2、3 问把方案和理由写进实验报告。\n",
+          "sourcePath": "learning/route-lab/lab-dispatch-c1.py",
+          "sourceUrl": "",
+          "extraction": "file",
+          "runnable": true,
+          "sourceOrigin": "authored"
+        }
+      ],
+      "legacyDraftKey": "draft:lab-editor:lab-dispatch-c1",
+      "labKey": "lab-dispatch-c1"
+    }
+  ],
+  "animations": [],
+  "conversion": null,
+  "blockAliases": {
+    "b0": "blk-lab-dispatch-000",
+    "b1": "blk-lab-dispatch-001",
+    "b2": "blk-lab-dispatch-002",
+    "b3": "blk-lab-dispatch-003",
+    "b4": "blk-lab-dispatch-004",
+    "b5": "blk-lab-dispatch-005",
+    "b6": "blk-lab-dispatch-006",
+    "b7": "blk-lab-dispatch-007",
+    "b8": "blk-lab-dispatch-008",
+    "b9": "blk-lab-dispatch-009",
+    "b10": "blk-lab-dispatch-010",
+    "b11": "blk-lab-dispatch-011",
+    "b12": "blk-lab-dispatch-012",
+    "b13": "blk-lab-dispatch-013",
+    "b14": "blk-lab-dispatch-014",
+    "b15": "blk-lab-dispatch-015",
+    "b16": "blk-lab-dispatch-016",
+    "b17": "blk-lab-dispatch-017",
+    "b18": "blk-lab-dispatch-018",
+    "b19": "blk-lab-dispatch-019",
+    "b20": "blk-lab-dispatch-020",
+    "b21": "blk-lab-dispatch-021",
+    "b22": "blk-lab-dispatch-022",
+    "b23": "blk-lab-dispatch-023",
+    "blk-lab-dispatch-000": "blk-lab-dispatch-000",
+    "blk-lab-dispatch-001": "blk-lab-dispatch-001",
+    "blk-lab-dispatch-002": "blk-lab-dispatch-002",
+    "blk-lab-dispatch-003": "blk-lab-dispatch-003",
+    "blk-lab-dispatch-004": "blk-lab-dispatch-004",
+    "blk-lab-dispatch-005": "blk-lab-dispatch-005",
+    "blk-lab-dispatch-006": "blk-lab-dispatch-006",
+    "blk-lab-dispatch-007": "blk-lab-dispatch-007",
+    "blk-lab-dispatch-008": "blk-lab-dispatch-008",
+    "blk-lab-dispatch-009": "blk-lab-dispatch-009",
+    "blk-lab-dispatch-010": "blk-lab-dispatch-010",
+    "blk-lab-dispatch-011": "blk-lab-dispatch-011",
+    "blk-lab-dispatch-012": "blk-lab-dispatch-012",
+    "blk-lab-dispatch-013": "blk-lab-dispatch-013",
+    "blk-lab-dispatch-014": "blk-lab-dispatch-014",
+    "blk-lab-dispatch-015": "blk-lab-dispatch-015",
+    "blk-lab-dispatch-016": "blk-lab-dispatch-016",
+    "blk-lab-dispatch-017": "blk-lab-dispatch-017",
+    "blk-lab-dispatch-018": "blk-lab-dispatch-018",
+    "blk-lab-dispatch-019": "blk-lab-dispatch-019",
+    "blk-lab-dispatch-020": "blk-lab-dispatch-020",
+    "blk-lab-dispatch-021": "blk-lab-dispatch-021",
+    "blk-lab-dispatch-022": "blk-lab-dispatch-022",
+    "blk-lab-dispatch-023": "blk-lab-dispatch-023"
+  },
+  "contentVersion": "a08085c9774ada92"
+}

@@ -13,7 +13,8 @@ import { registerLearningFlush } from "./learning-flush";
 import {summonCodeAssistant,activeCodeProvider,snapshotVersion} from "./code-context";
 import PlexCoach from "./PlexCoach.vue";
 import CodeEditor from "./CodeEditor.vue";
-const emit=defineEmits<{completed:[]}>();
+import type { LabRunResult } from "./route-lab";
+const emit=defineEmits<{completed:[]; outcome:[result:LabRunResult]}>();
 const props = defineProps<{
   example?: CodeExample;
   exercise?: ExerciseDefinition;
@@ -58,6 +59,13 @@ const draftKey = computed(
   () =>
     `draft:${props.exercise?.id || props.example?.id}:${props.exercise ? "python" : variant.value?.language}:${version.value}`,
 );
+let activeLabRun: { key: string; codeVersion: string } | undefined;
+function recordLabRun(state: LabRunResult["state"]) {
+  if (!activeLabRun) return;
+  const result: LabRunResult = {...activeLabRun, state, updatedAt: new Date().toISOString()};
+  activeLabRun=undefined;
+  void putLearning("lab-run:"+result.key,result).then(()=>emit("outcome",result)).catch(()=>{});
+}
 let activeKey = "",
   restoring = false,
   disposed = false,
@@ -89,9 +97,13 @@ watch(
     const own = ++loadSerial;
     stop("");
     restoring = true;
-    const draft = await getLearning<
+    let draft = await getLearning<
       { code: string; stdin?: string; undo?: string } | undefined
     >(key, undefined);
+    if (!draft && props.example?.legacyDraftKey) {
+      draft=await getLearning<{code:string;stdin?:string;undo?:string}|undefined>(props.example.legacyDraftKey,undefined);
+      if (draft) await putLearning(key,draft).catch(()=>{});
+    }
     if (disposed || own !== loadSerial) return;
     code.value = draft?.code ?? original.value;
     stdin.value = draft?.stdin || "";
@@ -130,6 +142,7 @@ watch(
   { immediate: true },
 );
 function stop(message = "已停止运行。") {
+  if (running.value) recordLabRun("stopped");
   ++runId;
   worker?.terminate();
   worker = undefined;
@@ -149,7 +162,11 @@ async function saveAttempt() {
 }
 async function start(check = false) {
   if (running.value) return;
+  const generation=++runId;
+  running.value = true;
+  if (props.example?.labKey) activeLabRun={key:props.example.labKey,codeVersion:snapshotVersion(code.value)};
   await persist();
+  if (disposed || generation!==runId) return;
   if (check || checking !== check) {
     worker?.terminate();
     worker = undefined;
@@ -160,7 +177,7 @@ async function start(check = false) {
   output.value = "";
   diagnostics.value = [];
   results.value = check ? [] : results.value;
-  const id = ++runId;
+  const id = generation;
   status.value = ready.value ? "运行中…" : "首次启动 Python 环境…";
   const execute = () => {
     status.value = check ? "正在检查测试用例…" : "运行中…";
@@ -208,6 +225,7 @@ async function start(check = false) {
           msg.type === "error"
         ) {
           clearTimeout(timer);
+          recordLabRun(msg.type==="error"?"error":"done");
           if(msg.type==="done")emit("completed");
           running.value = false;
           status.value =
@@ -306,7 +324,7 @@ onBeforeUnmount(() => {
     </div>
     <p class="panel-note">
       {{
-        exercise ? "提交测试会逐例反馈结果。" : "完整示例源文件，包含演示入口。"
+        exercise ? "提交测试会逐例反馈结果。" : example?.labKey ? "本题起始代码：基础档可跟做，进阶与挑战需按题意补全。运行完成不代表测试通过。" : "完整示例源文件，包含演示入口。"
       }}
       草稿保存在本机，关闭后可继续。
     </p>

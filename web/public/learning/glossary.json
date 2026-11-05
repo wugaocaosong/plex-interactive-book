@@ -3,91 +3,120 @@
     "term": "算法",
     "english": "algorithm",
     "definition": "解决问题的一组明确、有限且可执行的步骤。",
-    "sectionId": "chapter_introduction/index"
+    "sectionId": "chapter_introduction/index",
+    "homeSection": "chapter_introduction/algorithms_are_everywhere"
   },
   {
     "term": "数据结构",
     "english": "data structure",
     "definition": "组织和存储数据的方式，决定访问与修改数据的成本。",
-    "sectionId": "chapter_data_structure/index"
+    "sectionId": "chapter_data_structure/index",
+    "homeSection": "chapter_data_structure/classification_of_data_structure"
   },
   {
     "term": "代码",
     "english": "code",
     "definition": "用编程语言表达的数据和操作指令。",
-    "sectionId": "chapter_preface/index"
+    "sectionId": "chapter_preface/index",
+    "homeSection": "chapter_preface/about_the_book",
+    "tip": "用编程语言写下的指令。看书时随手改一行再运行，比盯着看十遍有用。",
+    "keys": [
+      "Ctrl+C 复制",
+      "Ctrl+V 粘贴",
+      "Ctrl+Z 撤销"
+    ]
   },
   {
     "term": "文件",
     "english": "file",
     "definition": "以名称保存在存储设备中的一组数据。",
-    "sectionId": "chapter_hashing/summary"
+    "sectionId": "chapter_hashing/summary",
+    "homeSection": "chapter_preface/suggestions",
+    "tip": "保存在磁盘上的数据集合。写代码时记得 Ctrl+S，别让辛苦白费。"
   },
   {
     "term": "函数",
     "english": "function",
     "definition": "接收参数并执行特定任务的可复用代码单元。",
-    "sectionId": "chapter_sorting/heap_sort"
+    "sectionId": "chapter_sorting/heap_sort",
+    "homeSection": "chapter_sorting/heap_sort",
+    "tip": "打包好的一段逻辑，给参数就能复用。看到代码窗口，按 Ctrl+Enter 可以直接跑起来。"
   },
   {
     "term": "方法",
     "english": "method",
     "definition": "与对象或类型关联的函数。",
-    "sectionId": "chapter_searching/summary"
+    "sectionId": "chapter_searching/summary",
+    "homeSection": "chapter_searching/binary_search",
+    "tip": "挂在对象或类型上的函数。想看它的效果，选中后按 Ctrl+Enter 运行。"
   },
   {
     "term": "变量",
     "english": "variable",
     "definition": "用于引用或保存程序运行中数据的名称。",
-    "sectionId": "chapter_graph/summary"
+    "sectionId": "chapter_graph/summary",
+    "homeSection": "chapter_graph/graph",
+    "tip": "给数据起的名字。改错了不用慌，Ctrl+Z 就能撤回。",
+    "keys": [
+      "Ctrl+Z 撤销",
+      "Ctrl+C 复制"
+    ]
   },
   {
     "term": "渐近复杂度分析",
     "english": "asymptotic complexity analysis",
     "definition": "关注输入规模增大时资源消耗的增长趋势，忽略常数等次要因素。",
-    "sectionId": "chapter_computational_complexity/performance_evaluation"
+    "sectionId": "chapter_computational_complexity/performance_evaluation",
+    "homeSection": "chapter_computational_complexity/performance_evaluation"
   },
   {
     "term": "时间复杂度",
     "english": "time complexity",
     "definition": "算法基本操作次数随输入规模增长的数量级。",
-    "sectionId": "chapter_computational_complexity/time_complexity"
+    "sectionId": "chapter_computational_complexity/time_complexity",
+    "homeSection": "chapter_computational_complexity/time_complexity"
   },
   {
     "term": "空间复杂度",
     "english": "space complexity",
     "definition": "算法所需空间随输入规模增长的数量级；讨论时需说明是否计入输入。",
-    "sectionId": "chapter_computational_complexity/space_complexity"
+    "sectionId": "chapter_computational_complexity/space_complexity",
+    "homeSection": "chapter_computational_complexity/space_complexity"
   },
   {
     "term": "循环",
     "english": "loop",
     "definition": "重复执行一段代码的控制结构。",
-    "sectionId": "chapter_searching/summary"
+    "sectionId": "chapter_searching/summary",
+    "homeSection": "chapter_searching/binary_search"
   },
   {
     "term": "迭代",
     "english": "iteration",
     "definition": "通过重复步骤更新状态，逐步得到结果的过程。",
-    "sectionId": "chapter_computational_complexity/iteration_and_recursion"
+    "sectionId": "chapter_computational_complexity/iteration_and_recursion",
+    "homeSection": "chapter_computational_complexity/iteration_and_recursion"
   },
   {
     "term": "递归",
     "english": "recursion",
     "definition": "函数调用自身来解决规模更小的同类问题，需要终止条件。",
-    "sectionId": "chapter_computational_complexity/iteration_and_recursion"
+    "sectionId": "chapter_computational_complexity/iteration_and_recursion",
+    "homeSection": "chapter_computational_complexity/iteration_and_recursion"
   },
   {
     "term": "尾递归",
     "english": "tail recursion",
     "definition": "递归调用是函数返回前的最后一步，后面没有待完成的计算。",
-    "sectionId": "chapter_computational_complexity/summary"
+    "sectionId": "chapter_computational_complexity/summary",
+    "homeSection": "chapter_computational_complexity/iteration_and_recursion"
   },
   {
     "term": "递归树",
     "english": "recursion tree",
     "definition": "用树形结构表示递归调用之间的关系。",
-    "sectionId": "chapter_dynamic_programming/summary"
+    "sectionId": "chapter_dynamic_programming/summary",
+    "homeSection": "chapter_dynamic_programming/intro_to_dynamic_programming"
   },
   {
     "term": "大 O 记号",
@@ -99,103 +128,125 @@
     "term": "渐近上界",
     "english": "asymptotic upper bound",
     "definition": "输入规模足够大后，目标函数不超过某函数的常数倍。",
-    "sectionId": "chapter_computational_complexity/summary"
+    "sectionId": "chapter_computational_complexity/summary",
+    "homeSection": "chapter_computational_complexity/time_complexity"
   },
   {
     "term": "原码",
     "english": "sign-magnitude",
     "definition": "用最高位表示符号、其余位表示绝对值的有符号整数表示。",
-    "sectionId": "chapter_data_structure/summary"
+    "sectionId": "chapter_data_structure/summary",
+    "homeSection": "chapter_data_structure/number_encoding"
   },
   {
     "term": "反码",
     "english": "1’s complement",
     "definition": "正数与原码相同，负数在符号位以外逐位取反。",
-    "sectionId": "chapter_data_structure/summary"
+    "sectionId": "chapter_data_structure/summary",
+    "homeSection": "chapter_data_structure/number_encoding"
   },
   {
     "term": "补码",
     "english": "2’s complement",
     "definition": "正数与原码相同；负数可由反码加一得到，便于统一加减运算。",
-    "sectionId": "chapter_data_structure/summary"
+    "sectionId": "chapter_data_structure/summary",
+    "homeSection": "chapter_data_structure/number_encoding"
   },
   {
     "term": "数组",
     "english": "array",
     "definition": "在连续空间中存储元素、可按索引直接访问的结构。",
-    "sectionId": "chapter_array_and_linkedlist/index"
+    "sectionId": "chapter_array_and_linkedlist/index",
+    "homeSection": "chapter_array_and_linkedlist/array",
+    "tip": "一排连续存放的元素，靠下标定位。想临时挪一段代码？先 Ctrl+X 剪切再 Ctrl+V 粘贴。",
+    "keys": [
+      "Ctrl+X 剪切",
+      "Ctrl+V 粘贴"
+    ]
   },
   {
     "term": "索引",
     "english": "index",
     "definition": "定位序列中元素的位置编号，Python 中通常从 0 开始。",
-    "sectionId": "chapter_divide_and_conquer/summary"
+    "sectionId": "chapter_divide_and_conquer/summary",
+    "homeSection": "chapter_divide_and_conquer/divide_and_conquer"
   },
   {
     "term": "链表",
     "english": "linked list",
     "definition": "由节点及其连接指针组成的结构，节点不必连续存储。",
-    "sectionId": "chapter_array_and_linkedlist/index"
+    "sectionId": "chapter_array_and_linkedlist/index",
+    "homeSection": "chapter_array_and_linkedlist/linked_list"
   },
   {
     "term": "链表节点",
     "english": "linked list node, list node",
     "definition": "保存数据以及一个或多个连接指针的链表单元。",
-    "sectionId": "chapter_stack_and_queue/summary"
+    "sectionId": "chapter_stack_and_queue/summary",
+    "homeSection": "chapter_stack_and_queue/stack"
   },
   {
     "term": "头节点",
     "english": "head node",
     "definition": "链表中的第一个节点。",
-    "sectionId": "chapter_array_and_linkedlist/exercises"
+    "sectionId": "chapter_array_and_linkedlist/exercises",
+    "homeSection": "chapter_array_and_linkedlist/linked_list"
   },
   {
     "term": "尾节点",
     "english": "tail node",
     "definition": "链表中的最后一个节点。",
-    "sectionId": "chapter_array_and_linkedlist/summary"
+    "sectionId": "chapter_array_and_linkedlist/summary",
+    "homeSection": "chapter_array_and_linkedlist/linked_list"
   },
   {
     "term": "列表",
     "english": "list",
     "definition": "按顺序保存元素的抽象结构；Python 的 list 使用动态数组实现。",
-    "sectionId": "chapter_array_and_linkedlist/list"
+    "sectionId": "chapter_array_and_linkedlist/list",
+    "homeSection": "chapter_array_and_linkedlist/list"
   },
   {
     "term": "动态数组",
     "english": "dynamic array",
     "definition": "容量不足时申请更大空间并搬移元素的数组结构。",
-    "sectionId": "chapter_array_and_linkedlist/summary"
+    "sectionId": "chapter_array_and_linkedlist/summary",
+    "homeSection": "chapter_array_and_linkedlist/array"
   },
   {
     "term": "硬盘",
     "english": "hard disk",
     "definition": "用于长期保存数据的非易失性存储设备。",
-    "sectionId": "chapter_array_and_linkedlist/ram_and_cache"
+    "sectionId": "chapter_array_and_linkedlist/ram_and_cache",
+    "homeSection": "chapter_array_and_linkedlist/ram_and_cache"
   },
   {
     "term": "内存",
     "english": "random-access memory (RAM)",
     "definition": "程序运行时保存指令和数据的主要工作空间。",
-    "sectionId": "chapter_array_and_linkedlist/ram_and_cache"
+    "sectionId": "chapter_array_and_linkedlist/ram_and_cache",
+    "homeSection": "chapter_array_and_linkedlist/ram_and_cache"
   },
   {
     "term": "缓存",
     "english": "cache memory",
     "definition": "保存近期或常用数据副本，以降低访问延迟的存储层。",
-    "sectionId": "chapter_array_and_linkedlist/ram_and_cache"
+    "sectionId": "chapter_array_and_linkedlist/ram_and_cache",
+    "homeSection": "chapter_array_and_linkedlist/ram_and_cache"
   },
   {
     "term": "缓存未命中",
     "english": "cache miss",
     "definition": "所需数据不在当前缓存中，必须从下一层存储获取。",
-    "sectionId": "chapter_array_and_linkedlist/ram_and_cache"
+    "sectionId": "chapter_array_and_linkedlist/ram_and_cache",
+    "homeSection": "chapter_array_and_linkedlist/ram_and_cache"
   },
   {
     "term": "缓存命中率",
     "english": "cache hit rate",
     "definition": "访问请求中能够直接从缓存获取数据的比例。",
-    "sectionId": "chapter_array_and_linkedlist/ram_and_cache"
+    "sectionId": "chapter_array_and_linkedlist/ram_and_cache",
+    "homeSection": "chapter_array_and_linkedlist/ram_and_cache"
   },
   {
     "term": "栈",
@@ -207,49 +258,57 @@
     "term": "栈顶",
     "english": "top of the stack",
     "definition": "栈中允许压入和弹出元素的一端。",
-    "sectionId": "chapter_stack_and_queue/summary"
+    "sectionId": "chapter_stack_and_queue/summary",
+    "homeSection": "chapter_stack_and_queue/stack"
   },
   {
     "term": "栈底",
     "english": "bottom of the stack",
     "definition": "与栈顶相对的一端，通常是最早入栈元素的位置。",
-    "sectionId": "chapter_stack_and_queue/stack"
+    "sectionId": "chapter_stack_and_queue/stack",
+    "homeSection": "chapter_stack_and_queue/stack"
   },
   {
     "term": "队列",
     "english": "queue",
     "definition": "从队尾加入、从队首移除，遵循先进先出。",
-    "sectionId": "chapter_stack_and_queue/index"
+    "sectionId": "chapter_stack_and_queue/index",
+    "homeSection": "chapter_stack_and_queue/queue"
   },
   {
     "term": "双向队列",
     "english": "double-ended queue",
     "definition": "两端都可以加入和移除元素的队列。",
-    "sectionId": "chapter_stack_and_queue/deque"
+    "sectionId": "chapter_stack_and_queue/deque",
+    "homeSection": "chapter_stack_and_queue/deque"
   },
   {
     "term": "队首",
     "english": "front of the queue",
     "definition": "普通队列中取出元素的一端。",
-    "sectionId": "chapter_stack_and_queue/exercises"
+    "sectionId": "chapter_stack_and_queue/exercises",
+    "homeSection": "chapter_stack_and_queue/queue"
   },
   {
     "term": "队尾",
     "english": "rear of the queue",
     "definition": "普通队列中加入元素的一端。",
-    "sectionId": "chapter_stack_and_queue/exercises"
+    "sectionId": "chapter_stack_and_queue/exercises",
+    "homeSection": "chapter_stack_and_queue/queue"
   },
   {
     "term": "哈希表",
     "english": "hash table",
     "definition": "通过哈希函数把键映射到存储位置，支持高效查找。",
-    "sectionId": "chapter_hashing/index"
+    "sectionId": "chapter_hashing/index",
+    "homeSection": "chapter_hashing/hash_map"
   },
   {
     "term": "哈希集合",
     "english": "hash set",
     "definition": "使用哈希存储不重复元素的集合结构。",
-    "sectionId": "chapter_backtracking/summary"
+    "sectionId": "chapter_backtracking/summary",
+    "homeSection": "chapter_backtracking/permutations_problem"
   },
   {
     "term": "桶",
@@ -261,103 +320,121 @@
     "term": "哈希函数",
     "english": "hash function",
     "definition": "把输入键映射为固定范围数值的函数。",
-    "sectionId": "chapter_hashing/exercises"
+    "sectionId": "chapter_hashing/exercises",
+    "homeSection": "chapter_hashing/hash_map"
   },
   {
     "term": "哈希冲突",
     "english": "hash collision",
     "definition": "不同键被映射到同一存储位置的现象。",
-    "sectionId": "chapter_hashing/hash_collision"
+    "sectionId": "chapter_hashing/hash_collision",
+    "homeSection": "chapter_hashing/hash_collision"
   },
   {
     "term": "负载因子",
     "english": "load factor",
     "definition": "哈希表元素数与桶数之比，用于衡量拥挤程度。",
-    "sectionId": "chapter_hashing/summary"
+    "sectionId": "chapter_hashing/summary",
+    "homeSection": "chapter_hashing/hash_map"
   },
   {
     "term": "链式地址",
     "english": "separate chaining",
     "definition": "在每个桶中维护链表等容器，保存映射到该桶的多个元素。",
-    "sectionId": "chapter_hashing/exercises"
+    "sectionId": "chapter_hashing/exercises",
+    "homeSection": "chapter_hashing/hash_collision"
   },
   {
     "term": "开放寻址",
     "english": "open addressing",
     "definition": "发生冲突后在哈希表内部寻找其他空槽位的处理方式。",
-    "sectionId": "chapter_hashing/summary"
+    "sectionId": "chapter_hashing/summary",
+    "homeSection": "chapter_hashing/hash_collision"
   },
   {
     "term": "线性探测",
     "english": "linear probing",
     "definition": "开放寻址的一种方式，冲突后按固定步长依次检查后续槽位。",
-    "sectionId": "chapter_hashing/summary"
+    "sectionId": "chapter_hashing/summary",
+    "homeSection": "chapter_hashing/hash_collision"
   },
   {
     "term": "懒删除",
     "english": "lazy deletion",
     "definition": "先标记元素已删除而非立刻移走，以保持探测或访问路径。",
-    "sectionId": "chapter_hashing/hash_collision"
+    "sectionId": "chapter_hashing/hash_collision",
+    "homeSection": "chapter_hashing/hash_collision"
   },
   {
     "term": "二叉树",
     "english": "binary tree",
     "definition": "每个节点最多有两个子节点的树结构。",
-    "sectionId": "chapter_tree/binary_tree_traversal"
+    "sectionId": "chapter_tree/binary_tree_traversal",
+    "homeSection": "chapter_tree/binary_tree_traversal"
   },
   {
     "term": "树节点",
     "english": "tree node",
     "definition": "树中保存数据并关联子节点的单元。",
-    "sectionId": "chapter_searching/searching_algorithm_revisited"
+    "sectionId": "chapter_searching/searching_algorithm_revisited",
+    "homeSection": "chapter_tree/binary_tree",
+    "tip": "树里的一个元素，带着指向子节点的引用。图可以看成去掉“唯一父节点”约束的树。"
   },
   {
     "term": "左子节点",
     "english": "left-child node",
     "definition": "二叉树节点的左侧直接孩子。",
-    "sectionId": "chapter_tree/binary_tree_traversal"
+    "sectionId": "chapter_tree/binary_tree_traversal",
+    "homeSection": "chapter_tree/binary_tree_traversal"
   },
   {
     "term": "右子节点",
     "english": "right-child node",
     "definition": "二叉树节点的右侧直接孩子。",
-    "sectionId": "chapter_tree/binary_tree_traversal"
+    "sectionId": "chapter_tree/binary_tree_traversal",
+    "homeSection": "chapter_tree/binary_tree_traversal"
   },
   {
     "term": "父节点",
     "english": "parent node",
     "definition": "直接连接并位于某节点上一层的节点。",
-    "sectionId": "chapter_heap/exercises"
+    "sectionId": "chapter_heap/exercises",
+    "homeSection": "chapter_heap/heap"
   },
   {
     "term": "左子树",
     "english": "left subtree",
     "definition": "以某节点的左孩子为根的树。",
-    "sectionId": "chapter_divide_and_conquer/summary"
+    "sectionId": "chapter_divide_and_conquer/summary",
+    "homeSection": "chapter_divide_and_conquer/build_binary_tree_problem"
   },
   {
     "term": "右子树",
     "english": "right subtree",
     "definition": "以某节点的右孩子为根的树。",
-    "sectionId": "chapter_divide_and_conquer/summary"
+    "sectionId": "chapter_divide_and_conquer/summary",
+    "homeSection": "chapter_divide_and_conquer/build_binary_tree_problem"
   },
   {
     "term": "根节点",
     "english": "root node",
     "definition": "树的起点，没有父节点。",
-    "sectionId": "chapter_sorting/heap_sort"
+    "sectionId": "chapter_sorting/heap_sort",
+    "homeSection": "chapter_sorting/heap_sort"
   },
   {
     "term": "叶节点",
     "english": "leaf node",
     "definition": "没有子节点的树节点。",
-    "sectionId": "chapter_sorting/heap_sort"
+    "sectionId": "chapter_sorting/heap_sort",
+    "homeSection": "chapter_sorting/heap_sort"
   },
   {
     "term": "边",
     "english": "edge",
     "definition": "连接两个节点或顶点的关系。",
-    "sectionId": "chapter_searching/binary_search_edge"
+    "sectionId": "chapter_searching/binary_search_edge",
+    "tip": "连接两个顶点的线。谁和谁是好友，谁和谁有路，就是一条边。"
   },
   {
     "term": "层",
@@ -375,43 +452,50 @@
     "term": "高度",
     "english": "height",
     "definition": "节点到其最远叶节点路径的边数；整棵树高度为根的高度。",
-    "sectionId": "chapter_introduction/what_is_dsa"
+    "sectionId": "chapter_introduction/what_is_dsa",
+    "homeSection": "chapter_introduction/what_is_dsa"
   },
   {
     "term": "深度",
     "english": "depth",
     "definition": "根节点到当前节点路径的边数。",
-    "sectionId": "chapter_searching/summary"
+    "sectionId": "chapter_searching/summary",
+    "homeSection": "chapter_preface/about_the_book"
   },
   {
     "term": "完美二叉树",
     "english": "perfect binary tree",
     "definition": "每一层节点都填满的二叉树。",
-    "sectionId": "chapter_tree/exercises"
+    "sectionId": "chapter_tree/exercises",
+    "homeSection": "chapter_tree/binary_tree"
   },
   {
     "term": "完全二叉树",
     "english": "complete binary tree",
     "definition": "除最后一层外均填满，最后一层节点从左到右连续排列的二叉树。",
-    "sectionId": "chapter_heap/summary"
+    "sectionId": "chapter_heap/summary",
+    "homeSection": "chapter_heap/heap"
   },
   {
     "term": "完满二叉树",
     "english": "full binary tree",
     "definition": "每个节点的孩子数只能是 0 或 2 的二叉树。",
-    "sectionId": "chapter_tree/exercises"
+    "sectionId": "chapter_tree/exercises",
+    "homeSection": "chapter_tree/binary_tree"
   },
   {
     "term": "平衡二叉树",
     "english": "balanced binary tree",
     "definition": "各节点左右子树高度差保持在规定范围内的二叉树。",
-    "sectionId": "chapter_tree/summary"
+    "sectionId": "chapter_tree/summary",
+    "homeSection": "chapter_tree/binary_tree"
   },
   {
     "term": "二叉搜索树",
     "english": "binary search tree",
     "definition": "每个节点左子树的键较小、右子树的键较大，从而支持有序查找。",
-    "sectionId": "chapter_tree/binary_search_tree"
+    "sectionId": "chapter_tree/binary_search_tree",
+    "homeSection": "chapter_tree/binary_search_tree"
   },
   {
     "term": "AVL 树",
@@ -423,55 +507,66 @@
     "term": "红黑树",
     "english": "red-black tree",
     "definition": "通过节点颜色及相关约束保持近似平衡的二叉搜索树。",
-    "sectionId": "chapter_graph/summary"
+    "sectionId": "chapter_graph/summary",
+    "homeSection": "chapter_graph/graph"
   },
   {
     "term": "层序遍历",
     "english": "level-order traversal",
     "definition": "从根开始，按层从上到下访问节点，通常借助队列。",
-    "sectionId": "chapter_tree/binary_tree_traversal"
+    "sectionId": "chapter_tree/binary_tree_traversal",
+    "homeSection": "chapter_tree/binary_tree_traversal"
   },
   {
     "term": "广度优先遍历",
     "english": "breadth-first traversal",
     "definition": "先访问距离起点较近的节点，再逐层向外扩展。",
-    "sectionId": "chapter_graph/summary"
+    "sectionId": "chapter_graph/summary",
+    "homeSection": "chapter_graph/graph_traversal",
+    "tip": "一圈一圈往外扩：先看所有邻居，再看邻居的邻居。像往水里丢石子，波纹一层层漾开。"
   },
   {
     "term": "深度优先遍历",
     "english": "depth-first traversal",
     "definition": "沿一条路径深入，无法继续时回退探索其他分支。",
-    "sectionId": "chapter_graph/summary"
+    "sectionId": "chapter_graph/summary",
+    "homeSection": "chapter_graph/graph_traversal",
+    "tip": "一条路走到黑，走不通再回头换条路。像走迷宫时贴着右手边的墙一直走。"
   },
   {
     "term": "前序遍历",
     "english": "pre-order traversal",
     "definition": "按根节点、左子树、右子树的顺序访问二叉树。",
-    "sectionId": "chapter_divide_and_conquer/summary"
+    "sectionId": "chapter_divide_and_conquer/summary",
+    "homeSection": "chapter_divide_and_conquer/build_binary_tree_problem"
   },
   {
     "term": "中序遍历",
     "english": "in-order traversal",
     "definition": "按左子树、根节点、右子树的顺序访问二叉树。",
-    "sectionId": "chapter_divide_and_conquer/summary"
+    "sectionId": "chapter_divide_and_conquer/summary",
+    "homeSection": "chapter_divide_and_conquer/build_binary_tree_problem"
   },
   {
     "term": "后序遍历",
     "english": "post-order traversal",
     "definition": "按左子树、右子树、根节点的顺序访问二叉树。",
-    "sectionId": "chapter_sorting/merge_sort"
+    "sectionId": "chapter_sorting/merge_sort",
+    "homeSection": "chapter_sorting/merge_sort"
   },
   {
     "term": "平衡二叉搜索树",
     "english": "balanced binary search tree",
     "definition": "在维持搜索树有序性的同时限制树高，避免退化为链。",
-    "sectionId": "chapter_tree/summary"
+    "sectionId": "chapter_tree/summary",
+    "homeSection": "chapter_tree/avl_tree"
   },
   {
     "term": "平衡因子",
     "english": "balance factor",
     "definition": "节点左子树高度减去右子树高度。",
-    "sectionId": "chapter_tree/avl_tree"
+    "sectionId": "chapter_tree/avl_tree",
+    "homeSection": "chapter_tree/avl_tree"
   },
   {
     "term": "堆",
@@ -483,25 +578,29 @@
     "term": "大顶堆",
     "english": "max heap",
     "definition": "每个父节点都不小于其孩子，根节点为最大元素。",
-    "sectionId": "chapter_heap/summary"
+    "sectionId": "chapter_heap/summary",
+    "homeSection": "chapter_heap/heap"
   },
   {
     "term": "小顶堆",
     "english": "min heap",
     "definition": "每个父节点都不大于其孩子，根节点为最小元素。",
-    "sectionId": "chapter_heap/summary"
+    "sectionId": "chapter_heap/summary",
+    "homeSection": "chapter_heap/heap"
   },
   {
     "term": "优先队列",
     "english": "priority queue",
     "definition": "按优先级而非加入时间取出元素的抽象结构。",
-    "sectionId": "chapter_heap/summary"
+    "sectionId": "chapter_heap/summary",
+    "homeSection": "chapter_heap/heap"
   },
   {
     "term": "堆化",
     "english": "heapify",
     "definition": "通过上浮或下沉调整节点，使结构恢复堆性质的过程。",
-    "sectionId": "chapter_heap/summary"
+    "sectionId": "chapter_heap/summary",
+    "homeSection": "chapter_heap/heap"
   },
   {
     "term": "Top-k 问题",
@@ -513,187 +612,244 @@
     "term": "图",
     "english": "graph",
     "definition": "由顶点和顶点之间的边组成的数据结构。",
-    "sectionId": "chapter_graph/index"
+    "sectionId": "chapter_graph/index",
+    "tip": "把一堆东西和它们之间的关系画出来，就是图。社交网络、地铁线路、网页链接，全是图。"
   },
   {
     "term": "顶点",
     "english": "vertex",
     "definition": "图中表示实体的基本单元。",
-    "sectionId": "chapter_graph/summary"
+    "sectionId": "chapter_graph/summary",
+    "homeSection": "chapter_graph/graph",
+    "tip": "图里的每一个“点”。在人脉图里，每个人就是一个顶点。"
   },
   {
     "term": "无向图",
     "english": "undirected graph",
     "definition": "边没有方向，连接关系可双向访问的图。",
-    "sectionId": "chapter_graph/exercises"
+    "sectionId": "chapter_graph/exercises",
+    "homeSection": "chapter_graph/graph",
+    "tip": "边不分方向：A 认识 B，B 也认识 A。好友关系就是无向的。"
   },
   {
     "term": "有向图",
     "english": "directed graph",
     "definition": "边具有起点和终点，连接关系有方向的图。",
-    "sectionId": "chapter_graph/summary"
+    "sectionId": "chapter_graph/summary",
+    "homeSection": "chapter_graph/graph",
+    "tip": "边有箭头：你关注了对方，对方不一定关注你。"
   },
   {
     "term": "连通图",
     "english": "connected graph",
     "definition": "任意两个顶点之间都存在路径的无向图。",
-    "sectionId": "chapter_graph/summary"
+    "sectionId": "chapter_graph/summary",
+    "homeSection": "chapter_graph/graph",
+    "tip": "随便挑一个点，都能走到其他所有点。走不到，就是非连通图。"
   },
   {
     "term": "非连通图",
     "english": "disconnected graph",
     "definition": "存在无法通过路径相互到达的顶点的图。",
-    "sectionId": "chapter_graph/summary"
+    "sectionId": "chapter_graph/summary",
+    "homeSection": "chapter_graph/graph",
+    "tip": "图里分成了几块互不相通的区域，像没有桥的几座岛。"
   },
   {
     "term": "有权图",
     "english": "weighted graph",
     "definition": "边附带距离、成本等数值权重的图。",
-    "sectionId": "chapter_graph/summary"
+    "sectionId": "chapter_graph/summary",
+    "homeSection": "chapter_graph/graph",
+    "tip": "边上有数字，比如距离、票价、耗时。找最短路径时，这个数字才是关键。"
   },
   {
     "term": "邻接",
     "english": "adjacency",
     "definition": "两个顶点之间直接存在边的关系。",
-    "sectionId": "chapter_graph/summary"
+    "sectionId": "chapter_graph/summary",
+    "homeSection": "chapter_graph/graph",
+    "tip": "判断“这两个点之间有没有直接的边”。查邻接关系，就是在查它俩认不认识。"
   },
   {
     "term": "路径",
     "english": "path",
     "definition": "沿相邻顶点及连接边形成的访问序列。",
-    "sectionId": "chapter_graph/summary"
+    "sectionId": "chapter_graph/summary",
+    "homeSection": "chapter_graph/graph",
+    "tip": "从一个顶点走到另一个顶点，一路上经过的边连起来就是路径。"
   },
   {
     "term": "入度",
     "english": "in-degree",
     "definition": "有向图中指向当前顶点的边数。",
-    "sectionId": "chapter_graph/graph"
+    "sectionId": "chapter_graph/graph",
+    "homeSection": "chapter_graph/graph",
+    "tip": "有多少条边指向我。在微博里，入度大致就是有多少人关注你。"
   },
   {
     "term": "出度",
     "english": "out-degree",
     "definition": "有向图中从当前顶点出发的边数。",
-    "sectionId": "chapter_graph/graph"
+    "sectionId": "chapter_graph/graph",
+    "homeSection": "chapter_graph/graph",
+    "tip": "有多少条边从我指出去。你关注了多少人，就是你的出度。"
   },
   {
     "term": "邻接矩阵",
     "english": "adjacency matrix",
     "definition": "用二维矩阵记录顶点之间是否相连及边权。",
-    "sectionId": "chapter_graph/summary"
+    "sectionId": "chapter_graph/summary",
+    "homeSection": "chapter_graph/graph",
+    "tip": "用一张二维表格记“谁和谁相邻”，查关系是 O(1)，但占地方。适合点不多的稠密图。"
   },
   {
     "term": "邻接表",
     "english": "adjacency list",
     "definition": "为每个顶点保存其邻居集合的图表示。",
-    "sectionId": "chapter_graph/summary"
+    "sectionId": "chapter_graph/summary",
+    "homeSection": "chapter_graph/graph",
+    "tip": "每个顶点挂一串“我认识谁”的名单，省空间，遍历邻居也快。稀疏图的常用选择。"
   },
   {
     "term": "广度优先搜索",
     "english": "breadth-first search",
     "definition": "使用队列按层探索图；在无权图中可求最少边数路径。",
-    "sectionId": "chapter_searching/summary"
+    "sectionId": "chapter_searching/summary",
+    "homeSection": "chapter_tree/binary_tree_traversal",
+    "tip": "从起点开始一层层向外找，先到先查。找“最少几步能到”这类问题时特别好用。"
   },
   {
     "term": "深度优先搜索",
     "english": "depth-first search",
     "definition": "通过递归或栈优先探索深处节点，并记录已访问状态。",
-    "sectionId": "chapter_searching/summary"
+    "sectionId": "chapter_searching/summary",
+    "homeSection": "chapter_tree/binary_tree_traversal",
+    "tip": "沿着一条分支往下钻，钻不动了再退回上一个路口。适合枚举所有可能。"
   },
   {
     "term": "二分查找",
     "english": "binary search",
     "definition": "在有序数据中比较中点，每次排除一半搜索区间的算法。",
-    "sectionId": "chapter_searching/binary_search_edge"
+    "sectionId": "chapter_searching/binary_search_edge",
+    "homeSection": "chapter_searching/binary_search_edge",
+    "tip": "每轮砍掉一半候选，前提是数据已经排好序。猜数字游戏用的就是这个思路。"
   },
   {
     "term": "搜索算法",
     "english": "searching algorithm",
     "definition": "在数据中寻找目标元素或满足条件解的方法。",
-    "sectionId": "chapter_searching/searching_algorithm_revisited"
+    "sectionId": "chapter_searching/searching_algorithm_revisited",
+    "homeSection": "chapter_searching/binary_search",
+    "tip": "在数据里找目标值的办法统称搜索。数据有序可以用二分，无序多半得靠哈希或遍历。"
   },
   {
     "term": "排序算法",
     "english": "sorting algorithm",
     "definition": "按给定比较规则重新排列数据的方法。",
-    "sectionId": "chapter_sorting/sorting_algorithm"
+    "sectionId": "chapter_sorting/sorting_algorithm",
+    "homeSection": "chapter_sorting/sorting_algorithm",
+    "tip": "把一堆元素按大小排好。看似简单，却是理解复杂度、分治和取舍的最好入口。"
   },
   {
     "term": "选择排序",
     "english": "selection sort",
     "definition": "反复从未排序部分选出最小元素，放到已排序部分末尾。",
-    "sectionId": "chapter_sorting/selection_sort"
+    "sectionId": "chapter_sorting/selection_sort",
+    "homeSection": "chapter_sorting/selection_sort",
+    "tip": "每一轮挑出剩下元素里最小的，放到已排好部分的末尾。思路最直白，但比较次数固定。"
   },
   {
     "term": "冒泡排序",
     "english": "bubble sort",
     "definition": "反复比较并交换相邻逆序元素，使较大元素逐轮移到末尾。",
-    "sectionId": "chapter_sorting/bubble_sort"
+    "sectionId": "chapter_sorting/bubble_sort",
+    "homeSection": "chapter_sorting/bubble_sort",
+    "tip": "相邻两个比一比，大的往后挪。一轮下来最大的就“冒”到了最后。"
   },
   {
     "term": "插入排序",
     "english": "insertion sort",
     "definition": "把当前元素插入前面已经有序的部分。",
-    "sectionId": "chapter_sorting/insertion_sort"
+    "sectionId": "chapter_sorting/insertion_sort",
+    "homeSection": "chapter_sorting/insertion_sort",
+    "tip": "像整理手里的扑克牌：新牌插进左边已经排好的牌里。数据接近有序时特别快。"
   },
   {
     "term": "快速排序",
     "english": "quick sort",
     "definition": "按基准划分较小和较大元素，再递归排序各分区。",
-    "sectionId": "chapter_sorting/quick_sort"
+    "sectionId": "chapter_sorting/quick_sort",
+    "homeSection": "chapter_sorting/quick_sort",
+    "tip": "随便挑一个基准值，比它小的扔左边，大的扔右边，然后两边各自再排。平均最快。"
   },
   {
     "term": "归并排序",
     "english": "merge sort",
     "definition": "递归划分数据，排序后将有序子序列合并。",
-    "sectionId": "chapter_sorting/merge_sort"
+    "sectionId": "chapter_sorting/merge_sort",
+    "homeSection": "chapter_sorting/merge_sort",
+    "tip": "把数组一分为二，两边分别排好，再合并成一个有序数组。稳定，且最坏也是 O(n log n)。"
   },
   {
     "term": "堆排序",
     "english": "heap sort",
     "definition": "利用堆反复取出极值并放到最终位置的排序算法。",
-    "sectionId": "chapter_sorting/heap_sort"
+    "sectionId": "chapter_sorting/heap_sort",
+    "homeSection": "chapter_sorting/heap_sort",
+    "tip": "先把数组建成大顶堆，再反复把堆顶（最大值）换到末尾。空间省，但不稳定。"
   },
   {
     "term": "桶排序",
     "english": "bucket sort",
     "definition": "把数据分配到不同桶，分别排序后依序合并。",
-    "sectionId": "chapter_sorting/bucket_sort"
+    "sectionId": "chapter_sorting/bucket_sort",
+    "homeSection": "chapter_sorting/bucket_sort",
+    "tip": "按数值范围分成若干桶，各自排好再拼起来。数据分布均匀时非常快。"
   },
   {
     "term": "计数排序",
     "english": "counting sort",
     "definition": "统计各个取值的出现次数，再按顺序还原数据。",
-    "sectionId": "chapter_sorting/counting_sort"
+    "sectionId": "chapter_sorting/counting_sort",
+    "homeSection": "chapter_sorting/counting_sort",
+    "tip": "不比较大小，直接数每个值出现几次，再按次数还原顺序。适合范围小的整数。"
   },
   {
     "term": "基数排序",
     "english": "radix sort",
     "definition": "按各位数值分轮进行稳定排序，从而得到整体顺序。",
-    "sectionId": "chapter_sorting/radix_sort"
+    "sectionId": "chapter_sorting/radix_sort",
+    "homeSection": "chapter_sorting/radix_sort",
+    "tip": "从个位开始，一位一位地稳定排序，排完最高位就全有序了。"
   },
   {
     "term": "分治",
     "english": "divide and conquer",
     "definition": "把问题分解成较小的同类子问题，分别求解后合并。",
-    "sectionId": "chapter_divide_and_conquer/index"
+    "sectionId": "chapter_divide_and_conquer/index",
+    "homeSection": "chapter_divide_and_conquer/divide_and_conquer"
   },
   {
     "term": "汉诺塔问题",
     "english": "hanota problem",
     "definition": "在不把大盘放到小盘上方的约束下，借助辅助柱移动盘子。",
-    "sectionId": "chapter_divide_and_conquer/hanota_problem"
+    "sectionId": "chapter_divide_and_conquer/hanota_problem",
+    "homeSection": "chapter_divide_and_conquer/hanota_problem"
   },
   {
     "term": "回溯算法",
     "english": "backtracking algorithm",
     "definition": "逐步尝试候选选择，不可行时撤销选择并尝试其他分支。",
-    "sectionId": "chapter_backtracking/backtracking_algorithm"
+    "sectionId": "chapter_backtracking/backtracking_algorithm",
+    "homeSection": "chapter_backtracking/backtracking_algorithm"
   },
   {
     "term": "约束",
     "english": "constraint",
     "definition": "问题要求解必须满足的条件。",
-    "sectionId": "chapter_backtracking/summary"
+    "sectionId": "chapter_backtracking/summary",
+    "homeSection": "chapter_backtracking/backtracking_algorithm"
   },
   {
     "term": "解",
@@ -705,25 +861,29 @@
     "term": "状态",
     "english": "state",
     "definition": "描述算法某一时刻进展所需的信息。",
-    "sectionId": "chapter_backtracking/summary"
+    "sectionId": "chapter_backtracking/summary",
+    "homeSection": "chapter_backtracking/backtracking_algorithm"
   },
   {
     "term": "剪枝",
     "english": "pruning",
     "definition": "提前排除不可能产生有效或更优解的搜索分支。",
-    "sectionId": "chapter_backtracking/summary"
+    "sectionId": "chapter_backtracking/summary",
+    "homeSection": "chapter_backtracking/backtracking_algorithm"
   },
   {
     "term": "全排列问题",
     "english": "permutations problem",
     "definition": "枚举一组元素的所有不同排列顺序。",
-    "sectionId": "chapter_backtracking/permutations_problem"
+    "sectionId": "chapter_backtracking/permutations_problem",
+    "homeSection": "chapter_backtracking/permutations_problem"
   },
   {
     "term": "子集和问题",
     "english": "subset-sum problem",
     "definition": "从给定集合中选择若干元素，使其和满足指定目标。",
-    "sectionId": "chapter_backtracking/subset_sum_problem"
+    "sectionId": "chapter_backtracking/subset_sum_problem",
+    "homeSection": "chapter_backtracking/subset_sum_problem"
   },
   {
     "term": "n 皇后问题",
@@ -735,36 +895,42 @@
     "term": "动态规划",
     "english": "dynamic programming",
     "definition": "利用子问题的递推关系并保存结果，避免重复计算。",
-    "sectionId": "chapter_dynamic_programming/index"
+    "sectionId": "chapter_dynamic_programming/index",
+    "homeSection": "chapter_dynamic_programming/intro_to_dynamic_programming"
   },
   {
     "term": "初始状态",
     "english": "initial state",
     "definition": "递推开始时已知的基础状态及其数值。",
-    "sectionId": "chapter_sorting/selection_sort"
+    "sectionId": "chapter_sorting/selection_sort",
+    "homeSection": "chapter_sorting/selection_sort"
   },
   {
     "term": "状态转移方程",
     "english": "state-transition equation",
     "definition": "表达当前状态如何由其他状态计算得到的关系。",
-    "sectionId": "chapter_dynamic_programming/summary"
+    "sectionId": "chapter_dynamic_programming/summary",
+    "homeSection": "chapter_dynamic_programming/intro_to_dynamic_programming"
   },
   {
     "term": "背包问题",
     "english": "knapsack problem",
     "definition": "在容量等限制下选择物品，使总价值等目标最优。",
-    "sectionId": "chapter_greedy/fractional_knapsack_problem"
+    "sectionId": "chapter_greedy/fractional_knapsack_problem",
+    "homeSection": "chapter_greedy/fractional_knapsack_problem"
   },
   {
     "term": "编辑距离问题",
     "english": "edit distance problem",
     "definition": "用插入、删除、替换等操作把一个序列变为另一个，求最小操作代价。",
-    "sectionId": "chapter_dynamic_programming/edit_distance_problem"
+    "sectionId": "chapter_dynamic_programming/edit_distance_problem",
+    "homeSection": "chapter_dynamic_programming/edit_distance_problem"
   },
   {
     "term": "贪心算法",
     "english": "greedy algorithm",
     "definition": "每一步选择当前看来最优的方案；正确性需由问题性质保证。",
-    "sectionId": "chapter_greedy/greedy_algorithm"
+    "sectionId": "chapter_greedy/greedy_algorithm",
+    "homeSection": "chapter_greedy/greedy_algorithm"
   }
 ]
