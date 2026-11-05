@@ -10,9 +10,9 @@ import type {ReadingLocator,BookManifest} from './types';
 import type {GalaxyPhase,SceneLabel} from './galaxy-engine';
 const Scene=defineAsyncComponent(()=>import('./GalaxyScene.vue')),router=useRouter();
 const scene=ref<{reset:()=>void;hover:(id:string)=>void;pulse:(id:string)=>void}>(),initializing=ref(true),phase=ref<GalaxyPhase>('galaxy'),simple=ref(true),active=ref(true),failed=ref(false),sceneReady=ref(false),resume=ref(''),reduced=ref(false),labels=ref<SceneLabel[]>([]),notice=ref('');
-const fallback=computed(()=>simple.value||failed.value),book=library.books[0];let timer:ReturnType<typeof setTimeout>|undefined,disposed=false,query:MediaQueryList|undefined;
+const fallback=computed(()=>simple.value||failed.value),book=library.books[0];let timer:ReturnType<typeof setTimeout>|undefined,disposed=false,query:MediaQueryList|undefined,motionOverride=false;
 function background(){active.value=!document.hidden;}
-function preference(){reduced.value=!!query?.matches;}
+function preference(){reduced.value=!!query?.matches&&!motionOverride;}
 function labelStyle(id:string,i:number){const p=labels.value.find(l=>l.id===id);const defaults=[[71,51],[25,70],[40,31],[64,25],[86,35],[88,73],[48,81]];const x=p?.x??defaults[i][0],y=p?.y??defaults[i][1];return {left:`${Math.max(i===0?28:8,Math.min(i===0?81:92,x))}%`,top:`${Math.max(23,Math.min(82,y))}%`,visibility:!fallback.value&&p&&!p.visible?'hidden' as const:'visible' as const};}
 async function showBook(){clearTimeout(timer);phase.value='book';await nextTick();document.querySelector<HTMLButtonElement>('.enter-book')?.focus({preventScroll:true});}
 watch(phase,value=>{petHost.bottomInset=value==='book'?160:0;});
@@ -22,13 +22,13 @@ function choose(id='plex-programming'){if(phase.value!=='galaxy')return;if(id!==
 function enter(){if(phase.value!=='book'||(!fallback.value&&!sceneReady.value))return;phase.value='opening';timer=setTimeout(()=>void revealReader(()=>router.go(book.entry!),reduced.value),reduced.value?0:700);}
 function skip(){clearTimeout(timer);if(phase.value==='opening')void revealReader(()=>router.go(book.entry!),true);else void showBook();}
 function back(){clearTimeout(timer);phase.value='galaxy';notice.value='';nextTick(()=>document.querySelector<HTMLButtonElement>('.planet-0')?.focus({preventScroll:true}));}
-function simplify(){simple.value=!simple.value;sceneReady.value=false;failed.value=false;void putLearning('galaxy:simple',simple.value).catch(()=>notice.value='显示偏好未保存，本次设置仍有效。');}
+function simplify(){simple.value=!simple.value;motionOverride=!simple.value;preference();sceneReady.value=false;failed.value=false;void putLearning('galaxy:simple',simple.value).catch(()=>notice.value='显示偏好未保存，本次设置仍有效。');}
 function onFail(){failed.value=true;notice.value='三维场景不可用，已切换简化显示，可继续阅读。';}
 function key(event:KeyboardEvent){if(event.key==='Escape'&&phase.value==='book'){event.preventDefault();back();}}
 onErrorCaptured(()=>{onFail();return false;});
 onMounted(async()=>{
  query=matchMedia('(prefers-reduced-motion: reduce)');preference();query.addEventListener('change',preference);
- try{simple.value=await getLearning('galaxy:simple',reduced.value);const place=await getLearning<ReadingLocator|null>('reading',readStore<ReadingLocator|null>('reading',null));if(place){const response=await fetch('/book/manifest.json');if(response.ok){const manifest:BookManifest=await response.json(),section=manifest.pages.find(p=>p.id===place.sectionId);if(section)resume.value=section.route+'#'+place.blockId+'@'+place.offset;}}}catch{notice.value='未能读取上次位置，仍可从扉页开始。';}
+ try{const savedSimple=await getLearning<boolean|null>('galaxy:simple',null);simple.value=savedSimple??reduced.value;if(savedSimple===false){motionOverride=true;preference();}const place=await getLearning<ReadingLocator|null>('reading',readStore<ReadingLocator|null>('reading',null));if(place){const response=await fetch('/book/manifest.json');if(response.ok){const manifest:BookManifest=await response.json(),section=manifest.pages.find(p=>p.id===place.sectionId);if(section)resume.value=section.route+'#'+place.blockId+'@'+place.offset;}}}catch{notice.value='未能读取上次位置，仍可从扉页开始。';}
  if(disposed)return;initializing.value=false;document.addEventListener('visibilitychange',background);window.addEventListener('keydown',key);
 });
 onBeforeUnmount(()=>{disposed=true;clearTimeout(timer);query?.removeEventListener('change',preference);document.removeEventListener('visibilitychange',background);window.removeEventListener('keydown',key);});

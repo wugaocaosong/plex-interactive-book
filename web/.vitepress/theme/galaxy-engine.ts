@@ -73,7 +73,7 @@ export class GalaxyEngine{
  private frame=(now:number)=>{
   if(this.destroyed||!this.active)return;const frameTime=Math.min(1,(now-this.last)/1000),dt=Math.min(.05,frameTime);this.last=now;
   if(this.phase==='galaxy'){
-   this.controls.update();if(!this.reduced){this.elapsed+=dt;this.galaxy.rotation.z+=dt*.015;
+   this.controls.update();if(!this.reduced){this.elapsed+=dt;this.galaxy.rotation.z+=dt*.035;
     const dust=this.galaxy.children[1] as T.Points<T.BufferGeometry,T.ShaderMaterial>;dust.material.uniforms.uTime.value=this.elapsed;
     this.systems.forEach((s,i)=>{const hover=this.hovered===library.books[i].id;if(!hover)this.ticks[i]+=dt;const t=this.ticks[i];s.sun.rotation.y+=dt*.25;s.sun.material.uniforms.time.value=t;s.group.position.copy(this.bases[i]);s.group.position.x+=Math.sin(t*.055)*(.3+i*.055);s.group.position.y+=Math.cos(t*.055)*.22;s.satellites.forEach((p,j)=>{const a=t*s.specs[j].speed+j*2.1,r=s.radius*s.specs[j].radius*(hover?.94:1);p.position.set(Math.cos(a)*r,Math.sin(a)*r,0);p.rotation.y+=dt*.6;});s.glow.scale.setScalar(hover?1.25:1+Math.sin(t*1.6)*.06);s.orbits.children.forEach(o=>{if(o instanceof T.LineLoop)(o.material as T.LineBasicMaterial).opacity=hover?.85:.38;});});
    }

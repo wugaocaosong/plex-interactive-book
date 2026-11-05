@@ -17,9 +17,15 @@ await mkdir(resolve(publicDir, 'vendor/pyodide'), {recursive: true});
 for (const file of ['pyodide.mjs','pyodide.asm.mjs','pyodide.asm.wasm','pyodide-lock.json','python_stdlib.zip']) {
   await cp(resolve(root, 'node_modules/pyodide',file),resolve(publicDir, 'vendor/pyodide',file));
 }
-await cp(resolve(root, 'content/h5p/binary-search'),resolve(publicDir,'h5p/binary-search'),{recursive:true});
-await cp(resolve(root, 'content/h5p/binary-search'),resolve(publicDir,'h5p/monty-hall'),{recursive:true});
-await cp(resolve(root, 'content/h5p/monty-hall'),resolve(publicDir,'h5p/monty-hall'),{recursive:true});
+const binarySearchOutput=resolve(publicDir,'h5p/binary-search');
+const sharedMontyLibraries=resolve(publicDir,'h5p/monty-hall');
+await cp(resolve(root, 'content/h5p/binary-search'),binarySearchOutput,{recursive:true});
+await mkdir(sharedMontyLibraries,{recursive:true});
+for(const entry of await readdir(resolve(root,'content/h5p/binary-search'),{withFileTypes:true})){
+ if(entry.name==='content'||entry.name==='h5p.json')continue;
+ await cp(resolve(root,'content/h5p/binary-search',entry.name),resolve(sharedMontyLibraries,entry.name),{recursive:true});
+}
+await cp(resolve(root, 'content/h5p/monty-hall'),sharedMontyLibraries,{recursive:true});
 await mkdir(resolve(publicDir, 'images'), {recursive:true});
 await cp(resolve(root,'assets/references/cover.png'),resolve(publicDir,'images/cover.png'));
 await cp(resolve(root,'assets/references/logo.png'),resolve(publicDir,'images/logo.png'));
@@ -37,7 +43,7 @@ for(const name of ['three.quarks','quarks.core','@huggingface/transformers','@or
   notices.push(`${name} ${pkg.version}: ${pkg.license}`);
   for(const file of await readdir(dir)) if(/^(license|licence|ofl|copyright)/i.test(file)) {
     await mkdir(resolve(root,'licenses/dependencies'),{recursive:true});
-    await cp(resolve(dir,file),resolve(root,'licenses/dependencies',name.replaceAll('/','-')+'-'+file),{recursive:true});
+    await writeFile(resolve(root,'licenses/dependencies',name.replaceAll('/','-')+'-'+file),await readFile(resolve(dir,file)));
   }
 }
 await writeFile(resolve(root,'licenses/dependencies.txt'),notices.join('\n')+'\n');

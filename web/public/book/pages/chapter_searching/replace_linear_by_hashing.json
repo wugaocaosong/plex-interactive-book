@@ -6,7 +6,8 @@
   "route": "/read/chapter_searching/replace_linear_by_hashing",
   "sourcePath": "chapter_searching/replace_linear_by_hashing.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"blk-398a21f5b4a93d4c\" id=\"_1\">哈希优化策略</h1>\n<p data-block=\"blk-e25e5bc63a2d58f5\">在算法题中，<strong>我们常通过将线性查找替换为哈希查找来降低算法的时间复杂度</strong>。我们借助一个算法题来加深理解。</p>\n<div class=\"admonition question\" data-block=\"blk-4e2de9dd75414b3d\">\n<p class=\"admonition-title\">Question</p>\n<p>给定一个整数数组 <code>nums</code> 和一个目标元素 <code>target</code> ，请在数组中搜索“和”为 <code>target</code> 的两个元素，并返回它们的数组索引。返回任意一个解即可。</p>\n</div>\n<h2 data-block=\"blk-da45786701559d0f\" id=\"_2\">线性查找：以时间换空间</h2>\n<p data-block=\"blk-80581669be37d182\">考虑直接遍历所有可能的组合。如下图所示，我们开启一个两层循环，在每轮中判断两个整数的和是否为 <code>target</code> ，若是，则返回它们的索引。</p>\n<figure data-block=\"blk-d1ebe259fa476b71\"><img alt=\"线性查找求解两数之和\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_searching/replace_linear_by_hashing.assets/two_sum_brute_force.png\"/><figcaption>线性查找求解两数之和</figcaption></figure>\n<p data-block=\"blk-d9fd5865953cd105\">代码如下所示：</p>\n<div class=\"code-example\" data-block=\"blk-aa9051c6c14d6c5a\" data-code=\"0\"><div class=\"code-caption\"><span>two_sum · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def two_sum_brute_force(nums: list[int], target: int) -&gt; list[int]:\n    \"\"\"方法一：暴力枚举\"\"\"\n    # 两层循环，时间复杂度为 O(n^2)\n    for i in range(len(nums) - 1):\n        for j in range(i + 1, len(nums)):\n            if nums[i] + nums[j] == target:\n                return [i, j]\n    return []</code></pre></div>\n<p data-block=\"blk-0ebef8b094b5c012\">此方法的时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n^2)\\)\">\\(O(n^2)\\)</span> ，空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span> ，在大数据量下非常耗时。</p>\n<h2 data-block=\"blk-adf63deeec945f91\" id=\"_3\">哈希查找：以空间换时间</h2>\n<p data-block=\"blk-c34615968279eaaf\">考虑借助一个哈希表，键值对分别为数组元素和元素索引。循环遍历数组，每轮执行下图所示的步骤。</p>\n<ol data-block=\"blk-e14bdca33724ba1f\">\n<li>判断数字 <code>target - nums[i]</code> 是否在哈希表中，若是，则直接返回这两个元素的索引。</li>\n<li>将键值对 <code>nums[i]</code> 和索引 <code>i</code> 添加进哈希表。</li>\n</ol>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-03a94c8afac606e9\"><img alt=\"辅助哈希表求解两数之和\" data-action=\"image\" src=\"/upstream/chapter_searching/replace_linear_by_hashing.assets/two_sum_hashtable_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 3</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<p data-block=\"blk-2113460a386f19cb\">实现代码如下所示，仅需单层循环即可：</p>\n<div class=\"code-example\" data-block=\"blk-83be0bd7b97dc777\" data-code=\"1\"><div class=\"code-caption\"><span>two_sum · python</span><button data-action=\"code\" data-code=\"1\">查看 / 运行</button></div><pre><code>def two_sum_hash_table(nums: list[int], target: int) -&gt; list[int]:\n    \"\"\"方法二：辅助哈希表\"\"\"\n    # 辅助哈希表，空间复杂度为 O(n)\n    dic = {}\n    # 单层循环，时间复杂度为 O(n)\n    for i in range(len(nums)):\n        if target - nums[i] in dic:\n            return [dic[target - nums[i]], i]\n        dic[nums[i]] = i\n    return []</code></pre></div>\n<p data-block=\"blk-6946e123c15bb8bc\">此方法通过哈希查找将时间复杂度从 <span class=\"arithmatex\" data-tex=\"\\(O(n^2)\\)\">\\(O(n^2)\\)</span> 降至 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> ，大幅提升运行效率。</p>\n<p data-block=\"blk-1f33e4ec6ba492ab\">由于需要维护一个额外的哈希表，因此空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 。<strong>尽管如此，该方法的整体时空效率更为均衡，因此它是本题的最优解法</strong>。</p>",
+  "edition": "Genius 算法",
+  "html": "<h1 data-block=\"blk-398a21f5b4a93d4c\" id=\"_1\">哈希优化策略</h1>\n<p data-block=\"blk-a071d52b5be9e1e8\">做算法题时，我们常通过将线性查找替换为哈希查找来降低算法的时间复杂度。下面用一个题来体会一下。</p>\n<p data-block=\"blk-74a50d9e0290625d\">Question</p>\n<p data-block=\"blk-b6456b9d7298117d\">给定整数数组 nums 和一个目标元素 target ，请在数组里找两个加起来等于 target 的元素，返回它们的索引。返回任意一组解即可。</p>\n<h2 data-block=\"blk-da45786701559d0f\" id=\"_2\">线性查找：以时间换空间</h2>\n<p data-block=\"blk-cce10b97859af98b\">最直接的想法是把所有组合试一遍：如下图所示，开一个两层循环，每轮判断两个整数的和是不是 target ，是的话就返回它们的索引。</p>\n<figure data-block=\"blk-d1ebe259fa476b71\"><img alt=\"线性查找求解两数之和\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/genius/media/image_246.png\"/><figcaption>线性查找求解两数之和</figcaption></figure>\n<p data-block=\"blk-d9fd5865953cd105\">代码如下所示：</p>\n<div class=\"code-example\" data-block=\"blk-41c5ed3f69419431\" data-code=\"0\"><div class=\"code-caption\"><span>two_sum · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def two_sum_brute_force(nums: list[int], target: int) -&gt; list[int]:\n    \"\"\"方法一：暴力枚举\"\"\"\n    # 两层循环，时间复杂度为 O(n^2)\n    for i in range(len(nums) - 1):\n        for j in range(i + 1, len(nums)):\n            if nums[i] + nums[j] == target:\n                return [i, j]\n    return []</code></pre></div>\n<p data-block=\"blk-b082e37f9f34fd44\">这种写法时间复杂度 <span class=\"arithmatex\" data-tex=\"\\(O(n^{2})\\)\">\\(O(n^{2})\\)</span> 、空间复杂度 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span> ，数据量大时非常慢。</p>\n<h2 data-block=\"blk-adf63deeec945f91\" id=\"_3\">哈希查找：以空间换时间</h2>\n<p data-block=\"blk-02798bb8f25d3184\">换个思路，用一个哈希表，键值对分别是数组元素和元素索引。遍历数组，每轮做下图这几步。</p>\n<ol data-block=\"blk-8c341db332514334\">\n<li>\n<p>看看 target - nums[i] 在不在哈希表里，在的话直接返回这两个元素的索引。</p>\n</li>\n<li>\n<p>把键值对 nums[i] 和索引 i 存进哈希表。</p>\n</li>\n</ol>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-6c07b72625dd673f\"><img alt=\"图解步骤 1 / 3 · 辅助哈希表求解两数之和\" data-action=\"image\" src=\"/genius/media/image_247.png\"/><div class=\"step-frame-caption\" data-frame-caption=\"\">图解步骤 1 / 3 · 辅助哈希表求解两数之和</div><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 3</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<p data-block=\"blk-2113460a386f19cb\">实现代码如下所示，仅需单层循环即可：</p>\n<div class=\"code-example\" data-block=\"blk-7dfeaa816740a2c5\" data-code=\"1\"><div class=\"code-caption\"><span>two_sum · python</span><button data-action=\"code\" data-code=\"1\">查看 / 运行</button></div><pre><code>def two_sum_hash_table(nums: list[int], target: int) -&gt; list[int]:\n    \"\"\"方法二：辅助哈希表\"\"\"\n    # 辅助哈希表，空间复杂度为 O(n)\n    dic = {}\n    # 单层循环，时间复杂度为 O(n)\n    for i in range(len(nums)):\n        if target - nums[i] in dic:\n            return [dic[target - nums[i]], i]\n        dic[nums[i]] = i\n    return []</code></pre></div>\n<p data-block=\"blk-1b108efd8a8c9b75\">这样用哈希查找把时间复杂度从 <span class=\"arithmatex\" data-tex=\"\\(O(n^{2})\\)\">\\(O(n^{2})\\)</span> 降到 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> ，运行效率提升很多。</p>\n<p data-block=\"blk-1f33e4ec6ba492ab\">由于需要维护一个额外的哈希表，因此空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 。尽管如此，该方法的整体时空效率更为均衡，因此它是本题的最优解法。</p>",
   "codeExamples": [
     {
       "id": "example-4d9e23ac89978a87",
@@ -280,16 +281,19 @@
   "animations": [
     [
       {
-        "src": "/upstream/chapter_searching/replace_linear_by_hashing.assets/two_sum_hashtable_step1.png",
-        "alt": "辅助哈希表求解两数之和"
+        "src": "/genius/media/image_247.png",
+        "alt": "图解步骤 1 / 3 · 辅助哈希表求解两数之和",
+        "caption": "图解步骤 1 / 3 · 辅助哈希表求解两数之和"
       },
       {
-        "src": "/upstream/chapter_searching/replace_linear_by_hashing.assets/two_sum_hashtable_step2.png",
-        "alt": "two_sum_hashtable_step2"
+        "src": "/genius/media/image_248.png",
+        "alt": "图解步骤 2 / 3 · two_sum_hashtable_step2",
+        "caption": "图解步骤 2 / 3 · two_sum_hashtable_step2"
       },
       {
-        "src": "/upstream/chapter_searching/replace_linear_by_hashing.assets/two_sum_hashtable_step3.png",
-        "alt": "two_sum_hashtable_step3"
+        "src": "/genius/media/image_249.png",
+        "alt": "图解步骤 3 / 3 · two_sum_hashtable_step3",
+        "caption": "图解步骤 3 / 3 · two_sum_hashtable_step3"
       }
     ]
   ],
@@ -301,10 +305,12 @@
       "local asset and link rewriting",
       "stable block anchors",
       "math and footnotes",
-      "image caption grouping"
+      "image caption grouping",
+      "Genius DOCX-authored chapter text, equations, images, and captions"
     ],
     "codeReferences": 2,
-    "animationGroups": 1
+    "animationGroups": 1,
+    "geniusSourceSha256": "55f43325bfe3c59b8414d3d91fe550e2b41dea9a54e74033c7f5b85e4105f4b7"
   },
   "blockAliases": {
     "b0": "blk-398a21f5b4a93d4c",
@@ -325,5 +331,5 @@
     "b15": "blk-6946e123c15bb8bc",
     "b16": "blk-1f33e4ec6ba492ab"
   },
-  "contentVersion": "573a18144d9c1710"
+  "contentVersion": "adf9a8a288d03fc3"
 }

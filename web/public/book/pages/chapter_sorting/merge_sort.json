@@ -6,7 +6,8 @@
   "route": "/read/chapter_sorting/merge_sort",
   "sourcePath": "chapter_sorting/merge_sort.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"blk-c2e141557eb0b388\" id=\"_1\">归并排序</h1>\n<p data-block=\"blk-d0536e85cded2476\"><u>归并排序（merge sort）</u>是一种基于分治策略的排序算法，包含下图所示的“划分”和“合并”阶段。</p>\n<ol data-block=\"blk-f2b3e9d7fa7f790b\">\n<li><strong>划分阶段</strong>：通过递归不断地将数组从中点处分开，将长数组的排序问题转换为短数组的排序问题。</li>\n<li><strong>合并阶段</strong>：当子数组长度为 1 时终止划分，开始合并，持续地将左右两个较短的有序数组合并为一个较长的有序数组，直至结束。</li>\n</ol>\n<figure data-block=\"blk-9b63da46aaa99a6e\"><img alt=\"归并排序的划分与合并阶段\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_sorting/merge_sort.assets/merge_sort_overview.png\"/><figcaption>归并排序的划分与合并阶段</figcaption></figure>\n<h2 data-block=\"blk-ba865fcdda500a01\" id=\"_2\">算法流程</h2>\n<p data-block=\"blk-fa1db5a7f2fe7524\">如下图所示，“划分阶段”从顶至底递归地将数组从中点切分为两个子数组。</p>\n<ol data-block=\"blk-adcc555912c14c28\">\n<li>计算数组中点 <code>mid</code> ，递归划分左子数组（区间 <code>[left, mid]</code> ）和右子数组（区间 <code>[mid + 1, right]</code> ）。</li>\n<li>递归执行步骤 <code>1.</code> ，直至子数组区间长度为 1 时终止。</li>\n</ol>\n<p data-block=\"blk-e3580845101a0305\">“合并阶段”从底至顶地将左子数组和右子数组合并为一个有序数组。需要注意的是，从长度为 1 的子数组开始合并，合并阶段中的每个子数组都是有序的。</p>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-2bcdbd3198eb3252\"><img alt=\"归并排序步骤\" data-action=\"image\" src=\"/upstream/chapter_sorting/merge_sort.assets/merge_sort_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 10</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<p data-block=\"blk-61fbd9b1ff886ea4\">观察发现，归并排序与二叉树后序遍历的递归顺序是一致的。</p>\n<ul data-block=\"blk-26c522ba641beb7d\">\n<li><strong>后序遍历</strong>：先递归左子树，再递归右子树，最后处理根节点。</li>\n<li><strong>归并排序</strong>：先递归左子数组，再递归右子数组，最后处理合并。</li>\n</ul>\n<p data-block=\"blk-7e05e4b345e050c3\">归并排序的实现如以下代码所示。请注意，<code>nums</code> 的待合并区间为 <code>[left, right]</code> ，而 <code>tmp</code> 的对应区间为 <code>[0, right - left]</code> 。</p>\n<div class=\"code-example\" data-block=\"blk-b0aa3223c0364528\" data-code=\"0\"><div class=\"code-caption\"><span>merge_sort · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def merge_sort(nums: list[int], left: int, right: int):\n    \"\"\"归并排序\"\"\"\n    # 终止条件\n    if left &gt;= right:\n        return  # 当子数组长度为 1 时终止递归\n    # 划分阶段\n    mid = (left + right) // 2 # 计算中点\n    merge_sort(nums, left, mid)  # 递归左子数组\n    merge_sort(nums, mid + 1, right)  # 递归右子数组\n    # 合并阶段\n    merge(nums, left, mid, right)</code></pre></div>\n<h2 data-block=\"blk-e4fee783b4e77de6\" id=\"_3\">算法特性</h2>\n<ul data-block=\"blk-12cec4d442251c05\">\n<li><strong>时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n \\log n)\\)\">\\(O(n \\log n)\\)</span>、非自适应排序</strong>：划分产生高度为 <span class=\"arithmatex\" data-tex=\"\\(\\log n\\)\">\\(\\log n\\)</span> 的递归树，每层合并的总操作数量为 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> ，因此总体时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n \\log n)\\)\">\\(O(n \\log n)\\)</span> 。</li>\n<li><strong>空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span>、非原地排序</strong>：递归深度为 <span class=\"arithmatex\" data-tex=\"\\(\\log n\\)\">\\(\\log n\\)</span> ，使用 <span class=\"arithmatex\" data-tex=\"\\(O(\\log n)\\)\">\\(O(\\log n)\\)</span> 大小的栈帧空间。合并操作需要借助辅助数组实现，使用 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 大小的额外空间。</li>\n<li><strong>稳定排序</strong>：在合并过程中，相等元素的次序保持不变。</li>\n</ul>\n<h2 data-block=\"blk-4752fb640969baa0\" id=\"_4\">链表排序</h2>\n<p data-block=\"blk-85fe3b67e097f7db\">对于链表，归并排序相较于其他排序算法具有显著优势，<strong>可以将链表排序任务的空间复杂度优化至 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span></strong> 。</p>\n<ul data-block=\"blk-d500bc8dd07160b9\">\n<li><strong>划分阶段</strong>：可以使用“迭代”替代“递归”来实现链表划分工作，从而省去递归使用的栈帧空间。</li>\n<li><strong>合并阶段</strong>：在链表中，节点增删操作仅需改变引用（指针）即可实现，因此合并阶段（将两个短有序链表合并为一个长有序链表）无须创建额外链表。</li>\n</ul>\n<p data-block=\"blk-5e94cbc9ab27cba0\">具体实现细节比较复杂，有兴趣的读者可以查阅相关资料进行学习。</p>",
+  "edition": "Genius 算法",
+  "html": "<h1 data-block=\"blk-c2e141557eb0b388\" id=\"_1\">归并排序</h1>\n<p data-block=\"blk-2573be4d08417980\">归并排序（merge sort）是一种基于分治策略的排序算法，分为下图所示的“划分”和“合并”两个阶段。</p>\n<ol data-block=\"blk-6ee2c84f0274a28c\">\n<li>\n<p>划分阶段：通过递归不断把数组从中间切开，把长数组的排序问题变成短数组的排序问题。</p>\n</li>\n<li>\n<p>合并阶段：子数组长度为 1 时停止划分，开始合并，把左右两个较短的有序数组不断并成一个更长的有序数组，直到全部并完。</p>\n</li>\n</ol>\n<figure data-block=\"blk-9b63da46aaa99a6e\"><img alt=\"归并排序的划分与合并阶段\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/genius/media/image_285.png\"/><figcaption>归并排序的划分与合并阶段</figcaption></figure>\n<h2 data-block=\"blk-ba865fcdda500a01\" id=\"_2\">算法流程</h2>\n<p data-block=\"blk-6263b85b97e80452\">如下图所示，“划分阶段”从顶到底递归地把数组从中点切成两个子数组。</p>\n<ol data-block=\"blk-d75229463bfaabc3\">\n<li>\n<p>先算数组中点 mid ，再递归划分左子数组（区间 [left, mid] ）和右子数组（区间 [mid + 1, right] ）。</p>\n</li>\n<li>\n<p>重复第 1 步，直到子数组区间长度为 1 时停止。</p>\n</li>\n</ol>\n<p data-block=\"blk-1a6ff689980c0d88\">“合并阶段”从底到顶把左子数组和右子数组合并成一个有序数组。注意：从长度为 1 的子数组开始合并，这一阶段里的每个子数组都是有序的。</p>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-e83bfe0903b751ff\"><img alt=\"图解步骤 1 / 10 · 归并排序步骤\" data-action=\"image\" src=\"/genius/media/image_286.png\"/><div class=\"step-frame-caption\" data-frame-caption=\"\">图解步骤 1 / 10 · 归并排序步骤</div><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 10</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<p data-block=\"blk-61fbd9b1ff886ea4\">观察发现，归并排序与二叉树后序遍历的递归顺序是一致的。</p>\n<ul data-block=\"blk-034395f0d0692f8b\">\n<li>\n<p>后序遍历：先递归左子树，再递归右子树，最后处理根节点。</p>\n</li>\n<li>\n<p>归并排序：先递归左子数组，再递归右子数组，最后做合并。</p>\n</li>\n</ul>\n<p data-block=\"blk-485554d21ca294e6\">归并排序的代码见下。注意 nums 的待合并区间是 [left, right] ，而 tmp 对应的区间是 [0, right - left] 。</p>\n<div class=\"code-example\" data-block=\"blk-b0aa3223c0364528\" data-code=\"0\"><div class=\"code-caption\"><span>merge_sort · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def merge_sort(nums: list[int], left: int, right: int):\n    \"\"\"归并排序\"\"\"\n    # 终止条件\n    if left &gt;= right:\n        return  # 当子数组长度为 1 时终止递归\n    # 划分阶段\n    mid = (left + right) // 2 # 计算中点\n    merge_sort(nums, left, mid)  # 递归左子数组\n    merge_sort(nums, mid + 1, right)  # 递归右子数组\n    # 合并阶段\n    merge(nums, left, mid, right)</code></pre></div>\n<h2 data-block=\"blk-e4fee783b4e77de6\" id=\"_3\">算法特性</h2>\n<ul data-block=\"blk-38eb9b0ba57246ca\">\n<li>\n<p>时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(nlogn)\\)\">\\(O(nlogn)\\)</span>、非自适应排序：划分产生的递归树高度为 <span class=\"arithmatex\" data-tex=\"\\(logn\\)\">\\(logn\\)</span> ，每层合并的总操作数量为 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> ，所以总体时间复杂度是 <span class=\"arithmatex\" data-tex=\"\\(O(nlogn)\\)\">\\(O(nlogn)\\)</span> 。</p>\n</li>\n<li>\n<p>空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span>、非原地排序：递归深度为 <span class=\"arithmatex\" data-tex=\"\\(logn\\)\">\\(logn\\)</span> ，占 <span class=\"arithmatex\" data-tex=\"\\(O(logn)\\)\">\\(O(logn)\\)</span> 大小的栈帧空间；合并还要借助辅助数组，占 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 大小的额外空间。</p>\n</li>\n<li>\n<p>稳定排序：合并过程中，相等元素的先后次序保持不变。</p>\n</li>\n</ul>\n<h2 data-block=\"blk-4752fb640969baa0\" id=\"_4\">链表排序</h2>\n<p data-block=\"blk-23be99e4157797b8\">对于链表，归并排序比其他排序算法有明显优势，可以将链表排序任务的空间复杂度优化至 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span> 。</p>\n<ul data-block=\"blk-d9264d7ad5c60658\">\n<li>\n<p>划分阶段：链表划分可以用“迭代”代替“递归”来做，这样就不必占用递归的栈帧空间。</p>\n</li>\n<li>\n<p>合并阶段：链表里增删节点只要改引用（指针），所以合并阶段（把两个短有序链表并成一个长有序链表）不需要新建链表。</p>\n</li>\n</ul>\n<p data-block=\"blk-423da0b3845be4a9\">具体实现细节比较绕，有兴趣可以查资料深入学习。</p>",
   "codeExamples": [
     {
       "id": "example-3b5c4aba07d8a3a7",
@@ -146,44 +147,54 @@
   "animations": [
     [
       {
-        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step1.png",
-        "alt": "归并排序步骤"
+        "src": "/genius/media/image_286.png",
+        "alt": "图解步骤 1 / 10 · 归并排序步骤",
+        "caption": "图解步骤 1 / 10 · 归并排序步骤"
       },
       {
-        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step2.png",
-        "alt": "merge_sort_step2"
+        "src": "/genius/media/image_287.png",
+        "alt": "图解步骤 2 / 10 · merge_sort_step2",
+        "caption": "图解步骤 2 / 10 · merge_sort_step2"
       },
       {
-        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step3.png",
-        "alt": "merge_sort_step3"
+        "src": "/genius/media/image_288.png",
+        "alt": "图解步骤 3 / 10 · merge_sort_step3",
+        "caption": "图解步骤 3 / 10 · merge_sort_step3"
       },
       {
-        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step4.png",
-        "alt": "merge_sort_step4"
+        "src": "/genius/media/image_289.png",
+        "alt": "图解步骤 4 / 10 · merge_sort_step4",
+        "caption": "图解步骤 4 / 10 · merge_sort_step4"
       },
       {
-        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step5.png",
-        "alt": "merge_sort_step5"
+        "src": "/genius/media/image_290.png",
+        "alt": "图解步骤 5 / 10 · merge_sort_step5",
+        "caption": "图解步骤 5 / 10 · merge_sort_step5"
       },
       {
-        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step6.png",
-        "alt": "merge_sort_step6"
+        "src": "/genius/media/image_291.png",
+        "alt": "图解步骤 6 / 10 · merge_sort_step6",
+        "caption": "图解步骤 6 / 10 · merge_sort_step6"
       },
       {
-        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step7.png",
-        "alt": "merge_sort_step7"
+        "src": "/genius/media/image_292.png",
+        "alt": "图解步骤 7 / 10 · merge_sort_step7",
+        "caption": "图解步骤 7 / 10 · merge_sort_step7"
       },
       {
-        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step8.png",
-        "alt": "merge_sort_step8"
+        "src": "/genius/media/image_293.png",
+        "alt": "图解步骤 8 / 10 · merge_sort_step8",
+        "caption": "图解步骤 8 / 10 · merge_sort_step8"
       },
       {
-        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step9.png",
-        "alt": "merge_sort_step9"
+        "src": "/genius/media/image_294.png",
+        "alt": "图解步骤 9 / 10 · merge_sort_step9",
+        "caption": "图解步骤 9 / 10 · merge_sort_step9"
       },
       {
-        "src": "/upstream/chapter_sorting/merge_sort.assets/merge_sort_step10.png",
-        "alt": "merge_sort_step10"
+        "src": "/genius/media/image_295.png",
+        "alt": "图解步骤 10 / 10 · merge_sort_step10",
+        "caption": "图解步骤 10 / 10 · merge_sort_step10"
       }
     ]
   ],
@@ -195,10 +206,12 @@
       "local asset and link rewriting",
       "stable block anchors",
       "math and footnotes",
-      "image caption grouping"
+      "image caption grouping",
+      "Genius DOCX-authored chapter text, equations, images, and captions"
     ],
     "codeReferences": 1,
-    "animationGroups": 1
+    "animationGroups": 1,
+    "geniusSourceSha256": "e1992b731a799c72a30b61dbe1a5a3c8413a2558e0c7ef7be0b1bb3dd869800b"
   },
   "blockAliases": {
     "b0": "blk-c2e141557eb0b388",
@@ -221,5 +234,5 @@
     "b17": "blk-d500bc8dd07160b9",
     "b18": "blk-5e94cbc9ab27cba0"
   },
-  "contentVersion": "1214d8da7a5d08a2"
+  "contentVersion": "bcab22c016b57bd2"
 }

@@ -6,7 +6,8 @@
   "route": "/read/chapter_sorting/bubble_sort",
   "sourcePath": "chapter_sorting/bubble_sort.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"blk-139e7ff2752ecae2\" id=\"_1\">冒泡排序</h1>\n<p data-block=\"blk-2489e936be521820\"><u>冒泡排序（bubble sort）</u>通过连续地比较与交换相邻元素实现排序。这个过程就像气泡从底部升到顶部一样，因此得名冒泡排序。</p>\n<p data-block=\"blk-90f95f5cf90b2956\">如下图所示，冒泡过程可以利用元素交换操作来模拟：从数组最左端开始向右遍历，依次比较相邻元素大小，如果“左元素 &gt; 右元素”就交换二者。遍历完成后，最大的元素会被移动到数组的最右端。</p>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-8f28396329e6a4e7\"><img alt=\"利用元素交换操作模拟冒泡\" data-action=\"image\" src=\"/upstream/chapter_sorting/bubble_sort.assets/bubble_operation_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 7</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<h2 data-block=\"blk-89aed8ac35a4c469\" id=\"_2\">算法流程</h2>\n<p data-block=\"blk-c643783394aae284\">设数组的长度为 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> ，冒泡排序的步骤如下图所示。</p>\n<ol data-block=\"blk-1c2b0c97ed7c7d8f\">\n<li>首先，对 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> 个元素执行“冒泡”，<strong>将数组的最大元素交换至正确位置</strong>。</li>\n<li>接下来，对剩余 <span class=\"arithmatex\" data-tex=\"\\(n - 1\\)\">\\(n - 1\\)</span> 个元素执行“冒泡”，<strong>将第二大元素交换至正确位置</strong>。</li>\n<li>以此类推，经过 <span class=\"arithmatex\" data-tex=\"\\(n - 1\\)\">\\(n - 1\\)</span> 轮“冒泡”后，<strong>前 <span class=\"arithmatex\" data-tex=\"\\(n - 1\\)\">\\(n - 1\\)</span> 大的元素都被交换至正确位置</strong>。</li>\n<li>仅剩的一个元素必定是最小元素，无须排序，因此数组排序完成。</li>\n</ol>\n<figure data-block=\"blk-ccafdd5b274b5ce0\"><img alt=\"冒泡排序流程\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_sorting/bubble_sort.assets/bubble_sort_overview.png\"/><figcaption>冒泡排序流程</figcaption></figure>\n<p data-block=\"blk-ec906dee6d5e4e0a\">示例代码如下：</p>\n<div class=\"code-example\" data-block=\"blk-bfa7221924aebf92\" data-code=\"0\"><div class=\"code-caption\"><span>bubble_sort · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def bubble_sort(nums: list[int]):\n    \"\"\"冒泡排序\"\"\"\n    n = len(nums)\n    # 外循环：未排序区间为 [0, i]\n    for i in range(n - 1, 0, -1):\n        # 内循环：将未排序区间 [0, i] 中的最大元素交换至该区间的最右端\n        for j in range(i):\n            if nums[j] &gt; nums[j + 1]:\n                # 交换 nums[j] 与 nums[j + 1]\n                nums[j], nums[j + 1] = nums[j + 1], nums[j]</code></pre></div>\n<h2 data-block=\"blk-aac15c5475f52de7\" id=\"_3\">效率优化</h2>\n<p data-block=\"blk-b42b31be481e9961\">我们发现，如果某轮“冒泡”中没有执行任何交换操作，说明数组已经完成排序，可直接返回结果。因此，可以增加一个标志位 <code>flag</code> 来监测这种情况，一旦出现就立即返回。</p>\n<p data-block=\"blk-212919db79bbbbaa\">经过优化，冒泡排序的最差时间复杂度和平均时间复杂度仍为 <span class=\"arithmatex\" data-tex=\"\\(O(n^2)\\)\">\\(O(n^2)\\)</span> ；但当输入数组完全有序时，可达到最佳时间复杂度 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 。</p>\n<div class=\"code-example\" data-block=\"blk-3111ffe981056a8b\" data-code=\"1\"><div class=\"code-caption\"><span>bubble_sort · python</span><button data-action=\"code\" data-code=\"1\">查看 / 运行</button></div><pre><code>def bubble_sort_with_flag(nums: list[int]):\n    \"\"\"冒泡排序（标志优化）\"\"\"\n    n = len(nums)\n    # 外循环：未排序区间为 [0, i]\n    for i in range(n - 1, 0, -1):\n        flag = False  # 初始化标志位\n        # 内循环：将未排序区间 [0, i] 中的最大元素交换至该区间的最右端\n        for j in range(i):\n            if nums[j] &gt; nums[j + 1]:\n                # 交换 nums[j] 与 nums[j + 1]\n                nums[j], nums[j + 1] = nums[j + 1], nums[j]\n                flag = True  # 记录交换元素\n        if not flag:\n            break  # 此轮“冒泡”未交换任何元素，直接跳出</code></pre></div>\n<h2 data-block=\"blk-e010f0a13f9c01cf\" id=\"_4\">算法特性</h2>\n<ul data-block=\"blk-739d8b6cc6e9ce5a\">\n<li><strong>时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n^2)\\)\">\\(O(n^2)\\)</span>、自适应排序</strong>：各轮“冒泡”遍历的数组长度依次为 <span class=\"arithmatex\" data-tex=\"\\(n - 1\\)\">\\(n - 1\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(n - 2\\)\">\\(n - 2\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(\\dots\\)\">\\(\\dots\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(2\\)\">\\(2\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span> ，总和为 <span class=\"arithmatex\" data-tex=\"\\((n - 1) n / 2\\)\">\\((n - 1) n / 2\\)</span> 。在引入 <code>flag</code> 优化后，最佳时间复杂度可达到 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 。</li>\n<li><strong>空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span>、原地排序</strong>：指针 <span class=\"arithmatex\" data-tex=\"\\(i\\)\">\\(i\\)</span> 和 <span class=\"arithmatex\" data-tex=\"\\(j\\)\">\\(j\\)</span> 使用常数大小的额外空间。</li>\n<li><strong>稳定排序</strong>：由于在“冒泡”中遇到相等元素不交换。</li>\n</ul>",
+  "edition": "Genius 算法",
+  "html": "<h1 data-block=\"blk-139e7ff2752ecae2\" id=\"_1\">冒泡排序</h1>\n<p data-block=\"blk-dde10c7439bbfb47\">冒泡排序（bubble sort）靠不断比较、交换相邻元素来完成排序。整个过程就像气泡从底部慢慢升到顶部，所以叫冒泡排序。</p>\n<p data-block=\"blk-90f95f5cf90b2956\">如下图所示，冒泡过程可以利用元素交换操作来模拟：从数组最左端开始向右遍历，依次比较相邻元素大小，如果“左元素 &gt; 右元素”就交换二者。遍历完成后，最大的元素会被移动到数组的最右端。</p>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-5c90939a78c012f5\"><img alt=\"图解步骤 1 / 7 · 利用元素交换操作模拟冒泡\" data-action=\"image\" src=\"/genius/media/image_265.png\"/><div class=\"step-frame-caption\" data-frame-caption=\"\">图解步骤 1 / 7 · 利用元素交换操作模拟冒泡</div><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 7</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<h2 data-block=\"blk-89aed8ac35a4c469\" id=\"_2\">算法流程</h2>\n<p data-block=\"blk-83ccfd3445cea00f\">设数组长度为 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> ，冒泡排序的步骤如下。</p>\n<ol data-block=\"blk-9e62118eb741ccda\">\n<li>\n<p>先对 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> 个元素做一次“冒泡”，将数组的最大元素交换至正确位置。</p>\n</li>\n<li>\n<p>接着对剩下的 <span class=\"arithmatex\" data-tex=\"\\(n−1\\)\">\\(n−1\\)</span> 个元素再“冒泡”一次，将第二大元素交换至正确位置。</p>\n</li>\n<li>\n<p>依此类推，经过 <span class=\"arithmatex\" data-tex=\"\\(n−1\\)\">\\(n−1\\)</span> 轮“冒泡”后，前 <span class=\"arithmatex\" data-tex=\"\\(n−1\\)\">\\(n−1\\)</span> 大的元素都被交换至正确位置。</p>\n</li>\n<li>\n<p>最后剩下那个元素一定是最小的，不用再排，排序到此完成。</p>\n</li>\n</ol>\n<figure data-block=\"blk-ccafdd5b274b5ce0\"><img alt=\"冒泡排序流程\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/genius/media/image_272.png\"/><figcaption>冒泡排序流程</figcaption></figure>\n<p data-block=\"blk-ec906dee6d5e4e0a\">示例代码如下：</p>\n<div class=\"code-example\" data-block=\"blk-bfa7221924aebf92\" data-code=\"0\"><div class=\"code-caption\"><span>bubble_sort · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def bubble_sort(nums: list[int]):\n    \"\"\"冒泡排序\"\"\"\n    n = len(nums)\n    # 外循环：未排序区间为 [0, i]\n    for i in range(n - 1, 0, -1):\n        # 内循环：将未排序区间 [0, i] 中的最大元素交换至该区间的最右端\n        for j in range(i):\n            if nums[j] &gt; nums[j + 1]:\n                # 交换 nums[j] 与 nums[j + 1]\n                nums[j], nums[j + 1] = nums[j + 1], nums[j]</code></pre></div>\n<h2 data-block=\"blk-aac15c5475f52de7\" id=\"_3\">效率优化</h2>\n<p data-block=\"blk-7cba6c52f7734397\">可以发现，如果某一轮“冒泡”里没有任何交换，说明数组已经排好了，可以直接返回。因此可以加一个标志位 flag 来监测这种情况，一旦出现就立刻返回。</p>\n<p data-block=\"blk-7b7b904c66603075\">经过优化，冒泡排序的最差时间复杂度和平均时间复杂度仍为 <span class=\"arithmatex\" data-tex=\"\\(O(n^{2})\\)\">\\(O(n^{2})\\)</span> ；但当输入数组完全有序时，可达到最佳时间复杂度 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 。</p>\n<div class=\"code-example\" data-block=\"blk-3111ffe981056a8b\" data-code=\"1\"><div class=\"code-caption\"><span>bubble_sort · python</span><button data-action=\"code\" data-code=\"1\">查看 / 运行</button></div><pre><code>def bubble_sort_with_flag(nums: list[int]):\n    \"\"\"冒泡排序（标志优化）\"\"\"\n    n = len(nums)\n    # 外循环：未排序区间为 [0, i]\n    for i in range(n - 1, 0, -1):\n        flag = False  # 初始化标志位\n        # 内循环：将未排序区间 [0, i] 中的最大元素交换至该区间的最右端\n        for j in range(i):\n            if nums[j] &gt; nums[j + 1]:\n                # 交换 nums[j] 与 nums[j + 1]\n                nums[j], nums[j + 1] = nums[j + 1], nums[j]\n                flag = True  # 记录交换元素\n        if not flag:\n            break  # 此轮“冒泡”未交换任何元素，直接跳出</code></pre></div>\n<h2 data-block=\"blk-e010f0a13f9c01cf\" id=\"_4\">算法特性</h2>\n<ul data-block=\"blk-1fa15086d4dbef67\">\n<li>\n<p>时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n^{2})\\)\">\\(O(n^{2})\\)</span>、自适应排序：各轮“冒泡”遍历的数组长度依次为 <span class=\"arithmatex\" data-tex=\"\\(n−1\\)\">\\(n−1\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(n−2\\)\">\\(n−2\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(…\\)\">\\(…\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(2\\)\">\\(2\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span> ，总和为 <span class=\"arithmatex\" data-tex=\"\\((n−1)n/2\\)\">\\((n−1)n/2\\)</span> 。在引入 flag 优化后，最佳时间复杂度可达到 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 。</p>\n</li>\n<li>\n<p>空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span>、原地排序：指针 <span class=\"arithmatex\" data-tex=\"\\(i\\)\">\\(i\\)</span> 和 <span class=\"arithmatex\" data-tex=\"\\(j\\)\">\\(j\\)</span> 使用常数大小的额外空间。</p>\n</li>\n<li>\n<p>稳定排序：由于在“冒泡”中遇到相等元素不交换。</p>\n</li>\n</ul>",
   "codeExamples": [
     {
       "id": "example-32098bb6403800a5",
@@ -280,32 +281,39 @@
   "animations": [
     [
       {
-        "src": "/upstream/chapter_sorting/bubble_sort.assets/bubble_operation_step1.png",
-        "alt": "利用元素交换操作模拟冒泡"
+        "src": "/genius/media/image_265.png",
+        "alt": "图解步骤 1 / 7 · 利用元素交换操作模拟冒泡",
+        "caption": "图解步骤 1 / 7 · 利用元素交换操作模拟冒泡"
       },
       {
-        "src": "/upstream/chapter_sorting/bubble_sort.assets/bubble_operation_step2.png",
-        "alt": "bubble_operation_step2"
+        "src": "/genius/media/image_266.png",
+        "alt": "图解步骤 2 / 7 · bubble_operation_step2",
+        "caption": "图解步骤 2 / 7 · bubble_operation_step2"
       },
       {
-        "src": "/upstream/chapter_sorting/bubble_sort.assets/bubble_operation_step3.png",
-        "alt": "bubble_operation_step3"
+        "src": "/genius/media/image_267.png",
+        "alt": "图解步骤 3 / 7 · bubble_operation_step3",
+        "caption": "图解步骤 3 / 7 · bubble_operation_step3"
       },
       {
-        "src": "/upstream/chapter_sorting/bubble_sort.assets/bubble_operation_step4.png",
-        "alt": "bubble_operation_step4"
+        "src": "/genius/media/image_268.png",
+        "alt": "图解步骤 4 / 7 · bubble_operation_step4",
+        "caption": "图解步骤 4 / 7 · bubble_operation_step4"
       },
       {
-        "src": "/upstream/chapter_sorting/bubble_sort.assets/bubble_operation_step5.png",
-        "alt": "bubble_operation_step5"
+        "src": "/genius/media/image_269.png",
+        "alt": "图解步骤 5 / 7 · bubble_operation_step5",
+        "caption": "图解步骤 5 / 7 · bubble_operation_step5"
       },
       {
-        "src": "/upstream/chapter_sorting/bubble_sort.assets/bubble_operation_step6.png",
-        "alt": "bubble_operation_step6"
+        "src": "/genius/media/image_270.png",
+        "alt": "图解步骤 6 / 7 · bubble_operation_step6",
+        "caption": "图解步骤 6 / 7 · bubble_operation_step6"
       },
       {
-        "src": "/upstream/chapter_sorting/bubble_sort.assets/bubble_operation_step7.png",
-        "alt": "bubble_operation_step7"
+        "src": "/genius/media/image_271.png",
+        "alt": "图解步骤 7 / 7 · bubble_operation_step7",
+        "caption": "图解步骤 7 / 7 · bubble_operation_step7"
       }
     ]
   ],
@@ -317,10 +325,12 @@
       "local asset and link rewriting",
       "stable block anchors",
       "math and footnotes",
-      "image caption grouping"
+      "image caption grouping",
+      "Genius DOCX-authored chapter text, equations, images, and captions"
     ],
     "codeReferences": 2,
-    "animationGroups": 1
+    "animationGroups": 1,
+    "geniusSourceSha256": "1464176423002a54558405e1e6ec5f50d34b8c409391ed8f23a4300bed12dd3c"
   },
   "blockAliases": {
     "b0": "blk-139e7ff2752ecae2",
@@ -340,5 +350,5 @@
     "b14": "blk-e010f0a13f9c01cf",
     "b15": "blk-739d8b6cc6e9ce5a"
   },
-  "contentVersion": "5a945f52a077b910"
+  "contentVersion": "34538a0d413e360c"
 }

@@ -13,7 +13,7 @@ export function nebulaVeil(){
     fragmentShader:`${simplex}
 uniform float time;varying vec2 vUv;
 float fbm(vec3 p){return .56*snoise(p)+.28*snoise(p*2.03+8.)+.14*snoise(p*4.1+17.);}
-void main(){vec2 p=(vUv-.5)*2.;float r=length(p);float a=atan(p.y,p.x);float t=time*.018;
+void main(){vec2 p=(vUv-.5)*2.;float r=length(p);float a=atan(p.y,p.x);float t=time*.035;
 vec3 q=vec3(p*3.,t);float warp=fbm(q+vec3(0.,0.,t));float cloud=fbm(q+warp*.7);
 float arms=pow(.5+.5*cos(a*2.-r*12.+warp*.6),3.);float mask=(1.-smoothstep(.2,1.,r))*smoothstep(.02,.25,r);
 float density=smoothstep(-.38,.55,cloud)*mask*(.18+.82*arms);

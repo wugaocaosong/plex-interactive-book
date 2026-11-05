@@ -6,7 +6,8 @@
   "route": "/read/chapter_sorting/selection_sort",
   "sourcePath": "chapter_sorting/selection_sort.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"blk-133b7c9a88673567\" id=\"_1\">选择排序</h1>\n<p data-block=\"blk-c5a98c3243bd4860\"><u>选择排序（selection sort）</u>的工作原理非常简单：开启一个循环，每轮从未排序区间选择最小的元素，将其放到已排序区间的末尾。</p>\n<p data-block=\"blk-9a4ad160b16f8ab1\">设数组的长度为 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> ，选择排序的算法流程如下图所示。</p>\n<ol data-block=\"blk-6418e5ee39b7e0dd\">\n<li>初始状态下，所有元素未排序，即未排序（索引）区间为 <span class=\"arithmatex\" data-tex=\"\\([0, n-1]\\)\">\\([0, n-1]\\)</span> 。</li>\n<li>选取区间 <span class=\"arithmatex\" data-tex=\"\\([0, n-1]\\)\">\\([0, n-1]\\)</span> 中的最小元素，将其与索引 <span class=\"arithmatex\" data-tex=\"\\(0\\)\">\\(0\\)</span> 处的元素交换。完成后，数组前 1 个元素已排序。</li>\n<li>选取区间 <span class=\"arithmatex\" data-tex=\"\\([1, n-1]\\)\">\\([1, n-1]\\)</span> 中的最小元素，将其与索引 <span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span> 处的元素交换。完成后，数组前 2 个元素已排序。</li>\n<li>以此类推。经过 <span class=\"arithmatex\" data-tex=\"\\(n - 1\\)\">\\(n - 1\\)</span> 轮选择与交换后，数组前 <span class=\"arithmatex\" data-tex=\"\\(n - 1\\)\">\\(n - 1\\)</span> 个元素已排序。</li>\n<li>仅剩的一个元素必定是最大元素，无须排序，因此数组排序完成。</li>\n</ol>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-7d5add3cd0701269\"><img alt=\"选择排序步骤\" data-action=\"image\" src=\"/upstream/chapter_sorting/selection_sort.assets/selection_sort_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 11</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<p data-block=\"blk-c4aa206b90b0fb28\">在代码中，我们用 <span class=\"arithmatex\" data-tex=\"\\(k\\)\">\\(k\\)</span> 来记录未排序区间内的最小元素：</p>\n<div class=\"code-example\" data-block=\"blk-c3e939608e5c40e9\" data-code=\"0\"><div class=\"code-caption\"><span>selection_sort · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def selection_sort(nums: list[int]):\n    \"\"\"选择排序\"\"\"\n    n = len(nums)\n    # 外循环：未排序区间为 [i, n-1]\n    for i in range(n - 1):\n        # 内循环：找到未排序区间内的最小元素\n        k = i\n        for j in range(i + 1, n):\n            if nums[j] &lt; nums[k]:\n                k = j  # 记录最小元素的索引\n        # 将该最小元素与未排序区间的首个元素交换\n        nums[i], nums[k] = nums[k], nums[i]</code></pre></div>\n<h2 data-block=\"blk-0104a2b7232476ba\" id=\"_2\">算法特性</h2>\n<ul data-block=\"blk-7be557d3d1135353\">\n<li><strong>时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n^2)\\)\">\\(O(n^2)\\)</span>、非自适应排序</strong>：外循环共 <span class=\"arithmatex\" data-tex=\"\\(n - 1\\)\">\\(n - 1\\)</span> 轮，第一轮内循环执行 <span class=\"arithmatex\" data-tex=\"\\(n - 1\\)\">\\(n - 1\\)</span> 次，最后一轮执行 <span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span> 次，即各轮内循环分别执行 <span class=\"arithmatex\" data-tex=\"\\(n - 1\\)\">\\(n - 1\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(n - 2\\)\">\\(n - 2\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(\\dots\\)\">\\(\\dots\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(2\\)\">\\(2\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span> 次，求和为 <span class=\"arithmatex\" data-tex=\"\\(\\frac{n(n - 1)}{2}\\)\">\\(\\frac{n(n - 1)}{2}\\)</span> 。</li>\n<li><strong>空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span>、原地排序</strong>：指针 <span class=\"arithmatex\" data-tex=\"\\(i\\)\">\\(i\\)</span> 和 <span class=\"arithmatex\" data-tex=\"\\(j\\)\">\\(j\\)</span> 使用常数大小的额外空间。</li>\n<li><strong>非稳定排序</strong>：如下图所示，元素 <code>nums[i]</code> 有可能被交换至与其相等的元素的右边，导致两者的相对顺序发生改变。</li>\n</ul>\n<figure data-block=\"blk-1f88d0cbf5c89671\"><img alt=\"选择排序非稳定示例\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_sorting/selection_sort.assets/selection_sort_instability.png\"/><figcaption>选择排序非稳定示例</figcaption></figure>",
+  "edition": "Genius 算法",
+  "html": "<h1 data-block=\"blk-133b7c9a88673567\" id=\"_1\">选择排序</h1>\n<p data-block=\"blk-734ca6fa87ab6ddf\">选择排序（selection sort）的原理很简单：开一个循环，每轮从没排序的区间里挑最小的元素，放到已排序区间的末尾。</p>\n<p data-block=\"blk-9a4ad160b16f8ab1\">设数组的长度为 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> ，选择排序的算法流程如下图所示。</p>\n<ol data-block=\"blk-b8177b6910892362\">\n<li>\n<p>一开始所有元素都没排序，也就是未排序（索引）区间为 <span class=\"arithmatex\" data-tex=\"\\([0,n−1]\\)\">\\([0,n−1]\\)</span> 。</p>\n</li>\n<li>\n<p>从区间 <span class=\"arithmatex\" data-tex=\"\\([0,n−1]\\)\">\\([0,n−1]\\)</span> 里选出最小的元素，和索引 <span class=\"arithmatex\" data-tex=\"\\(0\\)\">\\(0\\)</span> 处的元素交换。这样数组前 1 个元素就排好了。</p>\n</li>\n<li>\n<p>再从区间 <span class=\"arithmatex\" data-tex=\"\\([1,n−1]\\)\">\\([1,n−1]\\)</span> 里选出最小的元素，和索引 <span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span> 处的元素交换。数组前 2 个元素就排好了。</p>\n</li>\n<li>\n<p>照这样下去，经过 <span class=\"arithmatex\" data-tex=\"\\(n−1\\)\">\\(n−1\\)</span> 轮选择和交换，数组前 <span class=\"arithmatex\" data-tex=\"\\(n−1\\)\">\\(n−1\\)</span> 个元素就排好了。</p>\n</li>\n<li>\n<p>最后剩下那个元素一定是最大的，不用再排，排序到此完成。</p>\n</li>\n</ol>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-6d0811b40becbafc\"><img alt=\"图解步骤 1 / 11 · 选择排序步骤\" data-action=\"image\" src=\"/genius/media/image_253.png\"/><div class=\"step-frame-caption\" data-frame-caption=\"\">图解步骤 1 / 11 · 选择排序步骤</div><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 11</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<p data-block=\"blk-c4aa206b90b0fb28\">在代码中，我们用 <span class=\"arithmatex\" data-tex=\"\\(k\\)\">\\(k\\)</span> 来记录未排序区间内的最小元素：</p>\n<div class=\"code-example\" data-block=\"blk-c3e939608e5c40e9\" data-code=\"0\"><div class=\"code-caption\"><span>selection_sort · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def selection_sort(nums: list[int]):\n    \"\"\"选择排序\"\"\"\n    n = len(nums)\n    # 外循环：未排序区间为 [i, n-1]\n    for i in range(n - 1):\n        # 内循环：找到未排序区间内的最小元素\n        k = i\n        for j in range(i + 1, n):\n            if nums[j] &lt; nums[k]:\n                k = j  # 记录最小元素的索引\n        # 将该最小元素与未排序区间的首个元素交换\n        nums[i], nums[k] = nums[k], nums[i]</code></pre></div>\n<h2 data-block=\"blk-0104a2b7232476ba\" id=\"_2\">算法特性</h2>\n<ul data-block=\"blk-479a7d5b61c3eee2\">\n<li>\n<p>时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n^{2})\\)\">\\(O(n^{2})\\)</span>、非自适应排序：外循环共 <span class=\"arithmatex\" data-tex=\"\\(n−1\\)\">\\(n−1\\)</span> 轮，第一轮内循环执行 <span class=\"arithmatex\" data-tex=\"\\(n−1\\)\">\\(n−1\\)</span> 次，最后一轮执行 <span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span> 次，即各轮内循环分别执行 <span class=\"arithmatex\" data-tex=\"\\(n−1\\)\">\\(n−1\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(n−2\\)\">\\(n−2\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(…\\)\">\\(…\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(2\\)\">\\(2\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span> 次，求和为 <span class=\"arithmatex\" data-tex=\"\\(\\frac{n(n−1)}{2}\\)\">\\(\\frac{n(n−1)}{2}\\)</span> 。</p>\n</li>\n<li>\n<p>空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span>、原地排序：指针 <span class=\"arithmatex\" data-tex=\"\\(i\\)\">\\(i\\)</span> 和 <span class=\"arithmatex\" data-tex=\"\\(j\\)\">\\(j\\)</span> 使用常数大小的额外空间。</p>\n</li>\n<li>\n<p>非稳定排序：如下图所示，元素 nums[i] 有可能被交换到与其相等的元素的右边，两者的相对顺序就变了。</p>\n</li>\n</ul>\n<figure data-block=\"blk-1f88d0cbf5c89671\"><img alt=\"选择排序非稳定示例\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/genius/media/image_264.png\"/><figcaption>选择排序非稳定示例</figcaption></figure>",
   "codeExamples": [
     {
       "id": "example-da8aa4b85a621c23",
@@ -137,48 +138,59 @@
   "animations": [
     [
       {
-        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step1.png",
-        "alt": "选择排序步骤"
+        "src": "/genius/media/image_253.png",
+        "alt": "图解步骤 1 / 11 · 选择排序步骤",
+        "caption": "图解步骤 1 / 11 · 选择排序步骤"
       },
       {
-        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step2.png",
-        "alt": "selection_sort_step2"
+        "src": "/genius/media/image_254.png",
+        "alt": "图解步骤 2 / 11 · selection_sort_step2",
+        "caption": "图解步骤 2 / 11 · selection_sort_step2"
       },
       {
-        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step3.png",
-        "alt": "selection_sort_step3"
+        "src": "/genius/media/image_255.png",
+        "alt": "图解步骤 3 / 11 · selection_sort_step3",
+        "caption": "图解步骤 3 / 11 · selection_sort_step3"
       },
       {
-        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step4.png",
-        "alt": "selection_sort_step4"
+        "src": "/genius/media/image_256.png",
+        "alt": "图解步骤 4 / 11 · selection_sort_step4",
+        "caption": "图解步骤 4 / 11 · selection_sort_step4"
       },
       {
-        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step5.png",
-        "alt": "selection_sort_step5"
+        "src": "/genius/media/image_257.png",
+        "alt": "图解步骤 5 / 11 · selection_sort_step5",
+        "caption": "图解步骤 5 / 11 · selection_sort_step5"
       },
       {
-        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step6.png",
-        "alt": "selection_sort_step6"
+        "src": "/genius/media/image_258.png",
+        "alt": "图解步骤 6 / 11 · selection_sort_step6",
+        "caption": "图解步骤 6 / 11 · selection_sort_step6"
       },
       {
-        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step7.png",
-        "alt": "selection_sort_step7"
+        "src": "/genius/media/image_259.png",
+        "alt": "图解步骤 7 / 11 · selection_sort_step7",
+        "caption": "图解步骤 7 / 11 · selection_sort_step7"
       },
       {
-        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step8.png",
-        "alt": "selection_sort_step8"
+        "src": "/genius/media/image_260.png",
+        "alt": "图解步骤 8 / 11 · selection_sort_step8",
+        "caption": "图解步骤 8 / 11 · selection_sort_step8"
       },
       {
-        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step9.png",
-        "alt": "selection_sort_step9"
+        "src": "/genius/media/image_261.png",
+        "alt": "图解步骤 9 / 11 · selection_sort_step9",
+        "caption": "图解步骤 9 / 11 · selection_sort_step9"
       },
       {
-        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step10.png",
-        "alt": "selection_sort_step10"
+        "src": "/genius/media/image_262.png",
+        "alt": "图解步骤 10 / 11 · selection_sort_step10",
+        "caption": "图解步骤 10 / 11 · selection_sort_step10"
       },
       {
-        "src": "/upstream/chapter_sorting/selection_sort.assets/selection_sort_step11.png",
-        "alt": "selection_sort_step11"
+        "src": "/genius/media/image_263.png",
+        "alt": "图解步骤 11 / 11 · selection_sort_step11",
+        "caption": "图解步骤 11 / 11 · selection_sort_step11"
       }
     ]
   ],
@@ -190,10 +202,12 @@
       "local asset and link rewriting",
       "stable block anchors",
       "math and footnotes",
-      "image caption grouping"
+      "image caption grouping",
+      "Genius DOCX-authored chapter text, equations, images, and captions"
     ],
     "codeReferences": 1,
-    "animationGroups": 1
+    "animationGroups": 1,
+    "geniusSourceSha256": "689cc0e5ddf316ae0afbfb7d9fbd8c8928ac1e4d1523ab204dcc82079d2b4b46"
   },
   "blockAliases": {
     "b0": "blk-133b7c9a88673567",
@@ -207,5 +221,5 @@
     "b8": "blk-7be557d3d1135353",
     "b9": "blk-1f88d0cbf5c89671"
   },
-  "contentVersion": "ea84e517e0b3aa2f"
+  "contentVersion": "c993050e618c045f"
 }

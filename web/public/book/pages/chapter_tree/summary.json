@@ -17,10 +17,12 @@
       "local asset and link rewriting",
       "stable block anchors",
       "math and footnotes",
-      "image caption grouping"
+      "image caption grouping",
+      "authored chapter mission and interactive scene overlays"
     ],
     "codeReferences": 0,
-    "animationGroups": 0
+    "animationGroups": 0,
+    "chapterEnhancementVersion": 2
   },
   "blockAliases": {
     "b0": "blk-82d545fe9ad6cd56",

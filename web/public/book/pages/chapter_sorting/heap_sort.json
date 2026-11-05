@@ -6,7 +6,8 @@
   "route": "/read/chapter_sorting/heap_sort",
   "sourcePath": "chapter_sorting/heap_sort.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"blk-7241cdfbe54a8725\" id=\"_1\">堆排序</h1>\n<div class=\"admonition tip\" data-block=\"blk-2d0ee44a42c51054\">\n<p class=\"admonition-title\">Tip</p>\n<p>阅读本节前，请确保已学完“堆”章节。</p>\n</div>\n<p data-block=\"blk-536d6ab76b7af230\"><u>堆排序（heap sort）</u>是一种基于堆数据结构实现的高效排序算法。我们可以利用已经学过的“建堆操作”和“元素出堆操作”实现堆排序。</p>\n<ol data-block=\"blk-0fb130e5c0d9283e\">\n<li>输入数组并建立小顶堆，此时最小元素位于堆顶。</li>\n<li>不断执行出堆操作，依次记录出堆元素，即可得到从小到大排序的序列。</li>\n</ol>\n<p data-block=\"blk-6a4511ada431953e\">以上方法虽然可行，但需要借助一个额外数组来保存弹出的元素，比较浪费空间。在实际中，我们通常使用一种更加优雅的实现方式。</p>\n<h2 data-block=\"blk-a718dbe379e4d796\" id=\"_2\">算法流程</h2>\n<p data-block=\"blk-48bf851dbe5bdaf3\">设数组的长度为 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> ，堆排序的流程如下图所示。</p>\n<ol data-block=\"blk-d3d7e15f9ab7528e\">\n<li>输入数组并建立大顶堆。完成后，最大元素位于堆顶。</li>\n<li>将堆顶元素（第一个元素）与堆底元素（最后一个元素）交换。完成交换后，堆的长度减 <span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span> ，已排序元素数量加 <span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span> 。</li>\n<li>从堆顶元素开始，从顶到底执行堆化操作（sift down）。完成堆化后，堆的性质得到修复。</li>\n<li>循环执行第 <code>2.</code> 步和第 <code>3.</code> 步。循环 <span class=\"arithmatex\" data-tex=\"\\(n - 1\\)\">\\(n - 1\\)</span> 轮后，即可完成数组排序。</li>\n</ol>\n<div class=\"admonition tip\" data-block=\"blk-6d497b5b2f93cf9b\">\n<p class=\"admonition-title\">Tip</p>\n<p>实际上，元素出堆操作中也包含第 <code>2.</code> 步和第 <code>3.</code> 步，只是多了一个弹出元素的步骤。</p>\n</div>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-4c61780d498da1ba\"><img alt=\"堆排序步骤\" data-action=\"image\" src=\"/upstream/chapter_sorting/heap_sort.assets/heap_sort_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 12</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<p data-block=\"blk-32626a6a7f35646a\">在代码实现中，我们使用了与“堆”章节相同的从顶至底堆化 <code>sift_down()</code> 函数。值得注意的是，由于堆的长度会随着提取最大元素而减小，因此我们需要给 <code>sift_down()</code> 函数添加一个长度参数 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> ，用于指定堆的当前有效长度。代码如下所示：</p>\n<div class=\"code-example\" data-block=\"blk-79058f450ea28e54\" data-code=\"0\"><div class=\"code-caption\"><span>heap_sort · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def heap_sort(nums: list[int]):\n    \"\"\"堆排序\"\"\"\n    # 建堆操作：堆化除叶节点以外的其他所有节点\n    for i in range(len(nums) // 2 - 1, -1, -1):\n        sift_down(nums, len(nums), i)\n    # 从堆中提取最大元素，循环 n-1 轮\n    for i in range(len(nums) - 1, 0, -1):\n        # 交换根节点与最右叶节点（交换首元素与尾元素）\n        nums[0], nums[i] = nums[i], nums[0]\n        # 以根节点为起点，从顶至底进行堆化\n        sift_down(nums, i, 0)</code></pre></div>\n<h2 data-block=\"blk-381e1d004c6c9b5b\" id=\"_3\">算法特性</h2>\n<ul data-block=\"blk-b8af7472669e4a23\">\n<li><strong>时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n \\log n)\\)\">\\(O(n \\log n)\\)</span>、非自适应排序</strong>：建堆操作使用 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 时间。从堆中提取最大元素的时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(\\log n)\\)\">\\(O(\\log n)\\)</span> ，共循环 <span class=\"arithmatex\" data-tex=\"\\(n - 1\\)\">\\(n - 1\\)</span> 轮。</li>\n<li><strong>空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span>、原地排序</strong>：几个指针变量使用 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span> 空间。元素交换和堆化操作都是在原数组上进行的。</li>\n<li><strong>非稳定排序</strong>：在交换堆顶元素和堆底元素时，相等元素的相对位置可能发生变化。</li>\n</ul>",
+  "edition": "Genius 算法",
+  "html": "<h1 data-block=\"blk-7241cdfbe54a8725\" id=\"_1\">堆排序</h1>\n<p data-block=\"blk-ab7c343e01e8a6df\">Tip</p>\n<p data-block=\"blk-487f055ae73f91e0\">看这一节之前，请确保已经学完“堆”那一章。</p>\n<p data-block=\"blk-8313f326d9428279\">堆排序（heap sort）是一种基于堆数据结构的高效排序算法，可以利用之前学过的“建堆操作”和“元素出堆操作”来实现。</p>\n<ol data-block=\"blk-ae00f54488ef0ec7\">\n<li>\n<p>输入数组并建立小顶堆，此时最小元素就在堆顶。</p>\n</li>\n<li>\n<p>不断执行出堆操作，把出堆的元素依次记下来，就得到从小到大的序列。</p>\n</li>\n</ol>\n<p data-block=\"blk-bc9b1edffa8c0bb3\">这个办法虽然可行，但需要一个额外数组存弹出的元素，比较浪费空间。实际中更常用一种更省事的实现方式。</p>\n<h2 data-block=\"blk-a718dbe379e4d796\" id=\"_2\">算法流程</h2>\n<p data-block=\"blk-a8c4ff18c646981a\">设数组长度为 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> ，堆排序的流程如下图所示。</p>\n<ol data-block=\"blk-32d86f6acca81bc8\">\n<li>\n<p>输入数组并建立大顶堆，建好后最大元素就在堆顶。</p>\n</li>\n<li>\n<p>把堆顶元素（第一个元素）和堆底元素（最后一个元素）交换。交换后，堆的长度减 <span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span> ，已排序元素数量加 <span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span> 。</p>\n</li>\n<li>\n<p>从堆顶开始，从上到下做堆化操作（sift down）。堆化完成后，堆的性质就恢复了。</p>\n</li>\n<li>\n<p>重复第 2 步和第 3 步，循环 <span class=\"arithmatex\" data-tex=\"\\(n−1\\)\">\\(n−1\\)</span> 轮后，数组就排好序了。</p>\n</li>\n</ol>\n<p data-block=\"blk-344ea50bc1f568ca\">Tip</p>\n<p data-block=\"blk-b2f9175de8ac287d\">其实元素出堆操作里也包含第 2 步和第 3 步，只是多了一步弹出元素。</p>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-4fbf61873bf8251a\"><img alt=\"图解步骤 1 / 12 · 堆排序步骤\" data-action=\"image\" src=\"/genius/media/image_296.png\"/><div class=\"step-frame-caption\" data-frame-caption=\"\">图解步骤 1 / 12 · 堆排序步骤</div><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 12</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<p data-block=\"blk-32626a6a7f35646a\">在代码实现中，我们使用了与“堆”章节相同的从顶至底堆化 sift_down() 函数。值得注意的是，由于堆的长度会随着提取最大元素而减小，因此我们需要给 sift_down() 函数添加一个长度参数 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> ，用于指定堆的当前有效长度。代码如下所示：</p>\n<div class=\"code-example\" data-block=\"blk-63335b72775837a9\" data-code=\"0\"><div class=\"code-caption\"><span>heap_sort · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def heap_sort(nums: list[int]):\n    \"\"\"堆排序\"\"\"\n    # 建堆操作：堆化除叶节点以外的其他所有节点\n    for i in range(len(nums) // 2 - 1, -1, -1):\n        sift_down(nums, len(nums), i)\n    # 从堆中提取最大元素，循环 n-1 轮\n    for i in range(len(nums) - 1, 0, -1):\n        # 交换根节点与最右叶节点（交换首元素与尾元素）\n        nums[0], nums[i] = nums[i], nums[0]\n        # 以根节点为起点，从顶至底进行堆化\n        sift_down(nums, i, 0)</code></pre></div>\n<h2 data-block=\"blk-381e1d004c6c9b5b\" id=\"_3\">算法特性</h2>\n<ul data-block=\"blk-aabaa08237f9ebcc\">\n<li>\n<p>时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(nlogn)\\)\">\\(O(nlogn)\\)</span>、非自适应排序：建堆要花 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 时间；从堆中取出最大元素的时间复杂度是 <span class=\"arithmatex\" data-tex=\"\\(O(logn)\\)\">\\(O(logn)\\)</span> ，一共循环 <span class=\"arithmatex\" data-tex=\"\\(n−1\\)\">\\(n−1\\)</span> 轮。</p>\n</li>\n<li>\n<p>空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span>、原地排序：几个指针变量占 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span> 空间。元素交换和堆化都在原数组上完成。</p>\n</li>\n<li>\n<p>非稳定排序：交换堆顶和堆底元素时，相等元素的相对位置可能会变。</p>\n</li>\n</ul>",
   "codeExamples": [
     {
       "id": "example-c02a8cfb419d2763",
@@ -137,52 +138,64 @@
   "animations": [
     [
       {
-        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step1.png",
-        "alt": "堆排序步骤"
+        "src": "/genius/media/image_296.png",
+        "alt": "图解步骤 1 / 12 · 堆排序步骤",
+        "caption": "图解步骤 1 / 12 · 堆排序步骤"
       },
       {
-        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step2.png",
-        "alt": "heap_sort_step2"
+        "src": "/genius/media/image_297.png",
+        "alt": "图解步骤 2 / 12 · heap_sort_step2",
+        "caption": "图解步骤 2 / 12 · heap_sort_step2"
       },
       {
-        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step3.png",
-        "alt": "heap_sort_step3"
+        "src": "/genius/media/image_298.png",
+        "alt": "图解步骤 3 / 12 · heap_sort_step3",
+        "caption": "图解步骤 3 / 12 · heap_sort_step3"
       },
       {
-        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step4.png",
-        "alt": "heap_sort_step4"
+        "src": "/genius/media/image_299.png",
+        "alt": "图解步骤 4 / 12 · heap_sort_step4",
+        "caption": "图解步骤 4 / 12 · heap_sort_step4"
       },
       {
-        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step5.png",
-        "alt": "heap_sort_step5"
+        "src": "/genius/media/image_300.png",
+        "alt": "图解步骤 5 / 12 · heap_sort_step5",
+        "caption": "图解步骤 5 / 12 · heap_sort_step5"
       },
       {
-        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step6.png",
-        "alt": "heap_sort_step6"
+        "src": "/genius/media/image_301.png",
+        "alt": "图解步骤 6 / 12 · heap_sort_step6",
+        "caption": "图解步骤 6 / 12 · heap_sort_step6"
       },
       {
-        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step7.png",
-        "alt": "heap_sort_step7"
+        "src": "/genius/media/image_302.png",
+        "alt": "图解步骤 7 / 12 · heap_sort_step7",
+        "caption": "图解步骤 7 / 12 · heap_sort_step7"
       },
       {
-        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step8.png",
-        "alt": "heap_sort_step8"
+        "src": "/genius/media/image_303.png",
+        "alt": "图解步骤 8 / 12 · heap_sort_step8",
+        "caption": "图解步骤 8 / 12 · heap_sort_step8"
       },
       {
-        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step9.png",
-        "alt": "heap_sort_step9"
+        "src": "/genius/media/image_304.png",
+        "alt": "图解步骤 9 / 12 · heap_sort_step9",
+        "caption": "图解步骤 9 / 12 · heap_sort_step9"
       },
       {
-        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step10.png",
-        "alt": "heap_sort_step10"
+        "src": "/genius/media/image_305.png",
+        "alt": "图解步骤 10 / 12 · heap_sort_step10",
+        "caption": "图解步骤 10 / 12 · heap_sort_step10"
       },
       {
-        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step11.png",
-        "alt": "heap_sort_step11"
+        "src": "/genius/media/image_306.png",
+        "alt": "图解步骤 11 / 12 · heap_sort_step11",
+        "caption": "图解步骤 11 / 12 · heap_sort_step11"
       },
       {
-        "src": "/upstream/chapter_sorting/heap_sort.assets/heap_sort_step12.png",
-        "alt": "heap_sort_step12"
+        "src": "/genius/media/image_307.png",
+        "alt": "图解步骤 12 / 12 · heap_sort_step12",
+        "caption": "图解步骤 12 / 12 · heap_sort_step12"
       }
     ]
   ],
@@ -194,10 +207,12 @@
       "local asset and link rewriting",
       "stable block anchors",
       "math and footnotes",
-      "image caption grouping"
+      "image caption grouping",
+      "Genius DOCX-authored chapter text, equations, images, and captions"
     ],
     "codeReferences": 1,
-    "animationGroups": 1
+    "animationGroups": 1,
+    "geniusSourceSha256": "01498807501202c0b0f9e9e357130f7d219512601681da10c64628231ee7886b"
   },
   "blockAliases": {
     "b0": "blk-7241cdfbe54a8725",
@@ -215,5 +230,5 @@
     "b12": "blk-381e1d004c6c9b5b",
     "b13": "blk-b8af7472669e4a23"
   },
-  "contentVersion": "bd0b48c52029ee88"
+  "contentVersion": "cd4a8cb42bd71efc"
 }

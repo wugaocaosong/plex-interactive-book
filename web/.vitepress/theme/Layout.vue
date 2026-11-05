@@ -767,6 +767,7 @@ async function prepareAdjacent(page: BookPage) {
   source.className = "leaf-content source-neighbor";
   source.dataset.section = page.id;
   test.className = "leaf-content page-measure";
+  test.dataset.section = page.id;
   source.innerHTML = page.html;
   area.append(source, test);
   document.querySelector(".reader")!.append(area);
@@ -1078,6 +1079,8 @@ async function stepFigure(figure: HTMLElement, delta: number) {
   const img = figure.querySelector("img")!;
   img.src = frames[next].src;
   img.alt = frames[next].alt;
+  const caption = figure.querySelector<HTMLElement>("[data-frame-caption]");
+  if (caption) caption.textContent = frames[next].caption || frames[next].alt;
   figure.querySelector("[data-step-label]")!.textContent =
     `${next + 1} / ${frames.length}`;
 }
@@ -1260,8 +1263,9 @@ async function layout(place?: ReadingLocator) {
     .forEach(
       (img) => (img.style.height = img.getBoundingClientRect().height + "px"),
     );
-  const primary = current.value,
-    primaryLeaves =
+  const primary = current.value;
+  measure.value.dataset.section = primary.id;
+  const primaryLeaves =
       primary.kind === "contents"
         ? contentsLeaf()
         : paginate(
@@ -1306,14 +1310,6 @@ async function layout(place?: ReadingLocator) {
       leafSections.value.push(item.page.id);
     }
     if (item.page.id === primary.id) sectionEnd = leaves.value.length - 1;
-    if (desktop.value && item.pages.length % 2) {
-      leaves.value.push({
-        html: '<div class="blank-verso">PLEX</div>',
-        blockId: item.pages.at(-1)!.blockId,
-        offset: item.pages.at(-1)!.offset,
-      });
-      leafSections.value.push(item.page.id);
-    }
   }
   // PageFlip owns these nodes; stateful panels stay outside the three-section window.
   disposeDrag?.();
@@ -1334,6 +1330,7 @@ async function layout(place?: ReadingLocator) {
     head.textContent = page.group + " / " + page.title;
     const content = document.createElement("div");
     content.className = "leaf-content";
+    content.dataset.section = page.id;
     content.innerHTML = leaf.html;
     const foot = document.createElement("div");
     foot.className = "leaf-footer";
@@ -1342,14 +1339,6 @@ async function layout(place?: ReadingLocator) {
     node.append(el);
     return el;
   });
-  // The blank verso is explicitly blank, never a duplicate of the previous leaf.
-  if (desktop.value && elements.length % 2) {
-    const blank = document.createElement("div");
-    blank.className = "book-leaf blank-verso";
-    blank.innerHTML = "<span>PLEX</span>";
-    node.append(blank);
-    elements.push(blank);
-  }
   const { PageFlip } = await import("page-flip");
   if (own !== serial) return;
   const target =

@@ -10,6 +10,7 @@ from chapter12_tasks import publish as publish_chapter12_tasks
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'content/upstream/hello-algo'
+GENIUS_SOURCE = ROOT / 'content/genius-chapters'
 PUBLIC = ROOT / 'web/public'
 SHA = '350f483801b2badb95180047aa82cadb825852a2'
 LANGUAGES = ['python','java','cpp','c','csharp','go','javascript','typescript','swift','rust','kotlin','dart','ruby','zig']
@@ -165,7 +166,7 @@ def convert(source, path, page_id):
             if key.startswith('on'): del tag[key]
     for image in soup.find_all('img'):
         url=image.get('src','')
-        if not re.match(r'^(https?:|data:)',url):
+        if not re.match(r'^(https?:|data:|/)',url):
             normalized=(SOURCE/'docs'/path.parent/url).resolve()
             if not normalized.is_relative_to((SOURCE/'docs').resolve()) or not normalized.exists():
                 raise ValueError(f'Missing image: {path}: {url}')
@@ -189,9 +190,9 @@ def convert(source, path, page_id):
     for tabset in soup.select('.tabbed-set'):
         contents=tabset.select(':scope > .tabbed-content > .tabbed-block')
         if len(contents)>1 and all(c.find('img') for c in contents):
-            frames=[{'src':c.find('img')['src'],'alt':c.find('img').get('alt','图解')} for c in contents]
+            frames=[{'src':c.find('img')['src'],'alt':c.find('img').get('alt','图解'),'caption':c.find('img').get('alt','')} for c in contents]
             ai=len(animations); animations.append(frames)
-            markup=f'<figure class="step-player" data-animation="{ai}"><img src="{frames[0]["src"]}" alt="{html.escape(frames[0]["alt"])}" data-action="image"/><figcaption><button data-action="step-prev" data-animation="{ai}" aria-label="上一帧">‹</button><span data-step-label>1 / {len(frames)}</span><button data-action="step-play" data-animation="{ai}">播放</button><button data-action="step-next" data-animation="{ai}" aria-label="下一帧">›</button></figcaption></figure>'
+            markup=f'<figure class="step-player" data-animation="{ai}"><img src="{frames[0]["src"]}" alt="{html.escape(frames[0]["alt"])}" data-action="image"/><div class="step-frame-caption" data-frame-caption>{html.escape(frames[0]["caption"])}</div><figcaption><button data-action="step-prev" data-animation="{ai}" aria-label="上一帧">‹</button><span data-step-label>1 / {len(frames)}</span><button data-action="step-play" data-animation="{ai}">播放</button><button data-action="step-next" data-animation="{ai}" aria-label="下一帧">›</button></figcaption></figure>'
             tabset.replace_with(BeautifulSoup(markup,'html.parser'))
     # Textual tabs remain accessible as labelled sections, not inert radio controls.
     for tabset in soup.select('.tabbed-set'):
@@ -228,6 +229,13 @@ def publish(record,body,examples=None,animations=None):
     if record['sourcePath']:
         original=(SOURCE/'docs'/record['sourcePath']).read_bytes()
         conversion={'sourceSha256':hashlib.sha256(original).hexdigest(),'adapterVersion':1,'operations':['MkDocs Markdown to HTML','local asset and link rewriting','stable block anchors','math and footnotes','image caption grouping'], 'codeReferences':len(examples or []),'animationGroups':len(animations or [])}
+        authored=GENIUS_SOURCE/record['sourcePath'] if record['sourcePath'] else None
+        if authored and authored.is_file():
+            conversion['geniusSourceSha256']=hashlib.sha256(authored.read_bytes()).hexdigest()
+            conversion['operations']+=['Genius DOCX-authored chapter text, equations, images, and captions']
+        if record['id'].split('/',1)[0] in chapter_scenes.CHAPTER_BRIEFS:
+            conversion['chapterEnhancementVersion']=chapter_scenes.CONFIG['version']
+            conversion['operations']+=['authored chapter mission and interactive scene overlays']
         if chapter12.CONFIG['enabled'] and record['id'].startswith(chapter12.PREFIX):
             conversion['chapterEnhancementVersion']=chapter12.CONFIG['version']
             conversion['operations']+=['authored chapter12 overlay','chapter-first term annotations','local PLEX diagrams and activity cards']
@@ -263,10 +271,14 @@ if __name__=='__main__':
         publish(page_record(id,info['title'],info.get('kind','editorial'),info.get('group','卷首')),str(soup))
     def add_source(item):
         path,label,group=item
-        text=(SOURCE/'docs'/path).read_text(encoding='utf8')
+        genius_path=GENIUS_SOURCE/path
+        is_genius=genius_path.is_file()
+        text=(genius_path if is_genius else SOURCE/'docs'/path).read_text(encoding='utf8')
         title=label or re.search(r'^# (.+)',text,re.M)[1]
         record=page_record(path[:-3],title,'chapter',group,path)
         body,examples,animations=convert(text,pathlib.PurePosixPath(path),record['id'])
+        if is_genius:
+            record['edition']='Genius 算法'
         if path=='chapter_searching/binary_search.md':
             body+='<div class="activity-invitation" data-block="activity"><span>动手试一试</span><h3>二分查找 · 星轨试炼</h3><p>完成三道小练习，检查你的理解。</p><button data-action="activity">开始练习</button></div>'
             record['activityId']='binary-search'
@@ -301,6 +313,9 @@ if __name__=='__main__':
     for path in (SOURCE/'docs').rglob('*'):
         if path.is_file() and path.suffix.lower() in {'.png','.jpg','.jpeg','.gif','.svg','.webp','.mp4','.webm','.pdf'}:
             target=PUBLIC/'upstream'/path.relative_to(SOURCE/'docs');target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(path,target)
+    for path in GENIUS_SOURCE.rglob('*'):
+        if path.is_file() and path.suffix.lower() in {'.png','.jpg','.jpeg','.gif','.svg','.webp'}:
+            target=PUBLIC/'genius'/path.relative_to(GENIUS_SOURCE);target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(path,target)
     python_files={p.relative_to(SOURCE/'codes/python').as_posix():p.read_text(encoding='utf8') for p in (SOURCE/'codes/python').rglob('*.py')}
     write_json(PUBLIC/'book/python-files.json',python_files)
     (ROOT/'web/index.md').write_text('---\ntitle: 星轨编程\nbookId: cover\n---\n',encoding='utf8',newline='\n')

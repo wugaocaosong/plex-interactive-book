@@ -6,7 +6,8 @@
   "route": "/read/chapter_searching/summary",
   "sourcePath": "chapter_searching/summary.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"blk-47638498bbcd7e3b\" id=\"_1\">小结</h1>\n<h3 data-block=\"blk-e15d14a49ebc7676\" id=\"_2\">重点回顾</h3>\n<ul data-block=\"blk-8f04ec14c436a0d7\">\n<li>二分查找依赖数据的有序性，通过循环逐步缩减一半搜索区间来进行查找。它要求输入数据有序，且仅适用于数组或基于数组实现的数据结构。</li>\n<li>暴力搜索通过遍历数据结构来定位数据。线性搜索适用于数组和链表，广度优先搜索和深度优先搜索适用于图和树。此类算法通用性好，无须对数据进行预处理，但时间复杂度 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 较高。</li>\n<li>哈希查找、树查找和二分查找属于高效搜索方法，可在特定数据结构中快速定位目标元素。此类算法效率高，时间复杂度可达 <span class=\"arithmatex\" data-tex=\"\\(O(\\log n)\\)\">\\(O(\\log n)\\)</span> 甚至 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span> ，但通常需要借助额外数据结构。</li>\n<li>实际中，我们需要对数据规模、搜索性能要求、数据查询和更新频率等因素进行具体分析，从而选择合适的搜索方法。</li>\n<li>线性搜索适用于小型或频繁更新的数据；二分查找适用于大型、排序的数据；哈希查找适用于对查询效率要求较高且无须范围查询的数据；树查找适用于需要维护顺序和支持范围查询的大型动态数据。</li>\n<li>用哈希查找替换线性查找是一种常用的优化运行时间的策略，可将时间复杂度从 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 降至 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span> 。</li>\n</ul>",
+  "edition": "Genius 算法",
+  "html": "<h1 data-block=\"blk-47638498bbcd7e3b\" id=\"_1\">小结</h1>\n<h3 data-block=\"blk-e15d14a49ebc7676\" id=\"_2\">重点回顾</h3>\n<ul data-block=\"blk-804d9e52a24adea4\">\n<li>\n<p>二分查找靠数据有序，通过循环把搜索区间每次砍半来查找。它要求数据有序，而且只适合数组或基于数组实现的结构。</p>\n</li>\n<li>\n<p>暴力搜索靠遍历定位数据。线性搜索适合数组和链表，广度优先搜索和深度优先搜索适合图和树。这类算法通用性好、不用预处理，但时间复杂度 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 偏高。</p>\n</li>\n<li>\n<p>哈希查找、树查找和二分查找属于高效搜索，能在特定数据结构里快速定位目标。它们效率高，时间复杂度可达 <span class=\"arithmatex\" data-tex=\"\\(O(logn)\\)\">\\(O(logn)\\)</span> 甚至 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span> ，但一般要借助额外的数据结构。</p>\n</li>\n<li>\n<p>实际选哪种方法，要看数据规模、对搜索性能的要求，以及查询和更新的频率。</p>\n</li>\n<li>\n<p>线性搜索适合数据量小或频繁更新的情况；二分查找适合大型且已排序的数据；哈希查找适合对查询效率要求高、又不需要范围查询的数据；树查找适合需要维护顺序、支持范围查询的大型动态数据。</p>\n</li>\n<li>\n<p>用哈希查找替换线性查找，是常用的提速办法，可以把时间复杂度从 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 降到 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span> 。</p>\n</li>\n</ul>",
   "codeExamples": [],
   "animations": [],
   "conversion": {
@@ -17,15 +18,17 @@
       "local asset and link rewriting",
       "stable block anchors",
       "math and footnotes",
-      "image caption grouping"
+      "image caption grouping",
+      "Genius DOCX-authored chapter text, equations, images, and captions"
     ],
     "codeReferences": 0,
-    "animationGroups": 0
+    "animationGroups": 0,
+    "geniusSourceSha256": "44b179e6261a332475577839618f4284a3d20f376257b0e40b0b8f581254485a"
   },
   "blockAliases": {
     "b0": "blk-47638498bbcd7e3b",
     "b1": "blk-e15d14a49ebc7676",
     "b2": "blk-8f04ec14c436a0d7"
   },
-  "contentVersion": "c12fba7d4e6e8701"
+  "contentVersion": "bfed83621edd0105"
 }

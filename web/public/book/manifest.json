@@ -704,7 +704,8 @@
       "group": "第 9 章   图",
       "route": "/read/chapter_graph/graph",
       "sourcePath": "chapter_graph/graph.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_graph/graph_operations",
@@ -713,7 +714,8 @@
       "group": "第 9 章   图",
       "route": "/read/chapter_graph/graph_operations",
       "sourcePath": "chapter_graph/graph_operations.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_graph/graph_traversal",
@@ -722,7 +724,8 @@
       "group": "第 9 章   图",
       "route": "/read/chapter_graph/graph_traversal",
       "sourcePath": "chapter_graph/graph_traversal.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_graph/summary",
@@ -731,7 +734,8 @@
       "group": "第 9 章   图",
       "route": "/read/chapter_graph/summary",
       "sourcePath": "chapter_graph/summary.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_graph/exercises",
@@ -740,7 +744,8 @@
       "group": "第 9 章   图",
       "route": "/read/chapter_graph/exercises",
       "sourcePath": "chapter_graph/exercises.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_searching/index",
@@ -759,6 +764,7 @@
       "route": "/read/chapter_searching/binary_search",
       "sourcePath": "chapter_searching/binary_search.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法",
       "activityId": "binary-search"
     },
     {
@@ -768,7 +774,8 @@
       "group": "第 10 章   搜索",
       "route": "/read/chapter_searching/binary_search_insertion",
       "sourcePath": "chapter_searching/binary_search_insertion.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_searching/binary_search_edge",
@@ -777,7 +784,8 @@
       "group": "第 10 章   搜索",
       "route": "/read/chapter_searching/binary_search_edge",
       "sourcePath": "chapter_searching/binary_search_edge.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_searching/replace_linear_by_hashing",
@@ -786,7 +794,8 @@
       "group": "第 10 章   搜索",
       "route": "/read/chapter_searching/replace_linear_by_hashing",
       "sourcePath": "chapter_searching/replace_linear_by_hashing.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_searching/searching_algorithm_revisited",
@@ -795,7 +804,8 @@
       "group": "第 10 章   搜索",
       "route": "/read/chapter_searching/searching_algorithm_revisited",
       "sourcePath": "chapter_searching/searching_algorithm_revisited.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_searching/summary",
@@ -804,7 +814,8 @@
       "group": "第 10 章   搜索",
       "route": "/read/chapter_searching/summary",
       "sourcePath": "chapter_searching/summary.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_searching/exercises",
@@ -813,7 +824,8 @@
       "group": "第 10 章   搜索",
       "route": "/read/chapter_searching/exercises",
       "sourcePath": "chapter_searching/exercises.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_sorting/index",
@@ -831,7 +843,8 @@
       "group": "第 11 章   排序",
       "route": "/read/chapter_sorting/sorting_algorithm",
       "sourcePath": "chapter_sorting/sorting_algorithm.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_sorting/selection_sort",
@@ -840,7 +853,8 @@
       "group": "第 11 章   排序",
       "route": "/read/chapter_sorting/selection_sort",
       "sourcePath": "chapter_sorting/selection_sort.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_sorting/bubble_sort",
@@ -849,7 +863,8 @@
       "group": "第 11 章   排序",
       "route": "/read/chapter_sorting/bubble_sort",
       "sourcePath": "chapter_sorting/bubble_sort.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_sorting/insertion_sort",
@@ -858,7 +873,8 @@
       "group": "第 11 章   排序",
       "route": "/read/chapter_sorting/insertion_sort",
       "sourcePath": "chapter_sorting/insertion_sort.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_sorting/quick_sort",
@@ -867,7 +883,8 @@
       "group": "第 11 章   排序",
       "route": "/read/chapter_sorting/quick_sort",
       "sourcePath": "chapter_sorting/quick_sort.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_sorting/merge_sort",
@@ -876,7 +893,8 @@
       "group": "第 11 章   排序",
       "route": "/read/chapter_sorting/merge_sort",
       "sourcePath": "chapter_sorting/merge_sort.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_sorting/heap_sort",
@@ -885,7 +903,8 @@
       "group": "第 11 章   排序",
       "route": "/read/chapter_sorting/heap_sort",
       "sourcePath": "chapter_sorting/heap_sort.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_sorting/bucket_sort",
@@ -894,7 +913,8 @@
       "group": "第 11 章   排序",
       "route": "/read/chapter_sorting/bucket_sort",
       "sourcePath": "chapter_sorting/bucket_sort.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_sorting/counting_sort",
@@ -903,7 +923,8 @@
       "group": "第 11 章   排序",
       "route": "/read/chapter_sorting/counting_sort",
       "sourcePath": "chapter_sorting/counting_sort.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_sorting/radix_sort",
@@ -912,7 +933,8 @@
       "group": "第 11 章   排序",
       "route": "/read/chapter_sorting/radix_sort",
       "sourcePath": "chapter_sorting/radix_sort.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_sorting/summary",
@@ -921,7 +943,8 @@
       "group": "第 11 章   排序",
       "route": "/read/chapter_sorting/summary",
       "sourcePath": "chapter_sorting/summary.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_sorting/exercises",
@@ -930,7 +953,8 @@
       "group": "第 11 章   排序",
       "route": "/read/chapter_sorting/exercises",
       "sourcePath": "chapter_sorting/exercises.md",
-      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
+      "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
+      "edition": "Genius 算法"
     },
     {
       "id": "chapter_divide_and_conquer/index",

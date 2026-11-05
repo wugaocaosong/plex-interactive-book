@@ -41,7 +41,7 @@ export interface CodeExample {
 export interface BookPage extends BookSection {
   html: string;
   codeExamples: CodeExample[];
-  animations: { src: string; alt: string }[][];
+  animations: { src: string; alt: string; caption?: string }[][];
   blockAliases?: Record<string, string>;
   contentVersion?: string;
 }

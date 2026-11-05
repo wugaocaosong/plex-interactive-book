@@ -1,5 +1,5 @@
 import {mergeSteps,hanoiSteps} from './chapter12-model.ts';
-export type SceneId='merge'|'binary'|'tree'|'hanoi'|'permutations'|'queens'|'stairs'|'knapsack'|'fractional'|'capacity'|'workflow';
+export type SceneId='merge'|'binary'|'tree'|'hanoi'|'permutations'|'queens'|'stairs'|'knapsack'|'fractional'|'capacity'|'workflow'|'stack'|'queue'|'deque'|'hash'|'traversal'|'heap';
 export interface TeachingStep {explanation:string;values?:number[];active?:number[];rows?:number[][];labels?:string[];variables:Record<string,unknown>;code?:string;line?:number;result?:unknown}
 export const sceneDefinitions:Record<SceneId,{title:string;input:unknown;hint:string}>={
  merge:{title:'拆分合并',input:[6,3,8,2,5,1],hint:'2—8 个整数的 JSON 数组'},
@@ -12,13 +12,69 @@ export const sceneDefinitions:Record<SceneId,{title:string;input:unknown;hint:st
  knapsack:{title:'0-1 背包填表与选取',input:{weights:[2,3,4],values:[3,4,5],capacity:6},hint:'最多 6 件物品，正整数重量，非负价值，容量 0—20'},
  fractional:{title:'分数背包',input:{weights:[10,20,30],values:[60,100,120],capacity:20},hint:'最多 6 件物品，容量 0—20，物品可切分'},
  capacity:{title:'最大容量双指针',input:[1,8,6,2,5,4,8,3,7],hint:'2—12 个非负整数高度'},
- workflow:{title:'编辑 → 运行 → 定位错误 → 修正',input:null,hint:'预设教学流程，不实际安装软件或运行学生代码'}
+ workflow:{title:'编辑 → 运行 → 定位错误 → 修正',input:null,hint:'预设教学流程，不实际安装软件或运行学生代码'},
+ stack:{title:'栈顶装载与卸载',input:{push:[4,2,7,1],pop:2},hint:'JSON：push 为入栈整数列表，pop 为出栈次数'},
+ queue:{title:'队列舱顺序放行',input:{enqueue:[4,2,7,1],dequeue:2},hint:'JSON：enqueue 为入队整数列表，dequeue 为出队次数'},
+ deque:{title:'双端舱门调度',input:{left:[2,1],right:[3,4],removeLeft:1,removeRight:1},hint:'JSON：left/right 为两端加入的整数列表，并设置两端移除次数'},
+ hash:{title:'信标编号入槽',input:{keys:[19,26,13,48],capacity:7},hint:'JSON：keys 为 0—999 的整数列表，capacity 为 3—17 的槽位数'},
+ traversal:{title:'巡检机器人遍历树站',input:{preorder:[8,4,2,6,12,10,14],inorder:[2,4,6,8,10,12,14],order:'preorder'},hint:'JSON：提供相同且互异的 preorder/inorder 节点，并选择 preorder/inorder/postorder/level'},
+ heap:{title:'从底向上建堆',input:{values:[7,4,6,1,3,5,2],kind:'min'},hint:'JSON：values 为 1—15 个整数，kind 选 min 或 max'}
 };
 function integer(n:unknown,min:number,max:number){if(typeof n!=='number'||!Number.isSafeInteger(n)||n<min||n>max)throw Error(`请输入 ${min}—${max} 的整数`);return n;}
 function array(a:unknown,max=12,min=0){if(!Array.isArray(a)||a.length<min||a.length>max||a.some(v=>!Number.isSafeInteger(v)))throw Error(`数组应有 ${min}—${max} 个安全整数`);return a as number[];}
 function object(v:unknown):Record<string,unknown>{if(!v||Array.isArray(v)||typeof v!=='object')throw Error('请输入 JSON 对象');return v as Record<string,unknown>;}
+function sequenceSteps(id:'stack'|'queue'|'deque',input:unknown):TeachingStep[]{
+ const v=object(input),steps:TeachingStep[]=[],emit=(values:number[],explanation:string,variables:Record<string,unknown>,active:number[]=[])=>(steps.push({values:[...values],active,explanation,variables}));
+ if(id==='stack'||id==='queue'){
+  const key=id==='stack'?'push':'enqueue',items=array(v[key],12),count=integer(v[id==='stack'?'pop':'dequeue'],0,items.length),values:number[]=[];
+  emit(values,id==='stack'?'货舱为空。从栈顶装入一件物品开始。':'队列为空。从队尾接收第一条信号开始。',{结构:id==='stack'?'栈':'队列',操作:'初始'});
+  for(const value of items){values.push(value);emit(values,id==='stack'?`将 ${value} 压入栈顶；它会比栈中更早进入的元素先被取出。`:`将 ${value} 加入队尾；已有信号仍按到达顺序等待。`,{操作:id==='stack'?'push':'enqueue',当前元素:value,长度:values.length},[values.length-1]);}
+  for(let i=0;i<count;i++){const value=id==='stack'?values.pop()!:values.shift()!;emit(values,id==='stack'?`从栈顶弹出 ${value}：它是最后进入的元素。`:`从队首放行 ${value}：它是最早到达的信号。`,{操作:id==='stack'?'pop':'dequeue',离开元素:value,长度:values.length},values.length?[id==='stack'?values.length-1:0]:[]);}
+  return steps;
+ }
+ const left=array(v.left,8),right=array(v.right,8),removeLeft=integer(v.removeLeft,0,left.length),removeRight=integer(v.removeRight,0,right.length),values:number[]=[];
+ emit(values,'左右舱门都关闭，双端队列为空。',{结构:'双向队列',操作:'初始'});
+ for(const value of left){values.unshift(value);emit(values,`从左端加入 ${value}。`,{操作:'左端加入',当前元素:value,长度:values.length},[0]);}
+ for(const value of right){values.push(value);emit(values,`从右端加入 ${value}。`,{操作:'右端加入',当前元素:value,长度:values.length},[values.length-1]);}
+ for(let i=0;i<removeLeft&&values.length;i++){const value=values.shift()!;emit(values,`从左端移出 ${value}。`,{操作:'左端移出',离开元素:value,长度:values.length},values.length?[0]:[]);}
+ for(let i=0;i<removeRight&&values.length;i++){const value=values.pop()!;emit(values,`从右端移出 ${value}。`,{操作:'右端移出',离开元素:value,长度:values.length},values.length?[values.length-1]:[]);}
+ return steps;
+}
+function hashSteps(input:unknown):TeachingStep[]{
+ const v=object(input),keys=array(v.keys,12,1),capacity=integer(v.capacity,3,17);if(keys.some(k=>k<0||k>999))throw Error('信标编号请使用 0—999 的非负整数');
+ const slots=Array<number>(capacity).fill(-1),steps:TeachingStep[]=[];const emit=(explanation:string,variables:Record<string,unknown>,active:number[]=[])=>(steps.push({values:[...slots],active,explanation,variables}));
+ emit('所有存储槽为空。哈希函数先计算 key mod capacity，得到首选位置。',{容量:capacity,策略:'线性探测'});
+ for(const key of keys){const home=key%capacity;let slot=home;for(let probe=0;probe<capacity;probe++){
+   if(slots[slot]===-1){slots[slot]=key;emit(`编号 ${key} 的首选槽位是 ${home}。槽位 ${slot} 为空，完成写入。`,{编号:key,哈希值:home,写入槽位:slot,探测次数:probe+1},[slot]);break;}
+   emit(`编号 ${key} 的首选位置 ${home} 已被 ${slots[slot]} 占用；检查槽位 ${slot} 后继续向后探测。`,{编号:key,哈希值:home,冲突值:slots[slot],探测次数:probe+1},[slot]);slot=(slot+1)%capacity;
+   if(probe===capacity-1)throw Error('哈希表已满，请增加槽位或减少编号');
+  }}
+ return steps;
+}
+function traversalSteps(input:unknown):TeachingStep[]{
+ const v=object(input),pre=array(v.preorder,15,1),ino=array(v.inorder,15,1),order=v.order??'preorder';if(pre.length!==ino.length||new Set(pre).size!==pre.length||pre.some(n=>!ino.includes(n)))throw Error('前序与中序遍历必须包含相同且互不重复的节点');
+ if(!['preorder','inorder','postorder','level'].includes(String(order)))throw Error('order 请使用 preorder、inorder、postorder 或 level');
+ type Node={value:number;left:Node|null;right:Node|null};const edges:number[][]=[];
+ function build(p:number[],i:number[],parent:number|null,side:number):Node|null{if(!p.length)return null;const value=p[0],k=i.indexOf(value);if(k<0||k>=p.length)throw Error('遍历序列无法构成一致的二叉树');const node:Node={value,left:null,right:null};edges.push([value,parent??value,side]);node.left=build(p.slice(1,k+1),i.slice(0,k),value,-1);node.right=build(p.slice(k+1),i.slice(k+1),value,1);return node;}
+ const root=build(pre,ino,null,0);const steps:TeachingStep[]=[],visited:number[]=[];const name=({preorder:'前序',inorder:'中序',postorder:'后序',level:'层序'} as Record<string,string>)[String(order)];
+ const emit=(value?:number)=>steps.push({rows:edges.map(row=>[...row]),values:[...visited],active:value===undefined?[]:[value],explanation:value===undefined?`按${name}规则开始巡检。`:`第 ${visited.length} 个记录点：访问节点 ${value}。`,variables:{遍历方式:name,当前节点:value??'—',访问序号:visited.length}});
+ emit();function visit(node:Node|null){if(!node)return;if(order==='preorder'){visited.push(node.value);emit(node.value);}visit(node.left);if(order==='inorder'){visited.push(node.value);emit(node.value);}visit(node.right);if(order==='postorder'){visited.push(node.value);emit(node.value);}}
+ if(order==='level'){const queue:Node[]=[root!];while(queue.length){const node=queue.shift()!;visited.push(node.value);emit(node.value);if(node.left)queue.push(node.left);if(node.right)queue.push(node.right);}}else visit(root);
+ steps.push({rows:edges.map(row=>[...row]),values:[...visited],explanation:`巡检完成，${name}序列为 ${visited.join(' → ')}。`,variables:{遍历方式:name,节点数:visited.length},result:visited});return steps;
+}
+function heapSteps(input:unknown):TeachingStep[]{
+ const v=object(input),heap=array(v.values,15,1),kind=v.kind??'min';if(kind!=='min'&&kind!=='max')throw Error('kind 请使用 min 或 max');const steps:TeachingStep[]=[];
+ const better=(a:number,b:number)=>kind==='min'?a<b:a>b;const emit=(explanation:string,active:number[],variables:Record<string,unknown>)=>steps.push({values:[...heap],active,explanation,variables});
+ emit(`待整理数组：[${heap.join(', ')}]。从最后一个非叶节点开始向上调整。`,[],{堆类型:kind==='min'?'小顶堆':'大顶堆',阶段:'初始数组'});
+ for(let parent=Math.floor(heap.length/2)-1;parent>=0;parent--){let current=parent;emit(`从索引 ${parent} 开始下沉检查。`,[current],{父节点索引:current,阶段:'检查子节点'});while(true){const left=current*2+1,right=left+1;let chosen=current;if(left<heap.length&&better(heap[left],heap[chosen]))chosen=left;if(right<heap.length&&better(heap[right],heap[chosen]))chosen=right;if(chosen===current)break;emit(`比较父节点 ${heap[current]} 与优先级更高的子节点 ${heap[chosen]}，准备交换。`,[current,chosen],{父节点索引:current,子节点索引:chosen,阶段:'交换'});[heap[current],heap[chosen]]=[heap[chosen],heap[current]];current=chosen;emit(`交换完成，继续检查新的子树。`,[current],{父节点索引:current,阶段:'继续下沉'});}}
+ emit(`建堆完成：堆顶 ${heap[0]} 是当前优先级${kind==='min'?'最高（最小）':'最高（最大）'}的任务。`,[0],{堆类型:kind==='min'?'小顶堆':'大顶堆',阶段:'完成'});return steps;
+}
 export function teachingSteps(id:SceneId,input:unknown):TeachingStep[]{
  const steps:TeachingStep[]=[];const emit=(s:TeachingStep)=>steps.push(structuredClone(s));
+ if(id==='stack'||id==='queue'||id==='deque')return sequenceSteps(id,input);
+ if(id==='hash')return hashSteps(input);
+ if(id==='traversal')return traversalSteps(input);
+ if(id==='heap')return heapSteps(input);
  if(id==='merge')return mergeSteps(array(input,8,2)).map(s=>({explanation:s.explanation,values:s.values,variables:{任务:s.path,阶段:s.phase}}));
  if(id==='hanoi')return hanoiSteps(integer(input,1,5)).map((s,i)=>({explanation:s.explanation,rows:s.towers,labels:['A 柱','B 柱','C 柱'],variables:{移动次数:i,最优次数:2**Number(input)-1}}));
  if(id==='binary'){

@@ -6,7 +6,8 @@
   "route": "/read/chapter_graph/graph_traversal",
   "sourcePath": "chapter_graph/graph_traversal.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"blk-71678fc1a04eb366\" id=\"_1\">图的遍历</h1>\n<p data-block=\"blk-1c570b89fce3eb64\">树代表的是“一对多”的关系，而图则具有更高的自由度，可以表示任意的“多对多”关系。因此，我们可以把树看作图的一种特例。显然，<strong>树的遍历操作也是图的遍历操作的一种特例</strong>。</p>\n<p data-block=\"blk-2f9631545edd6954\">图和树都需要应用搜索算法来实现遍历操作。图的遍历方式也可分为两种：<u>广度优先遍历</u>和<u>深度优先遍历</u>。</p>\n<h2 data-block=\"blk-f864cd9ba0a1aa0e\" id=\"_2\">广度优先遍历</h2>\n<p data-block=\"blk-6aa4accb86a1e812\"><strong>广度优先遍历是一种由近及远的遍历方式，从某个节点出发，始终优先访问距离最近的顶点，并一层层向外扩张</strong>。如下图所示，从左上角顶点出发，首先遍历该顶点的所有邻接顶点，然后遍历下一个顶点的所有邻接顶点，以此类推，直至所有顶点访问完毕。</p>\n<figure data-block=\"blk-15b0ed3e6ee817ca\"><img alt=\"图的广度优先遍历\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_graph/graph_traversal.assets/graph_bfs.png\"/><figcaption>图的广度优先遍历</figcaption></figure>\n<h3 data-block=\"blk-60b506403f36911b\" id=\"_3\">算法实现</h3>\n<p data-block=\"blk-722d2bc7743b42f9\">BFS 通常借助队列来实现，代码如下所示。队列具有“先入先出”的性质，这与 BFS 的“由近及远”的思想异曲同工。</p>\n<ol data-block=\"blk-f2a1117d9c7cb6d4\">\n<li>将遍历起始顶点 <code>startVet</code> 加入队列，并开启循环。</li>\n<li>在循环的每轮迭代中，弹出队首顶点并记录访问，然后将该顶点的所有邻接顶点加入到队列尾部。</li>\n<li>循环步骤 <code>2.</code> ，直到所有顶点被访问完毕后结束。</li>\n</ol>\n<p data-block=\"blk-eaf3eccee66f2619\">为了防止重复遍历顶点，我们需要借助一个哈希集合 <code>visited</code> 来记录哪些节点已被访问。</p>\n<div class=\"admonition tip\" data-block=\"blk-665e1c709dcf4e82\">\n<p class=\"admonition-title\">Tip</p>\n<p>哈希集合可以看作一个只存储 <code>key</code> 而不存储 <code>value</code> 的哈希表，它可以在 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span> 时间复杂度下进行 <code>key</code> 的增删查改操作。根据 <code>key</code> 的唯一性，哈希集合通常用于数据去重等场景。</p>\n</div>\n<div class=\"code-example\" data-block=\"blk-a002934ee46798ad\" data-code=\"0\"><div class=\"code-caption\"><span>graph_bfs · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def graph_bfs(graph: GraphAdjList, start_vet: Vertex) -&gt; list[Vertex]:\n    \"\"\"广度优先遍历\"\"\"\n    # 使用邻接表来表示图，以便获取指定顶点的所有邻接顶点\n    # 顶点遍历序列\n    res = []\n    # 哈希集合，用于记录已被访问过的顶点\n    visited = set[Vertex]([start_vet])\n    # 队列用于实现 BFS\n    que = deque[Vertex]([start_vet])\n    # 以顶点 vet 为起点，循环直至访问完所有顶点\n    while len(que) &gt; 0:\n        vet = que.popleft()  # 队首顶点出队\n        res.append(vet)  # 记录访问顶点\n        # 遍历该顶点的所有邻接顶点\n        for adj_vet in graph.adj_list[vet]:\n            if adj_vet in visited:\n                continue  # 跳过已被访问的顶点\n            que.append(adj_vet)  # 只入队未访问的顶点\n            visited.add(adj_vet)  # 标记该顶点已被访问\n    # 返回顶点遍历序列\n    return res</code></pre></div>\n<p data-block=\"blk-cec7db0aabeb3af3\">代码相对抽象，建议对照下图来加深理解。</p>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-a619f8263e57d0e3\"><img alt=\"图的广度优先遍历步骤\" data-action=\"image\" src=\"/upstream/chapter_graph/graph_traversal.assets/graph_bfs_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 11</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<div class=\"admonition question\" data-block=\"blk-3f80b585809eae0c\">\n<p class=\"admonition-title\">广度优先遍历的序列是否唯一？</p>\n<p>不唯一。广度优先遍历只要求按“由近及远”的顺序遍历，<strong>而多个相同距离的顶点的遍历顺序允许被任意打乱</strong>。以上图为例，顶点 <span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(3\\)\">\\(3\\)</span> 的访问顺序可以交换，顶点 <span class=\"arithmatex\" data-tex=\"\\(2\\)\">\\(2\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(4\\)\">\\(4\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(6\\)\">\\(6\\)</span> 的访问顺序也可以任意交换。</p>\n</div>\n<h3 data-block=\"blk-da8288ecfe06fe61\" id=\"_4\">复杂度分析</h3>\n<p data-block=\"blk-aa96220c15c40c28\"><strong>时间复杂度</strong>：所有顶点都会入队并出队一次，使用 <span class=\"arithmatex\" data-tex=\"\\(O(|V|)\\)\">\\(O(|V|)\\)</span> 时间；在遍历邻接顶点的过程中，由于是无向图，因此所有边都会被访问 <span class=\"arithmatex\" data-tex=\"\\(2\\)\">\\(2\\)</span> 次，使用 <span class=\"arithmatex\" data-tex=\"\\(O(2|E|)\\)\">\\(O(2|E|)\\)</span> 时间；总体使用 <span class=\"arithmatex\" data-tex=\"\\(O(|V| + |E|)\\)\">\\(O(|V| + |E|)\\)</span> 时间。</p>\n<p data-block=\"blk-81301ca163256f06\"><strong>空间复杂度</strong>：列表 <code>res</code> ，哈希集合 <code>visited</code> ，队列 <code>que</code> 中的顶点数量最多为 <span class=\"arithmatex\" data-tex=\"\\(|V|\\)\">\\(|V|\\)</span> ，使用 <span class=\"arithmatex\" data-tex=\"\\(O(|V|)\\)\">\\(O(|V|)\\)</span> 空间。</p>\n<h2 data-block=\"blk-2f6893e67364e608\" id=\"_5\">深度优先遍历</h2>\n<p data-block=\"blk-78ae959fd12e7081\"><strong>深度优先遍历是一种优先走到底、无路可走再回头的遍历方式</strong>。如下图所示，从左上角顶点出发，访问当前顶点的某个邻接顶点，直到走到尽头时返回，再继续走到尽头并返回，以此类推，直至所有顶点遍历完成。</p>\n<figure data-block=\"blk-1839a01a87077a0b\"><img alt=\"图的深度优先遍历\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_graph/graph_traversal.assets/graph_dfs.png\"/><figcaption>图的深度优先遍历</figcaption></figure>\n<h3 data-block=\"blk-59c1de6512ccf3cc\" id=\"_6\">算法实现</h3>\n<p data-block=\"blk-f8142b384bb38dde\">这种“走到尽头再返回”的算法范式通常基于递归来实现。与广度优先遍历类似，在深度优先遍历中，我们也需要借助一个哈希集合 <code>visited</code> 来记录已被访问的顶点，以避免重复访问顶点。</p>\n<div class=\"code-example\" data-block=\"blk-448407ac8fe25fd1\" data-code=\"1\"><div class=\"code-caption\"><span>graph_dfs · python</span><button data-action=\"code\" data-code=\"1\">查看 / 运行</button></div><pre><code>def graph_dfs(graph: GraphAdjList, start_vet: Vertex) -&gt; list[Vertex]:\n    \"\"\"深度优先遍历\"\"\"\n    # 使用邻接表来表示图，以便获取指定顶点的所有邻接顶点\n    # 顶点遍历序列\n    res = []\n    # 哈希集合，用于记录已被访问过的顶点\n    visited = set[Vertex]()\n    dfs(graph, visited, res, start_vet)\n    return res</code></pre></div>\n<p data-block=\"blk-e14cd7b3f23bd8c6\">深度优先遍历的算法流程如下图所示。</p>\n<ul data-block=\"blk-1a5b6e20f238e23b\">\n<li><strong>直虚线代表向下递推</strong>，表示开启了一个新的递归方法来访问新顶点。</li>\n<li><strong>曲虚线代表向上回溯</strong>，表示此递归方法已经返回，回溯到了开启此方法的位置。</li>\n</ul>\n<p data-block=\"blk-977d9bf5725ffd83\">为了加深理解，建议将下图与代码结合起来，在脑中模拟（或者用笔画下来）整个 DFS 过程，包括每个递归方法何时开启、何时返回。</p>\n<figure class=\"step-player\" data-animation=\"1\" data-block=\"blk-85efa7aae3d29d81\"><img alt=\"图的深度优先遍历步骤\" data-action=\"image\" src=\"/upstream/chapter_graph/graph_traversal.assets/graph_dfs_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"1\">‹</button><span data-step-label=\"\">1 / 11</span><button data-action=\"step-play\" data-animation=\"1\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"1\">›</button></figcaption></figure>\n<div class=\"admonition question\" data-block=\"blk-aab66a76f7ecf22a\">\n<p class=\"admonition-title\">深度优先遍历的序列是否唯一？</p>\n<p>与广度优先遍历类似，深度优先遍历序列的顺序也不是唯一的。给定某顶点，先往哪个方向探索都可以，即邻接顶点的顺序可以任意打乱，都是深度优先遍历。</p>\n<p>以树的遍历为例，“根 <span class=\"arithmatex\" data-tex=\"\\(\\rightarrow\\)\">\\(\\rightarrow\\)</span> 左 <span class=\"arithmatex\" data-tex=\"\\(\\rightarrow\\)\">\\(\\rightarrow\\)</span> 右”“左 <span class=\"arithmatex\" data-tex=\"\\(\\rightarrow\\)\">\\(\\rightarrow\\)</span> 根 <span class=\"arithmatex\" data-tex=\"\\(\\rightarrow\\)\">\\(\\rightarrow\\)</span> 右”“左 <span class=\"arithmatex\" data-tex=\"\\(\\rightarrow\\)\">\\(\\rightarrow\\)</span> 右 <span class=\"arithmatex\" data-tex=\"\\(\\rightarrow\\)\">\\(\\rightarrow\\)</span> 根”分别对应前序、中序、后序遍历，它们展示了三种遍历优先级，然而这三者都属于深度优先遍历。</p>\n</div>\n<h3 data-block=\"blk-16732496e8aa2a54\" id=\"_7\">复杂度分析</h3>\n<p data-block=\"blk-63c7f7bbcaec35e0\"><strong>时间复杂度</strong>：所有顶点都会被访问 <span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span> 次，使用 <span class=\"arithmatex\" data-tex=\"\\(O(|V|)\\)\">\\(O(|V|)\\)</span> 时间；所有边都会被访问 <span class=\"arithmatex\" data-tex=\"\\(2\\)\">\\(2\\)</span> 次，使用 <span class=\"arithmatex\" data-tex=\"\\(O(2|E|)\\)\">\\(O(2|E|)\\)</span> 时间；总体使用 <span class=\"arithmatex\" data-tex=\"\\(O(|V| + |E|)\\)\">\\(O(|V| + |E|)\\)</span> 时间。</p>\n<p data-block=\"blk-f511b4cc587076a3\"><strong>空间复杂度</strong>：列表 <code>res</code> ，哈希集合 <code>visited</code> 顶点数量最多为 <span class=\"arithmatex\" data-tex=\"\\(|V|\\)\">\\(|V|\\)</span> ，递归深度最大为 <span class=\"arithmatex\" data-tex=\"\\(|V|\\)\">\\(|V|\\)</span> ，因此使用 <span class=\"arithmatex\" data-tex=\"\\(O(|V|)\\)\">\\(O(|V|)\\)</span> 空间。</p>",
+  "edition": "Genius 算法",
+  "html": "<h1 data-block=\"blk-71678fc1a04eb366\" id=\"_1\">图的遍历</h1>\n<p data-block=\"blk-c021c28cf7edf29b\">树表达的是“一对多”的关系，图更自由，能表达任意的“多对多”关系。所以树可以看作图的一个特例，树的遍历操作也是图的遍历操作的一种特例。</p>\n<p data-block=\"blk-2f9631545edd6954\">图和树都需要应用搜索算法来实现遍历操作。图的遍历方式也可分为两种：广度优先遍历和深度优先遍历。</p>\n<h2 data-block=\"blk-f864cd9ba0a1aa0e\" id=\"_2\">广度优先遍历</h2>\n<p data-block=\"blk-7b83cb64ce0bdd1d\">广度优先遍历是一种由近及远的遍历方式，从某个节点出发，始终优先访问距离最近的顶点，并一层层向外扩张。如下图所示，从左上角的顶点出发，先把它的邻接顶点都走一遍，再看下一批顶点，就这一层层推下去，直到所有顶点都访问完。</p>\n<figure data-block=\"blk-15b0ed3e6ee817ca\"><img alt=\"图的广度优先遍历\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/genius/media/image_200.png\"/><figcaption>图的广度优先遍历</figcaption></figure>\n<h3 data-block=\"blk-60b506403f36911b\" id=\"_3\">算法实现</h3>\n<p data-block=\"blk-13e33e7bc67f5e15\">BFS 一般用队列实现，代码如下。队列“先入先出”的性质，正好和 BFS“由近及远”的思路对得上。</p>\n<ol data-block=\"blk-ae3e31db60bdd228\">\n<li>\n<p>把起点 startVet 放进队列，然后开始循环。</p>\n</li>\n<li>\n<p>每一轮循环里，弹出队首顶点并记下它已被访问，再把这个顶点的所有邻接顶点依次放到队尾。</p>\n</li>\n<li>\n<p>重复第 2 步，直到所有顶点都访问完为止。</p>\n</li>\n</ol>\n<p data-block=\"blk-1b06eb8c1d6836ca\">为了避免同一个顶点被重复访问，还需要一个哈希集合 visited ，用来记录哪些顶点已经走过。</p>\n<p data-block=\"blk-945aa3e033cc516c\">Tip</p>\n<p data-block=\"blk-9e8cb0555df0abcc\">哈希集合可以看成只存 key、不存 value 的哈希表，它能在 <span class=\"arithmatex\" data-tex=\"\\(O(1)\\)\">\\(O(1)\\)</span> 时间复杂度内完成 key 的增删查改。凭借 key 的唯一性，哈希集合常用于数据去重这类场景。</p>\n<div class=\"code-example\" data-block=\"blk-e818832e0422868f\" data-code=\"0\"><div class=\"code-caption\"><span>graph_bfs · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def graph_bfs(graph: GraphAdjList, start_vet: Vertex) -&gt; list[Vertex]:\n    \"\"\"广度优先遍历\"\"\"\n    # 使用邻接表来表示图，以便获取指定顶点的所有邻接顶点\n    # 顶点遍历序列\n    res = []\n    # 哈希集合，用于记录已被访问过的顶点\n    visited = set[Vertex]([start_vet])\n    # 队列用于实现 BFS\n    que = deque[Vertex]([start_vet])\n    # 以顶点 vet 为起点，循环直至访问完所有顶点\n    while len(que) &gt; 0:\n        vet = que.popleft()  # 队首顶点出队\n        res.append(vet)  # 记录访问顶点\n        # 遍历该顶点的所有邻接顶点\n        for adj_vet in graph.adj_list[vet]:\n            if adj_vet in visited:\n                continue  # 跳过已被访问的顶点\n            que.append(adj_vet)  # 只入队未访问的顶点\n            visited.add(adj_vet)  # 标记该顶点已被访问\n    # 返回顶点遍历序列\n    return res</code></pre></div>\n<p data-block=\"blk-6de6fea3d984375f\">光看代码有点抽象，建议对着下面的图来理解。</p>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-ef70d1bc808c3261\"><img alt=\"图解步骤 1 / 11 · 图的广度优先遍历步骤\" data-action=\"image\" src=\"/genius/media/image_201.png\"/><div class=\"step-frame-caption\" data-frame-caption=\"\">图解步骤 1 / 11 · 图的广度优先遍历步骤</div><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 11</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<p data-block=\"blk-afc878470c8d80df\">广度优先遍历的序列是否唯一？</p>\n<p data-block=\"blk-dd4d05fd4b7e0953\">不唯一。广度优先遍历只要求“由近及远”，而多个相同距离的顶点的遍历顺序允许被任意打乱。以上图为例，顶点 <span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(3\\)\">\\(3\\)</span> 谁先谁后可以换，顶点 <span class=\"arithmatex\" data-tex=\"\\(2\\)\">\\(2\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(4\\)\">\\(4\\)</span>、<span class=\"arithmatex\" data-tex=\"\\(6\\)\">\\(6\\)</span> 的顺序也能随便排。</p>\n<h3 data-block=\"blk-54c30b0c69c569eb\" id=\"_4\">复杂度分析</h3>\n<p data-block=\"blk-b9c13fb8c629ccf0\">时间复杂度：每个顶点都入队、出队各一次，花 <span class=\"arithmatex\" data-tex=\"\\(O(|V|)\\)\">\\(O(|V|)\\)</span> 时间；遍历邻接顶点时，因为是无向图，每条边会被访问 <span class=\"arithmatex\" data-tex=\"\\(2\\)\">\\(2\\)</span> 次，花 <span class=\"arithmatex\" data-tex=\"\\(O(2|E|)\\)\">\\(O(2|E|)\\)</span> 时间；加起来是 <span class=\"arithmatex\" data-tex=\"\\(O(|V|+|E|)\\)\">\\(O(|V|+|E|)\\)</span> 。</p>\n<p data-block=\"blk-81301ca163256f06\">空间复杂度：列表 res ，哈希集合 visited ，队列 que 中的顶点数量最多为 <span class=\"arithmatex\" data-tex=\"\\(|V|\\)\">\\(|V|\\)</span> ，使用 <span class=\"arithmatex\" data-tex=\"\\(O(|V|)\\)\">\\(O(|V|)\\)</span> 空间。</p>\n<h2 data-block=\"blk-2f6893e67364e608\" id=\"_5\">深度优先遍历</h2>\n<p data-block=\"blk-85a0a64b32a2b398\">深度优先遍历是一种优先走到底、无路可走再回头的遍历方式。如下图所示，从左上角的顶点出发，先顺着一条路一直往下走，走到尽头再退回来换一条路，就这样一直走到所有顶点都访问完。</p>\n<figure data-block=\"blk-1839a01a87077a0b\"><img alt=\"图的深度优先遍历\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/genius/media/image_212.png\"/><figcaption>图的深度优先遍历</figcaption></figure>\n<h3 data-block=\"blk-59c1de6512ccf3cc\" id=\"_6\">算法实现</h3>\n<p data-block=\"blk-9907d0eda46793be\">这种“走到底再回头”的做法，通常用递归实现。和广度优先遍历一样，深度优先遍历也要用哈希集合 visited 记录走过的顶点，避免重复访问。</p>\n<div class=\"code-example\" data-block=\"blk-e39bb95e471cadb9\" data-code=\"1\"><div class=\"code-caption\"><span>graph_dfs · python</span><button data-action=\"code\" data-code=\"1\">查看 / 运行</button></div><pre><code>def graph_dfs(graph: GraphAdjList, start_vet: Vertex) -&gt; list[Vertex]:\n    \"\"\"深度优先遍历\"\"\"\n    # 使用邻接表来表示图，以便获取指定顶点的所有邻接顶点\n    # 顶点遍历序列\n    res = []\n    # 哈希集合，用于记录已被访问过的顶点\n    visited = set[Vertex]()\n    dfs(graph, visited, res, start_vet)\n    return res</code></pre></div>\n<p data-block=\"blk-e2c0234aa6473823\">深度优先遍历的流程如下图所示。</p>\n<ul data-block=\"blk-3891addea9f08340\">\n<li>\n<p>直虚线代表向下递推，意思是又开启了一层新的递归，去访问新顶点。</p>\n</li>\n<li>\n<p>曲虚线代表向上回溯，意思是这一层递归已经返回，退回到开启它的位置。</p>\n</li>\n</ul>\n<p data-block=\"blk-729d788d40d8dc6c\">想理解得更透，最好把下面的图和代码对着看，在脑子里（或者拿笔画一画）把整个 DFS 过程走一遍：每个递归什么时候开启、什么时候返回。</p>\n<figure class=\"step-player\" data-animation=\"1\" data-block=\"blk-57f264137fbeedf2\"><img alt=\"图解步骤 1 / 11 · 图的深度优先遍历步骤\" data-action=\"image\" src=\"/genius/media/image_213.png\"/><div class=\"step-frame-caption\" data-frame-caption=\"\">图解步骤 1 / 11 · 图的深度优先遍历步骤</div><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"1\">‹</button><span data-step-label=\"\">1 / 11</span><button data-action=\"step-play\" data-animation=\"1\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"1\">›</button></figcaption></figure>\n<p data-block=\"blk-ace9df87eb364cca\">深度优先遍历的序列是否唯一？</p>\n<p data-block=\"blk-4a5132fed73fb56f\">和广度优先遍历一样，深度优先遍历的顺序也不是唯一的。给定一个顶点，先往哪个方向走都可以，邻接顶点的顺序随便打乱，都算深度优先遍历。</p>\n<p data-block=\"blk-2755ff7a84a02a98\">以树的遍历为例，“根 <span class=\"arithmatex\" data-tex=\"\\(→\\)\">\\(→\\)</span> 左 <span class=\"arithmatex\" data-tex=\"\\(→\\)\">\\(→\\)</span> 右”“左 <span class=\"arithmatex\" data-tex=\"\\(→\\)\">\\(→\\)</span> 根 <span class=\"arithmatex\" data-tex=\"\\(→\\)\">\\(→\\)</span> 右”“左 <span class=\"arithmatex\" data-tex=\"\\(→\\)\">\\(→\\)</span> 右 <span class=\"arithmatex\" data-tex=\"\\(→\\)\">\\(→\\)</span> 根”分别对应前序、中序、后序遍历。它们只是优先级的三种排法，本质上都属于深度优先遍历。</p>\n<h3 data-block=\"blk-fd9850caf1ee4bf5\" id=\"_7\">复杂度分析</h3>\n<p data-block=\"blk-9f0e4d5ede2e4897\">时间复杂度：每个顶点被访问 <span class=\"arithmatex\" data-tex=\"\\(1\\)\">\\(1\\)</span> 次，花 <span class=\"arithmatex\" data-tex=\"\\(O(|V|)\\)\">\\(O(|V|)\\)</span> 时间；每条边被访问 <span class=\"arithmatex\" data-tex=\"\\(2\\)\">\\(2\\)</span> 次，花 <span class=\"arithmatex\" data-tex=\"\\(O(2|E|)\\)\">\\(O(2|E|)\\)</span> 时间；加起来是 <span class=\"arithmatex\" data-tex=\"\\(O(|V|+|E|)\\)\">\\(O(|V|+|E|)\\)</span> 。</p>\n<p data-block=\"blk-f511b4cc587076a3\">空间复杂度：列表 res ，哈希集合 visited 顶点数量最多为 <span class=\"arithmatex\" data-tex=\"\\(|V|\\)\">\\(|V|\\)</span> ，递归深度最大为 <span class=\"arithmatex\" data-tex=\"\\(|V|\\)\">\\(|V|\\)</span> ，因此使用 <span class=\"arithmatex\" data-tex=\"\\(O(|V|)\\)\">\\(O(|V|)\\)</span> 空间。</p>",
   "codeExamples": [
     {
       "id": "example-3a4511bfa0db0189",
@@ -262,94 +263,116 @@
   "animations": [
     [
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_bfs_step1.png",
-        "alt": "图的广度优先遍历步骤"
+        "src": "/genius/media/image_201.png",
+        "alt": "图解步骤 1 / 11 · 图的广度优先遍历步骤",
+        "caption": "图解步骤 1 / 11 · 图的广度优先遍历步骤"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_bfs_step2.png",
-        "alt": "graph_bfs_step2"
+        "src": "/genius/media/image_202.png",
+        "alt": "图解步骤 2 / 11 · graph_bfs_step2",
+        "caption": "图解步骤 2 / 11 · graph_bfs_step2"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_bfs_step3.png",
-        "alt": "graph_bfs_step3"
+        "src": "/genius/media/image_203.png",
+        "alt": "图解步骤 3 / 11 · graph_bfs_step3",
+        "caption": "图解步骤 3 / 11 · graph_bfs_step3"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_bfs_step4.png",
-        "alt": "graph_bfs_step4"
+        "src": "/genius/media/image_204.png",
+        "alt": "图解步骤 4 / 11 · graph_bfs_step4",
+        "caption": "图解步骤 4 / 11 · graph_bfs_step4"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_bfs_step5.png",
-        "alt": "graph_bfs_step5"
+        "src": "/genius/media/image_205.png",
+        "alt": "图解步骤 5 / 11 · graph_bfs_step5",
+        "caption": "图解步骤 5 / 11 · graph_bfs_step5"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_bfs_step6.png",
-        "alt": "graph_bfs_step6"
+        "src": "/genius/media/image_206.png",
+        "alt": "图解步骤 6 / 11 · graph_bfs_step6",
+        "caption": "图解步骤 6 / 11 · graph_bfs_step6"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_bfs_step7.png",
-        "alt": "graph_bfs_step7"
+        "src": "/genius/media/image_207.png",
+        "alt": "图解步骤 7 / 11 · graph_bfs_step7",
+        "caption": "图解步骤 7 / 11 · graph_bfs_step7"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_bfs_step8.png",
-        "alt": "graph_bfs_step8"
+        "src": "/genius/media/image_208.png",
+        "alt": "图解步骤 8 / 11 · graph_bfs_step8",
+        "caption": "图解步骤 8 / 11 · graph_bfs_step8"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_bfs_step9.png",
-        "alt": "graph_bfs_step9"
+        "src": "/genius/media/image_209.png",
+        "alt": "图解步骤 9 / 11 · graph_bfs_step9",
+        "caption": "图解步骤 9 / 11 · graph_bfs_step9"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_bfs_step10.png",
-        "alt": "graph_bfs_step10"
+        "src": "/genius/media/image_210.png",
+        "alt": "图解步骤 10 / 11 · graph_bfs_step10",
+        "caption": "图解步骤 10 / 11 · graph_bfs_step10"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_bfs_step11.png",
-        "alt": "graph_bfs_step11"
+        "src": "/genius/media/image_211.png",
+        "alt": "图解步骤 11 / 11 · graph_bfs_step11",
+        "caption": "图解步骤 11 / 11 · graph_bfs_step11"
       }
     ],
     [
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_dfs_step1.png",
-        "alt": "图的深度优先遍历步骤"
+        "src": "/genius/media/image_213.png",
+        "alt": "图解步骤 1 / 11 · 图的深度优先遍历步骤",
+        "caption": "图解步骤 1 / 11 · 图的深度优先遍历步骤"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_dfs_step2.png",
-        "alt": "graph_dfs_step2"
+        "src": "/genius/media/image_214.png",
+        "alt": "图解步骤 2 / 11 · graph_dfs_step2",
+        "caption": "图解步骤 2 / 11 · graph_dfs_step2"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_dfs_step3.png",
-        "alt": "graph_dfs_step3"
+        "src": "/genius/media/image_215.png",
+        "alt": "图解步骤 3 / 11 · graph_dfs_step3",
+        "caption": "图解步骤 3 / 11 · graph_dfs_step3"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_dfs_step4.png",
-        "alt": "graph_dfs_step4"
+        "src": "/genius/media/image_216.png",
+        "alt": "图解步骤 4 / 11 · graph_dfs_step4",
+        "caption": "图解步骤 4 / 11 · graph_dfs_step4"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_dfs_step5.png",
-        "alt": "graph_dfs_step5"
+        "src": "/genius/media/image_217.png",
+        "alt": "图解步骤 5 / 11 · graph_dfs_step5",
+        "caption": "图解步骤 5 / 11 · graph_dfs_step5"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_dfs_step6.png",
-        "alt": "graph_dfs_step6"
+        "src": "/genius/media/image_218.png",
+        "alt": "图解步骤 6 / 11 · graph_dfs_step6",
+        "caption": "图解步骤 6 / 11 · graph_dfs_step6"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_dfs_step7.png",
-        "alt": "graph_dfs_step7"
+        "src": "/genius/media/image_219.png",
+        "alt": "图解步骤 7 / 11 · graph_dfs_step7",
+        "caption": "图解步骤 7 / 11 · graph_dfs_step7"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_dfs_step8.png",
-        "alt": "graph_dfs_step8"
+        "src": "/genius/media/image_220.png",
+        "alt": "图解步骤 8 / 11 · graph_dfs_step8",
+        "caption": "图解步骤 8 / 11 · graph_dfs_step8"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_dfs_step9.png",
-        "alt": "graph_dfs_step9"
+        "src": "/genius/media/image_221.png",
+        "alt": "图解步骤 9 / 11 · graph_dfs_step9",
+        "caption": "图解步骤 9 / 11 · graph_dfs_step9"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_dfs_step10.png",
-        "alt": "graph_dfs_step10"
+        "src": "/genius/media/image_222.png",
+        "alt": "图解步骤 10 / 11 · graph_dfs_step10",
+        "caption": "图解步骤 10 / 11 · graph_dfs_step10"
       },
       {
-        "src": "/upstream/chapter_graph/graph_traversal.assets/graph_dfs_step11.png",
-        "alt": "graph_dfs_step11"
+        "src": "/genius/media/image_223.png",
+        "alt": "图解步骤 11 / 11 · graph_dfs_step11",
+        "caption": "图解步骤 11 / 11 · graph_dfs_step11"
       }
     ]
   ],
@@ -361,10 +384,12 @@
       "local asset and link rewriting",
       "stable block anchors",
       "math and footnotes",
-      "image caption grouping"
+      "image caption grouping",
+      "Genius DOCX-authored chapter text, equations, images, and captions"
     ],
     "codeReferences": 2,
-    "animationGroups": 2
+    "animationGroups": 2,
+    "geniusSourceSha256": "c544ef58140729941e5826daebf101629b029314904749c2f25ad5abb976c4e9"
   },
   "blockAliases": {
     "b0": "blk-71678fc1a04eb366",
@@ -400,5 +425,5 @@
     "b30": "blk-63c7f7bbcaec35e0",
     "b31": "blk-f511b4cc587076a3"
   },
-  "contentVersion": "d6448c2f31a84260"
+  "contentVersion": "8c09ffab92623dcd"
 }

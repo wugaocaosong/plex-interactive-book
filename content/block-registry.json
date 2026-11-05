@@ -853,8 +853,8 @@
         "previous": "blk-3e121608e6ea920e"
       },
       {
-        "id": "blk-89c0c689df13691a",
-        "fingerprint": "815be6f2a616dabf5050e797d4e7f573fa1e860529bd4dc599dba6e65252a359",
+        "id": "blk-7c645996d8c1be4c",
+        "fingerprint": "0c958eba800eed52233a5b83fb1d29380c7f9b636ae45bf16962aa19a4c0cc17",
         "heading": "算法无处不在",
         "previous": "blk-97f906b0fbfeed59"
       },
@@ -862,7 +862,7 @@
         "id": "blk-82cd8f07e54612fa",
         "fingerprint": "7e2f64e518438a9734a2677d25d48075e4af0ee95462ba26359235537085acfa",
         "heading": "算法无处不在",
-        "previous": "blk-89c0c689df13691a"
+        "previous": "blk-7c645996d8c1be4c"
       },
       {
         "id": "blk-c810757d9cb0e9eb",
@@ -6209,16 +6209,28 @@
         "previous": ""
       },
       {
+        "id": "blk-52d4036a7155a0a5",
+        "fingerprint": "0e9170e302be0f414d6534c77d1f62bdf8adc5ec76805263cb62b0d42f2bef7c",
+        "heading": "栈与队列",
+        "previous": "blk-18c63c64a5db84f1"
+      },
+      {
         "id": "blk-06b017e41ba7d94a",
         "fingerprint": "d5d86a6098432310cf0f42ef2ebae0217eb18d4e6f9a34d3ce8f95db9caad58d",
         "heading": "栈与队列",
-        "previous": "blk-18c63c64a5db84f1"
+        "previous": "blk-52d4036a7155a0a5"
       },
       {
         "id": "blk-9459a37e197a949f",
         "fingerprint": "67f66f9c8b81b2720ca327d62c1d56aa80037a40219b17bc2e279c8cf6fe5065",
         "heading": "栈与队列",
         "previous": "blk-06b017e41ba7d94a"
+      },
+      {
+        "id": "blk-6a4cbad28b795fc9",
+        "fingerprint": "2cf522ba1ee7f1947dc1824a4d46c86992121d6205d36bbc762f40fba046055b",
+        "heading": "栈与队列",
+        "previous": "blk-9459a37e197a949f"
       }
     ],
     "aliases": {
@@ -6236,10 +6248,16 @@
         "previous": ""
       },
       {
+        "id": "blk-a830b8ef1d609d6a",
+        "fingerprint": "b6c78bcddf670fb33009d5be82f985a8008f96388e14950bb66bd402a114c019",
+        "heading": "栈",
+        "previous": "blk-a7095d8bcc9a1f1e"
+      },
+      {
         "id": "blk-0948e1a36e268c0a",
         "fingerprint": "590e73e3e907bde6fc118cf7caf38dd064c27c0db889d68072288fa5e3c0e228",
         "heading": "栈",
-        "previous": "blk-a7095d8bcc9a1f1e"
+        "previous": "blk-a830b8ef1d609d6a"
       },
       {
         "id": "blk-f8ac0f966068a2e4",
@@ -6254,10 +6272,16 @@
         "previous": "blk-f8ac0f966068a2e4"
       },
       {
+        "id": "blk-0fbe59ec3c2e0b13",
+        "fingerprint": "e390e4a468191c22e851f2c4ce7af68eba03b2cac4835e2be83a60bd11e25389",
+        "heading": "栈",
+        "previous": "blk-957c6fc8a3fae050"
+      },
+      {
         "id": "blk-1189ae16eb7efccd",
         "fingerprint": "daeacf10c0ea0b3799587a492c572c2571a6f7863a062deea8a8eea8888fa00d",
         "heading": "栈",
-        "previous": "blk-957c6fc8a3fae050"
+        "previous": "blk-0fbe59ec3c2e0b13"
       },
       {
         "id": "blk-1d89bb0726ffa8d1",
@@ -6338,8 +6362,8 @@
         "previous": "blk-9053ea510f1ed8e3"
       },
       {
-        "id": "blk-907c9f76747ed550",
-        "fingerprint": "440328f80ff17db59c7fe1b5535fe8157c245f65d490ef6e0da23b076ffbc427",
+        "id": "blk-df86df72b42c405c",
+        "fingerprint": "535765703ecdfd581c947e3f4db158ada36f61aca54ac3deee0756a90f77fb75",
         "heading": "基于链表的实现",
         "previous": "blk-55ad89146857d27e"
       },
@@ -6347,7 +6371,7 @@
         "id": "blk-95cdefc0d5a97683",
         "fingerprint": "cc0fbc8c15e4ec4915189e7451e8d251f713b84a1a9ee7a471157d1b02a26e13",
         "heading": "基于链表的实现",
-        "previous": "blk-907c9f76747ed550"
+        "previous": "blk-df86df72b42c405c"
       },
       {
         "id": "blk-024c50326515b400",
@@ -6368,8 +6392,8 @@
         "previous": "blk-d5ff724a30643c5a"
       },
       {
-        "id": "blk-88389993be6f2ca8",
-        "fingerprint": "440328f80ff17db59c7fe1b5535fe8157c245f65d490ef6e0da23b076ffbc427",
+        "id": "blk-677966846ac61d95",
+        "fingerprint": "900c4dad03cb7dcfdbc9087101a3c59d31f428fb7c47e2b606f258ef976fbc09",
         "heading": "基于数组的实现",
         "previous": "blk-4328f0cb129cbd70"
       },
@@ -6377,7 +6401,7 @@
         "id": "blk-3a689bdc72ffda3d",
         "fingerprint": "929e1fe6fc57a6086342f3d0a1406dd2312eff723ebfbb50e9af0b9cd6904b09",
         "heading": "基于数组的实现",
-        "previous": "blk-88389993be6f2ca8"
+        "previous": "blk-677966846ac61d95"
       },
       {
         "id": "blk-1f12806bf18a1495",
@@ -6522,10 +6546,16 @@
         "previous": ""
       },
       {
+        "id": "blk-2f0aa60beb3fe806",
+        "fingerprint": "74220f2d04c00a85dbe19f8e957563ad47673a94a26e8d3534f9eb24a323c985",
+        "heading": "队列",
+        "previous": "blk-60f8189883ed0465"
+      },
+      {
         "id": "blk-42adc8978140b204",
         "fingerprint": "3e94407cce099ad7e20c88d7efd65b5407d580703681b0da97ce2bfd7c52a60b",
         "heading": "队列",
-        "previous": "blk-60f8189883ed0465"
+        "previous": "blk-2f0aa60beb3fe806"
       },
       {
         "id": "blk-e5bf68673f84c2dd",
@@ -6534,10 +6564,16 @@
         "previous": "blk-42adc8978140b204"
       },
       {
+        "id": "blk-d97aba96002ca7a3",
+        "fingerprint": "d86388a49c276a7a18c89a89ecd99487ed4878c77f28d7c4cc391dc58a163505",
+        "heading": "队列",
+        "previous": "blk-e5bf68673f84c2dd"
+      },
+      {
         "id": "blk-6df697eadb20afe2",
         "fingerprint": "937732422c05ff34fc3e67ce70f7c0d4a4ff5a304decb46360ff2567e5bed827",
         "heading": "队列",
-        "previous": "blk-e5bf68673f84c2dd"
+        "previous": "blk-d97aba96002ca7a3"
       },
       {
         "id": "blk-335a79c2a62a241a",
@@ -6606,8 +6642,8 @@
         "previous": "blk-5be6b5b774c8567e"
       },
       {
-        "id": "blk-afa0deae39984e11",
-        "fingerprint": "440328f80ff17db59c7fe1b5535fe8157c245f65d490ef6e0da23b076ffbc427",
+        "id": "blk-93cf0aa99ac3fff2",
+        "fingerprint": "ee22c5531cb9a81a51add4cf5cf537cc6f87f347596d30decfea8e4eb175ee04",
         "heading": "基于链表的实现",
         "previous": "blk-f36078e692c14d1c"
       },
@@ -6615,7 +6651,7 @@
         "id": "blk-27e6e2278f72369d",
         "fingerprint": "99e59f2c8133210fbc6b087a9eea823f44679d1e87886e874ed282c868c21902",
         "heading": "基于链表的实现",
-        "previous": "blk-afa0deae39984e11"
+        "previous": "blk-93cf0aa99ac3fff2"
       },
       {
         "id": "blk-2a2dfa86605962a8",
@@ -6660,8 +6696,8 @@
         "previous": "blk-0b5645c53d22e030"
       },
       {
-        "id": "blk-c9a034c5304569ad",
-        "fingerprint": "440328f80ff17db59c7fe1b5535fe8157c245f65d490ef6e0da23b076ffbc427",
+        "id": "blk-ee29925be10ae9e3",
+        "fingerprint": "bed5ab3db74787faa251fdef09902640f53a030c4546a7c3af5061fe5c2bcfb7",
         "heading": "基于数组的实现",
         "previous": "blk-67a4c0089ed1a963"
       },
@@ -6669,7 +6705,7 @@
         "id": "blk-c2e723dae14eff10",
         "fingerprint": "3fef032d5c2a9d26dcf801686a891e7e437d7cedd93676aa3109190067bb8fc8",
         "heading": "基于数组的实现",
-        "previous": "blk-c9a034c5304569ad"
+        "previous": "blk-ee29925be10ae9e3"
       },
       {
         "id": "blk-ecac61741fd95aa7",
@@ -6752,16 +6788,28 @@
         "previous": ""
       },
       {
+        "id": "blk-5bd24269eee44add",
+        "fingerprint": "d2f4dcc856aeabaeae575040354175e32275f5adae45ad410847935217153039",
+        "heading": "双向队列",
+        "previous": "blk-a585cbf9ab4bf2e8"
+      },
+      {
         "id": "blk-337ab8a4454f9681",
         "fingerprint": "804020a75099a618759915ce96cc96c607f0ff7cb5383b4e714301efd4bd147c",
         "heading": "双向队列",
-        "previous": "blk-a585cbf9ab4bf2e8"
+        "previous": "blk-5bd24269eee44add"
+      },
+      {
+        "id": "blk-ddbdccb60a31ea54",
+        "fingerprint": "d246c305f429b0844e1c91aa17d26ff232b6e986932bf97e186981dec96754a2",
+        "heading": "双向队列",
+        "previous": "blk-337ab8a4454f9681"
       },
       {
         "id": "blk-158ff0b384ea24c6",
         "fingerprint": "4e44eef6d83c947d3276aa253bec0b43e8e06a9a346bb5e89efd63ecc5c8a80e",
         "heading": "双向队列",
-        "previous": "blk-337ab8a4454f9681"
+        "previous": "blk-ddbdccb60a31ea54"
       },
       {
         "id": "blk-1cc8fad2b1f863b4",
@@ -6842,8 +6890,8 @@
         "previous": "blk-f31e8b83d10eace8"
       },
       {
-        "id": "blk-23964b562036c3d6",
-        "fingerprint": "815be6f2a616dabf5050e797d4e7f573fa1e860529bd4dc599dba6e65252a359",
+        "id": "blk-499db53b5bd904ba",
+        "fingerprint": "713ae19aa956421d2b7e572654e89d6792d689219f608b75de685a4474551c59",
         "heading": "基于双向链表的实现",
         "previous": "blk-6d34a1bac37f7616"
       },
@@ -6851,7 +6899,7 @@
         "id": "blk-677a372feb56e04b",
         "fingerprint": "eaf859a82510541f5052bec1acc15cd052c5aaf0ddac34f576b829dbbcd22316",
         "heading": "基于双向链表的实现",
-        "previous": "blk-23964b562036c3d6"
+        "previous": "blk-499db53b5bd904ba"
       },
       {
         "id": "blk-79f508513201bc83",
@@ -6872,8 +6920,8 @@
         "previous": "blk-eb3dcd5cff842aa8"
       },
       {
-        "id": "blk-54cba028bb59de89",
-        "fingerprint": "815be6f2a616dabf5050e797d4e7f573fa1e860529bd4dc599dba6e65252a359",
+        "id": "blk-98fc0dda220755c7",
+        "fingerprint": "f8e2b638bfd3297417854505916b1044f636ba73ec1ba76b6e9de7591e389ab3",
         "heading": "基于数组的实现",
         "previous": "blk-f7477a76945797d7"
       },
@@ -6881,7 +6929,7 @@
         "id": "blk-ed5097f1b53735c3",
         "fingerprint": "5d0dd332ddf39a0d3630dfded8866f22f9f5ff1bf401d5bd600f3006b2cb0d54",
         "heading": "基于数组的实现",
-        "previous": "blk-54cba028bb59de89"
+        "previous": "blk-98fc0dda220755c7"
       },
       {
         "id": "blk-752d9e30e47c73be",
@@ -7211,16 +7259,28 @@
         "previous": ""
       },
       {
+        "id": "blk-84f7fa95927af1bc",
+        "fingerprint": "9aa68fa8c0730252061697161d9ed8bf2e29f9612e7ce413b9f46be69065591a",
+        "heading": "哈希表",
+        "previous": "blk-e012f20c14a13f45"
+      },
+      {
         "id": "blk-07b1c3d47e19b8cc",
         "fingerprint": "07250a3913a5424a7bddd58b3ce443fe47021ffb781eb87de6c5f2f1159c9a0e",
         "heading": "哈希表",
-        "previous": "blk-e012f20c14a13f45"
+        "previous": "blk-84f7fa95927af1bc"
       },
       {
         "id": "blk-b4247dc6ddd73795",
         "fingerprint": "4643fe4fd049047f2ba1abb5d9535558c8307625e2fce186d6d160017452a583",
         "heading": "哈希表",
         "previous": "blk-07b1c3d47e19b8cc"
+      },
+      {
+        "id": "blk-257c6997640b0750",
+        "fingerprint": "45e10bfe5c7e1cb2707b8c81c67a3e2e1290a2b7ae358fb319aea51e08bbcaba",
+        "heading": "哈希表",
+        "previous": "blk-b4247dc6ddd73795"
       }
     ],
     "aliases": {
@@ -7238,10 +7298,16 @@
         "previous": ""
       },
       {
+        "id": "blk-ac2c4a9acda2dbc2",
+        "fingerprint": "245bda53a0bab07aee506ab1fd262a27fbfceb0ac04fcd4080ccd4d7242baf20",
+        "heading": "哈希表",
+        "previous": "blk-e13ac1a4ebdefb6b"
+      },
+      {
         "id": "blk-e98df3335a68c426",
         "fingerprint": "57c203a76a7fa0d98022b88fa19ee967680b47e44f7e382003a4c1b744c8492c",
         "heading": "哈希表",
-        "previous": "blk-e13ac1a4ebdefb6b"
+        "previous": "blk-ac2c4a9acda2dbc2"
       },
       {
         "id": "blk-e3421e31d034286e",
@@ -7250,10 +7316,16 @@
         "previous": "blk-e98df3335a68c426"
       },
       {
+        "id": "blk-0553e81cbd985960",
+        "fingerprint": "1a49c309d252f56639a76ea0441aae67b2cab0b82d8dc5d826633bf794311371",
+        "heading": "哈希表",
+        "previous": "blk-e3421e31d034286e"
+      },
+      {
         "id": "blk-d0d72bbf90e48f41",
         "fingerprint": "d8f509de6473f135cdff05b71df1a632ab73ad0ebe8379bf29bbeb0bdcd4838b",
         "heading": "哈希表",
-        "previous": "blk-e3421e31d034286e"
+        "previous": "blk-0553e81cbd985960"
       },
       {
         "id": "blk-a315c24a40c85d1b",
@@ -7510,10 +7582,16 @@
         "previous": ""
       },
       {
+        "id": "blk-bc6d77ada848a23f",
+        "fingerprint": "7b33ea4169e3de149fc8c6a81c149b479eac04b5271e1e614b7c9dbc11a15e2b",
+        "heading": "哈希冲突",
+        "previous": "blk-19036657dfbbd419"
+      },
+      {
         "id": "blk-b44c74b2c1a0b9de",
         "fingerprint": "b7df4ab8115090ac243cb31cc26609a52209838ca34015810e6e51ff41d676f4",
         "heading": "哈希冲突",
-        "previous": "blk-19036657dfbbd419"
+        "previous": "blk-bc6d77ada848a23f"
       },
       {
         "id": "blk-fd0ede352610dea2",
@@ -7546,10 +7624,16 @@
         "previous": "blk-405e6b06b37ca622"
       },
       {
+        "id": "blk-e9ba56d447882993",
+        "fingerprint": "7631089cecba880ceb37efb93793dfe2cdc1d2507fbc56d701b7b0b72e2d23f7",
+        "heading": "链式地址",
+        "previous": "blk-c97c27c7503cd72a"
+      },
+      {
         "id": "blk-92eb5f24f0631e0b",
         "fingerprint": "bc80c205eaf3e341be326a0aa535e5ee70c46e78e1674124be2da92addfb757b",
         "heading": "链式地址",
-        "previous": "blk-c97c27c7503cd72a"
+        "previous": "blk-e9ba56d447882993"
       },
       {
         "id": "blk-a7572fbfc9c7219d",
@@ -8458,16 +8542,28 @@
         "previous": ""
       },
       {
+        "id": "blk-91943c7210141ff1",
+        "fingerprint": "420e9cffd49170c622c8e1fb33a626e2e67a422bebdb9aea54b4a86948f84dcf",
+        "heading": "树",
+        "previous": "blk-b281093db98c8d9c"
+      },
+      {
         "id": "blk-7a64fb122c7d3fb9",
         "fingerprint": "efff2702a56767c39857ed585229b67ffa4088fc12d79f3c5082de2a2c982b84",
         "heading": "树",
-        "previous": "blk-b281093db98c8d9c"
+        "previous": "blk-91943c7210141ff1"
       },
       {
         "id": "blk-321af004869c575f",
         "fingerprint": "0064d4a5e1d6a95c4b966565b630b7eb89d8382b68a08654fcd49038bbec893a",
         "heading": "树",
         "previous": "blk-7a64fb122c7d3fb9"
+      },
+      {
+        "id": "blk-5243b2cb26d7adf3",
+        "fingerprint": "ca92ad0272dc05a7357a687fb561253fc84522986afa2708a976de4bcace1c8d",
+        "heading": "树",
+        "previous": "blk-321af004869c575f"
       }
     ],
     "aliases": {
@@ -8792,10 +8888,16 @@
         "previous": ""
       },
       {
+        "id": "blk-e5f4836e192b7e86",
+        "fingerprint": "73f6e9e04053d57829949276ff649247ea6853d5f8e2ac72a3e65d40fbdc2c0e",
+        "heading": "二叉树遍历",
+        "previous": "blk-47b5f131816e1d35"
+      },
+      {
         "id": "blk-06ff817dbea13de2",
         "fingerprint": "0064ccd09929b42d78f9c5352a7476ffb772bbb4c1bda9c78f3b48704ea11179",
         "heading": "二叉树遍历",
-        "previous": "blk-47b5f131816e1d35"
+        "previous": "blk-e5f4836e192b7e86"
       },
       {
         "id": "blk-e8c19148b13b6ae9",
@@ -8822,13 +8924,19 @@
         "previous": "blk-0e6d17cfdce2dd8d"
       },
       {
-        "id": "blk-891d24378bc57f83",
-        "fingerprint": "9350428eac3bb9a9c3cee1f90525dc6e9d4de0d9d71fbc1061bd85e9d9c60e40",
+        "id": "blk-89e358f1a21e7668",
+        "fingerprint": "eca808de9314c484060726775ac59a6ab5ca22f33d3402d3e82d33aa3878201c",
         "heading": "层序遍历",
         "previous": "blk-f146ec14a0d225c1"
       },
       {
-        "id": "blk-93e3c5ddc26d0722",
+        "id": "blk-891d24378bc57f83",
+        "fingerprint": "9350428eac3bb9a9c3cee1f90525dc6e9d4de0d9d71fbc1061bd85e9d9c60e40",
+        "heading": "层序遍历",
+        "previous": "blk-89e358f1a21e7668"
+      },
+      {
+        "id": "blk-a915fecad1eb095b",
         "fingerprint": "250f1f9241088bbd75d4a39f1bfc95e320144b6c89c6010a9de384f513033512",
         "heading": "代码实现",
         "previous": "blk-891d24378bc57f83"
@@ -8837,7 +8945,7 @@
         "id": "blk-33fd27647ca22dab",
         "fingerprint": "89426d2c4d5cd66fc347b983c148d289c1d5389d1d6bb6d9412ea4e010d4f4a8",
         "heading": "代码实现",
-        "previous": "blk-93e3c5ddc26d0722"
+        "previous": "blk-a915fecad1eb095b"
       },
       {
         "id": "blk-fb8b73e956a41019",
@@ -8918,8 +9026,8 @@
         "previous": "blk-6a9c7843660c52a1"
       },
       {
-        "id": "blk-d63567a3d73f261d",
-        "fingerprint": "b4c0f4f6aefeedfff689ea66f0997c1178bc0488cdf25db49cdb4488e9df8179",
+        "id": "blk-c07e43affa21e1f5",
+        "fingerprint": "f94ea97dec526e730305fc8a7d5fd0ea0d60fda4bbf796fa58bca89f1ba87574",
         "heading": "代码实现",
         "previous": "blk-553982699a489114"
       },
@@ -8927,7 +9035,7 @@
         "id": "blk-69ae2aa94ca3418e",
         "fingerprint": "1d5da441231b84ab42b181f29539a3ea227e0b5348bb8bd97ab5d2a4cd2a27e9",
         "heading": "复杂度分析",
-        "previous": "blk-d63567a3d73f261d"
+        "previous": "blk-c07e43affa21e1f5"
       },
       {
         "id": "blk-b28f4b5c790d4666",
@@ -9209,8 +9317,8 @@
         "previous": "blk-6b92f06e8b32e226"
       },
       {
-        "id": "blk-7f774241aba97264",
-        "fingerprint": "576cbe56c21a3dad129f3c74646e0ca9958d1070a23461559ead4e34d8edb460",
+        "id": "blk-5f3570b44235dda8",
+        "fingerprint": "3bf5ff1d757b34e0d69e3aee78959427fdcb6ea0cd3b0901121f566c5116442a",
         "heading": "查找节点",
         "previous": "blk-9f2db0d06464cf0a"
       },
@@ -9218,7 +9326,7 @@
         "id": "blk-24baeaeeba444cf6",
         "fingerprint": "4bf39ffe78d5e2e7430193306d3ffdd25370ca1fc8eaa2cc450a3900b6e0a3af",
         "heading": "查找节点",
-        "previous": "blk-7f774241aba97264"
+        "previous": "blk-5f3570b44235dda8"
       },
       {
         "id": "blk-e1b67e30107d1c69",
@@ -9329,8 +9437,8 @@
         "previous": "blk-4216fa15b808de59"
       },
       {
-        "id": "blk-6a93f527382a2270",
-        "fingerprint": "576cbe56c21a3dad129f3c74646e0ca9958d1070a23461559ead4e34d8edb460",
+        "id": "blk-c3ee077023775e7b",
+        "fingerprint": "3de9cb3106f247cd03c482741152f53993c29c3702fad7e46ea4e84a9c131220",
         "heading": "删除节点",
         "previous": "blk-cf731522680c116a"
       },
@@ -9338,7 +9446,7 @@
         "id": "blk-17d692e9c0527cfc",
         "fingerprint": "a3bc6ca3699af391922778d260385a7b9630c8c0a7fc84f600c199130eb74344",
         "heading": "删除节点",
-        "previous": "blk-6a93f527382a2270"
+        "previous": "blk-c3ee077023775e7b"
       },
       {
         "id": "blk-4ac0c7e0a43e26b4",
@@ -9621,8 +9729,8 @@
         "previous": "blk-18ce350d5f7f3ea8"
       },
       {
-        "id": "blk-7912816a89f8640b",
-        "fingerprint": "576cbe56c21a3dad129f3c74646e0ca9958d1070a23461559ead4e34d8edb460",
+        "id": "blk-b47773f29d4ece01",
+        "fingerprint": "afad8a38a8f05779ec9e20dbbcea3641ecbda17a2e1b1279b33089369c73ef7c",
         "heading": "右旋",
         "previous": "blk-c417867bb2d65c32"
       },
@@ -9630,7 +9738,7 @@
         "id": "blk-77ea314463d7cf47",
         "fingerprint": "e58550033945061353a0edaa86d94dae1bbf6f42c6a5f64ebd634e6eb27c014e",
         "heading": "右旋",
-        "previous": "blk-7912816a89f8640b"
+        "previous": "blk-b47773f29d4ece01"
       },
       {
         "id": "blk-a8cd11c8232d828f",
@@ -10305,16 +10413,28 @@
         "previous": ""
       },
       {
+        "id": "blk-92ce745744a69bf4",
+        "fingerprint": "cd37c44b3bf1700a07c881249efba25db54acec359b86d70fcbb4bebaa080b56",
+        "heading": "堆",
+        "previous": "blk-f579daf1ecafd4bc"
+      },
+      {
         "id": "blk-dd0105e6130c5916",
         "fingerprint": "db74d68ddabc08f2a14239ca8763d0b385f1cff2a9c4d8bff74ed4d8081f7cf1",
         "heading": "堆",
-        "previous": "blk-f579daf1ecafd4bc"
+        "previous": "blk-92ce745744a69bf4"
       },
       {
         "id": "blk-f23d6b8f4e6c2ba5",
         "fingerprint": "333bc3a0604e1dc487b80f038d036c35cd05f8d2937a54dbc4d308de0a2a6f6c",
         "heading": "堆",
         "previous": "blk-dd0105e6130c5916"
+      },
+      {
+        "id": "blk-618c881cc4a83fe6",
+        "fingerprint": "9706fcbba5ecc7030b6c9f72efab2afce11a99eb9b5fac2eecbe898d6a25a3b0",
+        "heading": "堆",
+        "previous": "blk-f23d6b8f4e6c2ba5"
       }
     ],
     "aliases": {
@@ -10332,10 +10452,16 @@
         "previous": ""
       },
       {
+        "id": "blk-d22dc2aaa1c9cfe3",
+        "fingerprint": "eb9b127a39cd734653a00ad79d77ecb1a0fb5bd5dca70c39c7a17385e3faa442",
+        "heading": "堆",
+        "previous": "blk-9a1dc1a6d645fb85"
+      },
+      {
         "id": "blk-e4b2a1f2044ea208",
         "fingerprint": "c1c00f6c3224fd198ee03d892ee416b13703d6405affd02c5d353cf4ccc86bce",
         "heading": "堆",
-        "previous": "blk-9a1dc1a6d645fb85"
+        "previous": "blk-d22dc2aaa1c9cfe3"
       },
       {
         "id": "blk-78a6080f004e4559",
@@ -10344,10 +10470,16 @@
         "previous": "blk-e4b2a1f2044ea208"
       },
       {
+        "id": "blk-540d7c8bac3187f3",
+        "fingerprint": "6b03f5f7aa92b7b952938615b8055a417c871e944a7879aebf0bf394de233822",
+        "heading": "堆",
+        "previous": "blk-78a6080f004e4559"
+      },
+      {
         "id": "blk-45bb13e21087305b",
         "fingerprint": "01cd929d1acc943ee01e35c6e34f17518ea434efe81a7c678e5e1f3678499d0b",
         "heading": "堆",
-        "previous": "blk-78a6080f004e4559"
+        "previous": "blk-540d7c8bac3187f3"
       },
       {
         "id": "blk-0a37fd1cbdb99283",
@@ -10512,8 +10644,8 @@
         "previous": "blk-3c241ee1932c4df0"
       },
       {
-        "id": "blk-93c25897997c26c4",
-        "fingerprint": "5d46cf7dc57d8521acf88b3201a594d4f54669ec04890546bcc0526009918183",
+        "id": "blk-c109ff4b51fd686e",
+        "fingerprint": "48d7f59161c86e4c03440f1c10b974bd050bd24f4b92bc433d86f4fdd925403b",
         "heading": "元素入堆",
         "previous": "blk-be7ecb7969389f36"
       },
@@ -10521,7 +10653,7 @@
         "id": "blk-bb625646cb4dcc25",
         "fingerprint": "cf39dcaf4cd462628aeb67ef35177ff7558620500545b5accd37a23b4c843f9b",
         "heading": "元素入堆",
-        "previous": "blk-93c25897997c26c4"
+        "previous": "blk-c109ff4b51fd686e"
       },
       {
         "id": "blk-558c5ba253b10c72",
@@ -10554,8 +10686,8 @@
         "previous": "blk-519c74b76c3e5a21"
       },
       {
-        "id": "blk-94f6f3702eb06b85",
-        "fingerprint": "afaeb87b22f89f1389eecda64f518a877998fbd48bd2ef84640e0f4938f57d38",
+        "id": "blk-0f386bd6cafddec0",
+        "fingerprint": "08439a2964db410bbfc0d3f05174a26f98bb8650336d4564ecb9d2e7e124d8eb",
         "heading": "堆顶元素出堆",
         "previous": "blk-ae284d0ecd411650"
       },
@@ -10563,7 +10695,7 @@
         "id": "blk-7e0c758e9d08ca90",
         "fingerprint": "dd9f23791e25ff40883a5eb4668c0054f3425dfdf2bf0b25bb88dc40bde2752e",
         "heading": "堆顶元素出堆",
-        "previous": "blk-94f6f3702eb06b85"
+        "previous": "blk-0f386bd6cafddec0"
       },
       {
         "id": "blk-029de79d68286155",
@@ -10639,10 +10771,16 @@
         "previous": ""
       },
       {
+        "id": "blk-42bd72c1bf4a11cd",
+        "fingerprint": "bac97c39ca82732deda4bc294e97bf76ce835de2a59257bb144385f041016c9d",
+        "heading": "建堆操作",
+        "previous": "blk-7188abcbbef4c510"
+      },
+      {
         "id": "blk-a7d9e2cb3952daad",
         "fingerprint": "bdc5e0663d1cf4cbe89a408ef3564b632d89ec31ad2f259b33475386a0247c5d",
         "heading": "建堆操作",
-        "previous": "blk-7188abcbbef4c510"
+        "previous": "blk-42bd72c1bf4a11cd"
       },
       {
         "id": "blk-2f1357ec4efa0bb6",
@@ -10741,10 +10879,16 @@
         "previous": "blk-2d3040f90e1eb6ee"
       },
       {
+        "id": "blk-6227baeb1ffd4314",
+        "fingerprint": "8909b055f1de887dc947d3c0eed76875211532b584e00f8a6799bd971129b21a",
+        "heading": "复杂度分析",
+        "previous": "blk-3466c2ad68cf1487"
+      },
+      {
         "id": "blk-24ebbde4fbe19619",
         "fingerprint": "2a34980471b9f21b92924470ff2053fea96b5b1de86beccf121f97378da3c029",
         "heading": "复杂度分析",
-        "previous": "blk-3466c2ad68cf1487"
+        "previous": "blk-6227baeb1ffd4314"
       },
       {
         "id": "blk-15a89d1a8ed0f42c",
@@ -10925,8 +11069,8 @@
         "previous": "blk-d4a3860d90465154"
       },
       {
-        "id": "blk-9620f6e1f242b075",
-        "fingerprint": "5d46cf7dc57d8521acf88b3201a594d4f54669ec04890546bcc0526009918183",
+        "id": "blk-0af810ad34623e66",
+        "fingerprint": "390a68db6fd1d49bce57ec7361de6d45454fd1489e7ae3b9c9dbd792ea87f618",
         "heading": "方法三：堆",
         "previous": "blk-b05b5e2cdbb8b23b"
       },
@@ -10934,7 +11078,7 @@
         "id": "blk-64b17d258d9a611d",
         "fingerprint": "8de719e44e33b153c862b3b814cda54d746604378415ff0a028c3145141de4d0",
         "heading": "方法三：堆",
-        "previous": "blk-9620f6e1f242b075"
+        "previous": "blk-0af810ad34623e66"
       },
       {
         "id": "blk-181ce9630ac3e333",
@@ -11222,28 +11366,52 @@
         "previous": ""
       },
       {
-        "id": "blk-1aa5554e45fa0ac0",
-        "fingerprint": "f82a296b75b16692f2c7c74830dd694015b20ce3904120214a75605c17c60456",
+        "id": "blk-157a9f3fdf4d8540",
+        "fingerprint": "43de974a96018fa4ea57b9e3c706c53fae1dd31eb4728fdab6659a85a4b24432",
         "heading": "图",
         "previous": "blk-2d1f915ed706b5e4"
       },
       {
-        "id": "blk-c0df56719f622971",
-        "fingerprint": "fea7e1b81f9dd0c9ff2e8e498ca0ca6acf4f4a49c94e0dfeb48bcb08f6792d9a",
+        "id": "blk-6bb9e5a52661aaf0",
+        "fingerprint": "a10a57ce124e276b86b2e38e431f1171656eddfdf1f536993de78f1caf8eb0df",
         "heading": "图",
-        "previous": "blk-1aa5554e45fa0ac0"
+        "previous": "blk-157a9f3fdf4d8540"
       },
       {
-        "id": "blk-510f8a3982e2d386",
-        "fingerprint": "eeac2704e3efb7b6760de786a88b29375ec882320046bb81f2b541bed41e2fa8",
+        "id": "blk-5a938ab25d38885d",
+        "fingerprint": "3d9e0a1424bc177f23b02d0763d77e8a1706ba268f0847344c79e285a97b2a7a",
         "heading": "图",
-        "previous": "blk-c0df56719f622971"
+        "previous": "blk-6bb9e5a52661aaf0"
+      },
+      {
+        "id": "blk-fac19c3bdeefb0a8",
+        "fingerprint": "b744bcfe93c823cb5e2a0ff69dcfe1bedb59a42cc9270de51da3d171ea1a5102",
+        "heading": "图",
+        "previous": "blk-5a938ab25d38885d"
+      },
+      {
+        "id": "blk-4adf4c80f1ff854b",
+        "fingerprint": "8c88f38601ce0e5b471dd04362a9f12c18829dd56586fc2518f0d8aba37f11dc",
+        "heading": "图",
+        "previous": "blk-fac19c3bdeefb0a8"
+      },
+      {
+        "id": "blk-eddacbbc4deba0ab",
+        "fingerprint": "9592ad8e1e64b7b6a7e737769158d0010ad6ba4bf40dbaf1077cdb98fa544c49",
+        "heading": "图",
+        "previous": "blk-4adf4c80f1ff854b"
+      },
+      {
+        "id": "blk-4e2c2e372027f629",
+        "fingerprint": "167e1b4bebd3de1204f9c420efe68fca705b77a9c594ad74d71b12563ade6f05",
+        "heading": "图",
+        "previous": "blk-eddacbbc4deba0ab"
       },
       {
         "id": "blk-c08a6c7116eeaeb8",
         "fingerprint": "f6b3169e2027230b9f4b20b47f5b62bcce13469f1500cd8382c61bda2df981a8",
         "heading": "图",
-        "previous": "blk-510f8a3982e2d386"
+        "previous": "blk-4e2c2e372027f629"
       },
       {
         "id": "blk-1a3184406eb56589",
@@ -11252,22 +11420,22 @@
         "previous": "blk-c08a6c7116eeaeb8"
       },
       {
-        "id": "blk-a6743b64b538ed6b",
-        "fingerprint": "f734d908f7e8e8d58e8f1d3a1a453b6dd31cc7d48aea46c44f1ae4371b68fd8a",
+        "id": "blk-c8342a34f8e630bd",
+        "fingerprint": "4f83e037e0879417d2dac56f101fec536aefc78de56301b35e60e1f896a8ea4f",
         "heading": "图的常见类型与术语",
         "previous": "blk-1a3184406eb56589"
       },
       {
-        "id": "blk-530ec6ec33eef86b",
-        "fingerprint": "f17d74f00e257a1a6096aece302a78200387c397e69540a3b7a44c2a53e17769",
+        "id": "blk-a2c5c01d2df5c74b",
+        "fingerprint": "ece2b0d416d79cc1fcd0af2e7a9bab5dccd45d106df3bde8f9fb27e9d4316905",
         "heading": "图的常见类型与术语",
-        "previous": "blk-a6743b64b538ed6b"
+        "previous": "blk-c8342a34f8e630bd"
       },
       {
         "id": "blk-1ce2e5c37e51ed1d",
         "fingerprint": "4e12e1febbda2e1931902ff7d85c35cf296fccebc74521a9567bd79c2e3e285f",
         "heading": "图的常见类型与术语",
-        "previous": "blk-530ec6ec33eef86b"
+        "previous": "blk-a2c5c01d2df5c74b"
       },
       {
         "id": "blk-96073dfeac11573a",
@@ -11276,8 +11444,8 @@
         "previous": "blk-1ce2e5c37e51ed1d"
       },
       {
-        "id": "blk-406df4e54ecf2677",
-        "fingerprint": "bc9832a94b45bdf8834fe116426f67ccf9b963fb4976f3c87fcc86067347ffdc",
+        "id": "blk-8b744dd6269cb1e9",
+        "fingerprint": "b731f97e0e89b00af4fcbdbb3d56a1705e472ca493b29cdeeb959000f1b400aa",
         "heading": "图的常见类型与术语",
         "previous": "blk-96073dfeac11573a"
       },
@@ -11285,7 +11453,7 @@
         "id": "blk-29c1ae665b5b9a1f",
         "fingerprint": "23d997b7ac34a5c85035cf36ffb79e74c70724ef2ccecc61798247b109f2ac29",
         "heading": "图的常见类型与术语",
-        "previous": "blk-406df4e54ecf2677"
+        "previous": "blk-8b744dd6269cb1e9"
       },
       {
         "id": "blk-584ee25c47dbd505",
@@ -11306,8 +11474,8 @@
         "previous": "blk-fcc687192b691c22"
       },
       {
-        "id": "blk-c05c28871e61dfa5",
-        "fingerprint": "1632aba50a22549d733c65b7c0274daa085c3ad1ad9e94c063d336de6edddcd2",
+        "id": "blk-587bab4a3b713e2b",
+        "fingerprint": "81bd65bb5d1397eebcce9438549619c8fec529c312fe895b2e2aedd0b6d9a3fd",
         "heading": "图的常见类型与术语",
         "previous": "blk-2d3c10593f4f1973"
       },
@@ -11315,11 +11483,11 @@
         "id": "blk-2927a1f1a8c58816",
         "fingerprint": "7116301fc121c2c783ddcd9e6941b0d535c3249dde85dd9ce57a7b7909642b7c",
         "heading": "图的表示",
-        "previous": "blk-c05c28871e61dfa5"
+        "previous": "blk-587bab4a3b713e2b"
       },
       {
-        "id": "blk-47bff42ed7bb9d21",
-        "fingerprint": "1c2b5a2380d955bc30bb63601cf32ea4d538ef198ddda4007fdd8b26fa9f1775",
+        "id": "blk-8805fd5b3a3d3afa",
+        "fingerprint": "f46d9c4d7bb1db0657fcc74f1cd1ed2c4280c1cac7eb586a8e2c9e4c580bf56f",
         "heading": "图的表示",
         "previous": "blk-2927a1f1a8c58816"
       },
@@ -11327,25 +11495,25 @@
         "id": "blk-14dbc6db70758b68",
         "fingerprint": "d51a1dddc15b1f1f4c2be90162ee43001da2b9dd8db00c8c4f5a9f5f7e80dbe2",
         "heading": "邻接矩阵",
-        "previous": "blk-47bff42ed7bb9d21"
+        "previous": "blk-8805fd5b3a3d3afa"
       },
       {
-        "id": "blk-387b0b056489ca45",
-        "fingerprint": "d0f7c492cf6570605f9ee1f719cc40cc08ede4fd40684475b693a34ce93d96ef",
+        "id": "blk-47b40c8143a74ad5",
+        "fingerprint": "aeafb438c880642e3eb1aa4e5075885c7727ea60a83daa95a93734c270931266",
         "heading": "邻接矩阵",
         "previous": "blk-14dbc6db70758b68"
       },
       {
-        "id": "blk-b7ecdd10fef3c52d",
-        "fingerprint": "3f012491f8324c1bfbb01034d790a65ee94d8fb13a7350dfd36c6a608d78111f",
+        "id": "blk-1c726522d245beba",
+        "fingerprint": "0d23457e6f0b7e988a7dafb7796c7c2bbd4637b6891f7e66d1e09d5d685c7726",
         "heading": "邻接矩阵",
-        "previous": "blk-387b0b056489ca45"
+        "previous": "blk-47b40c8143a74ad5"
       },
       {
         "id": "blk-4dd36a3538633de5",
         "fingerprint": "f7ab4d73e5476316a47ca1f53b4e6b0b14c3600695341d4540948b434e637060",
         "heading": "邻接矩阵",
-        "previous": "blk-b7ecdd10fef3c52d"
+        "previous": "blk-1c726522d245beba"
       },
       {
         "id": "blk-10328f754995b2fe",
@@ -11354,26 +11522,26 @@
         "previous": "blk-4dd36a3538633de5"
       },
       {
-        "id": "blk-b83840dd1ccc2be1",
-        "fingerprint": "1ca7892d17b0a7e3ab3d4e200d937e3cd51ef9bf14b143ca909c2ae23c9b36ed",
+        "id": "blk-c2ea5051b08eba2b",
+        "fingerprint": "f6a33a876afe949a89b8b19fc0a53aaa8d74121663c620d1f4e7069a3c893c00",
         "heading": "邻接矩阵",
         "previous": "blk-10328f754995b2fe"
       },
       {
-        "id": "blk-365044c6ed5f9557",
-        "fingerprint": "88bce0e9b7e207aeaae84d85985059819d84e7b6a152437dfbf5f5c4a84475b4",
+        "id": "blk-22f235636e231722",
+        "fingerprint": "9ef22f976bdcbd4a4f9ed2d17abd11c0e33f842cd8d98c48b42f7310a296ad8b",
         "heading": "邻接矩阵",
-        "previous": "blk-b83840dd1ccc2be1"
+        "previous": "blk-c2ea5051b08eba2b"
       },
       {
         "id": "blk-af07f9895c1918e3",
         "fingerprint": "24218be5a0ee18f876a623cd6482d904e147103cf2fca0453345009b034a660b",
         "heading": "邻接表",
-        "previous": "blk-365044c6ed5f9557"
+        "previous": "blk-22f235636e231722"
       },
       {
-        "id": "blk-292c4f5b8aac7f88",
-        "fingerprint": "028a5c7642431ad5b083768d45d04992e4a89457064784a204533c6c918edd72",
+        "id": "blk-33066cbcb76cb06b",
+        "fingerprint": "05d4ae6572632ea26e0ed63e0109e1eadad43bef01e6bdf0ac38367f276cf3c2",
         "heading": "邻接表",
         "previous": "blk-af07f9895c1918e3"
       },
@@ -11381,43 +11549,43 @@
         "id": "blk-22be3c8c501b542c",
         "fingerprint": "3a6427ecf6bed59492e1c2e55539c81479d8716ba86648ec676ca1e18d4784e8",
         "heading": "邻接表",
-        "previous": "blk-292c4f5b8aac7f88"
+        "previous": "blk-33066cbcb76cb06b"
       },
       {
-        "id": "blk-7bfaf0021a8f4d10",
-        "fingerprint": "d53ac7c52265f68998e3654741b9943b31f0e36e9c5d52029d3b6f9bb5a004ef",
+        "id": "blk-b8cf0093d4c29db3",
+        "fingerprint": "002a917bd8649cade9dad631ffba9eb7146b54252371a5288a05c0ec9e16f9c7",
         "heading": "邻接表",
         "previous": "blk-22be3c8c501b542c"
       },
       {
-        "id": "blk-114e1bb11e7184c7",
-        "fingerprint": "d28e758b5d7c6519d5f22221c56580bfe5f7c68d52f9e752139654306155f898",
+        "id": "blk-deb80dee6123cd5e",
+        "fingerprint": "9131e4070e02df6e2c48dac8741a44244c4f6f5e06c56ef4666e5fc1cfd04969",
         "heading": "邻接表",
-        "previous": "blk-7bfaf0021a8f4d10"
+        "previous": "blk-b8cf0093d4c29db3"
       },
       {
         "id": "blk-8c978b9dec716346",
         "fingerprint": "b4e2a40e8e5cd70ac9aeccf3d08babc58fcd82253738d85eb0b0578935711722",
         "heading": "图的常见应用",
-        "previous": "blk-114e1bb11e7184c7"
+        "previous": "blk-deb80dee6123cd5e"
       },
       {
-        "id": "blk-378755593d3a8ad1",
-        "fingerprint": "de8d91486696e506bfdac3d61b287742bdd92eda1abf33b28b6dcee909aa43ec",
+        "id": "blk-e8682134e9f8745b",
+        "fingerprint": "f69f0a5eab43322714edb41c2016299f78439a7993ba3a12278e1cf08de17981",
         "heading": "图的常见应用",
         "previous": "blk-8c978b9dec716346"
       },
       {
-        "id": "blk-f99bc4946e67c22e",
-        "fingerprint": "8bb80532e1ab46a109cce9f0e553043ade36066020c92a5311b6360c7ab94b75",
+        "id": "blk-10633d3592d0bc46",
+        "fingerprint": "97d249bad79e2d6870319647d5603c3bd5c74d90609857326735f9e243fe55af",
         "heading": "图的常见应用",
-        "previous": "blk-378755593d3a8ad1"
+        "previous": "blk-e8682134e9f8745b"
       },
       {
-        "id": "blk-f30d8061ad392b4b",
-        "fingerprint": "268a29cb3dea830ad011068431f22fcd6ed6bfde0913daad6e0d88ab86fd4e1f",
+        "id": "blk-c8dc75871e62f3a2",
+        "fingerprint": "2b6d52e89a2795f84ca56eef1d321646dd2e29b5ef48674c810ee90c89e51bb6",
         "heading": "图的常见应用",
-        "previous": "blk-f99bc4946e67c22e"
+        "previous": "blk-10633d3592d0bc46"
       }
     ],
     "aliases": {
@@ -11460,46 +11628,46 @@
   "chapter_graph/graph_operations": {
     "blocks": [
       {
-        "id": "blk-8ce634e97cd5e60e",
-        "fingerprint": "58047ae386fe648ee1510d46ea9e8c67cead0508aaa2668967f79f6b2187a1bf",
-        "heading": "图的基础操作",
+        "id": "blk-91754ff5ce910124",
+        "fingerprint": "8a0a6ba90eff93c37cc7120663d4ea6960482ace15d16c9b7058f9398f15fca3",
+        "heading": "图基础操作",
         "previous": ""
       },
       {
-        "id": "blk-1a13f95d70bb8c44",
-        "fingerprint": "e06419c1bfaca267c8ccaeee248fe89d939fd874380428406a0f835e33bb60ea",
-        "heading": "图的基础操作",
-        "previous": "blk-8ce634e97cd5e60e"
+        "id": "blk-99c5a4c6456721dd",
+        "fingerprint": "c4d316f775cc0e3666f07033336557962cb2c29f4412791f141534e737894d39",
+        "heading": "图基础操作",
+        "previous": "blk-91754ff5ce910124"
       },
       {
         "id": "blk-71b8f6b007e24d95",
         "fingerprint": "10626ac31ba3317d4dd445b1a9103fb7db08c1161a2923e9a30026365c8967c5",
         "heading": "基于邻接矩阵的实现",
-        "previous": "blk-1a13f95d70bb8c44"
+        "previous": "blk-99c5a4c6456721dd"
       },
       {
-        "id": "blk-ccb38d7b2f54f048",
-        "fingerprint": "d9970be0b2198a13e9649523bfa38bbfa35a5404ca147d02e86d95462bbe8199",
+        "id": "blk-24eb105321e9b84b",
+        "fingerprint": "212dcff06f129c9a9a10e3a820e62df5e37f60ad4798c1076bb34823033a139d",
         "heading": "基于邻接矩阵的实现",
         "previous": "blk-71b8f6b007e24d95"
       },
       {
-        "id": "blk-46fe18a9b500c8b3",
-        "fingerprint": "873adea33a1784da8bca77a0f12ad103ae89f47527d115b4e45a6736b650f96c",
+        "id": "blk-2297bef54fae96ab",
+        "fingerprint": "63bd85beb4009bfa0904f2376fa2a06702e4357bb5c6a5ce206aefe21274e6e1",
         "heading": "基于邻接矩阵的实现",
-        "previous": "blk-ccb38d7b2f54f048"
+        "previous": "blk-24eb105321e9b84b"
       },
       {
-        "id": "blk-97f41795562365a4",
-        "fingerprint": "815be6f2a616dabf5050e797d4e7f573fa1e860529bd4dc599dba6e65252a359",
+        "id": "blk-0f806c9544f1aaf8",
+        "fingerprint": "3c995f37e19e4510d69deba2cf5f7cdf1fd75cf5f927fe55a09983e8d2533b7a",
         "heading": "基于邻接矩阵的实现",
-        "previous": "blk-46fe18a9b500c8b3"
+        "previous": "blk-2297bef54fae96ab"
       },
       {
         "id": "blk-a8c8274e17be2e7b",
         "fingerprint": "1fa3fce3ed0a942770d260a0091678b432f8e40386732c0f705c6f584b67c2bb",
         "heading": "基于邻接矩阵的实现",
-        "previous": "blk-97f41795562365a4"
+        "previous": "blk-0f806c9544f1aaf8"
       },
       {
         "id": "blk-425c40c000baec1b",
@@ -11514,46 +11682,46 @@
         "previous": "blk-425c40c000baec1b"
       },
       {
-        "id": "blk-9b30beeac9b5340e",
-        "fingerprint": "cecb1c1fac545fa524be0b831d9836c63f79072909bc2df7cace278172484500",
+        "id": "blk-cb5c68456853457c",
+        "fingerprint": "584f9bc13d9727910cf64106707bac3c12e8cec218656ce40f630c342aa90587",
         "heading": "基于邻接表的实现",
         "previous": "blk-06ac7089f482e497"
       },
       {
-        "id": "blk-3aa6104e6d69ac92",
-        "fingerprint": "59a5aad2d9779818a5355aa58cc5453e6cecf87aca06c4a081473963d2e92808",
+        "id": "blk-13a1bcc5713d975d",
+        "fingerprint": "55f425c250ac65275e24d23f8edd7f3f33ec9aacc8e90844ef768b460f8d4949",
         "heading": "基于邻接表的实现",
-        "previous": "blk-9b30beeac9b5340e"
+        "previous": "blk-cb5c68456853457c"
       },
       {
-        "id": "blk-d5919fc6ce3df687",
-        "fingerprint": "815be6f2a616dabf5050e797d4e7f573fa1e860529bd4dc599dba6e65252a359",
+        "id": "blk-e0f967c1ee98a3a9",
+        "fingerprint": "7d6b9aba70b1231a897db69e7b80993cadab2b3e087c87d81f15e8f536c903a2",
         "heading": "基于邻接表的实现",
-        "previous": "blk-3aa6104e6d69ac92"
+        "previous": "blk-13a1bcc5713d975d"
       },
       {
         "id": "blk-cdb7dd77fba1e021",
         "fingerprint": "ae6c1df5ba7ac45cc98db1bce033405442b0706bcb1ae2ca441f19a1fb927112",
         "heading": "基于邻接表的实现",
-        "previous": "blk-d5919fc6ce3df687"
+        "previous": "blk-e0f967c1ee98a3a9"
       },
       {
-        "id": "blk-f1719f8dc535e155",
-        "fingerprint": "a1e6668ee54e45c1669461e3a7aa883fd2a929a396bd116893eb336ca31dfd1b",
+        "id": "blk-e6b84bdd9ace6eb5",
+        "fingerprint": "cd1a22909919da6f4b3a93f6e88bcb9fb22c99b8d4eebc79f6aa4cd05b8fe81c",
         "heading": "基于邻接表的实现",
         "previous": "blk-cdb7dd77fba1e021"
       },
       {
-        "id": "blk-90403f039e5af66a",
-        "fingerprint": "1cc19ae77aaf585fc5c5da46ab20e28fe328341d9b602cdd6f688db558ffcaa5",
+        "id": "blk-41eb60775d0e2bb0",
+        "fingerprint": "f45b711f4ed92c5343d03f4409c51799236616969a7274870ac5a2f998d8b39a",
         "heading": "基于邻接表的实现",
-        "previous": "blk-f1719f8dc535e155"
+        "previous": "blk-e6b84bdd9ace6eb5"
       },
       {
         "id": "blk-374d48335fcc8e97",
         "fingerprint": "a132960118c7a97c55fb5f3792869b046751b94724e25b0289ac0bb1cb48fb35",
         "heading": "基于邻接表的实现",
-        "previous": "blk-90403f039e5af66a"
+        "previous": "blk-41eb60775d0e2bb0"
       },
       {
         "id": "blk-b1d8870c33aa6ea3",
@@ -11562,28 +11730,28 @@
         "previous": "blk-374d48335fcc8e97"
       },
       {
-        "id": "blk-3b1ba9f25e1ceaa3",
-        "fingerprint": "4af524605758aa69211c9b9ce9b265f511b2e98749f66477ac185d2faf7109d7",
+        "id": "blk-12544aeed437de71",
+        "fingerprint": "bb23950d3a5c27004401e9ed5c71aee3d954c4ca9d3618e2820a6a61ff3f6dab",
         "heading": "效率对比",
         "previous": "blk-b1d8870c33aa6ea3"
       },
       {
-        "id": "blk-0b425813ced6fa62",
-        "fingerprint": "339b6826ac7f35decfd790341fd3aca6a46884808d5df6f335a650244053902a",
+        "id": "blk-1461c9f0ab4d4a7d",
+        "fingerprint": "1d89321311b48b786b0ffaf909e558c41ba7596fb4e59d97d070cddf49396f88",
         "heading": "效率对比",
-        "previous": "blk-3b1ba9f25e1ceaa3"
+        "previous": "blk-12544aeed437de71"
       },
       {
-        "id": "blk-844440f28c2c93cb",
-        "fingerprint": "8fe1fbb5bb7d5c6ddd3d6602c11966a57eda97379dbc0be0cd3ad0b7dd757fd0",
+        "id": "blk-ade0f9ab8aac143b",
+        "fingerprint": "bda24340910e50fbde32524af1e4845be8102e9f8feca7099b3a878f5384029e",
         "heading": "效率对比",
-        "previous": "blk-0b425813ced6fa62"
+        "previous": "blk-1461c9f0ab4d4a7d"
       },
       {
         "id": "blk-ff50f774703a3bed",
         "fingerprint": "bad146646c42ba66c5143fa903ddc239756f0a13f0b2488b409a804a055f8038",
         "heading": "效率对比",
-        "previous": "blk-844440f28c2c93cb"
+        "previous": "blk-ade0f9ab8aac143b"
       }
     ],
     "aliases": {
@@ -11619,8 +11787,8 @@
         "previous": ""
       },
       {
-        "id": "blk-1c570b89fce3eb64",
-        "fingerprint": "7fd4fd1d00fe3a344d6bb30b943ec05e05126f2c120ba60ebe2b4ce7e8e0ed28",
+        "id": "blk-c021c28cf7edf29b",
+        "fingerprint": "060a568e59061e06388737b1a0328e7e9c28a52b6b6c2b1cf65941a634554173",
         "heading": "图的遍历",
         "previous": "blk-71678fc1a04eb366"
       },
@@ -11628,7 +11796,7 @@
         "id": "blk-2f9631545edd6954",
         "fingerprint": "024d925498764f0d5550aa0c6d0f0141a008699b6acc5b7e68ac4d10c766accd",
         "heading": "图的遍历",
-        "previous": "blk-1c570b89fce3eb64"
+        "previous": "blk-c021c28cf7edf29b"
       },
       {
         "id": "blk-f864cd9ba0a1aa0e",
@@ -11637,8 +11805,8 @@
         "previous": "blk-2f9631545edd6954"
       },
       {
-        "id": "blk-6aa4accb86a1e812",
-        "fingerprint": "c79262d6627d1ec8694f5c6b8bb81934768863d32a6b532f057844ccbbc7e361",
+        "id": "blk-7b83cb64ce0bdd1d",
+        "fingerprint": "98f532011101f4705beefdf6a889e86a8a4ab6c464d38f9243c0e5ba214c760c",
         "heading": "广度优先遍历",
         "previous": "blk-f864cd9ba0a1aa0e"
       },
@@ -11646,7 +11814,7 @@
         "id": "blk-15b0ed3e6ee817ca",
         "fingerprint": "e922ccd00682beb729342923a6265cbab56980727c8ca4b54826b4ed0fa7a8b1",
         "heading": "广度优先遍历",
-        "previous": "blk-6aa4accb86a1e812"
+        "previous": "blk-7b83cb64ce0bdd1d"
       },
       {
         "id": "blk-60b506403f36911b",
@@ -11655,70 +11823,82 @@
         "previous": "blk-15b0ed3e6ee817ca"
       },
       {
-        "id": "blk-722d2bc7743b42f9",
-        "fingerprint": "b9acea3f3bdfbcab51f287ea89f809536820918ab9fd7096964e6aba3d4244e7",
+        "id": "blk-13e33e7bc67f5e15",
+        "fingerprint": "1b81b21387dbfcc6f7674cb6d2ca3b2208ac2dbac248f6e15727d2a897b54edb",
         "heading": "算法实现",
         "previous": "blk-60b506403f36911b"
       },
       {
-        "id": "blk-f2a1117d9c7cb6d4",
-        "fingerprint": "9c0095b095debde9f595a174be9dd75088af4c38d8d3755b0d2a1ac983e6d33f",
+        "id": "blk-ae3e31db60bdd228",
+        "fingerprint": "a22ce63f9f7cf826de25fcbd7b6cb7c05a452be10cac11a00ad368aa813c6aa5",
         "heading": "算法实现",
-        "previous": "blk-722d2bc7743b42f9"
+        "previous": "blk-13e33e7bc67f5e15"
       },
       {
-        "id": "blk-eaf3eccee66f2619",
-        "fingerprint": "5d9d834e90fc592240d7de73df3489856b1cb57971efe6fc0d6a3b4f6d9aa8d2",
+        "id": "blk-1b06eb8c1d6836ca",
+        "fingerprint": "9a703bc641a7552d6ae778a5ac9208833aee8a6ab97ea92ba1168eb675119ff0",
         "heading": "算法实现",
-        "previous": "blk-f2a1117d9c7cb6d4"
+        "previous": "blk-ae3e31db60bdd228"
       },
       {
-        "id": "blk-665e1c709dcf4e82",
-        "fingerprint": "efb063e53cce6c4e146f129f3efdddda07777c4a466cd20d2497431500f94dee",
+        "id": "blk-945aa3e033cc516c",
+        "fingerprint": "58c04ce813cfcd11eb8196b3b6bdcabda9517b3349d21b08f693477ad6a812aa",
         "heading": "算法实现",
-        "previous": "blk-eaf3eccee66f2619"
+        "previous": "blk-1b06eb8c1d6836ca"
       },
       {
-        "id": "blk-a002934ee46798ad",
+        "id": "blk-9e8cb0555df0abcc",
+        "fingerprint": "4d4d7081d78811dcfc040ab9770fe7b3aa45417ffb569a967510e1c67ea2d326",
+        "heading": "算法实现",
+        "previous": "blk-945aa3e033cc516c"
+      },
+      {
+        "id": "blk-e818832e0422868f",
         "fingerprint": "ba3dd2722233d91459bb06686356d980232cbd7a7cb6330718b8fecf24611a81",
         "heading": "算法实现",
-        "previous": "blk-665e1c709dcf4e82"
+        "previous": "blk-9e8cb0555df0abcc"
       },
       {
-        "id": "blk-cec7db0aabeb3af3",
-        "fingerprint": "cca95d2443de5822c3ccd8fbfba373381fe8b5bba0b0c76cc88e3895795c2fb2",
+        "id": "blk-6de6fea3d984375f",
+        "fingerprint": "4ffbc93bd0bda73b466b58069d37fb7db66f3b2ea5133559de7c03aa40b8e67a",
         "heading": "算法实现",
-        "previous": "blk-a002934ee46798ad"
+        "previous": "blk-e818832e0422868f"
       },
       {
-        "id": "blk-a619f8263e57d0e3",
-        "fingerprint": "b4c0f4f6aefeedfff689ea66f0997c1178bc0488cdf25db49cdb4488e9df8179",
+        "id": "blk-ef70d1bc808c3261",
+        "fingerprint": "203481687026bd13fa0bef5764b816f47a9d912eeb5bcfc02ff11420f52f20da",
         "heading": "算法实现",
-        "previous": "blk-cec7db0aabeb3af3"
+        "previous": "blk-6de6fea3d984375f"
       },
       {
-        "id": "blk-3f80b585809eae0c",
-        "fingerprint": "62bdaaac61c0910c05728f9b3cbd9da629578681105d6cfa1acc33fa16dfdeee",
+        "id": "blk-afc878470c8d80df",
+        "fingerprint": "47c52c2d3528b30fca80ddb5e55cec63f3c4c10af0a5c77934ec66e869401b6c",
         "heading": "算法实现",
-        "previous": "blk-a619f8263e57d0e3"
+        "previous": "blk-ef70d1bc808c3261"
       },
       {
-        "id": "blk-da8288ecfe06fe61",
+        "id": "blk-dd4d05fd4b7e0953",
+        "fingerprint": "70c96d7380ba6dc1679a5f80e8a3a961bfba3f11a20ffd9e8e087ef92362494b",
+        "heading": "算法实现",
+        "previous": "blk-afc878470c8d80df"
+      },
+      {
+        "id": "blk-54c30b0c69c569eb",
         "fingerprint": "1d5da441231b84ab42b181f29539a3ea227e0b5348bb8bd97ab5d2a4cd2a27e9",
         "heading": "复杂度分析",
-        "previous": "blk-3f80b585809eae0c"
+        "previous": "blk-dd4d05fd4b7e0953"
       },
       {
-        "id": "blk-aa96220c15c40c28",
-        "fingerprint": "8e9059e7ad5da170e48a2b65b6142472fd8effab3d8044c15b8d06db31f6225f",
+        "id": "blk-b9c13fb8c629ccf0",
+        "fingerprint": "fe55a72e5604e6addeab370ab1ea6dfc44bb35c63b8c5f9601af01b271bd3c31",
         "heading": "复杂度分析",
-        "previous": "blk-da8288ecfe06fe61"
+        "previous": "blk-54c30b0c69c569eb"
       },
       {
         "id": "blk-81301ca163256f06",
         "fingerprint": "f659027339bb0635b17060a59ae824d939e79b53a8be651497a914c3e69d9879",
         "heading": "复杂度分析",
-        "previous": "blk-aa96220c15c40c28"
+        "previous": "blk-b9c13fb8c629ccf0"
       },
       {
         "id": "blk-2f6893e67364e608",
@@ -11727,8 +11907,8 @@
         "previous": "blk-81301ca163256f06"
       },
       {
-        "id": "blk-78ae959fd12e7081",
-        "fingerprint": "c97c3ef778e0f305bc10d745ff81fabeb70bd6151dd20894c8bc5d2e57143f88",
+        "id": "blk-85a0a64b32a2b398",
+        "fingerprint": "2acec2128ff5c7693fa3f871c565865d9275f4112b3e7492607bd0861b2cb9e3",
         "heading": "深度优先遍历",
         "previous": "blk-2f6893e67364e608"
       },
@@ -11736,7 +11916,7 @@
         "id": "blk-1839a01a87077a0b",
         "fingerprint": "dcd9c49715a51ac9559fc4cf1a5d900582a7a6af94d573b1060fb6815077c569",
         "heading": "深度优先遍历",
-        "previous": "blk-78ae959fd12e7081"
+        "previous": "blk-85a0a64b32a2b398"
       },
       {
         "id": "blk-59c1de6512ccf3cc",
@@ -11745,64 +11925,76 @@
         "previous": "blk-1839a01a87077a0b"
       },
       {
-        "id": "blk-f8142b384bb38dde",
-        "fingerprint": "8d346f16d3f7a405c019ce23c5a51512b745f743531c360b0de75a6631c1f5fc",
+        "id": "blk-9907d0eda46793be",
+        "fingerprint": "97dc2a7d9146758537c821422a4443618e910c4bd7860af7e115553a591777b0",
         "heading": "算法实现",
         "previous": "blk-59c1de6512ccf3cc"
       },
       {
-        "id": "blk-448407ac8fe25fd1",
+        "id": "blk-e39bb95e471cadb9",
         "fingerprint": "b3bfb945df6b4c7e5aa68b1213fcfc99a86ae7aef143d6a0cde242419df4cb7b",
         "heading": "算法实现",
-        "previous": "blk-f8142b384bb38dde"
+        "previous": "blk-9907d0eda46793be"
       },
       {
-        "id": "blk-e14cd7b3f23bd8c6",
-        "fingerprint": "0b135c23f7d65b6d53f337e9646dfab087016567449aaa23346d2400b861133e",
+        "id": "blk-e2c0234aa6473823",
+        "fingerprint": "3a740c58413748e5ac07c90c95b326753e322268bf6c7973c909bce72fdc2371",
         "heading": "算法实现",
-        "previous": "blk-448407ac8fe25fd1"
+        "previous": "blk-e39bb95e471cadb9"
       },
       {
-        "id": "blk-1a5b6e20f238e23b",
-        "fingerprint": "f0446ce208bef1dd1f5d6a952595918dfd67f90060e8e2d87f25025bfa8218d4",
+        "id": "blk-3891addea9f08340",
+        "fingerprint": "8d6c289409f1bee8be5ac6cad7a69a13ef9bf0e5ff075268a4cb4536e0ff5feb",
         "heading": "算法实现",
-        "previous": "blk-e14cd7b3f23bd8c6"
+        "previous": "blk-e2c0234aa6473823"
       },
       {
-        "id": "blk-977d9bf5725ffd83",
-        "fingerprint": "8ab2ec36b48c7ef83012c9031c1d0a269e1966775583be50490b84e1757187ad",
+        "id": "blk-729d788d40d8dc6c",
+        "fingerprint": "fe183273812a33a30320e6e4c3ab05214786c5a2a9e99dbc77a387d17fc98690",
         "heading": "算法实现",
-        "previous": "blk-1a5b6e20f238e23b"
+        "previous": "blk-3891addea9f08340"
       },
       {
-        "id": "blk-85efa7aae3d29d81",
-        "fingerprint": "b4c0f4f6aefeedfff689ea66f0997c1178bc0488cdf25db49cdb4488e9df8179",
+        "id": "blk-57f264137fbeedf2",
+        "fingerprint": "1e93c70efe68b1480e48fec844269b5d63e7c20b6dbdd436e43b89fb85163731",
         "heading": "算法实现",
-        "previous": "blk-977d9bf5725ffd83"
+        "previous": "blk-729d788d40d8dc6c"
       },
       {
-        "id": "blk-aab66a76f7ecf22a",
-        "fingerprint": "76295e679d6b2a65f1b0d17dae1374abb334e251d8ee163bfffdef9ead33ea82",
+        "id": "blk-ace9df87eb364cca",
+        "fingerprint": "8331256bcdbb32a08d6643bcf01d1b58d647478d037b55cff9f4951eb1eb37a9",
         "heading": "算法实现",
-        "previous": "blk-85efa7aae3d29d81"
+        "previous": "blk-57f264137fbeedf2"
       },
       {
-        "id": "blk-16732496e8aa2a54",
+        "id": "blk-4a5132fed73fb56f",
+        "fingerprint": "2ecb8e6a774f99ad68000cf58a23afd3fcb31c922f2dd837737096d88805424b",
+        "heading": "算法实现",
+        "previous": "blk-ace9df87eb364cca"
+      },
+      {
+        "id": "blk-2755ff7a84a02a98",
+        "fingerprint": "29261aceb1f0d25ae1afc601e1932837a7853c25d0043011b91b5477e1cce202",
+        "heading": "算法实现",
+        "previous": "blk-4a5132fed73fb56f"
+      },
+      {
+        "id": "blk-fd9850caf1ee4bf5",
         "fingerprint": "1d5da441231b84ab42b181f29539a3ea227e0b5348bb8bd97ab5d2a4cd2a27e9",
         "heading": "复杂度分析",
-        "previous": "blk-aab66a76f7ecf22a"
+        "previous": "blk-2755ff7a84a02a98"
       },
       {
-        "id": "blk-63c7f7bbcaec35e0",
-        "fingerprint": "1f9137939d22b2874736a75bd30f724a77dcab91acd335344e3631969f75cb6e",
+        "id": "blk-9f0e4d5ede2e4897",
+        "fingerprint": "046438619e18fab21271485cd1f5a811e53e13741ac823e9d38c19a09bc95446",
         "heading": "复杂度分析",
-        "previous": "blk-16732496e8aa2a54"
+        "previous": "blk-fd9850caf1ee4bf5"
       },
       {
         "id": "blk-f511b4cc587076a3",
         "fingerprint": "d522730e360ad7255102a60a6568bf75cd64c848481ffefe9fd8f877d25ccf04",
         "heading": "复杂度分析",
-        "previous": "blk-63c7f7bbcaec35e0"
+        "previous": "blk-9f0e4d5ede2e4897"
       }
     ],
     "aliases": {
@@ -11855,8 +12047,8 @@
         "previous": "blk-12ffb32b67dad59c"
       },
       {
-        "id": "blk-2153d9b117a4a9b8",
-        "fingerprint": "fe0366fcd5e6b0a73afaa16e178a05d170c4428f5797b960ef00ad3e00e04934",
+        "id": "blk-0d57033970feee7c",
+        "fingerprint": "75373b6ea8c956c65ed07bcc582f882a99e4b25aa42fa0f346a18b60e451414c",
         "heading": "重点回顾",
         "previous": "blk-22c1bd9402f82260"
       },
@@ -11864,7 +12056,7 @@
         "id": "blk-359052beefc4f47a",
         "fingerprint": "1ae46438291bb80a2b59dfe2598429dda24d09ced43e556514eae729ac36d3d2",
         "heading": "Q & A",
-        "previous": "blk-2153d9b117a4a9b8"
+        "previous": "blk-0d57033970feee7c"
       },
       {
         "id": "blk-b5cd36ccbcfdac15",
@@ -11944,32 +12136,62 @@
         "previous": "blk-4d6489a705810633"
       },
       {
-        "id": "blk-6943e151b8ddf6c1",
-        "fingerprint": "9efb200d83f66a1d798de7b1ef9e0b0b11431ef9d2a4159c7bb1bb0250cc0667",
+        "id": "blk-e405f47957668806",
+        "fingerprint": "50fbe94067ade5cbe72b09607c13ec967f240122399f1aa19d75602c36d125f5",
         "heading": "用两种方式表示同一张图",
         "previous": "blk-70d044350cc03d52"
       },
       {
-        "id": "blk-2b1e3a02f8b7463f",
-        "fingerprint": "d8649a3ec1424a1ccfb7100eb68d145cd017c2d92f7685bc0a17b72ec297ef14",
+        "id": "blk-9b2864b2e6e625bb",
+        "fingerprint": "981d98a57bee2ff971682894e37a53ec3f13b635296ad42bf5a72db1028cb82b",
         "heading": "用两种方式表示同一张图",
-        "previous": "blk-6943e151b8ddf6c1"
+        "previous": "blk-e405f47957668806"
       },
       {
-        "id": "blk-02d7a3968a56e8ac",
-        "fingerprint": "820749775dbfda1a83909d8be3ab945d58fd407ee0622f74f7476cbca35639a7",
+        "id": "blk-5e3239537cb36684",
+        "fingerprint": "10415039bfb0c56c148c25cbee0239233fd3726e34de3bdec9880f94c8859e60",
         "heading": "用两种方式表示同一张图",
-        "previous": "blk-2b1e3a02f8b7463f"
+        "previous": "blk-9b2864b2e6e625bb"
+      },
+      {
+        "id": "blk-62cbd30fd00389c3",
+        "fingerprint": "14b956bb132c44aa7cca0792c18df938268c00ebbc7ba080a58a9ea78ce9f924",
+        "heading": "用两种方式表示同一张图",
+        "previous": "blk-5e3239537cb36684"
+      },
+      {
+        "id": "blk-0478585355da6de3",
+        "fingerprint": "9b4810ce037438849d786c18fb25138374e5db13b44018e887541f0821dabcb8",
+        "heading": "用两种方式表示同一张图",
+        "previous": "blk-62cbd30fd00389c3"
+      },
+      {
+        "id": "blk-80d9ca58512c45cb",
+        "fingerprint": "160d55a4931fea61dca79a5dc1d187e267e1fb21e4de9b3a447e1838581671c9",
+        "heading": "用两种方式表示同一张图",
+        "previous": "blk-0478585355da6de3"
+      },
+      {
+        "id": "blk-60b734efba05bee4",
+        "fingerprint": "b43464cd64f94afc0b30a5f30d6a7a34457294142cd867087edc21dd5e42491e",
+        "heading": "用两种方式表示同一张图",
+        "previous": "blk-80d9ca58512c45cb"
+      },
+      {
+        "id": "blk-57ac96a23391a518",
+        "fingerprint": "249f0b7475c6987ec82f805f24bf5845534690360969315dd3bc00dd3431189e",
+        "heading": "用两种方式表示同一张图",
+        "previous": "blk-60b734efba05bee4"
       },
       {
         "id": "blk-47d01651ef706eb4",
         "fingerprint": "82941ddaec0871fb0b25b87644a334366fab10e546e22675ed8aa09affe93f11",
         "heading": "广度优先与深度优先访问顺序",
-        "previous": "blk-02d7a3968a56e8ac"
+        "previous": "blk-57ac96a23391a518"
       },
       {
-        "id": "blk-9ea4c74250cfa246",
-        "fingerprint": "bd9bd6a5db2b21d08d906b8636a342e995667766361728b8f131a1c5b1ba7a39",
+        "id": "blk-e673e823f0081101",
+        "fingerprint": "75816c2bf72e1c194a74181d5a09ba28488a77f55473135cf8413f3a7bab2fce",
         "heading": "广度优先与深度优先访问顺序",
         "previous": "blk-47d01651ef706eb4"
       },
@@ -11977,49 +12199,61 @@
         "id": "blk-fc46e165ff551535",
         "fingerprint": "6e069f914bb9fd860a3649022916514219a0f4021fc25522a66190f1c22abd3b",
         "heading": "广度优先与深度优先访问顺序",
-        "previous": "blk-9ea4c74250cfa246"
+        "previous": "blk-e673e823f0081101"
       },
       {
-        "id": "blk-ce48d93b348a3cd5",
-        "fingerprint": "afd29d01c0048730cb7dc9fd90bc9bb253380576e14a36e7e492a0345a1e31ca",
+        "id": "blk-690818b06f160bb5",
+        "fingerprint": "3bbd1b4a78b7eb1e73d433240e96ebc8bc93b93db6e57d9a702fbb3db182a3c1",
         "heading": "广度优先与深度优先访问顺序",
         "previous": "blk-fc46e165ff551535"
       },
       {
-        "id": "blk-1893812511c8864e",
-        "fingerprint": "d1279981c0e1f9cfb7956b2647d612ce54ee9f3246f7925aed8f3f9d4c49f05c",
+        "id": "blk-dc3489a0bace7802",
+        "fingerprint": "10415039bfb0c56c148c25cbee0239233fd3726e34de3bdec9880f94c8859e60",
         "heading": "广度优先与深度优先访问顺序",
-        "previous": "blk-ce48d93b348a3cd5"
+        "previous": "blk-690818b06f160bb5"
+      },
+      {
+        "id": "blk-bcb0e4fb4e092ae1",
+        "fingerprint": "3f2eaa8122bfad3ba17d6dbd367f851129c214251743ec85c4dafa3d6f28a561",
+        "heading": "广度优先与深度优先访问顺序",
+        "previous": "blk-dc3489a0bace7802"
       },
       {
         "id": "blk-b0ca6d0486cd425c",
         "fingerprint": "d4030539aba8423698593c2ce8c8f8bb85db78a6af449f045ffeef7d9b4987a1",
         "heading": "一次 BFS 能访问整张图吗",
-        "previous": "blk-1893812511c8864e"
+        "previous": "blk-bcb0e4fb4e092ae1"
       },
       {
-        "id": "blk-bc61a2a03df6d601",
-        "fingerprint": "78b072bb452c5805e2470f2545cadacc63267f8d19189900e25b4b4da2b4de58",
+        "id": "blk-80b9f333051c3b77",
+        "fingerprint": "c9936df7bdae8781299b292a736998f91ba478347e8ed91e2ea4233d24d4f8c5",
         "heading": "一次 BFS 能访问整张图吗",
         "previous": "blk-b0ca6d0486cd425c"
       },
       {
-        "id": "blk-6e73fdd618b9cd0c",
-        "fingerprint": "6c43bab8e86a5754719e853afda6099f1b69598dc485f6d33a888d0708a953b3",
+        "id": "blk-b0822186df514e9f",
+        "fingerprint": "fd6a201059c567f3866bd4d32682209163a04051d907590bb9fed4b680e4cc07",
         "heading": "一次 BFS 能访问整张图吗",
-        "previous": "blk-bc61a2a03df6d601"
+        "previous": "blk-80b9f333051c3b77"
       },
       {
-        "id": "blk-ccdab85e34dd6969",
-        "fingerprint": "3a208a0a46515b7a49341f937371986cf13638da2fe6014c873028fbb9dd4d91",
+        "id": "blk-59040d7841e3934d",
+        "fingerprint": "10415039bfb0c56c148c25cbee0239233fd3726e34de3bdec9880f94c8859e60",
         "heading": "一次 BFS 能访问整张图吗",
-        "previous": "blk-6e73fdd618b9cd0c"
+        "previous": "blk-b0822186df514e9f"
+      },
+      {
+        "id": "blk-cd049c72310d55ad",
+        "fingerprint": "2550a095dc4c9b1e334bc54d1dccafc6c8ddb4f06c6a256cee91a30264779b85",
+        "heading": "一次 BFS 能访问整张图吗",
+        "previous": "blk-59040d7841e3934d"
       },
       {
         "id": "blk-c4abce831079c251",
         "fingerprint": "6830f3f9b22df09f3d3b0acd1008c55a058da3836ff31220d9362f19d6ae5721",
         "heading": "编程练习",
-        "previous": "blk-ccdab85e34dd6969"
+        "previous": "blk-cd049c72310d55ad"
       },
       {
         "id": "blk-8bd073929cc6ee63",
@@ -12028,28 +12262,34 @@
         "previous": "blk-c4abce831079c251"
       },
       {
-        "id": "blk-8ae58b92294f3bfc",
-        "fingerprint": "cd5850b6e6716448d70da639b7fb9e1778fb51df9d72f47b3da75d5c9358928b",
+        "id": "blk-2188d6b75c2e5f13",
+        "fingerprint": "25e891a4ddeb037996816e58e22e1270ce63dbcedfe0ff7b005e46792940c548",
         "heading": "判断无向图中是否存在路径",
         "previous": "blk-8bd073929cc6ee63"
       },
       {
-        "id": "blk-aa105810483d0837",
-        "fingerprint": "63afa626a3eeb595609a32535d85c3d565ec754550691106d923f22cee4d8597",
+        "id": "blk-0f0e3ba4f2ed494a",
+        "fingerprint": "4418469548a0c31a5b8f816895da3732bb1bb055354682ca98bf14bd7469baaa",
         "heading": "判断无向图中是否存在路径",
-        "previous": "blk-8ae58b92294f3bfc"
+        "previous": "blk-2188d6b75c2e5f13"
       },
       {
-        "id": "blk-2fb445b132c65217",
-        "fingerprint": "58010c65f9a07dfcd89e431778332363b191a62fcefcd5242e5853cb6a12a34c",
+        "id": "blk-8829f17844007afb",
+        "fingerprint": "ac97e240ea69b1e814386dfd2ee3274fe0debd8d5ebd6adf94ea3c852693214e",
         "heading": "判断无向图中是否存在路径",
-        "previous": "blk-aa105810483d0837"
+        "previous": "blk-0f0e3ba4f2ed494a"
+      },
+      {
+        "id": "blk-e81ab27bc128a38f",
+        "fingerprint": "384dc2343eaca1279521237cfa9e5e966c5ede02e8ad0e1e7253380ccc3732fa",
+        "heading": "判断无向图中是否存在路径",
+        "previous": "blk-8829f17844007afb"
       },
       {
         "id": "blk-d4809f78c853b84b",
         "fingerprint": "d556a63bea731d98b0f69bbf3637d269fb505665aab87c133a1978a97c0b48b7",
         "heading": "判断无向图中是否存在路径",
-        "previous": "blk-2fb445b132c65217"
+        "previous": "blk-e81ab27bc128a38f"
       }
     ],
     "aliases": {
@@ -12112,26 +12352,56 @@
         "previous": ""
       },
       {
-        "id": "blk-7bbd445fd20ee2b9",
-        "fingerprint": "6425ff1ce7b089433cb11803ad3198dd7c39afe2e2b6452ebf060bdc1ef97232",
+        "id": "blk-e6b1e401f84d127a",
+        "fingerprint": "2266a80522653df33460b1d8d79cd52f78f6fe6fdfd940459610dd1219958674",
         "heading": "二分查找",
         "previous": "blk-6114c17a609327af"
       },
       {
-        "id": "blk-be0e47c5e5d7bebc",
-        "fingerprint": "822d45574c1e30616ebf6e0cacb6e7fe129c76c8f4354371495d34af4e252895",
+        "id": "blk-f4a80f91c23b048f",
+        "fingerprint": "a10a57ce124e276b86b2e38e431f1171656eddfdf1f536993de78f1caf8eb0df",
         "heading": "二分查找",
-        "previous": "blk-7bbd445fd20ee2b9"
+        "previous": "blk-e6b1e401f84d127a"
+      },
+      {
+        "id": "blk-90ed3ff4dfe6fb7a",
+        "fingerprint": "252a1a5a94109a2e15167c60b1a711cfc5875f8d0176f822362d28fabc236646",
+        "heading": "二分查找",
+        "previous": "blk-f4a80f91c23b048f"
+      },
+      {
+        "id": "blk-ce80a7ad780b82e4",
+        "fingerprint": "d477a12948a2c56f763a7b7f9fc90c9a03241880ed86ee10d15939a9c89921be",
+        "heading": "二分查找",
+        "previous": "blk-90ed3ff4dfe6fb7a"
+      },
+      {
+        "id": "blk-7135295a2f0739d4",
+        "fingerprint": "ae31545af3034fabb362e9f0a8cb9c1db85465738e54065f7b2350a49c9e2528",
+        "heading": "二分查找",
+        "previous": "blk-ce80a7ad780b82e4"
+      },
+      {
+        "id": "blk-086dc5d420e4f186",
+        "fingerprint": "f264f3ab2e0f70902c459da7db6163e1e31fbd73b9120b8ac0f6914251a4e78c",
+        "heading": "二分查找",
+        "previous": "blk-7135295a2f0739d4"
+      },
+      {
+        "id": "blk-b237bc96e829eb18",
+        "fingerprint": "cc5c64cb31a93ccad9fd61f98da75dfc77a5820c6030aa6ddc72243bd875452d",
+        "heading": "二分查找",
+        "previous": "blk-086dc5d420e4f186"
       },
       {
         "id": "blk-2c7355adedb51bdd",
         "fingerprint": "d73f9a0af102488973236d97be7d6b825340fa83545ff0ec02e019c407af71fc",
         "heading": "二分查找",
-        "previous": "blk-be0e47c5e5d7bebc"
+        "previous": "blk-b237bc96e829eb18"
       },
       {
-        "id": "blk-dc6e285171d93ce0",
-        "fingerprint": "43fff4502163d5e1b1cccc5bbebd02c2995513837690d316301660e33d3891a5",
+        "id": "blk-12037f4c79164cef",
+        "fingerprint": "7ea24e1d78dda92b10b494ef5d6e7d8ce35a118025c7d34e78e1f80c24233be4",
         "heading": "二分查找",
         "previous": "blk-2c7355adedb51bdd"
       },
@@ -12139,55 +12409,55 @@
         "id": "blk-e770676595b37139",
         "fingerprint": "fc493cf6521a8d235e758ab7db50bcab01320643007752e383534fee07652705",
         "heading": "二分查找",
-        "previous": "blk-dc6e285171d93ce0"
+        "previous": "blk-12037f4c79164cef"
       },
       {
-        "id": "blk-06f03cce3d6016e1",
-        "fingerprint": "77c18c6f98f6d6f1ecbdc4849341751a72de326730ae7de12f41ea4ca9d18250",
+        "id": "blk-6fd6cec3de33521e",
+        "fingerprint": "37bbafba131ebda4375b0d2ad27c61d9afbb3b0480e3a7088aeec4ffff82324b",
         "heading": "二分查找",
         "previous": "blk-e770676595b37139"
       },
       {
-        "id": "blk-fd9ab40121490a59",
-        "fingerprint": "5937eb99a3c4d4a795e5754b869d9817a279abf450508fba88cc7f28228abb47",
+        "id": "blk-a38575ec951427bc",
+        "fingerprint": "ea6098af2372aa11e33a7d7b647d7ab8a75fff8bc89fefe8a25a300f248f822a",
         "heading": "二分查找",
-        "previous": "blk-06f03cce3d6016e1"
+        "previous": "blk-6fd6cec3de33521e"
       },
       {
-        "id": "blk-e560198859224f2f",
-        "fingerprint": "7401c63d0245076a4e77002fe98c19007ac3024508d101a22be38d994f7f1682",
+        "id": "blk-25340ddf400b80a8",
+        "fingerprint": "208e069902999ee3708ebc12a6899154cc7145747befaa8c0fbc016865bca633",
         "heading": "二分查找",
-        "previous": "blk-fd9ab40121490a59"
+        "previous": "blk-a38575ec951427bc"
       },
       {
-        "id": "blk-65ca7233a959575f",
-        "fingerprint": "cd55bac7327aa22d7126297a476dfafc35c75a91d41f4608f4e8730c5de59fa4",
+        "id": "blk-22d118380b64763c",
+        "fingerprint": "a4754b8e39b57125e75cd56f6ffdb9238f8747a1e1e0bc4330a2e43ac44ab47b",
         "heading": "二分查找",
-        "previous": "blk-e560198859224f2f"
+        "previous": "blk-25340ddf400b80a8"
       },
       {
         "id": "blk-ffa44572abebbba3",
         "fingerprint": "a4f2f9428bc20177003b209091f3ba461ed286b890efebbf00bb843339de4383",
         "heading": "二分查找",
-        "previous": "blk-65ca7233a959575f"
+        "previous": "blk-22d118380b64763c"
       },
       {
-        "id": "blk-131abbbd5502f8c1",
+        "id": "blk-5bc8ed31d83da51c",
         "fingerprint": "569cf469aef6d0e9749f7986d766caec6de6ef01d273f5a294a1a07d43da385a",
         "heading": "二分查找",
         "previous": "blk-ffa44572abebbba3"
       },
       {
-        "id": "blk-0188f6700b23838b",
-        "fingerprint": "0468cf3c0bee28ec8858ec54c3efc476cb0425e3e34ade0dbb1801b143e1062e",
+        "id": "blk-2b6b33088ad04d94",
+        "fingerprint": "59c501ee1cba73a4a68cc43e781ab4bdd99e0e72581e849743754cc5c0e68e1c",
         "heading": "二分查找",
-        "previous": "blk-131abbbd5502f8c1"
+        "previous": "blk-5bc8ed31d83da51c"
       },
       {
         "id": "blk-b3c77ba4f8735859",
         "fingerprint": "d0e3e3c9f37b6709bc49e3e26bb2b9a76508a8bdd340e982cf3205c46839b69e",
         "heading": "二分查找",
-        "previous": "blk-0188f6700b23838b"
+        "previous": "blk-2b6b33088ad04d94"
       },
       {
         "id": "blk-f95d2a40c15463ed",
@@ -12196,8 +12466,8 @@
         "previous": "blk-b3c77ba4f8735859"
       },
       {
-        "id": "blk-f3632a5904484adc",
-        "fingerprint": "da6e459df2ddb1c1f0062a25e7d5a02ee6e789bf0ff8e4d2ed5a8cb5f96171eb",
+        "id": "blk-3f85c392bd2358f7",
+        "fingerprint": "84f03decd8560190acfec9fa5db0cb3cce9be0d7478952d624b2d36416a9d7f3",
         "heading": "区间表示方法",
         "previous": "blk-f95d2a40c15463ed"
       },
@@ -12205,25 +12475,25 @@
         "id": "blk-9837bf2cc00d922d",
         "fingerprint": "9dcdd145fc05de3b71fcd0f3fcaaaa644e7701badc39d748d369dd696cb36476",
         "heading": "区间表示方法",
-        "previous": "blk-f3632a5904484adc"
+        "previous": "blk-3f85c392bd2358f7"
       },
       {
-        "id": "blk-2414aa6307e16ab5",
+        "id": "blk-e90d00641d95577a",
         "fingerprint": "85927f202f9c37841e78c8b3413f707ead078ce08c185abd8140dff05624d5f8",
         "heading": "区间表示方法",
         "previous": "blk-9837bf2cc00d922d"
       },
       {
-        "id": "blk-6c0207e406149598",
-        "fingerprint": "2bb7933ee62ead3ffda4fb81f9a7e644e8a415221c99fc09866f8f831d940f16",
+        "id": "blk-e60a51c71c0356da",
+        "fingerprint": "138878a6a555e69a8914900d5f8965bec17478de4f7c8bda33632ee81f96a713",
         "heading": "区间表示方法",
-        "previous": "blk-2414aa6307e16ab5"
+        "previous": "blk-e90d00641d95577a"
       },
       {
         "id": "blk-6a36e61b822973fc",
         "fingerprint": "2692b2dd1e8c84a4f4ec84bd96ac6872cba2e953ccb2ea809d29e3451a644c11",
         "heading": "区间表示方法",
-        "previous": "blk-6c0207e406149598"
+        "previous": "blk-e60a51c71c0356da"
       },
       {
         "id": "blk-4dacbcfa4093cfe0",
@@ -12238,34 +12508,34 @@
         "previous": "blk-4dacbcfa4093cfe0"
       },
       {
-        "id": "blk-a1492b06a27de514",
-        "fingerprint": "a75ba21bfc4995bd1f65a8b27849a89ca04f28c65d5a2edff2252af87dbe3e93",
+        "id": "blk-0f16a6d95c3d6f08",
+        "fingerprint": "fb2836f2f5ea1fa948123443bff46bbe15ce45840a846b17e519c970167075b1",
         "heading": "优点与局限性",
         "previous": "blk-193496dccb80d61b"
       },
       {
-        "id": "blk-62568bd931f1ab40",
-        "fingerprint": "b726d54faf45296b298437fc06f8519deeaba8c2ef479ec2654e0deb2d0857b8",
+        "id": "blk-9f358dee5e9f858d",
+        "fingerprint": "46743712e52e385bf03685ea968663e9e306073af1c6243293d99781ca91ecae",
         "heading": "优点与局限性",
-        "previous": "blk-a1492b06a27de514"
+        "previous": "blk-0f16a6d95c3d6f08"
       },
       {
-        "id": "blk-ebf6f7e5d853f6a5",
-        "fingerprint": "ce416b76516e4456b919e175b2eae628457e24b49b4254ed6a680ce4474a507b",
+        "id": "blk-674715809316103e",
+        "fingerprint": "728bbc630a6764e9afd21e6926f5fa510d3e170578c4c7cb493ceea729109b2b",
         "heading": "优点与局限性",
-        "previous": "blk-62568bd931f1ab40"
+        "previous": "blk-9f358dee5e9f858d"
       },
       {
-        "id": "blk-ac0f2b043f21db81",
-        "fingerprint": "10532751d435a094fe435963b9eba8c28c4fd9c9e13642e0c1bebccc4978f94f",
+        "id": "blk-05b0ffcf37a7d900",
+        "fingerprint": "60393bfaf7c91245e19355a2bf208a3aa6fd51eb893c52e7eb1607b9bf17f56a",
         "heading": "优点与局限性",
-        "previous": "blk-ebf6f7e5d853f6a5"
+        "previous": "blk-674715809316103e"
       },
       {
         "id": "blk-a13154b45210ba4e",
         "fingerprint": "15b5472970b5c66a23473b0c3f5b3add3d90ac8987e1dbc9d21526750f430694",
         "heading": "优点与局限性",
-        "previous": "blk-ac0f2b043f21db81"
+        "previous": "blk-05b0ffcf37a7d900"
       }
     ],
     "aliases": {
@@ -12307,8 +12577,8 @@
         "previous": ""
       },
       {
-        "id": "blk-5f8b7cb8f1f6f04a",
-        "fingerprint": "178999c00e9f9f4129a403cce882aadfbacf446dcdaf9b4c0cceff61fa942bbd",
+        "id": "blk-55bf000cdf0810a5",
+        "fingerprint": "13699d3841de1f877ad52cbfefd364f0969e43e70e59eb7e5b1d8a39dfae0555",
         "heading": "二分查找插入点",
         "previous": "blk-ecd36342c5b9d3b5"
       },
@@ -12316,19 +12586,25 @@
         "id": "blk-4c2a64d83853780a",
         "fingerprint": "257a32fa7c812f494e5d6390219af5a2ac0016d58012e54b133d0b1a50f30435",
         "heading": "无重复元素的情况",
-        "previous": "blk-5f8b7cb8f1f6f04a"
+        "previous": "blk-55bf000cdf0810a5"
       },
       {
-        "id": "blk-620accad0f38bbf0",
-        "fingerprint": "6c02fd5e8fd6029f3e58fc2cae98c0303b7efc67355b8f73f6d0ba9f0d92b40d",
+        "id": "blk-e00e2ca67fab9068",
+        "fingerprint": "f264f3ab2e0f70902c459da7db6163e1e31fbd73b9120b8ac0f6914251a4e78c",
         "heading": "无重复元素的情况",
         "previous": "blk-4c2a64d83853780a"
+      },
+      {
+        "id": "blk-61aa98314093f09a",
+        "fingerprint": "91911b47faac322161881121af88694a5b10a401da108f188497a4947dcb7fd8",
+        "heading": "无重复元素的情况",
+        "previous": "blk-e00e2ca67fab9068"
       },
       {
         "id": "blk-0faf1857cec3623f",
         "fingerprint": "135b11c58615af2d7d0b9f73b1b3901737692a473260d08659aa39b422c5cd1d",
         "heading": "无重复元素的情况",
-        "previous": "blk-620accad0f38bbf0"
+        "previous": "blk-61aa98314093f09a"
       },
       {
         "id": "blk-88f8d14d1022a9bb",
@@ -12367,7 +12643,7 @@
         "previous": "blk-5b68922a223f2c73"
       },
       {
-        "id": "blk-44c8511f378f5599",
+        "id": "blk-8e26e6740edf95d5",
         "fingerprint": "ed29e2ed3de08d4e537a56c5f21302046ea4b9b1aabba9f612e904a3e774dcb4",
         "heading": "无重复元素的情况",
         "previous": "blk-2f4f78fe5beff9f0"
@@ -12376,29 +12652,35 @@
         "id": "blk-ec76944f5efe6930",
         "fingerprint": "aed4e4fbade0d5b4f040a16695d4fc8eb716542c4c7fceaafe36864ec5ce4627",
         "heading": "存在重复元素的情况",
-        "previous": "blk-44c8511f378f5599"
+        "previous": "blk-8e26e6740edf95d5"
       },
       {
-        "id": "blk-99790b53f699b9b9",
-        "fingerprint": "ea5b72df298bca121d4dee41ee93d3f1636e670021de5492a09996f444f6f220",
+        "id": "blk-e12a5c21660806df",
+        "fingerprint": "f264f3ab2e0f70902c459da7db6163e1e31fbd73b9120b8ac0f6914251a4e78c",
         "heading": "存在重复元素的情况",
         "previous": "blk-ec76944f5efe6930"
       },
       {
-        "id": "blk-7bbedce1a6b2b054",
-        "fingerprint": "f2b1da69064d0aa066864e7481a4c49be51049c8afab3566b66a33381bc08cd5",
+        "id": "blk-adfee5a518548050",
+        "fingerprint": "7aabaa591c78d051f386158192dd007702b282423bbfe93a45a130aecb8c0afb",
         "heading": "存在重复元素的情况",
-        "previous": "blk-99790b53f699b9b9"
+        "previous": "blk-e12a5c21660806df"
+      },
+      {
+        "id": "blk-0cc47480398146ae",
+        "fingerprint": "53cb4cadb6d032c5f3be130c27bc4b16ea9f4ad25a13c2e6a17fffe29c0db736",
+        "heading": "存在重复元素的情况",
+        "previous": "blk-adfee5a518548050"
       },
       {
         "id": "blk-cc627c5bfc4728e9",
         "fingerprint": "c8ce4896482817e24b4c51cdf3d294bd4fe4715ec01de5b3befa25957cf62eb2",
         "heading": "存在重复元素的情况",
-        "previous": "blk-7bbedce1a6b2b054"
+        "previous": "blk-0cc47480398146ae"
       },
       {
-        "id": "blk-b98be93e5bcb07e1",
-        "fingerprint": "07c988f1f8e7d1e035697ad800d28a04350ee1002470283a381b7fccdbcf89ec",
+        "id": "blk-18e9081c8a455235",
+        "fingerprint": "782c7fb0ac3f8606b93f8ed431a609fb880b6184fddbfba7afd965edc76ffd3b",
         "heading": "存在重复元素的情况",
         "previous": "blk-cc627c5bfc4728e9"
       },
@@ -12406,7 +12688,7 @@
         "id": "blk-1ad74d4286693337",
         "fingerprint": "90d0820c7635a28b8f597483806ebe11f25c22abf82bfd5309e539053b1874dd",
         "heading": "存在重复元素的情况",
-        "previous": "blk-b98be93e5bcb07e1"
+        "previous": "blk-18e9081c8a455235"
       },
       {
         "id": "blk-f23bb3be7057e8a5",
@@ -12421,28 +12703,28 @@
         "previous": "blk-f23bb3be7057e8a5"
       },
       {
-        "id": "blk-616fada044285492",
-        "fingerprint": "280fc706f58c103fc3aa7667a432c730c984be2b521f5ae6f314e720ed4b3a13",
+        "id": "blk-51a24345a632cdbb",
+        "fingerprint": "553f01044cb841029b4cbfbef56b57481c1e7fa098ed3789942a4db3cd3dcd71",
         "heading": "存在重复元素的情况",
         "previous": "blk-fc58b11875edf424"
       },
       {
-        "id": "blk-c87fe8613080ef2b",
-        "fingerprint": "34cf8401a7d73a89a4f50f7af94dd67c53914d2ae024efcd35c46cde70bd097b",
+        "id": "blk-e84d549c82ed61f9",
+        "fingerprint": "ed14b3878836740a7f24385f6ebf6154af93e22aff68c8e6da2f5bb45ec39e9b",
         "heading": "存在重复元素的情况",
-        "previous": "blk-616fada044285492"
+        "previous": "blk-51a24345a632cdbb"
       },
       {
-        "id": "blk-1a889147c50c8354",
-        "fingerprint": "6268b3b2b14eabfc449d64803ab97838c6c2da73a874faa9a70841cdf8f2a341",
+        "id": "blk-6e850b5478e3770f",
+        "fingerprint": "81e766d4cfa005f97d038e3cc690c5c0966e13922e62365d373d5a4944497600",
         "heading": "存在重复元素的情况",
-        "previous": "blk-c87fe8613080ef2b"
+        "previous": "blk-e84d549c82ed61f9"
       },
       {
         "id": "blk-bf32d65a095a2b9b",
         "fingerprint": "7399b03de4bfc42090ae4bf5d29563a2abad67d1ed1911c52067e586ccb38260",
         "heading": "存在重复元素的情况",
-        "previous": "blk-1a889147c50c8354"
+        "previous": "blk-6e850b5478e3770f"
       },
       {
         "id": "blk-8e5a833ff4cf9840",
@@ -12451,28 +12733,34 @@
         "previous": "blk-bf32d65a095a2b9b"
       },
       {
-        "id": "blk-880a7c6caf1109ba",
+        "id": "blk-17cc5aafd5fb1beb",
         "fingerprint": "57d16703d8cf9c38d8ec9dd4a7056f83e907bc6189e82359d3c950fa44ed5fba",
         "heading": "存在重复元素的情况",
         "previous": "blk-8e5a833ff4cf9840"
       },
       {
-        "id": "blk-831a460411b5b2c6",
-        "fingerprint": "aea597e7b2d36031843fdc2ffff4910c1c994d62ef7458466320e7b318936b25",
+        "id": "blk-ac6467ff39ef0cd1",
+        "fingerprint": "58c04ce813cfcd11eb8196b3b6bdcabda9517b3349d21b08f693477ad6a812aa",
         "heading": "存在重复元素的情况",
-        "previous": "blk-880a7c6caf1109ba"
+        "previous": "blk-17cc5aafd5fb1beb"
       },
       {
-        "id": "blk-a16a5ca20aa49a2a",
-        "fingerprint": "c0f557eccc8e956a4e99cad54b0905183dc41844d3b0b8f9576381693b6f2989",
+        "id": "blk-60752e3a3f0da822",
+        "fingerprint": "eaabe75d082e1fbad171c70d785d66ea6bb57aafb268d4fa8acc3387aaf3c732",
         "heading": "存在重复元素的情况",
-        "previous": "blk-831a460411b5b2c6"
+        "previous": "blk-ac6467ff39ef0cd1"
+      },
+      {
+        "id": "blk-ec515c9533222da1",
+        "fingerprint": "fabd6f6f7e36570d8b5f40711d5a9ed498c82e507f1b0fd3eb7b8d4ce5ebadf0",
+        "heading": "存在重复元素的情况",
+        "previous": "blk-60752e3a3f0da822"
       },
       {
         "id": "blk-33afa0d5be4bdd2b",
         "fingerprint": "eef2823f1f48a871f59e40767e5f3e51e14d6e18f42c81ad4c6cdff4ed58d7c0",
         "heading": "存在重复元素的情况",
-        "previous": "blk-a16a5ca20aa49a2a"
+        "previous": "blk-ec515c9533222da1"
       }
     ],
     "aliases": {
@@ -12522,50 +12810,56 @@
         "previous": "blk-3a511d5aeaaaa651"
       },
       {
-        "id": "blk-a9199dad01510af8",
-        "fingerprint": "901db1964959a12d41f10e9f65957d6943ab5836eaebcef1faed69c6937d6759",
+        "id": "blk-308a345efe17f47a",
+        "fingerprint": "f264f3ab2e0f70902c459da7db6163e1e31fbd73b9120b8ac0f6914251a4e78c",
         "heading": "查找左边界",
         "previous": "blk-bb2d5c1300931362"
       },
       {
-        "id": "blk-5aca3dbe86c51d69",
-        "fingerprint": "4a32a66823aa1f1c6fe4d55860a8afd35de7cae862418912993331323d2693fc",
+        "id": "blk-45c0d08610d37bef",
+        "fingerprint": "24178008e3082f3f64e82b9bde52984566822be2df9584c4f181af52fb51fcc7",
         "heading": "查找左边界",
-        "previous": "blk-a9199dad01510af8"
+        "previous": "blk-308a345efe17f47a"
+      },
+      {
+        "id": "blk-499bbdf16dfeb490",
+        "fingerprint": "76b54f7d180963b2a04fbe520f349fd60031bb11b98c43b816756796b5982daa",
+        "heading": "查找左边界",
+        "previous": "blk-45c0d08610d37bef"
       },
       {
         "id": "blk-9dfdc3ea8dba602e",
         "fingerprint": "79e536e3efdb11c515ce12ee42176999064809dc4da8cf7e8290321f1769a52a",
         "heading": "查找左边界",
-        "previous": "blk-5aca3dbe86c51d69"
+        "previous": "blk-499bbdf16dfeb490"
       },
       {
-        "id": "blk-8aa85faba3cc4486",
-        "fingerprint": "71c512a5734b74022f783e3f4698d9b37a45a100f916e0810872b38274172175",
+        "id": "blk-53d2077df4dff8b0",
+        "fingerprint": "2de550744424c0b52122a26eec8313598126f6cca6e91e9257fadaf8d7b50e11",
         "heading": "查找左边界",
         "previous": "blk-9dfdc3ea8dba602e"
       },
       {
-        "id": "blk-b2912b32594ee267",
-        "fingerprint": "6cce76042cfac344e5449bc1fc5f86aef5b92bcb370066175dadcd4ea9c5fb9b",
+        "id": "blk-16ce5ca2a19fe7fa",
+        "fingerprint": "896a78150633e569b8238866809e646c0c7062425ea625a3ea26bb8a2e1bd37a",
         "heading": "查找左边界",
-        "previous": "blk-8aa85faba3cc4486"
+        "previous": "blk-53d2077df4dff8b0"
       },
       {
-        "id": "blk-4ba237cd52faa2ca",
+        "id": "blk-b070f9a73cedb735",
         "fingerprint": "b132e279dc08ea7116204a7deb93e84ff1e1bff5f3f9d2082ea9dc334fa00557",
         "heading": "查找左边界",
-        "previous": "blk-b2912b32594ee267"
+        "previous": "blk-16ce5ca2a19fe7fa"
       },
       {
         "id": "blk-cb2f104a16eca6ff",
         "fingerprint": "7dd3233b84e45044b62ecb94f116c9aace930539033b4555205d50ee725747c2",
         "heading": "查找右边界",
-        "previous": "blk-4ba237cd52faa2ca"
+        "previous": "blk-b070f9a73cedb735"
       },
       {
-        "id": "blk-b73d30fb33730872",
-        "fingerprint": "52553e2c77d80efc02b2f25e45d5f8d7bb027db371ea76b6adb43fb9a038949d",
+        "id": "blk-e740c231c8b541e8",
+        "fingerprint": "1191689189c78eaf9af3458e58b42c65435fcc5d7816b1e689ed07c0996b5a24",
         "heading": "查找右边界",
         "previous": "blk-cb2f104a16eca6ff"
       },
@@ -12573,7 +12867,7 @@
         "id": "blk-01739afe5ce516e0",
         "fingerprint": "d2980242a7d487f59ef0962ad1d3db2a1c36e35a93d5e8dc53425a42e9be8a67",
         "heading": "查找右边界",
-        "previous": "blk-b73d30fb33730872"
+        "previous": "blk-e740c231c8b541e8"
       },
       {
         "id": "blk-9b1e388c8cfc991d",
@@ -12582,8 +12876,8 @@
         "previous": "blk-01739afe5ce516e0"
       },
       {
-        "id": "blk-971f430db3730562",
-        "fingerprint": "34d6af3af98988a41f2d76c4174c8fe02a4cae4f94140cff167168203b76cb80",
+        "id": "blk-d7cf6374fb1c8099",
+        "fingerprint": "e6b0a59fa4bd3bc8e6bd76ddd8b502efd699b6fe7d29f731939d8d581299fa1d",
         "heading": "复用查找左边界",
         "previous": "blk-9b1e388c8cfc991d"
       },
@@ -12591,7 +12885,7 @@
         "id": "blk-74cf9891df470ff9",
         "fingerprint": "5f76b636421fd58edf45ade9377dadbc4ad641c85ece888d681999d4903fba16",
         "heading": "复用查找左边界",
-        "previous": "blk-971f430db3730562"
+        "previous": "blk-d7cf6374fb1c8099"
       },
       {
         "id": "blk-e71324699d9a8f40",
@@ -12606,7 +12900,7 @@
         "previous": "blk-e71324699d9a8f40"
       },
       {
-        "id": "blk-9f799820aa8c1feb",
+        "id": "blk-918670c2e0d9c79f",
         "fingerprint": "0f681f7dee05c8f9ba508e2b57c24f08b34cdb7fc494d031a1a98d24baea7c56",
         "heading": "复用查找左边界",
         "previous": "blk-31e58b51c2855b88"
@@ -12615,11 +12909,11 @@
         "id": "blk-3b4f979c0382b7a1",
         "fingerprint": "95e2d2f3dc9b30a4cd33cb0b7c07cd6d800ac880daa69fc2964504fcc4267dcc",
         "heading": "转化为查找元素",
-        "previous": "blk-9f799820aa8c1feb"
+        "previous": "blk-918670c2e0d9c79f"
       },
       {
-        "id": "blk-9a890008887bb880",
-        "fingerprint": "349b404830fbdf400cef5e3efe909df69b6bc00810de8e8539b27d2a5cc6cb00",
+        "id": "blk-768e437180a07633",
+        "fingerprint": "d2a52b40fc7ca7d81bbe53a581bd94cd27c8b78647d2884e78ec7450f8da165d",
         "heading": "转化为查找元素",
         "previous": "blk-3b4f979c0382b7a1"
       },
@@ -12627,11 +12921,11 @@
         "id": "blk-e97a7efe411a28a2",
         "fingerprint": "f078938b7c84f63e462f6f360a39ee91a88837051d2f29ba3b126c3be8c4a99c",
         "heading": "转化为查找元素",
-        "previous": "blk-9a890008887bb880"
+        "previous": "blk-768e437180a07633"
       },
       {
-        "id": "blk-b236f06a70a9b68d",
-        "fingerprint": "0687e3d0238a06bbe83526c3888be7d1f57df1fa9cd7425951c652737d1172f7",
+        "id": "blk-f3213f52faef16df",
+        "fingerprint": "e4c568f44062c12b43ac6857d821c2b48de8e92b146e18021b93a42eea55d87e",
         "heading": "转化为查找元素",
         "previous": "blk-e97a7efe411a28a2"
       },
@@ -12639,7 +12933,7 @@
         "id": "blk-64ae8043ee7827b7",
         "fingerprint": "e897ee5875e136278e9eab16d1349f089770bbbecf7dfad283e280b83d92b3d6",
         "heading": "转化为查找元素",
-        "previous": "blk-b236f06a70a9b68d"
+        "previous": "blk-f3213f52faef16df"
       },
       {
         "id": "blk-f2138d8b9488f487",
@@ -12648,8 +12942,8 @@
         "previous": "blk-64ae8043ee7827b7"
       },
       {
-        "id": "blk-1a65adc25aa1e226",
-        "fingerprint": "4895dc28968fdf0c87da4e40eb99de6079475e3823422196baae312bb6207248",
+        "id": "blk-addf16375cf4c23e",
+        "fingerprint": "61064f9da12ebcbdd8ff5341cb3a09866b019d59fdf5efc7a721829b526d3c7e",
         "heading": "转化为查找元素",
         "previous": "blk-f2138d8b9488f487"
       }
@@ -12690,26 +12984,32 @@
         "previous": ""
       },
       {
-        "id": "blk-e25e5bc63a2d58f5",
-        "fingerprint": "f4c062b9ce2ffa05cbb2f0b344c0832e4d84cfde7e023b772f6e8c7153831b5d",
+        "id": "blk-a071d52b5be9e1e8",
+        "fingerprint": "d0c2cc3636f79b713053916bf31e7474ed8fc6e7c6277b4173387a787fd6c65d",
         "heading": "哈希优化策略",
         "previous": "blk-398a21f5b4a93d4c"
       },
       {
-        "id": "blk-4e2de9dd75414b3d",
-        "fingerprint": "653cfd51b142bde87986f243ed7db8b361f9bd6dbcf59298e11b4d4a142c78d4",
+        "id": "blk-74a50d9e0290625d",
+        "fingerprint": "f264f3ab2e0f70902c459da7db6163e1e31fbd73b9120b8ac0f6914251a4e78c",
         "heading": "哈希优化策略",
-        "previous": "blk-e25e5bc63a2d58f5"
+        "previous": "blk-a071d52b5be9e1e8"
+      },
+      {
+        "id": "blk-b6456b9d7298117d",
+        "fingerprint": "6b6009f53c53e7051931f3f0e86d189d3536a1ea08f3d76aef6bad6ad8c46dac",
+        "heading": "哈希优化策略",
+        "previous": "blk-74a50d9e0290625d"
       },
       {
         "id": "blk-da45786701559d0f",
         "fingerprint": "61ebf75f03383ccef3ab219eac4ad40f53be486e6663576a74aa0da94ed00be0",
         "heading": "线性查找：以时间换空间",
-        "previous": "blk-4e2de9dd75414b3d"
+        "previous": "blk-b6456b9d7298117d"
       },
       {
-        "id": "blk-80581669be37d182",
-        "fingerprint": "b632bec80ff1be1563fadf56a552c5db1088e632875b6605cfeec9e6ede9117a",
+        "id": "blk-cce10b97859af98b",
+        "fingerprint": "42e92b356e6622b0c679a28f1d6b2d1faa4ea7db04c706282ad27025cb509cfe",
         "heading": "线性查找：以时间换空间",
         "previous": "blk-da45786701559d0f"
       },
@@ -12717,7 +13017,7 @@
         "id": "blk-d1ebe259fa476b71",
         "fingerprint": "b3e4ea416317931426870591603aa2022f5387beb9cc934cf75ea65d9af48402",
         "heading": "线性查找：以时间换空间",
-        "previous": "blk-80581669be37d182"
+        "previous": "blk-cce10b97859af98b"
       },
       {
         "id": "blk-d9fd5865953cd105",
@@ -12726,64 +13026,64 @@
         "previous": "blk-d1ebe259fa476b71"
       },
       {
-        "id": "blk-aa9051c6c14d6c5a",
+        "id": "blk-41c5ed3f69419431",
         "fingerprint": "5b9454d9707bebac0add5f7a5ecfdcf59400bd07b788e8013b9bc5a683c9df5d",
         "heading": "线性查找：以时间换空间",
         "previous": "blk-d9fd5865953cd105"
       },
       {
-        "id": "blk-0ebef8b094b5c012",
-        "fingerprint": "8e92b6bd07f2ae759d037b4358f3990bcbe10e1add2bfc3607fdde7744a5498c",
+        "id": "blk-b082e37f9f34fd44",
+        "fingerprint": "f0985342a4206733a918b279516cd294993856dbcb80c1d9ebe669e4134091e8",
         "heading": "线性查找：以时间换空间",
-        "previous": "blk-aa9051c6c14d6c5a"
+        "previous": "blk-41c5ed3f69419431"
       },
       {
         "id": "blk-adf63deeec945f91",
         "fingerprint": "7c410a50c4b8e901466349ccd7fcafd661841f1b1adb865683baee888c199d99",
         "heading": "哈希查找：以空间换时间",
-        "previous": "blk-0ebef8b094b5c012"
+        "previous": "blk-b082e37f9f34fd44"
       },
       {
-        "id": "blk-c34615968279eaaf",
-        "fingerprint": "44706005199722911b62f4678bac6a56c0a3f248cf4c52ddeb3073a740a8171f",
+        "id": "blk-02798bb8f25d3184",
+        "fingerprint": "d8cb6ec51e9c1285ad60eafddf512bb33abf26061692091af6a27b0334314682",
         "heading": "哈希查找：以空间换时间",
         "previous": "blk-adf63deeec945f91"
       },
       {
-        "id": "blk-e14bdca33724ba1f",
-        "fingerprint": "780d78201e8c4c617bbbbdb8c52bf443540dc2123684317d7364385985985a22",
+        "id": "blk-8c341db332514334",
+        "fingerprint": "97e9f99a340fdd57b7709d9be0da714a12072fc0beb8342ea4f6c7b217d63903",
         "heading": "哈希查找：以空间换时间",
-        "previous": "blk-c34615968279eaaf"
+        "previous": "blk-02798bb8f25d3184"
       },
       {
-        "id": "blk-03a94c8afac606e9",
-        "fingerprint": "440328f80ff17db59c7fe1b5535fe8157c245f65d490ef6e0da23b076ffbc427",
+        "id": "blk-6c07b72625dd673f",
+        "fingerprint": "02d7227c8325d97cc1b07ceb4f4c87a058b7021d8306c519e6cbe646a438f5e9",
         "heading": "哈希查找：以空间换时间",
-        "previous": "blk-e14bdca33724ba1f"
+        "previous": "blk-8c341db332514334"
       },
       {
         "id": "blk-2113460a386f19cb",
         "fingerprint": "47513143d3345f2432e74bbbdad82fe824164a6a71b95ecd01f87320d8bb117c",
         "heading": "哈希查找：以空间换时间",
-        "previous": "blk-03a94c8afac606e9"
+        "previous": "blk-6c07b72625dd673f"
       },
       {
-        "id": "blk-83be0bd7b97dc777",
+        "id": "blk-7dfeaa816740a2c5",
         "fingerprint": "2ea0e467347681002a5e9760eb534411878fbbacb5ad62befa473a6627eb6f3d",
         "heading": "哈希查找：以空间换时间",
         "previous": "blk-2113460a386f19cb"
       },
       {
-        "id": "blk-6946e123c15bb8bc",
-        "fingerprint": "33c39a9791b33da708c7a48c394eae2ca2f7835d5dda058f9bf96b7f258a4221",
+        "id": "blk-1b108efd8a8c9b75",
+        "fingerprint": "d29a56c4c6ea4e06223fa48b88b580249c1f29b84174bf010333335c4c8491dd",
         "heading": "哈希查找：以空间换时间",
-        "previous": "blk-83be0bd7b97dc777"
+        "previous": "blk-7dfeaa816740a2c5"
       },
       {
         "id": "blk-1f33e4ec6ba492ab",
         "fingerprint": "e3596d12689c467bf92ced7f018145a696c3c3aafc39a455a124b5aa5481d5a8",
         "heading": "哈希查找：以空间换时间",
-        "previous": "blk-6946e123c15bb8bc"
+        "previous": "blk-1b108efd8a8c9b75"
       }
     ],
     "aliases": {
@@ -12815,8 +13115,8 @@
         "previous": ""
       },
       {
-        "id": "blk-6540f6d96a30dac8",
-        "fingerprint": "75906dda7ebf4a38bc949baa16c2cc0c7a7b44fb8398a7aab8b0e7a77a749bff",
+        "id": "blk-b053308d7aa60fed",
+        "fingerprint": "298f58b4013b991a71dadd03e4feb9ebca63cd7093dcc7603e5188e7f8c09bc7",
         "heading": "重识搜索算法",
         "previous": "blk-f00986642a71db4d"
       },
@@ -12824,49 +13124,49 @@
         "id": "blk-30fe09490eb4064a",
         "fingerprint": "71e48e143200eef1672fbfa834da78b2e5de16c761a231974fb0f20d9ba35776",
         "heading": "重识搜索算法",
-        "previous": "blk-6540f6d96a30dac8"
+        "previous": "blk-b053308d7aa60fed"
       },
       {
-        "id": "blk-370704dfb3f0fd56",
-        "fingerprint": "36514ebaa3c522f651bfee031f749293108088b58f2bf9db8e3f9eed1e394bb7",
+        "id": "blk-58a8d18daf3f16c3",
+        "fingerprint": "78c820ad05e6729e690a91766d09e007187e9c90cd7e4b5c14123e555fbc3552",
         "heading": "重识搜索算法",
         "previous": "blk-30fe09490eb4064a"
       },
       {
-        "id": "blk-39a5a52594587d08",
-        "fingerprint": "9849d6b95ac61af17b044a5eeb5c6077bfab1722091e29430728d0ffc7244128",
+        "id": "blk-8bee82635a647dbc",
+        "fingerprint": "1aa675acdb8a208e76af6c4c83828e4da183a1ddf3d8094f586bb4574c59210a",
         "heading": "重识搜索算法",
-        "previous": "blk-370704dfb3f0fd56"
+        "previous": "blk-58a8d18daf3f16c3"
       },
       {
         "id": "blk-d742c024a24711b0",
         "fingerprint": "7b7fb41c8b8eb02132eb92b85d60c78f9de8e62484eec3ab2fdf45e034341b13",
         "heading": "暴力搜索",
-        "previous": "blk-39a5a52594587d08"
+        "previous": "blk-8bee82635a647dbc"
       },
       {
-        "id": "blk-9754788ca7e35073",
-        "fingerprint": "2cf9e12903e3f17c1deaaf8f91a7e4bb70a99925d264a2e3510ddf4121ec4691",
+        "id": "blk-320db8c711a71bf3",
+        "fingerprint": "574266c2f666e20873557f479bf73513248c160d49bd98d4ac58cbba2d1ef0ae",
         "heading": "暴力搜索",
         "previous": "blk-d742c024a24711b0"
       },
       {
-        "id": "blk-05220c584363778d",
-        "fingerprint": "c56a05b60059936fd2da0de0cf9e994e1fa90ac00c97ea63e5b3101d657ca64f",
+        "id": "blk-5cc82ad20da9e79b",
+        "fingerprint": "ccee408717bec41f19890940dcc6d4167d319b70e28bc0d7b7bc906d89c0bab2",
         "heading": "暴力搜索",
-        "previous": "blk-9754788ca7e35073"
+        "previous": "blk-320db8c711a71bf3"
       },
       {
-        "id": "blk-c9b4b7ed44af1f36",
-        "fingerprint": "206bb23d3c74483276ac74c9775082367e16d70ce568a9063ab8bdf54042c6ff",
+        "id": "blk-9572f18f40b9e209",
+        "fingerprint": "14214f1ec77486eea4306927bed5ccc5d821aa9193306ae7be11463f5f8dccf3",
         "heading": "暴力搜索",
-        "previous": "blk-05220c584363778d"
+        "previous": "blk-5cc82ad20da9e79b"
       },
       {
         "id": "blk-d914167a836c1fa5",
         "fingerprint": "93dce93d4acb16395d439cef41bb179c9cee127b0294cde12f274bc9ef37aaed",
         "heading": "暴力搜索",
-        "previous": "blk-c9b4b7ed44af1f36"
+        "previous": "blk-9572f18f40b9e209"
       },
       {
         "id": "blk-494085d7818a6fc0",
@@ -12875,44 +13175,50 @@
         "previous": "blk-d914167a836c1fa5"
       },
       {
-        "id": "blk-31bbcd3d6819fe73",
-        "fingerprint": "fbb753bfe9a6b8731ec7368bcbc98027eed6e22cd50dec1bf69ba2894910e9ca",
+        "id": "blk-e45eef9e662574ca",
+        "fingerprint": "fef1b3887dc784f37c5ee04f3e6409e72ba032704f9bd23bcd40b0b530094226",
         "heading": "自适应搜索",
         "previous": "blk-494085d7818a6fc0"
       },
       {
-        "id": "blk-9601c672c22d5dba",
-        "fingerprint": "00e6c741c604a746cb87bcd277242c937cb9186402a4c8fcbb1ea578913ead96",
+        "id": "blk-652baa5bf72e103e",
+        "fingerprint": "3fa1a878e1a54166c2d6296ba1699b37b7db5221abbec4045db116a831ce20f4",
         "heading": "自适应搜索",
-        "previous": "blk-31bbcd3d6819fe73"
+        "previous": "blk-e45eef9e662574ca"
       },
       {
-        "id": "blk-4fc07e2bde936443",
-        "fingerprint": "e5b2b657aa17f61ab93e1d66c6920b6c07d789603d611f0bec5d62543a1e9f51",
+        "id": "blk-27921d661ca5cab8",
+        "fingerprint": "2bfd766449c151559cf031a98f4d3ad9e3b38d6e87aa122113ff09ba149da918",
         "heading": "自适应搜索",
-        "previous": "blk-9601c672c22d5dba"
+        "previous": "blk-652baa5bf72e103e"
       },
       {
         "id": "blk-e5d335517797337e",
         "fingerprint": "93af86b714b06cdb576a95e396e5339b6fc77f2641219e08bc26cea432b5e978",
         "heading": "自适应搜索",
-        "previous": "blk-4fc07e2bde936443"
+        "previous": "blk-27921d661ca5cab8"
       },
       {
-        "id": "blk-8457be7270bd2fea",
-        "fingerprint": "cb7cf591559b0232b4937fb59bd3814b3d2cdd64dbf2a587254d342383ee6c79",
+        "id": "blk-f550cc000eec3072",
+        "fingerprint": "58c04ce813cfcd11eb8196b3b6bdcabda9517b3349d21b08f693477ad6a812aa",
         "heading": "自适应搜索",
         "previous": "blk-e5d335517797337e"
+      },
+      {
+        "id": "blk-efc63e78d0293c1b",
+        "fingerprint": "3fcdcacf93805266e0823398d4fb4263a66deb05d7df7f2cb905aade2274cc26",
+        "heading": "自适应搜索",
+        "previous": "blk-f550cc000eec3072"
       },
       {
         "id": "blk-855da550bff543e6",
         "fingerprint": "ec492150947dd25d9b5656f14cab777b9b467fa96dda2156db93222161967874",
         "heading": "搜索方法选取",
-        "previous": "blk-8457be7270bd2fea"
+        "previous": "blk-efc63e78d0293c1b"
       },
       {
-        "id": "blk-cc80933b7a94329b",
-        "fingerprint": "4135a3cd8eaab956152e2c621f2d963c8cb9a5126a9245c0ebccc56c1b953ee1",
+        "id": "blk-d2fcb6702f1b7e9e",
+        "fingerprint": "b472fb50a171446b8dbfeb184cf70ed75ea64f1211186f07af69ddfa1a26991a",
         "heading": "搜索方法选取",
         "previous": "blk-855da550bff543e6"
       },
@@ -12920,7 +13226,7 @@
         "id": "blk-dd17530fa8bf84ad",
         "fingerprint": "87a19a6e515c1dfce26af449faaf432e5f9c915325615f9e75ba70eeb7831b56",
         "heading": "搜索方法选取",
-        "previous": "blk-cc80933b7a94329b"
+        "previous": "blk-d2fcb6702f1b7e9e"
       },
       {
         "id": "blk-9472b2263facf728",
@@ -12929,22 +13235,22 @@
         "previous": "blk-dd17530fa8bf84ad"
       },
       {
-        "id": "blk-0c36e53a91450053",
-        "fingerprint": "1e4676806a81ca528169f044505a9a51a0e01887781159b17c2dd886a1abb496",
+        "id": "blk-6ec8fbac613a195c",
+        "fingerprint": "4c7aa1618d20a90a98ede5a5ad984130695517ac1078a0bd2f73e753b2b0e010",
         "heading": "搜索方法选取",
         "previous": "blk-9472b2263facf728"
       },
       {
-        "id": "blk-0bae1a9994196f8f",
-        "fingerprint": "4177777a47b394963e9073013b9c746d803d3b0fe0cb80b270a058dda6c7d8cd",
+        "id": "blk-baa6147be85b5885",
+        "fingerprint": "09fd060625539170ba05d7e9753263bcf804498e25c2d3f6adc57b204f34b900",
         "heading": "搜索方法选取",
-        "previous": "blk-0c36e53a91450053"
+        "previous": "blk-6ec8fbac613a195c"
       },
       {
         "id": "blk-f14c187b66d7d50d",
         "fingerprint": "f4248e631db709d064d6c7976f188366617527ea90ef39af5be86ec959da8a5d",
         "heading": "搜索方法选取",
-        "previous": "blk-0bae1a9994196f8f"
+        "previous": "blk-baa6147be85b5885"
       },
       {
         "id": "blk-ca2ff6e07567a828",
@@ -12953,8 +13259,8 @@
         "previous": "blk-f14c187b66d7d50d"
       },
       {
-        "id": "blk-2b27a3aecaf255fb",
-        "fingerprint": "95dbd34e4e63d4272b43d7f563ad93f11f81909274eb4f7b09bd36b843bae6bb",
+        "id": "blk-67c8fe83d5031c71",
+        "fingerprint": "bf4b5c8c707e0643527125d6885825a4b7f3fabadf49cadb6d48b5f0f7b2a3ee",
         "heading": "搜索方法选取",
         "previous": "blk-ca2ff6e07567a828"
       },
@@ -12962,11 +13268,11 @@
         "id": "blk-1200b359dc8a05dd",
         "fingerprint": "3148dae2e7780e17ba49d7ea23ffb52c53c1dadf39df8cccfe2da8692945defd",
         "heading": "搜索方法选取",
-        "previous": "blk-2b27a3aecaf255fb"
+        "previous": "blk-67c8fe83d5031c71"
       },
       {
-        "id": "blk-59f8c4594f012626",
-        "fingerprint": "e86a41dea9ad18aeb990b20f4e2aa668747cb739b5877c03a11c38b307523ecf",
+        "id": "blk-4f71553d8df9676a",
+        "fingerprint": "4ae7cbb297114e4908f470a34366f4955450d2b1a0b8411070fad587ae87f053",
         "heading": "搜索方法选取",
         "previous": "blk-1200b359dc8a05dd"
       },
@@ -12974,11 +13280,11 @@
         "id": "blk-4ebe79c3b34b9f74",
         "fingerprint": "506544a44cb49a359e6e36866e8632bb2166462270c0c49a1b637affaf4103e6",
         "heading": "搜索方法选取",
-        "previous": "blk-59f8c4594f012626"
+        "previous": "blk-4f71553d8df9676a"
       },
       {
-        "id": "blk-2f14ebf99d57bdd3",
-        "fingerprint": "c3d0096c7e80fcd00f826463748255418517cacd0692e542101bbbfed6ce31ef",
+        "id": "blk-5a968641c4d434ca",
+        "fingerprint": "2127a083488af91de51f8429f0d5f14c79a0256b767da4e6e06452c2569e3c20",
         "heading": "搜索方法选取",
         "previous": "blk-4ebe79c3b34b9f74"
       },
@@ -12986,11 +13292,11 @@
         "id": "blk-947e83f6bb9cc0e4",
         "fingerprint": "87e72d30b261f1dd0a0c937336dfd79b9230d62d9a49a7b85277c8ba865b3574",
         "heading": "搜索方法选取",
-        "previous": "blk-2f14ebf99d57bdd3"
+        "previous": "blk-5a968641c4d434ca"
       },
       {
-        "id": "blk-739bcdbe6e165430",
-        "fingerprint": "b2949a111352cbbbcd169349a26931c988c16debf3cc800434eb81b54dc6cab5",
+        "id": "blk-1efdd5f8e57fd02c",
+        "fingerprint": "28369c882887c151efd200f2838d9e722c6e94f59201813f8d7474d8f6a7bbb1",
         "heading": "搜索方法选取",
         "previous": "blk-947e83f6bb9cc0e4"
       }
@@ -13044,8 +13350,8 @@
         "previous": "blk-47638498bbcd7e3b"
       },
       {
-        "id": "blk-8f04ec14c436a0d7",
-        "fingerprint": "b4e9d88d8af0327e27f513df179ffc0d9957a19449a6aeac0bf896d7913a7120",
+        "id": "blk-804d9e52a24adea4",
+        "fingerprint": "ef54fcac773c3f215c8ca09b8b88ade870e6b3f3a906785dbd75cf02d2b9c677",
         "heading": "重点回顾",
         "previous": "blk-e15d14a49ebc7676"
       }
@@ -13077,76 +13383,106 @@
         "previous": "blk-14f47faa50dae2b3"
       },
       {
-        "id": "blk-4595f642440ad5d9",
-        "fingerprint": "095f5708f80448693475a35c247a18f99fc84d116cb2ff698524fd78d5562fca",
+        "id": "blk-884a6c385e3930ad",
+        "fingerprint": "4e9b33f01fcdba67fd21c7613fde582dc2daab2a509565e5fce029e347330d77",
         "heading": "二分查找怎样缩小搜索区间",
         "previous": "blk-96656bfc764ec751"
       },
       {
-        "id": "blk-c3060ee30dddf753",
-        "fingerprint": "c8adc43d609a5b8c5a46f800d3919c0f9353d1c83ccb51abab053e1f318e9aa8",
+        "id": "blk-f48927b3d594cd9d",
+        "fingerprint": "df2e652027b8146725c623d1cc9379028c0099c77617dde17c9c1483c21840f7",
         "heading": "二分查找怎样缩小搜索区间",
-        "previous": "blk-4595f642440ad5d9"
+        "previous": "blk-884a6c385e3930ad"
       },
       {
-        "id": "blk-94f8ac76c4179209",
-        "fingerprint": "5622b5cc96866525062f621833b91c6ba85166f767de85b8499da1afc5e813ea",
+        "id": "blk-1faa25f774738640",
+        "fingerprint": "10415039bfb0c56c148c25cbee0239233fd3726e34de3bdec9880f94c8859e60",
         "heading": "二分查找怎样缩小搜索区间",
-        "previous": "blk-c3060ee30dddf753"
+        "previous": "blk-f48927b3d594cd9d"
+      },
+      {
+        "id": "blk-52e2024d7b075d2e",
+        "fingerprint": "7a8d61f4e448d510c4440c9e47b4df006e8c611e12626902c9bef6fa39b156bd",
+        "heading": "二分查找怎样缩小搜索区间",
+        "previous": "blk-1faa25f774738640"
+      },
+      {
+        "id": "blk-f604f56f4efb46fe",
+        "fingerprint": "cc38c3f6d612d5db58585c7a7ec47a53dc073ccb5453c840a284195fcbbcc93d",
+        "heading": "二分查找怎样缩小搜索区间",
+        "previous": "blk-52e2024d7b075d2e"
+      },
+      {
+        "id": "blk-9ca24bd93f9b1e2f",
+        "fingerprint": "8349e5ead7592a62365c6449c3948ff1516b1baa37c70edb59a5e8a74c897248",
+        "heading": "二分查找怎样缩小搜索区间",
+        "previous": "blk-f604f56f4efb46fe"
       },
       {
         "id": "blk-e67a0a9cea966e80",
         "fingerprint": "e8be5232b801c52e98b0a5fecd0d1fb3d4c81ccf17eb77b0ee8cfe7e5eeb7293",
         "heading": "重复元素的左右边界",
-        "previous": "blk-94f8ac76c4179209"
+        "previous": "blk-9ca24bd93f9b1e2f"
       },
       {
-        "id": "blk-44d473a6bf35273a",
-        "fingerprint": "2e3136b865a545c8232008346d22d39fff6bed923494429c471414feb83b37d5",
+        "id": "blk-03ac803ce77d22f3",
+        "fingerprint": "2cf96de02d161f478a9ccdf5ea0103542c66207d902862021a524c25a9c02373",
         "heading": "重复元素的左右边界",
         "previous": "blk-e67a0a9cea966e80"
       },
       {
-        "id": "blk-e1707b12ac3b5418",
-        "fingerprint": "0d1bbeb06bfa35cafebb7d853462a6170440cb6a7b6d4cc0c7d1c361c3154740",
+        "id": "blk-dd23c1a1ffc3cf14",
+        "fingerprint": "04e8faaf761d2494c48a8803e47a6a554588b2bcdb03c9e85d3536a44bb09d98",
         "heading": "重复元素的左右边界",
-        "previous": "blk-44d473a6bf35273a"
+        "previous": "blk-03ac803ce77d22f3"
       },
       {
-        "id": "blk-467ae4a916ca4592",
-        "fingerprint": "cee338b0e684abb4dc549ac57bf4276b75d9b24f75a3347f516c46d54f203957",
+        "id": "blk-8b962f85a84d1b36",
+        "fingerprint": "10415039bfb0c56c148c25cbee0239233fd3726e34de3bdec9880f94c8859e60",
         "heading": "重复元素的左右边界",
-        "previous": "blk-e1707b12ac3b5418"
+        "previous": "blk-dd23c1a1ffc3cf14"
+      },
+      {
+        "id": "blk-45244308095f8187",
+        "fingerprint": "3bf9d042ae38d76062162088404aed0cf9e7ebd0a9b994c7238184a4434d041a",
+        "heading": "重复元素的左右边界",
+        "previous": "blk-8b962f85a84d1b36"
       },
       {
         "id": "blk-cf085e7324bf5994",
         "fingerprint": "34d73b1d5d858f9b4ed094851d63822289a173c769d7f54e5cdfca590369db20",
         "heading": "不同数据该选哪种搜索方法",
-        "previous": "blk-467ae4a916ca4592"
+        "previous": "blk-45244308095f8187"
       },
       {
-        "id": "blk-37e7f1a4081b07ac",
-        "fingerprint": "b724f4062485cc91d0e5965ee81414285d289084e5c1e5eb3d4c45bdfa647f3b",
+        "id": "blk-bd6f33185d4e94e5",
+        "fingerprint": "4673c4b344cecdf4be622f5310dd4340bec7115ca4ec7b303b7a18593d8716b3",
         "heading": "不同数据该选哪种搜索方法",
         "previous": "blk-cf085e7324bf5994"
       },
       {
-        "id": "blk-35748cf5ab51b764",
-        "fingerprint": "0efe564efe5a2e1ccb10478388e5cb81254740a07fe017f44977579926bdef89",
+        "id": "blk-0e1f24c6da4ff567",
+        "fingerprint": "46cec224c829545a304381a84c76d493384d16586017552166c29479bc9f6319",
         "heading": "不同数据该选哪种搜索方法",
-        "previous": "blk-37e7f1a4081b07ac"
+        "previous": "blk-bd6f33185d4e94e5"
       },
       {
-        "id": "blk-c4caf64a56838b22",
-        "fingerprint": "895c79afbd1460f46c956f22b9381b204e94602c41e1f8083532721063e05296",
+        "id": "blk-57deb2a7594b8244",
+        "fingerprint": "10415039bfb0c56c148c25cbee0239233fd3726e34de3bdec9880f94c8859e60",
         "heading": "不同数据该选哪种搜索方法",
-        "previous": "blk-35748cf5ab51b764"
+        "previous": "blk-0e1f24c6da4ff567"
+      },
+      {
+        "id": "blk-d24a882a982aea8b",
+        "fingerprint": "322ace2086fefdaa22dd1eb8e73e95692705bb6a0629297b5bc4a72a536ce8e0",
+        "heading": "不同数据该选哪种搜索方法",
+        "previous": "blk-57deb2a7594b8244"
       },
       {
         "id": "blk-c59038fa29107136",
         "fingerprint": "6830f3f9b22df09f3d3b0acd1008c55a058da3836ff31220d9362f19d6ae5721",
         "heading": "编程练习",
-        "previous": "blk-c4caf64a56838b22"
+        "previous": "blk-d24a882a982aea8b"
       },
       {
         "id": "blk-84089ffdbec7237e",
@@ -13155,22 +13491,28 @@
         "previous": "blk-c59038fa29107136"
       },
       {
-        "id": "blk-50aac71f4a67dcad",
-        "fingerprint": "fde7647757735a59beb8acc1a75a4ad36a76e74864fb57996b3d9190cddb7fd9",
+        "id": "blk-4ffeb96fba9d28ef",
+        "fingerprint": "0beff87e39ec493aacb470cf64d8e79d393c17cbbeb1aa458df29ee94c3b9fae",
         "heading": "有序数组的二分查找",
         "previous": "blk-84089ffdbec7237e"
       },
       {
-        "id": "blk-cd99dee47b2893ac",
-        "fingerprint": "182603054e020018b45311c544665fec1659b8f0396f56e6fc02ca72ebdfd732",
+        "id": "blk-6e33d755627ddcb9",
+        "fingerprint": "ac97e240ea69b1e814386dfd2ee3274fe0debd8d5ebd6adf94ea3c852693214e",
         "heading": "有序数组的二分查找",
-        "previous": "blk-50aac71f4a67dcad"
+        "previous": "blk-4ffeb96fba9d28ef"
+      },
+      {
+        "id": "blk-b78652456e1ba431",
+        "fingerprint": "65238ef03ce60c3de433ab997ce1d918560cca518d494efbbb08588bb7537a72",
+        "heading": "有序数组的二分查找",
+        "previous": "blk-6e33d755627ddcb9"
       },
       {
         "id": "blk-42bf3b4d26231390",
         "fingerprint": "bdff62ad9dff16daccc22b6fa19f794c89dd9b54fdd04dd4dcf833f64b1e38e6",
         "heading": "有序数组的二分查找",
-        "previous": "blk-cd99dee47b2893ac"
+        "previous": "blk-b78652456e1ba431"
       },
       {
         "id": "blk-2729525ce1d1dfdb",
@@ -13179,8 +13521,8 @@
         "previous": "blk-42bf3b4d26231390"
       },
       {
-        "id": "blk-6c25173012a716f1",
-        "fingerprint": "bda870d3e2faa4eb8cbde9413367c37ac994364920636e2c1f820554e699b1cb",
+        "id": "blk-0bc6f70fd284f927",
+        "fingerprint": "80c04094304177cd491c5fb14e3746ae6728608c2354328c2bea77f719d5034f",
         "heading": "有序数组的插入位置",
         "previous": "blk-2729525ce1d1dfdb"
       },
@@ -13188,19 +13530,25 @@
         "id": "blk-faf3114269e2bf03",
         "fingerprint": "d2c648d9b1163619780cef7ff4635db2a03ca2bbddb2296ca202559a7e3511e8",
         "heading": "有序数组的插入位置",
-        "previous": "blk-6c25173012a716f1"
+        "previous": "blk-0bc6f70fd284f927"
       },
       {
-        "id": "blk-802c45429cf243dc",
-        "fingerprint": "69b1b3f55d963b61b29305508912e1b49ab5065d0122c814edb3a06d4a322d14",
+        "id": "blk-018fafd1ed051d21",
+        "fingerprint": "ac97e240ea69b1e814386dfd2ee3274fe0debd8d5ebd6adf94ea3c852693214e",
         "heading": "有序数组的插入位置",
         "previous": "blk-faf3114269e2bf03"
+      },
+      {
+        "id": "blk-1ce20432772f421c",
+        "fingerprint": "350b556e24360c9af5d34b617a7db478db0a022ff691cbb0eb8675e58c14b297",
+        "heading": "有序数组的插入位置",
+        "previous": "blk-018fafd1ed051d21"
       },
       {
         "id": "blk-80909e110f5ebaa6",
         "fingerprint": "d556a63bea731d98b0f69bbf3637d269fb505665aab87c133a1978a97c0b48b7",
         "heading": "有序数组的插入位置",
-        "previous": "blk-802c45429cf243dc"
+        "previous": "blk-1ce20432772f421c"
       }
     ],
     "aliases": {
@@ -13266,16 +13614,40 @@
         "previous": ""
       },
       {
-        "id": "blk-8ab195fb642edecc",
-        "fingerprint": "6f7a1bf18afb33a9d35387a70e792774efebd5e8fa2272eea20d29252a65e73c",
+        "id": "blk-a1787f7f8fb855ad",
+        "fingerprint": "bda754166d6d02fe27b723b0c2ce305cfa4b539dedbd10931f0db044d84c68a5",
         "heading": "排序算法",
         "previous": "blk-f215e057003c04ab"
+      },
+      {
+        "id": "blk-087f1ba6bcd6be0e",
+        "fingerprint": "a10a57ce124e276b86b2e38e431f1171656eddfdf1f536993de78f1caf8eb0df",
+        "heading": "排序算法",
+        "previous": "blk-a1787f7f8fb855ad"
+      },
+      {
+        "id": "blk-6119f9c634e05fe5",
+        "fingerprint": "2c181e170eee0ebd160e630ea57fe981c5908af7e47aa1d6da54093267ffac6a",
+        "heading": "排序算法",
+        "previous": "blk-087f1ba6bcd6be0e"
+      },
+      {
+        "id": "blk-da8da83f8354a803",
+        "fingerprint": "90234816d7064c1a6e07136ec8940847b1afdd025b3ced3421b2bcad2ff4c8f9",
+        "heading": "排序算法",
+        "previous": "blk-6119f9c634e05fe5"
+      },
+      {
+        "id": "blk-1f5e6bcac1a31e7b",
+        "fingerprint": "1683bc6d36e0d2e5883dc0015814259c2f528da6aa7035bc6e0685de0701be3d",
+        "heading": "排序算法",
+        "previous": "blk-da8da83f8354a803"
       },
       {
         "id": "blk-16acfb40426373d7",
         "fingerprint": "eb3e2fd7c51f0ccad5d4cd24bfe194a30bf2881035f93ca0720807b4b52cf0ab",
         "heading": "排序算法",
-        "previous": "blk-8ab195fb642edecc"
+        "previous": "blk-1f5e6bcac1a31e7b"
       },
       {
         "id": "blk-4f575a20e347ba8e",
@@ -13290,8 +13662,8 @@
         "previous": "blk-4f575a20e347ba8e"
       },
       {
-        "id": "blk-0e2746275034e5be",
-        "fingerprint": "b1b19e77ea9589e5cbb89c2237ad7e79c8e116ff6d0315cebc4ee4b292660948",
+        "id": "blk-cfa70fb0bdd530e5",
+        "fingerprint": "7d627b04da11b6f29a2b1aaad7de359eb909a4ccf92c18ca3d2de8baf29fba8a",
         "heading": "评价维度",
         "previous": "blk-5a3d9a496d9651e3"
       },
@@ -13299,7 +13671,7 @@
         "id": "blk-c0f12d4cbaa2f32c",
         "fingerprint": "7ff338b95f2a5ea40f13119d7117895a5bd1f929866e55aa04c97e6e3bb716ef",
         "heading": "评价维度",
-        "previous": "blk-0e2746275034e5be"
+        "previous": "blk-cfa70fb0bdd530e5"
       },
       {
         "id": "blk-284a3895b9b3c2e1",
@@ -13320,26 +13692,26 @@
         "previous": "blk-a33e8c4862aff92a"
       },
       {
-        "id": "blk-c08d6701b69a4729",
-        "fingerprint": "197e7d2d1a346a8dd5ed7026b5a9f843664532a6d5286e73fdcc3d373bff9f0e",
+        "id": "blk-b3d5d098fc0cdd93",
+        "fingerprint": "9bfd4460cb14eb2e494cca5c302b47b338b448479f36dbd48dc3e6126e266c89",
         "heading": "评价维度",
         "previous": "blk-be40b3490843f1bd"
       },
       {
-        "id": "blk-40e14d9e1e6a2efc",
-        "fingerprint": "3c650c56045de99badf55b0c3a711665121faf9af1f0a5f53e08b0e445dd614b",
+        "id": "blk-e934226abea40972",
+        "fingerprint": "969d3e37a767fb657f0ddb8af1739c4b8745b425487769b070cd1587748cfc50",
         "heading": "评价维度",
-        "previous": "blk-c08d6701b69a4729"
+        "previous": "blk-b3d5d098fc0cdd93"
       },
       {
         "id": "blk-e220b6a0f39fd586",
         "fingerprint": "6d324d81518dbb16424502b376f102e87fe948daa9dd4215c0c449dffb791831",
         "heading": "理想排序算法",
-        "previous": "blk-40e14d9e1e6a2efc"
+        "previous": "blk-e934226abea40972"
       },
       {
-        "id": "blk-e1a3a2249dcdcd66",
-        "fingerprint": "3f1476a679175f86c392ae763a532697d3764b2240eb69c49e3bec403c1ed414",
+        "id": "blk-81e9a465210832df",
+        "fingerprint": "e425c339b68c0f1e9e1945c6f8b30af9f418ee250e24b9322029cf6177a3cc75",
         "heading": "理想排序算法",
         "previous": "blk-e220b6a0f39fd586"
       },
@@ -13347,7 +13719,7 @@
         "id": "blk-d0574efe527c581a",
         "fingerprint": "b5a93ee4096f0ce488b2258431b54ac2d7b7d3ee25a045c9bdbddae11816012f",
         "heading": "理想排序算法",
-        "previous": "blk-e1a3a2249dcdcd66"
+        "previous": "blk-81e9a465210832df"
       }
     ],
     "aliases": {
@@ -13377,8 +13749,8 @@
         "previous": ""
       },
       {
-        "id": "blk-c5a98c3243bd4860",
-        "fingerprint": "8db698db741b251165628fc2c8344f65f81dd4ea30adafdd0b7c114ddcc075b7",
+        "id": "blk-734ca6fa87ab6ddf",
+        "fingerprint": "f8c78cb1678db65a33a308b32f6575ededd515b0187b2da925d15589aabdd4d0",
         "heading": "选择排序",
         "previous": "blk-133b7c9a88673567"
       },
@@ -13386,25 +13758,25 @@
         "id": "blk-9a4ad160b16f8ab1",
         "fingerprint": "83cb192686024075e645e0a90d3637037776d80547f02ae0294135007bbab5ba",
         "heading": "选择排序",
-        "previous": "blk-c5a98c3243bd4860"
+        "previous": "blk-734ca6fa87ab6ddf"
       },
       {
-        "id": "blk-6418e5ee39b7e0dd",
-        "fingerprint": "db5625b99d4d1c19a004a5773514e95007021c98217b5e4ec4bdff2d35675e62",
+        "id": "blk-b8177b6910892362",
+        "fingerprint": "e833654ffbcfc2bd2f9f78dad24440fef1fbc98092b9ff635420d916cc923a9c",
         "heading": "选择排序",
         "previous": "blk-9a4ad160b16f8ab1"
       },
       {
-        "id": "blk-7d5add3cd0701269",
-        "fingerprint": "b4c0f4f6aefeedfff689ea66f0997c1178bc0488cdf25db49cdb4488e9df8179",
+        "id": "blk-6d0811b40becbafc",
+        "fingerprint": "fedcdeb21f705ad35bf2a7703ae325b36cdfd900f8930aed79672aadf60be9a5",
         "heading": "选择排序",
-        "previous": "blk-6418e5ee39b7e0dd"
+        "previous": "blk-b8177b6910892362"
       },
       {
         "id": "blk-c4aa206b90b0fb28",
         "fingerprint": "28355b8096305f6e4a5cd5d6c46f18c3dc2d80ed29c0f6cd3aa640be4f931241",
         "heading": "选择排序",
-        "previous": "blk-7d5add3cd0701269"
+        "previous": "blk-6d0811b40becbafc"
       },
       {
         "id": "blk-c3e939608e5c40e9",
@@ -13419,8 +13791,8 @@
         "previous": "blk-c3e939608e5c40e9"
       },
       {
-        "id": "blk-7be557d3d1135353",
-        "fingerprint": "ad088ad9fcbba864d5afeb1a324d4c7088e43db4efe0bcb6825d2e3c7adc30da",
+        "id": "blk-479a7d5b61c3eee2",
+        "fingerprint": "5ebcddc0800f3872b255ad8a9910a54f0fe8d543b4b7c96456dbe61bc480eb76",
         "heading": "算法特性",
         "previous": "blk-0104a2b7232476ba"
       },
@@ -13428,7 +13800,7 @@
         "id": "blk-1f88d0cbf5c89671",
         "fingerprint": "981b20bef8da942f5cd800a84d10374a4ac6a65b6fdd2b9f3f7c5c09ad5a7b3f",
         "heading": "算法特性",
-        "previous": "blk-7be557d3d1135353"
+        "previous": "blk-479a7d5b61c3eee2"
       }
     ],
     "aliases": {
@@ -13453,8 +13825,8 @@
         "previous": ""
       },
       {
-        "id": "blk-2489e936be521820",
-        "fingerprint": "15cd8309197b41adfebbae7eab88736888b839f5a620f9dee8d444b51b4870ba",
+        "id": "blk-dde10c7439bbfb47",
+        "fingerprint": "269eb99075e31a318996022a11e505cf96db4004951d9d72b596ac519f8fcd1b",
         "heading": "冒泡排序",
         "previous": "blk-139e7ff2752ecae2"
       },
@@ -13462,11 +13834,11 @@
         "id": "blk-90f95f5cf90b2956",
         "fingerprint": "161f5ca28fd0b988a79163183865bb7618cac2ab131ece11e3d45930c913f63a",
         "heading": "冒泡排序",
-        "previous": "blk-2489e936be521820"
+        "previous": "blk-dde10c7439bbfb47"
       },
       {
-        "id": "blk-8f28396329e6a4e7",
-        "fingerprint": "7401c63d0245076a4e77002fe98c19007ac3024508d101a22be38d994f7f1682",
+        "id": "blk-5c90939a78c012f5",
+        "fingerprint": "74bade27800715bf06429af9d5d1e4755310f7991261becd053ea94e53047ac0",
         "heading": "冒泡排序",
         "previous": "blk-90f95f5cf90b2956"
       },
@@ -13474,25 +13846,25 @@
         "id": "blk-89aed8ac35a4c469",
         "fingerprint": "e26df59b07a43056d764e226ea07163c7377490d4dd1bd4f8afb8bbedd6f56a4",
         "heading": "算法流程",
-        "previous": "blk-8f28396329e6a4e7"
+        "previous": "blk-5c90939a78c012f5"
       },
       {
-        "id": "blk-c643783394aae284",
-        "fingerprint": "ee46ce40d097e3555cf4d3478a617a5580488191e2c10131882f1bd41e8de30b",
+        "id": "blk-83ccfd3445cea00f",
+        "fingerprint": "5a36c246ed0bbdacb82a2f7265fb59624b3e3946827648711b01738c6cf35181",
         "heading": "算法流程",
         "previous": "blk-89aed8ac35a4c469"
       },
       {
-        "id": "blk-1c2b0c97ed7c7d8f",
-        "fingerprint": "d078902b27ed7cff235a67c46bb6f78fbf36e96357a8b9289c2d6ff551526a7b",
+        "id": "blk-9e62118eb741ccda",
+        "fingerprint": "5c9ed9a1a8bd0f25647b6579f9200dd5282891f29982bd2ff17d94167f6935ca",
         "heading": "算法流程",
-        "previous": "blk-c643783394aae284"
+        "previous": "blk-83ccfd3445cea00f"
       },
       {
         "id": "blk-ccafdd5b274b5ce0",
         "fingerprint": "35b6de7602e46d41d01e262b2532e31bbf1a0a38e06c4707712167f272b53fc9",
         "heading": "算法流程",
-        "previous": "blk-1c2b0c97ed7c7d8f"
+        "previous": "blk-9e62118eb741ccda"
       },
       {
         "id": "blk-ec906dee6d5e4e0a",
@@ -13513,22 +13885,22 @@
         "previous": "blk-bfa7221924aebf92"
       },
       {
-        "id": "blk-b42b31be481e9961",
-        "fingerprint": "5bc90084ae97d093f53070ac36a7fa30cf84aa861d6eb8c46e9c749f57a90635",
+        "id": "blk-7cba6c52f7734397",
+        "fingerprint": "07eb1b18f8b9471b7f084328f662a1743372e033a0d9caab30ac3a0ffaebe695",
         "heading": "效率优化",
         "previous": "blk-aac15c5475f52de7"
       },
       {
-        "id": "blk-212919db79bbbbaa",
-        "fingerprint": "3a862a9cfc2c9d3a21b26e52ddd3141ed21bafe3a111ea621599e87477f1f896",
+        "id": "blk-7b7b904c66603075",
+        "fingerprint": "a82a1d551a0ac9dc8262563de4975293374671056b47f2897e59b455c64ab15f",
         "heading": "效率优化",
-        "previous": "blk-b42b31be481e9961"
+        "previous": "blk-7cba6c52f7734397"
       },
       {
         "id": "blk-3111ffe981056a8b",
         "fingerprint": "e812521aece4c833e8c353fd77747894730dcd2403245c01a024d306339e8656",
         "heading": "效率优化",
-        "previous": "blk-212919db79bbbbaa"
+        "previous": "blk-7b7b904c66603075"
       },
       {
         "id": "blk-e010f0a13f9c01cf",
@@ -13537,8 +13909,8 @@
         "previous": "blk-3111ffe981056a8b"
       },
       {
-        "id": "blk-739d8b6cc6e9ce5a",
-        "fingerprint": "3cab330f3e09367516ee0690819a20d7c896d61f6b29dd6d34f13e1240da61ae",
+        "id": "blk-1fa15086d4dbef67",
+        "fingerprint": "12e3517ca5e06b91f12f0c18d2a41d770bfc3a97131fad6456231f5703de2b3e",
         "heading": "算法特性",
         "previous": "blk-e010f0a13f9c01cf"
       }
@@ -13571,8 +13943,8 @@
         "previous": ""
       },
       {
-        "id": "blk-0fa05cebeac69ad0",
-        "fingerprint": "2bee2c5d9f0fafbac3bfcf13e19acb849bfafa1f6cc8ea0a110f531b53d1ec75",
+        "id": "blk-31993a3530e0edc8",
+        "fingerprint": "0d4712ac5d0e18c55aca516b891f12244d2daea5d5e996e752b230e2d29e64fe",
         "heading": "插入排序",
         "previous": "blk-84120558058887ea"
       },
@@ -13580,7 +13952,7 @@
         "id": "blk-85565588568bf5c6",
         "fingerprint": "639c7fe71781e1384e39a95dcee7bc1950583a29a311843782e0848e6430d68c",
         "heading": "插入排序",
-        "previous": "blk-0fa05cebeac69ad0"
+        "previous": "blk-31993a3530e0edc8"
       },
       {
         "id": "blk-77922a0fb51a5d34",
@@ -13607,8 +13979,8 @@
         "previous": "blk-3c58dcba9b887056"
       },
       {
-        "id": "blk-a51c3ffba5a93835",
-        "fingerprint": "6ae9cd47400c137f88e4c05f1c1140a555038901c007fdf4b22ba6cb478c54dd",
+        "id": "blk-252f4cd9e28d3cdc",
+        "fingerprint": "c5af809f739273e51cba382dc6b5db179be2cc9cd16f1cc0121883eba824c906",
         "heading": "算法流程",
         "previous": "blk-d4575c4e980dfe08"
       },
@@ -13616,7 +13988,7 @@
         "id": "blk-e6da2299d25a8faa",
         "fingerprint": "2a9037d749ce35f4782824e54821cec61721ef7000cbfd64a4c77bf8aa591dc0",
         "heading": "算法流程",
-        "previous": "blk-a51c3ffba5a93835"
+        "previous": "blk-252f4cd9e28d3cdc"
       },
       {
         "id": "blk-641d20a54df21b08",
@@ -13637,8 +14009,8 @@
         "previous": "blk-b7655d36dba8ef55"
       },
       {
-        "id": "blk-19b7a4a71adb4309",
-        "fingerprint": "54f69964c26ad487d7018a8e8e5c9fea0a682046cd6f868c336e966acf235fee",
+        "id": "blk-a626013a31a00d84",
+        "fingerprint": "2c0af1aea01971984d6cfbd2fdecafe2eba97430ad3fad2ba87adb53b3df0810",
         "heading": "算法特性",
         "previous": "blk-b7958609c283eab0"
       },
@@ -13646,37 +14018,37 @@
         "id": "blk-54b5d9ce06a7a085",
         "fingerprint": "6c5e4ae878fa385237946f36ebbe147983972284890a24c73f2e96bdbdeff3d4",
         "heading": "插入排序的优势",
-        "previous": "blk-19b7a4a71adb4309"
+        "previous": "blk-a626013a31a00d84"
       },
       {
-        "id": "blk-7469490c56146be3",
-        "fingerprint": "a6956dbc7110eabdba2882ae0b9cdfb49cba4bfe5fc800ac63d55b359ffd453a",
+        "id": "blk-1d571f735c2d8b20",
+        "fingerprint": "95c8fce5095e41e13f4c45d70ac7b48ec25fabbb9c1a39f735b802e3e51ed49c",
         "heading": "插入排序的优势",
         "previous": "blk-54b5d9ce06a7a085"
       },
       {
-        "id": "blk-b249b7e2482aae60",
-        "fingerprint": "a3821d18da8c06c595691286f46da9e8ae5cfa5590255d7b81b6782b8f4e9795",
+        "id": "blk-ffe029efbd15f50f",
+        "fingerprint": "d86df8bdb3381288391cbfb4b6d32f8e4076e1090cbdb51028048941283edef2",
         "heading": "插入排序的优势",
-        "previous": "blk-7469490c56146be3"
+        "previous": "blk-1d571f735c2d8b20"
       },
       {
         "id": "blk-1c8893b6ebc49dc4",
         "fingerprint": "4573026be46fbe33f509bd4752acae0cc045de7eaf0609c5f47be81c89e15e25",
         "heading": "插入排序的优势",
-        "previous": "blk-b249b7e2482aae60"
+        "previous": "blk-ffe029efbd15f50f"
       },
       {
-        "id": "blk-d608829155dac096",
-        "fingerprint": "16e818a1d0f8717f7c4aa5dd84957a55f284bd80ad60961b01bbeedaac8f152e",
+        "id": "blk-5941667634721050",
+        "fingerprint": "d4659cbea67ff8fef0006d343949d069bce5d1e83992ef84fdaa0d0d846a7098",
         "heading": "插入排序的优势",
         "previous": "blk-1c8893b6ebc49dc4"
       },
       {
-        "id": "blk-7a94b746b87ecc63",
-        "fingerprint": "f614c68bf9f759810475b7c76243d7f60da25e7a452137d48553b02bedfeda28",
+        "id": "blk-2e6bb10315fb4628",
+        "fingerprint": "8c6d2d3d4c0e64d9bc8af45996611365a85dd895f1d5380a9d883fe70bcb6302",
         "heading": "插入排序的优势",
-        "previous": "blk-d608829155dac096"
+        "previous": "blk-5941667634721050"
       }
     ],
     "aliases": {
@@ -13710,8 +14082,8 @@
         "previous": ""
       },
       {
-        "id": "blk-a7483c8c64007052",
-        "fingerprint": "6ea2bf2859af2aa44417896cae550d3661bd6195f49eca32ab09d75e210f0c62",
+        "id": "blk-9c4a4f6e68c0e63d",
+        "fingerprint": "3007eff4f69856f0d48e346eb25efa151071e764ec10bb8cc3fe4c230d58d0fb",
         "heading": "快速排序",
         "previous": "blk-694398730abebfa5"
       },
@@ -13719,43 +14091,49 @@
         "id": "blk-13dab044314c8c9d",
         "fingerprint": "62aeb75edde8cd945b05ebdbc6e1fd56dee96e3505fd58a0441082e203322c89",
         "heading": "快速排序",
-        "previous": "blk-a7483c8c64007052"
+        "previous": "blk-9c4a4f6e68c0e63d"
       },
       {
-        "id": "blk-9960cd75d1462152",
-        "fingerprint": "654e2159e4ae110ea1c01d948c7cad8242e7ff82c6d5c22a95fe7c58b4be766a",
+        "id": "blk-33dd4af664df3f77",
+        "fingerprint": "94cecb46279cf9d4182bd40d19cdbcce656b79491cdf7a99217539339a861e28",
         "heading": "快速排序",
         "previous": "blk-13dab044314c8c9d"
       },
       {
-        "id": "blk-e0bfdde52d81d4ab",
-        "fingerprint": "5d46cf7dc57d8521acf88b3201a594d4f54669ec04890546bcc0526009918183",
+        "id": "blk-64cf567d796ee615",
+        "fingerprint": "1c1c585de65cfb04b7cbcb8054db540c3be8a330f8c2db6eedc900542d27f896",
         "heading": "快速排序",
-        "previous": "blk-9960cd75d1462152"
+        "previous": "blk-33dd4af664df3f77"
       },
       {
-        "id": "blk-39522c36a00e1b22",
-        "fingerprint": "81daf82c9fe45ea80bd5a28f05bbc1f69e3f6938943fc23973291962655d59f8",
+        "id": "blk-2351518b6c986a40",
+        "fingerprint": "4de396857f4e9b725e1d39603931e2d45d2dc30cfc529f5caa12935db7b90524",
         "heading": "快速排序",
-        "previous": "blk-e0bfdde52d81d4ab"
+        "previous": "blk-64cf567d796ee615"
       },
       {
-        "id": "blk-60f700f3b83f47d6",
-        "fingerprint": "0932e6a4f49dbf41e96e67104f9fc3ad75394f487343b104c0e0b867991b44b0",
+        "id": "blk-2d94c50b1a21f5b0",
+        "fingerprint": "f0923b1d6ea3497ce50ffbebd5faa49d115b88fee042677f0d3d054800bc6272",
         "heading": "快速排序",
-        "previous": "blk-39522c36a00e1b22"
+        "previous": "blk-2351518b6c986a40"
       },
       {
-        "id": "blk-a77fb764805a91e5",
+        "id": "blk-7dcdffc248c942be",
+        "fingerprint": "df8b06a6526374fcb1de1ccb84e48d6e57d73f39b35501ff5c7ea9dacca8ea18",
+        "heading": "快速排序",
+        "previous": "blk-2d94c50b1a21f5b0"
+      },
+      {
+        "id": "blk-ba36b9e4b3c51573",
         "fingerprint": "e04cb6adc50b334a93e936e8e761a2b59773856595d2969c6aad0d35e616d3f0",
         "heading": "快速排序",
-        "previous": "blk-60f700f3b83f47d6"
+        "previous": "blk-7dcdffc248c942be"
       },
       {
         "id": "blk-c75986506714dbb4",
         "fingerprint": "e26df59b07a43056d764e226ea07163c7377490d4dd1bd4f8afb8bbedd6f56a4",
         "heading": "算法流程",
-        "previous": "blk-a77fb764805a91e5"
+        "previous": "blk-ba36b9e4b3c51573"
       },
       {
         "id": "blk-c0f2a50d1200d56a",
@@ -13764,8 +14142,8 @@
         "previous": "blk-c75986506714dbb4"
       },
       {
-        "id": "blk-bf2c9e76a3e8af1f",
-        "fingerprint": "b86c924375fdcf8f1d087eb4ce21f5170e27226e48b1c4ef8e99c73279f03699",
+        "id": "blk-16c7d168f27a83ce",
+        "fingerprint": "dd9ba802e0e86da383d95a43530dc35ccfa60bbe09e8104cd16a00aad74c9e6a",
         "heading": "算法流程",
         "previous": "blk-c0f2a50d1200d56a"
       },
@@ -13773,10 +14151,10 @@
         "id": "blk-e03dc243f980484e",
         "fingerprint": "b2276e49dd223e1479c660acdafed2a0fc328372a5918760fa4bc0707356b0d9",
         "heading": "算法流程",
-        "previous": "blk-bf2c9e76a3e8af1f"
+        "previous": "blk-16c7d168f27a83ce"
       },
       {
-        "id": "blk-83f30b80d0a618c1",
+        "id": "blk-7fe5992003167320",
         "fingerprint": "1162117a3ed2b7aec62ba25d01eb5b81fa2ef5b7979feb16d68907108e426bf0",
         "heading": "算法流程",
         "previous": "blk-e03dc243f980484e"
@@ -13785,11 +14163,11 @@
         "id": "blk-f6092fb12e6dd5f3",
         "fingerprint": "b07a3fba5caa3bae32f767bceadfb16c1e5837e5f98cfd29ff0bdc074858db65",
         "heading": "算法特性",
-        "previous": "blk-83f30b80d0a618c1"
+        "previous": "blk-7fe5992003167320"
       },
       {
-        "id": "blk-9a77e4ffdb2ef2d3",
-        "fingerprint": "ac5ec4927c44403a7749ce656515c332afe065c313faef9e8a72e9d8bda05e20",
+        "id": "blk-8ca08283a7c8442e",
+        "fingerprint": "8f8ed40d5a7e5a3beabb72cb393567bdfde8169dafe6efc2ad15a00d17978d1c",
         "heading": "算法特性",
         "previous": "blk-f6092fb12e6dd5f3"
       },
@@ -13797,29 +14175,29 @@
         "id": "blk-f0481250abac98b1",
         "fingerprint": "d71399c3de1a64a7795cd48027ff012f2ea93b95593216612dcc7c1227b83edc",
         "heading": "快速排序为什么快",
-        "previous": "blk-9a77e4ffdb2ef2d3"
+        "previous": "blk-8ca08283a7c8442e"
       },
       {
-        "id": "blk-6c769412c86e9d29",
-        "fingerprint": "4c9d779adeca7e7b75787a6d8029e9cf2e008b56ea734280fbdc60b3f4e6503e",
+        "id": "blk-5b9b5e0fba3d7d46",
+        "fingerprint": "d6b1584f4256506b5544ac1e119e990c559b73875b8f4477fe71a2f02f9cc60a",
         "heading": "快速排序为什么快",
         "previous": "blk-f0481250abac98b1"
       },
       {
-        "id": "blk-cca6e228fad26e9b",
-        "fingerprint": "5e14449b4310aa1ec5bf365dcae735f41afad9a81aaaca60b546af2e9512a01d",
+        "id": "blk-8fe8d1b17d22110e",
+        "fingerprint": "76395b315083aabf19ebca8052460338b23c58fa62232babe1de7b63c29e3838",
         "heading": "快速排序为什么快",
-        "previous": "blk-6c769412c86e9d29"
+        "previous": "blk-5b9b5e0fba3d7d46"
       },
       {
         "id": "blk-0be387149208ea63",
         "fingerprint": "d6f9cc843a1639583172634632c6454d905a45172de5d0c67321ce3441b8c984",
         "heading": "基准数优化",
-        "previous": "blk-cca6e228fad26e9b"
+        "previous": "blk-8fe8d1b17d22110e"
       },
       {
-        "id": "blk-e6a6ce42ca19b4ba",
-        "fingerprint": "59ca6c99f31e96a45772a52a7961e97fb460d3ec1fadc924b5c3bcdb88498e52",
+        "id": "blk-196a31b86aebb06d",
+        "fingerprint": "fb93cfa00ddd789a73daa259ef41b54a9c0a092b1641a2da2ae9eaca5c874ca6",
         "heading": "基准数优化",
         "previous": "blk-0be387149208ea63"
       },
@@ -13827,7 +14205,7 @@
         "id": "blk-b8fbd7068bf84688",
         "fingerprint": "e4c49c87b727702c56f5e84eedb70b4185918a5705437bb1b55f7933c217964c",
         "heading": "基准数优化",
-        "previous": "blk-e6a6ce42ca19b4ba"
+        "previous": "blk-196a31b86aebb06d"
       },
       {
         "id": "blk-422378e8df133086",
@@ -13836,8 +14214,8 @@
         "previous": "blk-b8fbd7068bf84688"
       },
       {
-        "id": "blk-e7ee2bcc98be6af2",
-        "fingerprint": "6502088543b8b2de4ca9ce53a1b09280a66515ca5f2f78241b8763bb35aaac89",
+        "id": "blk-1a2e1e6ff2dd335c",
+        "fingerprint": "3c7a38eddde28b9c148ca03e1da0ebce412b267eb468df9092c6e93e17e40f62",
         "heading": "基准数优化",
         "previous": "blk-422378e8df133086"
       },
@@ -13845,10 +14223,10 @@
         "id": "blk-8cb75299c96f46d1",
         "fingerprint": "8de719e44e33b153c862b3b814cda54d746604378415ff0a028c3145141de4d0",
         "heading": "基准数优化",
-        "previous": "blk-e7ee2bcc98be6af2"
+        "previous": "blk-1a2e1e6ff2dd335c"
       },
       {
-        "id": "blk-0e5945650e207025",
+        "id": "blk-635a8a2eee83bf40",
         "fingerprint": "719f18b2a2401a1c027c1d98c203c0ff05de577b8460bb12e3ba781ee6c92055",
         "heading": "基准数优化",
         "previous": "blk-8cb75299c96f46d1"
@@ -13857,25 +14235,25 @@
         "id": "blk-eb6b152009f4f286",
         "fingerprint": "ce357e574e3f8bcb96932e6699bae1621df360963a9c20427c2d3fb063ec8e87",
         "heading": "递归深度优化",
-        "previous": "blk-0e5945650e207025"
+        "previous": "blk-635a8a2eee83bf40"
       },
       {
-        "id": "blk-9cbfbc9faf7e25b4",
-        "fingerprint": "34b7c74972206132d697afd53b90135ce6aea51e92c6d6adf1a1279755511798",
+        "id": "blk-2d3a87816957ff75",
+        "fingerprint": "aeb40c9d066ea39298047e8fb00a25928f07bafc907d20fbcbdb0fe011845ee6",
         "heading": "递归深度优化",
         "previous": "blk-eb6b152009f4f286"
       },
       {
-        "id": "blk-a5bb02ccb18a1aa9",
-        "fingerprint": "52424b97110287d392e4cc8be77bd7a299c18d0fc149c8207f37378b8917348a",
+        "id": "blk-f3d40e25b35278d1",
+        "fingerprint": "511c017fd58283253a4beae9694da60c63b8543acc92f070b32781934336ef19",
         "heading": "递归深度优化",
-        "previous": "blk-9cbfbc9faf7e25b4"
+        "previous": "blk-2d3a87816957ff75"
       },
       {
-        "id": "blk-b81ab825b664b810",
+        "id": "blk-4851cf18e14ff065",
         "fingerprint": "fa4d38bd752d55bf146b001ae4ed97de24e3a25bd8c4ad50cddc3a427596325a",
         "heading": "递归深度优化",
-        "previous": "blk-a5bb02ccb18a1aa9"
+        "previous": "blk-f3d40e25b35278d1"
       }
     ],
     "aliases": {
@@ -13919,22 +14297,22 @@
         "previous": ""
       },
       {
-        "id": "blk-d0536e85cded2476",
-        "fingerprint": "3c6a7a26d8365a398e1be613f5d1490c71d5d653ecd52ef96f500ad5ee5c2997",
+        "id": "blk-2573be4d08417980",
+        "fingerprint": "02200ff2ce30bd9a3b27d83e43b0904f4b4e354dd867c3aabb33945583ab59e1",
         "heading": "归并排序",
         "previous": "blk-c2e141557eb0b388"
       },
       {
-        "id": "blk-f2b3e9d7fa7f790b",
-        "fingerprint": "0bc3fc67c81be8ba02f17173b951583b4a6f42ac9ebccc2b81c364eb6bbc7a2f",
+        "id": "blk-6ee2c84f0274a28c",
+        "fingerprint": "d99273d090f7831dc5b82847b5fdfb1324286bf614bb99c170906e15bd4851fc",
         "heading": "归并排序",
-        "previous": "blk-d0536e85cded2476"
+        "previous": "blk-2573be4d08417980"
       },
       {
         "id": "blk-9b63da46aaa99a6e",
         "fingerprint": "1985b454cb5e2f2ca683394d97e5f1caf72a5e5cf4eb19b157a7d5199a383279",
         "heading": "归并排序",
-        "previous": "blk-f2b3e9d7fa7f790b"
+        "previous": "blk-6ee2c84f0274a28c"
       },
       {
         "id": "blk-ba865fcdda500a01",
@@ -13943,52 +14321,52 @@
         "previous": "blk-9b63da46aaa99a6e"
       },
       {
-        "id": "blk-fa1db5a7f2fe7524",
-        "fingerprint": "7077b390909bc3b6a1dfb2b56597a4fff04e96bed0cb6800ff448fed620d143d",
+        "id": "blk-6263b85b97e80452",
+        "fingerprint": "5778b47db0d5ae4285721ce161bce244da6e498f707991db9442f8173fc975f3",
         "heading": "算法流程",
         "previous": "blk-ba865fcdda500a01"
       },
       {
-        "id": "blk-adcc555912c14c28",
-        "fingerprint": "fd5a9017226c81d50861f42ac797b41b32d6510a09155bcc541de8c3b76ca56d",
+        "id": "blk-d75229463bfaabc3",
+        "fingerprint": "4ecf910108bf3ec65959d8424d37fa79ccb324a48f2ebfe3c2dde02161cf5009",
         "heading": "算法流程",
-        "previous": "blk-fa1db5a7f2fe7524"
+        "previous": "blk-6263b85b97e80452"
       },
       {
-        "id": "blk-e3580845101a0305",
-        "fingerprint": "edd6284fcec124ba5f31e7183e5e1cbdaabce5709a19b14fca33d49edc57f430",
+        "id": "blk-1a6ff689980c0d88",
+        "fingerprint": "8613e8d91638a0127aa2183c3f5ff174e647ffc29310d762755c4a3a9cd9bcd0",
         "heading": "算法流程",
-        "previous": "blk-adcc555912c14c28"
+        "previous": "blk-d75229463bfaabc3"
       },
       {
-        "id": "blk-2bcdbd3198eb3252",
-        "fingerprint": "afaeb87b22f89f1389eecda64f518a877998fbd48bd2ef84640e0f4938f57d38",
+        "id": "blk-e83bfe0903b751ff",
+        "fingerprint": "e3e939872f2b8c30535ee9d90d5e55d77c2600f128f842d7b49634c55fb67bfe",
         "heading": "算法流程",
-        "previous": "blk-e3580845101a0305"
+        "previous": "blk-1a6ff689980c0d88"
       },
       {
         "id": "blk-61fbd9b1ff886ea4",
         "fingerprint": "c1197f01c3ae3885f005e491f109d722401ea334a994b4fe0632524cab990ff1",
         "heading": "算法流程",
-        "previous": "blk-2bcdbd3198eb3252"
+        "previous": "blk-e83bfe0903b751ff"
       },
       {
-        "id": "blk-26c522ba641beb7d",
-        "fingerprint": "0c4012eb83753708f8708ad47e64731731620b628e58c3fb2b4ee8caf064a564",
+        "id": "blk-034395f0d0692f8b",
+        "fingerprint": "c77ca78af7a75202866940d56f4bb24acfca6a07985a7920eb6c2565828aece6",
         "heading": "算法流程",
         "previous": "blk-61fbd9b1ff886ea4"
       },
       {
-        "id": "blk-7e05e4b345e050c3",
-        "fingerprint": "be2580292722abdc4646e3dc69be3a5b61dc34ba87860785a0b17964b65cc349",
+        "id": "blk-485554d21ca294e6",
+        "fingerprint": "0d2a2b8787c1823c7c38195b581a9ce421c320bf26ab2818733032ce14173ff6",
         "heading": "算法流程",
-        "previous": "blk-26c522ba641beb7d"
+        "previous": "blk-034395f0d0692f8b"
       },
       {
         "id": "blk-b0aa3223c0364528",
         "fingerprint": "bdac5d2a07c0fc994c12beca5e993b0f249e461710b1a64c5b9cd6d3eb546a88",
         "heading": "算法流程",
-        "previous": "blk-7e05e4b345e050c3"
+        "previous": "blk-485554d21ca294e6"
       },
       {
         "id": "blk-e4fee783b4e77de6",
@@ -13997,8 +14375,8 @@
         "previous": "blk-b0aa3223c0364528"
       },
       {
-        "id": "blk-12cec4d442251c05",
-        "fingerprint": "579d3460eebbd471aabf6b9911937c8bfeafe29f1c1f6b6fe68c491f49c32ef6",
+        "id": "blk-38eb9b0ba57246ca",
+        "fingerprint": "166aff21580a09dfe8763d7e7e3d7184429790c4a595231ad5ef135244702949",
         "heading": "算法特性",
         "previous": "blk-e4fee783b4e77de6"
       },
@@ -14006,25 +14384,25 @@
         "id": "blk-4752fb640969baa0",
         "fingerprint": "0cfe4c958966d6e8f8308c4b3c810d3c8093c34c3c1de26c5f9c1eb0bdacb2e1",
         "heading": "链表排序",
-        "previous": "blk-12cec4d442251c05"
+        "previous": "blk-38eb9b0ba57246ca"
       },
       {
-        "id": "blk-85fe3b67e097f7db",
-        "fingerprint": "90b3dc4d087e3b29e467d42f2644880e8c344e2f0daa92a8d57246db7742bf9e",
+        "id": "blk-23be99e4157797b8",
+        "fingerprint": "d972c3bea39227f380bb2782367f6a7d846dfeaa0dbc0cf76936146b4c9bf7b0",
         "heading": "链表排序",
         "previous": "blk-4752fb640969baa0"
       },
       {
-        "id": "blk-d500bc8dd07160b9",
-        "fingerprint": "4be973a30d00bbeb23f1bbe8b64b0c756df996d25948e55b56602f56a5174e14",
+        "id": "blk-d9264d7ad5c60658",
+        "fingerprint": "598c76ee8ad4b10129ea7b3f4de9496f9c7b31ea4e310ae00248886e954c8571",
         "heading": "链表排序",
-        "previous": "blk-85fe3b67e097f7db"
+        "previous": "blk-23be99e4157797b8"
       },
       {
-        "id": "blk-5e94cbc9ab27cba0",
-        "fingerprint": "7cc230170ea580abdf867f384e3c93c246555c2764909d2bc7ba6051f38798c9",
+        "id": "blk-423da0b3845be4a9",
+        "fingerprint": "7d5483f2cb84e3a2b0c1c146297ce4a0cf770b283a713b5ff84f8eb9c3b8f5b7",
         "heading": "链表排序",
-        "previous": "blk-d500bc8dd07160b9"
+        "previous": "blk-d9264d7ad5c60658"
       }
     ],
     "aliases": {
@@ -14058,67 +14436,79 @@
         "previous": ""
       },
       {
-        "id": "blk-2d0ee44a42c51054",
-        "fingerprint": "4c786571b2622df8be01096f34138465bdaa1547ed0d111bbc803d3bc22f9521",
+        "id": "blk-ab7c343e01e8a6df",
+        "fingerprint": "58c04ce813cfcd11eb8196b3b6bdcabda9517b3349d21b08f693477ad6a812aa",
         "heading": "堆排序",
         "previous": "blk-7241cdfbe54a8725"
       },
       {
-        "id": "blk-536d6ab76b7af230",
-        "fingerprint": "d92c95aef0d02abd53ed447b1155f178eeeae19775f5d167453dd0af94718dfd",
+        "id": "blk-487f055ae73f91e0",
+        "fingerprint": "1725aab638c999855fc136ed93074e45d665f14aa0eeefcfececac9665575f3b",
         "heading": "堆排序",
-        "previous": "blk-2d0ee44a42c51054"
+        "previous": "blk-ab7c343e01e8a6df"
       },
       {
-        "id": "blk-0fb130e5c0d9283e",
-        "fingerprint": "b2b439989d5a14e51b9bf07392d0e00aa061d2a4ebbf72fd0dd92aec2def3d78",
+        "id": "blk-8313f326d9428279",
+        "fingerprint": "0c10a8b0da44e78afc61aa07c67825a6728e7a0f00c73e8c9a501928cb36b524",
         "heading": "堆排序",
-        "previous": "blk-536d6ab76b7af230"
+        "previous": "blk-487f055ae73f91e0"
       },
       {
-        "id": "blk-6a4511ada431953e",
-        "fingerprint": "2b55b4152c5149997f68d2a4f09e03aa472384d383f621b01b0f86fe5fc02019",
+        "id": "blk-ae00f54488ef0ec7",
+        "fingerprint": "f469588743a1e629ce7bf1d9aa2e951276f4350e8d4c91d79ba27e8ed952b97c",
         "heading": "堆排序",
-        "previous": "blk-0fb130e5c0d9283e"
+        "previous": "blk-8313f326d9428279"
+      },
+      {
+        "id": "blk-bc9b1edffa8c0bb3",
+        "fingerprint": "24dcd25896ce1127fed0ff33b08d23e068487142ce634bba434940d88552e7fa",
+        "heading": "堆排序",
+        "previous": "blk-ae00f54488ef0ec7"
       },
       {
         "id": "blk-a718dbe379e4d796",
         "fingerprint": "e26df59b07a43056d764e226ea07163c7377490d4dd1bd4f8afb8bbedd6f56a4",
         "heading": "算法流程",
-        "previous": "blk-6a4511ada431953e"
+        "previous": "blk-bc9b1edffa8c0bb3"
       },
       {
-        "id": "blk-48bf851dbe5bdaf3",
-        "fingerprint": "7004a4f086d90a7361f6e6f4d64281945c4859fba5546287fa146525dd476fc6",
+        "id": "blk-a8c4ff18c646981a",
+        "fingerprint": "04ec9413da773017d0403e84f82d384e841246c62bce143a1e22fb46b10500e1",
         "heading": "算法流程",
         "previous": "blk-a718dbe379e4d796"
       },
       {
-        "id": "blk-d3d7e15f9ab7528e",
-        "fingerprint": "e3bbd7a1c81fc4694ec2d0dd14fad7a26ef5880edbbace021b0507691fe20274",
+        "id": "blk-32d86f6acca81bc8",
+        "fingerprint": "695a9b0a7278052870b3b56d1b2908ab40efd32cf26c34fcd09cabfa145f6f44",
         "heading": "算法流程",
-        "previous": "blk-48bf851dbe5bdaf3"
+        "previous": "blk-a8c4ff18c646981a"
       },
       {
-        "id": "blk-6d497b5b2f93cf9b",
-        "fingerprint": "bd58a610461c7110d73d9791b0c742cbed34bff94d763771d753d96a330ebdff",
+        "id": "blk-344ea50bc1f568ca",
+        "fingerprint": "58c04ce813cfcd11eb8196b3b6bdcabda9517b3349d21b08f693477ad6a812aa",
         "heading": "算法流程",
-        "previous": "blk-d3d7e15f9ab7528e"
+        "previous": "blk-32d86f6acca81bc8"
       },
       {
-        "id": "blk-4c61780d498da1ba",
-        "fingerprint": "051f4e1191929e0b84503f2b91dc3772b41f2d80eddf28d8ee0f08c710462e66",
+        "id": "blk-b2f9175de8ac287d",
+        "fingerprint": "086cdd797baf3feb3daabac3e4f332e45b54fd7ea9a96af7f1b17eb9f7728c91",
         "heading": "算法流程",
-        "previous": "blk-6d497b5b2f93cf9b"
+        "previous": "blk-344ea50bc1f568ca"
+      },
+      {
+        "id": "blk-4fbf61873bf8251a",
+        "fingerprint": "fe71dddb8651074a434780eb1f0742b3da6fceee1daa64451668f61b2812cd6c",
+        "heading": "算法流程",
+        "previous": "blk-b2f9175de8ac287d"
       },
       {
         "id": "blk-32626a6a7f35646a",
         "fingerprint": "2281636672959a333bb7315c9f79e6cb08ad5860b2d596d70521e6ffe4b11cd9",
         "heading": "算法流程",
-        "previous": "blk-4c61780d498da1ba"
+        "previous": "blk-4fbf61873bf8251a"
       },
       {
-        "id": "blk-79058f450ea28e54",
+        "id": "blk-63335b72775837a9",
         "fingerprint": "5f9d553357feedaf43d3590e433b1b04db0633b3ee251e133ee4189ce2c362c7",
         "heading": "算法流程",
         "previous": "blk-32626a6a7f35646a"
@@ -14127,11 +14517,11 @@
         "id": "blk-381e1d004c6c9b5b",
         "fingerprint": "b07a3fba5caa3bae32f767bceadfb16c1e5837e5f98cfd29ff0bdc074858db65",
         "heading": "算法特性",
-        "previous": "blk-79058f450ea28e54"
+        "previous": "blk-63335b72775837a9"
       },
       {
-        "id": "blk-b8af7472669e4a23",
-        "fingerprint": "d84a459dd5efb83bfd0433519375c5b71e4c8eaa4f636287562fbd8aa7a71ebe",
+        "id": "blk-aabaa08237f9ebcc",
+        "fingerprint": "0f5a0ac79f98c3c50367a9b16c9e5ad0b850a3f7fa64a638e32de0bcc26d6da3",
         "heading": "算法特性",
         "previous": "blk-381e1d004c6c9b5b"
       }
@@ -14162,8 +14552,8 @@
         "previous": ""
       },
       {
-        "id": "blk-7a8df93b51715ff6",
-        "fingerprint": "74a94f742e5d0551a00634d5ccdc374dfe6a751ef58265abb0050dd84830d442",
+        "id": "blk-31b034202f4f6569",
+        "fingerprint": "2ff1ad951bf80f6fdf9e98856c20cf99575aeb41568fe3d1e78343566ce51ba1",
         "heading": "桶排序",
         "previous": "blk-cdbd25e3328dc3be"
       },
@@ -14171,7 +14561,7 @@
         "id": "blk-ae9d2d77383ef512",
         "fingerprint": "a351a1630ec9abc9de8b0ee2cd8866fbafa8564978e3877e74a41e067289b284",
         "heading": "桶排序",
-        "previous": "blk-7a8df93b51715ff6"
+        "previous": "blk-31b034202f4f6569"
       },
       {
         "id": "blk-bc0c39eceeccea6b",
@@ -14180,22 +14570,22 @@
         "previous": "blk-ae9d2d77383ef512"
       },
       {
-        "id": "blk-667fa0c34ba81c64",
-        "fingerprint": "822336eeddfed50afdaf8efb5e1ef1ed50a1b63f8f319300076a10187c64a5ad",
+        "id": "blk-62ad19d822d61dc8",
+        "fingerprint": "eee6ad152625f3a8eae1f57b3e836797dc7cd96dbce897497816231d6b00a3f5",
         "heading": "算法流程",
         "previous": "blk-bc0c39eceeccea6b"
       },
       {
-        "id": "blk-e8dbaeffaefba4b5",
-        "fingerprint": "1f26b455811bab7e36b2230e4fa4cd5bbe76143150cd35e530b0e59f19103735",
+        "id": "blk-700353d739e3f4a6",
+        "fingerprint": "717ac1aa10f44a806b141da19162a674fdf0502906d880cd15173a8b61ef5ede",
         "heading": "算法流程",
-        "previous": "blk-667fa0c34ba81c64"
+        "previous": "blk-62ad19d822d61dc8"
       },
       {
         "id": "blk-c795d7a0c0a3c9ef",
         "fingerprint": "e9a7d8805c5add39ba3603e8e5b6efb51775893cb2dca34bd00c969e065f100f",
         "heading": "算法流程",
-        "previous": "blk-e8dbaeffaefba4b5"
+        "previous": "blk-700353d739e3f4a6"
       },
       {
         "id": "blk-7948f38e859c2690",
@@ -14216,26 +14606,26 @@
         "previous": "blk-b09b10fdbfc9387b"
       },
       {
-        "id": "blk-74a94d51f7f3a8c8",
-        "fingerprint": "5baad9dc71dca42abfa89d7d0d2d01b0d0ab041580f584722255c8ff9c6b71ee",
+        "id": "blk-e1ea1515f4e1159d",
+        "fingerprint": "f56a3e198583ec78d34fd23bb4357b225840bb03b53431c0e30fff4fff5b882c",
         "heading": "算法特性",
         "previous": "blk-84565a972ee2389b"
       },
       {
-        "id": "blk-d461d05c03084de1",
-        "fingerprint": "1bf19aa0fd0655e7d730a24f7ebec483437349178efd1f44eb470955d606bb62",
+        "id": "blk-c5f64cdfb8acaf70",
+        "fingerprint": "601d55b324d16a734384a52715c4512bd0fb4266dcc506e41856a3d483fbdb34",
         "heading": "算法特性",
-        "previous": "blk-74a94d51f7f3a8c8"
+        "previous": "blk-e1ea1515f4e1159d"
       },
       {
         "id": "blk-7693ee7c7ed97b11",
         "fingerprint": "472bb2b46166af3600d7454d9493e54bed5ea686d34e57efadf92d85326be7c7",
         "heading": "如何实现平均分配",
-        "previous": "blk-d461d05c03084de1"
+        "previous": "blk-c5f64cdfb8acaf70"
       },
       {
-        "id": "blk-d3ec6c2c0f470b8f",
-        "fingerprint": "e2c86f059e2c77c5f30647032a8b4e5524a2cad36422f9776a577505c59d7d46",
+        "id": "blk-ea358d7b65fcfeff",
+        "fingerprint": "db07dc1782565b9eeecb9d40356b5e41529123b3d8ca3cec3460713d1a109337",
         "heading": "如何实现平均分配",
         "previous": "blk-7693ee7c7ed97b11"
       },
@@ -14243,7 +14633,7 @@
         "id": "blk-644de72e9ab2c53e",
         "fingerprint": "ef2952c33d1d29b23a31f142822e2638a75f0acdb2cd14db09a09f1c9625d612",
         "heading": "如何实现平均分配",
-        "previous": "blk-d3ec6c2c0f470b8f"
+        "previous": "blk-ea358d7b65fcfeff"
       },
       {
         "id": "blk-f13589b3e31b11f9",
@@ -14308,8 +14698,8 @@
         "previous": ""
       },
       {
-        "id": "blk-e58e3bda07e0ee5d",
-        "fingerprint": "5d996668efb98c24b536ba36b6036c6f4595d110cdc8ce8eb9e7dddf317284fb",
+        "id": "blk-74b8ed1d6ea1fc46",
+        "fingerprint": "bce514700ac00e8aac738de601a0cc0c76e5cdcc610f58eb8844f0ceab4d01cf",
         "heading": "计数排序",
         "previous": "blk-945566ad0c2a47b2"
       },
@@ -14317,25 +14707,25 @@
         "id": "blk-d19f51c988f7b2c5",
         "fingerprint": "5cb961eddbf18807bcbcd5721ac2d78e8d786fe0e1636d7e2bc6a39d21ba8461",
         "heading": "简单实现",
-        "previous": "blk-e58e3bda07e0ee5d"
+        "previous": "blk-74b8ed1d6ea1fc46"
       },
       {
-        "id": "blk-73730a8d410b7385",
-        "fingerprint": "e112440637b0f1a62f92fd8a94730c0b01a96b4439fbc09fd7292b680e416fa0",
+        "id": "blk-26847ec41a115651",
+        "fingerprint": "2d5cb66aad8df51bd2d3651f3c259741839344fe15882012cb12b69af669f0ae",
         "heading": "简单实现",
         "previous": "blk-d19f51c988f7b2c5"
       },
       {
-        "id": "blk-9e883244ff029fed",
-        "fingerprint": "237eb79846078c8b4cb68e8d2eb59cbecee5cb52cb36633ae996b912cd3055e3",
+        "id": "blk-0540b51bdcedf51a",
+        "fingerprint": "fc393b367d80b78b475ff5d9e028350699eb1080141bdd71d5e7c08a3482f296",
         "heading": "简单实现",
-        "previous": "blk-73730a8d410b7385"
+        "previous": "blk-26847ec41a115651"
       },
       {
         "id": "blk-55288641acff893c",
         "fingerprint": "edfeb162aec8bcb28e84c731d023b4e334296314a1aa6a9e9b6339aff0c55130",
         "heading": "简单实现",
-        "previous": "blk-9e883244ff029fed"
+        "previous": "blk-0540b51bdcedf51a"
       },
       {
         "id": "blk-bffffc50ddace470",
@@ -14350,20 +14740,26 @@
         "previous": "blk-bffffc50ddace470"
       },
       {
-        "id": "blk-c6c26baed14b5935",
-        "fingerprint": "f277cb1c16e004ba6ef061ecf598ad43839f7f64a5662d6cbba68c02b2ad9fd6",
+        "id": "blk-d27dd69ce4eae4fd",
+        "fingerprint": "bfc16f75c12fc994ebf4c404b032d28c81e2b9309e7f5166da2f5af7f836c422",
         "heading": "简单实现",
         "previous": "blk-ab6696864825831c"
+      },
+      {
+        "id": "blk-34354bde724787b4",
+        "fingerprint": "c7950a1aefc68aad6b131fbf838af5bb890b3aeba77f2ae7edf3a0fc445b43c0",
+        "heading": "简单实现",
+        "previous": "blk-d27dd69ce4eae4fd"
       },
       {
         "id": "blk-bfb950d023baf884",
         "fingerprint": "d1ee789aaef0fd14e5b1fe260726c14baeea0ebf4c2d6499c45238412916e5bc",
         "heading": "完整实现",
-        "previous": "blk-c6c26baed14b5935"
+        "previous": "blk-34354bde724787b4"
       },
       {
-        "id": "blk-59b0804b892e16ce",
-        "fingerprint": "bd768410b8f591ecf6534683608fd63591220ac1e1ffc01a17820ea08cc5b200",
+        "id": "blk-40387812655d980e",
+        "fingerprint": "72b2505d34175fd9e8cd4305932c43e85e88cdc6c7ade55c0558aa523aa3f46a",
         "heading": "完整实现",
         "previous": "blk-bfb950d023baf884"
       },
@@ -14371,46 +14767,46 @@
         "id": "blk-b8753e74c2ecf91d",
         "fingerprint": "d50db6d2afac338a99b8de25c1608acdf8b788127e3ee7529dc84f46a0f6f7e1",
         "heading": "完整实现",
-        "previous": "blk-59b0804b892e16ce"
+        "previous": "blk-40387812655d980e"
       },
       {
-        "id": "blk-efba28bd6dc1c02c",
-        "fingerprint": "7df75eb27a0d3b1dc4abbc8b87bc0b4525ec80454c2ea1a32cea267c9d7ed991",
+        "id": "blk-d1b70e5ac6a39798",
+        "fingerprint": "752f0d323313fdd5517eb5e6f3a75c6881369b07b71255ed827ab230494cfab5",
         "heading": "完整实现",
         "previous": "blk-b8753e74c2ecf91d"
       },
       {
-        "id": "blk-bc6cb3dc1e21a059",
-        "fingerprint": "08057792d64d769386b5176ed4e8cd5bb359b4df9eb95366caf6433029a5d21f",
+        "id": "blk-52b3c9ff3afa78f9",
+        "fingerprint": "fd5adf5da2c9a354692cf00cbf58f16cc588b867bc6528ef598105cebdf1ff0b",
         "heading": "完整实现",
-        "previous": "blk-efba28bd6dc1c02c"
+        "previous": "blk-d1b70e5ac6a39798"
       },
       {
-        "id": "blk-ed6b6b9e492046d6",
-        "fingerprint": "4937a8d569181d8ec01e62613dab2b476b119ece012abe19614c3c8412bb2f71",
+        "id": "blk-2eeec7ce9100b7ce",
+        "fingerprint": "59e6c0242b03eaae36617be62a5b90efa836a3bd2453f861f6af26346585c6fc",
         "heading": "完整实现",
-        "previous": "blk-bc6cb3dc1e21a059"
+        "previous": "blk-52b3c9ff3afa78f9"
       },
       {
-        "id": "blk-e886a21f01aec3f8",
-        "fingerprint": "bada601e95d3c579bf0df3e82cdfe66b982f24a66036937ceea387529e96575d",
+        "id": "blk-37686c00c087e52c",
+        "fingerprint": "109e9b690e8811ad6424ee39d0d827ea24c0ab177dbf7b8268b54c77dba64106",
         "heading": "完整实现",
-        "previous": "blk-ed6b6b9e492046d6"
+        "previous": "blk-2eeec7ce9100b7ce"
       },
       {
-        "id": "blk-25ad3c9f0c01b363",
-        "fingerprint": "6268b3b2b14eabfc449d64803ab97838c6c2da73a874faa9a70841cdf8f2a341",
+        "id": "blk-4851071cfe05965b",
+        "fingerprint": "5da60a357963f8a9f6e0af60422d77abedd593b2ed7cacdafcdb25181a0245c3",
         "heading": "完整实现",
-        "previous": "blk-e886a21f01aec3f8"
+        "previous": "blk-37686c00c087e52c"
       },
       {
         "id": "blk-2410305dddc5282b",
         "fingerprint": "cb06c33714a4696ce712d22f7571caf59ab561d3d4ac1b3230d24633879dc877",
         "heading": "完整实现",
-        "previous": "blk-25ad3c9f0c01b363"
+        "previous": "blk-4851071cfe05965b"
       },
       {
-        "id": "blk-940e507d9142fb9a",
+        "id": "blk-e81d71759ff9af18",
         "fingerprint": "d0ad941ba0b137eaf09f576369a00eb18ff6eb9f51a05864c2d6d894024eaf99",
         "heading": "完整实现",
         "previous": "blk-2410305dddc5282b"
@@ -14419,11 +14815,11 @@
         "id": "blk-40e3ac43792ea792",
         "fingerprint": "b07a3fba5caa3bae32f767bceadfb16c1e5837e5f98cfd29ff0bdc074858db65",
         "heading": "算法特性",
-        "previous": "blk-940e507d9142fb9a"
+        "previous": "blk-e81d71759ff9af18"
       },
       {
-        "id": "blk-5154b30fdcec78fd",
-        "fingerprint": "7003d2e20afb6e05f04f48328691f0e6a21006aa14bd29de26a78eeda008cb70",
+        "id": "blk-915412dba935d5f7",
+        "fingerprint": "845e749f74e0f1fe45c59d454c1fb9a9167a6504f0a558f756b635f7f35692b0",
         "heading": "算法特性",
         "previous": "blk-40e3ac43792ea792"
       },
@@ -14431,11 +14827,11 @@
         "id": "blk-c5e97fe748c344a2",
         "fingerprint": "3c53886aabc4fdec57748a55255a776245e7877df633db30a2f6b4838c1e121e",
         "heading": "局限性",
-        "previous": "blk-5154b30fdcec78fd"
+        "previous": "blk-915412dba935d5f7"
       },
       {
-        "id": "blk-f81d79e68037f4e0",
-        "fingerprint": "4c41af9aa5cf69b48aa9a85ee03935a73a142bc4af102ee9fecd9f7f3ba9dee8",
+        "id": "blk-0a302f85e9a6dd26",
+        "fingerprint": "61abf6a274141b1e7dfe5a804538ac9efa373df236c5a2bd936aa01d20116f0a",
         "heading": "局限性",
         "previous": "blk-c5e97fe748c344a2"
       },
@@ -14443,11 +14839,11 @@
         "id": "blk-de6cf1bab0d93702",
         "fingerprint": "774ee6fe32e05a916cf637934a38c16957aa19b6d44bd19cccc65b142deb510e",
         "heading": "局限性",
-        "previous": "blk-f81d79e68037f4e0"
+        "previous": "blk-0a302f85e9a6dd26"
       },
       {
-        "id": "blk-14b643ce722ca4d9",
-        "fingerprint": "aee423cc1ade3a93a0b0880798d3f2a362c428337cdb12648cd3121e155e70e1",
+        "id": "blk-f6a01d7b08d3e418",
+        "fingerprint": "2616712a27220b551807d6c0f9e1db9955cf11f278aa910f064ee0678a3d3884",
         "heading": "局限性",
         "previous": "blk-de6cf1bab0d93702"
       }
@@ -14489,8 +14885,8 @@
         "previous": ""
       },
       {
-        "id": "blk-516475c26565543e",
-        "fingerprint": "d3821cb48b6388131b3254cf196400ab66488a01d8b361cedd7877f0959e4515",
+        "id": "blk-0b090bebc2ede74c",
+        "fingerprint": "a5773f3a8cf1e3c46266665f131a0fd8b5e1d037c452b39b9d5575e997d9e15b",
         "heading": "基数排序",
         "previous": "blk-70e838418ae5fe54"
       },
@@ -14498,7 +14894,7 @@
         "id": "blk-1c922e3b856e57ce",
         "fingerprint": "c39d26df6cf50d850598c18aca90248df3791b26c2ebd9473b67b20eda64506c",
         "heading": "基数排序",
-        "previous": "blk-516475c26565543e"
+        "previous": "blk-0b090bebc2ede74c"
       },
       {
         "id": "blk-bcb96509a42aced8",
@@ -14507,46 +14903,46 @@
         "previous": "blk-1c922e3b856e57ce"
       },
       {
-        "id": "blk-6aec9564a8f1b656",
-        "fingerprint": "638a1a4441973c1c8d7f6c0716c91c54fc293040d41f36429b7ec5b8cfb18c17",
+        "id": "blk-5c837111d9113f04",
+        "fingerprint": "b1dc929a310af198d485156afef0993a59bdb4c3c1168b64412c34f1b3102ffe",
         "heading": "算法流程",
         "previous": "blk-bcb96509a42aced8"
       },
       {
-        "id": "blk-ee345aac31143ac3",
-        "fingerprint": "5919d3c9955d79ba3c8cbed92c648200517a8c53739f756d891d9ff92e70cc32",
+        "id": "blk-a8594713170b1a19",
+        "fingerprint": "b9c42d7eb63693cc3e405a712717dcbaf6396a83bc4907cbec2a79c931c09574",
         "heading": "算法流程",
-        "previous": "blk-6aec9564a8f1b656"
+        "previous": "blk-5c837111d9113f04"
       },
       {
         "id": "blk-6cb31ae8ae6bedf2",
         "fingerprint": "6ddd23a3a3a0c50a1898657aa96d4274a33fe4f2943a9d8a2116cef25ce837cc",
         "heading": "算法流程",
-        "previous": "blk-ee345aac31143ac3"
+        "previous": "blk-a8594713170b1a19"
       },
       {
-        "id": "blk-822af3d0fd416427",
-        "fingerprint": "655356a7317d96d30842b1aaeafe02aa2d3dc6b0b4f12fccf9930f8b8efbd296",
+        "id": "blk-689d579efd71d176",
+        "fingerprint": "cd370f436ed0b3b7459de45aed4e206fcf928a03eeeb733b54c6c7d37e1b11d0",
         "heading": "算法流程",
         "previous": "blk-6cb31ae8ae6bedf2"
       },
       {
-        "id": "blk-129df064e8fce858",
-        "fingerprint": "27d57d43cf80126e50b32ba0b0f9f3355f8d7c1199c69cf4424c3f019f1c1db8",
+        "id": "blk-4a90d9b4cb1c3b20",
+        "fingerprint": "046a62765db66a339fef83ccc8c4be84d28819df890b329c6ce633a23d5a9a91",
         "heading": "算法流程",
-        "previous": "blk-822af3d0fd416427"
+        "previous": "blk-689d579efd71d176"
       },
       {
-        "id": "blk-df297d1e9ff34cd8",
-        "fingerprint": "66b2d4d3ce7f8aaa96a60d8e7a8a551a245f957908d96dc1c9e169b828492ea2",
+        "id": "blk-5facf3aae6fb4ce7",
+        "fingerprint": "56bf415529f94703362a5d84712e867f66d590e914762dd0b7d38456195c5baa",
         "heading": "算法流程",
-        "previous": "blk-129df064e8fce858"
+        "previous": "blk-4a90d9b4cb1c3b20"
       },
       {
         "id": "blk-0bca542a354a3bef",
         "fingerprint": "00a21b4e3c76ee184751bf1cd1ef63ba223d578f7299638a229a02d1bb92b2c3",
         "heading": "算法流程",
-        "previous": "blk-df297d1e9ff34cd8"
+        "previous": "blk-5facf3aae6fb4ce7"
       },
       {
         "id": "blk-100890623e91a04f",
@@ -14555,28 +14951,34 @@
         "previous": "blk-0bca542a354a3bef"
       },
       {
-        "id": "blk-1698caa6e6c4c0e7",
-        "fingerprint": "75d9250a063f6bd4afd47f3294014a47964665d3c1ebb43a7b7e577a82b0d75c",
+        "id": "blk-df0a2dc04aa2e5d2",
+        "fingerprint": "41495724e54a025cf6081e13eb931bda0ba595ab469f882ea7df6234b67f45f4",
         "heading": "算法流程",
         "previous": "blk-100890623e91a04f"
+      },
+      {
+        "id": "blk-0f75a5d0e82177c2",
+        "fingerprint": "28a3cf9b4d1f71644dda4ab0c7843c7bc8404f56f569ff6816bfbe301c63b4c6",
+        "heading": "算法流程",
+        "previous": "blk-df0a2dc04aa2e5d2"
       },
       {
         "id": "blk-874dc647684c9278",
         "fingerprint": "b07a3fba5caa3bae32f767bceadfb16c1e5837e5f98cfd29ff0bdc074858db65",
         "heading": "算法特性",
-        "previous": "blk-1698caa6e6c4c0e7"
+        "previous": "blk-0f75a5d0e82177c2"
       },
       {
-        "id": "blk-68ec2c4097e18adf",
-        "fingerprint": "6c51beca393f034402603778a7962c54aa361c91a80e5446e8c22e59eb6a1c42",
+        "id": "blk-5bb181ef5274ca46",
+        "fingerprint": "cb14cb5b38e53e870cca505c1e904a4a8959c84056e1cd2d8ad9cf918d88c6b1",
         "heading": "算法特性",
         "previous": "blk-874dc647684c9278"
       },
       {
-        "id": "blk-ac71eed0f91f6185",
-        "fingerprint": "67fe0e62201884993c71e1adc0fcb840e5e3cc98a7bac9be4ca8d55bc167c276",
+        "id": "blk-1e0f45a1823bd8ce",
+        "fingerprint": "caab1235c65232bc7c6fd8bfeee93aebac31790b9d98171b08f001b727ddeec1",
         "heading": "算法特性",
-        "previous": "blk-68ec2c4097e18adf"
+        "previous": "blk-5bb181ef5274ca46"
       }
     ],
     "aliases": {
@@ -14613,8 +15015,8 @@
         "previous": "blk-a57eababc71d33b0"
       },
       {
-        "id": "blk-31d05165aca98cde",
-        "fingerprint": "cf50d77e9d3c9becf798d72a1a51468aa6ad566279bff8be6be6bf8b094b232c",
+        "id": "blk-16b0761efa6ef278",
+        "fingerprint": "a116676f757284ec520db5927b2a3ef6c91efd34d8c124f70e870079c961ef07",
         "heading": "重点回顾",
         "previous": "blk-726e48d3a50c062d"
       },
@@ -14622,7 +15024,7 @@
         "id": "blk-c2e7963e00f81e7c",
         "fingerprint": "502d38233640114aced81c498c562aa09f86d6707354d329e4986bc9731fc9ce",
         "heading": "重点回顾",
-        "previous": "blk-31d05165aca98cde"
+        "previous": "blk-16b0761efa6ef278"
       },
       {
         "id": "blk-56492d771ba913c9",
@@ -14679,46 +15081,46 @@
         "previous": "blk-79d4624b438d83fd"
       },
       {
-        "id": "blk-fd24676f6094f8d5",
-        "fingerprint": "5f4765db2080f212af50b4ae4a318491a3f25d1f4bf94b5a62e309b1a9a1ef8c",
+        "id": "blk-278dea5baa110b80",
+        "fingerprint": "1437b249fe07ed5660e2fbe81a789a03ece1e592c5398a05f4e7387121995b31",
         "heading": "Q & A",
         "previous": "blk-a40eaa9b3ea75546"
       },
       {
-        "id": "blk-b176ea68756c7bf9",
-        "fingerprint": "1836a63d3b4d7b5e62255b9cf17195f5fc76608405740a3cf3c9ecd05a9352f7",
+        "id": "blk-8fbeb8c1f71c743f",
+        "fingerprint": "53557477139412f759822d0b587fa343dc2d3601374c8b26fa6d3abd2ff7781b",
         "heading": "Q & A",
-        "previous": "blk-fd24676f6094f8d5"
+        "previous": "blk-278dea5baa110b80"
       },
       {
-        "id": "blk-494a253b1ea24e04",
-        "fingerprint": "8d587a710a52e1863aa7b03512aa549f2376560227f89f7365d60b5f983c8e17",
+        "id": "blk-3316ae988dd1cedc",
+        "fingerprint": "fe1a0b768632f22c472494a78e27a6e16dd48fdf59faba3e68b7c0117f5e151a",
         "heading": "Q & A",
-        "previous": "blk-b176ea68756c7bf9"
+        "previous": "blk-8fbeb8c1f71c743f"
       },
       {
-        "id": "blk-c0572722d236f0ba",
-        "fingerprint": "3320409a1d7fc56a710b13de2d3821605675a9872b0e77f9e11365aacb812e87",
+        "id": "blk-48277c8434c71fd6",
+        "fingerprint": "826a60587a194995fcc06ad93190722d49883a1578cfca1adc125d7bf7ea0589",
         "heading": "Q & A",
-        "previous": "blk-494a253b1ea24e04"
+        "previous": "blk-3316ae988dd1cedc"
       },
       {
         "id": "blk-73d0a629923079d0",
         "fingerprint": "8cf05fed01f580f8a0d72b6bea0b13d6b8f2b8cee401883d50964c18ac632f19",
         "heading": "Q & A",
-        "previous": "blk-c0572722d236f0ba"
+        "previous": "blk-48277c8434c71fd6"
       },
       {
-        "id": "blk-0f2a274dcc52d45e",
-        "fingerprint": "d7713852d483bcadb3775fb8a069d046c686fca8912c64dff36b7243a315d39a",
+        "id": "blk-d1a7579d48bedae4",
+        "fingerprint": "7c763832410bb7ac40f0d5e3aeb2d8017b4352432801d869ce90de202463c0c9",
         "heading": "Q & A",
         "previous": "blk-73d0a629923079d0"
       },
       {
-        "id": "blk-c3744738f837c706",
-        "fingerprint": "74aacbd051dadd64adf150199c7447a174629190066b94138f486855fd391fee",
+        "id": "blk-75de11dca8916246",
+        "fingerprint": "d392c8bfd6c6aea808a079d70521505f74c860cf0298bd70b0ad306a188360cb",
         "heading": "Q & A",
-        "previous": "blk-0f2a274dcc52d45e"
+        "previous": "blk-d1a7579d48bedae4"
       }
     ],
     "aliases": {
@@ -14765,76 +15167,106 @@
         "previous": "blk-ecb050d75d564a5e"
       },
       {
-        "id": "blk-3e43d130487ebab2",
-        "fingerprint": "1e319abf25d053b6494b779aabcf59cc3d67d046f858af5391fb97f956680d3b",
+        "id": "blk-af6addb6552de82a",
+        "fingerprint": "9e3385a1eb2a0f04adeacb3a754bbf91e50d6452b950bb4e9832b325cbfe2f04",
         "heading": "选择排序和冒泡排序的前几轮",
         "previous": "blk-677040d72def95d6"
       },
       {
-        "id": "blk-01e62170302da0cb",
-        "fingerprint": "1dadbd4f61bb7216f2ded39a46e55ce08ca1208d19d9d12bef36b17f02d9c42c",
+        "id": "blk-0f1dbae86b7f8ab0",
+        "fingerprint": "8406866da9343844313e83a8bddc02a82d9126ecbd0b41cd0f9f97b3a8c5e29c",
         "heading": "选择排序和冒泡排序的前几轮",
-        "previous": "blk-3e43d130487ebab2"
+        "previous": "blk-af6addb6552de82a"
       },
       {
-        "id": "blk-7e1264c39a6fa01a",
-        "fingerprint": "1347edade231fdbde1785ed5e8ab19089973b557b0f83642dbd1bb38b3e094cd",
+        "id": "blk-3ce7abc2b0d8c15c",
+        "fingerprint": "10415039bfb0c56c148c25cbee0239233fd3726e34de3bdec9880f94c8859e60",
         "heading": "选择排序和冒泡排序的前几轮",
-        "previous": "blk-01e62170302da0cb"
+        "previous": "blk-0f1dbae86b7f8ab0"
+      },
+      {
+        "id": "blk-015d4718d93e6e5c",
+        "fingerprint": "dbe4d4f5e9d2b97b275a9881e14ea27c77d79bc950acdc065fcfb40df971ca3b",
+        "heading": "选择排序和冒泡排序的前几轮",
+        "previous": "blk-3ce7abc2b0d8c15c"
+      },
+      {
+        "id": "blk-7d52e1d47f4dffa7",
+        "fingerprint": "fc63be59c57e714057bc399606183d99a8d58c1c780063acf968f07a34bc10b2",
+        "heading": "选择排序和冒泡排序的前几轮",
+        "previous": "blk-015d4718d93e6e5c"
+      },
+      {
+        "id": "blk-d4307d64e7e117a8",
+        "fingerprint": "ad90ab53587d102086e1c8e0e8f444d34a55f429bb33fa45e9c97538359f0201",
+        "heading": "选择排序和冒泡排序的前几轮",
+        "previous": "blk-7d52e1d47f4dffa7"
       },
       {
         "id": "blk-48561a93fd0db5bc",
         "fingerprint": "a2985efc9f317e107bf0ea6c08fc0bacd742e1e69fa9953505115cfd5c3b0f09",
         "heading": "相同元素的先后次序会变吗",
-        "previous": "blk-7e1264c39a6fa01a"
+        "previous": "blk-d4307d64e7e117a8"
       },
       {
-        "id": "blk-9f6925a936092e50",
-        "fingerprint": "167042d32103291877647bb3a27124a1b2f391e0718a2de64656e51dc6230589",
+        "id": "blk-c278886be6e18e92",
+        "fingerprint": "8602941cb894d5355e1f8e8226abef9c16209e87ce4e41cf89d0ab2bc80ae723",
         "heading": "相同元素的先后次序会变吗",
         "previous": "blk-48561a93fd0db5bc"
       },
       {
-        "id": "blk-197444b2276ca8aa",
-        "fingerprint": "bbe4516c69ebca8bb618eeb2759075edf5abf676a5b526de22d780224eb7d178",
+        "id": "blk-13508914a3ce49c6",
+        "fingerprint": "b7adf71a27aa54cd2eaa10366fe85218599d370248228e173623680005132b4f",
         "heading": "相同元素的先后次序会变吗",
-        "previous": "blk-9f6925a936092e50"
+        "previous": "blk-c278886be6e18e92"
       },
       {
-        "id": "blk-a19a5a7695f51653",
-        "fingerprint": "6c8fb919082341ebf9e8e5f19efaca438d93960c8b45e63c8b535de9954f8563",
+        "id": "blk-a4200ff4cd78d7c0",
+        "fingerprint": "10415039bfb0c56c148c25cbee0239233fd3726e34de3bdec9880f94c8859e60",
         "heading": "相同元素的先后次序会变吗",
-        "previous": "blk-197444b2276ca8aa"
+        "previous": "blk-13508914a3ce49c6"
+      },
+      {
+        "id": "blk-f42bef87531a2136",
+        "fingerprint": "ae06448889d26753b297f5ac0ff9b6838307bf95d3f61c38e076c3266355bfcf",
+        "heading": "相同元素的先后次序会变吗",
+        "previous": "blk-a4200ff4cd78d7c0"
       },
       {
         "id": "blk-838a5af9246dedea",
         "fingerprint": "d0640d8467e3f1ef1306bab508ed1ffdac1388d1f7ba2ef4c616e01f8b021e98",
         "heading": "比较计数排序和基数排序",
-        "previous": "blk-a19a5a7695f51653"
+        "previous": "blk-f42bef87531a2136"
       },
       {
-        "id": "blk-34bb6dbc815e39e2",
-        "fingerprint": "feeca1df53646ce52fd4568e810a014f6511130fcdf88a12a0bac585611763dd",
+        "id": "blk-f3bca5db8a45a4c5",
+        "fingerprint": "208ca82d50f3519841b6d260602124579b62079a25571eed55a109ea242e6e9a",
         "heading": "比较计数排序和基数排序",
         "previous": "blk-838a5af9246dedea"
       },
       {
-        "id": "blk-0a1abded4afbc950",
-        "fingerprint": "6a485144249c6373afa7908e4bcac4341d282a6b225e900a047756b0bd90feea",
+        "id": "blk-64293d8287a617bd",
+        "fingerprint": "562255ac5abb85f32a769a070ba6a03ca91f756255f55445ecb106863f7f67f8",
         "heading": "比较计数排序和基数排序",
-        "previous": "blk-34bb6dbc815e39e2"
+        "previous": "blk-f3bca5db8a45a4c5"
       },
       {
-        "id": "blk-d471ec3838e9b675",
-        "fingerprint": "70b179bac401e55539cffb7a0dd46352bbcb55a48d7e02770e12cd782442761f",
+        "id": "blk-5fb3cf56675bbaa5",
+        "fingerprint": "10415039bfb0c56c148c25cbee0239233fd3726e34de3bdec9880f94c8859e60",
         "heading": "比较计数排序和基数排序",
-        "previous": "blk-0a1abded4afbc950"
+        "previous": "blk-64293d8287a617bd"
+      },
+      {
+        "id": "blk-6f060ac82ef2e160",
+        "fingerprint": "76d43e1eff4d881a512521b857bce5479548fbb619fd94fd6cd2ea1e8a9a93cf",
+        "heading": "比较计数排序和基数排序",
+        "previous": "blk-5fb3cf56675bbaa5"
       },
       {
         "id": "blk-da2298e26c2eac93",
         "fingerprint": "6830f3f9b22df09f3d3b0acd1008c55a058da3836ff31220d9362f19d6ae5721",
         "heading": "编程练习",
-        "previous": "blk-d471ec3838e9b675"
+        "previous": "blk-6f060ac82ef2e160"
       },
       {
         "id": "blk-cd92ad6a6cd0d4f6",
@@ -14843,22 +15275,28 @@
         "previous": "blk-da2298e26c2eac93"
       },
       {
-        "id": "blk-cc60406220471029",
-        "fingerprint": "73723f6c2bb56ca26998f38f5ff6cfc6838ef0cc896036fa37803d55bb77c413",
+        "id": "blk-a249b9b7b327b61d",
+        "fingerprint": "95883b377a34ae83414303ab10981216623d50ea371c57d3155fe7d02e5e754b",
         "heading": "用归并排序排列数组",
         "previous": "blk-cd92ad6a6cd0d4f6"
       },
       {
-        "id": "blk-4fee104cf703109b",
-        "fingerprint": "6a17d4bb1b0ad51049f4e580ee2ddd1540d722b21222d45ef3b1cf7b4b86bcf9",
+        "id": "blk-dc73e1bc954c38a5",
+        "fingerprint": "ac97e240ea69b1e814386dfd2ee3274fe0debd8d5ebd6adf94ea3c852693214e",
         "heading": "用归并排序排列数组",
-        "previous": "blk-cc60406220471029"
+        "previous": "blk-a249b9b7b327b61d"
+      },
+      {
+        "id": "blk-0e2ccc0995ce7ed3",
+        "fingerprint": "8c79472069d16f1dfadca65a5bbb4e3665d3a287c04851035e6c90ed31dc1cde",
+        "heading": "用归并排序排列数组",
+        "previous": "blk-dc73e1bc954c38a5"
       },
       {
         "id": "blk-12f6c5e88f44201c",
         "fingerprint": "d556a63bea731d98b0f69bbf3637d269fb505665aab87c133a1978a97c0b48b7",
         "heading": "用归并排序排列数组",
-        "previous": "blk-4fee104cf703109b"
+        "previous": "blk-0e2ccc0995ce7ed3"
       },
       {
         "id": "blk-2871b09dbd10bc12",
@@ -14867,22 +15305,28 @@
         "previous": "blk-12f6c5e88f44201c"
       },
       {
-        "id": "blk-782f567920819628",
-        "fingerprint": "f270d35f4d458449ceb05bfe9c36442f8cb04dabf814c53ebd4aa4ee8a4a9e9f",
+        "id": "blk-bc141d2566aae215",
+        "fingerprint": "82a2cdc8fc080fa5d1219c42b0e695cb4be19bc14ea60beaf7ad8d67bc438792",
         "heading": "用计数排序排列整数数组",
         "previous": "blk-2871b09dbd10bc12"
       },
       {
-        "id": "blk-505bf40bf2bd48c7",
-        "fingerprint": "4458dc08e29e900243c8acc4587466e2cd1d8d805549a9f988272fa208212b59",
+        "id": "blk-314ed528a1e2657c",
+        "fingerprint": "3e18644f3e102eaa8c6e18f6654504030c600897d72a44292f39ff148fc8c9b3",
         "heading": "用计数排序排列整数数组",
-        "previous": "blk-782f567920819628"
+        "previous": "blk-bc141d2566aae215"
       },
       {
-        "id": "blk-49c81c900490683f",
-        "fingerprint": "75b84c106c57a9a5f3beadc1ed4e3006d8951c52db48e5110b0e228e8720a93c",
+        "id": "blk-fc693521de9b250c",
+        "fingerprint": "ac97e240ea69b1e814386dfd2ee3274fe0debd8d5ebd6adf94ea3c852693214e",
         "heading": "用计数排序排列整数数组",
-        "previous": "blk-505bf40bf2bd48c7"
+        "previous": "blk-314ed528a1e2657c"
+      },
+      {
+        "id": "blk-757d31d5bc35f7a4",
+        "fingerprint": "bdb7beca3cc3a6f2c921b173879ab1ffd98aa2ec07272ac91a90516faaca67d0",
+        "heading": "用计数排序排列整数数组",
+        "previous": "blk-fc693521de9b250c"
       }
     ],
     "aliases": {
@@ -15563,8 +16007,8 @@
         "previous": "blk-8d36103397bfd3a5"
       },
       {
-        "id": "blk-69960655f5ef5b0e",
-        "fingerprint": "5d46cf7dc57d8521acf88b3201a594d4f54669ec04890546bcc0526009918183",
+        "id": "blk-44a3a3fcaf9a3125",
+        "fingerprint": "0891a6f002277a6090d306f1251b1f14dcedc4c7c9c940ca73f32e81695837ba",
         "heading": "代码实现",
         "previous": "blk-a8acef704c0e143b"
       },
@@ -15572,7 +16016,7 @@
         "id": "blk-dddb356fbf426ad7",
         "fingerprint": "7ad093f96a77362eb3a95777e647970aeec95d9621b4787ce107af68cc2dde9c",
         "heading": "代码实现",
-        "previous": "blk-69960655f5ef5b0e"
+        "previous": "blk-44a3a3fcaf9a3125"
       },
       {
         "id": "blk-5e1944ac1f23dc96",
@@ -15696,7 +16140,7 @@
       },
       {
         "id": "blk-c27d6966c00bc83e",
-        "fingerprint": "8150394f4b196127e2194dec00dca4277b9cab8a167d96178056c7350db80d62",
+        "fingerprint": "129eceadcd68e121f683337ea5b73ae7b9f1725e3fb1942452eb36eeba28c25d",
         "heading": "考虑基本情况",
         "previous": "blk-4537abf8366377a0"
       },
@@ -15714,7 +16158,7 @@
       },
       {
         "id": "blk-a2cc271a9df25967",
-        "fingerprint": "855fcad7f92903d79ae24480dcbe1b8540d6590f0ce65564a5252d37962e6420",
+        "fingerprint": "942956fb3df7c66745245edd22d689360801351a68991a5871124aeea1016e75",
         "heading": "考虑基本情况",
         "previous": "blk-77d68885b1475b41"
       },
@@ -15750,7 +16194,7 @@
       },
       {
         "id": "blk-204a8074d6472998",
-        "fingerprint": "855fcad7f92903d79ae24480dcbe1b8540d6590f0ce65564a5252d37962e6420",
+        "fingerprint": "3d28d9ee1de39f3354a119cdd2ce21ffd4f969094e112f6718b2d0ed15de50bc",
         "heading": "子问题分解",
         "previous": "blk-7af78db4fedbd090"
       },
@@ -16203,8 +16647,8 @@
         "previous": "blk-7fca96c385c10122"
       },
       {
-        "id": "blk-145c5cbf5d44c993",
-        "fingerprint": "b4c0f4f6aefeedfff689ea66f0997c1178bc0488cdf25db49cdb4488e9df8179",
+        "id": "blk-faff370845b4b85e",
+        "fingerprint": "7e80c2aebb97a05aff021f63783163e8d8294278e6974874bcf833c954a6e918",
         "heading": "尝试与回退",
         "previous": "blk-2f5486279cb957b3"
       },
@@ -16212,7 +16656,7 @@
         "id": "blk-30333b81f44e36ed",
         "fingerprint": "79a76e69aa53b1fa33f4d47bd13152d0c4e3973e24e76532af33596fe30f7a2c",
         "heading": "剪枝",
-        "previous": "blk-145c5cbf5d44c993"
+        "previous": "blk-faff370845b4b85e"
       },
       {
         "id": "blk-1cb28a5f047405c7",
@@ -16563,16 +17007,10 @@
         "previous": "blk-dd9f573f88f83819"
       },
       {
-        "id": "blk-5c3c39d4f2c94dc1",
-        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
-        "heading": "无相等元素的情况",
-        "previous": "blk-9eafeb7363d43021"
-      },
-      {
         "id": "blk-19b4d5d973fa338f",
         "fingerprint": "2622978ee77801e1c206730703fbe4ea06c74f3cc6d8e00fc42d43d51001a5cb",
         "heading": "重复选择剪枝",
-        "previous": "blk-5c3c39d4f2c94dc1"
+        "previous": "blk-9eafeb7363d43021"
       },
       {
         "id": "blk-f82363dd48ad259a",
@@ -17112,16 +17550,10 @@
         "previous": "blk-3133d9c564f2af8a"
       },
       {
-        "id": "blk-e7dac6e4539a6542",
-        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
-        "heading": "n 皇后问题",
-        "previous": "blk-cd20aad569a6e5ec"
-      },
-      {
         "id": "blk-4fbb551ae395d4b8",
         "fingerprint": "8b7894a63fdb35022aa01e511a510b3ef8071edf677640a427af1027c8d01972",
         "heading": "n 皇后问题",
-        "previous": "blk-e7dac6e4539a6542"
+        "previous": "blk-cd20aad569a6e5ec"
       },
       {
         "id": "blk-8fa0cc2b67080554",
@@ -17552,16 +17984,10 @@
         "previous": "blk-fc94a4e64d08d239"
       },
       {
-        "id": "blk-b9d51a9841ae7f3f",
-        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
-        "heading": "初探动态规划",
-        "previous": "blk-b0f30a14afa1fb0b"
-      },
-      {
         "id": "blk-5d66e250afff34fb",
         "fingerprint": "2cd722cf43e8b87da6289658358683094b0ceca366e5f3c165ff0026c5590c9d",
         "heading": "初探动态规划",
-        "previous": "blk-b9d51a9841ae7f3f"
+        "previous": "blk-b0f30a14afa1fb0b"
       },
       {
         "id": "blk-20929bd6848efc2b",
@@ -18466,8 +18892,8 @@
         "previous": "blk-20144da5c5abb976"
       },
       {
-        "id": "blk-da24cd745c24f4da",
-        "fingerprint": "051f4e1191929e0b84503f2b91dc3772b41f2d80eddf28d8ee0f08c710462e66",
+        "id": "blk-e8db9da8a849de82",
+        "fingerprint": "971464a0ba17369d8048a70bdd8a5769d45713a44828217eb5c072f6c3e92e34",
         "heading": "方法三：动态规划",
         "previous": "blk-9b25d8f42e41bac9"
       },
@@ -18475,7 +18901,7 @@
         "id": "blk-9c36eb45ced402a6",
         "fingerprint": "6ded55aecd245fe3405680ee5da8ba99fc0b3904fdd837f23a2acf7a1b112151",
         "heading": "空间优化",
-        "previous": "blk-da24cd745c24f4da"
+        "previous": "blk-e8db9da8a849de82"
       },
       {
         "id": "blk-55e309d636696a59",
@@ -18604,16 +19030,10 @@
         "previous": "blk-74093f7a83fa729a"
       },
       {
-        "id": "blk-3b2818202a4c48ac",
-        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
-        "heading": "0-1 背包问题",
-        "previous": "blk-256c5649416678eb"
-      },
-      {
         "id": "blk-76582d9f0d7fefdf",
         "fingerprint": "236ec7ff79e21a2fdf68f4f83e56b4149a33f7a08b4cc0ed777fe9b87f0f2e0c",
         "heading": "0-1 背包问题",
-        "previous": "blk-3b2818202a4c48ac"
+        "previous": "blk-256c5649416678eb"
       },
       {
         "id": "blk-8a4c79e77f55cea6",
@@ -18808,8 +19228,8 @@
         "previous": "blk-a139cd66f10c7bac"
       },
       {
-        "id": "blk-78d0988127cab02f",
-        "fingerprint": "4e7f791d78ee8f4b401ffd48d611e5f31f8cc813b1c2ae9d5c60de719107cfc7",
+        "id": "blk-50650ba087189a43",
+        "fingerprint": "daa5ebd8e51640ad0f24fd944e5fb847e97ff03e668f5046a7328bc10f04c9fc",
         "heading": "方法三：动态规划",
         "previous": "blk-e8716c9955419863"
       },
@@ -18817,7 +19237,7 @@
         "id": "blk-97884d5681920a84",
         "fingerprint": "6ded55aecd245fe3405680ee5da8ba99fc0b3904fdd837f23a2acf7a1b112151",
         "heading": "空间优化",
-        "previous": "blk-78d0988127cab02f"
+        "previous": "blk-50650ba087189a43"
       },
       {
         "id": "blk-4f8bb557530791e4",
@@ -18844,8 +19264,8 @@
         "previous": "blk-b9c7942c27e41aad"
       },
       {
-        "id": "blk-2e71253492fd2145",
-        "fingerprint": "faacf3028e3517ae0317ba28f1164207a4124faa279da271dc8992f52bb6abea",
+        "id": "blk-939e0b21bc8be1ad",
+        "fingerprint": "4cefc4860cd13b1d663bd3494c4d687685e096c45f1110f8720c5dbf7b8781c4",
         "heading": "空间优化",
         "previous": "blk-0c1722e05cc5dc35"
       },
@@ -18853,7 +19273,7 @@
         "id": "blk-bd04a7671ffb055a",
         "fingerprint": "9b8c4ed5b9c4d20b35adab8a636123190ef92633fcc1e6706c481769d48b5dfb",
         "heading": "空间优化",
-        "previous": "blk-2e71253492fd2145"
+        "previous": "blk-939e0b21bc8be1ad"
       },
       {
         "id": "blk-29e255c7f752b79f",
@@ -19024,8 +19444,8 @@
         "previous": "blk-9ad3fd937c883f9f"
       },
       {
-        "id": "blk-d43dbb408deddb48",
-        "fingerprint": "faacf3028e3517ae0317ba28f1164207a4124faa279da271dc8992f52bb6abea",
+        "id": "blk-56436413a0795cfc",
+        "fingerprint": "0ef422d26e581344f3cc55b014261c29054bb7ee57e5db2da47066d26155392f",
         "heading": "空间优化",
         "previous": "blk-1c0763833e6cee67"
       },
@@ -19033,7 +19453,7 @@
         "id": "blk-958e1f849f66a78a",
         "fingerprint": "fa9e93c07742d563bb39e29bc327adf89602626b0a661fc089d9706f6534ffb9",
         "heading": "空间优化",
-        "previous": "blk-d43dbb408deddb48"
+        "previous": "blk-56436413a0795cfc"
       },
       {
         "id": "blk-588682c3a9ced375",
@@ -19174,22 +19594,22 @@
         "previous": "blk-812c33a7a6ad53cf"
       },
       {
-        "id": "blk-c799a1281bfb5753",
-        "fingerprint": "cafc7290bfff50df3a335c0642f44bc8bc30e6239f781996931802a0f2987e71",
+        "id": "blk-d7184a1d917b42cc",
+        "fingerprint": "a6d8001dfb634080d982204ec96b01fe7dc3f63d340d039de3cbf4b13cd08bb7",
         "heading": "代码实现",
         "previous": "blk-84b78e55ec498380"
       },
       {
-        "id": "blk-4b0c2465a7872d52",
+        "id": "blk-d25a0d67227baa7d",
         "fingerprint": "6ded55aecd245fe3405680ee5da8ba99fc0b3904fdd837f23a2acf7a1b112151",
         "heading": "空间优化",
-        "previous": "blk-c799a1281bfb5753"
+        "previous": "blk-d7184a1d917b42cc"
       },
       {
         "id": "blk-4f737ab666e39c04",
         "fingerprint": "aa4b4c5c1ccb6c6f8db165e63fc0efd1b9360c37bed76a973ed59a8c7e3e516c",
         "heading": "空间优化",
-        "previous": "blk-4b0c2465a7872d52"
+        "previous": "blk-d25a0d67227baa7d"
       },
       {
         "id": "blk-ba71f00a441834c9",
@@ -19528,8 +19948,8 @@
         "previous": "blk-778a0c7fa67dd8df"
       },
       {
-        "id": "blk-33a9cc81c9d1d5f8",
-        "fingerprint": "cafc7290bfff50df3a335c0642f44bc8bc30e6239f781996931802a0f2987e71",
+        "id": "blk-ad60730fe4d09b03",
+        "fingerprint": "68290dcf652b4e44de72becb4b862f5c60aa8bbf04f3671b2d784a36563741da",
         "heading": "代码实现",
         "previous": "blk-6be936c5509e3411"
       },
@@ -19537,7 +19957,7 @@
         "id": "blk-a3984dddbf72c310",
         "fingerprint": "6ded55aecd245fe3405680ee5da8ba99fc0b3904fdd837f23a2acf7a1b112151",
         "heading": "空间优化",
-        "previous": "blk-33a9cc81c9d1d5f8"
+        "previous": "blk-ad60730fe4d09b03"
       },
       {
         "id": "blk-ad9e4992e8294a93",
@@ -20159,16 +20579,10 @@
         "previous": "blk-1e63e6fac3b350f3"
       },
       {
-        "id": "blk-26c79a203a59c69c",
-        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
-        "heading": "分数背包问题",
-        "previous": "blk-be9b838e559266a7"
-      },
-      {
         "id": "blk-5da8646d41c88943",
         "fingerprint": "3ec166f928663c1027b8c85849db3b7a73195d0b2aaf4c2ef1f47d9c3e319d46",
         "heading": "分数背包问题",
-        "previous": "blk-26c79a203a59c69c"
+        "previous": "blk-be9b838e559266a7"
       },
       {
         "id": "blk-8ff3092474019c1a",
@@ -20338,16 +20752,10 @@
         "previous": "blk-d06d9e2668ba6d9f"
       },
       {
-        "id": "blk-d5278a6c2ece65d0",
-        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
-        "heading": "最大容量问题",
-        "previous": "blk-0cafc8f199b10dbe"
-      },
-      {
         "id": "blk-04620b994fd4efa8",
         "fingerprint": "dfc713b072f48cb16382ee7caff4ffcab501c36c1728a54f23b6208e04e57da5",
         "heading": "最大容量问题",
-        "previous": "blk-d5278a6c2ece65d0"
+        "previous": "blk-0cafc8f199b10dbe"
       },
       {
         "id": "blk-417428f450589ba2",
@@ -20434,8 +20842,8 @@
         "previous": "blk-c7faedc4ff043393"
       },
       {
-        "id": "blk-c8c69411585398cf",
-        "fingerprint": "5d46cf7dc57d8521acf88b3201a594d4f54669ec04890546bcc0526009918183",
+        "id": "blk-c78b37b820a70f4f",
+        "fingerprint": "4c05c89fdb56a9fb3c6bd308a0b4cfab58a8a449bbf8968bd6c0b5f33fbacd5c",
         "heading": "贪心策略确定",
         "previous": "blk-80e335d8fb9e5f7b"
       },
@@ -20443,7 +20851,7 @@
         "id": "blk-0c34abadc1e7008f",
         "fingerprint": "250f1f9241088bbd75d4a39f1bfc95e320144b6c89c6010a9de384f513033512",
         "heading": "代码实现",
-        "previous": "blk-c8c69411585398cf"
+        "previous": "blk-c78b37b820a70f4f"
       },
       {
         "id": "blk-425549ef7986ae65",
@@ -21077,16 +21485,10 @@
         "previous": "blk-653e8fd68a1c97b0"
       },
       {
-        "id": "blk-57f58da34a1d2402",
-        "fingerprint": "de36fcc18273ce66c4408f4304624c28fb758c424a8e1ee1c698fbbedc28563f",
-        "heading": "安装 IDE",
-        "previous": "blk-b3e6212251708c07"
-      },
-      {
         "id": "blk-963b570ec97a9966",
         "fingerprint": "5662958e18e3d2899cae371340c05323dc95b8ffdee4d558a4c9a706181b08d8",
         "heading": "安装 IDE",
-        "previous": "blk-57f58da34a1d2402"
+        "previous": "blk-b3e6212251708c07"
       },
       {
         "id": "blk-3654e097b19a554a",

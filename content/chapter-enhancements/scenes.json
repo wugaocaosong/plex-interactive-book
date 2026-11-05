@@ -1,6 +1,14 @@
 {
- "version":1,
+ "version":2,
  "chapters": {
+  "chapter_stack_and_queue/stack":{"scene":"stack","title":"栈顶装载与卸载"},
+  "chapter_stack_and_queue/queue":{"scene":"queue","title":"队列舱顺序放行"},
+  "chapter_stack_and_queue/deque":{"scene":"deque","title":"双端舱门调度"},
+  "chapter_hashing/hash_map":{"scene":"hash","title":"信标编号入槽"},
+  "chapter_hashing/hash_collision":{"scene":"hash","title":"哈希冲突处理"},
+  "chapter_tree/binary_tree_traversal":{"scene":"traversal","title":"巡检机器人遍历树站"},
+  "chapter_heap/heap":{"scene":"heap","title":"优先级调度堆"},
+  "chapter_heap/build_heap":{"scene":"heap","title":"从底向上建堆"},
   "chapter_divide_and_conquer/divide_and_conquer":{"scene":"merge","title":"拆分合并"},
   "chapter_divide_and_conquer/binary_search_recur":{"scene":"binary","title":"递归二分查找"},
   "chapter_divide_and_conquer/build_binary_tree_problem":{"scene":"tree","title":"前序／中序构建树"},

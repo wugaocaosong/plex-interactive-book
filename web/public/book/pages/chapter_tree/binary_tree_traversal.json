@@ -6,7 +6,7 @@
   "route": "/read/chapter_tree/binary_tree_traversal",
   "sourcePath": "chapter_tree/binary_tree_traversal.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
-  "html": "<h1 data-block=\"blk-47b5f131816e1d35\" id=\"_1\">二叉树遍历</h1>\n<p data-block=\"blk-06ff817dbea13de2\">从物理结构的角度来看，树是一种基于链表的数据结构，因此其遍历方式是通过指针逐个访问节点。然而，树是一种非线性数据结构，这使得遍历树比遍历链表更加复杂，需要借助搜索算法来实现。</p>\n<p data-block=\"blk-e8c19148b13b6ae9\">二叉树常见的遍历方式包括层序遍历、前序遍历、中序遍历和后序遍历等。</p>\n<h2 data-block=\"blk-21e593c5afd54fda\" id=\"_2\">层序遍历</h2>\n<p data-block=\"blk-0e6d17cfdce2dd8d\">如下图所示，<u>层序遍历（level-order traversal）</u>从顶部到底部逐层遍历二叉树，并在每一层按照从左到右的顺序访问节点。</p>\n<p data-block=\"blk-f146ec14a0d225c1\">层序遍历本质上属于<u>广度优先遍历（breadth-first traversal）</u>，也称<u>广度优先搜索（breadth-first search, BFS）</u>，它体现了一种“一圈一圈向外扩展”的逐层遍历方式。</p>\n<figure data-block=\"blk-891d24378bc57f83\"><img alt=\"二叉树的层序遍历\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_tree/binary_tree_traversal.assets/binary_tree_bfs.png\"/><figcaption>二叉树的层序遍历</figcaption></figure>\n<h3 data-block=\"blk-93e3c5ddc26d0722\" id=\"_3\">代码实现</h3>\n<p data-block=\"blk-33fd27647ca22dab\">广度优先遍历通常借助“队列”来实现。队列遵循“先进先出”的规则，而广度优先遍历则遵循“逐层推进”的规则，两者背后的思想是一致的。实现代码如下：</p>\n<div class=\"code-example\" data-block=\"blk-fb8b73e956a41019\" data-code=\"0\"><div class=\"code-caption\"><span>binary_tree_bfs · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def level_order(root: TreeNode | None) -&gt; list[int]:\n    \"\"\"层序遍历\"\"\"\n    # 初始化队列，加入根节点\n    queue: deque[TreeNode] = deque()\n    queue.append(root)\n    # 初始化一个列表，用于保存遍历序列\n    res = []\n    while queue:\n        node: TreeNode = queue.popleft()  # 队列出队\n        res.append(node.val)  # 保存节点值\n        if node.left is not None:\n            queue.append(node.left)  # 左子节点入队\n        if node.right is not None:\n            queue.append(node.right)  # 右子节点入队\n    return res</code></pre></div>\n<h3 data-block=\"blk-f0e8958aa08f468d\" id=\"_4\">复杂度分析</h3>\n<ul data-block=\"blk-7b74ef2a1cb32935\">\n<li><strong>时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span></strong> ：所有节点被访问一次，使用 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 时间，其中 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> 为节点数量。</li>\n<li><strong>空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span></strong> ：在最差情况下，即满二叉树时，遍历到最底层之前，队列中最多同时存在 <span class=\"arithmatex\" data-tex=\"\\((n + 1) / 2\\)\">\\((n + 1) / 2\\)</span> 个节点，占用 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 空间。</li>\n</ul>\n<h2 data-block=\"blk-a55720ddce6eccfe\" id=\"_5\">前序、中序、后序遍历</h2>\n<p data-block=\"blk-2dba8a14f141d202\">相应地，前序、中序和后序遍历都属于<u>深度优先遍历（depth-first traversal）</u>，也称<u>深度优先搜索（depth-first search, DFS）</u>，它体现了一种“先走到尽头，再回溯继续”的遍历方式。</p>\n<p data-block=\"blk-32ce28b5c22950ea\">下图展示了对二叉树进行深度优先遍历的工作原理。<strong>深度优先遍历就像是绕着整棵二叉树的外围“走”一圈</strong>，在每个节点都会遇到三个位置，分别对应前序遍历、中序遍历和后序遍历。</p>\n<figure data-block=\"blk-24a7f07da15b30c4\"><img alt=\"二叉搜索树的前序、中序、后序遍历\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_tree/binary_tree_traversal.assets/binary_tree_dfs.png\"/><figcaption>二叉搜索树的前序、中序、后序遍历</figcaption></figure>\n<h3 data-block=\"blk-a4fd7ede5d82095d\" id=\"_6\">代码实现</h3>\n<p data-block=\"blk-2b085a9f9407978a\">深度优先搜索通常基于递归实现：</p>\n<div class=\"code-example\" data-block=\"blk-7f310cd20d3e25ff\" data-code=\"1\"><div class=\"code-caption\"><span>binary_tree_dfs · python</span><button data-action=\"code\" data-code=\"1\">查看 / 运行</button></div><pre><code>def post_order(root: TreeNode | None):\n    \"\"\"后序遍历\"\"\"\n    if root is None:\n        return\n    # 访问优先级：左子树 -&gt; 右子树 -&gt; 根节点\n    post_order(root=root.left)\n    post_order(root=root.right)\n    res.append(root.val)</code></pre></div>\n<div class=\"admonition tip\" data-block=\"blk-2eced8ea1343473d\">\n<p class=\"admonition-title\">Tip</p>\n<p>深度优先搜索也可以基于迭代实现，有兴趣的读者可以自行研究。</p>\n</div>\n<p data-block=\"blk-6a9c7843660c52a1\">下图展示了前序遍历二叉树的递归过程，其可分为“递”和“归”两个逆向的部分。</p>\n<ol data-block=\"blk-553982699a489114\">\n<li>“递”表示开启新方法，程序在此过程中访问下一个节点。</li>\n<li>“归”表示函数返回，代表当前节点已经访问完毕。</li>\n</ol>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-d63567a3d73f261d\"><img alt=\"前序遍历的递归过程\" data-action=\"image\" src=\"/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step1.png\"/><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 11</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<h3 data-block=\"blk-69ae2aa94ca3418e\" id=\"_7\">复杂度分析</h3>\n<ul data-block=\"blk-b28f4b5c790d4666\">\n<li><strong>时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span></strong> ：所有节点被访问一次，使用 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 时间。</li>\n<li><strong>空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span></strong> ：在最差情况下，即树退化为链表时，递归深度达到 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> ，系统占用 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 栈帧空间。</li>\n</ul>",
+  "html": "<h1 data-block=\"blk-47b5f131816e1d35\" id=\"_1\">二叉树遍历</h1><p class=\"ch12-intro\" data-block=\"blk-e5f4836e192b7e86\">巡检机器人每到一个节点，都可以先记录当前站点，或先进入子树。逐步切换遍历顺序，观察访问序列如何变化。</p>\n<p data-block=\"blk-06ff817dbea13de2\">从物理结构的角度来看，树是一种基于链表的数据结构，因此其遍历方式是通过指针逐个访问节点。然而，树是一种非线性数据结构，这使得遍历树比遍历链表更加复杂，需要借助搜索算法来实现。</p>\n<p data-block=\"blk-e8c19148b13b6ae9\">二叉树常见的遍历方式包括层序遍历、前序遍历、中序遍历和后序遍历等。</p>\n<h2 data-block=\"blk-21e593c5afd54fda\" id=\"_2\">层序遍历</h2>\n<p data-block=\"blk-0e6d17cfdce2dd8d\">如下图所示，<u>层序遍历（level-order traversal）</u>从顶部到底部逐层遍历二叉树，并在每一层按照从左到右的顺序访问节点。</p>\n<p data-block=\"blk-f146ec14a0d225c1\">层序遍历本质上属于<u>广度优先遍历（breadth-first traversal）</u>，也称<u>广度优先搜索（breadth-first search, BFS）</u>，它体现了一种“一圈一圈向外扩展”的逐层遍历方式。</p>\n<div class=\"chapter-scene-card ch12-card\" data-block=\"blk-89e358f1a21e7668\"><p class=\"ch12-eyebrow\">第 7 章 · 星轨任务</p><h3>巡检机器人遍历树站</h3><p>教学演示：可修改输入，自动播放或逐步查看解释。原教材图解保留在下方，可随时对照。</p><button data-action=\"teaching-scene\" data-scene=\"traversal\">打开巡检机器人遍历树站演示</button></div><figure data-block=\"blk-891d24378bc57f83\"><img alt=\"二叉树的层序遍历\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_tree/binary_tree_traversal.assets/binary_tree_bfs.png\"/><figcaption>二叉树的层序遍历</figcaption></figure>\n<h3 data-block=\"blk-a915fecad1eb095b\" id=\"_3\">代码实现</h3>\n<p data-block=\"blk-33fd27647ca22dab\">广度优先遍历通常借助“队列”来实现。队列遵循“先进先出”的规则，而广度优先遍历则遵循“逐层推进”的规则，两者背后的思想是一致的。实现代码如下：</p>\n<div class=\"code-example\" data-block=\"blk-fb8b73e956a41019\" data-code=\"0\"><div class=\"code-caption\"><span>binary_tree_bfs · python</span><button data-action=\"code\" data-code=\"0\">查看 / 运行</button></div><pre><code>def level_order(root: TreeNode | None) -&gt; list[int]:\n    \"\"\"层序遍历\"\"\"\n    # 初始化队列，加入根节点\n    queue: deque[TreeNode] = deque()\n    queue.append(root)\n    # 初始化一个列表，用于保存遍历序列\n    res = []\n    while queue:\n        node: TreeNode = queue.popleft()  # 队列出队\n        res.append(node.val)  # 保存节点值\n        if node.left is not None:\n            queue.append(node.left)  # 左子节点入队\n        if node.right is not None:\n            queue.append(node.right)  # 右子节点入队\n    return res</code></pre></div>\n<h3 data-block=\"blk-f0e8958aa08f468d\" id=\"_4\">复杂度分析</h3>\n<ul data-block=\"blk-7b74ef2a1cb32935\">\n<li><strong>时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span></strong> ：所有节点被访问一次，使用 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 时间，其中 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> 为节点数量。</li>\n<li><strong>空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span></strong> ：在最差情况下，即满二叉树时，遍历到最底层之前，队列中最多同时存在 <span class=\"arithmatex\" data-tex=\"\\((n + 1) / 2\\)\">\\((n + 1) / 2\\)</span> 个节点，占用 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 空间。</li>\n</ul>\n<h2 data-block=\"blk-a55720ddce6eccfe\" id=\"_5\">前序、中序、后序遍历</h2>\n<p data-block=\"blk-2dba8a14f141d202\">相应地，前序、中序和后序遍历都属于<u>深度优先遍历（depth-first traversal）</u>，也称<u>深度优先搜索（depth-first search, DFS）</u>，它体现了一种“先走到尽头，再回溯继续”的遍历方式。</p>\n<p data-block=\"blk-32ce28b5c22950ea\">下图展示了对二叉树进行深度优先遍历的工作原理。<strong>深度优先遍历就像是绕着整棵二叉树的外围“走”一圈</strong>，在每个节点都会遇到三个位置，分别对应前序遍历、中序遍历和后序遍历。</p>\n<figure data-block=\"blk-24a7f07da15b30c4\"><img alt=\"二叉搜索树的前序、中序、后序遍历\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/chapter_tree/binary_tree_traversal.assets/binary_tree_dfs.png\"/><figcaption>二叉搜索树的前序、中序、后序遍历</figcaption></figure>\n<h3 data-block=\"blk-a4fd7ede5d82095d\" id=\"_6\">代码实现</h3>\n<p data-block=\"blk-2b085a9f9407978a\">深度优先搜索通常基于递归实现：</p>\n<div class=\"code-example\" data-block=\"blk-7f310cd20d3e25ff\" data-code=\"1\"><div class=\"code-caption\"><span>binary_tree_dfs · python</span><button data-action=\"code\" data-code=\"1\">查看 / 运行</button></div><pre><code>def post_order(root: TreeNode | None):\n    \"\"\"后序遍历\"\"\"\n    if root is None:\n        return\n    # 访问优先级：左子树 -&gt; 右子树 -&gt; 根节点\n    post_order(root=root.left)\n    post_order(root=root.right)\n    res.append(root.val)</code></pre></div>\n<div class=\"admonition tip\" data-block=\"blk-2eced8ea1343473d\">\n<p class=\"admonition-title\">Tip</p>\n<p>深度优先搜索也可以基于迭代实现，有兴趣的读者可以自行研究。</p>\n</div>\n<p data-block=\"blk-6a9c7843660c52a1\">下图展示了前序遍历二叉树的递归过程，其可分为“递”和“归”两个逆向的部分。</p>\n<ol data-block=\"blk-553982699a489114\">\n<li>“递”表示开启新方法，程序在此过程中访问下一个节点。</li>\n<li>“归”表示函数返回，代表当前节点已经访问完毕。</li>\n</ol>\n<figure class=\"step-player\" data-animation=\"0\" data-block=\"blk-c07e43affa21e1f5\"><img alt=\"前序遍历的递归过程\" data-action=\"image\" src=\"/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step1.png\"/><div class=\"step-frame-caption\" data-frame-caption=\"\">前序遍历的递归过程</div><figcaption><button aria-label=\"上一帧\" data-action=\"step-prev\" data-animation=\"0\">‹</button><span data-step-label=\"\">1 / 11</span><button data-action=\"step-play\" data-animation=\"0\">播放</button><button aria-label=\"下一帧\" data-action=\"step-next\" data-animation=\"0\">›</button></figcaption></figure>\n<h3 data-block=\"blk-69ae2aa94ca3418e\" id=\"_7\">复杂度分析</h3>\n<ul data-block=\"blk-b28f4b5c790d4666\">\n<li><strong>时间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span></strong> ：所有节点被访问一次，使用 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 时间。</li>\n<li><strong>空间复杂度为 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span></strong> ：在最差情况下，即树退化为链表时，递归深度达到 <span class=\"arithmatex\" data-tex=\"\\(n\\)\">\\(n\\)</span> ，系统占用 <span class=\"arithmatex\" data-tex=\"\\(O(n)\\)\">\\(O(n)\\)</span> 栈帧空间。</li>\n</ul>",
   "codeExamples": [
     {
       "id": "example-ef7ad067b326d5bb",
@@ -281,47 +281,58 @@
     [
       {
         "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step1.png",
-        "alt": "前序遍历的递归过程"
+        "alt": "前序遍历的递归过程",
+        "caption": "前序遍历的递归过程"
       },
       {
         "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step2.png",
-        "alt": "preorder_step2"
+        "alt": "preorder_step2",
+        "caption": "preorder_step2"
       },
       {
         "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step3.png",
-        "alt": "preorder_step3"
+        "alt": "preorder_step3",
+        "caption": "preorder_step3"
       },
       {
         "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step4.png",
-        "alt": "preorder_step4"
+        "alt": "preorder_step4",
+        "caption": "preorder_step4"
       },
       {
         "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step5.png",
-        "alt": "preorder_step5"
+        "alt": "preorder_step5",
+        "caption": "preorder_step5"
       },
       {
         "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step6.png",
-        "alt": "preorder_step6"
+        "alt": "preorder_step6",
+        "caption": "preorder_step6"
       },
       {
         "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step7.png",
-        "alt": "preorder_step7"
+        "alt": "preorder_step7",
+        "caption": "preorder_step7"
       },
       {
         "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step8.png",
-        "alt": "preorder_step8"
+        "alt": "preorder_step8",
+        "caption": "preorder_step8"
       },
       {
         "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step9.png",
-        "alt": "preorder_step9"
+        "alt": "preorder_step9",
+        "caption": "preorder_step9"
       },
       {
         "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step10.png",
-        "alt": "preorder_step10"
+        "alt": "preorder_step10",
+        "caption": "preorder_step10"
       },
       {
         "src": "/upstream/chapter_tree/binary_tree_traversal.assets/preorder_step11.png",
-        "alt": "preorder_step11"
+        "alt": "preorder_step11",
+        "caption": "preorder_step11"
       }
     ]
   ],
@@ -333,10 +344,12 @@
       "local asset and link rewriting",
       "stable block anchors",
       "math and footnotes",
-      "image caption grouping"
+      "image caption grouping",
+      "authored chapter mission and interactive scene overlays"
     ],
     "codeReferences": 2,
-    "animationGroups": 1
+    "animationGroups": 1,
+    "chapterEnhancementVersion": 2
   },
   "blockAliases": {
     "b0": "blk-47b5f131816e1d35",
@@ -365,5 +378,5 @@
     "b23": "blk-69ae2aa94ca3418e",
     "b24": "blk-b28f4b5c790d4666"
   },
-  "contentVersion": "d256f40bc1b9d48d"
+  "contentVersion": "fe71aba5cb16046e"
 }
