@@ -44,6 +44,7 @@
     "codemirror": "6.0.2",
     "echarts": "6.1.0",
     "h5p-standalone": "3.8.2",
+    "html-to-image": "1.11.13",
     "katex": "0.16.22",
     "lucide-vue-next": "0.468.0",
     "motion-v": "2.8.0",

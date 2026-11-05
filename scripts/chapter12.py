@@ -61,6 +61,10 @@ def overlay(body, section, registry=None):
     for img in soup.find_all('img'):
         original = img.get('src','').split('/')[-1]
         if original in replacements:
+            source_url = img.get('src', '')
+            figure = img.find_parent('figure')
+            if figure:
+                figure.insert_after(BeautifulSoup('<details class="ch12-original"><summary>查看原图</summary><img src="'+html.escape(source_url)+'" alt="上游原图：'+html.escape(img.get('alt',original))+'" data-action="image"/></details>', 'html.parser'))
             img['src']='/chapter12/'+replacements[original]
             img['data-action']='image'
             if key == 'divide_and_conquer':
