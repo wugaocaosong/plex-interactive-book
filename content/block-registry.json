@@ -14942,6 +14942,18 @@
         "fingerprint": "285b598eee6e9b32761134367d8a4f661ca07815e13ed453464557bd6f0dc810",
         "heading": "分治",
         "previous": "blk-82dc959852138d87"
+      },
+      {
+        "id": "blk-cdbdb06e6ab77200",
+        "fingerprint": "80d6711a587e6d29e9b816f0f2d056ff113c75a35c940efe1f0d141658224f73",
+        "heading": "分治",
+        "previous": "blk-fa8a955d0231b01d"
+      },
+      {
+        "id": "blk-c34e2730bee295ce",
+        "fingerprint": "e5d272de834d572ec11bde23f76f4f1749a640637091d84244a2616ea7915c25",
+        "heading": "分治",
+        "previous": "blk-cdbdb06e6ab77200"
       }
     ],
     "aliases": {
@@ -15187,10 +15199,28 @@
         "previous": "blk-329dbefefb10ea61"
       },
       {
+        "id": "blk-df71a0050ce1599d",
+        "fingerprint": "9d5d5d71616957f3838391a732e8d3640943d86d2442856dbd3988bab55d9065",
+        "heading": "分治常见应用",
+        "previous": "blk-3ad91d9c50c51b2f"
+      },
+      {
+        "id": "blk-b6a5de9d1d75d1a6",
+        "fingerprint": "f5e018aac83f9f3380a4fd9f699773ef159290a1a3b3aeca18535968eb863b8d",
+        "heading": "分治常见应用",
+        "previous": "blk-df71a0050ce1599d"
+      },
+      {
         "id": "blk-15090a9f16e6d960",
         "fingerprint": "489dde28ba367135905410a47f2444cf80f158b1ea718d16633b1a4f9d932c87",
         "heading": "分治常见应用",
-        "previous": "blk-3ad91d9c50c51b2f"
+        "previous": "blk-b6a5de9d1d75d1a6"
+      },
+      {
+        "id": "blk-4adbd8f7597cc54f",
+        "fingerprint": "e5d272de834d572ec11bde23f76f4f1749a640637091d84244a2616ea7915c25",
+        "heading": "分治常见应用",
+        "previous": "blk-15090a9f16e6d960"
       }
     ],
     "aliases": {
@@ -15363,6 +15393,24 @@
         "fingerprint": "9e03df442c2e82d2d47d3640329f6eea5e2f99de7821c133ff7947c885d83354",
         "heading": "基于分治实现二分查找",
         "previous": "blk-d162ec1f6ba194d9"
+      },
+      {
+        "id": "blk-b7a327bc502f4242",
+        "fingerprint": "a3ba70af1fb788defba08360f5f6eb757efb9b5d084a9f563320317ef48be6cf",
+        "heading": "基于分治实现二分查找",
+        "previous": "blk-e0c95d9bc1a77a74"
+      },
+      {
+        "id": "blk-d8b270acfd5baa44",
+        "fingerprint": "f5e018aac83f9f3380a4fd9f699773ef159290a1a3b3aeca18535968eb863b8d",
+        "heading": "基于分治实现二分查找",
+        "previous": "blk-b7a327bc502f4242"
+      },
+      {
+        "id": "blk-0ec1b6e0e2012bd0",
+        "fingerprint": "e5d272de834d572ec11bde23f76f4f1749a640637091d84244a2616ea7915c25",
+        "heading": "基于分治实现二分查找",
+        "previous": "blk-d8b270acfd5baa44"
       }
     ],
     "aliases": {
@@ -15591,6 +15639,24 @@
         "fingerprint": "0938774043d184a7fcc1e15a78d0a224463b040b35e37cf52c5713339a54b7fe",
         "heading": "代码实现",
         "previous": "blk-5fa309653729b353"
+      },
+      {
+        "id": "blk-10a1bc91adf53871",
+        "fingerprint": "7b89cbe1a961896247e9036e64358f513d89af371b82b1806409550dafbce4cc",
+        "heading": "代码实现",
+        "previous": "blk-b6614902d77a1373"
+      },
+      {
+        "id": "blk-f816f5680eaf2c9f",
+        "fingerprint": "f5e018aac83f9f3380a4fd9f699773ef159290a1a3b3aeca18535968eb863b8d",
+        "heading": "代码实现",
+        "previous": "blk-10a1bc91adf53871"
+      },
+      {
+        "id": "blk-b10bb74a8dbaba41",
+        "fingerprint": "e5d272de834d572ec11bde23f76f4f1749a640637091d84244a2616ea7915c25",
+        "heading": "代码实现",
+        "previous": "blk-f816f5680eaf2c9f"
       }
     ],
     "aliases": {
@@ -15825,6 +15891,24 @@
         "fingerprint": "e5ac51832cc4e070dbac8d9f9e0ef09019ea994c3e8006094075bc1e88b9078a",
         "heading": "代码实现",
         "previous": "blk-48e29ddcf13b97cf"
+      },
+      {
+        "id": "blk-22b6ec3c9bedcbb2",
+        "fingerprint": "352977b93227b2aa52c6d286ded344c97fcb6b15372e1d8e0eb2f24a8f719a75",
+        "heading": "代码实现",
+        "previous": "blk-c44cb159441b7ddf"
+      },
+      {
+        "id": "blk-92890d9181f9bcbd",
+        "fingerprint": "f5e018aac83f9f3380a4fd9f699773ef159290a1a3b3aeca18535968eb863b8d",
+        "heading": "代码实现",
+        "previous": "blk-22b6ec3c9bedcbb2"
+      },
+      {
+        "id": "blk-a13d45b82eecc678",
+        "fingerprint": "e5d272de834d572ec11bde23f76f4f1749a640637091d84244a2616ea7915c25",
+        "heading": "代码实现",
+        "previous": "blk-92890d9181f9bcbd"
       }
     ],
     "aliases": {
@@ -15885,10 +15969,22 @@
         "previous": "blk-e0c2e923c9a819fc"
       },
       {
-        "id": "blk-7f9eef4e27829e11",
-        "fingerprint": "088311c9bda646471da64f52154dba2a2df753cbdd9259ecad5a3e37f5cd1296",
+        "id": "blk-79d5d6c63553a5cc",
+        "fingerprint": "80d6711a587e6d29e9b816f0f2d056ff113c75a35c940efe1f0d141658224f73",
         "heading": "重点回顾",
         "previous": "blk-4adf25464f90f309"
+      },
+      {
+        "id": "blk-c5685a8982d282a4",
+        "fingerprint": "2b5c6d56859a761ce74c602b0514377b644b1c8c504d5d9f66bd9060bd7d7167",
+        "heading": "重点回顾",
+        "previous": "blk-79d5d6c63553a5cc"
+      },
+      {
+        "id": "blk-d3e5dea41fa07a9f",
+        "fingerprint": "e5d272de834d572ec11bde23f76f4f1749a640637091d84244a2616ea7915c25",
+        "heading": "重点回顾",
+        "previous": "blk-c5685a8982d282a4"
       }
     ],
     "aliases": {
@@ -16048,6 +16144,24 @@
         "fingerprint": "9eb452e2da821e87db9803a1037f121f25d89e4702f0efc09edd8414be56cdf6",
         "heading": "快速幂",
         "previous": "blk-e0715c780ee81042"
+      },
+      {
+        "id": "blk-645608f1970c679d",
+        "fingerprint": "87cbb7681ebbd72ca009e5b36c27a4ef0ecc75a743c7781ae5e7f2fbeb9a5327",
+        "heading": "快速幂",
+        "previous": "blk-b3f54a20eab61dd1"
+      },
+      {
+        "id": "blk-79129eeecc440089",
+        "fingerprint": "f5e018aac83f9f3380a4fd9f699773ef159290a1a3b3aeca18535968eb863b8d",
+        "heading": "快速幂",
+        "previous": "blk-645608f1970c679d"
+      },
+      {
+        "id": "blk-214f23e1cbaa01d3",
+        "fingerprint": "e5d272de834d572ec11bde23f76f4f1749a640637091d84244a2616ea7915c25",
+        "heading": "快速幂",
+        "previous": "blk-79129eeecc440089"
       }
     ],
     "aliases": {
