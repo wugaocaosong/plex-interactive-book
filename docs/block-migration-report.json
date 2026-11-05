@@ -1,1 +1,27 @@
-[]
+[
+  {
+    "sectionId": "chapter_divide_and_conquer/divide_and_conquer",
+    "blockId": "blk-6e8ccff2c01392d1",
+    "reason": "new"
+  },
+  {
+    "sectionId": "chapter_divide_and_conquer/binary_search_recur",
+    "blockId": "blk-14b974023964e995",
+    "reason": "new"
+  },
+  {
+    "sectionId": "chapter_divide_and_conquer/build_binary_tree_problem",
+    "blockId": "blk-9aa502e92d519c99",
+    "reason": "new"
+  },
+  {
+    "sectionId": "chapter_divide_and_conquer/build_binary_tree_problem",
+    "blockId": "blk-06c2ca3e05b910ec",
+    "reason": "new"
+  },
+  {
+    "sectionId": "chapter_divide_and_conquer/hanota_problem",
+    "blockId": "blk-37f4a6d17ca24242",
+    "reason": "new"
+  }
+]

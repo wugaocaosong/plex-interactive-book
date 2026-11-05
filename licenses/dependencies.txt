@@ -1,3 +1,4 @@
+html-to-image 1.11.13: MIT
 three.quarks 0.17.1: MIT
 quarks.core 0.17.1: MIT
 @huggingface/transformers 4.3.2: Apache-2.0

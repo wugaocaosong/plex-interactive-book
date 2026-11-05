@@ -90,10 +90,11 @@ async function transaction<T>(
   });
 }
 export async function getLearning<T>(id: string, fallback: T): Promise<T> {
+  const scopedId=learningKey(id);
   try {
     return (
       ((
-        (await transaction("readonly", (s) => s.get(learningKey(id)))) as
+        (await transaction("readonly", (s) => s.get(scopedId))) as
           | LearningRecord
           | undefined
       )?.value as T) ?? fallback
@@ -104,11 +105,12 @@ export async function getLearning<T>(id: string, fallback: T): Promise<T> {
   }
 }
 export async function putLearning(id: string, value: unknown) {
+  const scopedId=learningKey(id);
   try {
     const serializable = JSON.parse(JSON.stringify(value));
     await transaction("readwrite", (s) =>
       s.put({
-        id: learningKey(id),
+        id: scopedId,
         value: serializable,
         updatedAt: new Date().toISOString(),
       }),
@@ -123,8 +125,9 @@ export async function putLearning(id: string, value: unknown) {
   }
 }
 export async function removeLearning(id: string) {
+  const scopedId=learningKey(id);
   try {
-    await transaction("readwrite", (s) => s.delete(learningKey(id)));
+    await transaction("readwrite", (s) => s.delete(scopedId));
   } catch (error) {
     storageError(error);
     throw error;
@@ -136,12 +139,13 @@ export async function updateLearning<T>(
   fallback: T,
   update: (value: T) => T,
 ): Promise<T> {
+  const scopedId=learningKey(id);
   try {
     const database = await db();
     const value = await new Promise<T>((resolve, reject) => {
       const tx = database.transaction("records", "readwrite");
       const store = tx.objectStore("records");
-      const request = store.get(learningKey(id));
+      const request = store.get(scopedId);
       let result: T;
       request.onsuccess = () => {
         try {
@@ -149,7 +153,7 @@ export async function updateLearning<T>(
             JSON.stringify(update(request.result?.value ?? fallback)),
           );
           store.put({
-            id: learningKey(id),
+            id: scopedId,
             value: result,
             updatedAt: new Date().toISOString(),
           });
@@ -244,6 +248,19 @@ export function validateBackup(value: unknown): Backup {
     )
       throw Error("备份记录格式错误");
     const value = record.value as Record<string, unknown> | null;
+    if(record.id.startsWith('code-history:')){
+      const rows=record.value as any;const states=['running','done','error','stopped','timeout'];
+      if(!Array.isArray(rows)||rows.length>50||new Set(rows.map((r:any)=>r?.id)).size!==rows.length||rows.some((r:any)=>!r||typeof r.id!=='string'||typeof r.reference!=='string'||typeof r.file!=='string'||typeof r.language!=='string'||typeof r.version!=='string'||typeof r.code!=='string'||r.code.length>200000||typeof r.stdin!=='string'||typeof r.output!=='string'||r.output.length>200000||!states.includes(r.state)||!['run','test'].includes(r.kind)||!Number.isFinite(Date.parse(r.at))||!Array.isArray(r.diagnostics)||!Array.isArray(r.results)))throw Error('代码历史格式错误');
+    }
+    if(record.id.startsWith('chapter12:quiz:')){
+      const q=value as any;const valid=(a:any)=>a&&Array.isArray(a.answer)&&a.answer.length<=10&&new Set(a.answer).size===a.answer.length&&a.answer.every((n:any)=>Number.isInteger(n)&&n>=0&&n<10)&&typeof a.passed==='boolean'&&Number.isFinite(Date.parse(a.at));
+      if(!q||q.version!==1||typeof q.hintUsed!=='boolean'||(q.first&&!valid(q.first))||(q.latest&&!valid(q.latest)))throw Error('即时题记录格式错误');
+    }
+    if(record.id.startsWith('chapter12:starship:')){
+      const s=value as any;const numbers=(a:any,max:number)=>Array.isArray(a)&&a.length<=max&&a.every(Number.isSafeInteger);
+      if(!s||s.version!==1||!s.input||!numbers(s.input.values,15)||!numbers(s.input.inorder,15)||!Number.isSafeInteger(s.input.target)||!Number.isInteger(s.input.rings)||s.input.rings<1||s.input.rings>5||!Number.isSafeInteger(s.input.base)||!Number.isInteger(s.input.exponent)||s.input.exponent<0||s.input.exponent>64||!['manual','demo'].includes(s.mode)||!Number.isInteger(s.cursor)||s.cursor<0||!Array.isArray(s.decisions)||s.decisions.length>500||!Array.isArray(s.moves)||s.moves.length>1000||s.moves.some((m:any)=>!Array.isArray(m)||m.length!==3||m.some((a:any)=>!numbers(a,5))))throw Error('星舰实验记录格式错误');
+    }
+    if(record.id.startsWith('qa-draft:')&&(!value||typeof value.text!=='string'||value.text.length>100000||typeof value.ai!=='boolean'))throw Error('问答草稿格式错误');
     if(record.id.startsWith('lab-run:') && (!value || typeof value.key!=='string' || record.id!=='lab-run:'+value.key || !['done','error','stopped'].includes(String(value.state)) || typeof value.codeVersion!=='string' || typeof value.updatedAt!=='string' || !Number.isFinite(Date.parse(value.updatedAt)))) throw Error('综合实验运行记录格式错误');
     if(record.id==='pet:appearance'&&(!value||value.version!==1||typeof value.scale!=='number'||!Number.isFinite(value.scale)||value.scale<.7||value.scale>2||typeof value.visible!=='boolean'||typeof value.idleMotion!=='boolean'))throw Error('小E外观记录格式错误');
     if(record.id==='bookmark:groups'||record.id==='bookmark:levels'){

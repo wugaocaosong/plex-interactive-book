@@ -15031,10 +15031,16 @@
         "previous": "blk-ce979859d99cdcbb"
       },
       {
+        "id": "blk-6e8ccff2c01392d1",
+        "fingerprint": "ae36fd350bd8aab149342ece0e62f6f6533b55ee4f1f0ac162f9fcc31415408e",
+        "heading": "分治算法",
+        "previous": "blk-5317a0dd06dbc239"
+      },
+      {
         "id": "blk-a34dccc6a859f6df",
         "fingerprint": "683fff52a07b5052f9b8dc05ca83bac830bceb2b77093f1b902f9c6e5b206eed",
         "heading": "如何判断分治问题",
-        "previous": "blk-5317a0dd06dbc239"
+        "previous": "blk-6e8ccff2c01392d1"
       },
       {
         "id": "blk-026cbf791c76b87a",
@@ -15377,10 +15383,16 @@
         "previous": "blk-b1c4ec075a03fa4e"
       },
       {
+        "id": "blk-14b974023964e995",
+        "fingerprint": "ae36fd350bd8aab149342ece0e62f6f6533b55ee4f1f0ac162f9fcc31415408e",
+        "heading": "基于分治实现二分查找",
+        "previous": "blk-5697ca2a2a726415"
+      },
+      {
         "id": "blk-895d3e48c9d5dafd",
         "fingerprint": "3786f30efc77cb810412110f573c2addc94334ff7535cc0465f4b4aa9dc66ce4",
         "heading": "基于分治实现二分查找",
-        "previous": "blk-5697ca2a2a726415"
+        "previous": "blk-14b974023964e995"
       },
       {
         "id": "blk-d162ec1f6ba194d9",
@@ -15473,10 +15485,16 @@
         "previous": "blk-8329872e556cc9b0"
       },
       {
+        "id": "blk-9aa502e92d519c99",
+        "fingerprint": "ae36fd350bd8aab149342ece0e62f6f6533b55ee4f1f0ac162f9fcc31415408e",
+        "heading": "构建二叉树问题",
+        "previous": "blk-c74ac401091aba42"
+      },
+      {
         "id": "blk-bc334e7ca866d5fd",
         "fingerprint": "ef00de6b7416bc6b27a02d3029d3efb8f9c008bb7c626caec2149c759afa65f6",
         "heading": "判断是否为分治问题",
-        "previous": "blk-c74ac401091aba42"
+        "previous": "blk-9aa502e92d519c99"
       },
       {
         "id": "blk-14a9109e33423abe",
@@ -15533,10 +15551,16 @@
         "previous": "blk-74acec31ae13f9c0"
       },
       {
+        "id": "blk-06c2ca3e05b910ec",
+        "fingerprint": "ae36fd350bd8aab149342ece0e62f6f6533b55ee4f1f0ac162f9fcc31415408e",
+        "heading": "如何划分子树",
+        "previous": "blk-716f7fc43d8c3c20"
+      },
+      {
         "id": "blk-171d3e7522a3cde9",
         "fingerprint": "704508b2c1a794ad7ea1cf3e2d62fb5f83d740b426c3f7aa21a49f67cea43e51",
         "heading": "基于变量描述子树区间",
-        "previous": "blk-716f7fc43d8c3c20"
+        "previous": "blk-06c2ca3e05b910ec"
       },
       {
         "id": "blk-6f2b4513d4e6f585",
@@ -15737,10 +15761,16 @@
         "previous": "blk-49bf5f40c96cf7b9"
       },
       {
+        "id": "blk-37f4a6d17ca24242",
+        "fingerprint": "ae36fd350bd8aab149342ece0e62f6f6533b55ee4f1f0ac162f9fcc31415408e",
+        "heading": "汉诺塔问题",
+        "previous": "blk-3f52ff86e90f6224"
+      },
+      {
         "id": "blk-b0febbcf397ce0dd",
         "fingerprint": "75469033c6d7ae5735be3ba2c17869d4d27dd2810559e2ad709147a254e32ee7",
         "heading": "汉诺塔问题",
-        "previous": "blk-3f52ff86e90f6224"
+        "previous": "blk-37f4a6d17ca24242"
       },
       {
         "id": "blk-9175edcca3854fd5",

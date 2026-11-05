@@ -8,7 +8,8 @@ import {sections,type Station} from './starship-model';
 const StarshipLab=defineAsyncComponent(()=>import('./StarshipLab.vue'));
 const StarshipQuiz=defineAsyncComponent(()=>import('./StarshipQuiz.vue'));
 const CodePanel=defineAsyncComponent(()=>import('./CodePanel.vue'));
-const props=defineProps<{mode:string}>();
+const props=defineProps<{mode:string;sectionId?:string}>();
+const EbookQa=defineAsyncComponent(()=>import('./EbookQa.vue'));
 const emit=defineEmits<{activity:[section:string,mode:string]}>();
 const prefix='chapter_divide_and_conquer/';
 type Route={id:string;title:string;section:string;goal:string;activity:string};
@@ -18,7 +19,7 @@ const moves=ref(mergeSteps([6,3,8,2,5,1]));
 const steps=computed(()=>hanoiSteps(ringCount.value));
 const towers=computed(()=>demonstration.value?steps.value[cursor.value].towers:manual.value[manualCursor.value]);
 const currentStep=computed(()=>moves.value[cursor.value]);
-const task=computed(()=>tasks.value.find(t=>t.id==='ch12-'+props.mode.slice(5)));
+const task=computed(()=>props.mode.startsWith('code-')?tasks.value.find(t=>t.id==='ch12-'+props.mode.slice(5)):undefined);
 const visited=ref<string[]>([]),completed=ref<Record<string,string>>({}),attempts=ref<Record<string,ExerciseAttempt>>({});
 const quizCorrect=ref(0);
 const selfCheck=computed(()=>quizCorrect.value>=4&&route.value.every(r=>attempts.value['ch12-'+r.id]?.results.length&&attempts.value['ch12-'+r.id].results.every(x=>x.passed)));
@@ -148,5 +149,6 @@ onBeforeUnmount(()=>{disposed=true;stop();void persist().catch(()=>{});unregiste
   <StarshipLab v-if="loaded && mode.startsWith('lab-') && sections[mode.slice(4) as Station]" :key="mode" :station="mode.slice(4) as Station" />
   <StarshipQuiz v-if="loaded && mode.startsWith('quiz-')" :key="mode" :station="mode.slice(5)" @activity="(section,mode)=>emit('activity',section,mode)" />
   <CodePanel v-if="loaded && task" :key="task.id" :exercise="task" />
+  <EbookQa v-if="loaded && mode==='qa' && sectionId" :key="sectionId" :section="sectionId" />
  </div>
 </template>

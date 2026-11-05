@@ -14,6 +14,7 @@ import {summonCodeAssistant,activeCodeProvider,snapshotVersion} from "./code-con
 import PlexCoach from "./PlexCoach.vue";
 import CodeEditor from "./CodeEditor.vue";
 import type { LabRunResult } from "./route-lab";
+import {readHistory,saveRun,deleteRun,exportRuns,type RunSnapshot} from './run-history';
 const emit=defineEmits<{completed:[]; outcome:[result:LabRunResult]}>();
 const props = defineProps<{
   example?: CodeExample;
@@ -36,6 +37,17 @@ const lang = ref(props.exercise ? "python" : readStore("language", "python")),
   readonlyHtml = ref(""),
   editor = ref<InstanceType<typeof CodeEditor>>();
 const selectedCode=ref('');
+const lastTestVersion=ref('');
+const historyOpen=ref(false),history=ref<RunSnapshot[]>([]),historyError=ref(''),compare=ref<RunSnapshot>();
+let activeRun:RunSnapshot|undefined;
+const unsavedRuns=new Map<string,RunSnapshot>();
+async function persistRun(run:RunSnapshot){unsavedRuns.set(run.id,run);await saveRun(run);if(unsavedRuns.get(run.id)===run)unsavedRuns.delete(run.id);}
+async function retryHistory(){try{for(const run of [...unsavedRuns.values()])await persistRun(run);historyError.value='';await reloadHistory();}catch{historyError.value='历史仍无法保存，可先导出当前历史。';}}
+async function reloadHistory(){const rows=await readHistory(props.exercise?.id||props.example?.id||'example');history.value=[...unsavedRuns.values(),...rows.filter(r=>!unsavedRuns.has(r.id))].sort((a,b)=>b.at.localeCompare(a.at)).slice(0,50);}
+function finishHistory(state:RunSnapshot['state']){if(!activeRun)return;const run={...activeRun,state,endedAt:new Date().toISOString(),output:output.value,diagnostics:JSON.parse(JSON.stringify(diagnostics.value)),results:activeRun.kind==='test'?JSON.parse(JSON.stringify(results.value)):[]};activeRun=undefined;void persistRun(run).then(()=>{if(!disposed)void reloadHistory();}).catch(()=>{history.value=[run,...history.value.filter(r=>r.id!==run.id)].slice(0,50);historyError.value='历史保存失败，记录暂存在当前窗口；请导出或重试后再关闭。';});}
+async function restoreRun(run:RunSnapshot){await persist();undo.value=code.value;code.value=run.code;stdin.value=run.stdin;await persist();status.value='已恢复历史代码，未自动运行；可撤销重置。';}
+function reviewRun(run:RunSnapshot){const snapshot={source:'history' as const,file:run.file,reference:run.reference,language:run.language,code:run.code,selection:'',output:run.output,diagnostics:run.diagnostics.map(x=>`${x.line||'?'}: ${x.message}`).join('\n'),version:run.version};summonCodeAssistant(()=>snapshot);window.dispatchEvent(new CustomEvent('plex-review-code',{detail:'请复查此历史代码版本的正确性、边界条件、复杂度和可读性。'}));}
+async function removeRun(run:RunSnapshot){try{history.value=await deleteRun(run.reference,run.id);}catch{historyError.value='删除历史失败，请重试。';}}
 const codeSnapshot=()=>({file:props.example?.file||props.exercise?.title||'example.py',reference:props.exercise?.id||props.example?.id||'',language:lang.value,code:code.value,selection:selectedCode.value,output:output.value,diagnostics:diagnostics.value.map(d=>`${d.line||'?'}: ${d.message}`).join('\n'),version:snapshotVersion(code.value)});
 onBeforeUnmount(()=>{if(activeCodeProvider.value===codeSnapshot)activeCodeProvider.value=null;});
 const variant = computed(
@@ -141,7 +153,8 @@ watch(
   },
   { immediate: true },
 );
-function stop(message = "已停止运行。") {
+function stop(message = "已停止运行。",reason:RunSnapshot['state']='stopped') {
+  finishHistory(reason);
   if (running.value) recordLabRun("stopped");
   ++runId;
   worker?.terminate();
@@ -164,6 +177,9 @@ async function start(check = false) {
   if (running.value) return;
   const generation=++runId;
   running.value = true;
+  output.value='';diagnostics.value=[];if(check)results.value=[];
+  activeRun={id:crypto.randomUUID(),reference:props.exercise?.id||props.example?.id||'example',file:props.example?.file||props.exercise?.title||'example.py',language:lang.value,version:snapshotVersion(code.value),code:code.value,stdin:stdin.value,kind:check?'test':'run',state:'running',at:new Date().toISOString(),output:'',diagnostics:[],results:[]};
+  try{await persistRun(activeRun);}catch{historyError.value='无法保存运行历史，代码仍可运行。';}
   if (props.example?.labKey) activeLabRun={key:props.example.labKey,codeVersion:snapshotVersion(code.value)};
   await persist();
   if (disposed || generation!==runId) return;
@@ -196,7 +212,7 @@ async function start(check = false) {
     });
     clearTimeout(timer);
     timer = setTimeout(
-      () => stop("执行超过 10 秒，已停止。可以修改代码后重新运行。"),
+      () => stop("执行超过 10 秒，已停止。可以修改代码后重新运行。",'timeout'),
       10000,
     );
   };
@@ -204,8 +220,8 @@ async function start(check = false) {
     if (!worker) {
       worker = new Worker("/python-worker.js", { type: "module" });
       worker.onerror = (e) => {
-        stop("Python 初始化失败，请重试。");
         output.value = e.message;
+        stop("Python 初始化失败，请重试。",'error');
       };
       worker.onmessage = (event) => {
         const msg = event.data;
@@ -238,8 +254,10 @@ async function start(check = false) {
           if (msg.diagnostic) diagnostics.value = [msg.diagnostic];
           if (msg.results) {
             results.value = msg.results;
+            lastTestVersion.value=activeRun?.version||'';
             void saveAttempt();
           }
+          finishHistory(msg.type==='error'?'error':'done');
           if (!ready.value || check) {
             worker?.terminate();
             worker = undefined;
@@ -247,12 +265,12 @@ async function start(check = false) {
           }
         }
       };
-      timer = setTimeout(() => stop("环境加载超时，请重试。"), 90000);
+      timer = setTimeout(() => stop("环境加载超时，请重试。",'timeout'), 90000);
       worker.postMessage({ type: "init", requestId: id, runId: id });
     } else execute();
   } catch (e) {
-    stop("无法启动 Python，请重试。");
     output.value = String(e);
+    stop("无法启动 Python，请重试。",'error');
   }
 }
 function reset() {
@@ -282,6 +300,7 @@ onBeforeUnmount(() => {
 </script>
 <template>
   <div class="code-panel">
+    <header v-if="exercise?.id.startsWith('ch12-')" class="mission-code-header"><small>PLEX / FLIGHT ENGINEERING</small><h3>星舰代码工作台</h3><p>任务简报 → 编辑程序 → 实际运行 → 测试验证</p><p v-if="results.length">{{lastTestVersion!==snapshotVersion(code)?'下面显示历史测试结果；当前代码需要重新检查。':results.every(r=>r.passed)?'任务验证通过。可以回顾本次解法并进入下一站。':'任务尚未完成：查看失败用例，修改后重新验证。'}}</p></header>
     <template v-if="exercise"
       ><p class="dialog-eyebrow">{{ exercise.group }} · {{ exercise.kind }}</p>
       <h3>{{ exercise.title }}</h3>
@@ -333,7 +352,7 @@ onBeforeUnmount(() => {
       ref="editor"
       v-model="code"
       :readonly="running"
-      :original="diff ? original : undefined"
+      :original="compare ? compare.code : diff ? original : undefined"
       :diagnostics="diagnostics"
       :fold-source-header="foldSourceHeader"
       @blur="persist" @selection="selectedCode=$event"
@@ -355,6 +374,8 @@ onBeforeUnmount(() => {
       />
     </label>
     <button class="summon-code-assistant" @click="summonCodeAssistant(codeSnapshot)">召唤小E · 查看代码上下文</button>
+    <button @click="historyOpen=!historyOpen;reloadHistory()">运行与测试历史</button><button v-if="compare" @click="compare=undefined">关闭历史差异</button><p v-if="historyError" role="alert">{{historyError}}<button @click="retryHistory">重试保存历史</button></p>
+    <section v-if="historyOpen" class="run-history" aria-label="本机代码历史"><h4>本机运行历史 · 非服务端正式提交</h4><button @click="exportRuns(history)">导出历史</button><p v-if="!history.length">尚无运行记录。</p><article v-for="run in history" :key="run.id"><p>{{run.kind==='test'?'测试':'运行'}} · {{run.at}} · {{run.version}} · {{run.state==='running'?'未收到结束结果':run.state}}</p><details><summary>查看此版本代码和结果</summary><pre>{{run.code}}</pre><pre>{{run.output}}</pre><pre v-if="run.results.length">{{JSON.stringify(run.results,null,2)}}</pre></details><button :disabled="running" @click="restoreRun(run)">恢复到编辑器</button><button @click="compare=run">比较版本差异</button><button @click="reviewRun(run)">小E复查此版本</button><button :disabled="running" @click="removeRun(run)">删除记录</button></article></section>
     <div class="execution-actions">
       <button
         v-if="python && !running"

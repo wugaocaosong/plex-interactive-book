@@ -55,6 +55,12 @@ import { readLabResults, labResultText, type LabRunResult } from "./route-lab";
 import ReaderControls from './ReaderControls.vue';
 import FloatingToolWindow from './FloatingToolWindow.vue';
 import {petHost,showPet} from './pet-host';
+import {frameActive,readingMaterial} from './reading-context';
+const FrameReading=defineAsyncComponent(()=>import('./FrameReading.vue'));
+function openFrame(){if(overlayOpen.value)closeOverlay();readingMaterial.value=null;frameActive.value=true;}
+function openQaEvent(event:Event){const id=(event as CustomEvent).detail?.section;if(typeof id==='string'&&id.startsWith('chapter_divide_and_conquer/'))void chapterActivity(id,'qa');}
+onMounted(()=>{window.addEventListener('plex-frame-reading',openFrame);window.addEventListener('plex-open-qa',openQaEvent);});
+onBeforeUnmount(()=>{frameActive.value=false;readingMaterial.value=null;window.removeEventListener('plex-frame-reading',openFrame);window.removeEventListener('plex-open-qa',openQaEvent);});
 const Blackboard=defineAsyncComponent(()=>import('./Blackboard.vue'));
 const boardOpen=ref(false),boardSection=ref(''),petOpen=toRef(petHost,'open'),dictating=toRef(petHost,'dictating');
 function petLogin(){openUnit('profile');}
@@ -66,7 +72,7 @@ const controlNotice=ref('');let noticeTimer:ReturnType<typeof setTimeout>|undefi
 function turnNotice(text:string){controlNotice.value=text;clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>controlNotice.value='',2200);}
 async function controlTurn(command:PageTurnCommand){
  const editing=(document.activeElement as HTMLElement)?.closest('input,textarea,select,[contenteditable=true],.cm-editor');
- const blocked=!!(menu.value||searchOpen.value||panel.value||boardOpen.value||petOpen.value||selection.value||loading.value||editing||!document.hasFocus()||document.hidden||!getSelection()?.isCollapsed||(flip&&flip.getState()!=='read'));
+ const blocked=!!(frameActive.value||menu.value||searchOpen.value||panel.value||boardOpen.value||petOpen.value||selection.value||loading.value||editing||!document.hasFocus()||document.hidden||!getSelection()?.isCollapsed||(flip&&flip.getState()!=='read'));
  if(!turnGate.accept(command,performance.now(),blocked))return;
  if(preferences.value.mode==='study'&&!cover.value&&study.value){
   const moved=await turnStudy(command.direction==='next'?1:-1);turnNotice(moved?'已滚动一屏':'已到阅读边界');return;
@@ -1503,6 +1509,7 @@ function resize() {
   resizeTimer = setTimeout(() => layout(place), 200);
 }
 function keydown(event: KeyboardEvent) {
+  if(frameActive.value)return;
   const editing=(event.target as HTMLElement).closest('input,textarea,select,[contenteditable=true],.cm-editor');
   if((event.ctrlKey||event.metaKey)&&event.altKey&&event.key.toLowerCase()==='m'&&!editing){
     const native=getSelection();const node=native?.anchorNode;
@@ -2152,7 +2159,7 @@ onBeforeUnmount(() => {
           :fold-source-header="panelSource.html.includes('ch12-')"
         />
         <TeachingScene v-if="panel==='teaching'" :key="teachingScene" :scene-id="teachingScene"/>
-        <Chapter12Panel v-if="panel === 'chapter12'" :key="chapter12Mode" :mode="chapter12Mode" @activity="chapterActivity" />
+        <Chapter12Panel v-if="panel === 'chapter12'" :key="chapter12Mode" :mode="chapter12Mode" :section-id="sectionId" @activity="chapterActivity" />
         <UnitPanel
           v-if="panel === 'unit'"
           :key="unitSection + unitMode"
@@ -2189,4 +2196,5 @@ onBeforeUnmount(() => {
 
     <ReaderControls :settings="menu==='controls'" :blocked="overlayOpen||boardOpen||petOpen" :dictating="dictating" :notice="controlNotice" @command="controlTurn" @fullscreen="fullscreen" @configure="openMenu('controls')" />
   </div>
+  <FrameReading v-if="frameActive" :section-id="sectionId" @close="frameActive=false" />
 </template>
