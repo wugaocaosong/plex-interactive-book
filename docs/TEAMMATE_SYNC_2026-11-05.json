@@ -1,0 +1,96 @@
+{
+  "checkedOn": "2026-11-05",
+  "repository": "yeniwu46-max/plex-interactive-book",
+  "baseline": "24ab06bd4a9756667982d93326802c67e2a152cb",
+  "branches": [
+    {
+      "branch": "origin/bingsober/ui-restore",
+      "commit": "8858dba45cd0124629b432895dd7345e61f57bd2",
+      "author": "bingsober",
+      "date": "2026-11-02T07:46:44+08:00",
+      "subject": "Restore classic reading UI and interactive labs",
+      "inMain": false
+    },
+    {
+      "branch": "origin/codex/ch12-learning-demo",
+      "commit": "5b32abe20d620b81b878b48bbc6e9df3ef812829",
+      "author": "wuyeni0806",
+      "date": "2026-10-30T22:14:33+08:00",
+      "subject": "docs: record main integration, clean installation and regression results",
+      "inMain": true
+    },
+    {
+      "branch": "origin/codex/galaxy-particles-chibi-pet",
+      "commit": "24ab06bd4a9756667982d93326802c67e2a152cb",
+      "author": "wuyeni0806",
+      "date": "2026-11-03T20:52:48+08:00",
+      "subject": "docs: record galaxy refinement integration into main",
+      "inMain": true
+    },
+    {
+      "branch": "origin/codex/galaxy-reading-upgrade",
+      "commit": "fc6b11d3621622b2e15d56961890dabdddad6e6e",
+      "author": "wuyeni0806",
+      "date": "2026-11-02T19:24:07+08:00",
+      "subject": "feat: redesign galaxy entrance with rotatable 3D book and eye reveal",
+      "inMain": true
+    },
+    {
+      "branch": "origin/codex/interactive-book-v1",
+      "commit": "242b531d6e2d4b70928ebfd7ba3eef13ceebec82",
+      "author": "wuyeni0806",
+      "date": "2026-10-22T17:15:00+08:00",
+      "subject": "docs: record clean-clone and standalone package acceptance",
+      "inMain": true
+    },
+    {
+      "branch": "origin/codex/learning-tools-v02",
+      "commit": "b73d37e04123f33c3bdb931ec8ba123bdfbb1fb8",
+      "author": "wuyeni0806",
+      "date": "2026-10-23T10:16:28+08:00",
+      "subject": "docs: record clean-clone v0.2 verification and reproducible builds",
+      "inMain": true
+    },
+    {
+      "branch": "origin/codex/merge-smart-search-2026-11-03",
+      "commit": "1dbd61e490bd67cb15335abb97a5ad5f11875d12",
+      "author": "wuyeni0806",
+      "date": "2026-11-03T18:02:06+08:00",
+      "subject": "merge: integrate teammate smart search and preserve reader interactions",
+      "inMain": true
+    },
+    {
+      "branch": "origin/codex/monty-hall-v03",
+      "commit": "58e25145940bbc04096fc099f70e346518781e5f",
+      "author": "wuyeni0806",
+      "date": "2026-10-25T16:58:15+08:00",
+      "subject": "docs: record v0.3 browser regression and clean-clone verification",
+      "inMain": true
+    },
+    {
+      "branch": "origin/codex/monty-lesson-v04",
+      "commit": "76c27d79c4f36d247ff1796dd436c1c7509c90c9",
+      "author": "wuyeni0806",
+      "date": "2026-10-27T10:55:53+08:00",
+      "subject": "docs: record clean v0.4 validation and add reproducible archive verification",
+      "inMain": true
+    },
+    {
+      "branch": "origin/codex/smart-search",
+      "commit": "2a737a235bb3b02c89f1cfe41534572054f75bcf",
+      "author": "gaomengqin97-ui",
+      "date": "2026-11-03T15:42:18+08:00",
+      "subject": "feat: refine AI textbook search panel",
+      "inMain": true
+    },
+    {
+      "branch": "origin/main",
+      "commit": "24ab06bd4a9756667982d93326802c67e2a152cb",
+      "author": "wuyeni0806",
+      "date": "2026-11-03T20:52:48+08:00",
+      "subject": "docs: record galaxy refinement integration into main",
+      "inMain": true
+    }
+  ],
+  "integration": "Selective source adaptation of bingsober/ui-restore; no unrelated-history merge; no main push or deployment."
+}

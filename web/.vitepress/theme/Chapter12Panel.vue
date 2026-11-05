@@ -4,6 +4,9 @@ import {mergeSteps,hanoiSteps,initialTowers,moveRing,type Towers} from './chapte
 import {getLearning,putLearning,updateLearning,allLearning} from './learning-store';
 import {registerLearningFlush} from './learning-flush';
 import type {ExerciseDefinition,ExerciseAttempt} from './types';
+import {sections,type Station} from './starship-model';
+const StarshipLab=defineAsyncComponent(()=>import('./StarshipLab.vue'));
+const StarshipQuiz=defineAsyncComponent(()=>import('./StarshipQuiz.vue'));
 const CodePanel=defineAsyncComponent(()=>import('./CodePanel.vue'));
 const props=defineProps<{mode:string}>();
 const emit=defineEmits<{activity:[section:string,mode:string]}>();
@@ -17,6 +20,8 @@ const towers=computed(()=>demonstration.value?steps.value[cursor.value].towers:m
 const currentStep=computed(()=>moves.value[cursor.value]);
 const task=computed(()=>tasks.value.find(t=>t.id==='ch12-'+props.mode.slice(5)));
 const visited=ref<string[]>([]),completed=ref<Record<string,string>>({}),attempts=ref<Record<string,ExerciseAttempt>>({});
+const quizCorrect=ref(0);
+const selfCheck=computed(()=>quizCorrect.value>=4&&route.value.every(r=>attempts.value['ch12-'+r.id]?.results.length&&attempts.value['ch12-'+r.id].results.every(x=>x.passed)));
 const last=computed(()=>props.mode==='merge'?moves.value.length-1:steps.value.length-1);
 let timer:ReturnType<typeof setInterval>|undefined;let disposed=false;
 const storageKey='chapter12:lab:'+props.mode;
@@ -71,6 +76,7 @@ async function load(){
   const progress=await getLearning('chapter12:progress',{visited:[] as string[],completed:{} as Record<string,string>});
   visited.value=progress.visited;completed.value=progress.completed;
   const records=await allLearning();
+  quizCorrect.value=records.filter(r=>r.id.startsWith('chapter12:quiz:summary-')&&(r.value as any)?.latest?.passed).length;
   attempts.value=Object.fromEntries(records.filter(r=>r.id.startsWith('attempt:ch12-')).map(r=>[(r.value as ExerciseAttempt).exerciseId,r.value as ExerciseAttempt]));
   if(['merge','hanoi'].includes(props.mode)){
    const saved=await getLearning<any>(storageKey,null);
@@ -104,10 +110,12 @@ onBeforeUnmount(()=>{disposed=true;stop();void persist().catch(()=>{});unregiste
   <p v-if="!loaded">正在读取活动…</p>
   <template v-else-if="mode==='route'">
    <h3>本章任务路线</h3><p>可以从任意一站出发。访问、实验完成、代码测试分别记录。</p>
+   <p>综合自检 {{quizCorrect}} / 5 · {{selfCheck?'本章自查达成（不等于全面掌握）':'继续实验与测试，不限制阅读'}}</p>
    <ol class="ch12-route">
     <li v-for="item in route" :key="item.id"><h4>{{item.title}}</h4><p>{{item.goal}}</p>
      <p>{{visited.includes(prefix+item.section)?'已访问':'尚未访问'}} · {{completed[item.activity]?'已完成实验':'实验尚未完成'}} · {{attempts['ch12-'+item.id]?.results.length ? '最近代码测试 '+attempts['ch12-'+item.id].results.filter(r=>r.passed).length+'/'+attempts['ch12-'+item.id].results.length : '代码尚未测试'}}</p>
      <button @click="emit('activity',prefix+item.section,item.activity)">前往{{item.title}}</button>
+     <button @click="emit('activity',prefix+item.section,'lab-'+item.id)">进入虚拟实验台</button><button @click="emit('activity',prefix+item.section,'quiz-'+item.id)">即时测验</button><button @click="emit('activity',prefix+item.section,'code-'+item.id)">编程验证</button><p>{{completed['lab-'+item.id]?'自主实验已完成':'自主实验待完成'}}</p>
     </li>
    </ol>
   </template>
@@ -137,6 +145,8 @@ onBeforeUnmount(()=>{disposed=true;stop();void persist().catch(()=>{});unregiste
    <button @click="play">{{playing?'暂停':'播放标准步骤'}}</button>
    <span v-if="mode==='merge'||demonstration">{{cursor+1}} / {{last+1}} 步</span>
   </div>
+  <StarshipLab v-if="loaded && mode.startsWith('lab-') && sections[mode.slice(4) as Station]" :key="mode" :station="mode.slice(4) as Station" />
+  <StarshipQuiz v-if="loaded && mode.startsWith('quiz-')" :key="mode" :station="mode.slice(5)" @activity="(section,mode)=>emit('activity',section,mode)" />
   <CodePanel v-if="loaded && task" :key="task.id" :exercise="task" />
  </div>
 </template>

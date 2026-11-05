@@ -5,6 +5,7 @@ import markdown, yaml
 from bs4 import BeautifulSoup
 from block_ids import assign_blocks
 import chapter12
+import route_lab
 import chapter_scenes
 from chapter12_tasks import publish as publish_chapter12_tasks
 
@@ -298,7 +299,12 @@ if __name__=='__main__':
         following=f'<button data-action="next-lesson" data-next="unit/monty/{lessons[page_index+1][0]}">下一教学环节 →</button>' if page_index+1<len(lessons) else ''
         markup+=f'<div class="activity-invitation"><span>本页目标：{html.escape(lesson[3])}</span><button data-action="unit" data-unit-mode="{lesson[2]}">{html.escape(lesson[4])}</button><button data-action="blackboard">打开小黑板</button>{following}</div>'
         publish(page_record('unit/monty/'+slug,title,'unit','三扇舱门 · 45 分钟'),markup)
+    lab_pages=list(route_lab.pages())
     for item in nav:
+        if item[0]=='chapter_divide_and_conquer/index.md':
+            for authored,body,examples in lab_pages:
+                route_lab.seed_registry(authored,block_registry)
+                publish(page_record(authored['id'],authored['title'],'unit','星航驿站 · 综合实验'),body,examples)
         if not item[0].startswith(('chapter_hello_algo/','chapter_preface/','chapter_appendix/','chapter_reference/')): add_source(item)
     for id in ['afterword','acknowledgements']: add_editorial(id)
     for item in nav:
@@ -317,6 +323,7 @@ if __name__=='__main__':
         if path.is_file() and path.suffix.lower() in {'.png','.jpg','.jpeg','.gif','.svg','.webp'}:
             target=PUBLIC/'genius'/path.relative_to(GENIUS_SOURCE);target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(path,target)
     python_files={p.relative_to(SOURCE/'codes/python').as_posix():p.read_text(encoding='utf8') for p in (SOURCE/'codes/python').rglob('*.py')}
+    python_files.update(route_lab.publish_sources(lab_pages,PUBLIC))
     write_json(PUBLIC/'book/python-files.json',python_files)
     (ROOT/'web/index.md').write_text('---\ntitle: 星轨编程\nbookId: cover\n---\n',encoding='utf8',newline='\n')
     print(json.dumps(stats,ensure_ascii=False))

@@ -51,6 +51,11 @@ for english,chinese in terms:
     candidates.sort(key=lambda entry:(chinese not in entry['title'],len(entry['text'])))
     section=candidates[0]['id'] if candidates else 'chapter_appendix/terminology'
     glossary.append(dict(term=chinese.replace('$',''),english=english.replace('$',''),definition=definitions[chinese],sectionId=section))
+supplements={item['term']:item for item in json.loads((ROOT/'content/learning/route-lab/glossary-supplements.json').read_text(encoding='utf8'))}
+for entry in glossary:
+    extra=supplements.get(entry['term'],{})
+    entry.update({k:v for k,v in extra.items() if k in ['homeSection','tip','keys']})
+    if entry.get('homeSection') not in sections: entry.pop('homeSection',None)
 publish(target.parent/'glossary.json',glossary)
 print(f'Published {len(glossary)} authored glossary explanations.')
 simulation=(ROOT/'content/learning/monty-simulation.py').read_text(encoding='utf8')

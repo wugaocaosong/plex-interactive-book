@@ -41,7 +41,8 @@ const notices = [];
 for(const name of ['three.quarks','quarks.core','@huggingface/transformers','@orama/orama','onnxruntime-web','@tresjs/core','three','@pmndrs/pointer-events','radashi','@mediapipe/tasks-vision','vosk-browser','uuid','vitepress','vue','page-flip','h5p-standalone','pyodide','katex','lucide-vue-next','codemirror','@codemirror/state','@codemirror/view','@codemirror/lang-python','@codemirror/language','@codemirror/merge','@codemirror/lint','shiki','motion-v','motion-dom','motion-utils','@vueuse/core','@vueuse/shared','echarts','zrender','vue-echarts','roughjs','hachure-fill','path-data-parser','points-on-curve','points-on-path','@axe-core/playwright','axe-core','@fontsource/noto-serif-sc','@fontsource/noto-sans-sc','@fontsource/jetbrains-mono']) {
   const dir=resolve(root,'node_modules',name);const pkg=JSON.parse(await readFile(resolve(dir,'package.json'),'utf8'));
   notices.push(`${name} ${pkg.version}: ${pkg.license}`);
-  for(const file of await readdir(dir)) if(/^(license|licence|ofl|copyright)/i.test(file)) {
+  for(const entry of await readdir(dir,{withFileTypes:true})) if(entry.isFile()&&/^(license|licence|ofl|copyright)/i.test(entry.name)) {
+    const file=entry.name;
     await mkdir(resolve(root,'licenses/dependencies'),{recursive:true});
     await writeFile(resolve(root,'licenses/dependencies',name.replaceAll('/','-')+'-'+file),await readFile(resolve(dir,file)));
   }

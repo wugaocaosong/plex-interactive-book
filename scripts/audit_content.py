@@ -1,6 +1,8 @@
 """Fail the build on missing pages, source references, images or internal links."""
 import hashlib,json,pathlib,re,urllib.parse
 from bs4 import BeautifulSoup
+import route_lab
+authored_sources={v['sourcePath']:v['fullSource'] for _,_,examples in route_lab.pages() for e in examples for v in e['variants']}
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 PUBLIC=ROOT/'web/public'
 manifest=json.loads((PUBLIC/'book/manifest.json').read_text(encoding='utf8'))
@@ -34,7 +36,11 @@ for page in manifest['pages']:
         code+=1
         if not example['variants']:fail(f'Empty code {example["id"]}')
         for variant in example['variants']:
-            source=ROOT/'content/upstream/hello-algo'/variant['sourcePath']
+            if variant.get('sourceOrigin')=='authored':
+                expected=authored_sources.get(variant['sourcePath'])
+                if expected is None or expected!=variant['fullSource']:fail(f'Authored code source mismatch {example["id"]}')
+                source=PUBLIC/variant['sourcePath']
+            else: source=ROOT/'content/upstream/hello-algo'/variant['sourcePath']
             if not source.exists():fail(f'Missing code source {source}')
             elif source.read_text(encoding='utf8')!=variant['fullSource']:fail(f'Code differs from upstream {source}')
             if not variant['snippet'].strip():fail(f'Empty snippet {example["id"]}')

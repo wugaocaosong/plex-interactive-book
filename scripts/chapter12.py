@@ -15,6 +15,7 @@ def prepare():
     dest.mkdir(exist_ok=True)
     (dest/'config.json').write_text(json.dumps(CONFIG, ensure_ascii=False, indent=2)+'\n', encoding='utf8')
     import shutil
+    shutil.copyfile(ROOT/'content/chapter12/quizzes.json', dest/'quizzes.json')
     for asset in (ROOT/'content/chapter12').glob('*.svg'):
         shutil.copyfile(asset, dest/asset.name)
     for field in ('src','captions'):
@@ -73,9 +74,11 @@ def overlay(body, section, registry=None):
             old_id=(registry or {}).get(section,{}).get('aliases',{}).get(figure.get('data-block'))
             if old_id: details['data-preserve-block']=old_id
             figure.wrap(details);details.insert(0,label)
-    if key == 'summary': soup.append(BeautifulSoup(invitation('回到本章路线', '访问、实验完成和代码测试分别记录；打开过页面并不表示已经掌握。', 'route', '查看本章活动记录'), 'html.parser'))
+    if key in ('index','summary'): soup.append(BeautifulSoup(invitation('星舰分治 · 五站任务路线', '实验、测验和代码测试分别记录；本章自查不等于全面掌握。', 'route', '查看本章活动记录'), 'html.parser'))
+    if key == 'summary': soup.append(BeautifulSoup(invitation('舰长综合自检', '五道题检查拆分、搜索、建树、搬运与快速幂。', 'quiz-summary', '开始综合自检'), 'html.parser'))
     task = {'divide_and_conquer':'merge', 'binary_search_recur':'search', 'build_binary_tree_problem':'tree', 'hanota_problem':'hanoi', 'exercises':'power'}.get(key)
     if task:
+        soup.append(BeautifulSoup(invitation('星舰实验台 · '+task, '自己决策并验证，或播放标准教学流程；原图解继续保留供对照。', 'lab-'+task, '进入虚拟实验台')+invitation('即时反馈 · 三道检查题', '先作答，再看解释；错误可以重试，并返回本节实验。', 'quiz-'+task, '开始即时测验'), 'html.parser'))
         from chapter12_tasks import TASKS
         entry=next(e for e in TASKS if e['id']=='ch12-'+task)
         markup=BeautifulSoup(invitation(entry['title'],entry['description'],'code-'+task,'动手写代码'), 'html.parser')
@@ -86,6 +89,7 @@ def overlay(body, section, registry=None):
         if not anchor: anchor=next((n for n in soup.find_all(['h2','h3']) if '代码实现' in n.get_text()),None)
         if anchor: anchor.insert_before(markup)
         else: soup.append(markup)
+    soup.append(BeautifulSoup(invitation('本节 QA · 共同讨论', '登录后与其他读者交流，问题关联本小节。个人小E答复不会自动公开。', 'qa', '打开本节问答'), 'html.parser'))
     return str(soup)
 
 def terms(body, section):

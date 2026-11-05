@@ -49,6 +49,9 @@ import { bindPageDrag } from "./page-drag";
 import { flushLearning } from "./learning-flush";
 const StarMap=defineAsyncComponent(()=>import("./SolarDirectory.vue"));
 import StudyReader from "./StudyReader.vue";
+import { decorateLabLevel, isLabLevel } from "./lab-level";
+import { injectExplorers } from "./explorers";
+import { readLabResults, labResultText, type LabRunResult } from "./route-lab";
 import ReaderControls from './ReaderControls.vue';
 import FloatingToolWindow from './FloatingToolWindow.vue';
 import {petHost,showPet} from './pet-host';
@@ -173,7 +176,24 @@ const systemDark = ref(false),
   );
 const glossary = ref<GlossaryEntry[]>([]),
   term = ref<GlossaryEntry>();
+const labResults=ref<Record<string,LabRunResult|undefined>>({});
+const labRevision=ref(0);
+function refreshLabLabels(root:ParentNode=document) {
+  root.querySelectorAll<HTMLElement>("[data-lab-result]").forEach(el=>el.textContent=labResultText(labResults.value[el.dataset.labResult!]));
+}
+function labOutcome(result:LabRunResult){labResults.value[result.key]=result;prepared.clear();refreshLabLabels();}
+async function changeLabLevel(level:string) {
+  if(!isLabLevel(level)||level===preferences.value.labLevel)return;
+  const place=locator();
+  preferences.value.labLevel=level;
+  saveStore("preferences",preferences.value);
+  prepared.clear();labRevision.value++;
+  await nextTick();
+  if(place){const source=document.createElement("div");source.innerHTML=current.value?.html||"";const block=[...source.querySelectorAll<HTMLElement>("[data-block]")].find(e=>e.dataset.block===place.blockId);if(block?.dataset.level&&block.dataset.level!==level){place.blockId=source.querySelector<HTMLElement>("h1")?.dataset.block||"b0";place.offset=0;}}
+  await layout(place);
+}
 function decorateTerms(root: HTMLElement) {
+  injectExplorers(root);
   if (root.dataset.section) {
     for (const note of notes.value.filter(
       (n) => n.sectionId === root.dataset.section,
@@ -185,6 +205,8 @@ function decorateTerms(root: HTMLElement) {
       }
     }
   }
+  decorateLabLevel(root,preferences.value.labLevel);
+  refreshLabLabels(root);
   if (!root.querySelector('.ch12-intro,.ch12-card,.ch12-video,.ch12-term')) decorateGlossary(root, glossary.value);
 }
 let studyRouting = false;
@@ -744,6 +766,8 @@ function preparedKey(id: string) {
     desktop.value,
     preferences.value.fontSize,
     preferences.value.lineHeight,
+    preferences.value.font,
+    preferences.value.labLevel,
     notes.value.map((n) => n.updatedAt),
   ]);
 }
@@ -870,6 +894,14 @@ function locator(): ReadingLocator {
     contentVersion: current.value?.contentVersion,
   };
 }
+function alignLabLocator(place?:ReadingLocator) {
+  if(!place || !current.value?.id.startsWith('unit/lab/') || current.value.id!==place.sectionId)return false;
+  const source=document.createElement('div');source.innerHTML=current.value.html;
+  const block=[...source.querySelectorAll<HTMLElement>('[data-block]')].find(el=>el.dataset.block===place.blockId);
+  const level=block?.closest<HTMLElement>('[data-level]')?.dataset.level;
+  if(!level || !isLabLevel(level) || level===preferences.value.labLevel)return false;
+  preferences.value.labLevel=level;saveStore('preferences',preferences.value);prepared.clear();labRevision.value++;return true;
+}
 function resolvePlace(place?: ReadingLocator) {
   if (place && current.value?.blockAliases?.[place.blockId])
     return { ...place, blockId: current.value.blockAliases[place.blockId] };
@@ -908,6 +940,7 @@ async function navigate(id: string, place?: ReadingLocator) {
   if (id === sectionId.value) {
     if (place) {
       place = resolvePlace(place)!;
+      if(alignLabLocator(place)){await nextTick();await layout(place);return;}
       if (preferences.value.mode === "study") await study.value?.go(place);
       else
         flip?.turnToPage(locateLeaf(leaves.value, place.blockId, place.offset));
@@ -1120,6 +1153,8 @@ async function clickBook(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
     const value = action.dataset.action;
+    if(value==="lab-level"){await changeLabLevel(action.dataset.labLevel||"");return;}
+    if(value==="explorer"&&action.dataset.target){await navigate(action.dataset.target);return;}
     if(value === "teaching-scene"){teachingScene.value=action.dataset.scene as SceneId;openPanel("teaching");return;}
     if (value === "chapter12") {
       await chapterActivity(panelBlock.value?.sectionId || sectionId.value,action.dataset.mode || "route");
@@ -1200,6 +1235,7 @@ async function clickBook(event: MouseEvent) {
 async function layout(place?: ReadingLocator) {
   if (!current.value || !measure.value || !stage.value) return;
   place = resolvePlace(place);
+  if(alignLabLocator(place))await nextTick();
   if (preferences.value.mode === "study") {
     disposeDrag?.();
     flip?.destroy();
@@ -1310,6 +1346,16 @@ async function layout(place?: ReadingLocator) {
       leafSections.value.push(item.page.id);
     }
     if (item.page.id === primary.id) sectionEnd = leaves.value.length - 1;
+    // Keep section starts on a left leaf: PageFlip reports the left page of
+    // a spread, so an odd boundary would route back into the previous section.
+    if (desktop.value && item.pages.length % 2) {
+      leaves.value.push({
+        html: '<div class="blank-verso">PLEX</div>',
+        blockId: item.pages.at(-1)!.blockId,
+        offset: item.pages.at(-1)!.offset,
+      });
+      leafSections.value.push(item.page.id);
+    }
   }
   // PageFlip owns these nodes; stateful panels stay outside the three-section window.
   disposeDrag?.();
@@ -1509,9 +1555,10 @@ function keydown(event: KeyboardEvent) {
     return;
 
 }
-function hashchange() {
+async function hashchange() {
   const place = resolvePlace(parseHash());
   if (place) {
+    if(alignLabLocator(place)){await nextTick();await layout(place);return;}
     if (preferences.value.mode === "study") void study.value?.go(place);
     else
       flip?.turnToPage(locateLeaf(leaves.value, place.blockId, place.offset));
@@ -1559,6 +1606,8 @@ onMounted(async () => {
   }
   try {
     manifest.value = await fetch("/book/manifest.json").then((r) => r.json());
+    const labKeys=(await Promise.all((manifest.value?.pages||[]).filter(p=>p.id.startsWith("unit/lab/")).map(p=>getPage(p.id)))).flatMap(p=>p.codeExamples.flatMap(e=>e.labKey?[e.labKey]:[]));
+    try {labResults.value=await readLabResults(labKeys);} catch(e) {storageMessage.value=String(e);}
     glossary.value = await fetch("/learning/glossary.json").then((r) =>
       r.json(),
     );
@@ -1602,8 +1651,10 @@ onBeforeUnmount(() => {
     class="reader"
     :data-section="current?.id"
     :data-mode="preferences.mode"
+    :data-font="preferences.font"
     :class="{
       'is-cover': cover,
+      'is-immersed': preferences.immersion,
       'is-back-cover': backCover,
       'theme-dark': dark,
       'has-floating-window': overlayOpen,
@@ -1618,6 +1669,7 @@ onBeforeUnmount(() => {
         (preferences.customWidth?.study ?? { narrow: 680, standard: 840, wide: 980 }[preferences.width]) + 'px',
     }"
   >
+    <button v-if="preferences.immersion && !overlayOpen" class="immersion-exit" @click="preferences.immersion=false;updatePreferences()">退出沉浸阅读</button>
     <a class="skip-link" href="#reading-content">跳到正文</a>
     <header class="reader-toolbar" :inert="overlayOpen">
       <button class="brand" aria-label="返回封面" @click="navigate('cover')">
@@ -1783,6 +1835,7 @@ onBeforeUnmount(() => {
           :get-page="getPage"
           :notes="notes"
           :decorate="decorateTerms"
+          :revision="labRevision"
           @position="studyPosition"
           @section="studySection"
           @select="selectText"
@@ -2026,6 +2079,8 @@ onBeforeUnmount(() => {
         </template>
         <div v-if="menu === 'settings'" class="reader-settings">
           <h2>阅读设置</h2>
+          <label>正文字体<select v-model="preferences.font" @change="updatePreferences"><option value="sans">无衬线 · 默认</option><option value="serif">衬线 · 宋体</option></select></label>
+          <label><input type="checkbox" v-model="preferences.immersion" @change="updatePreferences" />沉浸阅读（隐藏导航，保留退出入口）</label>
           <label
             >字号 {{ preferences.fontSize }}px<input
               v-model.number="preferences.fontSize"
@@ -2092,6 +2147,7 @@ onBeforeUnmount(() => {
         <CodePanel
           v-if="panel === 'code' && panelSource?.codeExamples[codeIndex]"
           :example="panelSource.codeExamples[codeIndex]"
+          @outcome="labOutcome"
           :fold-source-header="panelSource.html.includes('ch12-')"
         />
         <TeachingScene v-if="panel==='teaching'" :key="teachingScene" :scene-id="teachingScene"/>
@@ -2110,7 +2166,9 @@ onBeforeUnmount(() => {
         <div v-if="panel === 'term' && term" class="reader-settings">
           <h2>{{ term.term }}</h2>
           <small>{{ term.english }}</small>
-          <p>{{ term.definition }}</p>
+          <p>{{ term.tip || term.definition }}</p>
+          <p v-if="term.tip">{{ term.definition }}</p>
+          <p v-if="term.keys?.length">快捷键：{{ term.keys.join(" · ") }}</p>
           <button @click="navigate(term.sectionId)">阅读相关章节 →</button>
         </div>
         <H5PPanel v-if="panel === 'activity'" />

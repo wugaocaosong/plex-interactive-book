@@ -141,11 +141,12 @@ test('mobile pagination preserves every paragraph and survives resize and reload
   await page.setViewportSize({width:1440,height:1000});await page.waitForTimeout(1000)
   await expect(page.locator('.reader-error')).toHaveCount(0)
 })
-test('every bundled Python example referenced by the book runs with its own driver',async({page})=>{
+test('every upstream Python example referenced by the book runs with its own driver',async({page})=>{
   test.setTimeout(300000)
   const manifest=JSON.parse(readFileSync('web/public/book/manifest.json','utf8'))
   const examples=new Map<string,string>()
-  for(const section of manifest.pages){const data=JSON.parse(readFileSync(`web/public/book/pages/${section.id}.json`,'utf8'));for(const ref of data.codeExamples){const py=ref.variants.find((v:any)=>v.language==='python');if(py)examples.set(py.sourcePath.replace('codes/python/',''),py.fullSource)}}
+  for(const section of manifest.pages){const data=JSON.parse(readFileSync(`web/public/book/pages/${section.id}.json`,'utf8'));for(const ref of data.codeExamples){const py=ref.variants.find((v:any)=>v.language==='python' && v.sourceOrigin!=='authored');if(py)examples.set(py.sourcePath.replace('codes/python/',''),py.fullSource)}}
+  expect(examples.size).toBe(73)
   await page.goto('/')
   const results=await page.evaluate(async entries=>{
     const worker=new Worker('/python-worker.js',{type:'module'})

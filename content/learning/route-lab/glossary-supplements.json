@@ -1,0 +1,524 @@
+[
+  {
+    "term": "算法",
+    "homeSection": "chapter_introduction/algorithms_are_everywhere"
+  },
+  {
+    "term": "数据结构",
+    "homeSection": "chapter_data_structure/classification_of_data_structure"
+  },
+  {
+    "term": "代码",
+    "homeSection": "chapter_preface/about_the_book",
+    "tip": "用编程语言写下的指令。看书时随手改一行再运行，比盯着看十遍有用。",
+    "keys": [
+      "Ctrl+C 复制",
+      "Ctrl+V 粘贴",
+      "Ctrl+Z 撤销"
+    ]
+  },
+  {
+    "term": "文件",
+    "homeSection": "chapter_preface/suggestions",
+    "tip": "保存在磁盘上的数据集合。写代码时记得 Ctrl+S，别让辛苦白费。"
+  },
+  {
+    "term": "函数",
+    "homeSection": "chapter_sorting/heap_sort",
+    "tip": "打包好的一段逻辑，给参数就能复用。看到代码窗口，按 Ctrl+Enter 可以直接跑起来。"
+  },
+  {
+    "term": "方法",
+    "homeSection": "chapter_searching/binary_search",
+    "tip": "挂在对象或类型上的函数。想看它的效果，选中后按 Ctrl+Enter 运行。"
+  },
+  {
+    "term": "变量",
+    "homeSection": "chapter_graph/graph",
+    "tip": "给数据起的名字。改错了不用慌，Ctrl+Z 就能撤回。",
+    "keys": [
+      "Ctrl+Z 撤销",
+      "Ctrl+C 复制"
+    ]
+  },
+  {
+    "term": "渐近复杂度分析",
+    "homeSection": "chapter_computational_complexity/performance_evaluation"
+  },
+  {
+    "term": "时间复杂度",
+    "homeSection": "chapter_computational_complexity/time_complexity"
+  },
+  {
+    "term": "空间复杂度",
+    "homeSection": "chapter_computational_complexity/space_complexity"
+  },
+  {
+    "term": "循环",
+    "homeSection": "chapter_searching/binary_search"
+  },
+  {
+    "term": "迭代",
+    "homeSection": "chapter_computational_complexity/iteration_and_recursion"
+  },
+  {
+    "term": "递归",
+    "homeSection": "chapter_computational_complexity/iteration_and_recursion"
+  },
+  {
+    "term": "尾递归",
+    "homeSection": "chapter_computational_complexity/iteration_and_recursion"
+  },
+  {
+    "term": "递归树",
+    "homeSection": "chapter_dynamic_programming/intro_to_dynamic_programming"
+  },
+  {
+    "term": "渐近上界",
+    "homeSection": "chapter_computational_complexity/time_complexity"
+  },
+  {
+    "term": "原码",
+    "homeSection": "chapter_data_structure/number_encoding"
+  },
+  {
+    "term": "反码",
+    "homeSection": "chapter_data_structure/number_encoding"
+  },
+  {
+    "term": "补码",
+    "homeSection": "chapter_data_structure/number_encoding"
+  },
+  {
+    "term": "数组",
+    "homeSection": "chapter_array_and_linkedlist/array",
+    "tip": "一排连续存放的元素，靠下标定位。想临时挪一段代码？先 Ctrl+X 剪切再 Ctrl+V 粘贴。",
+    "keys": [
+      "Ctrl+X 剪切",
+      "Ctrl+V 粘贴"
+    ]
+  },
+  {
+    "term": "索引",
+    "homeSection": "chapter_divide_and_conquer/divide_and_conquer"
+  },
+  {
+    "term": "链表",
+    "homeSection": "chapter_array_and_linkedlist/linked_list"
+  },
+  {
+    "term": "链表节点",
+    "homeSection": "chapter_stack_and_queue/stack"
+  },
+  {
+    "term": "头节点",
+    "homeSection": "chapter_array_and_linkedlist/linked_list"
+  },
+  {
+    "term": "尾节点",
+    "homeSection": "chapter_array_and_linkedlist/linked_list"
+  },
+  {
+    "term": "列表",
+    "homeSection": "chapter_array_and_linkedlist/list"
+  },
+  {
+    "term": "动态数组",
+    "homeSection": "chapter_array_and_linkedlist/array"
+  },
+  {
+    "term": "硬盘",
+    "homeSection": "chapter_array_and_linkedlist/ram_and_cache"
+  },
+  {
+    "term": "内存",
+    "homeSection": "chapter_array_and_linkedlist/ram_and_cache"
+  },
+  {
+    "term": "缓存",
+    "homeSection": "chapter_array_and_linkedlist/ram_and_cache"
+  },
+  {
+    "term": "缓存未命中",
+    "homeSection": "chapter_array_and_linkedlist/ram_and_cache"
+  },
+  {
+    "term": "缓存命中率",
+    "homeSection": "chapter_array_and_linkedlist/ram_and_cache"
+  },
+  {
+    "term": "栈顶",
+    "homeSection": "chapter_stack_and_queue/stack"
+  },
+  {
+    "term": "栈底",
+    "homeSection": "chapter_stack_and_queue/stack"
+  },
+  {
+    "term": "队列",
+    "homeSection": "chapter_stack_and_queue/queue"
+  },
+  {
+    "term": "双向队列",
+    "homeSection": "chapter_stack_and_queue/deque"
+  },
+  {
+    "term": "队首",
+    "homeSection": "chapter_stack_and_queue/queue"
+  },
+  {
+    "term": "队尾",
+    "homeSection": "chapter_stack_and_queue/queue"
+  },
+  {
+    "term": "哈希表",
+    "homeSection": "chapter_hashing/hash_map"
+  },
+  {
+    "term": "哈希集合",
+    "homeSection": "chapter_backtracking/permutations_problem"
+  },
+  {
+    "term": "哈希函数",
+    "homeSection": "chapter_hashing/hash_map"
+  },
+  {
+    "term": "哈希冲突",
+    "homeSection": "chapter_hashing/hash_collision"
+  },
+  {
+    "term": "负载因子",
+    "homeSection": "chapter_hashing/hash_map"
+  },
+  {
+    "term": "链式地址",
+    "homeSection": "chapter_hashing/hash_collision"
+  },
+  {
+    "term": "开放寻址",
+    "homeSection": "chapter_hashing/hash_collision"
+  },
+  {
+    "term": "线性探测",
+    "homeSection": "chapter_hashing/hash_collision"
+  },
+  {
+    "term": "懒删除",
+    "homeSection": "chapter_hashing/hash_collision"
+  },
+  {
+    "term": "二叉树",
+    "homeSection": "chapter_tree/binary_tree_traversal"
+  },
+  {
+    "term": "树节点",
+    "homeSection": "chapter_tree/binary_tree",
+    "tip": "树里的一个元素，带着指向子节点的引用。图可以看成去掉“唯一父节点”约束的树。"
+  },
+  {
+    "term": "左子节点",
+    "homeSection": "chapter_tree/binary_tree_traversal"
+  },
+  {
+    "term": "右子节点",
+    "homeSection": "chapter_tree/binary_tree_traversal"
+  },
+  {
+    "term": "父节点",
+    "homeSection": "chapter_heap/heap"
+  },
+  {
+    "term": "左子树",
+    "homeSection": "chapter_divide_and_conquer/build_binary_tree_problem"
+  },
+  {
+    "term": "右子树",
+    "homeSection": "chapter_divide_and_conquer/build_binary_tree_problem"
+  },
+  {
+    "term": "根节点",
+    "homeSection": "chapter_sorting/heap_sort"
+  },
+  {
+    "term": "叶节点",
+    "homeSection": "chapter_sorting/heap_sort"
+  },
+  {
+    "term": "边",
+    "homeSection": "",
+    "tip": "连接两个顶点的线。谁和谁是好友，谁和谁有路，就是一条边。"
+  },
+  {
+    "term": "高度",
+    "homeSection": "chapter_introduction/what_is_dsa"
+  },
+  {
+    "term": "深度",
+    "homeSection": "chapter_preface/about_the_book"
+  },
+  {
+    "term": "完美二叉树",
+    "homeSection": "chapter_tree/binary_tree"
+  },
+  {
+    "term": "完全二叉树",
+    "homeSection": "chapter_heap/heap"
+  },
+  {
+    "term": "完满二叉树",
+    "homeSection": "chapter_tree/binary_tree"
+  },
+  {
+    "term": "平衡二叉树",
+    "homeSection": "chapter_tree/binary_tree"
+  },
+  {
+    "term": "二叉搜索树",
+    "homeSection": "chapter_tree/binary_search_tree"
+  },
+  {
+    "term": "红黑树",
+    "homeSection": "chapter_graph/graph"
+  },
+  {
+    "term": "层序遍历",
+    "homeSection": "chapter_tree/binary_tree_traversal"
+  },
+  {
+    "term": "广度优先遍历",
+    "homeSection": "chapter_graph/graph_traversal",
+    "tip": "一圈一圈往外扩：先看所有邻居，再看邻居的邻居。像往水里丢石子，波纹一层层漾开。"
+  },
+  {
+    "term": "深度优先遍历",
+    "homeSection": "chapter_graph/graph_traversal",
+    "tip": "一条路走到黑，走不通再回头换条路。像走迷宫时贴着右手边的墙一直走。"
+  },
+  {
+    "term": "前序遍历",
+    "homeSection": "chapter_divide_and_conquer/build_binary_tree_problem"
+  },
+  {
+    "term": "中序遍历",
+    "homeSection": "chapter_divide_and_conquer/build_binary_tree_problem"
+  },
+  {
+    "term": "后序遍历",
+    "homeSection": "chapter_sorting/merge_sort"
+  },
+  {
+    "term": "平衡二叉搜索树",
+    "homeSection": "chapter_tree/avl_tree"
+  },
+  {
+    "term": "平衡因子",
+    "homeSection": "chapter_tree/avl_tree"
+  },
+  {
+    "term": "大顶堆",
+    "homeSection": "chapter_heap/heap"
+  },
+  {
+    "term": "小顶堆",
+    "homeSection": "chapter_heap/heap"
+  },
+  {
+    "term": "优先队列",
+    "homeSection": "chapter_heap/heap"
+  },
+  {
+    "term": "堆化",
+    "homeSection": "chapter_heap/heap"
+  },
+  {
+    "term": "图",
+    "homeSection": "",
+    "tip": "把一堆东西和它们之间的关系画出来，就是图。社交网络、地铁线路、网页链接，全是图。"
+  },
+  {
+    "term": "顶点",
+    "homeSection": "chapter_graph/graph",
+    "tip": "图里的每一个“点”。在人脉图里，每个人就是一个顶点。"
+  },
+  {
+    "term": "无向图",
+    "homeSection": "chapter_graph/graph",
+    "tip": "边不分方向：A 认识 B，B 也认识 A。好友关系就是无向的。"
+  },
+  {
+    "term": "有向图",
+    "homeSection": "chapter_graph/graph",
+    "tip": "边有箭头：你关注了对方，对方不一定关注你。"
+  },
+  {
+    "term": "连通图",
+    "homeSection": "chapter_graph/graph",
+    "tip": "随便挑一个点，都能走到其他所有点。走不到，就是非连通图。"
+  },
+  {
+    "term": "非连通图",
+    "homeSection": "chapter_graph/graph",
+    "tip": "图里分成了几块互不相通的区域，像没有桥的几座岛。"
+  },
+  {
+    "term": "有权图",
+    "homeSection": "chapter_graph/graph",
+    "tip": "边上有数字，比如距离、票价、耗时。找最短路径时，这个数字才是关键。"
+  },
+  {
+    "term": "邻接",
+    "homeSection": "chapter_graph/graph",
+    "tip": "判断“这两个点之间有没有直接的边”。查邻接关系，就是在查它俩认不认识。"
+  },
+  {
+    "term": "路径",
+    "homeSection": "chapter_graph/graph",
+    "tip": "从一个顶点走到另一个顶点，一路上经过的边连起来就是路径。"
+  },
+  {
+    "term": "入度",
+    "homeSection": "chapter_graph/graph",
+    "tip": "有多少条边指向我。在微博里，入度大致就是有多少人关注你。"
+  },
+  {
+    "term": "出度",
+    "homeSection": "chapter_graph/graph",
+    "tip": "有多少条边从我指出去。你关注了多少人，就是你的出度。"
+  },
+  {
+    "term": "邻接矩阵",
+    "homeSection": "chapter_graph/graph",
+    "tip": "用一张二维表格记“谁和谁相邻”，查关系是 O(1)，但占地方。适合点不多的稠密图。"
+  },
+  {
+    "term": "邻接表",
+    "homeSection": "chapter_graph/graph",
+    "tip": "每个顶点挂一串“我认识谁”的名单，省空间，遍历邻居也快。稀疏图的常用选择。"
+  },
+  {
+    "term": "广度优先搜索",
+    "homeSection": "chapter_tree/binary_tree_traversal",
+    "tip": "从起点开始一层层向外找，先到先查。找“最少几步能到”这类问题时特别好用。"
+  },
+  {
+    "term": "深度优先搜索",
+    "homeSection": "chapter_tree/binary_tree_traversal",
+    "tip": "沿着一条分支往下钻，钻不动了再退回上一个路口。适合枚举所有可能。"
+  },
+  {
+    "term": "二分查找",
+    "homeSection": "chapter_searching/binary_search_edge",
+    "tip": "每轮砍掉一半候选，前提是数据已经排好序。猜数字游戏用的就是这个思路。"
+  },
+  {
+    "term": "搜索算法",
+    "homeSection": "chapter_searching/binary_search",
+    "tip": "在数据里找目标值的办法统称搜索。数据有序可以用二分，无序多半得靠哈希或遍历。"
+  },
+  {
+    "term": "排序算法",
+    "homeSection": "chapter_sorting/sorting_algorithm",
+    "tip": "把一堆元素按大小排好。看似简单，却是理解复杂度、分治和取舍的最好入口。"
+  },
+  {
+    "term": "选择排序",
+    "homeSection": "chapter_sorting/selection_sort",
+    "tip": "每一轮挑出剩下元素里最小的，放到已排好部分的末尾。思路最直白，但比较次数固定。"
+  },
+  {
+    "term": "冒泡排序",
+    "homeSection": "chapter_sorting/bubble_sort",
+    "tip": "相邻两个比一比，大的往后挪。一轮下来最大的就“冒”到了最后。"
+  },
+  {
+    "term": "插入排序",
+    "homeSection": "chapter_sorting/insertion_sort",
+    "tip": "像整理手里的扑克牌：新牌插进左边已经排好的牌里。数据接近有序时特别快。"
+  },
+  {
+    "term": "快速排序",
+    "homeSection": "chapter_sorting/quick_sort",
+    "tip": "随便挑一个基准值，比它小的扔左边，大的扔右边，然后两边各自再排。平均最快。"
+  },
+  {
+    "term": "归并排序",
+    "homeSection": "chapter_sorting/merge_sort",
+    "tip": "把数组一分为二，两边分别排好，再合并成一个有序数组。稳定，且最坏也是 O(n log n)。"
+  },
+  {
+    "term": "堆排序",
+    "homeSection": "chapter_sorting/heap_sort",
+    "tip": "先把数组建成大顶堆，再反复把堆顶（最大值）换到末尾。空间省，但不稳定。"
+  },
+  {
+    "term": "桶排序",
+    "homeSection": "chapter_sorting/bucket_sort",
+    "tip": "按数值范围分成若干桶，各自排好再拼起来。数据分布均匀时非常快。"
+  },
+  {
+    "term": "计数排序",
+    "homeSection": "chapter_sorting/counting_sort",
+    "tip": "不比较大小，直接数每个值出现几次，再按次数还原顺序。适合范围小的整数。"
+  },
+  {
+    "term": "基数排序",
+    "homeSection": "chapter_sorting/radix_sort",
+    "tip": "从个位开始，一位一位地稳定排序，排完最高位就全有序了。"
+  },
+  {
+    "term": "分治",
+    "homeSection": "chapter_divide_and_conquer/divide_and_conquer"
+  },
+  {
+    "term": "汉诺塔问题",
+    "homeSection": "chapter_divide_and_conquer/hanota_problem"
+  },
+  {
+    "term": "回溯算法",
+    "homeSection": "chapter_backtracking/backtracking_algorithm"
+  },
+  {
+    "term": "约束",
+    "homeSection": "chapter_backtracking/backtracking_algorithm"
+  },
+  {
+    "term": "状态",
+    "homeSection": "chapter_backtracking/backtracking_algorithm"
+  },
+  {
+    "term": "剪枝",
+    "homeSection": "chapter_backtracking/backtracking_algorithm"
+  },
+  {
+    "term": "全排列问题",
+    "homeSection": "chapter_backtracking/permutations_problem"
+  },
+  {
+    "term": "子集和问题",
+    "homeSection": "chapter_backtracking/subset_sum_problem"
+  },
+  {
+    "term": "动态规划",
+    "homeSection": "chapter_dynamic_programming/intro_to_dynamic_programming"
+  },
+  {
+    "term": "初始状态",
+    "homeSection": "chapter_sorting/selection_sort"
+  },
+  {
+    "term": "状态转移方程",
+    "homeSection": "chapter_dynamic_programming/intro_to_dynamic_programming"
+  },
+  {
+    "term": "背包问题",
+    "homeSection": "chapter_greedy/fractional_knapsack_problem"
+  },
+  {
+    "term": "编辑距离问题",
+    "homeSection": "chapter_dynamic_programming/edit_distance_problem"
+  },
+  {
+    "term": "贪心算法",
+    "homeSection": "chapter_greedy/greedy_algorithm"
+  }
+]

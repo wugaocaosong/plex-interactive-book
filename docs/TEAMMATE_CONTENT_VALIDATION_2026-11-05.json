@@ -1,0 +1,31 @@
+{
+  "unchangedExistingSectionRegistries": 143,
+  "addedSections": 6,
+  "upstreamPages": 118,
+  "bookSections": 149,
+  "authoredCodeCards": 15,
+  "referenceBasicCards": 7,
+  "originalGradedExercises": 27,
+  "originalExerciseCases": 130,
+  "upstreamPythonExamplesExecuted": 73,
+  "pagination": [
+    {
+      "width": 390,
+      "sections": 147,
+      "leaves": 4046,
+      "issues": 0
+    },
+    {
+      "width": 820,
+      "sections": 147,
+      "leaves": 2161,
+      "issues": 0
+    },
+    {
+      "width": 1440,
+      "sections": 147,
+      "leaves": 2972,
+      "issues": 0
+    }
+  ]
+}

@@ -15386,6 +15386,18 @@
         "fingerprint": "285b598eee6e9b32761134367d8a4f661ca07815e13ed453464557bd6f0dc810",
         "heading": "分治",
         "previous": "blk-82dc959852138d87"
+      },
+      {
+        "id": "blk-cdbdb06e6ab77200",
+        "fingerprint": "80d6711a587e6d29e9b816f0f2d056ff113c75a35c940efe1f0d141658224f73",
+        "heading": "分治",
+        "previous": "blk-fa8a955d0231b01d"
+      },
+      {
+        "id": "blk-c34e2730bee295ce",
+        "fingerprint": "e5d272de834d572ec11bde23f76f4f1749a640637091d84244a2616ea7915c25",
+        "heading": "分治",
+        "previous": "blk-cdbdb06e6ab77200"
       }
     ],
     "aliases": {
@@ -15631,10 +15643,28 @@
         "previous": "blk-329dbefefb10ea61"
       },
       {
+        "id": "blk-df71a0050ce1599d",
+        "fingerprint": "9d5d5d71616957f3838391a732e8d3640943d86d2442856dbd3988bab55d9065",
+        "heading": "分治常见应用",
+        "previous": "blk-3ad91d9c50c51b2f"
+      },
+      {
+        "id": "blk-b6a5de9d1d75d1a6",
+        "fingerprint": "f5e018aac83f9f3380a4fd9f699773ef159290a1a3b3aeca18535968eb863b8d",
+        "heading": "分治常见应用",
+        "previous": "blk-df71a0050ce1599d"
+      },
+      {
         "id": "blk-15090a9f16e6d960",
         "fingerprint": "489dde28ba367135905410a47f2444cf80f158b1ea718d16633b1a4f9d932c87",
         "heading": "分治常见应用",
-        "previous": "blk-3ad91d9c50c51b2f"
+        "previous": "blk-b6a5de9d1d75d1a6"
+      },
+      {
+        "id": "blk-4adbd8f7597cc54f",
+        "fingerprint": "e5d272de834d572ec11bde23f76f4f1749a640637091d84244a2616ea7915c25",
+        "heading": "分治常见应用",
+        "previous": "blk-15090a9f16e6d960"
       }
     ],
     "aliases": {
@@ -15807,6 +15837,24 @@
         "fingerprint": "9e03df442c2e82d2d47d3640329f6eea5e2f99de7821c133ff7947c885d83354",
         "heading": "基于分治实现二分查找",
         "previous": "blk-d162ec1f6ba194d9"
+      },
+      {
+        "id": "blk-b7a327bc502f4242",
+        "fingerprint": "a3ba70af1fb788defba08360f5f6eb757efb9b5d084a9f563320317ef48be6cf",
+        "heading": "基于分治实现二分查找",
+        "previous": "blk-e0c95d9bc1a77a74"
+      },
+      {
+        "id": "blk-d8b270acfd5baa44",
+        "fingerprint": "f5e018aac83f9f3380a4fd9f699773ef159290a1a3b3aeca18535968eb863b8d",
+        "heading": "基于分治实现二分查找",
+        "previous": "blk-b7a327bc502f4242"
+      },
+      {
+        "id": "blk-0ec1b6e0e2012bd0",
+        "fingerprint": "e5d272de834d572ec11bde23f76f4f1749a640637091d84244a2616ea7915c25",
+        "heading": "基于分治实现二分查找",
+        "previous": "blk-d8b270acfd5baa44"
       }
     ],
     "aliases": {
@@ -16035,6 +16083,24 @@
         "fingerprint": "0938774043d184a7fcc1e15a78d0a224463b040b35e37cf52c5713339a54b7fe",
         "heading": "代码实现",
         "previous": "blk-5fa309653729b353"
+      },
+      {
+        "id": "blk-10a1bc91adf53871",
+        "fingerprint": "7b89cbe1a961896247e9036e64358f513d89af371b82b1806409550dafbce4cc",
+        "heading": "代码实现",
+        "previous": "blk-b6614902d77a1373"
+      },
+      {
+        "id": "blk-f816f5680eaf2c9f",
+        "fingerprint": "f5e018aac83f9f3380a4fd9f699773ef159290a1a3b3aeca18535968eb863b8d",
+        "heading": "代码实现",
+        "previous": "blk-10a1bc91adf53871"
+      },
+      {
+        "id": "blk-b10bb74a8dbaba41",
+        "fingerprint": "e5d272de834d572ec11bde23f76f4f1749a640637091d84244a2616ea7915c25",
+        "heading": "代码实现",
+        "previous": "blk-f816f5680eaf2c9f"
       }
     ],
     "aliases": {
@@ -16269,6 +16335,24 @@
         "fingerprint": "e5ac51832cc4e070dbac8d9f9e0ef09019ea994c3e8006094075bc1e88b9078a",
         "heading": "代码实现",
         "previous": "blk-48e29ddcf13b97cf"
+      },
+      {
+        "id": "blk-22b6ec3c9bedcbb2",
+        "fingerprint": "352977b93227b2aa52c6d286ded344c97fcb6b15372e1d8e0eb2f24a8f719a75",
+        "heading": "代码实现",
+        "previous": "blk-c44cb159441b7ddf"
+      },
+      {
+        "id": "blk-92890d9181f9bcbd",
+        "fingerprint": "f5e018aac83f9f3380a4fd9f699773ef159290a1a3b3aeca18535968eb863b8d",
+        "heading": "代码实现",
+        "previous": "blk-22b6ec3c9bedcbb2"
+      },
+      {
+        "id": "blk-a13d45b82eecc678",
+        "fingerprint": "e5d272de834d572ec11bde23f76f4f1749a640637091d84244a2616ea7915c25",
+        "heading": "代码实现",
+        "previous": "blk-92890d9181f9bcbd"
       }
     ],
     "aliases": {
@@ -16329,10 +16413,22 @@
         "previous": "blk-e0c2e923c9a819fc"
       },
       {
-        "id": "blk-7f9eef4e27829e11",
-        "fingerprint": "088311c9bda646471da64f52154dba2a2df753cbdd9259ecad5a3e37f5cd1296",
+        "id": "blk-79d5d6c63553a5cc",
+        "fingerprint": "80d6711a587e6d29e9b816f0f2d056ff113c75a35c940efe1f0d141658224f73",
         "heading": "重点回顾",
         "previous": "blk-4adf25464f90f309"
+      },
+      {
+        "id": "blk-c5685a8982d282a4",
+        "fingerprint": "2b5c6d56859a761ce74c602b0514377b644b1c8c504d5d9f66bd9060bd7d7167",
+        "heading": "重点回顾",
+        "previous": "blk-79d5d6c63553a5cc"
+      },
+      {
+        "id": "blk-d3e5dea41fa07a9f",
+        "fingerprint": "e5d272de834d572ec11bde23f76f4f1749a640637091d84244a2616ea7915c25",
+        "heading": "重点回顾",
+        "previous": "blk-c5685a8982d282a4"
       }
     ],
     "aliases": {
@@ -16492,6 +16588,24 @@
         "fingerprint": "9eb452e2da821e87db9803a1037f121f25d89e4702f0efc09edd8414be56cdf6",
         "heading": "快速幂",
         "previous": "blk-e0715c780ee81042"
+      },
+      {
+        "id": "blk-645608f1970c679d",
+        "fingerprint": "87cbb7681ebbd72ca009e5b36c27a4ef0ecc75a743c7781ae5e7f2fbeb9a5327",
+        "heading": "快速幂",
+        "previous": "blk-b3f54a20eab61dd1"
+      },
+      {
+        "id": "blk-79129eeecc440089",
+        "fingerprint": "f5e018aac83f9f3380a4fd9f699773ef159290a1a3b3aeca18535968eb863b8d",
+        "heading": "快速幂",
+        "previous": "blk-645608f1970c679d"
+      },
+      {
+        "id": "blk-214f23e1cbaa01d3",
+        "fingerprint": "e5d272de834d572ec11bde23f76f4f1749a640637091d84244a2616ea7915c25",
+        "heading": "快速幂",
+        "previous": "blk-79129eeecc440089"
       }
     ],
     "aliases": {
@@ -22631,6 +22745,1138 @@
       "b4": "blk-e888d5672151bb45",
       "b5": "blk-3ae5663cbe493071",
       "b6": "blk-3b44c9cac27f0315"
+    }
+  },
+  "unit/lab/index": {
+    "blocks": [
+      {
+        "id": "blk-lab-index-000",
+        "fingerprint": "80d89e2057a987cc90020ff55cd98a7bfea45bf1d6e1bcbbbb6e7ca6936a4a6b",
+        "heading": "综合实验：给星航公司排一次配送",
+        "previous": ""
+      },
+      {
+        "id": "blk-lab-index-001",
+        "fingerprint": "d4f5f9b1fec96fdf98550e045ded7f64bc8b27a777d9f656fcd2432d844bb738",
+        "heading": "综合实验：给星航公司排一次配送",
+        "previous": "blk-lab-index-000"
+      },
+      {
+        "id": "blk-lab-index-002",
+        "fingerprint": "d15457e1c1707c99323c8bf0f9980a8bb7a4405f1f5c05ec0a4c04535486c891",
+        "heading": "综合实验：给星航公司排一次配送",
+        "previous": "blk-lab-index-001"
+      },
+      {
+        "id": "blk-lab-index-003",
+        "fingerprint": "91424c32eb149c4ba26e3194bcdf2dce85c94e0f22007c3a04a85592094da22e",
+        "heading": "一、这次要交付什么",
+        "previous": "blk-lab-index-002"
+      },
+      {
+        "id": "blk-lab-index-004",
+        "fingerprint": "6cc6542c631abc28f274878359c597222ed744ccbed936670076c2d7b2ddf85e",
+        "heading": "一、这次要交付什么",
+        "previous": "blk-lab-index-003"
+      },
+      {
+        "id": "blk-lab-index-005",
+        "fingerprint": "00d4ec874008f4a3caaf867369dfea50c94cc5ae748ad5c1886e799b6047f217",
+        "heading": "二、四步路线",
+        "previous": "blk-lab-index-004"
+      },
+      {
+        "id": "blk-lab-index-006",
+        "fingerprint": "fbd82d91846c466b0c6db8ef53af70762c2019ac8c5744bb0dd3bce2d996c932",
+        "heading": "二、四步路线",
+        "previous": "blk-lab-index-005"
+      },
+      {
+        "id": "blk-lab-index-007",
+        "fingerprint": "0aab0d1db7ee865ebb241456a1c7ebc756359a29e9bb46f2e59d561941617c85",
+        "heading": "二、四步路线",
+        "previous": "blk-lab-index-006"
+      },
+      {
+        "id": "blk-lab-index-008",
+        "fingerprint": "77d9f747b818c8efaa503d5aee295fa97d0480f996308d287fe456f5843c95ce",
+        "heading": "三、实验数据",
+        "previous": "blk-lab-index-007"
+      },
+      {
+        "id": "blk-lab-index-009",
+        "fingerprint": "de2fb41c0fcfea904a31260c0faa448d873dff6d379c3e08595d3f8848f6af0d",
+        "heading": "三、实验数据",
+        "previous": "blk-lab-index-008"
+      },
+      {
+        "id": "blk-lab-index-010",
+        "fingerprint": "739b7cd882311cc7edff584872bda5dd562ef937d04066868f2606322197d494",
+        "heading": "三、实验数据",
+        "previous": "blk-lab-index-009"
+      },
+      {
+        "id": "blk-lab-index-011",
+        "fingerprint": "84d9fcb7004d1b795536250fd079a49464d94b7a9407559d9518e9170cd74989",
+        "heading": "三、实验数据",
+        "previous": "blk-lab-index-010"
+      },
+      {
+        "id": "blk-lab-index-012",
+        "fingerprint": "d50e687401de0f8b842c8dd649e6565b05e0e7e376df294a244e7e12e3507ece",
+        "heading": "四、三档难度，随时可切",
+        "previous": "blk-lab-index-011"
+      },
+      {
+        "id": "blk-lab-index-013",
+        "fingerprint": "d46e82031c5d9cf7853d10115226d8c2c403f9e4a65f304eb7b08bee5ca680d8",
+        "heading": "四、三档难度，随时可切",
+        "previous": "blk-lab-index-012"
+      },
+      {
+        "id": "blk-lab-index-014",
+        "fingerprint": "93fecb37ade1ced2c6cd9a5c18cd0b83f43460abcb9a700f7f6da438da4be5c5",
+        "heading": "四、三档难度，随时可切",
+        "previous": "blk-lab-index-013"
+      },
+      {
+        "id": "blk-lab-index-015",
+        "fingerprint": "df3095b8434fc4f292f813d2f3ee12a51891f8145a9ad0621f4c87ce4b738d2a",
+        "heading": "四、三档难度，随时可切",
+        "previous": "blk-lab-index-014"
+      },
+      {
+        "id": "blk-lab-index-016",
+        "fingerprint": "5be4b44e24017952eb572ed563d4c399cef2b0d4468f6dd8f60f5d7b787fa804",
+        "heading": "五、实验约定",
+        "previous": "blk-lab-index-015"
+      },
+      {
+        "id": "blk-lab-index-017",
+        "fingerprint": "a832ef01ae363e4c1d7074a3f7b52b82ad0a8985b0bccf6ee32092279ab8ac92",
+        "heading": "五、实验约定",
+        "previous": "blk-lab-index-016"
+      },
+      {
+        "id": "blk-lab-index-018",
+        "fingerprint": "6609cabeba5f055df98f0661de5a12057c56e74c5198d5b19f46ec99c7cda6bc",
+        "heading": "五、实验约定",
+        "previous": "blk-lab-index-017"
+      }
+    ],
+    "aliases": {
+      "b0": "blk-lab-index-000",
+      "b1": "blk-lab-index-001",
+      "b2": "blk-lab-index-002",
+      "b3": "blk-lab-index-003",
+      "b4": "blk-lab-index-004",
+      "b5": "blk-lab-index-005",
+      "b6": "blk-lab-index-006",
+      "b7": "blk-lab-index-007",
+      "b8": "blk-lab-index-008",
+      "b9": "blk-lab-index-009",
+      "b10": "blk-lab-index-010",
+      "b11": "blk-lab-index-011",
+      "b12": "blk-lab-index-012",
+      "b13": "blk-lab-index-013",
+      "b14": "blk-lab-index-014",
+      "b15": "blk-lab-index-015",
+      "b16": "blk-lab-index-016",
+      "b17": "blk-lab-index-017",
+      "b18": "blk-lab-index-018",
+      "blk-lab-index-000": "blk-lab-index-000",
+      "blk-lab-index-001": "blk-lab-index-001",
+      "blk-lab-index-002": "blk-lab-index-002",
+      "blk-lab-index-003": "blk-lab-index-003",
+      "blk-lab-index-004": "blk-lab-index-004",
+      "blk-lab-index-005": "blk-lab-index-005",
+      "blk-lab-index-006": "blk-lab-index-006",
+      "blk-lab-index-007": "blk-lab-index-007",
+      "blk-lab-index-008": "blk-lab-index-008",
+      "blk-lab-index-009": "blk-lab-index-009",
+      "blk-lab-index-010": "blk-lab-index-010",
+      "blk-lab-index-011": "blk-lab-index-011",
+      "blk-lab-index-012": "blk-lab-index-012",
+      "blk-lab-index-013": "blk-lab-index-013",
+      "blk-lab-index-014": "blk-lab-index-014",
+      "blk-lab-index-015": "blk-lab-index-015",
+      "blk-lab-index-016": "blk-lab-index-016",
+      "blk-lab-index-017": "blk-lab-index-017",
+      "blk-lab-index-018": "blk-lab-index-018"
+    }
+  },
+  "unit/lab/graph": {
+    "blocks": [
+      {
+        "id": "blk-lab-graph-000",
+        "fingerprint": "9a18e0a5f50559c07695a397074b7da2fc70d68586f55e7fc67e83c084d58fc9",
+        "heading": "实验一　建图：把航线写成两张表",
+        "previous": ""
+      },
+      {
+        "id": "blk-lab-graph-001",
+        "fingerprint": "44c9e3fc660f7e2634bc2e4e9cf4f576cf6e997d864603a16ac43efd819de94f",
+        "heading": "实验一　建图：把航线写成两张表",
+        "previous": "blk-lab-graph-000"
+      },
+      {
+        "id": "blk-lab-graph-002",
+        "fingerprint": "af30133e57de9dfbfe4efa743487720386f6f1c2a81d55b96e93e5acb5dc7844",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-graph-001"
+      },
+      {
+        "id": "blk-lab-graph-003",
+        "fingerprint": "9c7137cdcd97f3743c4b0e6763288e2563d92ae02b96fa616b7a7a8d5e75b5ab",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-graph-002"
+      },
+      {
+        "id": "blk-lab-graph-004",
+        "fingerprint": "3a9a5e3d25336589f165bdcc02d5364df7a2445057867e89c286b580ddea585c",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-graph-003"
+      },
+      {
+        "id": "blk-lab-graph-005",
+        "fingerprint": "45eff6ed477cebf4e4cd6e8d3946c170babe2eb0fb5c02fbebe7de3ea4fe4552",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-graph-004"
+      },
+      {
+        "id": "blk-lab-graph-006",
+        "fingerprint": "d4a5fe00b886515be2a5ad5c2321c3702e239f75e27782c1cf2b4bfbf599375c",
+        "heading": "二、跟着做：三步把图建起来",
+        "previous": "blk-lab-graph-005"
+      },
+      {
+        "id": "blk-lab-graph-007",
+        "fingerprint": "5efd352924a933af8fcaaf9c2617b9feb0fae27a62bf09ea831d646c6fd28cf4",
+        "heading": "二、跟着做：三步把图建起来",
+        "previous": "blk-lab-graph-006"
+      },
+      {
+        "id": "blk-lab-graph-008",
+        "fingerprint": "0bd9659fcd457cbde5d799dd0b494c56974356710339dea4f1e5fa2bdc3aabc3",
+        "heading": "二、跟着做：三步把图建起来",
+        "previous": "blk-lab-graph-007"
+      },
+      {
+        "id": "blk-lab-graph-009",
+        "fingerprint": "ff6f5cb618fb713e1d559eec90ada49519143d02b4b99bba028f356a81fa073e",
+        "heading": "二、跟着做：三步把图建起来",
+        "previous": "blk-lab-graph-008"
+      },
+      {
+        "id": "blk-lab-graph-010",
+        "fingerprint": "eea7dee36491b16d758e56f625912dd65901cd3ceea0308ead85be89e30e947b",
+        "heading": "二、跟着做：三步把图建起来",
+        "previous": "blk-lab-graph-009"
+      },
+      {
+        "id": "blk-lab-graph-011",
+        "fingerprint": "e671c9f43cefa5e8be64bf84f4d8472ffd9f2b472a551483bba29fc74ae08e9d",
+        "heading": "二、跟着做：三步把图建起来",
+        "previous": "blk-lab-graph-010"
+      },
+      {
+        "id": "blk-lab-graph-012",
+        "fingerprint": "e45ad5d2417b0148fa3eb444217fece74ed95170e692b2d9d790509d2caa08a8",
+        "heading": "二、跟着做：三步把图建起来",
+        "previous": "blk-lab-graph-011"
+      },
+      {
+        "id": "blk-lab-graph-013",
+        "fingerprint": "345a314431eda00457ba7e005e36fc30d881c54ccfa2e7dba5a86c339f229369",
+        "heading": "二、跟着做：三步把图建起来",
+        "previous": "blk-lab-graph-012"
+      },
+      {
+        "id": "blk-lab-graph-014",
+        "fingerprint": "692155696e2972e60d4dbcdf0f6478f44a860085aaf555e406bdf103e30d8fb2",
+        "heading": "二、跟着做：三步把图建起来",
+        "previous": "blk-lab-graph-013"
+      },
+      {
+        "id": "blk-lab-graph-015",
+        "fingerprint": "e7775b7da4332a59c1595669bf66351232e323a3df480735058ba9400984e452",
+        "heading": "二、跟着做：三步把图建起来",
+        "previous": "blk-lab-graph-014"
+      },
+      {
+        "id": "blk-lab-graph-016",
+        "fingerprint": "82005928cad7c53cbaacc5c8b55cd4945246880ab21d41b822eaeaed53264c16",
+        "heading": "二、自己做：不看代码，把两张表写出来",
+        "previous": "blk-lab-graph-015"
+      },
+      {
+        "id": "blk-lab-graph-017",
+        "fingerprint": "11a962227e774062d3d4f5954d05b292979ae194ba4d4c061db3f92d7ef10945",
+        "heading": "二、自己做：不看代码，把两张表写出来",
+        "previous": "blk-lab-graph-016"
+      },
+      {
+        "id": "blk-lab-graph-018",
+        "fingerprint": "2087ee2292920a5a0420e30b5255ec4d8981786f2e443313994e959e1882705a",
+        "heading": "二、自己做：不看代码，把两张表写出来",
+        "previous": "blk-lab-graph-017"
+      },
+      {
+        "id": "blk-lab-graph-019",
+        "fingerprint": "91faf2959007baf2a06fbe733090d1c249dc9b38900a4f59a7c263770c85c5a4",
+        "heading": "二、自己做：不看代码，把两张表写出来",
+        "previous": "blk-lab-graph-018"
+      },
+      {
+        "id": "blk-lab-graph-020",
+        "fingerprint": "1c0aad822d5e769df83321389706d953e39664bc6de12b30ec7ecebfca660ed4",
+        "heading": "二、自己做：不看代码，把两张表写出来",
+        "previous": "blk-lab-graph-019"
+      },
+      {
+        "id": "blk-lab-graph-021",
+        "fingerprint": "fbe6534385a560cdc55b6eee5fe7ffac6edc397443f0af95834e5ad20d096ffe",
+        "heading": "二、自己做：不看代码，把两张表写出来",
+        "previous": "blk-lab-graph-020"
+      },
+      {
+        "id": "blk-lab-graph-022",
+        "fingerprint": "99caf5608a44c0a63809772bae5efd94ca48fef72825464da9252a72577b21e5",
+        "heading": "二、再难一点：航线会变",
+        "previous": "blk-lab-graph-021"
+      },
+      {
+        "id": "blk-lab-graph-023",
+        "fingerprint": "05b7acacc00f9eb4ee534f1d07163cbaccd04f7089e70fc37d74711dde82a4fa",
+        "heading": "二、再难一点：航线会变",
+        "previous": "blk-lab-graph-022"
+      },
+      {
+        "id": "blk-lab-graph-024",
+        "fingerprint": "962a4acdae03cf22feb704e1cddc893935f1c4f760422d9649be9944ff740d7e",
+        "heading": "二、再难一点：航线会变",
+        "previous": "blk-lab-graph-023"
+      },
+      {
+        "id": "blk-lab-graph-025",
+        "fingerprint": "d8df561d3f089521702f2c94aca4895185b972591b4dd37714a622c5c23910c8",
+        "heading": "二、再难一点：航线会变",
+        "previous": "blk-lab-graph-024"
+      },
+      {
+        "id": "blk-lab-graph-026",
+        "fingerprint": "8aa83890ad323306e79a993f53b719904f07a682a0597d28119133b4985b5ab5",
+        "heading": "二、再难一点：航线会变",
+        "previous": "blk-lab-graph-025"
+      },
+      {
+        "id": "blk-lab-graph-027",
+        "fingerprint": "be548371677c0cae4eddf08158aead5a50d6be2ccfbac438c8d06d732304bc5f",
+        "heading": "二、再难一点：航线会变",
+        "previous": "blk-lab-graph-026"
+      }
+    ],
+    "aliases": {
+      "b0": "blk-lab-graph-000",
+      "b1": "blk-lab-graph-001",
+      "b2": "blk-lab-graph-002",
+      "b3": "blk-lab-graph-003",
+      "b4": "blk-lab-graph-004",
+      "b5": "blk-lab-graph-005",
+      "b6": "blk-lab-graph-006",
+      "b7": "blk-lab-graph-007",
+      "b8": "blk-lab-graph-008",
+      "b9": "blk-lab-graph-009",
+      "b10": "blk-lab-graph-010",
+      "b11": "blk-lab-graph-011",
+      "b12": "blk-lab-graph-012",
+      "b13": "blk-lab-graph-013",
+      "b14": "blk-lab-graph-014",
+      "b15": "blk-lab-graph-015",
+      "b16": "blk-lab-graph-016",
+      "b17": "blk-lab-graph-017",
+      "b18": "blk-lab-graph-018",
+      "b19": "blk-lab-graph-019",
+      "b20": "blk-lab-graph-020",
+      "b21": "blk-lab-graph-021",
+      "b22": "blk-lab-graph-022",
+      "b23": "blk-lab-graph-023",
+      "b24": "blk-lab-graph-024",
+      "b25": "blk-lab-graph-025",
+      "b26": "blk-lab-graph-026",
+      "b27": "blk-lab-graph-027",
+      "blk-lab-graph-000": "blk-lab-graph-000",
+      "blk-lab-graph-001": "blk-lab-graph-001",
+      "blk-lab-graph-002": "blk-lab-graph-002",
+      "blk-lab-graph-003": "blk-lab-graph-003",
+      "blk-lab-graph-004": "blk-lab-graph-004",
+      "blk-lab-graph-005": "blk-lab-graph-005",
+      "blk-lab-graph-006": "blk-lab-graph-006",
+      "blk-lab-graph-007": "blk-lab-graph-007",
+      "blk-lab-graph-008": "blk-lab-graph-008",
+      "blk-lab-graph-009": "blk-lab-graph-009",
+      "blk-lab-graph-010": "blk-lab-graph-010",
+      "blk-lab-graph-011": "blk-lab-graph-011",
+      "blk-lab-graph-012": "blk-lab-graph-012",
+      "blk-lab-graph-013": "blk-lab-graph-013",
+      "blk-lab-graph-014": "blk-lab-graph-014",
+      "blk-lab-graph-015": "blk-lab-graph-015",
+      "blk-lab-graph-016": "blk-lab-graph-016",
+      "blk-lab-graph-017": "blk-lab-graph-017",
+      "blk-lab-graph-018": "blk-lab-graph-018",
+      "blk-lab-graph-019": "blk-lab-graph-019",
+      "blk-lab-graph-020": "blk-lab-graph-020",
+      "blk-lab-graph-021": "blk-lab-graph-021",
+      "blk-lab-graph-022": "blk-lab-graph-022",
+      "blk-lab-graph-023": "blk-lab-graph-023",
+      "blk-lab-graph-024": "blk-lab-graph-024",
+      "blk-lab-graph-025": "blk-lab-graph-025",
+      "blk-lab-graph-026": "blk-lab-graph-026",
+      "blk-lab-graph-027": "blk-lab-graph-027"
+    }
+  },
+  "unit/lab/traversal": {
+    "blocks": [
+      {
+        "id": "blk-lab-traversal-000",
+        "fingerprint": "60414a9467234495fb6c58310ae74736ca1427e4f2e42d4ac3cbe26d4254c6e8",
+        "heading": "实验二　遍历：最少几跳能到",
+        "previous": ""
+      },
+      {
+        "id": "blk-lab-traversal-001",
+        "fingerprint": "cb2d0dea3dd784fd27759c7c4a45b9f690cc44faa07b8a65fbd4408c9a01dc48",
+        "heading": "实验二　遍历：最少几跳能到",
+        "previous": "blk-lab-traversal-000"
+      },
+      {
+        "id": "blk-lab-traversal-002",
+        "fingerprint": "af30133e57de9dfbfe4efa743487720386f6f1c2a81d55b96e93e5acb5dc7844",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-traversal-001"
+      },
+      {
+        "id": "blk-lab-traversal-003",
+        "fingerprint": "020f6aec1bbc6a196acb11800830eb97a28444af2507da179eb65b5f45028622",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-traversal-002"
+      },
+      {
+        "id": "blk-lab-traversal-004",
+        "fingerprint": "23a4e08d99f90861d449bd1007f954c1325bf1c83575cba8e3839416a20b75f7",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-traversal-003"
+      },
+      {
+        "id": "blk-lab-traversal-005",
+        "fingerprint": "1c6a17f65f1ab757185a1a37021043ec4c1d8697872049c478d63165771948c8",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-traversal-004"
+      },
+      {
+        "id": "blk-lab-traversal-006",
+        "fingerprint": "00fd2476ed8db9f1cd80da5469ef5cefa170f04876586088eadde24e274e42fc",
+        "heading": "二、跟着做：让水波从总站荡开",
+        "previous": "blk-lab-traversal-005"
+      },
+      {
+        "id": "blk-lab-traversal-007",
+        "fingerprint": "309d75f504062d393715cf22d4dea12f3e36f43c163881cb923c7bdaa9c399e8",
+        "heading": "二、跟着做：让水波从总站荡开",
+        "previous": "blk-lab-traversal-006"
+      },
+      {
+        "id": "blk-lab-traversal-008",
+        "fingerprint": "c711d79f21fa668f102fd6b8f94de831fbf8eb51de43346c30d619302b4a8caf",
+        "heading": "二、跟着做：让水波从总站荡开",
+        "previous": "blk-lab-traversal-007"
+      },
+      {
+        "id": "blk-lab-traversal-009",
+        "fingerprint": "e671c9f43cefa5e8be64bf84f4d8472ffd9f2b472a551483bba29fc74ae08e9d",
+        "heading": "二、跟着做：让水波从总站荡开",
+        "previous": "blk-lab-traversal-008"
+      },
+      {
+        "id": "blk-lab-traversal-010",
+        "fingerprint": "e45ad5d2417b0148fa3eb444217fece74ed95170e692b2d9d790509d2caa08a8",
+        "heading": "二、跟着做：让水波从总站荡开",
+        "previous": "blk-lab-traversal-009"
+      },
+      {
+        "id": "blk-lab-traversal-011",
+        "fingerprint": "345a314431eda00457ba7e005e36fc30d881c54ccfa2e7dba5a86c339f229369",
+        "heading": "二、跟着做：让水波从总站荡开",
+        "previous": "blk-lab-traversal-010"
+      },
+      {
+        "id": "blk-lab-traversal-012",
+        "fingerprint": "1ea95dd9ef2b78919c2ab373553cc93d6635ba4c63b30a7eed7f981696421e39",
+        "heading": "二、跟着做：让水波从总站荡开",
+        "previous": "blk-lab-traversal-011"
+      },
+      {
+        "id": "blk-lab-traversal-013",
+        "fingerprint": "ba4321117d393a287e45f794102910bfa14cd97bae46ca48c19fd80509a60481",
+        "heading": "二、跟着做：让水波从总站荡开",
+        "previous": "blk-lab-traversal-012"
+      },
+      {
+        "id": "blk-lab-traversal-014",
+        "fingerprint": "40b266167d231ed70c41973d485bd60e9655994db8d4e3daf4f5d5b3ca2404c3",
+        "heading": "二、自己做：不只给距离，还要给路线",
+        "previous": "blk-lab-traversal-013"
+      },
+      {
+        "id": "blk-lab-traversal-015",
+        "fingerprint": "fcda3504343a0236964d0ed4606135f1a77edb9fcd39e5d3036d98ae389c7ef7",
+        "heading": "二、自己做：不只给距离，还要给路线",
+        "previous": "blk-lab-traversal-014"
+      },
+      {
+        "id": "blk-lab-traversal-016",
+        "fingerprint": "0c1da58112b6b4707ae3addaa5cc7f8b005b445c09f7caba0b2f2d6a4f5362d1",
+        "heading": "二、自己做：不只给距离，还要给路线",
+        "previous": "blk-lab-traversal-015"
+      },
+      {
+        "id": "blk-lab-traversal-017",
+        "fingerprint": "74e7ac2158258cbb105fd116b35fe29cd53827f77f78392b7bff56c65e39440d",
+        "heading": "二、自己做：不只给距离，还要给路线",
+        "previous": "blk-lab-traversal-016"
+      },
+      {
+        "id": "blk-lab-traversal-018",
+        "fingerprint": "0093e595a625d3e2b6f82fa7204671a368ffbd8696bd791487f2625d3e362d8b",
+        "heading": "二、自己做：不只给距离，还要给路线",
+        "previous": "blk-lab-traversal-017"
+      },
+      {
+        "id": "blk-lab-traversal-019",
+        "fingerprint": "a94c69448eeeda0d3aff30a8312a58ecec814063e30b3b9a9318a614c16f3d47",
+        "heading": "二、自己做：不只给距离，还要给路线",
+        "previous": "blk-lab-traversal-018"
+      },
+      {
+        "id": "blk-lab-traversal-020",
+        "fingerprint": "9fbe1dfc0623bf024c2a7c7ca0604aa4ad654ffd3d5e284c2b8849c697b28f1f",
+        "heading": "二、再难一点：当「跳数」不够用",
+        "previous": "blk-lab-traversal-019"
+      },
+      {
+        "id": "blk-lab-traversal-021",
+        "fingerprint": "9ec14ec9c05864531263baf648634337936a31c6cd0ffe9de37a4246e167612d",
+        "heading": "二、再难一点：当「跳数」不够用",
+        "previous": "blk-lab-traversal-020"
+      },
+      {
+        "id": "blk-lab-traversal-022",
+        "fingerprint": "5cd70465d29a03238388d1f8f9ac686b925a65666dabffcdbd085c9544e29808",
+        "heading": "二、再难一点：当「跳数」不够用",
+        "previous": "blk-lab-traversal-021"
+      },
+      {
+        "id": "blk-lab-traversal-023",
+        "fingerprint": "382b63d9f5b71b74a6c29847041da9a94ad28781b683295bdc0755e1e594dc98",
+        "heading": "二、再难一点：当「跳数」不够用",
+        "previous": "blk-lab-traversal-022"
+      },
+      {
+        "id": "blk-lab-traversal-024",
+        "fingerprint": "045ed40ee856964e6fbd5294a461c1893df87b889f603d3b48e5210ddb773f97",
+        "heading": "二、再难一点：当「跳数」不够用",
+        "previous": "blk-lab-traversal-023"
+      }
+    ],
+    "aliases": {
+      "b0": "blk-lab-traversal-000",
+      "b1": "blk-lab-traversal-001",
+      "b2": "blk-lab-traversal-002",
+      "b3": "blk-lab-traversal-003",
+      "b4": "blk-lab-traversal-004",
+      "b5": "blk-lab-traversal-005",
+      "b6": "blk-lab-traversal-006",
+      "b7": "blk-lab-traversal-007",
+      "b8": "blk-lab-traversal-008",
+      "b9": "blk-lab-traversal-009",
+      "b10": "blk-lab-traversal-010",
+      "b11": "blk-lab-traversal-011",
+      "b12": "blk-lab-traversal-012",
+      "b13": "blk-lab-traversal-013",
+      "b14": "blk-lab-traversal-014",
+      "b15": "blk-lab-traversal-015",
+      "b16": "blk-lab-traversal-016",
+      "b17": "blk-lab-traversal-017",
+      "b18": "blk-lab-traversal-018",
+      "b19": "blk-lab-traversal-019",
+      "b20": "blk-lab-traversal-020",
+      "b21": "blk-lab-traversal-021",
+      "b22": "blk-lab-traversal-022",
+      "b23": "blk-lab-traversal-023",
+      "b24": "blk-lab-traversal-024",
+      "blk-lab-traversal-000": "blk-lab-traversal-000",
+      "blk-lab-traversal-001": "blk-lab-traversal-001",
+      "blk-lab-traversal-002": "blk-lab-traversal-002",
+      "blk-lab-traversal-003": "blk-lab-traversal-003",
+      "blk-lab-traversal-004": "blk-lab-traversal-004",
+      "blk-lab-traversal-005": "blk-lab-traversal-005",
+      "blk-lab-traversal-006": "blk-lab-traversal-006",
+      "blk-lab-traversal-007": "blk-lab-traversal-007",
+      "blk-lab-traversal-008": "blk-lab-traversal-008",
+      "blk-lab-traversal-009": "blk-lab-traversal-009",
+      "blk-lab-traversal-010": "blk-lab-traversal-010",
+      "blk-lab-traversal-011": "blk-lab-traversal-011",
+      "blk-lab-traversal-012": "blk-lab-traversal-012",
+      "blk-lab-traversal-013": "blk-lab-traversal-013",
+      "blk-lab-traversal-014": "blk-lab-traversal-014",
+      "blk-lab-traversal-015": "blk-lab-traversal-015",
+      "blk-lab-traversal-016": "blk-lab-traversal-016",
+      "blk-lab-traversal-017": "blk-lab-traversal-017",
+      "blk-lab-traversal-018": "blk-lab-traversal-018",
+      "blk-lab-traversal-019": "blk-lab-traversal-019",
+      "blk-lab-traversal-020": "blk-lab-traversal-020",
+      "blk-lab-traversal-021": "blk-lab-traversal-021",
+      "blk-lab-traversal-022": "blk-lab-traversal-022",
+      "blk-lab-traversal-023": "blk-lab-traversal-023",
+      "blk-lab-traversal-024": "blk-lab-traversal-024"
+    }
+  },
+  "unit/lab/sort-search": {
+    "blocks": [
+      {
+        "id": "blk-lab-sort-search-000",
+        "fingerprint": "2e86867badbbf6cb904d667f17a0f8db904960047684b5e048241e6d0bf62f76",
+        "heading": "实验三　排序与检索：先理牌，再抽牌",
+        "previous": ""
+      },
+      {
+        "id": "blk-lab-sort-search-001",
+        "fingerprint": "e757357b9363f2d60ae74c00e82c607d27fe6250ccedfed35f4dbc9b1ed5fa95",
+        "heading": "实验三　排序与检索：先理牌，再抽牌",
+        "previous": "blk-lab-sort-search-000"
+      },
+      {
+        "id": "blk-lab-sort-search-002",
+        "fingerprint": "af30133e57de9dfbfe4efa743487720386f6f1c2a81d55b96e93e5acb5dc7844",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-sort-search-001"
+      },
+      {
+        "id": "blk-lab-sort-search-003",
+        "fingerprint": "1408ec8ff888b0b5282c9c0182943e99a6688ed67c4f9764e7fb4400a41431cd",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-sort-search-002"
+      },
+      {
+        "id": "blk-lab-sort-search-004",
+        "fingerprint": "94226ce5299181b072bcc16196038b0b3ee7002a17b1027e3be4a761abc14d70",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-sort-search-003"
+      },
+      {
+        "id": "blk-lab-sort-search-005",
+        "fingerprint": "d817cf8bb16baadfc57caf727f6b72208badcae7b0641774c0f80f55487de549",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-sort-search-004"
+      },
+      {
+        "id": "blk-lab-sort-search-006",
+        "fingerprint": "412cf149cda5278b693efab64501869b597fde978989f7ce8b4ed826b90d4314",
+        "heading": "二、跟着做：先排牌，再抽牌",
+        "previous": "blk-lab-sort-search-005"
+      },
+      {
+        "id": "blk-lab-sort-search-007",
+        "fingerprint": "f265a057b28d7c25dd4d52226f246cbe0ce16b5a71271cb00849734b868ed7c1",
+        "heading": "二、跟着做：先排牌，再抽牌",
+        "previous": "blk-lab-sort-search-006"
+      },
+      {
+        "id": "blk-lab-sort-search-008",
+        "fingerprint": "b6027f18d95cfa4e1d2ddad16d1ac4d3cd50c2b54b5050fc29027dca5c819c28",
+        "heading": "二、跟着做：先排牌，再抽牌",
+        "previous": "blk-lab-sort-search-007"
+      },
+      {
+        "id": "blk-lab-sort-search-009",
+        "fingerprint": "d39c858f7497f458982bead26c131e1b96c4679749f68787c0b2a9211308eaa1",
+        "heading": "二、跟着做：先排牌，再抽牌",
+        "previous": "blk-lab-sort-search-008"
+      },
+      {
+        "id": "blk-lab-sort-search-010",
+        "fingerprint": "e671c9f43cefa5e8be64bf84f4d8472ffd9f2b472a551483bba29fc74ae08e9d",
+        "heading": "二、跟着做：先排牌，再抽牌",
+        "previous": "blk-lab-sort-search-009"
+      },
+      {
+        "id": "blk-lab-sort-search-011",
+        "fingerprint": "e45ad5d2417b0148fa3eb444217fece74ed95170e692b2d9d790509d2caa08a8",
+        "heading": "二、跟着做：先排牌，再抽牌",
+        "previous": "blk-lab-sort-search-010"
+      },
+      {
+        "id": "blk-lab-sort-search-012",
+        "fingerprint": "345a314431eda00457ba7e005e36fc30d881c54ccfa2e7dba5a86c339f229369",
+        "heading": "二、跟着做：先排牌，再抽牌",
+        "previous": "blk-lab-sort-search-011"
+      },
+      {
+        "id": "blk-lab-sort-search-013",
+        "fingerprint": "31d4163ab2a16729db0fa95e1f045cb7c762b6940ac7108b63163eeb4273a73f",
+        "heading": "二、跟着做：先排牌，再抽牌",
+        "previous": "blk-lab-sort-search-012"
+      },
+      {
+        "id": "blk-lab-sort-search-014",
+        "fingerprint": "69f812e26ad78acbab7fd497794e461f811a61d2f9bac9f46a285045748456af",
+        "heading": "二、跟着做：先排牌，再抽牌",
+        "previous": "blk-lab-sort-search-013"
+      },
+      {
+        "id": "blk-lab-sort-search-015",
+        "fingerprint": "e128d7bb8b046ac535782e186f061876b03b0dcc6341f76e7569aacafcc198e4",
+        "heading": "二、自己做：数一数它到底动了多少次",
+        "previous": "blk-lab-sort-search-014"
+      },
+      {
+        "id": "blk-lab-sort-search-016",
+        "fingerprint": "88c509eb085adea64e0a08682ee86e44d6e6644c2fbf8719dbe33da4654fa0a9",
+        "heading": "二、自己做：数一数它到底动了多少次",
+        "previous": "blk-lab-sort-search-015"
+      },
+      {
+        "id": "blk-lab-sort-search-017",
+        "fingerprint": "4d68c62c731980e5b57d0c503cfda78daad09b0d81cb6433c48cce136be55f38",
+        "heading": "二、自己做：数一数它到底动了多少次",
+        "previous": "blk-lab-sort-search-016"
+      },
+      {
+        "id": "blk-lab-sort-search-018",
+        "fingerprint": "ee673a808a2d690bcf6e9e2efc6fd745ebb447f89c9b8e74b4b310a7dddf4b34",
+        "heading": "二、自己做：数一数它到底动了多少次",
+        "previous": "blk-lab-sort-search-017"
+      },
+      {
+        "id": "blk-lab-sort-search-019",
+        "fingerprint": "72e71b55452eff5c42091a7d2d3c88ab0dacb0e4ca022f4ad95a17cd7088a6d9",
+        "heading": "二、自己做：数一数它到底动了多少次",
+        "previous": "blk-lab-sort-search-018"
+      },
+      {
+        "id": "blk-lab-sort-search-020",
+        "fingerprint": "5a3ad8d721d7636f39858c7ac743a5fa049ab50287f1e398a9d292e8e38ec50d",
+        "heading": "二、自己做：数一数它到底动了多少次",
+        "previous": "blk-lab-sort-search-019"
+      },
+      {
+        "id": "blk-lab-sort-search-021",
+        "fingerprint": "d333b662f9b2eed280c9751ab9f2c79db87bcc8e28b23fe4db6f4892f4a81d23",
+        "heading": "二、再难一点：同一种活，两种干法",
+        "previous": "blk-lab-sort-search-020"
+      },
+      {
+        "id": "blk-lab-sort-search-022",
+        "fingerprint": "596876219672a25742b905f8368070ec7806a5e675394d74fbf0bbddd39ab365",
+        "heading": "二、再难一点：同一种活，两种干法",
+        "previous": "blk-lab-sort-search-021"
+      },
+      {
+        "id": "blk-lab-sort-search-023",
+        "fingerprint": "9e29056eef8ef338a6852262700c6211183b0e9f462c42b7cbbf7903f87796e5",
+        "heading": "二、再难一点：同一种活，两种干法",
+        "previous": "blk-lab-sort-search-022"
+      },
+      {
+        "id": "blk-lab-sort-search-024",
+        "fingerprint": "05b5a96fa95603d62e5afd989eee8a9a440f3f66b8c305f1c8008aabf0227d12",
+        "heading": "二、再难一点：同一种活，两种干法",
+        "previous": "blk-lab-sort-search-023"
+      },
+      {
+        "id": "blk-lab-sort-search-025",
+        "fingerprint": "6faa9e534bd0db295bfcebf00277efe53812528ba204213e461daebe78d3493e",
+        "heading": "二、再难一点：同一种活，两种干法",
+        "previous": "blk-lab-sort-search-024"
+      }
+    ],
+    "aliases": {
+      "b0": "blk-lab-sort-search-000",
+      "b1": "blk-lab-sort-search-001",
+      "b2": "blk-lab-sort-search-002",
+      "b3": "blk-lab-sort-search-003",
+      "b4": "blk-lab-sort-search-004",
+      "b5": "blk-lab-sort-search-005",
+      "b6": "blk-lab-sort-search-006",
+      "b7": "blk-lab-sort-search-007",
+      "b8": "blk-lab-sort-search-008",
+      "b9": "blk-lab-sort-search-009",
+      "b10": "blk-lab-sort-search-010",
+      "b11": "blk-lab-sort-search-011",
+      "b12": "blk-lab-sort-search-012",
+      "b13": "blk-lab-sort-search-013",
+      "b14": "blk-lab-sort-search-014",
+      "b15": "blk-lab-sort-search-015",
+      "b16": "blk-lab-sort-search-016",
+      "b17": "blk-lab-sort-search-017",
+      "b18": "blk-lab-sort-search-018",
+      "b19": "blk-lab-sort-search-019",
+      "b20": "blk-lab-sort-search-020",
+      "b21": "blk-lab-sort-search-021",
+      "b22": "blk-lab-sort-search-022",
+      "b23": "blk-lab-sort-search-023",
+      "b24": "blk-lab-sort-search-024",
+      "b25": "blk-lab-sort-search-025",
+      "blk-lab-sort-search-000": "blk-lab-sort-search-000",
+      "blk-lab-sort-search-001": "blk-lab-sort-search-001",
+      "blk-lab-sort-search-002": "blk-lab-sort-search-002",
+      "blk-lab-sort-search-003": "blk-lab-sort-search-003",
+      "blk-lab-sort-search-004": "blk-lab-sort-search-004",
+      "blk-lab-sort-search-005": "blk-lab-sort-search-005",
+      "blk-lab-sort-search-006": "blk-lab-sort-search-006",
+      "blk-lab-sort-search-007": "blk-lab-sort-search-007",
+      "blk-lab-sort-search-008": "blk-lab-sort-search-008",
+      "blk-lab-sort-search-009": "blk-lab-sort-search-009",
+      "blk-lab-sort-search-010": "blk-lab-sort-search-010",
+      "blk-lab-sort-search-011": "blk-lab-sort-search-011",
+      "blk-lab-sort-search-012": "blk-lab-sort-search-012",
+      "blk-lab-sort-search-013": "blk-lab-sort-search-013",
+      "blk-lab-sort-search-014": "blk-lab-sort-search-014",
+      "blk-lab-sort-search-015": "blk-lab-sort-search-015",
+      "blk-lab-sort-search-016": "blk-lab-sort-search-016",
+      "blk-lab-sort-search-017": "blk-lab-sort-search-017",
+      "blk-lab-sort-search-018": "blk-lab-sort-search-018",
+      "blk-lab-sort-search-019": "blk-lab-sort-search-019",
+      "blk-lab-sort-search-020": "blk-lab-sort-search-020",
+      "blk-lab-sort-search-021": "blk-lab-sort-search-021",
+      "blk-lab-sort-search-022": "blk-lab-sort-search-022",
+      "blk-lab-sort-search-023": "blk-lab-sort-search-023",
+      "blk-lab-sort-search-024": "blk-lab-sort-search-024",
+      "blk-lab-sort-search-025": "blk-lab-sort-search-025"
+    }
+  },
+  "unit/lab/dispatch": {
+    "blocks": [
+      {
+        "id": "blk-lab-dispatch-000",
+        "fingerprint": "62984f49f273ca20e4dc2753c872311e1b403056f23ee6e2e4de2b824f2e3135",
+        "heading": "实验四　综合调度：谁先送、怎么送",
+        "previous": ""
+      },
+      {
+        "id": "blk-lab-dispatch-001",
+        "fingerprint": "8bdc65735931cde74adedad56ff2e884dee5506beb5f284cab9382aa0de21e3d",
+        "heading": "实验四　综合调度：谁先送、怎么送",
+        "previous": "blk-lab-dispatch-000"
+      },
+      {
+        "id": "blk-lab-dispatch-002",
+        "fingerprint": "af30133e57de9dfbfe4efa743487720386f6f1c2a81d55b96e93e5acb5dc7844",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-dispatch-001"
+      },
+      {
+        "id": "blk-lab-dispatch-003",
+        "fingerprint": "45f8f436b30befad49fa991916b2229d84f524b0bf6e8646f5bca2277ea9dc42",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-dispatch-002"
+      },
+      {
+        "id": "blk-lab-dispatch-004",
+        "fingerprint": "31475e852f9dba5d01d80375a8dcdf2b7d2ee79afc4d9fb00f005d2201ed1afb",
+        "heading": "一、原理速览",
+        "previous": "blk-lab-dispatch-003"
+      },
+      {
+        "id": "blk-lab-dispatch-005",
+        "fingerprint": "aa460ad363fb93b01a263763a93f721ec7a648d4926b67cf50cf5bdd3d9d2aa9",
+        "heading": "二、跟着做：把三个结果拼成一句话",
+        "previous": "blk-lab-dispatch-004"
+      },
+      {
+        "id": "blk-lab-dispatch-006",
+        "fingerprint": "458295736ae24314aa56ef173923f9412adeb3b898fd2280c4c3cb4871104614",
+        "heading": "二、跟着做：把三个结果拼成一句话",
+        "previous": "blk-lab-dispatch-005"
+      },
+      {
+        "id": "blk-lab-dispatch-007",
+        "fingerprint": "ab20da55593b68880a0b0cdfe839f05bf7a426d4f09d5ed06975e3651831e14c",
+        "heading": "二、跟着做：把三个结果拼成一句话",
+        "previous": "blk-lab-dispatch-006"
+      },
+      {
+        "id": "blk-lab-dispatch-008",
+        "fingerprint": "e671c9f43cefa5e8be64bf84f4d8472ffd9f2b472a551483bba29fc74ae08e9d",
+        "heading": "二、跟着做：把三个结果拼成一句话",
+        "previous": "blk-lab-dispatch-007"
+      },
+      {
+        "id": "blk-lab-dispatch-009",
+        "fingerprint": "e45ad5d2417b0148fa3eb444217fece74ed95170e692b2d9d790509d2caa08a8",
+        "heading": "二、跟着做：把三个结果拼成一句话",
+        "previous": "blk-lab-dispatch-008"
+      },
+      {
+        "id": "blk-lab-dispatch-010",
+        "fingerprint": "345a314431eda00457ba7e005e36fc30d881c54ccfa2e7dba5a86c339f229369",
+        "heading": "二、跟着做：把三个结果拼成一句话",
+        "previous": "blk-lab-dispatch-009"
+      },
+      {
+        "id": "blk-lab-dispatch-011",
+        "fingerprint": "84ea24027dba9709afba5bc77e9288ed4a52f92e2b44345a185079e07921b613",
+        "heading": "二、跟着做：把三个结果拼成一句话",
+        "previous": "blk-lab-dispatch-010"
+      },
+      {
+        "id": "blk-lab-dispatch-012",
+        "fingerprint": "916865d244e2ec93950634ff8ee4d8d7362bfaf1c01fced2202e5f375c14f3e3",
+        "heading": "二、跟着做：把三个结果拼成一句话",
+        "previous": "blk-lab-dispatch-011"
+      },
+      {
+        "id": "blk-lab-dispatch-013",
+        "fingerprint": "5a9ed5e6e00c2609474e8df8b60b43380f204a2d5ce51772218e847a6041f76d",
+        "heading": "二、自己做：不看代码，把决策写出来",
+        "previous": "blk-lab-dispatch-012"
+      },
+      {
+        "id": "blk-lab-dispatch-014",
+        "fingerprint": "2a48951516493833456243bb6c40f9e928d5cf6004b8c33b69734ff4fb3c3cb6",
+        "heading": "二、自己做：不看代码，把决策写出来",
+        "previous": "blk-lab-dispatch-013"
+      },
+      {
+        "id": "blk-lab-dispatch-015",
+        "fingerprint": "fa3d5b1cfaf93d38cbf21b5187acaeb86b17454cd497a66d698a1e7f6c5bce28",
+        "heading": "二、自己做：不看代码，把决策写出来",
+        "previous": "blk-lab-dispatch-014"
+      },
+      {
+        "id": "blk-lab-dispatch-016",
+        "fingerprint": "994583d6d2f1462970ee006f2fd2eca18bad1c069735ca6bd8f58a53206be91d",
+        "heading": "二、自己做：不看代码，把决策写出来",
+        "previous": "blk-lab-dispatch-015"
+      },
+      {
+        "id": "blk-lab-dispatch-017",
+        "fingerprint": "06f9fbfae2364a9270887e5b1c80d742f04eec22aec00bf000db9dd24275b486",
+        "heading": "二、自己做：不看代码，把决策写出来",
+        "previous": "blk-lab-dispatch-016"
+      },
+      {
+        "id": "blk-lab-dispatch-018",
+        "fingerprint": "de1d14e87eec25456989d500e5b881f46eb06ddff2135d79686105b2234baa3f",
+        "heading": "二、自己做：不看代码，把决策写出来",
+        "previous": "blk-lab-dispatch-017"
+      },
+      {
+        "id": "blk-lab-dispatch-019",
+        "fingerprint": "586642094a928fbc3cdb4371a5868ad5ec68b5529bf6b836b073afacecd77017",
+        "heading": "二、再难一点：一个人，一次只能带 20 份",
+        "previous": "blk-lab-dispatch-018"
+      },
+      {
+        "id": "blk-lab-dispatch-020",
+        "fingerprint": "8da4b501d8becf86a9f1186ba825f028eedb8f2e983c7d71169e7389c5389fcc",
+        "heading": "二、再难一点：一个人，一次只能带 20 份",
+        "previous": "blk-lab-dispatch-019"
+      },
+      {
+        "id": "blk-lab-dispatch-021",
+        "fingerprint": "ac2fe5e3738c180da801ecc51f4a5648d40241d9bfa7c2731f62b31eab3c8402",
+        "heading": "二、再难一点：一个人，一次只能带 20 份",
+        "previous": "blk-lab-dispatch-020"
+      },
+      {
+        "id": "blk-lab-dispatch-022",
+        "fingerprint": "d9845992d0f1c70e3d2111a356d9e5ade52b91990cdc6eed692acf6264f0e713",
+        "heading": "二、再难一点：一个人，一次只能带 20 份",
+        "previous": "blk-lab-dispatch-021"
+      },
+      {
+        "id": "blk-lab-dispatch-023",
+        "fingerprint": "649e6dafb1cf8892de177c3323e8d1ef6a178d9af192126374554a73b1585a77",
+        "heading": "二、再难一点：一个人，一次只能带 20 份",
+        "previous": "blk-lab-dispatch-022"
+      }
+    ],
+    "aliases": {
+      "b0": "blk-lab-dispatch-000",
+      "b1": "blk-lab-dispatch-001",
+      "b2": "blk-lab-dispatch-002",
+      "b3": "blk-lab-dispatch-003",
+      "b4": "blk-lab-dispatch-004",
+      "b5": "blk-lab-dispatch-005",
+      "b6": "blk-lab-dispatch-006",
+      "b7": "blk-lab-dispatch-007",
+      "b8": "blk-lab-dispatch-008",
+      "b9": "blk-lab-dispatch-009",
+      "b10": "blk-lab-dispatch-010",
+      "b11": "blk-lab-dispatch-011",
+      "b12": "blk-lab-dispatch-012",
+      "b13": "blk-lab-dispatch-013",
+      "b14": "blk-lab-dispatch-014",
+      "b15": "blk-lab-dispatch-015",
+      "b16": "blk-lab-dispatch-016",
+      "b17": "blk-lab-dispatch-017",
+      "b18": "blk-lab-dispatch-018",
+      "b19": "blk-lab-dispatch-019",
+      "b20": "blk-lab-dispatch-020",
+      "b21": "blk-lab-dispatch-021",
+      "b22": "blk-lab-dispatch-022",
+      "b23": "blk-lab-dispatch-023",
+      "blk-lab-dispatch-000": "blk-lab-dispatch-000",
+      "blk-lab-dispatch-001": "blk-lab-dispatch-001",
+      "blk-lab-dispatch-002": "blk-lab-dispatch-002",
+      "blk-lab-dispatch-003": "blk-lab-dispatch-003",
+      "blk-lab-dispatch-004": "blk-lab-dispatch-004",
+      "blk-lab-dispatch-005": "blk-lab-dispatch-005",
+      "blk-lab-dispatch-006": "blk-lab-dispatch-006",
+      "blk-lab-dispatch-007": "blk-lab-dispatch-007",
+      "blk-lab-dispatch-008": "blk-lab-dispatch-008",
+      "blk-lab-dispatch-009": "blk-lab-dispatch-009",
+      "blk-lab-dispatch-010": "blk-lab-dispatch-010",
+      "blk-lab-dispatch-011": "blk-lab-dispatch-011",
+      "blk-lab-dispatch-012": "blk-lab-dispatch-012",
+      "blk-lab-dispatch-013": "blk-lab-dispatch-013",
+      "blk-lab-dispatch-014": "blk-lab-dispatch-014",
+      "blk-lab-dispatch-015": "blk-lab-dispatch-015",
+      "blk-lab-dispatch-016": "blk-lab-dispatch-016",
+      "blk-lab-dispatch-017": "blk-lab-dispatch-017",
+      "blk-lab-dispatch-018": "blk-lab-dispatch-018",
+      "blk-lab-dispatch-019": "blk-lab-dispatch-019",
+      "blk-lab-dispatch-020": "blk-lab-dispatch-020",
+      "blk-lab-dispatch-021": "blk-lab-dispatch-021",
+      "blk-lab-dispatch-022": "blk-lab-dispatch-022",
+      "blk-lab-dispatch-023": "blk-lab-dispatch-023"
+    }
+  },
+  "unit/lab/report": {
+    "blocks": [
+      {
+        "id": "blk-lab-report-000",
+        "fingerprint": "cdb36038800b9f302a2118611f004c9e9fa6688d36b64c268bfbaac5e5332e54",
+        "heading": "实验报告：对照、反思与延伸",
+        "previous": ""
+      },
+      {
+        "id": "blk-lab-report-001",
+        "fingerprint": "ba9a8dab97741aef272b9b511a75df5a8e8f0142193821992a72e6783ce49761",
+        "heading": "实验报告：对照、反思与延伸",
+        "previous": "blk-lab-report-000"
+      },
+      {
+        "id": "blk-lab-report-002",
+        "fingerprint": "ccc39edc854ccb43adaca9002ab46afda4c1646e422743ea39c7d643d0c6f068",
+        "heading": "一、预期完整输出",
+        "previous": "blk-lab-report-001"
+      },
+      {
+        "id": "blk-lab-report-003",
+        "fingerprint": "98bab10d2ddc9a1b5ce52e1ca312ac773ee30445d225798d164c3802357f3d7f",
+        "heading": "一、预期完整输出",
+        "previous": "blk-lab-report-002"
+      },
+      {
+        "id": "blk-lab-report-004",
+        "fingerprint": "95bc1d1e8e3be05c51b90489cd1f5cbcf2b468478829980c630876ccd00b5f86",
+        "heading": "一、预期完整输出",
+        "previous": "blk-lab-report-003"
+      },
+      {
+        "id": "blk-lab-report-005",
+        "fingerprint": "f4aa4f78cbcc1e3eee9ecd0813c6d9c36a47d018c6a7faf29f1941cbbe5b9403",
+        "heading": "一、预期完整输出",
+        "previous": "blk-lab-report-004"
+      },
+      {
+        "id": "blk-lab-report-006",
+        "fingerprint": "db32f718abc9301d9c24f26892e9ba5b0cb164eec8e5dbdea464d17ec55f5baa",
+        "heading": "二、两处值得多看一眼",
+        "previous": "blk-lab-report-005"
+      },
+      {
+        "id": "blk-lab-report-007",
+        "fingerprint": "6788467496099d2fdd168be2df2798851f203075cdd1c4d54ac5868c9493375d",
+        "heading": "二、两处值得多看一眼",
+        "previous": "blk-lab-report-006"
+      },
+      {
+        "id": "blk-lab-report-008",
+        "fingerprint": "99cd397df8770bebdb4df58b676af3850ad4d100af44db107fbeed66bf5f083a",
+        "heading": "二、两处值得多看一眼",
+        "previous": "blk-lab-report-007"
+      },
+      {
+        "id": "blk-lab-report-009",
+        "fingerprint": "47f23f64a8337326321d9dfb2b7c7171885c995b6e45567e67e3d6a2f669331d",
+        "heading": "三、自检清单",
+        "previous": "blk-lab-report-008"
+      },
+      {
+        "id": "blk-lab-report-010",
+        "fingerprint": "9c56af54914be1ddc89f4f8e29bf1f263977f554df8363d4fa0f2b428fca4858",
+        "heading": "三、自检清单",
+        "previous": "blk-lab-report-009"
+      },
+      {
+        "id": "blk-lab-report-011",
+        "fingerprint": "85487e1feeeb55192a9484568ab19e66ffa28c6bd4e342b102f5fbe01806b4af",
+        "heading": "三、自检清单",
+        "previous": "blk-lab-report-010"
+      },
+      {
+        "id": "blk-lab-report-012",
+        "fingerprint": "9a5935b016dbe0cca1abbe885b9df02ece854996e89637cf380d8138a3bb314f",
+        "heading": "四、想一想",
+        "previous": "blk-lab-report-011"
+      },
+      {
+        "id": "blk-lab-report-013",
+        "fingerprint": "e73602e36a8eb4fbde53a6764e037114999b0051b76d04d147f7133f92260bd7",
+        "heading": "四、想一想",
+        "previous": "blk-lab-report-012"
+      },
+      {
+        "id": "blk-lab-report-014",
+        "fingerprint": "0c276aed19580b2c8337d8e45cbb9f8fb92841f96158ea01382d74a221db1a51",
+        "heading": "四、想一想",
+        "previous": "blk-lab-report-013"
+      }
+    ],
+    "aliases": {
+      "b0": "blk-lab-report-000",
+      "b1": "blk-lab-report-001",
+      "b2": "blk-lab-report-002",
+      "b3": "blk-lab-report-003",
+      "b4": "blk-lab-report-004",
+      "b5": "blk-lab-report-005",
+      "b6": "blk-lab-report-006",
+      "b7": "blk-lab-report-007",
+      "b8": "blk-lab-report-008",
+      "b9": "blk-lab-report-009",
+      "b10": "blk-lab-report-010",
+      "b11": "blk-lab-report-011",
+      "b12": "blk-lab-report-012",
+      "b13": "blk-lab-report-013",
+      "b14": "blk-lab-report-014",
+      "blk-lab-report-000": "blk-lab-report-000",
+      "blk-lab-report-001": "blk-lab-report-001",
+      "blk-lab-report-002": "blk-lab-report-002",
+      "blk-lab-report-003": "blk-lab-report-003",
+      "blk-lab-report-004": "blk-lab-report-004",
+      "blk-lab-report-005": "blk-lab-report-005",
+      "blk-lab-report-006": "blk-lab-report-006",
+      "blk-lab-report-007": "blk-lab-report-007",
+      "blk-lab-report-008": "blk-lab-report-008",
+      "blk-lab-report-009": "blk-lab-report-009",
+      "blk-lab-report-010": "blk-lab-report-010",
+      "blk-lab-report-011": "blk-lab-report-011",
+      "blk-lab-report-012": "blk-lab-report-012",
+      "blk-lab-report-013": "blk-lab-report-013",
+      "blk-lab-report-014": "blk-lab-report-014"
     }
   }
 }

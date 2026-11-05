@@ -957,6 +957,60 @@
       "edition": "Genius 算法"
     },
     {
+      "id": "unit/lab/index",
+      "title": "实验导览　从一张地图开始",
+      "kind": "unit",
+      "group": "星航驿站 · 综合实验",
+      "route": "/read/unit/lab/index",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/lab/graph",
+      "title": "实验一　建图：把航线写成两张表",
+      "kind": "unit",
+      "group": "星航驿站 · 综合实验",
+      "route": "/read/unit/lab/graph",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/lab/traversal",
+      "title": "实验二　遍历：最少几跳能到",
+      "kind": "unit",
+      "group": "星航驿站 · 综合实验",
+      "route": "/read/unit/lab/traversal",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/lab/sort-search",
+      "title": "实验三　排序与检索：先理牌，再抽牌",
+      "kind": "unit",
+      "group": "星航驿站 · 综合实验",
+      "route": "/read/unit/lab/sort-search",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/lab/dispatch",
+      "title": "实验四　综合调度：谁先送、怎么送",
+      "kind": "unit",
+      "group": "星航驿站 · 综合实验",
+      "route": "/read/unit/lab/dispatch",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
+      "id": "unit/lab/report",
+      "title": "实验报告　对照、反思与延伸",
+      "kind": "unit",
+      "group": "星航驿站 · 综合实验",
+      "route": "/read/unit/lab/report",
+      "sourcePath": null,
+      "sourceCommit": null
+    },
+    {
       "id": "chapter_divide_and_conquer/index",
       "title": "分治",
       "kind": "chapter",

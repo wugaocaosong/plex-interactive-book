@@ -63,7 +63,7 @@ function traversalSteps(input:unknown):TeachingStep[]{
  steps.push({rows:edges.map(row=>[...row]),values:[...visited],explanation:`巡检完成，${name}序列为 ${visited.join(' → ')}。`,variables:{遍历方式:name,节点数:visited.length},result:visited});return steps;
 }
 function heapSteps(input:unknown):TeachingStep[]{
- const v=object(input),heap=array(v.values,15,1),kind=v.kind??'min';if(kind!=='min'&&kind!=='max')throw Error('kind 请使用 min 或 max');const steps:TeachingStep[]=[];
+ const v=object(input),heap=[...array(v.values,15,1)],kind=v.kind??'min';if(kind!=='min'&&kind!=='max')throw Error('kind 请使用 min 或 max');const steps:TeachingStep[]=[];
  const better=(a:number,b:number)=>kind==='min'?a<b:a>b;const emit=(explanation:string,active:number[],variables:Record<string,unknown>)=>steps.push({values:[...heap],active,explanation,variables});
  emit(`待整理数组：[${heap.join(', ')}]。从最后一个非叶节点开始向上调整。`,[],{堆类型:kind==='min'?'小顶堆':'大顶堆',阶段:'初始数组'});
  for(let parent=Math.floor(heap.length/2)-1;parent>=0;parent--){let current=parent;emit(`从索引 ${parent} 开始下沉检查。`,[current],{父节点索引:current,阶段:'检查子节点'});while(true){const left=current*2+1,right=left+1;let chosen=current;if(left<heap.length&&better(heap[left],heap[chosen]))chosen=left;if(right<heap.length&&better(heap[right],heap[chosen]))chosen=right;if(chosen===current)break;emit(`比较父节点 ${heap[current]} 与优先级更高的子节点 ${heap[chosen]}，准备交换。`,[current,chosen],{父节点索引:current,子节点索引:chosen,阶段:'交换'});[heap[current],heap[chosen]]=[heap[chosen],heap[current]];current=chosen;emit(`交换完成，继续检查新的子树。`,[current],{父节点索引:current,阶段:'继续下沉'});}}

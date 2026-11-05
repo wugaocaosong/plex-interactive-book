@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import {teachingSteps,sceneDefinitions} from '../web/.vitepress/theme/teaching-models.ts';
 import {organizeBookmarks,removeGroup,removeLevel} from '../web/.vitepress/theme/bookmark-model.ts';
 import {formulaSource} from '../web/.vitepress/theme/formula-copy.ts';
-test('all eleven deterministic scenes and boundary results',()=>{
- assert.equal(Object.keys(sceneDefinitions).length,11);
+test('all seventeen deterministic scenes and boundary results',()=>{
+ assert.deepEqual(Object.keys(sceneDefinitions).sort(), ['merge','binary','tree','hanoi','permutations','queens','stairs','knapsack','fractional','capacity','workflow','stack','queue','deque','hash','traversal','heap'].sort());
  for(const [id,d] of Object.entries(sceneDefinitions)){assert.deepEqual(teachingSteps(id,d.input),teachingSteps(id,d.input));assert.ok(teachingSteps(id,d.input).length>0);}
  assert.equal(teachingSteps('binary',{array:[],target:3}).at(-1).result,-1);
  assert.equal(teachingSteps('binary',{array:[1,1,2],target:2}).at(-1).result,2);

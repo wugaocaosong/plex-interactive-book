@@ -1,4 +1,7 @@
 export interface GlossaryEntry {
+  homeSection?: string;
+  tip?: string;
+  keys?: string[];
   term: string;
   english: string;
   definition: string;
@@ -6,8 +9,9 @@ export interface GlossaryEntry {
 }
 export function decorateGlossary(root: HTMLElement, entries: GlossaryEntry[]) {
   const used = new Set<string>();
+  const section=root.dataset.section || root.closest<HTMLElement>("[data-section]")?.dataset.section;
   const sorted = [...entries]
-    .filter((e) => e.term.length >= 2)
+    .filter((e) => e.term.length >= 2 && (!e.homeSection || !section || section===e.homeSection))
     .sort((a, b) => b.term.length - a.term.length);
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   const nodes: Text[] = [];
@@ -15,7 +19,7 @@ export function decorateGlossary(root: HTMLElement, entries: GlossaryEntry[]) {
   while ((node = walker.nextNode()))
     if (
       !node.parentElement?.closest(
-        "a,button,pre,code,.katex,.arithmatex,.glossary-term,mark,h1,h2,h3,h4,header,figcaption",
+        "a,button,pre,code,textarea,.route-lab-card,.katex,.arithmatex,.glossary-term,mark,h1,h2,h3,h4,header,figcaption",
       )
     )
       nodes.push(node as Text);
@@ -44,6 +48,7 @@ export function decorateGlossary(root: HTMLElement, entries: GlossaryEntry[]) {
       term.dataset.action = "term";
       term.dataset.term = match.term;
       term.tabIndex = 0;
+      term.title = match.tip || match.definition;
       term.setAttribute("role", "button");
       term.setAttribute("aria-label", `解释术语：${match.term}`);
       fragment.append(term);
