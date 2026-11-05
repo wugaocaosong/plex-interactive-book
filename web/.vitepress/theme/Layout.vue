@@ -848,10 +848,22 @@ function updateLeafAccessibility() {
     leaf.setAttribute("aria-hidden", String(!visible));
   });
 }
+function activeLeafIndex() {
+  const left = Math.max(0, Math.min(pageIndex.value, leaves.value.length - 1));
+  const right = left + 1;
+  // At a chapter boundary, the next chapter starts on the right-hand leaf.
+  // Treat it as the active reading location so the route and progress follow
+  // the page the reader has just turned to, without inserting a blank verso.
+  return desktop.value && right < leaves.value.length &&
+    leafSections.value[left] !== leafSections.value[right]
+    ? right
+    : left;
+}
 async function finishFlip() {
   if (rendering || finishingFlip || !flip || flip.getState() !== "read") return;
   updateLeafAccessibility();
-  const id = leafSections.value[pageIndex.value];
+  const activeIndex = activeLeafIndex();
+  const id = leafSections.value[activeIndex];
   if (!id || id === current.value?.id) {
     remember();
     return;
@@ -861,8 +873,8 @@ async function finishFlip() {
   finishingFlip = true;
   const place = {
     sectionId: id,
-    blockId: leaves.value[pageIndex.value].blockId,
-    offset: leaves.value[pageIndex.value].offset,
+    blockId: leaves.value[activeIndex].blockId,
+    offset: leaves.value[activeIndex].offset,
   };
   current.value = page;
   studyRouting = true;
@@ -891,10 +903,11 @@ function getPage(id: string) {
 function locator(): ReadingLocator {
   if (preferences.value.mode === "study" && studyPlace.value)
     return {...studyPlace.value,bookId:"plex-programming"};
-  const leaf = leaves.value[pageIndex.value];
+  const index = activeLeafIndex();
+  const leaf = leaves.value[index];
   return {
     bookId: "plex-programming",
-    sectionId: leafSections.value[pageIndex.value] || sectionId.value,
+    sectionId: leafSections.value[index] || sectionId.value,
     blockId: leaf?.blockId || "b0",
     offset: leaf?.offset || 0,
     contentVersion: current.value?.contentVersion,
@@ -1352,16 +1365,6 @@ async function layout(place?: ReadingLocator) {
       leafSections.value.push(item.page.id);
     }
     if (item.page.id === primary.id) sectionEnd = leaves.value.length - 1;
-    // Keep section starts on a left leaf: PageFlip reports the left page of
-    // a spread, so an odd boundary would route back into the previous section.
-    if (desktop.value && item.pages.length % 2) {
-      leaves.value.push({
-        html: '<div class="blank-verso">PLEX</div>',
-        blockId: item.pages.at(-1)!.blockId,
-        offset: item.pages.at(-1)!.offset,
-      });
-      leafSections.value.push(item.page.id);
-    }
   }
   // PageFlip owns these nodes; stateful panels stay outside the three-section window.
   disposeDrag?.();

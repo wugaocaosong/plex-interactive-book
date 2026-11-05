@@ -135,6 +135,22 @@ export function paginate(
         if (consumed < text.length) flush();
       }
     } else {
+      // Keep oversized figures in the book: scale their image to the available
+      // leaf height before falling back to the expanded-content card.
+      const figureImage =
+        element.tagName === "FIGURE"
+          ? element.querySelector<HTMLImageElement>("img")
+          : null;
+      if (figureImage) {
+        const caption = element.querySelector<HTMLElement>("figcaption");
+        const captionHeight = caption?.getBoundingClientRect().height || 24;
+        figureImage.style.maxHeight = `${Math.max(120, maxHeight - captionHeight - 110)}px`;
+        figureImage.style.maxWidth = "100%";
+        figureImage.style.width = "auto";
+        measure.append(element);
+        if (fits()) continue;
+        element.remove();
+      }
       // A large atomic block gets an explicit full-content viewer. Nothing is silently discarded.
       const card = document.createElement("div");
       card.className = "expanded-block";
