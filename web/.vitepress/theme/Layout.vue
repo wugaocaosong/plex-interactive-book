@@ -31,7 +31,6 @@ const teachingScene=ref<SceneId>("merge");
 import BookmarkLibrary from "./BookmarkLibrary.vue";
 import {organizeBookmarks} from "./bookmark-model";
 import {decorateFormulaCopies,handleFormulaCopy} from "./formula-copy";
-import ReaderWidth from "./ReaderWidth.vue";
 import renderMathInElement from "katex/contrib/auto-render";
 import type { PageFlip } from "page-flip";
 import type {
@@ -412,7 +411,6 @@ const imageAlt = ref("");
 const expandedHtml = ref("");
 const widthViewport = ref(typeof window === 'undefined' ? 1440 : window.innerWidth);
 const actualReaderWidth = computed(() => Math.min(widthViewport.value-48, preferences.value.customWidth?.[preferences.value.mode] ?? (preferences.value.mode==='flip'?{narrow:860,standard:1020,wide:1140}:{narrow:680,standard:840,wide:980})[preferences.value.width]));
-async function commitWidth(width?:number) {const place=locator(); preferences.value.customWidth={...preferences.value.customWidth,[preferences.value.mode]:width};saveStore('preferences',preferences.value);await layout(place);}
 const pageWidth = ref(510);
 const pageHeight = ref(670);
 const desktop = ref(true);
@@ -1026,6 +1024,17 @@ function addBookmark() {
   setTimeout(() => (saved.value = false), 1500);
 }
 async function openMenu(type: typeof menu.value) {
+  if (type === "contents") {
+    try {
+      await flushLearning();
+    } catch (e) {
+      storageMessage.value = String(e);
+    }
+    panel.value = null;
+    menu.value = null;
+    await router.go("/library/plex-programming/contents");
+    return;
+  }
   try {
     await flushLearning();
   } catch (e) {
@@ -1836,7 +1845,6 @@ onBeforeUnmount(() => {
             <Check v-if="saved" :size="17" /><Bookmark v-else :size="17" />
           </button>
         </div>
-        <ReaderWidth v-if="!loading" :width="actualReaderWidth" @commit="commitWidth" @reset="commitWidth()"/>
         <StudyReader
           v-if="preferences.mode === 'study' && current"
           ref="study"
