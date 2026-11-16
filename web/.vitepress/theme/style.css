@@ -11,3 +11,6 @@
 .cover-book.is-dragging,.book-host.is-dragging,.book-host.is-dragging:before,.book-host.is-dragging:after{cursor:grabbing;user-select:none;transition:none}
 .drag-hint{position:absolute;bottom:0;margin:0;color:#92998c;font-size:10px;letter-spacing:.06em;pointer-events:none}
 @media(max-width:1023px){.book-host:after{display:block}.drag-hint{bottom:2px;font-size:9px}}
+
+/* QA 留言板：内容偏文字，弹层不必占满宽屏 */
+.navigation-dialog.qa-dialog{width:min(900px,100%)}

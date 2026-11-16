@@ -19,6 +19,7 @@ import {
   ChevronRight,
   Compass,
   List,
+  MessageSquareText,
   Search,
   X,
   Expand,
@@ -44,6 +45,7 @@ import StudyReader from "./StudyReader.vue";
 import ChapterTermNote from "./ChapterTermNote.vue";
 import ChapterAnnotation from "./ChapterAnnotation.vue";
 const Chapter12Panel = defineAsyncComponent(() => import("./Chapter12Panel.vue"));
+const QaBoard = defineAsyncComponent(() => import("./QaBoard.vue"));
 const chapter12Mode = ref("route");
 const annotationPoint = ref({x:16,y:120});
 function positionAnnotation(rect?: DOMRect) {
@@ -116,7 +118,14 @@ const sectionIndex = computed(() =>
 const cover = computed(() => current.value?.kind === "cover");
 const backCover = computed(() => current.value?.kind === "back-cover");
 const menu = ref<
-  "contents" | "search" | "bookmarks" | "settings" | "notes" | "more" | null
+  | "contents"
+  | "search"
+  | "bookmarks"
+  | "settings"
+  | "notes"
+  | "more"
+  | "qa"
+  | null
 >(null);
 const mapView = ref(true);
 const query = ref("");
@@ -470,6 +479,7 @@ const menuLabel = computed(
       settings: "阅读设置",
       notes: "学习笔记",
       more: "阅读工具",
+      qa: "QA 留言板",
     })[menu.value || "contents"],
 );
 const coverElement = ref<HTMLElement>();
@@ -1489,6 +1499,9 @@ onBeforeUnmount(() => {
           >
             <BookOpen :size="15" />继续上次阅读
           </button>
+          <button class="resume-button" @click="openMenu('qa')">
+            <MessageSquareText :size="15" />读者留言板
+          </button>
         </div>
       </div>
       <section
@@ -1506,6 +1519,7 @@ onBeforeUnmount(() => {
           >
             {{lesson?.activityLabel || "学习活动"}}</button
           ><button @click="blockNote()">本段笔记</button
+          ><button @click="openMenu('qa')">留言</button
           ><button
             class="bookmark-page"
             :aria-label="saved ? '已加入书签' : '收藏当前页'"
@@ -1659,6 +1673,7 @@ onBeforeUnmount(() => {
     <div v-if="menu" class="overlay" :data-window="menu" @click.self="closeOverlay">
       <section
         class="navigation-dialog"
+        :class="{ 'qa-dialog': menu === 'qa' }"
         role="dialog"
         aria-modal="true"
         :aria-label="menuLabel"
@@ -1687,6 +1702,9 @@ onBeforeUnmount(() => {
           </button>
           <button aria-label="学习笔记" @click="openMenu('notes')">
             学习笔记
+          </button>
+          <button aria-label="QA 留言板" @click="openMenu('qa')">
+            QA 留言板
           </button>
           <button aria-label="阅读设置" @click="openMenu('settings')">
             阅读设置
@@ -1967,6 +1985,16 @@ onBeforeUnmount(() => {
               rebindNote = note;
               closeOverlay();
               storageMessage = '请重新选择原文，然后保存关联。';
+            }
+          "
+        />
+        <QaBoard
+          v-if="menu === 'qa'"
+          :current="{ id: sectionId, title: current?.title, group: current?.group }"
+          @navigate="
+            (id) => {
+              closeOverlay();
+              navigate(id);
             }
           "
         />
