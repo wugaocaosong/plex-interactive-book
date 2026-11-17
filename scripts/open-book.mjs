@@ -1,50 +1,39 @@
 import { spawn } from 'node:child_process';
-import { openSync, closeSync, existsSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { get } from 'node:http';
-
-const root = resolve(import.meta.dirname, '..');
-const url = 'http://127.0.0.1:5192/';
-function available() {
-  return new Promise(resolve => {
-    const req = get(url, res => {
-      let body = '';
-      res.setEncoding('utf8');
-      res.on('data', chunk => { body += chunk; });
-      res.on('end', () => resolve(res.statusCode === 200 && body.includes('PLEX')));
-      res.on('error', () => resolve(false));
-    });
-    req.setTimeout(1000, () => req.destroy());
-    req.on('error', () => resolve(false));
-  });
-}
-if (!existsSync(resolve(root, 'web/.vitepress/dist/index.html'))) {
-  console.error('The built book is missing: ' + root);
+import { createStaticServer } from './serve-dist.mjs';
+const root = resolve(import.meta.dirname, '..', 'web/.vitepress/dist');
+if (!existsSync(resolve(root, 'index.html'))) {
+  console.error('Build missing. Run npm run build in the book folder.');
   process.exit(1);
 }
-if (!await available()) {
-  const out = openSync(resolve(root, 'preview-server.log'), 'a');
-  const err = openSync(resolve(root, 'preview-server-error.log'), 'a');
+let server;
+let port;
+for (let candidate = 5192; candidate <= 5199; candidate++) {
+  const attempt = createStaticServer(root);
   try {
-    const child = spawn(process.execPath, [resolve(root, 'scripts/serve-dist.mjs'), '--port', '5192'], {
-      cwd: root, detached: true, windowsHide: true, stdio: ['ignore', out, err],
+    await new Promise((resolve, reject) => {
+      attempt.once('error', reject);
+      attempt.listen(candidate, '127.0.0.1', resolve);
     });
-    child.on('error', error => console.error(error.message));
-    child.unref();
-  } finally { closeSync(out); closeSync(err); }
-  let ready = false;
-  for (let attempt = 0; attempt < 40; attempt++) {
-    if (await available()) { ready = true; break; }
-    await new Promise(resolve => setTimeout(resolve, 250));
-  }
-  if (!ready) {
-    console.error('Could not start the book. See ' + resolve(root, 'preview-server-error.log'));
-    process.exit(1);
+    server = attempt; port = candidate; break;
+  } catch (error) {
+    if (error.code !== 'EADDRINUSE') {
+      console.error('Could not start preview:', error.message);
+      process.exit(1);
+    }
+    console.log(`Port ${candidate} is occupied; trying the next port.`);
   }
 }
-console.log('Book ready: ' + url);
+if (!server) {
+  console.error('Ports 5192-5199 are occupied. Close an older preview and retry.');
+  process.exit(1);
+}
+const url = `http://127.0.0.1:${port}/read/chapter_searching/`;
+console.log(`\nBook ready: ${url}\nKeep this window open while reading. Press Ctrl+C to stop.\n`);
+server.on('error', error => console.error('Preview error:', error.message));
 if (!process.argv.includes('--check-only')) {
-  const browser = spawn('cmd.exe', ['/d', '/c', 'start', '', url], { windowsHide: true, stdio: 'ignore' });
-  browser.on('error', error => console.error(error.message));
+  const browser = spawn('rundll32.exe', ['url.dll,FileProtocolHandler', url], { windowsHide: true, stdio: 'ignore' });
+  browser.on('error', error => console.error('Open the address above in your browser:', error.message));
   browser.unref();
 }
