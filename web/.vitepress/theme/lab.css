@@ -1,0 +1,295 @@
+/* ==========================================================================
+   综合实验 · 星航实验室：难度条 + 页内实验台
+   纸面卡片风格，高度固定（参与分页测量，运行时不允许撑高）
+   ========================================================================== */
+
+/* ---------- 难度条 ---------- */
+.lab-level-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0 0 18px;
+  padding: 8px 10px;
+  background: #efe9d6;
+  border: 1px solid #ded3b8;
+  border-left: 3px solid var(--teal, #4f8d86);
+  border-radius: 0 6px 6px 0;
+}
+.lab-level-label {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: #7c8474;
+  padding-left: 2px;
+}
+.lab-level-options {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+.lab-level-options button {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 5px 8px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #5c6656;
+  text-align: left;
+  background: transparent;
+}
+.lab-level-options button b {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.lab-level-options button i {
+  font-style: normal;
+  font-size: 8.5px;
+  line-height: 1.35;
+  color: #8a907e;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.lab-level-options button:hover:not(.is-active) {
+  background: #e6dfc9;
+}
+.lab-level-options button.is-active {
+  background: #f7f2e2;
+  border-color: var(--teal, #4f8d86);
+  color: #2f5f58;
+  box-shadow: inset 0 0 0 1px #ffffffb0;
+}
+.lab-level-options button.is-active i {
+  color: #4f7d73;
+}
+.lab-level-hint {
+  font-size: 9px;
+  color: #8a907e;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* ---------- 实验台卡片 ---------- */
+.lab-editor {
+  margin: 15px 0;
+  border: 1px solid #d5d2be;
+  border-radius: 7px;
+  background: #f1ecdd;
+  overflow: hidden;
+}
+.lab-editor-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 11px;
+  border-bottom: 1px solid #ded9c6;
+  background: #eae4d1;
+}
+.lab-editor-title {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #3f574f;
+}
+.lab-editor-meta {
+  font-size: 8.5px;
+  color: #8b917e;
+  letter-spacing: 0.02em;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lab-editor-code {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+  padding: 10px 12px;
+  background: #1b2422;
+  color: #d6e2cf;
+  font-family: "JetBrains Mono", "Noto Sans SC", monospace;
+  font-size: 10.5px;
+  line-height: 1.7;
+  tab-size: 4;
+  resize: none;
+  overflow: auto;
+  color-scheme: dark;
+  white-space: pre;
+  caret-color: #9fd3c3;
+}
+.lab-editor-code::selection {
+  background: #4f8d8675;
+}
+.lab-editor-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 7px 10px;
+  border-top: 1px solid #ded9c6;
+  background: #f3eedf;
+}
+.lab-editor-bar button {
+  font-size: 10px;
+  padding: 5px 11px;
+  border-radius: 4px;
+  border: 1px solid #cbc7b2;
+  color: #4a5b50;
+  background: #fbf7ea;
+  line-height: 1.2;
+}
+.lab-editor-bar button:hover:not(:disabled) {
+  border-color: var(--teal, #4f8d86);
+  color: #2f5f58;
+}
+.lab-editor-bar button[data-action="lab-run"] {
+  background: #386a61;
+  border-color: #386a61;
+  color: #f4f8ee;
+  font-weight: 600;
+}
+.lab-editor-bar button[data-action="lab-run"]:hover:not(:disabled) {
+  background: #2f5c54;
+  color: #ffffff;
+}
+.lab-editor-bar button[data-action="lab-stop"] {
+  border-color: #b06a5c;
+  color: #8d4a3d;
+  background: #f8ece6;
+}
+.lab-editor-status {
+  margin-left: auto;
+  font-size: 9px;
+  color: #8b917e;
+  letter-spacing: 0.02em;
+}
+.lab-editor-status.is-busy {
+  color: #a9782f;
+}
+.lab-editor-status.is-ok {
+  color: #3d7a63;
+}
+.lab-editor-status.is-error {
+  color: #a1503f;
+}
+.lab-editor-out {
+  margin: 0;
+  height: 84px;
+  padding: 9px 12px;
+  overflow: auto;
+  background: #f7f3e6;
+  border-top: 1px solid #e2dcc9;
+  font-family: "JetBrains Mono", "Noto Sans SC", monospace;
+  font-size: 10px;
+  line-height: 1.65;
+  color: #4a5b50;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.lab-editor-out.is-error {
+  color: #9c4a39;
+  background: #f9efe8;
+}
+
+/* ---------- 墨夜 ---------- */
+.theme-dark .lab-level-bar {
+  background: #2b3733;
+  border-color: #3b4a43;
+  border-left-color: #5fa294;
+}
+.theme-dark .lab-level-label,
+.theme-dark .lab-level-hint {
+  color: #93a49b;
+}
+.theme-dark .lab-level-options button {
+  color: #c2cfc6;
+}
+.theme-dark .lab-level-options button i {
+  color: #8b9c92;
+}
+.theme-dark .lab-level-options button:hover:not(.is-active) {
+  background: #33423c;
+}
+.theme-dark .lab-level-options button.is-active {
+  background: #3a4b44;
+  border-color: #6fb3a3;
+  color: #eaf3e5;
+  box-shadow: none;
+}
+.theme-dark .lab-editor {
+  background: #26322e;
+  border-color: #3a4a43;
+}
+.theme-dark .lab-editor-head {
+  background: #2c3935;
+  border-bottom-color: #3a4a43;
+}
+.theme-dark .lab-editor-title {
+  color: #b9d3c6;
+}
+.theme-dark .lab-editor-meta {
+  color: #8fa197;
+}
+.theme-dark .lab-editor-code {
+  background: #16201d;
+  color: #d6e2cf;
+}
+.theme-dark .lab-editor-bar {
+  background: #2c3935;
+  border-top-color: #3a4a43;
+}
+.theme-dark .lab-editor-bar button {
+  background: #33423c;
+  border-color: #46574f;
+  color: #c9d8cd;
+}
+.theme-dark .lab-editor-bar button[data-action="lab-run"] {
+  background: #4b8577;
+  border-color: #4b8577;
+  color: #f2f8ec;
+}
+.theme-dark .lab-editor-status {
+  color: #93a49b;
+}
+.theme-dark .lab-editor-out {
+  background: #1e2a26;
+  border-top-color: #3a4a43;
+  color: #b9c9bb;
+}
+.theme-dark .lab-editor-out.is-error {
+  background: #2f2320;
+  color: #e0a08c;
+}
+
+/* ---------- 窄屏 ---------- */
+@media (max-width: 1023px) {
+  .lab-level-bar {
+    margin: 10px 0 14px;
+    padding: 7px 8px;
+  }
+  .lab-level-options button {
+    padding: 4px 5px;
+  }
+  .lab-level-options button i {
+    display: none;
+  }
+  .lab-level-hint {
+    display: none;
+  }
+  .lab-editor-meta {
+    display: none;
+  }
+  .lab-editor-code {
+    font-size: 10px;
+  }
+}

@@ -115,6 +115,7 @@ const H5PPanel = defineAsyncComponent(() => import("./H5PPanel.vue"));
 const LearningHub = defineAsyncComponent(() => import("./LearningHub.vue"));
 import { decorateGlossary, type GlossaryEntry } from "./glossary";
 import { injectChapterQuiz, chapterLearning } from './chapter-learning';
+import { hydrateLabEditors, labEditorAction } from './lab-inline';
 const ChapterQuiz = defineAsyncComponent(() => import('./ChapterQuiz.vue'));
 const quizChapter = ref('');
 import { retainMathText, canonicalText } from "./text-coordinates";
@@ -271,6 +272,7 @@ function decorateTerms(root: HTMLElement) {
   decorateLabLevel(root,preferences.value.labLevel);
   refreshLabLabels(root);
   decorateGlossary(root, glossary.value);
+  hydrateLabEditors(root);
 }
 let studyRouting = false;
 let studyNavigation: string | undefined;
@@ -1253,6 +1255,7 @@ async function clickBook(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
     const value = action.dataset.action;
+    if (labEditorAction(action)) return;
     if (value === 'chapter-quiz') {
       const chapter = chapterLearning.find(c => c.id === action.dataset.chapter);
       if (chapter) { quizChapter.value = chapter.id; openPanel('chapter-quiz'); }
@@ -1473,6 +1476,7 @@ async function layout(place?: ReadingLocator) {
     content.className = "leaf-content";
     content.dataset.section = page.id;
     content.innerHTML = leaf.html;
+    hydrateLabEditors(content);
     const foot = document.createElement("div");
     foot.className = "leaf-footer";
     foot.textContent = `${i + 1} / ${leaves.value.length}　·　PLEX 星轨编程`;

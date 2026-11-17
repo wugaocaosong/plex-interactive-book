@@ -40,7 +40,7 @@ self.onmessage = async ({ data }) => {
       });
       runtime.globals.set("_plex_request_json", JSON.stringify(data));
       const serialized = await runtime.runPythonAsync(`
-import json, traceback, os, copy
+import json, traceback, os, copy, ast
 _request = json.loads(_plex_request_json)
 _filename = '/book/' + _request.get('path', 'exercise.py')
 sys.path[:] = [os.path.dirname(_filename)] + _plex_base_path
@@ -50,7 +50,15 @@ def _diagnostic(exc):
     return {'message': str(exc), 'filename': _filename, 'line': getattr(exc, 'lineno', None) or (frame.lineno if frame else None), 'column': getattr(exc, 'offset', None)}
 _result = {}
 try:
-    _compiled = compile(_request['code'], _filename, 'exec')
+    _source = _request['code']
+    if _request.get('echoLastExpression'):
+        _tree = ast.parse(_source, filename=_filename)
+        if _tree.body and isinstance(_tree.body[-1], ast.Expr):
+            _last = _tree.body[-1]
+            _tree.body[-1] = ast.copy_location(ast.Assign(targets=[ast.Name(id='_plex_last_value', ctx=ast.Store())], value=_last.value), _last)
+            _tree.body += ast.parse('if _plex_last_value is not None: print(repr(_plex_last_value))').body
+            _source = ast.fix_missing_locations(_tree)
+    _compiled = compile(_source, _filename, 'exec')
     if _request['type'] == 'simulate':
         if _request.get('count') not in [1, 10, 100, 1000, 10000]:
             raise ValueError('试验次数不受支持')

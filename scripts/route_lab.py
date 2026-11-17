@@ -37,16 +37,18 @@ def pages():
                 code = helpers + '\n\n' + code
                 if code.rstrip().endswith('dispatch_plan()'):
                     code = code.rstrip()[:-len('dispatch_plan()')] + 'print(dispatch_plan())\n'
-            title = card.select_one('.lab-editor-title').get_text().replace('🛠 ', '')
-            card.clear()
-            card['class'] = ['route-lab-card']
-            heading = soup.new_tag('h3'); heading.string = title; card.append(heading)
-            p = soup.new_tag('p'); p.string = '修改代码，运行后对照输出。运行成功不代表已通过知识测验。'; card.append(p)
-            preview = soup.new_tag('pre', attrs={'tabindex':'0','aria-label':'起始代码预览，完整代码可在实验台编辑'}); preview.string = '\n'.join(code.splitlines()[:4]) + '\n…'; card.append(preview)
-            button = soup.new_tag('button', attrs={'type':'button','data-action':'code','data-code':str(len(examples))})
-            button.string = '动手写代码'; card.append(button)
-            status = soup.new_tag('p', attrs={'class':'route-lab-result','data-lab-result':key,'role':'status'})
-            status.string = '尚未运行'; card.append(status)
+            # Keep the authored in-page editor and its original controls.
+            if slug == 'dispatch':
+                card['data-code-prefix'] = helpers
+            area = card.select_one('textarea')
+            area['aria-label'] = '代码编辑器，可直接修改'
+            run = card.select_one('[data-action="lab-run"]')
+            run.string = '运行 ▶'
+            stop = card.select_one('[data-action="lab-stop"]')
+            stop.attrs.pop('hidden', None)
+            full_button = soup.new_tag('button', attrs={'type':'button','data-action':'code','data-code':'0'})
+            full_button.string = '完整程序'
+            card.select_one('.lab-editor-status').insert_before(full_button)
             examples.append(example('example-' + key, code, 'learning/route-lab/' + key + '.py', key))
         # Stable explicit block IDs survive the first migration and subsequent imports.
         for tag in soup.select('[data-block]'):

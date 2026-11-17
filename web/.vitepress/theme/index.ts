@@ -13,6 +13,7 @@ export default { Layout } satisfies Theme
 import "./unit.css";
 import "./chapter12.css";
 import "./route-lab.css";
+import './lab.css';
 import './starship.css';
 import '@fontsource/noto-sans-sc/700.css';
 import './phantom.css';
