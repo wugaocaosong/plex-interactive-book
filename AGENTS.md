@@ -23,3 +23,7 @@ Publication status: integration is validated locally (42 Node tests, TypeScript,
 Run `npm run typecheck`, `node --test tests/*.test.mjs`, and `npm run build`. Do not run typecheck concurrently with a build that deletes the output directory. Regenerate authored quiz/glossary assets using their preparation scripts when their sources change.
 
 The user-facing local preview address is `http://127.0.0.1:5192/`; its stable launch entry is `OPEN_BOOK.cmd` (and `../打开电子书.cmd`). A temporary preview server started in a tool session may stop when the session ends. Never promise that a localhost link is a permanently hosted website.
+
+## Reader effect restoration (2026-11-17)
+
+The first integration omitted the preserved branch glossary hover implementation and 610 lines of authored learning.css, and replaced its three-column settings with a basic form. Restored these from work/local-preserved-20261117, including font/immersion bindings, full term explanations, settings reset and mode selection. QA component matches the preserved branch and is mounted in the navigation dialog. Verified actual browser hover tooltip, full settings controls and QA board after rebuilding. Typecheck, 9 targeted tests, content audit and production build passed. Do not claim all historical effects have been verified merely because the book loads. Remote publication remains blocked by GitHub connector HTTP 403.

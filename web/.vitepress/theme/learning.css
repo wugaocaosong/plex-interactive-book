@@ -679,3 +679,615 @@
     gap: 12px;
   }
 }
+
+/* ---------- 阅读设置：三栏面板（还原旧版布局） ---------- */
+.reader .settings-sheet {
+  padding: 26px 34px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+  color: var(--ui-text, #eef0e2);
+  overflow: auto;
+}
+.reader .settings-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 30px;
+  align-items: start;
+}
+.reader .settings-col {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.reader .settings-col-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  color: var(--ui-muted, #9aa38d);
+  white-space: nowrap;
+}
+.reader .settings-col-label::before,
+.reader .settings-col-label::after {
+  content: "";
+  height: 1px;
+  background: #3f4a3e;
+  flex: 1;
+}
+.reader .settings-col-label.settings-col-label-plain {
+  justify-content: flex-start;
+  letter-spacing: 0.04em;
+  color: var(--ui-text, #eef0e2);
+  font-weight: 700;
+}
+.reader .settings-col-label.settings-col-label-plain::before,
+.reader .settings-col-label.settings-col-label-plain::after {
+  content: none;
+}
+.reader .settings-preview-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--ui-muted, #9aa38d);
+}
+.reader .settings-group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.reader .settings-group > legend,
+.reader .settings-label {
+  padding: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ui-text, #eef0e2);
+}
+.reader .settings-label small {
+  margin-left: 8px;
+  font-weight: 400;
+  color: var(--ui-muted, #9aa38d);
+  letter-spacing: 0.02em;
+}
+.reader .settings-preview-group {
+  padding: 14px 18px 16px;
+  background: #22261f;
+  border: 1px solid #3f4a3e;
+  border-radius: 10px;
+  gap: 6px;
+}
+.reader .settings-preview {
+  padding: 0;
+  background: none;
+  border: 0;
+  font-family: "Noto Serif SC", serif;
+  font-size: 14px;
+  line-height: 1.9;
+  color: #d9d6c6;
+}
+.reader .settings-mode {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.reader .settings-mode.settings-mode-col {
+  grid-template-columns: 1fr;
+}
+.reader .settings-mode button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  padding: 15px 16px;
+  font-size: 13px;
+  color: #c9c8b4;
+  background: #22261f;
+  border: 1px solid #3f4a3e;
+  border-radius: 8px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.reader .settings-mode button small {
+  font-size: 11px;
+  color: var(--ui-muted, #9aa38d);
+  font-weight: 400;
+}
+.reader .settings-mode button:hover {
+  background: #2a2e24;
+  color: #eef0e2;
+}
+.reader .settings-mode button.is-on {
+  border-color: var(--ui-accent, #d9b873);
+  background: #2b281d;
+  color: var(--ui-accent, #d9b873);
+  font-weight: 700;
+}
+.reader .settings-mode button.is-on small {
+  color: #b8ab7f;
+}
+.reader .settings-fontsize {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.reader .settings-fontsize .step-btn {
+  min-width: 44px;
+  height: 36px;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: "Noto Serif SC", serif;
+  color: #c9c8b4;
+  background: #22261f;
+  border: 1px solid #3f4a3e;
+  border-radius: 6px;
+}
+.reader .settings-fontsize .step-btn:hover:not(:disabled) {
+  border-color: var(--ui-accent, #d9b873);
+  color: var(--ui-accent, #d9b873);
+}
+.reader .settings-fontsize .step-btn:disabled {
+  opacity: 0.35;
+}
+.reader .settings-sheet input[type="range"] {
+  flex: 1;
+  margin: 0;
+  accent-color: var(--ui-accent, #d9b873);
+}
+.reader .settings-seg {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(72px, auto);
+  gap: 6px;
+  align-self: flex-start;
+}
+.reader .settings-seg button {
+  padding: 8px 16px;
+  font-size: 12.5px;
+  line-height: 1.3;
+  color: #c9c8b4;
+  background: #22261f;
+  border: 1px solid #3f4a3e;
+  border-radius: 999px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.reader .settings-seg button:hover {
+  background: #2a2e24;
+  color: #eef0e2;
+}
+.reader .settings-seg button.is-on {
+  background: var(--ui-accent, #d9b873);
+  border-color: var(--ui-accent, #d9b873);
+  color: #241f10;
+  font-weight: 700;
+}
+.reader .settings-paper {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.reader .settings-paper.settings-paper-col {
+  grid-template-columns: 1fr;
+}
+.reader .settings-paper button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 12px 13px;
+  font-size: 12px;
+  color: #c9c8b4;
+  background: #22261f;
+  border: 1px solid #3f4a3e;
+  border-radius: 8px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.reader .settings-paper.settings-paper-col button {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  font-size: 12.5px;
+}
+.reader .settings-paper.settings-paper-col button.is-on {
+  font-weight: 700;
+}
+.reader .settings-paper .paper-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  font-family: "Noto Serif SC", serif;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid #ffffff22;
+  background: #f7eedb;
+  color: #242723;
+}
+.reader .settings-paper button:hover {
+  background: #2a2e24;
+}
+.reader .settings-paper button.is-on {
+  border-color: var(--ui-accent, #d9b873);
+  background: #2b281d;
+  color: var(--ui-accent, #d9b873);
+  font-weight: 700;
+}
+.reader .settings-paper button.is-on .paper-chip {
+  border-color: #d9b87388;
+}
+.reader .settings-paper .paper-chip.paper-dark {
+  background: #191c1e;
+  color: #e6e4da;
+}
+.reader .settings-paper .paper-chip.paper-system {
+  background: linear-gradient(105deg, #f7eedb 0 46%, #191c1e 54% 100%);
+  color: transparent;
+  position: relative;
+}
+.reader .settings-paper .paper-chip.paper-system::after {
+  content: "Aa";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #242723;
+}
+.reader .settings-immersion {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.reader .settings-immersion .settings-immersion-hint {
+  font-size: 11.5px;
+  color: var(--ui-muted, #9aa38d);
+}
+.reader .settings-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px 7px 8px;
+  font-size: 12px;
+  color: #c9c8b4;
+  background: #22261f;
+  border: 1px solid #3f4a3e;
+  border-radius: 999px;
+}
+.reader .settings-switch i {
+  display: inline-flex;
+  align-items: center;
+  width: 34px;
+  height: 18px;
+  padding: 2px;
+  background: #35392e;
+  border: 1px solid #4a4f40;
+  border-radius: 999px;
+  transition: background 0.18s;
+}
+.reader .settings-switch em {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #9aa38d;
+  transition: transform 0.18s, background 0.18s;
+}
+.reader .settings-switch.is-on {
+  border-color: var(--ui-accent, #d9b873);
+  color: var(--ui-accent, #d9b873);
+}
+.reader .settings-switch.is-on i {
+  background: var(--ui-accent, #d9b873);
+  border-color: #e6c987;
+}
+.reader .settings-switch.is-on em {
+  transform: translateX(16px);
+  background: #241f10;
+}
+.reader .settings-foot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-top: 4px;
+}
+.reader .settings-plain {
+  padding: 9px 16px;
+  font-size: 12px;
+  color: #c9c8b4;
+  background: #22261f;
+  border: 1px solid #3f4a3e;
+  border-radius: 6px;
+}
+.reader .settings-plain:hover {
+  border-color: var(--ui-accent, #d9b873);
+  color: var(--ui-accent, #d9b873);
+}
+.reader .settings-note {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--ui-muted, #9aa38d);
+}
+
+/* ---------- 术语卡片：定义 + 说人话 + 快捷键 ---------- */
+.reader .term-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 24px 28px 30px;
+  max-width: 780px;
+  color: var(--ui-text, #eef0e2);
+}
+.reader .term-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #5c7969;
+}
+.reader .term-head h2 {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.reader .term-head small {
+  color: var(--ui-accent, #d9b873);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+.reader .term-definition {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.9;
+  color: #e2e0d0;
+}
+.reader .term-tip {
+  padding: 13px 16px;
+  background: #22261f;
+  border-left: 3px solid var(--ui-accent, #d9b873);
+}
+.reader .term-tip p {
+  margin: 7px 0 0;
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: #d0cdba;
+}
+.reader .term-tip-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--ui-accent, #d9b873);
+}
+.reader .term-keys {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.reader .term-keys kbd {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  padding: 4px 9px;
+  color: #d9d6c6;
+  background: #22261f;
+  border: 1px solid #5c6553;
+  border-bottom-width: 2px;
+}
+.reader .term-link {
+  align-self: flex-start;
+  padding: 10px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #241f10;
+  background: var(--ui-accent, #d9b873);
+}
+
+/* ---------- 术语悬停浮层（鼠标放上去即出现的那个） ---------- */
+.term-pop {
+  position: fixed;
+  z-index: 320;
+  width: 300px;
+  max-width: calc(100vw - 24px);
+  padding: 13px 16px 10px;
+  background: #22261f;
+  border: 1px solid #4a4f40;
+  border-top: 3px solid var(--ui-accent, #d9b873);
+  border-radius: 8px;
+  box-shadow: 0 12px 32px #000a;
+  color: #e2e0d0;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 12px));
+  animation: term-pop-arrive 0.14s ease-out;
+}
+.term-pop.below {
+  border-top: 1px solid #4a4f40;
+  border-bottom: 3px solid var(--ui-accent, #d9b873);
+  transform: translate(-50%, 16px);
+  animation: term-pop-arrive-below 0.14s ease-out;
+}
+@keyframes term-pop-arrive-below {
+  from { opacity: 0; transform: translate(-50%, 10px); }
+  to { opacity: 1; transform: translate(-50%, 16px); }
+}
+.term-pop .term-pop-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.term-pop .term-pop-head b {
+  font-family: "Noto Serif SC", serif;
+  font-size: 15px;
+  color: #f4f0e0;
+}
+.term-pop .term-pop-head small {
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--ui-muted, #9aa38d);
+}
+.term-pop .term-pop-body {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.75;
+}
+.term-pop .term-pop-tip {
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-left: 2px solid var(--ui-accent, #d9b873);
+  background: #1b1e18;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #c9c8b4;
+}
+.term-pop .term-pop-foot {
+  display: block;
+  margin-top: 8px;
+  font-size: 10px;
+  color: #8a8d7c;
+  letter-spacing: 0.03em;
+}
+@keyframes term-pop-arrive {
+  from { opacity: 0; transform: translate(-50%, calc(-100% - 6px)); }
+  to { opacity: 1; transform: translate(-50%, calc(-100% - 12px)); }
+}
+
+/* ---------- 章节探险入口卡片 ---------- */
+.leaf-content .explorer-card,
+.study-article .explorer-card {
+  position: relative;
+  margin: 18px 0 22px;
+  padding: 20px 24px 22px;
+  border-radius: 10px;
+  border: 1px solid #a8bcb0;
+  background: linear-gradient(120deg, #e3ecdd 0%, #eef0e0 55%, #e6e8d6 100%);
+  color: #242723;
+}
+.theme-dark :is(.leaf-content .explorer-card,.study-article .explorer-card) {
+  border-color: #3d5a4e;
+  background: linear-gradient(120deg, #20281f 0%, #23261e 55%, #1f2620 100%);
+  color: #e6e4da;
+}
+.leaf-content .explorer-card .explorer-eyebrow,
+.study-article .explorer-card .explorer-eyebrow {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: #8a8d7c;
+}
+.leaf-content .explorer-card .explorer-star {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 18px;
+  transform: rotate(12deg);
+}
+.leaf-content .explorer-card h3,
+.study-article .explorer-card h3 {
+  margin: 10px 0 8px;
+  font-family: "Noto Serif SC", serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: inherit;
+}
+.leaf-content .explorer-card p,
+.study-article .explorer-card p {
+  margin: 0 0 14px;
+  font-size: 13px;
+  line-height: 1.9;
+  color: #4b645b;
+}
+.theme-dark :is(.leaf-content .explorer-card,.study-article .explorer-card) p {
+  color: #a8b0a0;
+}
+.leaf-content .explorer-card .explorer-go,
+.study-article .explorer-card .explorer-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #241f10;
+  background: var(--gold, #d9b873);
+  border-radius: 999px;
+  box-shadow: 0 3px 10px #00000022;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.leaf-content .explorer-card .explorer-go:hover,
+.study-article .explorer-card .explorer-go:hover {
+  color: #241f10;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px #00000033;
+}
+
+/* ---------- 正文字体切换 ---------- */
+.reader .leaf-content,
+.reader .study-article {
+  font-family: var(--reader-body, "Noto Sans SC", sans-serif);
+}
+
+/* ---------- 沉浸阅读 ---------- */
+.reader.is-immersive .reader-toolbar,
+.reader.is-immersive .reader-footer,
+.reader.is-immersive .section-heading,
+.reader.is-immersive .page-navigation,
+.reader.is-immersive .bottom-navigation,
+.reader.is-immersive .drag-hint {
+  display: none;
+}
+.reader.is-immersive .reading-main {
+  min-height: 100dvh;
+  padding-top: 6px;
+}
+.immersion-exit {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 220;
+  padding: 9px 14px;
+  font-size: 11.5px;
+  color: #e8e4d2;
+  background: #16181ae6;
+  border: 1px solid #d9b873;
+  border-radius: 0;
+  opacity: 0.72;
+  transition: opacity 0.18s;
+}
+.immersion-exit:hover {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .reader .settings-sheet {
+    padding: 16px 16px 22px;
+  }
+  .reader .settings-grid {
+    grid-template-columns: 1fr;
+  }
+  .reader .settings-mode,
+  .reader .settings-paper {
+    grid-template-columns: 1fr;
+  }
+  .reader .term-sheet {
+    padding: 18px 18px 24px;
+  }
+}
+
+.navigation-dialog.qa-dialog{width:min(900px,100%)}

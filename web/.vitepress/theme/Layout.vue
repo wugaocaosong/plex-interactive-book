@@ -184,7 +184,60 @@ const systemDark = ref(false),
       (preferences.value.theme === "system" && systemDark.value),
   );
 const glossary = ref<GlossaryEntry[]>([]),
-  term = ref<GlossaryEntry>();
+  term = ref<GlossaryEntry>(),
+  termHover = ref<{ entry: GlossaryEntry; x: number; y: number; below?: boolean }>();
+let termHoverTimer: ReturnType<typeof setTimeout> | undefined,
+  termHoverTarget: Element | undefined;
+function hideTermHover() {
+  clearTimeout(termHoverTimer);
+  termHoverTimer = undefined;
+  termHoverTarget = undefined;
+  termHover.value = undefined;
+}
+function onBookMouseOver(event: MouseEvent) {
+  const termEl = (event.target as HTMLElement).closest?.(".glossary-term");
+  if (!termEl || termEl === termHoverTarget) return;
+  const entry = glossary.value.find(
+    (e) => e.term === (termEl as HTMLElement).dataset.term,
+  );
+  if (!entry) return;
+  termHoverTarget = termEl;
+  clearTimeout(termHoverTimer);
+  termHoverTimer = setTimeout(() => {
+    const rect = termEl.getBoundingClientRect();
+    if (!rect.width) return;
+    const below = rect.top < 230;
+    termHover.value = {
+      entry,
+      below,
+      x: Math.min(
+        Math.max(rect.left + rect.width / 2, 168),
+        window.innerWidth - 168,
+      ),
+      y: below ? rect.bottom : rect.top,
+    };
+  }, 130);
+}
+function onBookMouseOut(event: MouseEvent) {
+  const termEl = (event.target as HTMLElement).closest?.(".glossary-term");
+  if (termEl && termEl === termHoverTarget) hideTermHover();
+}
+const lineOptions = [
+    { value: 1.5, label: "紧凑" },
+    { value: 1.8, label: "标准" },
+    { value: 2.1, label: "宽松" },
+  ] as const,
+  widthOptions = [
+    { value: "narrow", label: "窄" },
+    { value: "standard", label: "标准" },
+    { value: "wide", label: "宽" },
+  ] as const;
+const readerFontFamily = computed(() =>
+  preferences.value.font === "serif"
+    ? "'Noto Serif SC', serif"
+    : "'Noto Sans SC', sans-serif",
+);
+
 const labResults=ref<Record<string,LabRunResult|undefined>>({});
 const labRevision=ref(0);
 function refreshLabLabels(root:ParentNode=document) {
@@ -344,6 +397,16 @@ async function toggleMode() {
   studyPlace.value = place;
   await updatePreferences();
 }
+async function setMode(mode: ReaderPreferences["mode"]) {
+  if (preferences.value.mode === mode) return;
+  preferences.value.mode = mode;
+  await updatePreferences();
+}
+/** 设置面板「恢复默认」：回到出厂阅读偏好 */
+async function resetPreferences() {
+  preferences.value = { ...defaultPreferences };
+  await updatePreferences();
+}
 async function fullscreen() {
   try {
     if (document.fullscreenElement) await document.exitFullscreen();
@@ -402,6 +465,7 @@ const panel = ref<
 >(null);
 const overlayOpen = computed(() => !!(menu.value || panel.value));
 const windowExpanded = ref(false);
+watch(() => [sectionId.value, pageIndex.value, menu.value, panel.value], hideTermHover);
 let previousBodyOverflow = "";
 watch(overlayOpen, (open) => {
   if (typeof document === "undefined") return;
@@ -1658,6 +1722,8 @@ onMounted(async () => {
   window.addEventListener("resize", resize);
   window.addEventListener("keydown", keydown);
   window.addEventListener("hashchange", hashchange);
+  document.addEventListener("mouseover", onBookMouseOver);
+  document.addEventListener("mouseout", onBookMouseOut);
 });
 onBeforeUnmount(() => {
   window.removeEventListener('plex-pet-login',petLogin);
@@ -1673,6 +1739,9 @@ onBeforeUnmount(() => {
   window.removeEventListener("resize", resize);
   window.removeEventListener("keydown", keydown);
   window.removeEventListener("hashchange", hashchange);
+  hideTermHover();
+  document.removeEventListener("mouseover", onBookMouseOver);
+  document.removeEventListener("mouseout", onBookMouseOut);
   window.removeEventListener("plex-storage-error", storageNotice);
   darkMedia?.removeEventListener("change", updateSystemTheme);
 });
@@ -1689,6 +1758,8 @@ onBeforeUnmount(() => {
       'is-immersed': preferences.immersion,
       'is-back-cover': backCover,
       'theme-dark': dark,
+      'is-immersive': preferences.immersion,
+      'font-serif-body': preferences.font === 'serif',
       'has-floating-window': overlayOpen,
     }"
     :style="{
@@ -1697,6 +1768,7 @@ onBeforeUnmount(() => {
       '--content-height': pageHeight - (desktop ? 112 : 92) + 'px',
       '--reader-font': preferences.fontSize + 'px',
       '--reader-line': preferences.lineHeight,
+      '--reader-body': readerFontFamily,
       '--study-width':
         (preferences.customWidth?.study ?? { narrow: 680, standard: 840, wide: 980 }[preferences.width]) + 'px',
     }"
@@ -2112,46 +2184,188 @@ onBeforeUnmount(() => {
             </div>
           </div>
         </template>
-        <div v-if="menu === 'settings'" class="reader-settings">
-          <h2>阅读设置</h2>
-          <label>正文字体<select v-model="preferences.font" @change="updatePreferences"><option value="sans">无衬线 · 默认</option><option value="serif">衬线 · 宋体</option></select></label>
-          <label><input type="checkbox" v-model="preferences.immersion" @change="updatePreferences" />沉浸阅读（隐藏导航，保留退出入口）</label>
-          <label
-            >字号 {{ preferences.fontSize }}px<input
-              v-model.number="preferences.fontSize"
-              type="range"
-              min="14"
-              max="26"
-              step="2"
-              @change="updatePreferences" /></label
-          ><label
-            >行距<select
-              v-model.number="preferences.lineHeight"
-              @change="updatePreferences"
-            >
-              <option :value="1.5">紧凑</option>
-              <option :value="1.8">标准</option>
-              <option :value="2.1">宽松</option>
-            </select></label
-          ><label
-            >主题<select
-              v-model="preferences.theme"
-              @change="updatePreferences"
-            >
-              <option value="light">明亮 · 浅色纸面</option>
-              <option value="dark">深色</option>
-              <option value="system">跟随系统</option>
-            </select></label
-          ><label
-            >阅读宽度<select
-              v-model="preferences.width"
-              @change="updatePreferences"
-            >
-              <option value="narrow">窄</option>
-              <option value="standard">标准</option>
-              <option value="wide">宽</option>
-            </select></label
-          ><button @click="fullscreen">进入／退出全屏</button>
+        <div v-if="menu === 'settings'" class="settings-sheet">
+          <div class="settings-group settings-preview-group">
+            <span class="settings-preview-label">预览 · 下面的调整实时变化</span>
+            <p class="settings-preview">
+              星轨上的一次遍历，从起点出发，把每条边都走一遍——这就是图的意义。遍历不是路过，是记住每一站。
+            </p>
+          </div>
+          <div class="settings-grid">
+            <div class="settings-col">
+              <span class="settings-col-label">阅读方式</span>
+              <div class="settings-mode settings-mode-col">
+                <button
+                  :class="{ 'is-on': preferences.mode === 'flip' }"
+                  :aria-pressed="preferences.mode === 'flip'"
+                  @click="setMode('flip')"
+                >
+                  <span>📖 翻书模式</span>
+                  <small>像看书一样，左右翻页</small>
+                </button>
+                <button
+                  :class="{ 'is-on': preferences.mode === 'study' }"
+                  :aria-pressed="preferences.mode === 'study'"
+                  @click="setMode('study')"
+                >
+                  <span>📝 学习模式</span>
+                  <small>长页连续滚动，适合做笔记</small>
+                </button>
+              </div>
+              <span class="settings-col-label settings-col-label-plain">沉浸阅读</span>
+              <p class="settings-note">收起工具栏与页脚，只留书页 · Esc 退出</p>
+              <button
+                class="settings-switch"
+                :class="{ 'is-on': preferences.immersion }"
+                :aria-pressed="preferences.immersion"
+                @click="
+                  preferences.immersion = !preferences.immersion;
+                  updatePreferences();
+                "
+              >
+                <i><em /></i>
+                {{ preferences.immersion ? "已开启" : "已关闭" }}
+              </button>
+            </div>
+            <div class="settings-col">
+              <span class="settings-col-label">字里行间</span>
+              <span class="settings-label">
+                字号 <small>{{ preferences.fontSize }} px</small>
+              </span>
+              <div class="settings-fontsize">
+                <button
+                  class="step-btn"
+                  aria-label="减小字号"
+                  :disabled="preferences.fontSize <= 14"
+                  @click="
+                    preferences.fontSize = Math.max(14, preferences.fontSize - 2);
+                    updatePreferences();
+                  "
+                >
+                  A−
+                </button>
+                <input
+                  v-model.number="preferences.fontSize"
+                  type="range"
+                  min="14"
+                  max="26"
+                  step="2"
+                  aria-label="正文字号"
+                  @change="updatePreferences"
+                />
+                <button
+                  class="step-btn"
+                  aria-label="增大字号"
+                  :disabled="preferences.fontSize >= 26"
+                  @click="
+                    preferences.fontSize = Math.min(26, preferences.fontSize + 2);
+                    updatePreferences();
+                  "
+                >
+                  A+
+                </button>
+              </div>
+              <span class="settings-label">行距</span>
+              <div class="settings-seg">
+                <button
+                  v-for="opt in lineOptions"
+                  :key="opt.value"
+                  :class="{ 'is-on': preferences.lineHeight === opt.value }"
+                  :aria-pressed="preferences.lineHeight === opt.value"
+                  @click="
+                    preferences.lineHeight = opt.value;
+                    updatePreferences();
+                  "
+                >
+                  {{ opt.label }}
+                </button>
+              </div>
+              <span class="settings-label">正文字体</span>
+              <div class="settings-seg">
+                <button
+                  :class="{ 'is-on': preferences.font === 'sans' }"
+                  :aria-pressed="preferences.font === 'sans'"
+                  @click="
+                    preferences.font = 'sans';
+                    updatePreferences();
+                  "
+                >
+                  无衬线 · 清爽
+                </button>
+                <button
+                  :class="{ 'is-on': preferences.font === 'serif' }"
+                  :aria-pressed="preferences.font === 'serif'"
+                  @click="
+                    preferences.font = 'serif';
+                    updatePreferences();
+                  "
+                >
+                  衬线 · 书卷
+                </button>
+              </div>
+              <span class="settings-label">阅读宽度</span>
+              <div class="settings-seg">
+                <button
+                  v-for="opt in widthOptions"
+                  :key="opt.value"
+                  :class="{ 'is-on': preferences.width === opt.value }"
+                  :aria-pressed="preferences.width === opt.value"
+                  @click="
+                    preferences.width = opt.value;
+                    updatePreferences();
+                  "
+                >
+                  {{ opt.label }}
+                </button>
+              </div>
+            </div>
+            <div class="settings-col">
+              <span class="settings-col-label">纸面</span>
+              <div class="settings-paper settings-paper-col">
+                <button
+                  :class="{ 'is-on': preferences.theme === 'light' }"
+                  :aria-pressed="preferences.theme === 'light'"
+                  @click="
+                    preferences.theme = 'light';
+                    updatePreferences();
+                  "
+                >
+                  <span class="paper-chip" aria-hidden="true">Aa</span>
+                  暖白纸面
+                </button>
+                <button
+                  :class="{ 'is-on': preferences.theme === 'dark' }"
+                  :aria-pressed="preferences.theme === 'dark'"
+                  @click="
+                    preferences.theme = 'dark';
+                    updatePreferences();
+                  "
+                >
+                  <span class="paper-chip paper-dark" aria-hidden="true">Aa</span>
+                  墨夜
+                </button>
+                <button
+                  :class="{ 'is-on': preferences.theme === 'system' }"
+                  :aria-pressed="preferences.theme === 'system'"
+                  @click="
+                    preferences.theme = 'system';
+                    updatePreferences();
+                  "
+                >
+                  <span class="paper-chip paper-system" aria-hidden="true" />
+                  跟随系统
+                </button>
+              </div>
+              <div class="settings-foot">
+                <button class="settings-plain" @click="fullscreen">
+                  ⛶ 全屏
+                </button>
+                <button class="settings-plain" @click="resetPreferences">
+                  ↺ 恢复默认
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
         <LearningNotebook
           v-if="menu === 'notes'"
@@ -2199,13 +2413,23 @@ onBeforeUnmount(() => {
           @navigate="navigate"
         />
         <LearningHub v-if="panel === 'learning'" :section-id="sectionId" />
-        <div v-if="panel === 'term' && term" class="reader-settings">
-          <h2>{{ term.term }}</h2>
-          <small>{{ term.english }}</small>
-          <p>{{ term.tip || term.definition }}</p>
-          <p v-if="term.tip">{{ term.definition }}</p>
-          <p v-if="term.keys?.length">快捷键：{{ term.keys.join(" · ") }}</p>
-          <button @click="navigate(term.sectionId)">阅读相关章节 →</button>
+        <div v-if="panel === 'term' && term" class="term-sheet">
+          <div class="term-head">
+            <h2>{{ term.term }}</h2>
+            <small>{{ term.english }}</small>
+          </div>
+          <p class="term-definition">{{ term.definition }}</p>
+          <div v-if="term.tip" class="term-tip">
+            <span class="term-tip-label">说人话</span>
+            <p>{{ term.tip }}</p>
+          </div>
+          <div v-if="term.keys?.length" class="term-keys">
+            <span class="term-tip-label">顺手记</span>
+            <kbd v-for="k in term.keys" :key="k">{{ k }}</kbd>
+          </div>
+          <button class="term-link" @click="navigate(term.sectionId)">
+            阅读相关章节 →
+          </button>
         </div>
         <H5PPanel v-if="panel === 'activity'" />
         <div v-if="panel === 'image'" class="image-viewer">
@@ -2222,6 +2446,23 @@ onBeforeUnmount(() => {
     </FloatingToolWindow>
     <FloatingToolWindow v-if="boardOpen" v-show="!overlayOpen" :inert="overlayOpen" title="小黑板" storage-key="blackboard-window" @close="closeBoard"><Blackboard :key="boardSection" :section-id="boardSection" /></FloatingToolWindow>
 
+    <div
+      v-if="termHover && !panel && !menu"
+      class="term-pop"
+      :class="{ below: termHover.below }"
+      :style="{ left: termHover.x + 'px', top: termHover.y + 'px' }"
+      role="tooltip"
+    >
+      <div class="term-pop-head">
+        <b>{{ termHover.entry.term }}</b>
+        <small>{{ termHover.entry.english }}</small>
+      </div>
+      <p class="term-pop-body">{{ termHover.entry.definition }}</p>
+      <div v-if="termHover.entry.tip" class="term-pop-tip">
+        {{ termHover.entry.tip }}
+      </div>
+      <span class="term-pop-foot">点击术语以展开完整解释</span>
+    </div>
     <ReaderControls :settings="menu==='controls'" :blocked="overlayOpen||boardOpen||petOpen" :dictating="dictating" :notice="controlNotice" @command="controlTurn" @fullscreen="fullscreen" @configure="openMenu('controls')" />
   </div>
   <FrameReading v-if="frameActive" :section-id="sectionId" @close="frameActive=false" />
