@@ -3,7 +3,7 @@
   "title": "复杂度分析",
   "kind": "chapter",
   "group": "第 2 章   复杂度分析",
-  "route": "/read/chapter_computational_complexity/index",
+  "route": "/read/chapter_computational_complexity/",
   "sourcePath": "chapter_computational_complexity/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
   "html": "<h1 data-block=\"blk-fccdf8c87cc987c8\" id=\"_1\">复杂度分析</h1>\n<figure data-block=\"blk-43214ea707a4beee\"><img alt=\"复杂度分析\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_complexity_analysis.jpg\"/><figcaption>复杂度分析</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-cbb62c08b3687d23\">\n<p class=\"admonition-title\">Abstract</p>\n<p>复杂度分析犹如浩瀚的算法宇宙中的时空向导。</p>\n<p>它带领我们在时间与空间这两个维度上深入探索，寻找更优雅的解决方案。</p>\n</div>",

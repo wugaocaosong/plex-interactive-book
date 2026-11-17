@@ -3,7 +3,7 @@
   "title": "动态规划",
   "kind": "chapter",
   "group": "第 14 章   动态规划",
-  "route": "/read/chapter_dynamic_programming/index",
+  "route": "/read/chapter_dynamic_programming/",
   "sourcePath": "chapter_dynamic_programming/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
   "html": "<h1 data-block=\"blk-c3a8f0fcf2a5df15\" id=\"_1\">动态规划</h1>\n<figure data-block=\"blk-2c5b76ff778fb858\"><img alt=\"动态规划\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_dynamic_programming.jpg\"/><figcaption>动态规划</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-052f5a15974daa3e\">\n<p class=\"admonition-title\">Abstract</p>\n<p>小溪汇入河流，江河汇入大海。</p>\n<p>动态规划将小问题的解汇集成大问题的答案，一步步引领我们走向解决问题的彼岸。</p>\n</div>",

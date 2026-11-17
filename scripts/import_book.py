@@ -217,10 +217,12 @@ def convert(source, path, page_id):
     return str(soup),examples,animations
 
 def page_record(id,title,kind,group,source_path=None):
-    return {'id':id,'title':title,'kind':kind,'group':group,'route':f'/read/{id}',
+    return {'id':id,'title':title,'kind':kind,'group':group,'route':f'/read/{id}'.removesuffix('index') if id.endswith('/index') else f'/read/{id}',
             'sourcePath':source_path,'sourceCommit':SHA if source_path else None}
 
 def publish(record,body,examples=None,animations=None):
+    # VitePress resolves chapter index documents at their directory URL.
+    body=re.sub(r'(/read/[^"<>\s]+?)/index(?=["#])', r'\1/', body)
     body=chapter12.overlay(body,record['id'],block_registry)
     body=chapter_scenes.overlay(body,record['id'])
     body,aliases,changes=assign_blocks(body,record['id'],block_registry)
@@ -257,7 +259,7 @@ if __name__=='__main__':
     nav=[n for n in nav if not n[0].startswith('chapter_paperbook/')]
     assert len(nav)==118, f'Expected 118 textbook pages, got {len(nav)}'
     code_index={lang:[p for p in (SOURCE/'codes'/lang).rglob('*') if p.suffix in SUFFIXES] for lang in LANGUAGES}
-    route_map={p:f'/read/{p[:-3]}' for p,_,_ in nav}
+    route_map={p:(f'/read/{p[:-8]}' if p.endswith('/index.md') else f'/read/{p[:-3]}') for p,_,_ in nav}
     route_map['index.md']='/read/contents'
     records=[];search=[];stats={'pages':0,'codeReferences':0,'codeVariants':0,'animationGroups':0,'animationFrames':0,'fullFileDisplays':0}
     registry_path=ROOT/'content/block-registry.json'

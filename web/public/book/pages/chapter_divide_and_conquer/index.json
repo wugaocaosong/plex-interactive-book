@@ -3,7 +3,7 @@
   "title": "分治",
   "kind": "chapter",
   "group": "第 12 章   分治",
-  "route": "/read/chapter_divide_and_conquer/index",
+  "route": "/read/chapter_divide_and_conquer/",
   "sourcePath": "chapter_divide_and_conquer/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
   "html": "<h1 data-block=\"blk-83a6e4596031061d\" id=\"_1\">分治</h1>\n<figure data-block=\"blk-32fe26e7a0cd7fcf\"><img alt=\"分治\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_divide_and_conquer.jpg\"/><figcaption>分治</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-b82fff37eb1cc29f\">\n<p class=\"admonition-title\">Abstract</p>\n<p>难题被逐层拆解，每一次的拆解都使它变得更为简单。</p>\n<p>分而治之揭示了一个重要的事实：从简单做起，一切都不再复杂。</p>\n</div><div class=\"ch12-video\" data-block=\"blk-82dc959852138d87\"><h2>星舰任务简报 · 分治</h2><img alt=\"能源模块拆分与合并课程封面\" src=\"/chapter12/merge.svg\"/><p>导入视频后可播放 · 现在也可以直接阅读和实验</p></div><p data-block=\"blk-fa8a955d0231b01d\">学习目标：能解释拆分与停止条件，观察搜索和建树过程，用 Python 验证自己的想法。</p><div class=\"ch12-card\" data-block=\"blk-cdbdb06e6ab77200\"><p class=\"ch12-eyebrow\">PLEX · 第 12 章任务</p><h3>星舰分治 · 五站任务路线</h3><p>实验、测验和代码测试分别记录；本章自查不等于全面掌握。</p><button data-action=\"chapter12\" data-mode=\"route\">查看本章活动记录</button></div><div class=\"ch12-card\" data-block=\"blk-c34e2730bee295ce\"><p class=\"ch12-eyebrow\">PLEX · 第 12 章任务</p><h3>本节 QA · 共同讨论</h3><p>登录后与其他读者交流，问题关联本小节。个人小E答复不会自动公开。</p><button data-action=\"chapter12\" data-mode=\"qa\">打开本节问答</button></div>",

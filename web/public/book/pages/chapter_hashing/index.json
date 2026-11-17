@@ -3,7 +3,7 @@
   "title": "哈希表",
   "kind": "chapter",
   "group": "第 6 章   哈希表",
-  "route": "/read/chapter_hashing/index",
+  "route": "/read/chapter_hashing/",
   "sourcePath": "chapter_hashing/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
   "html": "<h1 data-block=\"blk-e012f20c14a13f45\" id=\"_1\">哈希表</h1><p class=\"ch12-intro\" data-block=\"blk-84f7fa95927af1bc\">通信舱要把大量信标编号快速映射到存储槽。哈希函数负责定位；当多个编号落到同一槽位时，还需要一套可靠的冲突处理规则。</p>\n<figure data-block=\"blk-07b1c3d47e19b8cc\"><img alt=\"哈希表\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_hashing.jpg\"/><figcaption>哈希表</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-b4247dc6ddd73795\">\n<p class=\"admonition-title\">Abstract</p>\n<p>在计算机世界中，哈希表如同一位聪慧的图书管理员。</p>\n<p>他知道如何计算索书号，从而可以快速找到目标图书。</p>\n</div><div class=\"ch12-card chapter-mission-card\" data-block=\"blk-257c6997640b0750\"><p class=\"ch12-eyebrow\">PLEX · 第 6 章任务简报</p><h3>信标快速定位</h3><p>先观察编号如何映射到槽位，再处理碰撞，最后检查哈希函数为什么需要稳定且均匀。</p><ol><li>哈希映射</li><li>冲突探测</li><li>函数设计</li></ol></div>",

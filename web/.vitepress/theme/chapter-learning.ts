@@ -25,5 +25,18 @@ export function injectChapterQuiz(root: HTMLElement) {
   button.dataset.chapter = chapter.id;
   button.textContent = '开始测试 →';
   card.append(title, text, button);
+  const labs: Record<string, string> = {
+    chapter_graph: 'unit/lab/graph',
+    chapter_searching: 'unit/lab/sort-search',
+    chapter_sorting: 'unit/lab/sort-search',
+  };
+  if (labs[chapter.id]) {
+    const lab = document.createElement('button');
+    lab.className = 'explorer-go';
+    lab.dataset.action = 'explorer';
+    lab.dataset.target = labs[chapter.id];
+    lab.textContent = '进入综合实验舱 →';
+    card.append(lab);
+  }
   root.append(card);
 }

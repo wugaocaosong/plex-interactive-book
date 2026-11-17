@@ -3,7 +3,7 @@
   "title": "回溯",
   "kind": "chapter",
   "group": "第 13 章   回溯",
-  "route": "/read/chapter_backtracking/index",
+  "route": "/read/chapter_backtracking/",
   "sourcePath": "chapter_backtracking/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
   "html": "<h1 data-block=\"blk-ae920f97f89e6c75\" id=\"_1\">回溯</h1>\n<figure data-block=\"blk-1eb2b1966083d367\"><img alt=\"回溯\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_backtracking.jpg\"/><figcaption>回溯</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-298e86adefe9c936\">\n<p class=\"admonition-title\">Abstract</p>\n<p>我们如同迷宫中的探索者，在前进的道路上可能会遇到困难。</p>\n<p>回溯的力量让我们能够重新开始，不断尝试，最终找到通往光明的出口。</p>\n</div>",

@@ -3,7 +3,7 @@
   "title": "树",
   "kind": "chapter",
   "group": "第 7 章   树",
-  "route": "/read/chapter_tree/index",
+  "route": "/read/chapter_tree/",
   "sourcePath": "chapter_tree/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
   "html": "<h1 data-block=\"blk-b281093db98c8d9c\" id=\"_1\">树</h1><p class=\"ch12-intro\" data-block=\"blk-91943c7210141ff1\">空间站的巡检路线是一棵树。机器人可以先检查站点本身，也可以先巡检左侧或右侧；改一下访问顺序，记录就会完全不同。</p>\n<figure data-block=\"blk-7a64fb122c7d3fb9\"><img alt=\"树\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_tree.jpg\"/><figcaption>树</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-321af004869c575f\">\n<p class=\"admonition-title\">Abstract</p>\n<p>参天大树充满生命力，根深叶茂，分枝扶疏。</p>\n<p>它为我们展现了数据分治的生动形态。</p>\n</div><div class=\"ch12-card chapter-mission-card\" data-block=\"blk-5243b2cb26d7adf3\"><p class=\"ch12-eyebrow\">PLEX · 第 7 章任务简报</p><h3>空间站节点巡检</h3><p>从树的结构出发，练习层序与深度优先遍历，再把节点关系转成可计算的表示。</p><ol><li>看懂节点与子树</li><li>逐步遍历</li><li>利用有序结构查找</li></ol></div>",

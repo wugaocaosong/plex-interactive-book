@@ -126,8 +126,10 @@ export function createStaticServer(
       response.writeHead(403).end();
       return;
     }
-    const candidates = pathname.endsWith("/")
-      ? [resolve(requested, "index.html")]
+    const normalizedPath = pathname.replace(/\/index(?:\.html)?$/, "/");
+    const normalized = resolve(root, "." + normalizedPath);
+    const candidates = normalizedPath.endsWith("/")
+      ? [resolve(normalized, "index.html")]
       : [requested, requested + ".html", resolve(requested, "index.html")];
     for (const file of candidates) {
       const info = await stat(file).catch(() => null);

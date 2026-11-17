@@ -3,7 +3,7 @@
   "title": "堆",
   "kind": "chapter",
   "group": "第 8 章   堆",
-  "route": "/read/chapter_heap/index",
+  "route": "/read/chapter_heap/",
   "sourcePath": "chapter_heap/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
   "html": "<h1 data-block=\"blk-f579daf1ecafd4bc\" id=\"_1\">堆</h1><p class=\"ch12-intro\" data-block=\"blk-92ce745744a69bf4\">调度中心需要随时找到最紧急的任务。堆把优先级最高的节点放在堆顶，并用局部调整维持整棵完全二叉树的顺序。</p>\n<figure data-block=\"blk-dd0105e6130c5916\"><img alt=\"堆\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_heap.jpg\"/><figcaption>堆</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-f23d6b8f4e6c2ba5\">\n<p class=\"admonition-title\">Abstract</p>\n<p>堆就像是山岳峰峦，层叠起伏、形态各异。</p>\n<p>座座山峰高低错落，而最高的山峰总是最先映入眼帘。</p>\n</div><div class=\"ch12-card chapter-mission-card\" data-block=\"blk-618c881cc4a83fe6\"><p class=\"ch12-eyebrow\">PLEX · 第 8 章任务简报</p><h3>优先级调度中心</h3><p>先看清堆顶规则，再逐步观察建堆；每次交换后都检查父节点与子节点的优先级关系。</p><ol><li>认识堆顶与堆底</li><li>从下往上建堆</li><li>用堆解决 Top-k</li></ol></div>",

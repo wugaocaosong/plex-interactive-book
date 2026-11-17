@@ -3,7 +3,7 @@
   "title": "数组与链表",
   "kind": "chapter",
   "group": "第 4 章   数组与链表",
-  "route": "/read/chapter_array_and_linkedlist/index",
+  "route": "/read/chapter_array_and_linkedlist/",
   "sourcePath": "chapter_array_and_linkedlist/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
   "html": "<h1 data-block=\"blk-d862ec0c060a73f2\" id=\"_1\">数组与链表</h1>\n<figure data-block=\"blk-b532744c205e986a\"><img alt=\"数组与链表\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_array_and_linkedlist.jpg\"/><figcaption>数组与链表</figcaption></figure>\n<div class=\"admonition abstract\" data-block=\"blk-f6bf7581fbe5a0f5\">\n<p class=\"admonition-title\">Abstract</p>\n<p>数据结构的世界如同一堵厚实的砖墙。</p>\n<p>数组的砖块整齐排列，逐个紧贴。链表的砖块分散各处，连接的藤蔓自由地穿梭于砖缝之间。</p>\n</div>",

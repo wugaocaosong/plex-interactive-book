@@ -3,7 +3,7 @@
   "title": "附录",
   "kind": "chapter",
   "group": "第 16 章   附录",
-  "route": "/read/chapter_appendix/index",
+  "route": "/read/chapter_appendix/",
   "sourcePath": "chapter_appendix/index.md",
   "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2",
   "html": "<h1 data-block=\"blk-16d55e5bae764d10\" id=\"_1\">附录</h1>\n<figure data-block=\"blk-ac5ec6c3aab37da1\"><img alt=\"附录\" data-action=\"image\" decoding=\"async\" loading=\"lazy\" src=\"/upstream/assets/covers/chapter_appendix.jpg\"/><figcaption>附录</figcaption></figure>",

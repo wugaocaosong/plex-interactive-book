@@ -54,7 +54,7 @@
       "title": "序",
       "kind": "chapter",
       "group": "序",
-      "route": "/read/chapter_hello_algo/index",
+      "route": "/read/chapter_hello_algo/",
       "sourcePath": "chapter_hello_algo/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -63,7 +63,7 @@
       "title": "前言",
       "kind": "chapter",
       "group": "第 0 章   前言",
-      "route": "/read/chapter_preface/index",
+      "route": "/read/chapter_preface/",
       "sourcePath": "chapter_preface/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -234,7 +234,7 @@
       "title": "初识算法",
       "kind": "chapter",
       "group": "第 1 章   初识算法",
-      "route": "/read/chapter_introduction/index",
+      "route": "/read/chapter_introduction/",
       "sourcePath": "chapter_introduction/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -270,7 +270,7 @@
       "title": "复杂度分析",
       "kind": "chapter",
       "group": "第 2 章   复杂度分析",
-      "route": "/read/chapter_computational_complexity/index",
+      "route": "/read/chapter_computational_complexity/",
       "sourcePath": "chapter_computational_complexity/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -333,7 +333,7 @@
       "title": "数据结构",
       "kind": "chapter",
       "group": "第 3 章   数据结构",
-      "route": "/read/chapter_data_structure/index",
+      "route": "/read/chapter_data_structure/",
       "sourcePath": "chapter_data_structure/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -396,7 +396,7 @@
       "title": "数组与链表",
       "kind": "chapter",
       "group": "第 4 章   数组与链表",
-      "route": "/read/chapter_array_and_linkedlist/index",
+      "route": "/read/chapter_array_and_linkedlist/",
       "sourcePath": "chapter_array_and_linkedlist/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -459,7 +459,7 @@
       "title": "栈与队列",
       "kind": "chapter",
       "group": "第 5 章   栈与队列",
-      "route": "/read/chapter_stack_and_queue/index",
+      "route": "/read/chapter_stack_and_queue/",
       "sourcePath": "chapter_stack_and_queue/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -513,7 +513,7 @@
       "title": "哈希表",
       "kind": "chapter",
       "group": "第 6 章   哈希表",
-      "route": "/read/chapter_hashing/index",
+      "route": "/read/chapter_hashing/",
       "sourcePath": "chapter_hashing/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -567,7 +567,7 @@
       "title": "树",
       "kind": "chapter",
       "group": "第 7 章   树",
-      "route": "/read/chapter_tree/index",
+      "route": "/read/chapter_tree/",
       "sourcePath": "chapter_tree/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -639,7 +639,7 @@
       "title": "堆",
       "kind": "chapter",
       "group": "第 8 章   堆",
-      "route": "/read/chapter_heap/index",
+      "route": "/read/chapter_heap/",
       "sourcePath": "chapter_heap/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -693,7 +693,7 @@
       "title": "图",
       "kind": "chapter",
       "group": "第 9 章   图",
-      "route": "/read/chapter_graph/index",
+      "route": "/read/chapter_graph/",
       "sourcePath": "chapter_graph/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -752,7 +752,7 @@
       "title": "搜索",
       "kind": "chapter",
       "group": "第 10 章   搜索",
-      "route": "/read/chapter_searching/index",
+      "route": "/read/chapter_searching/",
       "sourcePath": "chapter_searching/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -832,7 +832,7 @@
       "title": "排序",
       "kind": "chapter",
       "group": "第 11 章   排序",
-      "route": "/read/chapter_sorting/index",
+      "route": "/read/chapter_sorting/",
       "sourcePath": "chapter_sorting/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -961,7 +961,7 @@
       "title": "实验导览　从一张地图开始",
       "kind": "unit",
       "group": "星航驿站 · 综合实验",
-      "route": "/read/unit/lab/index",
+      "route": "/read/unit/lab/",
       "sourcePath": null,
       "sourceCommit": null
     },
@@ -1015,7 +1015,7 @@
       "title": "分治",
       "kind": "chapter",
       "group": "第 12 章   分治",
-      "route": "/read/chapter_divide_and_conquer/index",
+      "route": "/read/chapter_divide_and_conquer/",
       "sourcePath": "chapter_divide_and_conquer/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -1078,7 +1078,7 @@
       "title": "回溯",
       "kind": "chapter",
       "group": "第 13 章   回溯",
-      "route": "/read/chapter_backtracking/index",
+      "route": "/read/chapter_backtracking/",
       "sourcePath": "chapter_backtracking/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -1141,7 +1141,7 @@
       "title": "动态规划",
       "kind": "chapter",
       "group": "第 14 章   动态规划",
-      "route": "/read/chapter_dynamic_programming/index",
+      "route": "/read/chapter_dynamic_programming/",
       "sourcePath": "chapter_dynamic_programming/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -1222,7 +1222,7 @@
       "title": "贪心",
       "kind": "chapter",
       "group": "第 15 章   贪心",
-      "route": "/read/chapter_greedy/index",
+      "route": "/read/chapter_greedy/",
       "sourcePath": "chapter_greedy/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -1303,7 +1303,7 @@
       "title": "附录",
       "kind": "chapter",
       "group": "第 16 章   附录",
-      "route": "/read/chapter_appendix/index",
+      "route": "/read/chapter_appendix/",
       "sourcePath": "chapter_appendix/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
@@ -1339,7 +1339,7 @@
       "title": "参考文献",
       "kind": "chapter",
       "group": "参考文献",
-      "route": "/read/chapter_reference/index",
+      "route": "/read/chapter_reference/",
       "sourcePath": "chapter_reference/index.md",
       "sourceCommit": "350f483801b2badb95180047aa82cadb825852a2"
     },
