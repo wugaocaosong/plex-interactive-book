@@ -85,6 +85,7 @@ async function controlTurn(command:PageTurnCommand){
 import ChapterTermNote from "./ChapterTermNote.vue";
 import ChapterAnnotation from "./ChapterAnnotation.vue";
 const Chapter12Panel = defineAsyncComponent(() => import("./Chapter12Panel.vue"));
+const QaBoard = defineAsyncComponent(() => import("./QaBoard.vue"));
 const chapter12Mode = ref("route");
 const annotationPoint = ref({x:16,y:120});
 function positionAnnotation(rect?: DOMRect) {
@@ -113,6 +114,9 @@ const CodePanel = defineAsyncComponent(() => import("./CodePanel.vue"));
 const H5PPanel = defineAsyncComponent(() => import("./H5PPanel.vue"));
 const LearningHub = defineAsyncComponent(() => import("./LearningHub.vue"));
 import { decorateGlossary, type GlossaryEntry } from "./glossary";
+import { injectChapterQuiz, chapterLearning } from './chapter-learning';
+const ChapterQuiz = defineAsyncComponent(() => import('./ChapterQuiz.vue'));
+const quizChapter = ref('');
 import { retainMathText, canonicalText } from "./text-coordinates";
 import {
   defaultPreferences,
@@ -148,7 +152,7 @@ const sectionIndex = computed(() =>
 const cover = computed(() => current.value?.kind === "cover");
 const backCover = computed(() => current.value?.kind === "back-cover");
 const menu = ref<
-  "contents" | "bookmarks" | "settings" | "notes" | "more" | "controls" | null
+  "contents" | "bookmarks" | "settings" | "notes" | "more" | "controls" | "qa" | null
 >(null);
 const mapView = ref(true);
 const query = ref("");
@@ -199,6 +203,7 @@ async function changeLabLevel(level:string) {
 }
 function decorateTerms(root: HTMLElement) {
   injectExplorers(root);
+  injectChapterQuiz(root);
   if (root.dataset.section) {
     for (const note of notes.value.filter(
       (n) => n.sectionId === root.dataset.section,
@@ -212,7 +217,7 @@ function decorateTerms(root: HTMLElement) {
   }
   decorateLabLevel(root,preferences.value.labLevel);
   refreshLabLabels(root);
-  if (!root.querySelector('.ch12-intro,.ch12-card,.ch12-video,.ch12-term')) decorateGlossary(root, glossary.value);
+  decorateGlossary(root, glossary.value);
 }
 let studyRouting = false;
 let studyNavigation: string | undefined;
@@ -392,6 +397,7 @@ const panel = ref<
   | "term"
   | "unit"
   | "chapter12"
+  | "chapter-quiz"
   | null
 >(null);
 const overlayOpen = computed(() => !!(menu.value || panel.value));
@@ -433,6 +439,7 @@ const panelLabel = computed(
       term: "术语解释",
       unit: "小E · 三门学习单元",
       chapter12: "分治 · 探险工作台",
+      'chapter-quiz': '章末即时测试',
     })[panel.value || "expanded"],
 );
 const menuLabel = computed(
@@ -441,6 +448,7 @@ const menuLabel = computed(
       contents: "星域目录",
       bookmarks: "我的书签",
       settings: "阅读设置",
+      qa: "QA 留言板",
       controls: "翻页控制",
       notes: "学习笔记",
       more: "阅读工具",
@@ -1181,6 +1189,11 @@ async function clickBook(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
     const value = action.dataset.action;
+    if (value === 'chapter-quiz') {
+      const chapter = chapterLearning.find(c => c.id === action.dataset.chapter);
+      if (chapter) { quizChapter.value = chapter.id; openPanel('chapter-quiz'); }
+      return;
+    }
     if(value==="lab-level"){await changeLabLevel(action.dataset.labLevel||"");return;}
     if(value==="explorer"&&action.dataset.target){await navigate(action.dataset.target);return;}
     if(value === "teaching-scene"){teachingScene.value=action.dataset.scene as SceneId;openPanel("teaching");return;}
@@ -1734,6 +1747,7 @@ onBeforeUnmount(() => {
           />
         </button>
         <div class="cover-controls">
+          <button class="resume-button" @click="openMenu('qa')">QA 留言板</button>
           <button class="open-book" @click="next">
             翻开这本书 <ArrowRight :size="18" /></button
           ><button
@@ -1760,7 +1774,7 @@ onBeforeUnmount(() => {
           >
             {{lesson?.activityLabel || "学习活动"}}</button
           ><button @click="blockNote()">本段笔记</button
-          ><div class="smart-search-anchor">
+          ><button @click="openMenu('qa')">留言</button><div class="smart-search-anchor">
             <form class="cir-search" role="search" @submit.prevent="submitSmartSearch">
               <Search class="cir-search__icon" :size="16" aria-hidden="true" />
               <input
@@ -2004,6 +2018,7 @@ onBeforeUnmount(() => {
 
     <div v-if="menu" class="overlay" :data-window="menu" @click.self="closeOverlay">
       <section
+        :class="{ 'qa-dialog': menu === 'qa' }"
         class="navigation-dialog"
         role="dialog"
         aria-modal="true"
@@ -2018,8 +2033,10 @@ onBeforeUnmount(() => {
             <X :size="22" />
           </button>
         </div>
+        <QaBoard v-if="menu === 'qa'" :current="{ id: sectionId, title: current?.title, group: current?.group }" @navigate="(id: string) => { closeOverlay(); navigate(id); }" />
         <div v-if="menu === 'controls'" id="reader-control-slot"></div>
         <div v-if="menu === 'more'" class="more-tools">
+          <button aria-label="QA 留言板" @click="openMenu('qa')">QA 留言板</button>
           <button @click="openMenu('controls')">翻页控制</button><button @click="closeOverlay();showPet()">显示小E</button>
           <button
             aria-label="切换阅读模式"
@@ -2170,6 +2187,7 @@ onBeforeUnmount(() => {
         />
         <TeachingScene v-if="panel==='teaching'" :key="teachingScene" :scene-id="teachingScene"/>
         <Chapter12Panel v-if="panel === 'chapter12'" :key="chapter12Mode" :mode="chapter12Mode" :section-id="sectionId" @activity="chapterActivity" />
+        <ChapterQuiz v-if="panel === 'chapter-quiz'" :key="quizChapter" :chapter="quizChapter" @review="(id: string) => { closeOverlay(); navigate(id); }" />
         <UnitPanel
           v-if="panel === 'unit'"
           :key="unitSection + unitMode"

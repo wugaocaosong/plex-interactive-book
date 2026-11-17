@@ -32,15 +32,21 @@
     "definition": "以名称保存在存储设备中的一组数据。",
     "sectionId": "chapter_hashing/summary",
     "homeSection": "chapter_preface/suggestions",
-    "tip": "保存在磁盘上的数据集合。写代码时记得 Ctrl+S，别让辛苦白费。"
+    "tip": "保存在磁盘上的数据集合。写代码时记得 Ctrl+S，别让辛苦白费。",
+    "keys": [
+      "Ctrl+S 保存"
+    ]
   },
   {
     "term": "函数",
     "english": "function",
     "definition": "接收参数并执行特定任务的可复用代码单元。",
-    "sectionId": "chapter_hashing/index",
+    "sectionId": "chapter_sorting/heap_sort",
     "homeSection": "chapter_sorting/heap_sort",
-    "tip": "打包好的一段逻辑，给参数就能复用。看到代码窗口，按 Ctrl+Enter 可以直接跑起来。"
+    "tip": "打包好的一段逻辑，给参数就能复用。看到代码窗口，按 Ctrl+Enter 可以直接跑起来。",
+    "keys": [
+      "Ctrl+Enter 运行"
+    ]
   },
   {
     "term": "方法",
@@ -48,13 +54,16 @@
     "definition": "与对象或类型关联的函数。",
     "sectionId": "chapter_searching/summary",
     "homeSection": "chapter_searching/binary_search",
-    "tip": "挂在对象或类型上的函数。想看它的效果，选中后按 Ctrl+Enter 运行。"
+    "tip": "挂在对象或类型上的函数。想看它的效果，选中后按 Ctrl+Enter 运行。",
+    "keys": [
+      "Ctrl+Enter 运行"
+    ]
   },
   {
     "term": "变量",
     "english": "variable",
     "definition": "用于引用或保存程序运行中数据的名称。",
-    "sectionId": "chapter_backtracking/summary",
+    "sectionId": "chapter_graph/summary",
     "homeSection": "chapter_graph/graph",
     "tip": "给数据起的名字。改错了不用慌，Ctrl+Z 就能撤回。",
     "keys": [
@@ -122,7 +131,8 @@
     "term": "大 O 记号",
     "english": "big-O notation",
     "definition": "描述函数渐近上界的记号，常用于表达复杂度增长的上限。",
-    "sectionId": "chapter_appendix/terminology"
+    "sectionId": "chapter_appendix/terminology",
+    "homeSection": ""
   },
   {
     "term": "渐近上界",
@@ -252,13 +262,14 @@
     "term": "栈",
     "english": "stack",
     "definition": "只在同一端加入和移除元素，遵循后进先出。",
-    "sectionId": "chapter_stack_and_queue/index"
+    "sectionId": "chapter_stack_and_queue/index",
+    "homeSection": ""
   },
   {
     "term": "栈顶",
     "english": "top of the stack",
     "definition": "栈中允许压入和弹出元素的一端。",
-    "sectionId": "chapter_stack_and_queue/index",
+    "sectionId": "chapter_stack_and_queue/summary",
     "homeSection": "chapter_stack_and_queue/stack"
   },
   {
@@ -314,13 +325,14 @@
     "term": "桶",
     "english": "bucket",
     "definition": "哈希表中由哈希映射确定的存储槽位或冲突容器。",
-    "sectionId": "chapter_sorting/bucket_sort"
+    "sectionId": "chapter_sorting/bucket_sort",
+    "homeSection": ""
   },
   {
     "term": "哈希函数",
     "english": "hash function",
     "definition": "把输入键映射为固定范围数值的函数。",
-    "sectionId": "chapter_hashing/index",
+    "sectionId": "chapter_hashing/exercises",
     "homeSection": "chapter_hashing/hash_map"
   },
   {
@@ -384,21 +396,21 @@
     "term": "左子节点",
     "english": "left-child node",
     "definition": "二叉树节点的左侧直接孩子。",
-    "sectionId": "chapter_tree/exercises",
+    "sectionId": "chapter_tree/binary_tree_traversal",
     "homeSection": "chapter_tree/binary_tree_traversal"
   },
   {
     "term": "右子节点",
     "english": "right-child node",
     "definition": "二叉树节点的右侧直接孩子。",
-    "sectionId": "chapter_tree/exercises",
+    "sectionId": "chapter_tree/binary_tree_traversal",
     "homeSection": "chapter_tree/binary_tree_traversal"
   },
   {
     "term": "父节点",
     "english": "parent node",
     "definition": "直接连接并位于某节点上一层的节点。",
-    "sectionId": "chapter_heap/index",
+    "sectionId": "chapter_heap/exercises",
     "homeSection": "chapter_heap/heap"
   },
   {
@@ -434,19 +446,22 @@
     "english": "edge",
     "definition": "连接两个节点或顶点的关系。",
     "sectionId": "chapter_searching/binary_search_edge",
+    "homeSection": "",
     "tip": "连接两个顶点的线。谁和谁是好友，谁和谁有路，就是一条边。"
   },
   {
     "term": "层",
     "english": "level",
     "definition": "节点相对于根的位置；本书根节点为第 1 层。",
-    "sectionId": "chapter_tree/index"
+    "sectionId": "chapter_heap/index",
+    "homeSection": ""
   },
   {
     "term": "度",
     "english": "degree",
     "definition": "树中通常指节点的孩子数；图中指与顶点关联的边数。",
-    "sectionId": "chapter_computational_complexity/index"
+    "sectionId": "chapter_computational_complexity/index",
+    "homeSection": ""
   },
   {
     "term": "高度",
@@ -459,7 +474,7 @@
     "term": "深度",
     "english": "depth",
     "definition": "根节点到当前节点路径的边数。",
-    "sectionId": "chapter_tree/index",
+    "sectionId": "chapter_searching/summary",
     "homeSection": "chapter_preface/about_the_book"
   },
   {
@@ -473,7 +488,7 @@
     "term": "完全二叉树",
     "english": "complete binary tree",
     "definition": "除最后一层外均填满，最后一层节点从左到右连续排列的二叉树。",
-    "sectionId": "chapter_heap/index",
+    "sectionId": "chapter_heap/summary",
     "homeSection": "chapter_heap/heap"
   },
   {
@@ -501,7 +516,8 @@
     "term": "AVL 树",
     "english": "AVL tree",
     "definition": "要求任一节点左右子树高度差绝对值不超过 1 的二叉搜索树。",
-    "sectionId": "chapter_tree/avl_tree"
+    "sectionId": "chapter_tree/avl_tree",
+    "homeSection": ""
   },
   {
     "term": "红黑树",
@@ -514,7 +530,7 @@
     "term": "层序遍历",
     "english": "level-order traversal",
     "definition": "从根开始，按层从上到下访问节点，通常借助队列。",
-    "sectionId": "chapter_tree/exercises",
+    "sectionId": "chapter_tree/binary_tree_traversal",
     "homeSection": "chapter_tree/binary_tree_traversal"
   },
   {
@@ -529,7 +545,7 @@
     "term": "深度优先遍历",
     "english": "depth-first traversal",
     "definition": "沿一条路径深入，无法继续时回退探索其他分支。",
-    "sectionId": "chapter_tree/index",
+    "sectionId": "chapter_graph/summary",
     "homeSection": "chapter_graph/graph_traversal",
     "tip": "一条路走到黑，走不通再回头换条路。像走迷宫时贴着右手边的墙一直走。"
   },
@@ -572,7 +588,8 @@
     "term": "堆",
     "english": "heap",
     "definition": "满足父子节点大小约束的完全二叉树，通常用数组存储。",
-    "sectionId": "chapter_heap/index"
+    "sectionId": "chapter_heap/index",
+    "homeSection": ""
   },
   {
     "term": "大顶堆",
@@ -606,13 +623,15 @@
     "term": "Top-k 问题",
     "english": "top-k problem",
     "definition": "从数据集合中找出最大或最小的 k 个元素。",
-    "sectionId": "chapter_heap/top_k"
+    "sectionId": "chapter_heap/top_k",
+    "homeSection": ""
   },
   {
     "term": "图",
     "english": "graph",
     "definition": "由顶点和顶点之间的边组成的数据结构。",
     "sectionId": "chapter_graph/index",
+    "homeSection": "",
     "tip": "把一堆东西和它们之间的关系画出来，就是图。社交网络、地铁线路、网页链接，全是图。"
   },
   {
@@ -855,7 +874,8 @@
     "term": "解",
     "english": "solution",
     "definition": "满足问题要求的一组结果或选择。",
-    "sectionId": "chapter_dynamic_programming/dp_solution_pipeline"
+    "sectionId": "chapter_dynamic_programming/dp_solution_pipeline",
+    "homeSection": ""
   },
   {
     "term": "状态",
@@ -889,7 +909,8 @@
     "term": "n 皇后问题",
     "english": "n-queens problem",
     "definition": "在 n×n 棋盘上放置 n 个皇后，使任意两个不同行、不同列且不同对角线。",
-    "sectionId": "chapter_backtracking/n_queens_problem"
+    "sectionId": "chapter_backtracking/n_queens_problem",
+    "homeSection": ""
   },
   {
     "term": "动态规划",
@@ -902,7 +923,7 @@
     "term": "初始状态",
     "english": "initial state",
     "definition": "递推开始时已知的基础状态及其数值。",
-    "sectionId": "chapter_introduction/algorithms_are_everywhere",
+    "sectionId": "chapter_sorting/selection_sort",
     "homeSection": "chapter_sorting/selection_sort"
   },
   {
@@ -932,5 +953,137 @@
     "definition": "每一步选择当前看来最优的方案；正确性需由问题性质保证。",
     "sectionId": "chapter_greedy/greedy_algorithm",
     "homeSection": "chapter_greedy/greedy_algorithm"
+  },
+  {
+    "term": "节点",
+    "english": "node",
+    "definition": "数据结构中的基本组成单元，通常保存一个值及连接其他节点的引用。",
+    "sectionId": "chapter_array_and_linkedlist/linked_list"
+  },
+  {
+    "term": "复杂度分析",
+    "english": "complexity analysis",
+    "definition": "分析输入规模增长时，算法所需操作次数与额外存储空间的增长趋势。",
+    "sectionId": "chapter_computational_complexity/performance_evaluation"
+  },
+  {
+    "term": "ASCII 码",
+    "english": "ASCII",
+    "definition": "使用 7 位编码表示 128 个字符的字符编码标准，包括英文字母、数字、标点和控制字符。",
+    "sectionId": "chapter_data_structure/character_encoding"
+  },
+  {
+    "term": "EASCII",
+    "english": "extended ASCII",
+    "definition": "对 ASCII 的八位扩展编码的统称，可表示 256 个码值；不同扩展方案对高位码值的解释可能不同。",
+    "sectionId": "chapter_data_structure/character_encoding"
+  },
+  {
+    "term": "GB2312",
+    "english": "GB2312",
+    "definition": "用于简体中文信息交换的字符集与编码标准，收录常用汉字及其他符号。",
+    "sectionId": "chapter_data_structure/character_encoding"
+  },
+  {
+    "term": "GBK",
+    "english": "GBK",
+    "definition": "在 GB2312 基础上扩展的汉字编码方案，可表示更多汉字，包括许多繁体字和生僻字。",
+    "sectionId": "chapter_data_structure/character_encoding"
+  },
+  {
+    "term": "Unicode",
+    "english": "Unicode",
+    "definition": "为不同文字和符号分配统一码点的标准；UTF-8、UTF-16 等是其编码方式。Unicode 并不意味着每个字符都占相同字节数。",
+    "sectionId": "chapter_data_structure/character_encoding"
+  },
+  {
+    "term": "dp 表",
+    "english": "dynamic programming table",
+    "definition": "保存动态规划状态值的表格或数组，使已经求出的子问题结果可以被复用。",
+    "sectionId": "chapter_dynamic_programming/intro_to_dynamic_programming"
+  },
+  {
+    "term": "散列表",
+    "english": "hash table",
+    "definition": "哈希表的另一名称。通过哈希函数把键映射到桶或槽位，并处理不同键映射到同一位置的冲突。",
+    "sectionId": "chapter_hashing/hash_map"
+  },
+  {
+    "term": "原地排序",
+    "english": "in-place sorting",
+    "definition": "主要在原数据存储区域内交换或移动元素的排序方式，通常只需少量辅助空间；具体空间约定需同时考虑递归栈。",
+    "sectionId": "chapter_sorting/sorting_algorithm"
+  },
+  {
+    "term": "稳定排序",
+    "english": "stable sorting",
+    "definition": "排序后，比较键相等的元素仍保持排序前的相对先后顺序。",
+    "sectionId": "chapter_sorting/sorting_algorithm"
+  },
+  {
+    "term": "非稳定排序",
+    "english": "unstable sorting",
+    "definition": "不保证比较键相等的元素在排序后维持原相对顺序；不代表每次都会打乱相等元素。",
+    "sectionId": "chapter_sorting/sorting_algorithm"
+  },
+  {
+    "term": "自适应排序",
+    "english": "adaptive sorting",
+    "definition": "能够利用输入数据已有的有序程度，减少比较或移动操作的排序方法。",
+    "sectionId": "chapter_sorting/sorting_algorithm"
+  },
+  {
+    "term": "基于比较的排序",
+    "english": "comparison-based sorting",
+    "definition": "通过比较元素键值的大小关系确定顺序的排序方式，例如归并排序和堆排序。",
+    "sectionId": "chapter_sorting/sorting_algorithm"
+  },
+  {
+    "term": "非比较排序",
+    "english": "non-comparison sorting",
+    "definition": "利用键值范围、数字位或其他结构组织数据的排序方式，例如计数排序和基数排序，适用条件与数据特征有关。",
+    "sectionId": "chapter_sorting/sorting_algorithm"
+  },
+  {
+    "term": "满二叉树",
+    "english": "perfect binary tree (book convention)",
+    "definition": "本书按“完美二叉树”使用这一名称：每一层都填满。中文资料对“满二叉树”的译名存在差异，阅读时应核对定义；不要与本书的“完满二叉树”混淆。",
+    "sectionId": "chapter_tree/binary_tree"
+  },
+  {
+    "term": "子树",
+    "english": "",
+    "definition": "某个节点和它下方所有节点构成的树，也可以独立看成一个小问题。",
+    "sectionId": "chapter_divide_and_conquer/build_binary_tree_problem"
+  },
+  {
+    "term": "子问题",
+    "english": "",
+    "definition": "从原任务拆出来的小任务。例如给左半组能源模块排序。",
+    "sectionId": "chapter_divide_and_conquer/divide_and_conquer"
+  },
+  {
+    "term": "合并",
+    "english": "",
+    "definition": "把已经求出的部分答案组合成完整答案。例如按大小取出两组有序模块。",
+    "sectionId": "chapter_divide_and_conquer/divide_and_conquer"
+  },
+  {
+    "term": "并行计算",
+    "english": "",
+    "definition": "把可独立执行的任务交给多个计算单元同时处理；并不是所有递归都会自动并行。",
+    "sectionId": "chapter_divide_and_conquer/divide_and_conquer"
+  },
+  {
+    "term": "基准情况",
+    "english": "",
+    "definition": "不用继续拆分就能直接回答的最小情况，也是递归停止的依据。",
+    "sectionId": "chapter_divide_and_conquer/hanota_problem"
+  },
+  {
+    "term": "缓冲柱",
+    "english": "",
+    "definition": "汉诺塔中暂时存放圆盘的辅助柱。每次递归里它的角色可能改变。",
+    "sectionId": "chapter_divide_and_conquer/hanota_problem"
   }
 ]

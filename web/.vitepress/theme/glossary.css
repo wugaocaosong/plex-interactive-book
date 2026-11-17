@@ -1,0 +1,18 @@
+/* All explicit and automatically marked terms share the same visual cue. */
+:is(.leaf-content,.study-article,.expanded-viewer) .glossary-term {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .22em;
+  border-bottom: 0;
+  cursor: help;
+  color: var(--teal, #377e74);
+  font: inherit;
+  display: inline;
+  padding: 0;
+}
+:is(.leaf-content,.study-article,.expanded-viewer) .glossary-term:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}

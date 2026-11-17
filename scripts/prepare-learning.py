@@ -37,28 +37,9 @@ publish(target.parent/'monty-micro.json',[{'id':'monty-micro-'+slug,'file':slug+
     'variants':[{'language':'python','snippet':code,'fullSource':code,'sourcePath':'learning/'+slug+'.py',
                  'sourceUrl':'','extraction':'PLEX original micro-example','runnable':True}]} for slug,(_,code) in lesson['MICRO'].items()])
 print(f'Published {len(data)} exercises; {sum(len(e["tests"]) for e in data)} reference cases passed.')
-definitions=dict(line.split('\t',1) for line in (ROOT/'content/learning/glossary.tsv').read_text(encoding='utf8').splitlines() if line)
-terms=[]
-for line in (ROOT/'content/upstream/hello-algo/docs/chapter_appendix/terminology.md').read_text(encoding='utf8').splitlines():
-    if not line.startswith('|') or '---' in line or 'English' in line:continue
-    english,chinese=[part.strip() for part in line.split('|')[1:3]]
-    assert chinese in definitions,f'Missing definition: {chinese}'
-    terms.append((english,chinese))
-search=json.loads((ROOT/'web/public/book/search.json').read_text(encoding='utf8'))
-glossary=[]
-for english,chinese in terms:
-    candidates=[entry for entry in search if entry['id'].startswith('chapter_') and 'appendix' not in entry['id'] and 'reference' not in entry['id'] and chinese.replace('$','') in entry['text'].replace('$','')]
-    candidates.sort(key=lambda entry:(chinese not in entry['title'],len(entry['text'])))
-    section=candidates[0]['id'] if candidates else 'chapter_appendix/terminology'
-    glossary.append(dict(term=chinese.replace('$',''),english=english.replace('$',''),definition=definitions[chinese],sectionId=section))
-supplements={item['term']:item for item in json.loads((ROOT/'content/learning/route-lab/glossary-supplements.json').read_text(encoding='utf8'))}
-for entry in glossary:
-    extra=supplements.get(entry['term'],{})
-    entry.update({k:v for k,v in extra.items() if k in ['homeSection','tip','keys']})
-    if entry.get('homeSection') not in sections: entry.pop('homeSection',None)
-publish(target.parent/'glossary.json',glossary)
-print(f'Published {len(glossary)} authored glossary explanations.')
+runpy.run_path(str(ROOT/'scripts/prepare-glossary.py'))
 simulation=(ROOT/'content/learning/monty-simulation.py').read_text(encoding='utf8')
 simulation_target=target.parent/'monty-simulation.py'
 if '--check' in sys.argv: assert simulation_target.read_text(encoding='utf8')==simulation,'Stale Monty simulation'
 else: simulation_target.write_text(simulation,encoding='utf8',newline='\n')
+runpy.run_path(str(ROOT/'scripts/prepare-chapter-quizzes.py'))
