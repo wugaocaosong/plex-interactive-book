@@ -8,11 +8,15 @@ test('wheel over quiz content scrolls the floating window to the last question',
   const body=page.locator('.floating-tool-body');
   const quiz=page.locator('.chapter-quiz');
   await expect(quiz.locator('.quiz-question')).toHaveCount(4);
-  await quiz.locator('.quiz-question').first().hover();
+  await quiz.locator('.quiz-question').first().locator('.quiz-option').first().click();
+  await expect(quiz.locator('.quiz-question').first().locator('.quiz-option').first()).toBeDisabled();
+  await quiz.locator('.quiz-question').first().locator('.quiz-option').first().hover();
   await page.mouse.wheel(0,600);
   await expect.poll(()=>body.evaluate(el=>el.scrollTop)).toBeGreaterThan(0);
   await page.mouse.wheel(0,10000);
   await expect(quiz.getByRole('button',{name:'重新作答本章'})).toBeInViewport();
+  await page.mouse.wheel(0,-10000);
+  await expect.poll(()=>body.evaluate(el=>el.scrollTop)).toBe(0);
 });
 
 test('mixed tests grade choice, judgment, fill and ordering; restore and reset correctly',async({page})=>{

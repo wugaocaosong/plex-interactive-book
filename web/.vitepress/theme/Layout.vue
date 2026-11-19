@@ -2386,7 +2386,7 @@ onBeforeUnmount(() => {
         <BookmarkLibrary v-if="menu==='bookmarks'" :marks="bookmarks" :sections="sections" @update="bookmarks=$event" @navigate="navigate($event.sectionId,$event)"/>
       </section>
     </div>
-    <FloatingToolWindow v-if="panel" :title="panelLabel" storage-key="activity-window" mobile-fullscreen @close="closeOverlay">
+    <FloatingToolWindow v-if="panel" :title="panelLabel" storage-key="activity-window" :direct-scroll="panel==='chapter-quiz'" mobile-fullscreen @close="closeOverlay">
       <section class="content-dialog movable-activity" :data-window="panel">
         <button
           v-if="
