@@ -137,7 +137,9 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.chapter-quiz{max-width:800px;width:100%;box-sizing:border-box;margin:0 auto;padding:12px 20px 32px;color:inherit;flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}
+/* The floating window owns scrolling. An unconstrained inner scroll container
+   with overscroll containment swallows the wheel before it reaches that window. */
+.chapter-quiz{max-width:800px;width:100%;box-sizing:border-box;margin:0 auto;padding:12px 20px 32px;color:inherit;min-height:0;overflow:visible}
 .chapter-quiz h3{font-size:24px}.chapter-quiz p{line-height:1.8}
 .quiz-progress{font-weight:700;border-bottom:1px solid #8e9075;padding-bottom:12px}
 .quiz-question{border:1px solid #8e9075;border-radius:14px;margin:24px 0;padding:18px;min-width:0}

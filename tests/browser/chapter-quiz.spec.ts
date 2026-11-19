@@ -2,6 +2,19 @@ import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 const chapters=JSON.parse(readFileSync('web/.vitepress/theme/chapter-learning.json','utf8'));
 
+test('wheel over quiz content scrolls the floating window to the last question',async({page})=>{
+  await page.goto('/read/chapter_graph/exercises#quiz-chapter_graph');
+  await page.locator('.book-host .chapter-quiz-entry:visible').getByRole('button',{name:'开始测试'}).click();
+  const body=page.locator('.floating-tool-body');
+  const quiz=page.locator('.chapter-quiz');
+  await expect(quiz.locator('.quiz-question')).toHaveCount(4);
+  await quiz.locator('.quiz-question').first().hover();
+  await page.mouse.wheel(0,600);
+  await expect.poll(()=>body.evaluate(el=>el.scrollTop)).toBeGreaterThan(0);
+  await page.mouse.wheel(0,10000);
+  await expect(quiz.getByRole('button',{name:'重新作答本章'})).toBeInViewport();
+});
+
 test('mixed tests grade choice, judgment, fill and ordering; restore and reset correctly',async({page})=>{
   await page.goto('/read/chapter_searching/exercises#quiz-chapter_searching');
   await page.locator('.book-host .chapter-quiz-entry:visible').getByRole('button',{name:'开始测试'}).click();
