@@ -18,3 +18,5 @@ import './starship.css';
 import '@fontsource/noto-sans-sc/700.css';
 import './phantom.css';
 import './glossary.css';
+
+import './adventure.css';

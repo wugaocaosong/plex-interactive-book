@@ -63,6 +63,9 @@ for (const chapter of chapterLearning) {
 export function injectExplorers(source: HTMLElement) {
   const id = source.dataset.section;
   if (!id) return;
+  // An authored route (notably chapter 12) takes precedence over the generic entry.
+  const authored=[...source.querySelectorAll<HTMLButtonElement>('button')].some(b=>b.textContent?.replace(/\s/g,'').includes('开始探险'));
+  if(authored){decorateAdventureEntries(source);return;}
   const explorer = EXPLORERS.find((e) => e.sectionId === id);
   if (!explorer || source.querySelector(".explorer-card")) return;
   const card = document.createElement("aside");
@@ -77,4 +80,23 @@ export function injectExplorers(source: HTMLElement) {
   const heading = source.querySelector("h1");
   if (heading) heading.insertAdjacentElement("afterend", card);
   else source.prepend(card);
+  decorateAdventureEntries(source);
+}
+
+const paperPlane = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 9 15M21 3l-7 18-5-6-6-5 18-7Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
+export function decorateAdventureEntries(source:HTMLElement){
+ const entries=[...source.querySelectorAll<HTMLButtonElement>('button')].filter(b=>b.textContent?.replace(/\s/g,'').includes('开始探险'));
+ // A single source section must never show two competing chapter-route entries.
+ for(const extra of entries.slice(1)){
+  const card=extra.closest<HTMLElement>('.explorer-card,.ch12-card');
+  if(card&&!card.classList.contains('chapter-quiz-entry'))card.remove();else extra.remove();
+ }
+ const button=entries[0];if(!button)return;
+ const card=button.closest<HTMLElement>('.explorer-card,.ch12-card')||button.parentElement;
+ if(!card)return;card.classList.add('adventure-route-card');button.classList.add('adventure-start');
+ button.innerHTML=paperPlane+'<span>开始探险！</span>';
+ const title=card.querySelector('h3');if(title)title.textContent='本章探险路线';
+ const eyebrow=card.querySelector<HTMLElement>('.explorer-eyebrow,.ch12-eyebrow');
+ if(eyebrow){eyebrow.classList.add('adventure-eyebrow');const match=eyebrow.textContent?.match(/第\s*(\d+)\s*章/);eyebrow.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="9" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="m16 6-2 10-7 4 3-10Z" fill="#7bb9a8" stroke="currentColor" stroke-width="1.2"/><path d="M11 3V1h3v3" fill="none" stroke="currentColor"/></svg>';
+ eyebrow.append(document.createTextNode('PLEX · '+(match?'第 '+match[1]+' 章任务':'本章任务')));}
 }

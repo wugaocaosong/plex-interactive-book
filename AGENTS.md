@@ -26,6 +26,12 @@ The user-facing local preview address is `http://127.0.0.1:5192/`; its stable la
 
 ## Reader effect restoration (2026-11-17)
 
+2026-11-19 concept activities: eight ungraded knowledge-point entries now follow authored explanations in chapters 9–11: graph representations, BFS/DFS, binary search intervals, insertion boundaries, hash probing, manual sequence reordering, insertion sort and three-way pivot grouping. The shared ConceptPlayground is mounted through the reader's concept panel. Adventure cards use the user-provided mint/teal compass-and-paper-plane reference. Authored adventure routes take priority over generic injection; verified one adventure button per chapter 12–16. Typecheck, 49 Node tests and production build passed; all eight activities were opened and operated in the browser. Two preview tabs were retained for the user (graph interaction and chapter 12 adventure card); temporary study-mode testing was restored to flip mode.
+
+For the staged build, `npm run build -- --outDir .vitepress/dist-next` resolves its output at `<book>/.vitepress/dist-next`, NOT under `web/.vitepress`. All 155 HTML pages and root manifests were copied and byte-checked against the staged build, with new assets copied first and prior hashed assets retained to avoid blank lazy panels in older open documents. Do not claim deployment from only an assets copy or a single HTML check.
+
+The user explicitly authorized local-preview connections to Visual Studio telemetry/environment metadata on 2026-11-19 (in addition to prior build authorization). Do not repeatedly ask for this same permission.
+
 2026-11-19 update: user explicitly authorized retrying the build after the Visual Studio telemetry review block. `npm run build` subsequently completed successfully (72.82s), superseding the blocked-build status below. Reloaded the live app and verified chapter 1's existing 1/4 answered state: wheel over its disabled first answer scrolled to the reset button and back to scrollTop 0. Also verified divide-and-conquer code-merge opens the actual code editor and task with no console errors. Restored flip mode and returned the user to `/read/unit/lab/`.
 
 Quiz scrolling: keep `.floating-tool-body` as the only scroll container for the chapter quiz. The inner `.chapter-quiz` must not use `overflow:auto` with `overscroll-behavior:contain`: its natural height equals its content, so it cannot scroll and traps wheel events before they reach the outer window. Reproduced this with the real quiz window; regression coverage is in chapter-quiz.spec.ts.

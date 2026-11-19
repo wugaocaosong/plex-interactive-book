@@ -28,6 +28,9 @@ import {
 import type {SceneId} from "./teaching-models";
 const TeachingScene=defineAsyncComponent(()=>import("./TeachingScene.vue"));
 const teachingScene=ref<SceneId>("merge");
+const ConceptPlayground=defineAsyncComponent(()=>import('./ConceptPlayground.vue'));
+import {injectConceptActivities,conceptTitles,type ConceptId} from './concept-activities';
+const conceptId=ref<ConceptId>('graph');
 import BookmarkLibrary from "./BookmarkLibrary.vue";
 import {organizeBookmarks} from "./bookmark-model";
 import {decorateFormulaCopies,handleFormulaCopy} from "./formula-copy";
@@ -257,6 +260,7 @@ async function changeLabLevel(level:string) {
 }
 function decorateTerms(root: HTMLElement) {
   injectExplorers(root);
+  injectConceptActivities(root);
   injectChapterQuiz(root);
   if (root.dataset.section) {
     for (const note of notes.value.filter(
@@ -459,6 +463,7 @@ const panel = ref<
   | "expanded"
   | "learning"
   | "teaching"
+  | "concept"
   | "term"
   | "unit"
   | "chapter12"
@@ -502,6 +507,7 @@ const panelLabel = computed(
       expanded: "展开阅读",
       learning: "学习实验室",
       teaching: "算法教学演示",
+      concept: "知识点 · 动手观察",
       term: "术语解释",
       unit: "小E · 三门学习单元",
       chapter12: "分治 · 探险工作台",
@@ -1263,6 +1269,7 @@ async function clickBook(event: MouseEvent) {
     }
     if(value==="lab-level"){await changeLabLevel(action.dataset.labLevel||"");return;}
     if(value==="explorer"&&action.dataset.target){await navigate(action.dataset.target);return;}
+    if(value==='concept'&&action.dataset.concept&&action.dataset.concept in conceptTitles){conceptId.value=action.dataset.concept as ConceptId;openPanel('concept');return;}
     if(value === "teaching-scene"){teachingScene.value=action.dataset.scene as SceneId;openPanel("teaching");return;}
     if (value === "chapter12") {
       await chapterActivity(panelBlock.value?.sectionId || sectionId.value,action.dataset.mode || "route");
@@ -2403,6 +2410,7 @@ onBeforeUnmount(() => {
           @outcome="labOutcome"
           :fold-source-header="panelSource.html.includes('ch12-')"
         />
+        <ConceptPlayground v-if="panel==='concept'" :key="conceptId" :concept="conceptId"/>
         <TeachingScene v-if="panel==='teaching'" :key="teachingScene" :scene-id="teachingScene"/>
         <Chapter12Panel v-if="panel === 'chapter12'" :key="chapter12Mode" :mode="chapter12Mode" :section-id="sectionId" @activity="chapterActivity" />
         <ChapterQuiz v-if="panel === 'chapter-quiz'" :key="quizChapter" :chapter="quizChapter" @review="(id: string) => { closeOverlay(); navigate(id); }" />
