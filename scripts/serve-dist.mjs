@@ -4,6 +4,7 @@ import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
 import { resolve, relative, extname, isAbsolute } from "node:path";
 import { pathToFileURL } from "node:url";
+import { previewRootToken } from './preview-health.mjs';
 
 const mime = {
   ".html": "text/html; charset=utf-8",
@@ -44,6 +45,11 @@ export function createStaticServer(
   )
     throw Error("PLEX_API_TARGET must be a fixed HTTP(S) origin, or off");
   return createServer(async (request, response) => {
+    if (request.url === '/__plex/health') {
+      response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
+      response.end(JSON.stringify({ app: 'plex-interactive-book', rootToken: previewRootToken(root) }));
+      return;
+    }
     if (request.url === "/api" || request.url?.startsWith("/api/")) {
       const unavailable = () => {
         if (response.destroyed || response.writableEnded) return;

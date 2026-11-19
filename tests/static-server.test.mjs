@@ -5,6 +5,42 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createStaticServer } from '../scripts/serve-dist.mjs';
 import {createServer} from 'node:http';
+import {probePreview,monitorPreview} from '../scripts/preview-health.mjs';
+
+test('launcher monitor restores a stopped preview at the same address',async()=>{
+ const original=createStaticServer('.', 'off');
+ await new Promise(resolve=>original.listen(0,'127.0.0.1',resolve));
+ const port=original.address().port, base=`http://127.0.0.1:${port}`;
+ let replacement, resolveRestart, timeout;
+ const restarted=new Promise(resolve=>resolveRestart=resolve);
+ const stop=monitorPreview(base,'.',async()=>{
+  replacement=createStaticServer('.', 'off');
+  await new Promise((resolve,reject)=>{replacement.once('error',reject);replacement.listen(port,'127.0.0.1',resolve);});
+  resolveRestart();
+ },{intervalMs:25});
+ try{
+  await new Promise(resolve=>original.close(resolve));
+  await Promise.race([restarted,new Promise((_,reject)=>{timeout=setTimeout(()=>reject(Error('Preview was not restored')),3000);})]);
+  assert.equal(await probePreview(base,'.'),true);
+ }finally{
+  stop();clearTimeout(timeout);original.close();
+  if(replacement)await new Promise(resolve=>replacement.close(resolve));
+ }
+});
+
+test('launcher recognizes its own preview and refuses a different book directory',async()=>{
+ const preview=createStaticServer('.', 'off');
+ await new Promise(resolve=>preview.listen(0,'127.0.0.1',resolve));
+ const base=`http://127.0.0.1:${preview.address().port}`;
+ try{
+  assert.equal(await probePreview(base,'.'),true);
+  assert.equal(await probePreview(base,'other-book'),false);
+  const response=await fetch(base+'/__plex/health');
+  assert.equal(response.headers.get('cache-control'),'no-store');
+  const health=await response.json();assert.equal(health.app,'plex-interactive-book');
+  assert.equal(JSON.stringify(health).includes(process.cwd()),false);
+ }finally{await new Promise(resolve=>preview.close(resolve));}
+});
 
 test('fixed API proxy carries auth and JSON, prevents target injection and fails offline',async()=>{
  const upstream=createServer(async(req,res)=>{let body='';for await(const part of req)body+=part;res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify({path:req.url,auth:req.headers.authorization,body:JSON.parse(body||'{}')}));});

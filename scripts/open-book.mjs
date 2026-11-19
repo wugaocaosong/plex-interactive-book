@@ -2,6 +2,7 @@ import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { createStaticServer } from './serve-dist.mjs';
+import { probePreview, monitorPreview } from './preview-health.mjs';
 const root = resolve(import.meta.dirname, '..', 'web/.vitepress/dist');
 if (!existsSync(resolve(root, 'index.html'))) {
   console.error('Build missing. Run npm run build in the book folder.');
@@ -10,6 +11,10 @@ if (!existsSync(resolve(root, 'index.html'))) {
 let server;
 let port;
 for (let candidate = 5192; candidate <= 5199; candidate++) {
+  if (await probePreview(`http://127.0.0.1:${candidate}`, root)) {
+    port = candidate;
+    break;
+  }
   const attempt = createStaticServer(root);
   try {
     await new Promise((resolve, reject) => {
@@ -25,14 +30,27 @@ for (let candidate = 5192; candidate <= 5199; candidate++) {
     console.log(`Port ${candidate} is occupied; trying the next port.`);
   }
 }
-if (!server) {
+if (port === undefined) {
   console.error('Ports 5192-5199 are occupied. Close an older preview and retry.');
   process.exit(1);
 }
 const url = `http://127.0.0.1:${port}/read/chapter_searching/`;
-console.log(`\nBook ready: ${url}\nKeep this window open while reading. Press Ctrl+C to stop.\n`);
-server.on('error', error => console.error('Preview error:', error.message));
+console.log(`\nBook ready: ${url}\n${server ? 'Keep this window open while reading. Press Ctrl+C to stop.' : 'Reusing the existing preview; no duplicate server was started.'}\n`);
+server?.on('error', error => console.error('Preview error:', error.message));
 if (!process.argv.includes('--check-only')) {
+  if (!server) {
+    console.log('Keep this window open. It monitors the preview and restores it at the same address if it stops.');
+    monitorPreview(`http://127.0.0.1:${port}`, root, async () => {
+      const replacement = createStaticServer(root);
+      await new Promise((resolve, reject) => {
+        replacement.once('error', reject);
+        replacement.listen(port, '127.0.0.1', resolve);
+      });
+      server = replacement;
+      server.on('error', error => console.error('Preview error:', error.message));
+      console.log('Preview restored at ' + url);
+    }, { onError: error => console.error('Waiting to restore preview:', error.message) });
+  }
   const browser = spawn('rundll32.exe', ['url.dll,FileProtocolHandler', url], { windowsHide: true, stdio: 'ignore' });
   browser.on('error', error => console.error('Open the address above in your browser:', error.message));
   browser.unref();

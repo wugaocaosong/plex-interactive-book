@@ -20,6 +20,8 @@ Publication status: integration is validated locally (42 Node tests, TypeScript,
 
 ## Validation and preview
 
+2026-11-19 stability: confirmed ECONNREFUSED for home, manifest, chapter JSON and HTML when the tool-session server had stopped. The launcher now probes `/__plex/health` (hashed book-root identity), reuses an existing matching preview instead of opening another port, and when launched normally keeps a monitoring process alive to restore that preview at the same address if it exits. `--check-only` does not enable monitoring. Real socket tests cover reuse, wrong-root rejection and stop/restart recovery. The user must launch OPEN_BOOK.cmd on their own computer and keep its window open for a preview that outlives the agent tool session. Do not claim a tool-session server is persistent. An attempt to register an on-demand limited-user scheduled task failed because CIM resources are inaccessible; no persistent task was created. Do not use native UI automation to run terminal commands as a workaround.
+
 Run `npm run typecheck`, `node --test tests/*.test.mjs`, and `npm run build`. Do not run typecheck concurrently with a build that deletes the output directory. Regenerate authored quiz/glossary assets using their preparation scripts when their sources change.
 
 The user-facing local preview address is `http://127.0.0.1:5192/`; its stable launch entry is `OPEN_BOOK.cmd` (and `../打开电子书.cmd`). A temporary preview server started in a tool session may stop when the session ends. Never promise that a localhost link is a permanently hosted website.
