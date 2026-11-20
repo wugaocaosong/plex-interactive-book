@@ -40,14 +40,24 @@ export class GalaxyEffects {
 
 export function makeStellarSystem(color:string,radius:number,id:string,surfaces:SpaceSurfaces,variant=0,specs:StellarOrbit[]=stellarOrbits){
   const group=new T.Group(),orbits=new T.Group(),satellites:T.Mesh[]=[];
-  const sun=new T.Mesh(new T.SphereGeometry(radius*.38,40,28),surfaces.starMaterial(color));sun.name=id;group.add(sun);group.add(orbits);
-  const glow=surfaces.corona(radius*.44,color);group.add(glow);
-  for(let i=0;i<specs.length;i++){
-    const r=radius*specs[i].radius,pts=Array.from({length:97},(_,j)=>new T.Vector3(Math.cos(j/96*Math.PI*2)*r,Math.sin(j/96*Math.PI*2)*r,0));
-    orbits.add(new T.LineLoop(new T.BufferGeometry().setFromPoints(pts),new T.LineBasicMaterial({color,transparent:true,opacity:.38})));
-    const skin=planetSkins[(variant*3+i)%planetSkins.length];const planet=surfaces.planet(radius*specs[i].size,skin,id);planet.rotation.y=variant+i*1.3;satellites.push(planet);orbits.add(planet);
+  // Distinct silhouettes: ocean, rings, crystal, binary, dunes, ice giant, debris.
+  const skins=['earth_daymap','saturn','neptune','sun','mars','neptune','moon'] as const;
+  const sun:T.Mesh=variant===2
+    ?new T.Mesh(new T.IcosahedronGeometry(radius*.72,0),new T.MeshStandardMaterial({color:'#a8e9ed',metalness:.25,roughness:.15,flatShading:true,emissive:'#164851',emissiveIntensity:.6}))
+    :variant===3?new T.Mesh(new T.SphereGeometry(radius*.48,32,24),surfaces.starMaterial('#f7bd79'))
+    :surfaces.planet(radius*(variant===0?.72:.65),skins[variant] as typeof planetSkins[number],id);
+  sun.name=id;group.add(sun,orbits);
+  const glow=surfaces.atmosphere(radius*(variant===0?.76:.72),color);group.add(glow);
+  if(variant===3){sun.position.x=-radius*.45;const companion=new T.Mesh(new T.SphereGeometry(radius*.31,28,20),surfaces.starMaterial('#a2cfff'));companion.name=id;companion.position.set(radius*.65,radius*.2,0);group.add(companion);}
+  if(variant===2||variant===6){for(let i=0;i<18;i++){const shard=new T.Mesh(new T.IcosahedronGeometry(radius*(.025+(i%4)*.014),0),new T.MeshStandardMaterial({color:variant===2?'#9dcfdc':'#9b9eae',roughness:.55,metalness:.25}));const a=i/18*Math.PI*2,r=radius*(1.05+(i%3)*.14);shard.position.set(Math.cos(a)*r,Math.sin(a)*r*.34,Math.sin(a)*r*.65);shard.rotation.set(i*.7,i*.9,i);shard.name=id;group.add(shard);}}
+  const selected=variant===0?specs:specs.slice(0,variant===1||variant===6?0:1);
+  for(let i=0;i<selected.length;i++){
+    const r=radius*selected[i].radius,pts=Array.from({length:161},(_,j)=>new T.Vector3(Math.cos(j/160*Math.PI*2)*r,Math.sin(j/160*Math.PI*2)*r,0));
+    const path=new T.LineLoop(new T.BufferGeometry().setFromPoints(pts),new T.LineBasicMaterial({color,transparent:true,opacity:.24,depthWrite:false}));path.raycast=()=>{};orbits.add(path);
+    const skin=planetSkins[(variant*3+i+4)%planetSkins.length];const planet=surfaces.planet(radius*selected[i].size*.72,skin,id);planet.rotation.y=variant+i*1.3;satellites.push(planet);orbits.add(planet);
     const a=variant*2+i*2.1;planet.position.set(Math.cos(a)*r,Math.sin(a)*r,0);
   }
-  orbits.rotation.set(.7,.2,.25);
-  return {group,sun,orbits,satellites,radius,glow,specs};
+  orbits.rotation.set(.9+variant*.12,.2+variant*.19,.35-variant*.22);
+  group.userData.worldKind=['ocean','ringed','crystal','binary','dunes','ice','debris'][variant];
+  return {group,sun,orbits,satellites,radius,glow,specs:selected};
 }

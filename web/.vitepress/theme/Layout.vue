@@ -24,6 +24,11 @@ import {
   X,
   Expand,
   RotateCcw,
+  Orbit,
+  NotebookPen,
+  FlaskConical,
+  MessageCircle,
+  ChartNoAxesCombined,
 } from "lucide-vue-next";
 import type {SceneId} from "./teaching-models";
 const TeachingScene=defineAsyncComponent(()=>import("./TeachingScene.vue"));
@@ -1283,7 +1288,8 @@ async function layout(place?: ReadingLocator) {
   rendering = true;
   loading.value = true;
   stopAnimation();
-  const available = Math.max(280, window.innerWidth - 48);
+  const sideSpace = !preferences.value.immersion && window.innerWidth >= 1000 ? (window.innerWidth > 1100 ? 320 : 240) : 48;
+  const available = Math.max(280, window.innerWidth - sideSpace);
   const wanted = preferences.value.customWidth?.flip ?? ({narrow:860,standard:1020,wide:1140}[preferences.value.width]);
   const total = Math.min(available, wanted);
   desktop.value = window.innerWidth >= 1024 && total >= 800;
@@ -1945,6 +1951,20 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </main>
+    <nav class="reader-rail reader-rail-left" aria-label="阅读导航工具" :inert="overlayOpen || loading">
+      <div class="rail-heading" aria-hidden="true"><Orbit :size="30"/><small>EXPLORE</small></div>
+      <button @click="openMenu('contents')"><Compass :size="22"/><span>章节目录</span></button>
+      <button @click="focusSmartSearch"><Search :size="21"/><span>全书搜索</span></button>
+      <button @click="openMenu('bookmarks')"><Bookmark :size="21"/><span>我的书签</span></button>
+      <button @click="openUnit('progress')"><ChartNoAxesCombined :size="21"/><span>学习进度</span></button><i class="rail-status" aria-hidden="true"/>
+    </nav>
+    <nav class="reader-rail reader-rail-right" aria-label="学习创作工具" :inert="overlayOpen || loading">
+      <div class="rail-heading" aria-hidden="true"><Orbit :size="30"/><small>CREATE</small></div>
+      <button @click="openMenu('notes')"><NotebookPen :size="21"/><span>我的笔记</span></button>
+      <button @click="openBoard()"><BookOpen :size="21"/><span>随手黑板</span></button>
+      <button @click="openPanel('learning')"><FlaskConical :size="21"/><span>实验室</span></button>
+      <button @click="showPet()"><MessageCircle :size="21"/><span>呼唤小E</span></button><i class="rail-status" aria-hidden="true"/>
+    </nav>
     <nav class="bottom-navigation" aria-label="阅读主导航" :inert="overlayOpen || loading">
       <button aria-label="打开目录" @click="openMenu('contents')">
         <Compass :size="20" /><span>目录</span>

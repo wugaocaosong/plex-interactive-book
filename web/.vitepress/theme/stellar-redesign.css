@@ -1,0 +1,50 @@
+/* Shared reading chrome. The scene owns the screen; controls stay at its edges. */
+.manga-library{--ink:#07111f;--paper:#eff3ed;--red:#90e5ef;min-height:580px}
+.manga-library .galaxy-header{padding:26px 3.5vw;align-items:center;border-bottom:1px solid #90e5ef18;background:linear-gradient(#07111fe6,#07111f00)}
+.manga-library .galaxy-brand{transform:none;display:grid;grid-template-columns:auto 1fr;align-items:center;column-gap:14px;margin:0}
+.manga-library .galaxy-brand:before,.manga-library .galaxy-brand:after{display:none}
+.manga-library .plex-sticker{background:transparent;color:#90e5ef;font-size:19px;padding:0;clip-path:none;font-style:normal;font-weight:700;letter-spacing:.12em}
+.manga-library .brand-caption{font:9px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#b6ced9;margin:0}
+.manga-library .galaxy-brand h1,.manga-library.is-book .galaxy-brand h1{grid-column:1/-1;font-size:clamp(30px,3.2vw,46px);font-style:normal;letter-spacing:-.04em;text-shadow:none;margin-top:8px;line-height:1.2}
+.manga-library .comic-button{clip-path:none;border:1px solid #90e5ef55;border-radius:8px;background:#0c1c2ccc;color:#eff3ed;box-shadow:none;font-weight:500;font-size:13px;min-height:44px;padding:10px 18px;gap:10px;filter:none}
+.manga-library .comic-button:before,.manga-library .comic-button:after{display:none}
+.manga-library .comic-button:hover{translate:0 -2px;background:#173b49;border-color:#90e5ef}
+.manga-library .comic-button.primary{background:#90e5ef;color:#07111f;border-color:#90e5ef;min-height:48px;font-size:17px;padding:12px 24px;font-weight:700}
+.manga-library .galaxy-intro{left:3.5%;top:auto;bottom:125px;max-width:370px;padding:18px 20px;border-left:1px solid #90e5ef66;background:linear-gradient(90deg,#07111fbb,transparent)}
+.manga-library .galaxy-intro h2{font:500 clamp(14px,1.35vw,21px)/1.8 'Noto Serif SC',serif;letter-spacing:.03em}
+.manga-library .galaxy-intro p{font-size:11px;color:#b6ced9;margin:8px 0 0}
+.manga-library .planet-title{transform:translate(-50%,10%);background:#0a1b2be8;color:#eff3ed;border:1px solid #90e5ef88;border-radius:10px;padding:13px 20px;box-shadow:0 12px 40px #0006;text-align:center}
+.manga-library .planet-title strong{background:transparent;color:#e8fbf8;font-size:clamp(16px,1.7vw,24px);padding:0;margin:0 0 5px;font-weight:700}
+.manga-library .planet-title small{color:#bdd3df;font-size:11px;font-weight:400}
+.manga-library .planet-pointer{left:50%;bottom:auto;top:-26px;width:1px;height:25px;background:#90e5ef;clip-path:none}
+.manga-library .distant-label{transform:translate(-50%,10%);clip-path:none;border:0;border-top:1px solid #a6c7d455;background:#07111fa8;color:#d6e5ed;padding:6px 12px;font-size:12px;font-weight:500;border-radius:0 0 7px 7px;min-height:44px}
+.manga-library .distant-label small{display:block;font-size:9px;color:#9eb9c8;letter-spacing:.16em;margin-top:3px}
+.manga-library .galaxy-footer{inset:auto 3.5vw 24px}.manga-library .footer-actions{gap:14px}.manga-library .galaxy-help{font-size:11px;font-weight:400;letter-spacing:.1em;border:0;color:#aac8d7}
+.manga-library .library-index summary{font-size:12px;font-weight:400;border:1px solid #90e5ef55;border-radius:8px;padding:0 16px;background:#0c1c2ccc}
+.manga-library .library-index ul{border-color:#90e5ef44;border-radius:10px}.manga-library .library-index button:hover:not(:disabled){background:#193646}
+.manga-library .book-callout{background:#0b2030df;color:#d8eef0;clip-path:none;border:1px solid #90e5ef44;border-radius:10px;box-shadow:none;font-size:18px;font-weight:500;padding:18px 24px}
+.manga-library .book-callout span{display:none}.manga-library .return-galaxy{clip-path:none;padding-left:18px}.manga-library .return-galaxy span{display:inline}
+.manga-library .static-worlds i{width:clamp(55px,7vw,110px);transform:translate(-50%,-120%)}.manga-library .static-worlds .static-main{width:clamp(190px,26vw,390px);transform:translate(-50%,-105%)}
+.manga-library .static-worlds i:before,.manga-library .static-worlds i:after{display:none}.manga-library .static-worlds i:nth-child(2):before{display:block;inset:-45%;border:10px solid #b5a78d80;transform:rotate(-28deg) scaleY(.35)}.manga-library .static-worlds i:nth-child(3){border-radius:20%;clip-path:polygon(50% 0,90% 20%,100% 60%,65% 100%,20% 85%,0 40%)}.manga-library .static-worlds i:nth-child(4):after{display:block;inset:30% -65% 10% 95%;background:#9ebff9;border:0;transform:none;box-shadow:0 0 30px #8ba8f0}
+.reader::before{background:radial-gradient(ellipse at 5% 40%,#0e3a5299,transparent 42%),radial-gradient(ellipse at 95% 12%,#14395066,transparent 40%),linear-gradient(155deg,#071725,#030b16 65%,#061724)}
+.reader::after{opacity:.4;background:radial-gradient(circle at 7% 20%,#8be5f566 0 1px,transparent 1.5px),radial-gradient(circle at 90% 14%,#8be5f555 0 1px,transparent 1.5px);background-size:183px 257px,251px 197px}
+.reader .reader-toolbar{background:linear-gradient(90deg,#06111ee6,#0b2638cc,#06111ee6);border-bottom:1px solid #75cbe34d;box-shadow:0 8px 30px #02081544}
+.reader-rail{--rail-line:#71cce366;position:fixed;top:calc(50% - 50px);transform:translateY(-50%);z-index:12;width:88px;padding:16px 7px 12px;box-sizing:border-box;display:flex;flex-direction:column;gap:4px;border:1px solid var(--rail-line);border-radius:18px 4px 18px 4px;background:radial-gradient(ellipse at 50% 0,#15445d80,transparent 40%),linear-gradient(160deg,#0b2132ed,#051321f5 60%,#0a283af2);box-shadow:inset 0 0 0 4px #071623,inset 0 0 0 5px #3b6d8433,0 12px 32px #0006;backdrop-filter:blur(18px);isolation:isolate}
+.reader-rail:before{content:'';position:absolute;inset:7px;z-index:-1;border:1px solid #6ac8df24;border-radius:12px 2px 12px 2px;pointer-events:none;background:repeating-radial-gradient(ellipse at -25% 0,transparent 0 22px,#65bcd10b 23px 24px,transparent 25px 34px)}
+.reader-rail:after{content:'';position:absolute;left:-1px;top:34px;width:2px;height:44px;background:#92eafa;box-shadow:0 0 12px #42cdea66;pointer-events:none}
+.reader-rail-left{left:22px}.reader-rail-right{right:22px}.reader-rail-right:after{left:auto;right:-1px;top:auto;bottom:34px}
+.rail-heading{display:flex;flex-direction:column;align-items:center;gap:8px;padding:7px 0 14px;color:#7ad9ec}.rail-heading svg{filter:drop-shadow(0 0 8px #3abbd844);stroke-width:1}.rail-heading small{font:8px 'JetBrains Mono',monospace;letter-spacing:.17em;color:#a3c8d8}
+.reader-rail button{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:7px;border:1px solid transparent;background:transparent;color:#d9edf5;border-radius:8px;min-height:73px;width:100%;cursor:pointer;font:11px 'Noto Sans SC',sans-serif;transition:background .18s,border-color .18s,color .18s}
+.reader-rail button+button:before{content:'';position:absolute;top:-3px;width:24px;height:1px;background:linear-gradient(90deg,transparent,#75cbe344,transparent)}
+.reader-rail button svg{box-sizing:content-box;padding:8px;stroke-width:1.4;color:#bceaf4;background:linear-gradient(145deg,#18384b80,#061725cc);border:1px solid #71cce340;border-radius:6px;box-shadow:inset 0 1px 0 #a9efff0d,0 3px 8px #0002;transition:box-shadow .18s,border-color .18s}
+.reader-rail button:hover{background:#14344999;border-color:#71cce33d;color:#fff}.reader-rail button:hover svg{border-color:#93eafa;box-shadow:0 0 14px #49c8e32e; color:#d4fcff}.reader-rail button:focus-visible{outline:2px solid #96eafb;outline-offset:1px}
+.rail-status{width:5px;height:5px;display:block;align-self:center;border-radius:50%;background:#7be4ed;box-shadow:0 0 10px #64dce866;margin:12px 0 2px}
+.reader.is-immersed .reader-rail{display:none}
+@media(min-width:1000px){.reader .study-reader{max-width:calc(100vw - 320px);margin-left:auto;margin-right:auto}}
+@media(min-width:1000px) and (max-width:1100px){.reader .study-reader{max-width:calc(100vw - 240px)}}
+@media(max-width:1100px){.reader-rail{width:64px;padding:10px 4px}.reader-rail-left{left:8px}.reader-rail-right{right:8px}.reader-rail button{font-size:10px;min-height:66px}.reader-rail button svg{padding:6px}.rail-heading small{font-size:7px}}
+@media(max-height:800px){.reader-rail{top:120px;transform:none;padding-top:7px;padding-bottom:7px}.rail-heading{padding:0 0 6px}.rail-heading svg{width:22px;height:22px}.rail-heading small{display:none}.reader-rail button{min-height:56px;gap:3px}.reader-rail button svg{padding:4px}.rail-status{margin:8px 0 2px}}
+@media(max-width:999px){.reader-rail{display:none}}
+@media(max-width:600px){.manga-library .galaxy-header{padding:18px 20px}.manga-library .galaxy-header .utility{position:static;font-size:11px;min-height:44px;padding:8px 12px}.manga-library .galaxy-brand h1{font-size:32px}.manga-library .plex-sticker{font-size:15px}.manga-library .brand-caption{font-size:7px;letter-spacing:.08em}.manga-library .galaxy-brand{column-gap:8px}.manga-library .galaxy-intro{left:20px;bottom:110px;padding:8px 12px;max-width:260px}.manga-library .galaxy-intro h2{font-size:13px}.manga-library .galaxy-intro p{display:none}.manga-library .galaxy-footer{inset:auto 20px max(18px,env(safe-area-inset-bottom));gap:10px}.manga-library .footer-actions{flex-direction:row;gap:8px;flex-wrap:wrap}.manga-library .galaxy-help{display:none}.manga-library .comic-button{font-size:11px;padding:8px 12px}.manga-library .comic-button.primary{font-size:14px;padding:10px 18px}.manga-library .planet-title{padding:10px 13px}.manga-library .planet-title strong{font-size:16px}.manga-library .distant-label{font-size:10px;padding:5px 7px}.manga-library .distant-label small{font-size:8px}.manga-library .book-callout{font-size:13px;padding:10px 14px}.manga-library .book-actions{bottom:14%}.manga-library .static-worlds .static-main{width:210px}.manga-library .static-worlds i{width:52px}}
+
+@media(max-width:600px){.manga-library .planet-title{left:32%!important;max-width:calc(100vw - 152px);white-space:normal}.manga-library .planet-title strong{font-size:14px}.manga-library .planet-title small{font-size:10px}.solar-filter{padding-right:100px}}

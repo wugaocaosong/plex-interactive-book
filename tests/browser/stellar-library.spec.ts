@@ -9,7 +9,7 @@ test('bounded click particles recycle; dragging does not enter; unavailable syst
  await page.mouse.move(2,2);await canvas.click({position:{x:80,y:500}});await expect.poll(async()=>Number(await canvas.getAttribute('data-particles'))).toBeGreaterThan(100);
  await page.waitForTimeout(2300);expect(Number(await canvas.getAttribute('data-particles'))).toBeLessThan(200);
  await page.mouse.move(100,500);await page.mouse.down();await page.mouse.move(220,530,{steps:12});await page.mouse.up();await expect(page.locator('main')).toHaveAttribute('data-phase','galaxy');
- await page.getByRole('button',{name:'待上架书籍 1',exact:true}).click();await expect(page.locator('.galaxy-notice')).toContainText('尚未上架');await expect(page.locator('main')).toHaveAttribute('data-phase','galaxy');
+ await page.getByRole('button',{name:'光环秘境，待上架书籍 1',exact:true}).click();await expect(page.locator('.galaxy-notice')).toContainText('尚未上架');await expect(page.locator('main')).toHaveAttribute('data-phase','galaxy');
  for(let i=0;i<12;i++)await page.mouse.click(80,500);expect(Number(await canvas.getAttribute('data-particles'))).toBeLessThanOrEqual(2600);
 });
 

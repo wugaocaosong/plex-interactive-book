@@ -16,3 +16,5 @@ import "./route-lab.css";
 import './starship.css';
 import '@fontsource/noto-sans-sc/700.css';
 import './phantom.css';
+
+import './stellar-redesign.css';

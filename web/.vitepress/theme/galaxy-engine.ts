@@ -30,7 +30,7 @@ export class GalaxyEngine{
   const stars=new T.BufferGeometry();stars.setAttribute('position',new T.Float32BufferAttribute(points,3));this.backdrop.add(new T.Points(stars,new T.PointsMaterial({color:'#b1c1e5',size:.055,transparent:true,opacity:.65})));
   this.galaxy.add(this.veil);this.surfaces=new SpaceSurfaces(Math.min(8,this.renderer.capabilities.getMaxAnisotropy()));
   library.books.forEach((entry,i)=>{const system=makeStellarSystem(entry.color,entry.radius,entry.id,this.surfaces,i,entry.orbits);system.group.position.fromArray(entry.position);system.group.name=entry.id;this.systems.push(system);this.planets.push(system.group);this.ticks.push(i*13);this.scene.add(system.group);});
-  this.post=new SpacePost(this.renderer,this.scene,this.camera,this.mobile);
+  this.post=new SpacePost(this.renderer,this.scene,this.camera,this.mobile);canvas.dataset.worldKinds=this.systems.map(s=>s.group.userData.worldKind).join(',');
   void this.surfaces.ready().then(()=>{if(this.destroyed)return;this.mapsReady=true;canvas.dataset.surfaces='ready';canvas.dataset.textureCount=String(this.surfaces.textureCount);if(this.textureReady)callbacks.ready();},()=>{if(!this.destroyed)callbacks.failed();});
   this.effects=new GalaxyEffects(this.scene,this.mobile);
   this.book.root.visible=false;this.book.root.scale.setScalar(.9);this.book.root.position.y=.35;this.scene.add(this.book.root);this.scene.add(new T.HemisphereLight('#d4e4ff','#15213b',.85));const light=new T.DirectionalLight('#fff3df',2.1);light.position.set(-4,7,10);this.scene.add(light);const rim=new T.DirectionalLight('#55a3e9',.7);rim.position.set(5,2,-4);this.scene.add(rim);
@@ -68,14 +68,14 @@ export class GalaxyEngine{
  private pointerCancel=()=>{for(const id of this.pointers.keys())if(this.canvas.hasPointerCapture(id))this.canvas.releasePointerCapture(id);this.pointers.clear();this.velocity.set(0,0);this.moved=true;};
  private wheel=(event:WheelEvent)=>{if(this.phase!=='book')return;event.preventDefault();this.camera.position.z=T.MathUtils.clamp(this.camera.position.z+event.deltaY*.008,this.bookDistance*.8,this.bookDistance*1.45);};
  private contextLost=(event:Event)=>{event.preventDefault();cancelAnimationFrame(this.raf);this.callbacks.failed();};
- private projectLabels(){if(this.phase!=='galaxy'){this.callbacks.labels([]);return;}this.callbacks.labels(this.planets.map(p=>{const point=p.position.clone();point.y+=library.books.find(b=>b.id===p.name)!.radius;point.project(this.camera);return {id:p.name,x:(point.x+1)*50,y:(1-point.y)*50,visible:point.z>-1&&point.z<1&&Math.abs(point.x)<.96&&Math.abs(point.y)<.92};}));}
+ private projectLabels(){if(this.phase!=='galaxy'){this.callbacks.labels([]);return;}this.callbacks.labels(this.planets.map(p=>{const point=p.position.clone();point.y-=library.books.find(b=>b.id===p.name)!.radius*.95;point.project(this.camera);return {id:p.name,x:(point.x+1)*50,y:(1-point.y)*50,visible:point.z>-1&&point.z<1&&Math.abs(point.x)<.96&&Math.abs(point.y)<.92};}));}
  private start(){if(this.destroyed||!this.active)return;cancelAnimationFrame(this.raf);this.last=performance.now();this.raf=requestAnimationFrame(this.frame);}
  private frame=(now:number)=>{
   if(this.destroyed||!this.active)return;const frameTime=Math.min(1,(now-this.last)/1000),dt=Math.min(.05,frameTime);this.last=now;
   if(this.phase==='galaxy'){
    this.controls.update();if(!this.reduced){this.elapsed+=dt;this.galaxy.rotation.z+=dt*.035;
     const dust=this.galaxy.children[1] as T.Points<T.BufferGeometry,T.ShaderMaterial>;dust.material.uniforms.uTime.value=this.elapsed;
-    this.systems.forEach((s,i)=>{const hover=this.hovered===library.books[i].id;if(!hover)this.ticks[i]+=dt;const t=this.ticks[i];s.sun.rotation.y+=dt*.25;s.sun.material.uniforms.time.value=t;s.group.position.copy(this.bases[i]);s.group.position.x+=Math.sin(t*.055)*(.3+i*.055);s.group.position.y+=Math.cos(t*.055)*.22;s.satellites.forEach((p,j)=>{const a=t*s.specs[j].speed+j*2.1,r=s.radius*s.specs[j].radius*(hover?.94:1);p.position.set(Math.cos(a)*r,Math.sin(a)*r,0);p.rotation.y+=dt*.6;});s.glow.scale.setScalar(hover?1.25:1+Math.sin(t*1.6)*.06);s.orbits.children.forEach(o=>{if(o instanceof T.LineLoop)(o.material as T.LineBasicMaterial).opacity=hover?.85:.38;});});
+    this.systems.forEach((s,i)=>{const hover=this.hovered===library.books[i].id;if(!hover)this.ticks[i]+=dt;const t=this.ticks[i];s.sun.rotation.y+=dt*.25;s.group.position.copy(this.bases[i]);s.group.position.x+=Math.sin(t*.055)*(.3+i*.055);s.group.position.y+=Math.cos(t*.055)*.22;s.satellites.forEach((p,j)=>{const a=t*s.specs[j].speed+j*2.1,r=s.radius*s.specs[j].radius*(hover?.94:1);p.position.set(Math.cos(a)*r,Math.sin(a)*r,0);p.rotation.y+=dt*.6;});s.glow.scale.setScalar(hover?1.25:1+Math.sin(t*1.6)*.06);s.orbits.children.forEach(o=>{if(o instanceof T.LineLoop)(o.material as T.LineBasicMaterial).opacity=hover?.6:.24;});});
    }
   }
   this.effects.hover(!this.reduced&&this.phase==='galaxy'&&this.hovered==='plex-programming'?this.planets[0].position:undefined);
