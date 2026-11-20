@@ -35,12 +35,12 @@ watch(paused,v=>engine?.pause(v));watch(simple,()=>void start());
 onMounted(()=>{paused.value=false;void start();});
 onBeforeUnmount(()=>{disposed=true;generation++;engine?.dispose();});
 </script>
-<template><section class="solar-directory" :data-ready="ready" aria-label="动态太阳系目录">
+<template><section class="solar-directory" :data-ready="ready" :data-simple="simple" aria-label="动态太阳系目录">
  <header class="solar-heading"><div><small>PLEX / SOLAR CHAPTER ATLAS</small><h2>一颗星体，一段探索。</h2></div><p class="solar-caption">{{hovered>=0?worlds[hovered].section.title:'拖动观察轨道 · 点选章节星体'}}<small>教学导航示意，轨道与天体比例非真实天文尺度</small></p><div class="solar-tools"><button :aria-pressed="paused" @click="paused=!paused">{{paused?'继续公转':'暂停公转'}}</button><button :aria-pressed="simple" @click="simple=!simple;failed=false">{{simple?'开启三维':'简化显示'}}</button></div></header>
- <div v-show="!simple" class="solar-stage"><canvas ref="canvas" aria-label="星轨知识目录：拖动观察，点击知识星球进入章节"/><div class="solar-center" aria-hidden="true"><img src="/brand/little-e-directory-original.png" alt=""/></div><svg class="solar-leaders" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><template v-for="(p,i) in targets" :key="i"><line v-if="p.visible&&labels[i]" :x1="labels[i].x" :y1="labels[i].y" :x2="p.x" :y2="p.y"/></template></svg>
+ <div v-show="!simple" class="solar-stage"><canvas ref="canvas" aria-label="星轨知识目录：拖动观察，点击知识星球进入章节"/><div class="solar-center" aria-hidden="true"><img src="/brand/little-e-front.png" alt=""/></div><svg class="solar-leaders" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><template v-for="(p,i) in targets" :key="i"><line v-if="p.visible&&labels[i]" :x1="labels[i].x" :y1="labels[i].y" :x2="p.x" :y2="p.y"/></template></svg>
   <nav class="solar-labels" aria-label="章节星体"><button v-for="(world,i) in worlds" :key="world.section.id" :style="style(i)" :class="{'is-current':current?.startsWith(world.section.id.replace('/index',''))}" :aria-label="`进入${world.section.title}`" @pointerenter="focus(i)" @pointerleave="focus(-1)" @focus="focus(i)" @blur="focus(-1)" @click="select(i)"><b>{{String(world.number).padStart(2,'0')}}</b><span>{{world.section.title.replace(/^\d+\.?\s*/, '')}}</span></button></nav>
   <div v-if="!ready" class="solar-loading" role="status">正在点亮章节星体…</div>
- </div><div v-if="simple" class="solar-simple-mascot" aria-hidden="true"><img src="/brand/little-e-directory-original.png" alt=""/></div>
+ </div><div v-if="simple" class="solar-simple-mascot" aria-hidden="true"><img src="/brand/little-e-front.png" alt=""/></div>
  <p v-if="notice" role="status">{{notice}}</p>
  <nav class="solar-chapter-list" aria-label="全部章节文字目录"><button v-for="(world,i) in worlds" :key="world.section.id" :class="{'is-current':current?.startsWith(world.section.id.replace('/index',''))}" @click="select(i)" @focus="focus(i)" @blur="focus(-1)"><span>{{String(world.number).padStart(2,'0')}}</span><strong>{{world.section.title.replace(/^\d+\.?\s*/, '')}}</strong><small>{{world.number===16?'附录':'进入章节'}} ↗</small></button></nav>
 </section></template>

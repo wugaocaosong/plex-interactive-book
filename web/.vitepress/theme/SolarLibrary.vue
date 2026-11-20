@@ -22,6 +22,8 @@ onMounted(load);
 .solar-library .solar-heading{flex:none}.solar-library .solar-stage,.solar-library .solar-simple-mascot{flex:1;min-height:0;height:auto;max-height:none}
 .solar-library .solar-start{flex:none;padding:6px 0 0}.solar-library .solar-start p{margin-bottom:8px}
 .solar-library .solar-chapter-list,.solar-all-pages{display:none}
+.solar-library .solar-directory[data-simple="true"] .solar-simple-mascot{display:none}
+.solar-library .solar-directory[data-simple="true"] .solar-chapter-list{display:grid;flex:1;min-height:0;overflow:auto;align-content:start;padding-bottom:200px;scroll-padding-bottom:200px;box-sizing:border-box}
 .solar-library button,.solar-library a{cursor:pointer}.solar-all-pages{border-top:1px solid #385165;padding:20px}.solar-all-pages summary{cursor:pointer;padding:10px}.solar-all-pages a{display:inline-block;width:33%;padding:10px;color:#bddbe9;font-size:13px}.solar-library .reader-error{color:#ffd1bd;padding:30px}.solar-library .reader-error button{margin:16px}
 @media(max-width:700px){.solar-library-header{min-height:48px;gap:8px}.solar-library-header div{font-size:17px}.solar-library-header span{font-size:10px}.solar-library>.solar-directory{padding:10px}.solar-library .solar-heading{align-items:center}.solar-library .solar-heading h2{font-size:clamp(17px,4vw,22px)!important}.solar-library .solar-tools{gap:4px}.solar-library .solar-tools button{font-size:10px;padding:5px 8px}}
 </style>

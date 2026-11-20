@@ -1,0 +1,38 @@
+[
+  {
+    "id": "plex",
+    "name": "PLEX",
+    "description": "个性化编程学习与练习",
+    "url": "http://106.15.77.40/"
+  },
+  {
+    "id": "link",
+    "name": "LINK",
+    "description": "信息技术教师试讲与面试训练",
+    "url": "https://106.15.77.40:8443/"
+  },
+  {
+    "id": "genius",
+    "name": "PLEX 星轨编程",
+    "description": "Genius 算法 · 交互式编程教材",
+    "url": "https://genius.wuyeni.cn/"
+  },
+  {
+    "id": "resource",
+    "name": "Open Resource × AI",
+    "description": "开放资源与社团共创作品",
+    "url": "https://path-integral.app.workbuddy.host/"
+  },
+  {
+    "id": "sponge",
+    "name": "海绵伴",
+    "description": "小组忙闲时间与协作安排",
+    "url": "https://sponge-buddy.app.workbuddy.host/"
+  },
+  {
+    "id": "timeable",
+    "name": "课桌伴",
+    "description": "个人课表、任务与时间管理",
+    "url": "https://timeable.wuyeni.cn/"
+  }
+]

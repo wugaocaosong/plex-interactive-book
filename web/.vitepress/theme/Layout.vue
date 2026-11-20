@@ -47,6 +47,7 @@ import { readStore, saveStore } from "./storage";
 import { bindPageDrag } from "./page-drag";
 import { flushLearning } from "./learning-flush";
 const StarMap=defineAsyncComponent(()=>import("./SolarDirectory.vue"));
+import ProductLinks from './products/ProductLinks.vue';
 import StudyReader from "./StudyReader.vue";
 import { decorateLabLevel, isLabLevel } from "./lab-level";
 import { injectExplorers } from "./explorers";
@@ -148,7 +149,7 @@ const sectionIndex = computed(() =>
 const cover = computed(() => current.value?.kind === "cover");
 const backCover = computed(() => current.value?.kind === "back-cover");
 const menu = ref<
-  "contents" | "bookmarks" | "settings" | "notes" | "more" | "controls" | null
+  "contents" | "bookmarks" | "settings" | "notes" | "more" | "controls" | "products" | null
 >(null);
 const mapView = ref(true);
 const query = ref("");
@@ -444,6 +445,7 @@ const menuLabel = computed(
       controls: "翻页控制",
       notes: "学习笔记",
       more: "阅读工具",
+      products: "谱联产品",
     })[menu.value || "contents"],
 );
 const coverElement = ref<HTMLElement>();
@@ -2005,6 +2007,7 @@ onBeforeUnmount(() => {
     <div v-if="menu" class="overlay" :data-window="menu" @click.self="closeOverlay">
       <section
         class="navigation-dialog"
+        :style="menu === 'products' ? {width:'min(560px, calc(100vw - 32px))'} : undefined"
         role="dialog"
         aria-modal="true"
         :aria-label="menuLabel"
@@ -2019,7 +2022,9 @@ onBeforeUnmount(() => {
           </button>
         </div>
         <div v-if="menu === 'controls'" id="reader-control-slot"></div>
+        <ProductLinks v-if="menu === 'products'" current="genius" style="padding:20px;overflow-y:auto" />
         <div v-if="menu === 'more'" class="more-tools">
+          <button @click="openMenu('products')">谱联产品</button>
           <button @click="openMenu('controls')">翻页控制</button><button @click="closeOverlay();showPet()">显示小E</button>
           <button
             aria-label="切换阅读模式"
