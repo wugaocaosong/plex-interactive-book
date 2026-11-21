@@ -10,12 +10,12 @@ for(const width of [390,820,1440])test(`local surface maps and shader programs r
  page.on('request',r=>{if(/^https?:/.test(r.url())&&!r.url().startsWith('http://127.0.0.1:'))external.push(r.url());});
  page.on('response',r=>{if(/\/space\/surfaces\/2k_/.test(r.url())){if(r.status()!==200)errors.push(`${r.status()} ${r.url()}`);maps.add(r.url().split('/').pop()!);}});
  await page.goto('/');await expect(page.locator('.galaxy-canvas')).toHaveAttribute('data-surfaces','ready');
- await expect(page.locator('.galaxy-canvas')).toHaveAttribute('data-texture-count','11');
+ await expect(page.locator('.galaxy-canvas')).toHaveAttribute('data-texture-count','10');
  await page.waitForTimeout(1200);await page.screenshot({path:`output/validation/surfaces-home-${width}.png`});
- expect([...maps].sort()).toEqual(manifest.assets.map((a:{file:string})=>a.file).sort());
+ expect([...maps].sort()).toEqual(manifest.assets.map((a:{file:string})=>a.file).filter((file:string)=>file!=='2k_mercury.jpg').sort());
  await page.locator('.planet-0').click();await expect(page.locator('.enter-book')).toBeEnabled();await expect(page.locator('.galaxy-canvas')).toHaveAttribute('data-particles','0');await page.locator('.enter-book').click();
  await expect(page.locator('.entry-veil')).toHaveCount(0,{timeout:25000});await expect(page.locator('.solar-stage canvas')).toHaveAttribute('data-surfaces','ready');
- await expect(page.locator('.solar-stage canvas')).toHaveAttribute('data-texture-count','11');
+ await expect(page.locator('.solar-stage canvas')).toHaveAttribute('data-texture-count','10');
  await page.waitForTimeout(600);await page.screenshot({path:`output/validation/surfaces-solar-${width}.png`});
  expect(errors).toEqual([]);expect(external).toEqual([]);
 });

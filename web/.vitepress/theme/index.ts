@@ -20,3 +20,5 @@ import './phantom.css';
 import './glossary.css';
 
 import './adventure.css';
+
+import './stellar-redesign.css';

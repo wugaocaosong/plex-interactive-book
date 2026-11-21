@@ -24,6 +24,11 @@ import {
   X,
   Expand,
   RotateCcw,
+  Orbit,
+  NotebookPen,
+  FlaskConical,
+  MessageCircle,
+  ChartNoAxesCombined,
 } from "lucide-vue-next";
 import type {SceneId} from "./teaching-models";
 const TeachingScene=defineAsyncComponent(()=>import("./TeachingScene.vue"));
@@ -50,6 +55,7 @@ import { readStore, saveStore } from "./storage";
 import { bindPageDrag } from "./page-drag";
 import { flushLearning } from "./learning-flush";
 const StarMap=defineAsyncComponent(()=>import("./SolarDirectory.vue"));
+import ProductLinks from './products/ProductLinks.vue';
 import StudyReader from "./StudyReader.vue";
 import { decorateLabLevel, isLabLevel } from "./lab-level";
 import { injectExplorers } from "./explorers";
@@ -156,7 +162,7 @@ const sectionIndex = computed(() =>
 const cover = computed(() => current.value?.kind === "cover");
 const backCover = computed(() => current.value?.kind === "back-cover");
 const menu = ref<
-  "contents" | "bookmarks" | "settings" | "notes" | "more" | "controls" | "qa" | null
+  "contents" | "bookmarks" | "settings" | "notes" | "more" | "controls" | "qa" | "products" | null
 >(null);
 const mapView = ref(true);
 const query = ref("");
@@ -524,6 +530,7 @@ const menuLabel = computed(
       controls: "翻页控制",
       notes: "学习笔记",
       more: "阅读工具",
+      products: "谱联产品",
     })[menu.value || "contents"],
 );
 const coverElement = ref<HTMLElement>();
@@ -1368,7 +1375,8 @@ async function layout(place?: ReadingLocator) {
   rendering = true;
   loading.value = true;
   stopAnimation();
-  const available = Math.max(280, window.innerWidth - 48);
+  const sideSpace = !preferences.value.immersion && window.innerWidth >= 1000 ? (window.innerWidth > 1100 ? 320 : 240) : 48;
+  const available = Math.max(280, window.innerWidth - sideSpace);
   const wanted = preferences.value.customWidth?.flip ?? ({narrow:860,standard:1020,wide:1140}[preferences.value.width]);
   const total = Math.min(available, wanted);
   desktop.value = window.innerWidth >= 1024 && total >= 800;
@@ -2040,6 +2048,20 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </main>
+    <nav class="reader-rail reader-rail-left" aria-label="阅读导航工具" :inert="overlayOpen || loading">
+      <div class="rail-heading" aria-hidden="true"><Orbit :size="30"/><small>EXPLORE</small></div>
+      <button @click="openMenu('contents')"><Compass :size="22"/><span>章节目录</span></button>
+      <button @click="focusSmartSearch"><Search :size="21"/><span>全书搜索</span></button>
+      <button @click="openMenu('bookmarks')"><Bookmark :size="21"/><span>我的书签</span></button>
+      <button @click="openUnit('progress')"><ChartNoAxesCombined :size="21"/><span>学习进度</span></button><i class="rail-status" aria-hidden="true"/>
+    </nav>
+    <nav class="reader-rail reader-rail-right" aria-label="学习创作工具" :inert="overlayOpen || loading">
+      <div class="rail-heading" aria-hidden="true"><Orbit :size="30"/><small>CREATE</small></div>
+      <button @click="openMenu('notes')"><NotebookPen :size="21"/><span>我的笔记</span></button>
+      <button @click="openBoard()"><BookOpen :size="21"/><span>随手黑板</span></button>
+      <button @click="openPanel('learning')"><FlaskConical :size="21"/><span>实验室</span></button>
+      <button @click="showPet()"><MessageCircle :size="21"/><span>呼唤小E</span></button><i class="rail-status" aria-hidden="true"/>
+    </nav>
     <nav class="bottom-navigation" aria-label="阅读主导航" :inert="overlayOpen || loading">
       <button aria-label="打开目录" @click="openMenu('contents')">
         <Compass :size="20" /><span>目录</span>
@@ -2103,6 +2125,7 @@ onBeforeUnmount(() => {
       <section
         :class="{ 'qa-dialog': menu === 'qa' }"
         class="navigation-dialog"
+        :style="menu === 'products' ? {width:'min(560px, calc(100vw - 32px))'} : undefined"
         role="dialog"
         aria-modal="true"
         :aria-label="menuLabel"
@@ -2118,8 +2141,10 @@ onBeforeUnmount(() => {
         </div>
         <QaBoard v-if="menu === 'qa'" :current="{ id: sectionId, title: current?.title, group: current?.group }" @navigate="(id: string) => { closeOverlay(); navigate(id); }" />
         <div v-if="menu === 'controls'" id="reader-control-slot"></div>
+        <ProductLinks v-if="menu === 'products'" current="genius" style="padding:20px;overflow-y:auto" />
         <div v-if="menu === 'more'" class="more-tools">
           <button aria-label="QA 留言板" @click="openMenu('qa')">QA 留言板</button>
+          <button @click="openMenu('products')">谱联产品</button>
           <button @click="openMenu('controls')">翻页控制</button><button @click="closeOverlay();showPet()">显示小E</button>
           <button
             aria-label="切换阅读模式"

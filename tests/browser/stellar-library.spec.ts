@@ -9,7 +9,7 @@ test('bounded click particles recycle; dragging does not enter; unavailable syst
  await page.mouse.move(2,2);await canvas.click({position:{x:80,y:500}});await expect.poll(async()=>Number(await canvas.getAttribute('data-particles'))).toBeGreaterThan(100);
  await page.waitForTimeout(2300);expect(Number(await canvas.getAttribute('data-particles'))).toBeLessThan(200);
  await page.mouse.move(100,500);await page.mouse.down();await page.mouse.move(220,530,{steps:12});await page.mouse.up();await expect(page.locator('main')).toHaveAttribute('data-phase','galaxy');
- await page.getByRole('button',{name:'待上架书籍 1',exact:true}).click();await expect(page.locator('.galaxy-notice')).toContainText('尚未上架');await expect(page.locator('main')).toHaveAttribute('data-phase','galaxy');
+ await page.getByRole('button',{name:'光环秘境，待上架书籍 1',exact:true}).click();await expect(page.locator('.galaxy-notice')).toContainText('尚未上架');await expect(page.locator('main')).toHaveAttribute('data-phase','galaxy');
  for(let i=0;i<12;i++)await page.mouse.click(80,500);expect(Number(await canvas.getAttribute('data-particles'))).toBeLessThanOrEqual(2600);
 });
 
@@ -22,6 +22,7 @@ for(const width of [390,820,1440])test(`solar chapters, keyboard, persistent pet
  await page.getByRole('button',{name:'继续公转',exact:true}).click();await star.focus();await page.waitForTimeout(150);const focused=await star.getAttribute('style');await page.waitForTimeout(350);expect(await star.getAttribute('style')).toBe(focused);
  await page.locator('.pet-character').click();await page.getByLabel('发消息给小艺').fill('跨页面保留的问题');await page.getByRole('button',{name:'关闭聊天气泡'}).click();
  await page.evaluate(()=>{(document.querySelector('.ebook-pet') as HTMLElement).dataset.instance='same-host';});
+ await page.getByRole('button',{name:'简化显示',exact:true}).click();await expect(page.locator('.solar-chapter-list')).toBeVisible();
  const twelfth=page.locator('.solar-chapter-list button').nth(11);await twelfth.focus();await page.keyboard.press('Enter');await expect(page).toHaveURL(/chapter_divide_and_conquer\/(index)?/);await expect(page.locator('.ebook-pet')).toHaveAttribute('data-instance','same-host');await expect(page.locator('.solar-stage canvas')).toHaveCount(0);
  await page.locator('.pet-character').click();await expect(page.getByLabel('发消息给小艺')).toHaveValue('跨页面保留的问题');await page.getByRole('button',{name:'关闭聊天气泡'}).click();
  await page.goto(contents);await page.locator('.solar-stage canvas').evaluate(el=>el.dispatchEvent(new Event('webglcontextlost',{cancelable:true})));await expect(page.locator('.solar-stage')).toBeHidden();await expect(page.locator('.solar-chapter-list button')).toHaveCount(16);
